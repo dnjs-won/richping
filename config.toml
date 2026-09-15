@@ -1,0 +1,14 @@
+tickers = ["AAPL", "MSFT", "NVDA", "AVGO", "AMZN", "META", "GOOGL", "PLTR"]
+top_k = 3
+horizon = 5
+min_score = 60.0
+min_edge = 0.0
+min_samples = 60
+min_dates = 30
+train_sessions = 504
+commission_bps = 10.0
+slippage_bps = 10.0
+min_price = 5.0
+min_dollar_volume = 5000000.0
+bootstrap_samples = 500
+seed = 20260915
