@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 import sys
 
-from .core import Config, canonical, cutoff_at, latest_session, timestamp, utcnow
+from .core import Config, LEGACY_OUTCOME_VERSION, canonical, cutoff_at, latest_session, timestamp, utcnow
 from .data import import_csv, synthetic_dataset, yahoo_dataset
 from .engine import Engine
 from .evaluation import metrics
@@ -121,11 +121,37 @@ def main(argv=None):
                 elif args.command in {"observe", "evaluate"}:
                     as_of = args.as_of or utcnow()
                     counts, rows = track(store, dataset, as_of)
-                    groups = sorted({(r["model_id"], r["mode"]) for r in rows})
+                    all_groups = set((r["model_id"], r["mode"]) for r in rows)
+                    by_group_eval = counts.get("evaluation", {}).get("by_group", {})
+                    for g in by_group_eval.values():
+                        all_groups.add((g["model_id"], g["mode"]))
+                    groups = sorted(all_groups)
                     summaries = []
                     for model, mode in groups:
                         group = [r for r in rows if (r["model_id"], r["mode"]) == (model, mode)]
-                        summaries.append({"model": model, "mode": mode, "performance": metrics(group),
+                        grp_eval = by_group_eval.get(f"{model}:{mode}", {})
+                        versions = sorted(
+                            set(r.get("outcome_version", LEGACY_OUTCOME_VERSION) for r in group)
+                            | set(grp_eval.get("by_version", {}).keys())
+                        )
+                        by_version = {}
+                        for ver in versions:
+                            v_group = [r for r in group if r.get("outcome_version", LEGACY_OUTCOME_VERSION) == ver]
+                            by_version[ver] = {
+                                "samples": len(v_group),
+                                "performance": metrics(v_group),
+                                "by_regime": {regime: metrics([r for r in v_group if r["regime"] == regime])
+                                              for regime in sorted({r["regime"] for r in v_group})},
+                                "evaluation": {
+                                    "eligible": len(v_group),
+                                    "excluded": grp_eval.get("by_version", {}).get(ver, 0),
+                                },
+                            }
+                        summaries.append({"model": model, "mode": mode,
+                            "outcome_versions": versions,
+                            "by_version": by_version,
+                            "performance": metrics(group),
+                            "evaluation": grp_eval,
                             "by_regime": {regime: metrics([r for r in group if r["regime"] == regime])
                                 for regime in sorted({r["regime"] for r in group})}})
                     result = {"quality": dataset.metadata["quality"], "outcomes": counts, "by_model_mode": summaries}

@@ -10,6 +10,18 @@ import tomllib
 import exchange_calendars as xcals
 
 
+OUTCOME_VERSION_V1 = "v1_price_only"
+OUTCOME_VERSION_V2 = "v2_ordinary_cash_dividend"
+OUTCOME_VERSION_V3 = "v3_cash_action_guard"
+
+DEFAULT_OUTCOME_VERSION = OUTCOME_VERSION_V3
+LEGACY_OUTCOME_VERSION = OUTCOME_VERSION_V1
+VERIFIED_DIVIDEND_BASIS = "ordinary_cash_split_adjusted_per_share"
+SUPPORTED_OUTCOME_VERSIONS = (OUTCOME_VERSION_V1, OUTCOME_VERSION_V2, OUTCOME_VERSION_V3)
+ACTION_CAPTURE_SCHEMA_VERSION = "1.0"
+CAPITAL_GAINS_STATUSES = ("present", "not_applicable_by_provider", "unknown")
+CASH_ACTION_REVIEW_POLICY = "cash_action_review_v1"
+
 def canonical(value):
     return json.dumps(value, sort_keys=True, separators=(",", ":"), allow_nan=False)
 

@@ -102,3 +102,109 @@ def promotion_gate(evidence):
         if evidence.get(key) is not True:
             reasons.append(key)
     return {"decision": "ELIGIBLE_FOR_SHADOW_REVIEW" if not reasons else "REJECT", "reasons": reasons}
+
+
+def evaluate_outcome_eligibility(snapshot, outcome, dataset=None, as_of=None, mode="research"):
+    """Evaluate whether an outcome is eligible under CASH_ACTION_REVIEW_POLICY ("cash_action_review_v1").
+
+    Pure policy function: does not modify snapshot or outcome.
+    Returns: (is_eligible: bool, reason: str | None)
+    """
+    import math
+    from .core import (
+        LEGACY_OUTCOME_VERSION,
+        OUTCOME_VERSION_V1,
+        OUTCOME_VERSION_V2,
+        OUTCOME_VERSION_V3,
+        SUPPORTED_OUTCOME_VERSIONS,
+        cutoff_at,
+        next_sessions,
+        timestamp,
+    )
+    from .data import inspect_action_capture
+
+    if outcome.get("status") != "COMPLETE":
+        return False, outcome.get("reason", "status_not_complete")
+
+    snap_version = snapshot.get("outcome_version", LEGACY_OUTCOME_VERSION)
+    outcome_version = outcome.get("outcome_version", LEGACY_OUTCOME_VERSION)
+
+    # 1. Snapshot and outcome version mismatch
+    if snap_version != outcome_version:
+        return False, "outcome_version_mismatch"
+
+    # 2. Unsupported version
+    if outcome_version not in SUPPORTED_OUTCOME_VERSIONS:
+        return False, "unsupported_outcome_version"
+
+    # 3. v2 contract is unconditionally excluded under cash_action_review_v1
+    if outcome_version == OUTCOME_VERSION_V2:
+        return False, "legacy_v2_unverified_contract"
+
+    # 4. Structural integrity verification (fail-closed)
+    expected_horizon = snapshot.get("holding_period", 5)
+    horizon = outcome.get("horizon")
+    if horizon is None or horizon != expected_horizon:
+        return False, "horizon_mismatch"
+
+    days = next_sessions(snapshot["session"], horizon)
+    expected_end = days[-1]
+    if outcome.get("end_session") != expected_end:
+        return False, "end_session_mismatch"
+
+    # Shadow observed_at validation
+    if mode == "shadow":
+        obs_at = outcome.get("observed_at")
+        if not obs_at or not isinstance(obs_at, str) or not obs_at.strip():
+            return False, "missing_observed_at"
+        try:
+            obs_dt = timestamp(obs_at)
+        except Exception:
+            return False, "invalid_observed_at"
+        if cutoff_at(expected_end) > obs_dt:
+            return False, "horizon_not_mature"
+    else:
+        obs_at = outcome.get("observed_at") or as_of
+        obs_dt = timestamp(obs_at) if obs_at else None
+
+    # 5. v1 and v3 contract verification:
+    # Defend against historical buggy stored outcomes by verifying point-in-time known-at,
+    # corporate actions, and action-capture confirmation at observed_at.
+    if outcome_version in (OUTCOME_VERSION_V1, OUTCOME_VERSION_V3):
+        if dataset is None:
+            return False, "action_capture_unknown"
+        symbol = snapshot["ticker"]
+        bars = [dataset.by_ticker.get(symbol, {}).get(s) for s in days]
+        if any(b is None for b in bars):
+            return False, "missing_or_delisted_session"
+        if any(b.split for b in bars):
+            return False, "stock_split_requires_accounting"
+
+        # Point-in-time check on each holding bar in shadow mode:
+        # bar.known_at <= outcome.observed_at must hold for all bars
+        if mode == "shadow":
+            for b in bars:
+                try:
+                    b_known = timestamp(b.known_at)
+                except Exception:
+                    return False, "invalid_bar_known_at"
+                if b_known > obs_dt:
+                    return False, "data_not_yet_known"
+
+        ac = inspect_action_capture(dataset, symbol, days, as_of=obs_at, mode=mode)
+        if mode == "shadow" and ac.is_pending:
+            return False, ac.reason or "data_not_yet_known"
+        if ac.has_capital_gains:
+            return False, "unsupported_capital_gains_distribution"
+        if any(b.dividend > 0 for b in bars):
+            return False, "unverified_cash_dividend_event"
+        if not ac.is_confirmed:
+            return False, "action_capture_unknown"
+
+        origin = dataset.by_ticker.get(symbol, {}).get(snapshot["session"])
+        if origin is None or not math.isclose(origin.close, snapshot["entry_reference"], rel_tol=1e-8):
+            return False, "price_vintage_changed"
+
+        return True, None
+
+    return False, "unsupported_outcome_version"

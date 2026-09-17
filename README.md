@@ -48,8 +48,8 @@ Windows 작업 스케줄러에서 `powershell.exe -NoProfile -File C:\richping\s
 - Confidence는 과거 후보 승률이다. 검증된 개별 예측 확률이 아니다.
 - Entry/Stop/Target은 추천 종가 및 ATR 기반 참고값. 실제 체결이나 예상 수익과 다르다.
 - 최소 표본이나 기대값 신뢰구간을 충족하지 않으면 정상적으로 **NO TRADE**.
-- 결과 수익은 다음 session 시가 → horizon 종가, 왕복 commission 10bps + slippage 10bps 차감. stop/target은 진단만 하며 같은 일봉 양쪽 hit는 AMBIGUOUS.
-- COMPLETE / PENDING / UNRESOLVED를 모두 보고한다. 미해결 상폐/분할/배당을 0%나 정상 수익으로 바꾸지 않는다.
+- COMPLETE / PENDING / UNRESOLVED를 모두 보고한다. 미해결 상폐/분할/미확인 배당을 0%나 정상 수익으로 바꾸지 않는다.
+- M2-1A: `v2_ordinary_cash_dividend`는 역사적 계산 계약 보존용이며, 현재 `cash_action_review_v1` 정책에서 v2 COMPLETE는 현재 성과 증거에서 제외된다. 현재 기본 계약은 `v3_cash_action_guard`로, 현금배당 자동 지원 버전이 아니라 검증되지 않은 기업행동을 fail-closed로 격리하는 계약이다. 일반 현금배당 실데이터 자동 지원은 아직 승인되지 않았으며, 특징 창 배당 종목 제외 규칙은 유지된다.
 
 ## CSV contract
 
@@ -75,7 +75,7 @@ UTF-8, ticker 대문자, UTC offset을 포함한 known_at. session은 XNYS 거�
 
 포트폴리오 원장을 만들지 않았으므로 portfolio Sharpe/Sortino/Calmar/MDD는 N/A다. cohort drawdown은 순차 날짜별 추천 수익의 진단값이며 계좌 drawdown이 아니다.
 
-Champion은 고정 baseline-v1. 자동 challenger 학습·승격, 완전한 corporate-action 회계, point-in-time universe, 상폐 최종 수익은 후속 단계다. 현재 gate는 증거가 빠지면 REJECT. Performance PAUSED는 자동 재실행으로 해제되지 않는다.
+Champion은 고정 baseline-v1. 자동 challenger 학습·승격, 주식분할 및 복합 corporate-action 회계, point-in-time universe, 상폐 최종 수익은 후속 단계다. 현재 gate는 증거가 빠지면 REJECT. Performance PAUSED는 자동 재실행으로 해제되지 않는다.
 
 ## 문서
 

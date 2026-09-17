@@ -21,4 +21,5 @@ include = ["richping*"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+addopts = "-o cache_dir=var/.pytest_cache"
 

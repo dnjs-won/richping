@@ -70,7 +70,38 @@ ATR 기반 stop=2 ATR, target=4 ATR는 참고 가격이다. 기대수익과 targ
 
 다음 session 시가를 진입 관찰 가격으로 한다. 1/3/5/10/20번째 session 종가까지 buy-and-hold 가격 수익, MFE/MAE, target/stop hit를 계산한다. 왕복 commission 10bps + slippage 10bps = 20bps 차감. 동일 일봉에서 양 barrier에 닿으면 `AMBIGUOUS`로 명시한다. barrier는 진단용이며 수익률은 일관되게 horizon 종가 기준이다. stop 체결 수익을 가장하지 않는다.
 
-미성숙은 PENDING, 거래정지/상폐/데이터 결측은 UNRESOLVED. 미래 데이터 누락을 0% 또는 다음 관측일로 대체하지 않는다. split/dividend를 가로지르는 창은 첫 버전에서 UNRESOLVED로 격리한다. 완전한 corporate-action total-return 회계는 Phase 2의 필수 후속 작업이다. 미해결 비율을 보고하며 해당 실행은 승격 증거로 부적격이다.
+미성숙은 PENDING, 거래정지/상폐/데이터 결측은 UNRESOLVED. 미래 데이터 누락을 0% 또는 다음 관측일로 대체하지 않는다.
+
+계산 버전:
+- `v1_price_only` (기존 계약): 관측 기간에 split 또는 dividend가 존재하면 UNRESOLVED(`corporate_action_requires_accounting`)로 격리. 기존 스냅샷은 당시 계약을 불변 유지.
+- `v2_ordinary_cash_dividend` (M2-1A):
+  - 공급자 계약: Yahoo Finance `auto_adjust=False, back_adjust=False, actions=True` 기준. OHLC 가격은 split-adjusted(배당 미조정)이고, 배당은 배당락일 기준 split-adjusted 주당 현금배당 금액이다. 단위와 권리 조건이 확인된 데이터셋(`dividend_basis: ordinary_cash_split_adjusted_per_share`)만 지원.
+  - (과거 재현용 보존 계약이며 현재 신규 평가 승인 정책이 아님; Astra DIVIDEND_CONTRACT_DECISION 확정)
+  - 지원 조건 및 식별 한계:
+    - 주식분할 없음 (`b.split == 0`). 분할 발생 시 `stock_split_requires_accounting`으로 UNRESOLVED.
+    - 단일 배당 금액이 종가의 20% 미만인 적격 일반 현금배당. 공급자 API가 정기/특별 플래그를 제공하지 않으므로, 20% 이상의 배당은 특별/청산 배당 가능성으로 보아 `special_or_irregular_dividend_requires_accounting`으로 보수적 UNRESOLVED 격리.
+    - 단위·계약 미확인 데이터(CSV 등)는 `unverified_dividend_basis`로 UNRESOLVED 유지.
+  - 권리 및 수익 계산:
+    - 진입 session 시가 매수 기준이므로, 진입일 당일이 배당락일이면 해당 배당은 권리가 없으므로 미포함 (`entry_day_dividend_excluded`).
+    - 진입 익일부터 관측 종료일까지 발생한 적격 배당(`bars[1:]`)을 누적 합산 (`dividend_cash`).
+    - 배당 재투자는 하지 않음: `dividend_return = dividend_cash / entry_price`.
+    - 총수익: `raw_return = price_return + dividend_return`.
+    - 거래비용은 1회만 차감: `net_return = raw_return - cost`. 가격만의 순수익 `price_net_return`도 별도 확인 가능.
+    - 세전 배당 권리 기준 연구용 수익이며, 실제 지급일 입금이나 세후 계좌 수익이 아님을 명시.
+    - MFE, MAE 및 target/stop hit는 가격 기준 진단으로 불변.
+    - 기대값 추정(`calibration`)과 성과 관측(`observe`)이 동일한 v2 `net_return` 정의를 일관되게 사용.
+- `v3_cash_action_guard` (M2-1A-R2-2 현재 기본값):
+  - 실패 폐쇄형 현금 기업행동 격리 및 순수 가격 수익 계약.
+  - 관측 기간(`days`)에 주식분할 발생 시 `stock_split_requires_accounting` (우선순위 1).
+  - shadow 모드에서 capture 시점 미도래(`captured_at > as_of`) 또는 사건 시점 미도래(`known_at > as_of`) 시 `PENDING`, `data_not_yet_known`.
+  - 관측 기간 내 Capital Gains 분배금 발생 시 `unsupported_capital_gains_distribution` (우선순위 2).
+  - 관측 기간 내 현금배당 발생 시(진입일 `bars[0]` 및 전 기간 포함, 규모 무관) `unverified_cash_dividend_event` (우선순위 3).
+  - action capture 누락, ticker 부재, unknown 상태 또는 보유창 미완전 커버 시 `action_capture_unknown` (우선순위 4).
+  - 사건이 완전히 없고 검증 완료된 구간만 순수 가격 수익 계산: `raw_return = price_return`, `net_return = raw_return - cost` (비용 1회 차감).
+  - 특징 생성(`Engine.signals`):
+    - 후보 종목 61 거래일 창 내 split/dividend/Capital Gains 또는 unverified capture 존재 시 후보 제외 (`corporate_action_in_feature_window` 또는 `action_capture_unknown`).
+    - 벤치마크 SPY/QQQ 61 거래일 창 내 split/dividend/Capital Gains 또는 unverified capture 존재 시 즉시 `ValueError`로 실패 폐쇄 (침묵형 대체 금지).
+    - `Engine.history`는 `COMPLETE` 결과만 포함하며 제외된 결과는 `Engine.excluded_history`에 진단 보존.
 
 ## 7. Validation
 
