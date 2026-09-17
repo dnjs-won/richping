@@ -72,16 +72,41 @@ def track(store, dataset, as_of, model_id=None, mode=None):
                 ).fetchone()
 
                 use_stored = False
+                stored_structure_error = None
                 if stored_row is not None:
-                    stored_body = json.loads(stored_row["body"])
                     expected_end = next_sessions(snap["session"], horizon)[-1]
-                    end_sess = stored_body.get("end_session")
-                    if stored_body.get("horizon") == horizon and end_sess == expected_end:
+                    try:
+                        stored_body = json.loads(stored_row["body"])
+                    except (TypeError, ValueError, json.JSONDecodeError):
+                        stored_body = None
+                        stored_structure_error = "invalid_stored_outcome_body"
+
+                    if not isinstance(stored_body, dict):
+                        stored_structure_error = stored_structure_error or "invalid_stored_outcome_body"
+                    elif stored_body.get("status") != stored_row["status"]:
+                        stored_structure_error = "stored_status_mismatch"
+                    elif stored_body.get("horizon") != horizon:
+                        stored_structure_error = "horizon_mismatch"
+                    elif stored_body.get("end_session") != expected_end:
+                        stored_structure_error = "end_session_mismatch"
+                    else:
                         obs_at = stored_body.get("observed_at")
-                        # Enforce point-in-time rules: do not use future stored outcomes before as_of
-                        if cutoff_at(end_sess) <= timestamp(as_of) and (not obs_at or timestamp(obs_at) <= timestamp(as_of)):
-                            result = stored_body
-                            use_stored = True
+                        obs_dt = None
+                        if obs_at:
+                            try:
+                                obs_dt = timestamp(obs_at)
+                            except (TypeError, ValueError, AttributeError):
+                                stored_structure_error = "invalid_observed_at"
+
+                    if stored_structure_error:
+                        # A malformed immutable row remains the historical fact for
+                        # its DB key. Never heal it with a later recomputation.
+                        result = dict(stored_body) if isinstance(stored_body, dict) else {}
+                        result["status"] = stored_row["status"]
+                        use_stored = True
+                    elif cutoff_at(expected_end) <= timestamp(as_of) and (obs_dt is None or obs_dt <= timestamp(as_of)):
+                        result = stored_body
+                        use_stored = True
 
                 if not use_stored:
                     result = observe(snap, dataset, horizon, as_of, rec["mode"])
@@ -94,9 +119,12 @@ def track(store, dataset, as_of, model_id=None, mode=None):
                 counts[result["status"]] += 1
 
                 if horizon == snap["holding_period"] and result["status"] == "COMPLETE":
-                    is_eligible, reason = evaluate_outcome_eligibility(
-                        snap, result, dataset=dataset, as_of=as_of, mode=rec["mode"]
-                    )
+                    if stored_structure_error:
+                        is_eligible, reason = False, stored_structure_error
+                    else:
+                        is_eligible, reason = evaluate_outcome_eligibility(
+                            snap, result, dataset=dataset, as_of=as_of, mode=rec["mode"]
+                        )
                     ver = result.get("outcome_version", LEGACY_OUTCOME_VERSION)
                     grp = counts["evaluation"]["by_group"][group_key]
 

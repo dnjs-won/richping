@@ -1757,6 +1757,18 @@ def test_r2_3_normal_v3_complete_remains_eligible(tmp_path, five_session_dates):
         assert counts["evaluation"]["eligible_complete"] == 1
         assert counts["evaluation"]["excluded_complete"] == 0
 
+        stored_before = store.db.execute(
+            "SELECT body FROM outcomes WHERE recommendation_id='rec-norm' AND horizon=5"
+        ).fetchone()[0]
+        counts_again, rows_again = track(store, ds, as_of)
+        stored_after = store.db.execute(
+            "SELECT body FROM outcomes WHERE recommendation_id='rec-norm' AND horizon=5"
+        ).fetchone()[0]
+        assert len(rows_again) == 1
+        assert counts_again["evaluation"]["eligible_complete"] == 1
+        assert counts_again["evaluation"]["excluded_complete"] == 0
+        assert stored_after == stored_before
+
 
 def test_r2_stored_v3_complete_future_bar_known_at_excluded(tmp_path, five_session_dates):
     """Finding 1: stored v3 COMPLETE라도 보유 bar known_at > stored observed_at이면 data_not_yet_known으로 제외
@@ -1835,8 +1847,10 @@ def test_r2_stored_v3_complete_future_bar_known_at_excluded(tmp_path, five_sessi
     ("horizon", 10, "horizon_mismatch"),
     ("end_session", "2024-01-99", "end_session_mismatch"),
 ])
-def test_r2_stored_outcome_structural_integrity_fail_closed(five_session_dates, corrupt_field, corrupt_value, expected_reason):
-    """Finding 1: stored outcome의 구조적 정합성(observed_at 누락/비정상, horizon/end mismatch) 실패 폐쇄 검증"""
+def test_r2_stored_outcome_structural_integrity_fail_closed(
+    tmp_path, five_session_dates, corrupt_field, corrupt_value, expected_reason
+):
+    """Finding 1: malformed stored COMPLETE is excluded through the real Store + track path."""
     dates = five_session_dates
     origin_bar = [{"ticker": "ALFA", "session": "2024-01-02", "open": 100.0, "high": 101.0, "low": 99.0, "close": 100.0}]
     holding_bars = make_test_bars("ALFA", dates, [100.0] * 5, [105.0] * 5)
@@ -1858,10 +1872,87 @@ def test_r2_stored_outcome_structural_integrity_fail_closed(five_session_dates, 
     else:
         outcome[corrupt_field] = corrupt_value
 
-    as_of = cutoff_at("2024-01-16").isoformat()
-    is_eligible, reason = evaluate_outcome_eligibility(snap, outcome, dataset=ds, as_of=as_of, mode="shadow")
-    assert is_eligible is False
-    assert reason == expected_reason
+    original_body = json.dumps(outcome)
+    config = Config(tickers=("ALFA",), train_sessions=180)
+    with Store(tmp_path / f"stored-{corrupt_field}-{expected_reason}.db") as store:
+        store.save_dataset(ds)
+        store.save_model(config)
+        with store.db:
+            store.db.execute(
+                "INSERT INTO runs VALUES('run-struct', ?, ?, '2024-01-02', 'shadow', 'SUCCEEDED', 1, NULL, NULL, ?)",
+                (ds.id, config.model_id, cutoff_at("2024-01-02").isoformat()),
+            )
+            store.db.execute(
+                "INSERT INTO recommendations VALUES('rec-struct', 'run-struct', 'ALFA', 1, ?)",
+                (json.dumps(snap),),
+            )
+            store.db.execute(
+                "INSERT INTO outcomes VALUES('rec-struct', 5, ?, 'COMPLETE', ?)",
+                (ds.id, original_body),
+            )
+
+        counts, rows = track(store, ds, cutoff_at("2024-01-16").isoformat())
+
+        assert rows == []
+        assert counts["COMPLETE"] >= 1
+        assert counts["evaluation"]["eligible_complete"] == 0
+        assert counts["evaluation"]["excluded_complete"] == 1
+        assert counts["evaluation"]["by_reason"][expected_reason] == 1
+        saved = store.db.execute(
+            "SELECT status, body FROM outcomes WHERE recommendation_id='rec-struct' AND horizon=5"
+        ).fetchone()
+        assert saved["status"] == "COMPLETE"
+        assert saved["body"] == original_body
+
+
+@pytest.mark.parametrize("stored_body,expected_reason", [
+    ("not-json", "invalid_stored_outcome_body"),
+    (json.dumps([]), "invalid_stored_outcome_body"),
+    (json.dumps({
+        "horizon": 5,
+        "end_session": "2024-01-09",
+        "observed_at": cutoff_at("2024-01-09").isoformat(),
+        "outcome_version": OUTCOME_VERSION_V3,
+        "status": "UNRESOLVED",
+    }), "stored_status_mismatch"),
+])
+def test_r2_stored_outcome_body_and_status_integrity_fail_closed(
+    tmp_path, five_session_dates, stored_body, expected_reason
+):
+    dates = five_session_dates
+    origin_bar = [{"ticker": "ALFA", "session": "2024-01-02", "open": 100.0, "high": 101.0, "low": 99.0, "close": 100.0}]
+    holding_bars = make_test_bars("ALFA", dates, [100.0] * 5, [105.0] * 5)
+    ds = create_mini_dataset(origin_bar + holding_bars, include_action_capture=True)
+    snap = v3_snapshot()
+    config = Config(tickers=("ALFA",), train_sessions=180)
+
+    with Store(tmp_path / f"stored-body-{expected_reason}-{len(stored_body)}.db") as store:
+        store.save_dataset(ds)
+        store.save_model(config)
+        with store.db:
+            store.db.execute(
+                "INSERT INTO runs VALUES('run-body', ?, ?, '2024-01-02', 'shadow', 'SUCCEEDED', 1, NULL, NULL, ?)",
+                (ds.id, config.model_id, cutoff_at("2024-01-02").isoformat()),
+            )
+            store.db.execute(
+                "INSERT INTO recommendations VALUES('rec-body', 'run-body', 'ALFA', 1, ?)",
+                (json.dumps(snap),),
+            )
+            store.db.execute(
+                "INSERT INTO outcomes VALUES('rec-body', 5, ?, 'COMPLETE', ?)",
+                (ds.id, stored_body),
+            )
+
+        counts, rows = track(store, ds, cutoff_at("2024-01-16").isoformat())
+
+        assert rows == []
+        assert counts["evaluation"]["excluded_complete"] == 1
+        assert counts["evaluation"]["by_reason"][expected_reason] == 1
+        saved = store.db.execute(
+            "SELECT status, body FROM outcomes WHERE recommendation_id='rec-body' AND horizon=5"
+        ).fetchone()
+        assert saved["status"] == "COMPLETE"
+        assert saved["body"] == stored_body
 
 
 def test_r2_matched_spy_pairing_and_unresolved_denominator(tmp_path):
@@ -1919,6 +2010,4 @@ def test_r2_matched_spy_pairing_and_unresolved_denominator(tmp_path):
             # Candidate predictions contains the unresolved signal date 2023-03-06, but paired metrics exclude it
             oos_sessions = {r["session"] for r in result["oos_predictions"]}
             assert "2023-03-06" in oos_sessions
-
-
 
