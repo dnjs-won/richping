@@ -5,6 +5,18 @@
 **상태: COMPLETE WITH KNOWN LIMITATIONS**  
 **감사 결론: GO — close M2-1A and proceed**
 
+## Coverage Diagnostic v1 · 2026-09-17
+
+- `python -m richping coverage` 추가: 기존 Dataset/Engine/평가 함수를 사용하는 read-only research coverage 집계. 기본 출력 `var/coverage_report.json`. DB schema 및 signal/outcome/evaluation 계약 변경 없음.
+- 거래일 / candidate ticker-session / holding-period outcome / COMPLETE / pairing 시도 날짜 분모를 분리하고 count·rate·분모 단위를 보존. SPY/QQQ 배당·분할·Capital Gains·capture unknown을 독립 검사하며 중복 사유와 합집합을 구분.
+- 기존 Yahoo 수집판(`82eb2d624ef2f11e4634eb75f44d8ae849e12bc93e7e83d951a473723b997888`)에는 action_capture가 없음. 2022-12-09~2026-09-14의 942 대상 거래일 중 benchmark 지원 0일, 차단 942일(100%).
+- SPY 배당 guard 915일(97.13%), QQQ 915일(97.13%), 합집합 926일(98.30%). capture unknown은 942일(100%)이며 배당과 중복. 후보 7,536 ticker-session 중 배당 4,807(63.79%), split 122(1.62%), capture unknown 7,536(100%). Capital Gains 관측 0은 무분배 증명이 아님.
+- research 재생 추천 0일/0건, NO TRADE 942일, COMPLETE/PENDING/UNRESOLVED 0/0/0, eligible/excluded 0/0, paired 0. calibration/edge 단계 미도달. 과거 v2 OOS 숫자를 현재 evidence로 재사용하지 않음.
+- **Case 4 + Case 2; 실제 alpha 검증 충분성은 INSUFFICIENT EVIDENCE.** 가장 작은 다음 작업: 현재 adapter로 새 Yahoo 수집판을 한 번 수집한 뒤 동일 coverage 재측정. M2-1B는 시작하지 않음.
+- Daily 코드/테스트 점검: 증분 재사용, PENDING 성숙, immutable outcome 재사용, 중복 안전성, FAILED/RUNNING 복구, wrapper lock, report atomic replace 확인. 실제 DB는 shadow 성공 1일뿐이므로 다일 무인 운영 안정성은 **NOT_ESTABLISHED**.
+- 전체 `.venv\Scripts\python -m pytest`: **168 passed, 1 warning, 42.81s** (기존 145개 + 신규 23개, 실패/skip 없음). 경고는 기존 `var/.pytest_cache` 쓰기 WinError 5. 기존 M2-1A tests 수정 없음.
+- 실제 coverage 실행 전후 원본 DB 및 기존 daily/validation artifact SHA-256 동일. CLI `--help` 확인. 상세 계약·실측·운영 점검은 [Coverage Diagnostic](docs/COVERAGE_DIAGNOSTIC.md).
+
 ---
 
 ## 구현 완료 범위

@@ -111,6 +111,12 @@ ATR 기반 stop=2 ATR, target=4 ATR는 참고 가격이다. 기대수익과 targ
 
 평가는 추천 단위 expectancy/승률/평균 win/loss/payoff/PF/expected shortfall/tail loss를 우선한다. 같은 날 평균한 추천 수익의 순차 곡선은 **diagnostic cohort curve**라고 표시한다. 중첩 보유 추천을 portfolio NAV로 합성하지 않는다. 실제 일별 NAV가 없으므로 연환산 Sharpe/Sortino/Calmar/portfolio MDD는 null로 남긴다. 후속 단계에서 명시적 일별 포지션 회계를 추가한 뒤 제공한다.
 
+### Coverage Diagnostic v1
+
+`richping.coverage`는 기존 Dataset/Engine/평가 정책을 읽어 집계한다. `coverage` CLI는 DB를 read-only로 열고 `var/coverage_report.json`만 생성한다. 기본 기간은 60-session warmup 이후 전체 거래일이며 NORMAL 고정 모델의 rolling past-only calibration을 재생한다. 기존 validation의 frozen fold나 실제 운영 위험 latch와 구분한다. signal/outcome/평가 계약을 변경하지 않는다.
+
+SPY/QQQ 61-session action 사유를 독립 검사하고 거래일, 후보 ticker-session, holding-period outcome, COMPLETE, pairing 시도 날짜의 분모를 분리한다. action 사유는 중복 가능하고 분모 0의 rate는 null이다. 실제 alpha 및 다일 무인 안정성의 증명이 아니며, 정의와 실측은 [COVERAGE_DIAGNOSTIC.md](COVERAGE_DIAGNOSTIC.md)를 따른다.
+
 ## 8. Champion / Challenger
 
 현재 champion은 `baseline-v1` 고정. 첫 milestone에서 자동 학습/승격 실행은 하지 않는다. 작은 순수 gate 함수로 부적격 판정을 테스트한다. Phase 3: 사전 고정한 제한적 weight/threshold 이웃만 생성, trial 수 누적, train 선택 → validation → 미사용 OOS → shadow.

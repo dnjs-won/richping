@@ -35,8 +35,13 @@ COMMIT;
 
 
 class Store:
-    def __init__(self, path):
+    def __init__(self, path, read_only=False):
         self.path = Path(path)
+        if read_only:
+            self.db = sqlite3.connect(self.path.resolve().as_uri() + "?mode=ro", uri=True, timeout=30)
+            self.db.row_factory = sqlite3.Row
+            self.db.execute("PRAGMA query_only=ON")
+            return
         self.path.parent.mkdir(parents=True, exist_ok=True)
         self.db = sqlite3.connect(self.path, timeout=30)
         self.db.row_factory = sqlite3.Row

@@ -7,6 +7,7 @@ from pathlib import Path
 import sys
 
 from .core import Config, LEGACY_OUTCOME_VERSION, canonical, cutoff_at, latest_session, timestamp, utcnow
+from .coverage import coverage_report, stored_run_evidence
 from .data import import_csv, synthetic_dataset, yahoo_dataset
 from .engine import Engine
 from .evaluation import metrics
@@ -53,6 +54,11 @@ def parser():
     va.add_argument("--train", type=int, default=504)
     va.add_argument("--validation", type=int, default=63)
     va.add_argument("--oos", type=int, default=63)
+    coverage = sub.add_parser("coverage", help="Read-only v3 research coverage diagnostics")
+    coverage.add_argument("--start", help="First target session (default: after 60-session warmup)")
+    coverage.add_argument("--end", help="Last target session (default: dataset end)")
+    coverage.add_argument("--dataset-id", help="Immutable input vintage (default: latest stored)")
+    coverage.add_argument("--output", default="var/coverage_report.json")
     sub.add_parser("recover-runs", help="Mark interrupted RUNNING jobs failed; only run when no job is active")
     return p
 
@@ -62,7 +68,7 @@ def main(argv=None):
     database = args.db or ("var/demo.db" if args.command == "demo" else "var/richping.db")
     try:
         config = Config.load(args.config)
-        with Store(database) as store:
+        with Store(database, read_only=args.command == "coverage") as store:
             if args.command == "demo":
                 symbols = ("ALFA", "BETA", "GAMA", "DELT")
                 config = replace(config, tickers=symbols)
@@ -111,10 +117,19 @@ def main(argv=None):
                     changed = store.db.execute("UPDATE runs SET status='FAILED',error='operator_recovered_interrupted_run' WHERE status='RUNNING'").rowcount
                 print(f"Recovered {changed} interrupted runs")
             else:
-                dataset = store.load_dataset()
+                dataset = store.load_dataset(args.dataset_id if args.command == "coverage" else None)
                 if dataset.metadata["quality"] == "synthetic":
                     config = replace(config, tickers=tuple(m["ticker"] for m in dataset.members))
-                if args.command == "scan":
+                if args.command == "coverage":
+                    if Path(args.output).resolve() == Path(database).resolve():
+                        raise ValueError("Coverage output must not overwrite the source database")
+                    result = coverage_report(dataset, config, args.start, args.end)
+                    result["operational_evidence"] = stored_run_evidence(store)
+                    write_report(result, args.output)
+                    print(json.dumps({"output": args.output, "dataset_id": dataset.id,
+                                      "period": result["period"], "trading_days": result["trading_days"],
+                                      "signal_blocks": result["signal_blocks"]}, indent=2))
+                elif args.command == "scan":
                     report = scan(store, dataset, config, args.session or latest_session(), args.mode)
                     write_report(report, "var/daily-report.json")
                     print(format_report(report))

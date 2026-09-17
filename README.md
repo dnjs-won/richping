@@ -37,9 +37,14 @@ Windows 작업 스케줄러에서 `powershell.exe -NoProfile -File C:\richping\s
 .\.venv\Scripts\python -m richping report
 .\.venv\Scripts\python -m richping evaluate
 .\.venv\Scripts\python -m richping validate
+.\.venv\Scripts\python -m richping coverage
 ```
 
 `--db`와 `--config`는 subcommand 앞에 둔다. 과거 재생은 `scan --mode research --session YYYY-MM-DD`로 명시한다. 캘린더 범위는 1990–2035이다. 중단된 RUNNING 작업은 다른 프로세스가 없음을 확인한 뒤 `recover-runs`로 FAILED로 전환하고 재실행한다. 일반 오류는 FAILED로 자동 기록된다.
+
+`coverage`는 최신 저장 dataset을 SQLite read-only로 읽고 `var/coverage_report.json`을 원자적으로 생성한다. 네트워크 수집이나 DB 변경 없이 반복 가능하다. `--start`, `--end`, `--dataset-id`, `--output`으로 대상 기간·수집판·출력 경로를 지정할 수 있다. 기본 대상은 첫 60거래일 warmup 이후 전체 거래일이다.
+
+SPY/QQQ의 61-session 배당·분할·Capital Gains·capture unknown을 각각 검사하고, 중복 사유와 합집합을 기록한다. 거래일, 후보 ticker-session, 추천 holding-period outcome, COMPLETE, pairing 시도 날짜의 분모는 분리된다. 추천 funnel은 NORMAL 상태의 고정 모델 research 재생이며 실제 저장 추천이나 OOS/무인 운영 증거가 아니다. 자세한 정의와 실측·운영 점검은 [Coverage Diagnostic v1](docs/COVERAGE_DIAGNOSTIC.md)에 있다.
 
 ## 결과 읽기
 
