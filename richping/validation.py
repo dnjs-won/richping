@@ -156,11 +156,20 @@ def validate(store, dataset, config, train=504, validation=63, oos=63):
 
                 paired_dates_set = set(paired_dates)
                 benchmark_rows = [r for r in raw_spy_rows if r["session"] in paired_dates_set]
+
+                matched_candidate_rows = []
+                for p_date in paired_dates:
+                    date_cands = [r for r in rows if r["session"] == p_date]
+                    if date_cands:
+                        avg_net = sum(r["net_return"] for r in date_cands) / len(date_cands)
+                        matched_candidate_rows.append({"session": p_date, "net_return": avg_net})
+
                 outputs[label] = {"start": dataset.sessions[start], "end": dataset.sessions[end],
                     "metrics": metrics(rows), "outcomes": counts, "invalid_sessions": excluded_sessions,
                     "recommendation_frequency": sum(counts[k] for k in ("COMPLETE", "PENDING", "UNRESOLVED")) / (end - start + 1),
                     "date_block_ci": block_ci(rows, config.bootstrap_samples, config.seed),
                     "matched_SPY": metrics(benchmark_rows),
+                    "matched_candidate": metrics(matched_candidate_rows),
                     "matched_SPY_evaluation": spy_evaluation,
                     "cost_stress": metrics([{**r, "net_return": r["net_return"] - config.cost} for r in rows]),
                     "by_regime": {regime: metrics([r for r in rows if r["regime"] == regime]) for regime in sorted({r["regime"] for r in rows})}}

@@ -559,15 +559,15 @@ def yahoo_dataset(symbols, start, end, previous=None, prior_capture=None):
         except Exception:
             pass
 
-        symbol_captured_at = utcnow()
-        ticker_captured_times.append(symbol_captured_at)
-
         if not inst_type and hasattr(ticker_obj, "instrument_type"):
             inst_type = ticker_obj.instrument_type
             has_meta = True
         if not quote_curr and hasattr(ticker_obj, "quote_currency"):
             quote_curr = ticker_obj.quote_currency
             has_meta = True
+
+        symbol_captured_at = utcnow()
+        ticker_captured_times.append(symbol_captured_at)
 
         if not has_meta and previous is not None:
             prev_tinfo = previous.metadata.get("action_capture", {}).get("tickers", {}).get(symbol, {})

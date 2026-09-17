@@ -12,17 +12,24 @@
 - M2-1A-R2-2: `v3_cash_action_guard` 계산 엔진 및 feature window 기업행동 차단 (구현 완료).
 - M2-1A-R2-2-R1: `synthetic` shadow 시점 검사 수정 및 테스트 보강 (구현 완료).
 - M2-1A-R2-3: `cash_action_review_v1` 평가 정책 격리 및 보고서/파이프라인 분리 (구현 완료).
-- M2-1A-R2-Sol-Remediation: Sol High 통합검수 지적사항(2 HIGH + 2 MEDIUM) 국소 수정 완료:
+- M2-1A-R2-Sol-Remediation: Sol High 통합검수 지적사항(2 HIGH + 2 MEDIUM) 및 페어링 잔여점 국소 수정 완료:
   - HIGH 1: stored v3 COMPLETE의 bar known_at point-in-time 검증 및 구조적 정합성(observed_at 누락/비정상, horizon/end mismatch) 실패 폐쇄.
-  - HIGH 2: matched SPY의 UNRESOLVED/PENDING 관측 분모 보존 및 signal-date 기준 pairing 진단 보존.
-  - MEDIUM 3: Yahoo 일봉 수집 시 네트워크 완료 이전 known_at 기록 방지 (`symbol_captured_at = utcnow()` 및 max `overall_captured_at`).
+  - HIGH 2: matched SPY의 UNRESOLVED/PENDING 관측 분모 보존, signal-date 기준 pairing 진단 보존, 동일 paired date 기반 `matched_candidate` cohort 지표 추가.
+  - MEDIUM 3: Yahoo 일봉 수집 시 metadata fallback 접근 완료 이전 known_at 기록 방지 (`symbol_captured_at = utcnow()` 및 max `overall_captured_at`).
   - MEDIUM 4: README 및 PROJECT_STATUS 현재 v2(역사적 계산 보존)/v3(fail-closed 가드) 계약 동기화.
 - Rolling train/validation/OOS, 통계·위험 gate 기본 함수.
 - CLI 보고서, CSV import, 실패/재시도, PowerShell 일일 실행 스크립트.
 
 ## 실제 검증 결과
 
-- Python 3.13.7, 테스트 기본 `.\.venv\Scripts\python -m pytest` 통과 확인 중.
+- Python 3.13.7, 테스트 142 passed / 0 failed / 0 skipped (기본 `.\.venv\Scripts\python -m pytest` 통과).
+  - `tests/test_action_capture.py`: 37 passed
+  - `tests/test_cli.py`: 2 passed
+  - `tests/test_dividends.py`: 56 passed
+  - `tests/test_evaluation.py`: 16 passed
+  - `tests/test_ingestion.py`: 5 passed
+  - `tests/test_integrity.py`: 23 passed
+  - `tests/test_validation.py`: 3 passed
 
 ## R2 진행 및 검수 상태
 

@@ -1912,5 +1912,13 @@ def test_r2_matched_spy_pairing_and_unresolved_denominator(tmp_path):
             assert spy_samples < candidate_samples
             assert spy_samples == spy_ev["paired_signal_dates"]
 
+            # 5. matched_candidate has exactly the same paired signal dates as matched_SPY
+            matched_cand = oos["matched_candidate"]
+            assert matched_cand["samples"] == spy_samples
+            assert matched_cand["samples"] == spy_ev["paired_signal_dates"]
+            # Candidate predictions contains the unresolved signal date 2023-03-06, but paired metrics exclude it
+            oos_sessions = {r["session"] for r in result["oos_predictions"]}
+            assert "2023-03-06" in oos_sessions
+
 
 

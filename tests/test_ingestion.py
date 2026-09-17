@@ -113,13 +113,14 @@ def test_yahoo_dataset_known_at_not_before_fetch_completion(monkeypatch):
     monkeypatch.setattr("richping.data.time.sleep", lambda _: None)
 
     fetch_finish_times = {}
+    meta_finish_times = {}
 
     class AdvancingTicker:
         def __init__(self, symbol):
             self.symbol = symbol
 
         def history(self, **kwargs):
-            # Advance clock during fetch
+            # Advance clock during history fetch
             current_time[0] += timedelta(minutes=5)
             fetch_finish_times[self.symbol] = current_time[0].isoformat()
             bars = [b for b in data.bars if b.ticker == self.symbol and b.session >= kwargs["start"]]
@@ -129,33 +130,44 @@ def test_yahoo_dataset_known_at_not_before_fetch_completion(monkeypatch):
                               index=pd.to_datetime([b.session for b in bars]))
             return df
 
-        def get_history_metadata(self):
-            return {"instrumentType": "EQUITY", "currency": "USD"}
+        @property
+        def instrument_type(self):
+            # Lazy/network-backed property fallback access advances clock
+            current_time[0] += timedelta(minutes=2)
+            meta_finish_times[self.symbol] = current_time[0].isoformat()
+            return "EQUITY"
+
+        @property
+        def quote_currency(self):
+            current_time[0] += timedelta(minutes=1)
+            meta_finish_times[self.symbol] = current_time[0].isoformat()
+            return "USD"
 
     monkeypatch.setitem(sys.modules, "yfinance", SimpleNamespace(Ticker=AdvancingTicker, set_tz_cache_location=lambda _: None, __version__="1.7.0"))
 
     fresh = yahoo_dataset(("ALFA",), data.start, data.end)
 
-    # 1. Bar known_at is not earlier than each ticker's fetch completion
+    # 1. Bar known_at is not earlier than each ticker's final metadata fallback completion
     latest_sess = data.sessions[-1]
     alfa_bar = fresh.by_ticker["ALFA"][latest_sess]
     spy_bar = fresh.by_ticker["SPY"][latest_sess]
 
-    assert alfa_bar.known_at >= fetch_finish_times["ALFA"]
-    assert spy_bar.known_at >= fetch_finish_times["SPY"]
-    assert alfa_bar.known_at > t0.isoformat()
+    assert alfa_bar.known_at >= meta_finish_times["ALFA"]
+    assert alfa_bar.known_at > fetch_finish_times["ALFA"]
+    assert spy_bar.known_at >= meta_finish_times["SPY"]
+    assert spy_bar.known_at > fetch_finish_times["SPY"]
 
-    # 2. Overall action_capture captured_at is not earlier than total fetch completion
+    # 2. Overall action_capture captured_at is not earlier than total fetch and metadata completion
     cap = fresh.metadata["action_capture"]
-    assert cap["captured_at"] >= fetch_finish_times["ALFA"]
-    assert cap["captured_at"] >= max(fetch_finish_times.values())
+    assert cap["captured_at"] >= meta_finish_times["ALFA"]
+    assert cap["captured_at"] >= max(meta_finish_times.values())
 
-    # 3. Before fetch completion (at t0), shadow inspection blocks data as not yet known
+    # 3. Before fetch/meta completion (at t0), shadow inspection blocks data as not yet known
     ac_before = inspect_action_capture(fresh, "ALFA", [latest_sess], as_of=t0.isoformat(), mode="shadow")
     assert ac_before.is_pending is True
     assert ac_before.reason == "data_not_yet_known"
 
-    # After total fetch completion, shadow inspection succeeds
+    # After total completion, shadow inspection succeeds
     after_time = (current_time[0] + timedelta(minutes=1)).isoformat()
     ac_after = inspect_action_capture(fresh, "ALFA", [latest_sess], as_of=after_time, mode="shadow")
     assert ac_after.is_pending is False
