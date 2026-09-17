@@ -54,7 +54,7 @@ SPY/QQQ의 61-session 배당·분할·Capital Gains·capture unknown을 각각 �
 - Entry/Stop/Target은 추천 종가 및 ATR 기반 참고값. 실제 체결이나 예상 수익과 다르다.
 - 최소 표본이나 기대값 신뢰구간을 충족하지 않으면 정상적으로 **NO TRADE**.
 - COMPLETE / PENDING / UNRESOLVED를 모두 보고한다. 미해결 상폐/분할/미확인 배당을 0%나 정상 수익으로 바꾸지 않는다.
-- M2-1A: `v2_ordinary_cash_dividend`는 역사적 계산 계약 보존용이며, 현재 `cash_action_review_v1` 정책에서 v2 COMPLETE는 현재 성과 증거에서 제외된다. 현재 기본 계약은 `v3_cash_action_guard`로, 현금배당 자동 지원 버전이 아니라 검증되지 않은 기업행동을 fail-closed로 격리하는 계약이다. 일반 현금배당 실데이터 자동 지원은 아직 승인되지 않았으며, 특징 창 배당 종목 제외 규칙은 유지된다.
+- M2-1B: 검증된 Yahoo 배당 단위 증거가 있는 feature 창은 마지막 원본 가격에 고정한 OHLC 정규화를 사용한다. 기존 vintage에 증거를 소급 부여하지 않으며 새 `sync` 수집이 필요하다. **Feature dividend normalization ≠ Outcome dividend accounting.** 기본 outcome `v3_cash_action_guard`는 holding-period 배당을 계속 UNRESOLVED로 격리한다. `cash_action_review_v1`의 v2 COMPLETE 성과 증거 제외도 유지한다. 세부 지원 범위는 [설계 계약](docs/DESIGN.md)을 따른다.
 
 ## CSV contract
 
@@ -76,7 +76,7 @@ UTF-8, ticker 대문자, UTC offset을 포함한 known_at. session은 XNYS 거�
 
 기본 504 train / 63 validation / 63 OOS sessions, 최대 horizon 20 + embargo 1, 63 sessions씩 전진. 고정 baseline은 validation 시작 시 calibration을 동결한다. 실험은 실행 전 등록하고 실패 결과도 남긴다. OOS와 비용 2배 stress, 국면별 지표, SPY 동일 날짜 비교를 `var/validation.json`에 저장한다.
 
-무료 현재 데이터와 정적 종목군은 역사적 시점 무결성·상폐 종목 커버리지를 보증하지 않는다. 따라서 실제 데이터의 결과도 **research OOS**이며 자동 승격 증거로 사용할 수 없다. 기업행동을 포함하는 feature/outcome 창은 보수적으로 제외/미해결 처리한다. 이는 커버리지 제한이며 성과 선택 편향을 해결한 것이 아니다.
+무료 현재 데이터와 정적 종목군은 역사적 시점 무결성·상폐 종목 커버리지를 보증하지 않는다. 따라서 실제 데이터의 결과도 **research OOS**이며 자동 승격 증거로 사용할 수 없다. Feature 창은 검증된 배당만 정규화하고 미지원 기업행동은 제외한다. Outcome 창의 기업행동 격리는 유지한다. 이는 성과 선택 편향을 해결한 것이 아니다.
 
 포트폴리오 원장을 만들지 않았으므로 portfolio Sharpe/Sortino/Calmar/MDD는 N/A다. cohort drawdown은 순차 날짜별 추천 수익의 진단값이며 계좌 drawdown이 아니다.
 

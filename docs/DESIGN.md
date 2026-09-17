@@ -98,10 +98,25 @@ ATR 기반 stop=2 ATR, target=4 ATR는 참고 가격이다. 기대수익과 targ
   - 관측 기간 내 현금배당 발생 시(진입일 `bars[0]` 및 전 기간 포함, 규모 무관) `unverified_cash_dividend_event` (우선순위 3).
   - action capture 누락, ticker 부재, unknown 상태 또는 보유창 미완전 커버 시 `action_capture_unknown` (우선순위 4).
   - 사건이 완전히 없고 검증 완료된 구간만 순수 가격 수익 계산: `raw_return = price_return`, `net_return = raw_return - cost` (비용 1회 차감).
-  - 특징 생성(`Engine.signals`):
-    - 후보 종목 61 거래일 창 내 split/dividend/Capital Gains 또는 unverified capture 존재 시 후보 제외 (`corporate_action_in_feature_window` 또는 `action_capture_unknown`).
-    - 벤치마크 SPY/QQQ 61 거래일 창 내 split/dividend/Capital Gains 또는 unverified capture 존재 시 즉시 `ValueError`로 실패 폐쇄 (침묵형 대체 금지).
+  - 특징 생성은 아래 M2-1B feature 계약으로 분리한다. Outcome v3의 배당 격리는 그대로 유지한다.
     - `Engine.history`는 `COMPLETE` 결과만 포함하며 제외된 결과는 `Engine.excluded_history`에 진단 보존.
+
+### M2-1B: dividend-safe feature window (2026-09-17)
+
+**Feature dividend normalization ≠ Outcome dividend accounting.** Benchmark, candidate, historical calibration signal은 공통 `feature_window`를 사용한다. `observe`의 v3, `cash_action_review_v1`, score/risk/calibration/bootstrap 설정은 변경하지 않는다.
+
+`cash_gap_backward_v1`: 61-session 원본 창에서 배당락일 e의 현금금액 D와 직전 원본 종가 C로 `q_e = 1 - D/C`를 계산한다. bar i의 OHLC 전부에 `product(q_e, i < e <= signal_session)`를 곱한다. 마지막 OHLC는 원본과 정확히 같다. 순수한 배당락만 있는 예에서 `100 → 99, D=1`은 feature 입력 `99 → 99`가 된다. 이 수익률은 `(C_e / (C_prev-D)) - 1`이며, 배당 수취/재투자 total return이나 outcome label이 아니다.
+
+- 원본 `Dataset.bars`, dividend, volume은 수정하지 않는다. 정규화 bar는 임시 derived view이다. relative volume은 원본 volume, dollar-volume은 **원본 close × 원본 volume**의 20일 평균으로 유지하여 유동성 필터가 배당 조정으로 바뀌지 않게 한다. ATR·MA·breakout은 같은 조정 OHLC를 사용한다. entry/stop/target은 마지막 원본 close 단위이며 next-open 관측은 원본 bar에서 읽는다.
+- 지원 범위: 검증된 `yfinance-1.7.0`, `auto_adjust=False, back_adjust=False, actions=True, repair=False`, 명시된 split-adjusted/cash-unadjusted OHLC, USD EQUITY/ETF, 완전한 action capture. Yahoo Dividends는 해당 vintage의 split-adjusted 주당 금액이다. 수집 시 public `get_dividends(period="max")`에서 각 배당락일 금액을 history와 대조하고 통화를 검사한다. 명시된 외화/금액 불일치/조회 실패는 승인하지 않는다. 검증된 adapter의 currency 열 없는 Series는 quote currency 계약을 따른다.
+- 일치한 배당은 기존 action_capture.events에 `field=Dividends`, `currency=USD`, `unit_basis=quote_currency_split_adjusted_per_share`, `known_at`으로 보존한다. supplementary 조회 완료 이후 captured_at/known_at을 기록한다. 구 vintage의 단위 증거를 소급 생성하지 않는다. 증거가 없는 이전 dataset의 배당 창은 여전히 제외하며 sync는 새 전체 vintage를 수집한다. 증거 소실/수정도 전체 재수집하고 기존 raw/hash는 보존한다.
+- split, Capital Gains, unknown/incomplete capture, 미지원 action, bar와 event 불일치, 결측, shadow 미공개 자료는 fail closed. 모든 현금 분배를 승인하는 계약이 아니다. Yahoo는 ordinary/special/ROC 세무 분류를 확정하지 못하므로 **provider Dividends에 대한 제한된 feature 가격 변환**만 지원한다. 알려진 ROC/미지원 event는 거부하며 outcome 권리·세무 분류는 승인하지 않는다.
+- D는 finite·양수이고 직전 종가보다 작아야 한다. `D/C >= 25%`는 `large_cash_distribution`으로 제외한다. 이는 v2의 20% outcome heuristic 복사가 아니다. [FINRA 11140](https://www.finra.org/rules-guidance/rulebooks/finra-rules/11140)의 큰 분배에 대한 별도 ex-date 절차를 참고한 보수적 feature 범위 경계이며, 25% 미만이 ordinary임을 입증하는 규칙은 아니다. 수학적 불능·크기 경계·단위 불명은 각각 테스트한다.
+- 첫 bar가 배당락일이면 앞선 정확한 session의 close를 검증에만 사용한다. 그 배당으로 창 안의 bar를 조정하지는 않는다. 직전 bar가 없거나 shadow cutoff에 미공개면 차단한다. 배당이 창 밖으로 나가면 61-session 관측에 포함하지 않는다.
+- 각 signal session까지의 event만 사용한다. provider Adj Close와 미래 dividend는 읽지 않는다. shadow는 bar/capture/event/첫 배당의 직전 bar known_at을 검사한다. research는 기존의 역사적 공개시각 가정을 유지하며, 수정된 Yahoo vintage/현재 고정 universe를 완전한 역사적 PIT 자료라고 주장하지 않는다. label_end·22-session calibration 경계·embargo는 그대로다.
+- `code_hash()`가 모든 `richping/*.py`를 포함하므로 새 helper도 model_id에 반영된다. snapshot JSON에 feature_normalization, feature_price_basis, dollar_volume_basis만 추가하며 DB schema는 확장하지 않는다.
+
+가격 조정 근거: [Yahoo adjusted-close 설명](https://help.yahoo.com/kb/SLN28256.html), [yfinance PriceHistory API](https://ranaroussi.github.io/yfinance/reference/yfinance.price_history.html), 설치된 1.7.0 `scrapers/history.py`의 raw action/currency 처리. Yahoo 값 자체의 오류·소급 수정 가능성은 여전히 연구 데이터의 한계다.
 
 ## 7. Validation
 

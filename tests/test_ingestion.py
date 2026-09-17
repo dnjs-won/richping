@@ -42,6 +42,8 @@ def fake_yahoo(monkeypatch, data, error=False):
     class Ticker:
         def __init__(self, symbol):
             self.symbol = symbol
+        def get_history_metadata(self):
+            return {"instrumentType": None, "currency": "USD"}
         def history(self, **kwargs):
             calls.append((self.symbol, kwargs))
             if error:
@@ -130,18 +132,22 @@ def test_yahoo_dataset_known_at_not_before_fetch_completion(monkeypatch):
                               index=pd.to_datetime([b.session for b in bars]))
             return df
 
-        @property
-        def instrument_type(self):
-            # Lazy/network-backed property fallback access advances clock
+        def get_history_metadata(self):
+            # Primary metadata request advances clock.
             current_time[0] += timedelta(minutes=2)
             meta_finish_times[self.symbol] = current_time[0].isoformat()
-            return "EQUITY"
+            return {"instrumentType": "EQUITY", "currency": "USD"}
 
         @property
-        def quote_currency(self):
+        def fast_info(self):
             current_time[0] += timedelta(minutes=1)
             meta_finish_times[self.symbol] = current_time[0].isoformat()
-            return "USD"
+            return {"quoteType": "EQUITY", "currency": "USD"}
+
+        def get_info(self):
+            current_time[0] += timedelta(minutes=1)
+            meta_finish_times[self.symbol] = current_time[0].isoformat()
+            return {"quoteType": "EQUITY", "currency": "USD"}
 
     monkeypatch.setitem(sys.modules, "yfinance", SimpleNamespace(Ticker=AdvancingTicker, set_tz_cache_location=lambda _: None, __version__="1.7.0"))
 

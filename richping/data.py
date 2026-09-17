@@ -31,6 +31,124 @@ def is_verified_yfinance_adapter(adapter_version):
     return adapter_version in VERIFIED_YFINANCE_ADAPTERS
 
 
+def _feature_dividend_events(ticker_obj, frame, symbol, currency, adapter):
+    """Retain unit evidence discarded by history() before accepting feature cash gaps.
+
+    get_dividends returns the provider action series (or a frame with explicit
+    currency). Match amounts on each ex-date; foreign currency/mismatch fails closed.
+    Absence of a currency column means quote currency in this verified adapter.
+    """
+    if not is_verified_yfinance_adapter(adapter) or currency != "USD":
+        return []
+    if "Dividends" not in frame or not (frame["Dividends"] > 0).any():
+        return []
+    try:
+        dividends = ticker_obj.get_dividends(period="max")
+        is_frame = hasattr(dividends, "columns")
+        amounts = dividends["Dividends"] if is_frame else dividends
+        evidence = {}
+        for index, amount in amounts.items():
+            curr = dividends.loc[index, "currency"] if is_frame and "currency" in dividends else currency
+            evidence[str(index.date())] = (float(amount), curr)
+        events = []
+        for index, row in frame.iterrows():
+            amount = float(row["Dividends"])
+            day = str(index.date())
+            if amount > 0 and evidence.get(day) == (amount, currency):
+                events.append({"ticker": symbol, "session": day, "field": "Dividends",
+                    "amount": amount, "currency": currency,
+                    "unit_basis": "quote_currency_split_adjusted_per_share"})
+        return events
+    except Exception:
+        return []  # A failed supplementary unit check cannot certify a dividend.
+
+
+def _provider_value(payload, key, attribute=None):
+    if payload is None:
+        return None
+    try:
+        if hasattr(payload, "get"):
+            value = payload.get(key)
+            if value is not None:
+                return value
+    except Exception:
+        pass
+    if attribute:
+        try:
+            return getattr(payload, attribute)
+        except Exception:
+            pass
+    return None
+
+
+def _normalized_instrument_type(value):
+    if not isinstance(value, str) or not value.strip():
+        return None
+    return value.strip().upper()
+
+
+def _resolve_yahoo_metadata(ticker_obj):
+    """Resolve Yahoo metadata from ordered provider APIs and preserve evidence.
+
+    History metadata is primary because it is returned with the price request.
+    FastInfo is the documented lightweight facade in yfinance 1.7.0, while
+    get_info uses Yahoo's separate quote endpoints. Any disagreement fails closed.
+    """
+    observations = []
+    currency_candidates = []
+
+    def observe(source, payload, instrument_key, instrument_attribute=None, currency_key="currency"):
+        value = _normalized_instrument_type(
+            _provider_value(payload, instrument_key, instrument_attribute)
+        )
+        if value is not None:
+            observations.append({"source": source, "value": value})
+        currency = _provider_value(payload, currency_key, currency_key)
+        if isinstance(currency, str) and currency.strip():
+            currency_candidates.append(currency.strip().upper())
+
+    try:
+        getter = getattr(ticker_obj, "get_history_metadata", None)
+        history_metadata = getter() if callable(getter) else None
+    except Exception:
+        history_metadata = None
+    observe("get_history_metadata.instrumentType", history_metadata, "instrumentType")
+
+    try:
+        fast_info = getattr(ticker_obj, "fast_info")
+    except Exception:
+        fast_info = None
+    observe("fast_info.quote_type", fast_info, "quoteType", "quote_type")
+
+    try:
+        getter = getattr(ticker_obj, "get_info", None)
+        if callable(getter):
+            info = getter()
+        else:
+            info = getattr(ticker_obj, "info")
+    except Exception:
+        info = None
+    observe("get_info.quoteType", info, "quoteType")
+
+    distinct_types = {item["value"] for item in observations}
+    if len(distinct_types) == 1:
+        instrument_type = next(iter(distinct_types))
+        instrument_type_source = observations[0]["source"]
+    elif len(distinct_types) > 1:
+        instrument_type = None
+        instrument_type_source = "conflict"
+    else:
+        instrument_type = None
+        instrument_type_source = "unresolved"
+
+    return {
+        "instrument_type": instrument_type,
+        "instrument_type_source": instrument_type_source,
+        "instrument_type_observations": observations,
+        "quote_currency": currency_candidates[0] if currency_candidates else None,
+    }
+
+
 def validate_action_capture(capture):
     if not isinstance(capture, dict):
         raise ValueError("action_capture must be a dict")
@@ -49,6 +167,34 @@ def validate_action_capture(capture):
         st = tinfo.get("capital_gains_status")
         if st not in CAPITAL_GAINS_STATUSES:
             raise ValueError(f"Invalid capital_gains_status: {st!r} for {sym}")
+        source = tinfo.get("instrument_type_source")
+        observations = tinfo.get("instrument_type_observations")
+        if source is not None:
+            if not isinstance(source, str) or not source:
+                raise ValueError(f"Invalid instrument_type_source for {sym}")
+            if not isinstance(observations, list):
+                raise ValueError(f"instrument_type_observations required for {sym}")
+            for observation in observations:
+                if (
+                    not isinstance(observation, dict)
+                    or not isinstance(observation.get("source"), str)
+                    or not observation["source"]
+                    or _normalized_instrument_type(observation.get("value")) != observation.get("value")
+                ):
+                    raise ValueError(f"Invalid instrument type observation for {sym}: {observation!r}")
+            observed_types = {observation["value"] for observation in observations}
+            if source == "conflict":
+                if tinfo.get("instrument_type") is not None or len(observed_types) < 2:
+                    raise ValueError(f"Invalid conflicting instrument metadata for {sym}")
+            elif source == "unresolved":
+                if tinfo.get("instrument_type") is not None or observations:
+                    raise ValueError(f"Invalid unresolved instrument metadata for {sym}")
+            elif (
+                tinfo.get("instrument_type") is None
+                or source not in {observation["source"] for observation in observations}
+                or observed_types != {tinfo["instrument_type"]}
+            ):
+                raise ValueError(f"Invalid resolved instrument metadata for {sym}")
         intervals = tinfo.get("query_intervals")
         if not isinstance(intervals, list):
             raise ValueError(f"query_intervals list required for {sym}")
@@ -262,6 +408,9 @@ def create_action_capture(adapter_version, history_options, captured_at, tickers
             "query_intervals": norm_intervals,
             "quote_currency": info.get("quote_currency"),
         }
+        for field in ("instrument_type_source", "instrument_type_observations"):
+            if field in info:
+                sorted_tickers[sym][field] = info[field]
     sorted_events = sorted(
         events,
         key=lambda e: (e["ticker"], e["session"], e["field"], float(e["amount"]), e["known_at"])
@@ -509,6 +658,10 @@ def yahoo_dataset(symbols, start, end, previous=None, prior_capture=None):
             or prev_cap.get("schema_version") != ACTION_CAPTURE_SCHEMA_VERSION
             or prev_cap.get("adapter_version") != adapter_ver
             or prev_cap.get("history_options") != history_options
+            or any(b.dividend and not any(e.get("field") == "Dividends"
+                   and e.get("ticker") == b.ticker and e.get("session") == b.session
+                   and e.get("amount") == b.dividend and e.get("unit_basis") == "quote_currency_split_adjusted_per_share"
+                   for e in prev_cap.get("events", [])) for b in previous.bars)
         ):
             if isinstance(prev_cap, dict) and prior_capture is None:
                 prior_capture = prev_cap
@@ -537,42 +690,16 @@ def yahoo_dataset(symbols, start, end, previous=None, prior_capture=None):
                     raise
                 time.sleep(2 ** attempt)
 
-        inst_type = None
-        quote_curr = None
-        has_meta = False
-        try:
-            if hasattr(ticker_obj, "get_history_metadata"):
-                hm = ticker_obj.get_history_metadata() or {}
-                has_meta = True
-            elif hasattr(ticker_obj, "history_metadata"):
-                hm = ticker_obj.history_metadata
-                hm = hm() if callable(hm) else (hm or {})
-                has_meta = True
-            elif hasattr(ticker_obj, "fast_info"):
-                hm = getattr(ticker_obj, "fast_info", {}) or {}
-                has_meta = True
-            else:
-                hm = {}
-            if isinstance(hm, dict):
-                inst_type = hm.get("instrumentType")
-                quote_curr = hm.get("currency")
-        except Exception:
-            pass
+        resolved_metadata = _resolve_yahoo_metadata(ticker_obj)
+        inst_type = resolved_metadata["instrument_type"]
+        quote_curr = resolved_metadata["quote_currency"]
 
-        if not inst_type and hasattr(ticker_obj, "instrument_type"):
-            inst_type = ticker_obj.instrument_type
-            has_meta = True
-        if not quote_curr and hasattr(ticker_obj, "quote_currency"):
-            quote_curr = ticker_obj.quote_currency
-            has_meta = True
+        dividend_events = _feature_dividend_events(ticker_obj, frame, symbol, quote_curr, adapter_ver)
 
         symbol_captured_at = utcnow()
         ticker_captured_times.append(symbol_captured_at)
-
-        if not has_meta and previous is not None:
-            prev_tinfo = previous.metadata.get("action_capture", {}).get("tickers", {}).get(symbol, {})
-            inst_type = prev_tinfo.get("instrument_type")
-            quote_curr = prev_tinfo.get("quote_currency")
+        new_events.extend({**e, "known_at": symbol_captured_at} for e in dividend_events
+                          if e["session"] <= end and cutoff_at(e["session"]) <= timestamp(symbol_captured_at))
 
         has_cg_col = "Capital Gains" in frame.columns
         if has_cg_col:
@@ -619,6 +746,8 @@ def yahoo_dataset(symbols, start, end, previous=None, prior_capture=None):
             fetched_tickers_info[symbol] = {
                 "capital_gains_status": status,
                 "instrument_type": inst_type,
+                "instrument_type_source": resolved_metadata["instrument_type_source"],
+                "instrument_type_observations": resolved_metadata["instrument_type_observations"],
                 "query_intervals": [{"start": min(sym_sessions), "end": max(sym_sessions), "capital_gains_status": status}],
                 "quote_currency": quote_curr,
             }
@@ -677,6 +806,15 @@ def yahoo_dataset(symbols, start, end, previous=None, prior_capture=None):
                     revised = True
                 elif old_amt is not None and new_amt is not None and old_amt != new_amt:
                     revised = True
+                # Unit evidence may disappear/change even when OHLC and cash amount do not.
+                key = (symbol, s, "Dividends")
+                old_div = next((e for e in prev_cap.get("events", [])
+                                if (e["ticker"], e["session"], e["field"]) == key), None)
+                new_div = next((e for e in new_events
+                                if (e["ticker"], e["session"], e["field"]) == key), None)
+                evidence = lambda e: {k: v for k, v in e.items() if k != "known_at"} if e else None
+                if evidence(old_div) != evidence(new_div):
+                    revised = True
 
         if revised:
             return yahoo_dataset(symbols, start, end, previous=None, prior_capture=prev_cap)
@@ -704,6 +842,8 @@ def yahoo_dataset(symbols, start, end, previous=None, prior_capture=None):
             merged_tickers[symbol] = {
                 "capital_gains_status": overall_capital_gains_status(norm_ivs),
                 "instrument_type": new_tinfo.get("instrument_type"),
+                "instrument_type_source": new_tinfo.get("instrument_type_source", "unresolved"),
+                "instrument_type_observations": new_tinfo.get("instrument_type_observations", []),
                 "query_intervals": norm_ivs,
                 "quote_currency": new_tinfo.get("quote_currency"),
             }
@@ -727,7 +867,8 @@ def yahoo_dataset(symbols, start, end, previous=None, prior_capture=None):
                 k = (e["ticker"], e["session"], e["field"])
                 if k in prior_events:
                     pe = prior_events[k]
-                    if float(e["amount"]) == float(pe["amount"]):
+                    if ({k: v for k, v in e.items() if k != "known_at"}
+                            == {k: v for k, v in pe.items() if k != "known_at"}):
                         e["known_at"] = pe["known_at"]
         capture = create_action_capture(
             adapter_version=adapter_ver,

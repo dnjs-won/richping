@@ -3,13 +3,14 @@
 from collections import Counter
 
 from .core import CASH_ACTION_REVIEW_POLICY, DEFAULT_OUTCOME_VERSION, cutoff_at, timestamp
-from .data import inspect_action_capture
+from .feature_window import FEATURE_VERSION, feature_window
 from .engine import Engine, observe
 from .evaluation import cohort_returns, evaluate_outcome_eligibility, metrics
 
 
 WINDOW_REASONS = ("missing_or_unknown_history", "data_not_yet_known", "dividend",
-                  "split", "capital_gains", "action_capture_unknown")
+                  "split", "capital_gains", "action_capture_unknown", "dividend_normalized",
+                  "dividend_unsupported", "unsupported_corporate_action")
 CANDIDATE_REASONS = ("not_in_asof_universe",) + WINDOW_REASONS + (
     "price_or_liquidity", "weak_signal", "invalid_risk_reference")
 
@@ -31,28 +32,14 @@ def window_reasons(dataset, symbol, session, cutoff=None, mode="research"):
     sidecar events never become dated dividend/Capital Gains evidence in shadow.
     Missing windows cannot establish action absence.
     """
-    if mode not in {"research", "shadow"}:
-        raise ValueError("Invalid diagnostic mode")
-    cutoff = cutoff or cutoff_at(session).isoformat()
-    bars = dataset.window(symbol, session, 61, cutoff, "research")
-    if bars is None:
-        return ["missing_or_unknown_history"]
-    if mode == "shadow" and any(timestamp(b.known_at) > timestamp(cutoff) for b in bars):
-        return ["data_not_yet_known"]
-    reasons = []
-    if any(b.dividend for b in bars):
-        reasons.append("dividend")
-    if any(b.split for b in bars):
-        reasons.append("split")
-    capture = inspect_action_capture(dataset, symbol, [b.session for b in bars], cutoff, mode)
-    if capture.is_pending:
-        reasons.append("data_not_yet_known")
-    else:
-        if capture.has_capital_gains:
-            reasons.append("capital_gains")
-        if not capture.is_confirmed:
-            reasons.append("action_capture_unknown")
-    return reasons
+    window = feature_window(dataset, symbol, session, cutoff, mode)
+    return list(dict.fromkeys((*window.observations, *window.blockers)))
+
+
+def blocking_reasons(reasons):
+    # Legacy dividend occurrence is informational; only unsupported windows block.
+    return [r for r in reasons if r != "dividend_normalized"
+            and (r != "dividend" or "dividend_unsupported" in reasons)]
 
 
 def candidate_reasons(dataset, config, session, signals, cutoff=None, mode="research"):
@@ -68,8 +55,8 @@ def candidate_reasons(dataset, config, session, signals, cutoff=None, mode="rese
             results[symbol] = ["not_in_asof_universe"]
             continue
         reasons = window_reasons(dataset, symbol, session, cutoff, mode)
-        if not reasons and signals is not None and symbol in signals["excluded"]:
-            reasons = [signals["excluded"][symbol]]
+        if not blocking_reasons(reasons) and signals is not None and symbol in signals["excluded"]:
+            reasons.append(signals["excluded"][symbol])
         results[symbol] = reasons
     return results
 
@@ -165,8 +152,8 @@ def coverage_report(dataset, config, start=None, end=None, boundary=None, state=
         reasons = {symbol: window_reasons(dataset, symbol, day) for symbol in benchmark_counts}
         for symbol, values in reasons.items():
             benchmark_counts[symbol].update(values)
-            benchmark_counts[symbol]["feature_computable"] += not values
-        combined = {reason for values in reasons.values() for reason in values}
+            benchmark_counts[symbol]["feature_computable"] += not blocking_reasons(values)
+        combined = {reason for values in reasons.values() for reason in blocking_reasons(values)}
         blocks.update(combined)
         # Engine remains authoritative; unclassified failures are visible.
         try:
@@ -174,7 +161,7 @@ def coverage_report(dataset, config, start=None, end=None, boundary=None, state=
         except ValueError as exc:
             signals = None
             if not combined:
-                blocks["unclassified_engine_failure"] += 1
+                raise ValueError("Coverage diagnostics missed Engine benchmark failure") from exc
             error = str(exc)
         else:
             error = None
@@ -183,7 +170,11 @@ def coverage_report(dataset, config, start=None, end=None, boundary=None, state=
         details = candidate_reasons(dataset, config, day, signals)
         for values in details.values():
             candidates.update(values)
-            candidate_counts["excluded" if values else "not_evaluated_benchmark_blocked" if signals is None else "supported"] += 1
+            candidate_counts["excluded" if blocking_reasons(values) else "not_evaluated_benchmark_blocked" if signals is None else "supported"] += 1
+        if signals is not None:
+            diagnostic_supported = {s for s, v in details.items() if not blocking_reasons(v)}
+            if diagnostic_supported != {s["ticker"] for s in signals["candidates"]}:
+                raise ValueError("Coverage diagnostics disagree with Engine candidate contract")
         chosen, rejected = select_candidates(engine, signals, boundary, state) if signals else ([], Counter())
         for reason in rejected:
             funnel[reason + "_dates"] += 1
@@ -201,7 +192,7 @@ def coverage_report(dataset, config, start=None, end=None, boundary=None, state=
         elif not signals["supported"]:
             category = "unsupported_market_regime"
         elif not raw:
-            integrity = {"not_in_asof_universe", *WINDOW_REASONS}
+            integrity = {"not_in_asof_universe", *WINDOW_REASONS} - {"dividend", "dividend_normalized"}
             category = "integrity_data_blocked" if all(set(v) & integrity for v in details.values()) else "no_raw_signal"
         elif chosen:
             category = "recommendation_available"
@@ -247,12 +238,13 @@ def _assemble_report(dataset, config, days, boundary, state, benchmarks, blocks,
     decision["by_category"] = reason_metrics(categories, total, "target_trading_days", (
         "integrity_data_blocked", "unsupported_market_regime", "no_raw_signal",
         "calibration_insufficient", "edge_unsupported", "reduced_exposure_threshold", "recommendation_available"))
+    decision["raw_candidates"] = metric(funnel["raw_candidates"], total, "target_trading_days")
     decision["calibration_attempts"] = metric(funnel["calibration_attempts"], funnel["raw_candidates"], "raw_candidates")
     decision["candidate_rejections"] = {
         r: metric(funnel[r + "_candidates"], funnel["calibration_attempts"], "calibration_attempts")
         for r in ("insufficient_calibration", "edge_not_supported", "reduced_exposure_edge_threshold", "below_top_k")}
     return {
-        "schema": "coverage_diagnostic_v1", "period": {"start": days[0], "end": days[-1]},
+        "schema": "coverage_diagnostic_v1", "feature_contract": FEATURE_VERSION, "period": {"start": days[0], "end": days[-1]},
         "dataset_period": {"start": dataset.start, "end": dataset.end,
                            "trading_days": len(dataset.sessions), "feature_window_sessions": 61},
         "dataset_id": dataset.id, "model_id": config.model_id, "config": config.payload(),
@@ -265,7 +257,7 @@ def _assemble_report(dataset, config, days, boundary, state, benchmarks, blocks,
                          "signal_blocked": metric(total - funnel["signal_supported"], total, "target_trading_days")},
         "signal_blocks": {"by_reason": reason_metrics(blocks, total, "target_trading_days", WINDOW_REASONS),
                           "both_benchmarks_dividend": metric(dividend_both, total, "target_trading_days"),
-                          "counting": "union across SPY/QQQ per reason; reasons overlap"},
+                          "counting": "blocking reasons only; dividend = unsupported observed dividend union; both_benchmarks_dividend = raw occurrence intersection"},
         "benchmark": {s: {"by_reason": reason_metrics(c, total, "target_trading_days", WINDOW_REASONS + ("feature_computable",))}
                       for s, c in benchmarks.items()},
         "candidate_evaluations": {"total": ticker_total,

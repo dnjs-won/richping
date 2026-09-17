@@ -1,4 +1,51 @@
-# Coverage Diagnostic v1 · 2026-09-17
+# Coverage Diagnostic v1 · M2-1B · 2026-09-17
+
+## M2-1B 현재 계약과 재현
+
+**Feature dividend normalization ≠ Outcome dividend accounting.** M2-1B는 feature-only 배당 정규화를 적용하며 outcome v3/evaluation 정책은 유지한다.
+
+```powershell
+.\.venv\Scripts\python -m richping --db var/m2-1b-fresh.db coverage --dataset-id 7d573d75465eb054f3cc89cde451d11fdbd4787f3353c67e84b292be653af2e8 --output var/coverage-m2-1b-replay.json
+```
+
+현재 검증 artifact는 `var/coverage-m2-1b-final.json`, 원본 비교는 `var/coverage-provenance-fixed.json`이다. 새 수집은 별도 `var/m2-1b-fresh.db`에 저장했다. 운영 DB를 교체하지 않았으므로 기본 DB의 기존 vintage에 M2-1B 단위 증거가 자동 생성되지는 않는다. 일반 `sync`는 증거 없는 이전 입력에서 새 전체 vintage로 전환한다.
+
+JSON의 `schema=coverage_diagnostic_v1` 구조를 유지하고 `feature_contract=cash_gap_backward_v1`, `decision_funnel.raw_candidates`를 추가했다. `window_reasons`와 benchmark/candidate `by_reason.dividend`는 원본 배당 **관측**이다. `dividend_normalized`는 창 전체의 무결성/단위/수학 검증에 성공한 배당 창, `dividend_unsupported`는 배당이 관측됐으나 다른 action을 포함해 창이 실패한 경우다. 따라서 unsupported 수를 배당 자체만의 인과 효과로 해석하지 않는다. `signal_blocks.by_reason.dividend`는 이제 **배당 관측이 있는 차단 창의 합집합**이며, 성공한 정규화를 차단으로 세지 않는다. `both_benchmarks_dividend`는 기존처럼 관측 교집합이다. Engine와 benchmark/candidate 지원 여부가 어느 방향으로든 다르면 진단은 실패한다.
+
+대상 기간은 이전과 같은 2022-12-13~2026-09-16, 942거래일/7,536 candidate ticker-session이다. 이전 dataset `0910ebac772cbd4fe42c22bd57a948f9b5cc918410b034d8e4d3213eee655771`와 새 수집의 **10,020개 OHLCV/dividend/split 값은 모두 동일**하다. 새 dataset id는 위 명령과 같으며 adapter `yfinance-1.7.0`, 116개 배당 단위 증거를 수집했다. before/after는 다른 immutable vintage지만 원본 가격/action 변화가 없는 비교다.
+
+| 지표 | Before | After |
+|---|---:|---:|
+| benchmark supported / blocked | 16 / 926 | 941 / 1 |
+| SPY feature computable | 28 | 942 |
+| QQQ feature computable | 27 | 941 |
+| SPY dividend observed / normalized / unsupported | 914 / 미지원 / 914 | 914 / 914 / 0 |
+| QQQ dividend observed / normalized / unsupported | 915 / 미지원 / 915 | 915 / 914 / 1 |
+| benchmark capture unknown 합집합 | 0 | 0 |
+| candidate capture unknown | 0 | 0 |
+| candidate dividend observed / normalized / unsupported | 4,809 / 미지원 / 4,809 | 4,809 / 4,688 / 121 |
+| candidate split | 122 | 122 |
+| candidate supported / excluded / benchmark 미평가 | 19 / 4,843 / 2,674 | 2,210 / 5,318 / 8 |
+| raw candidate 날짜 / 개수 | 9 / 19 | 754 / 2,210 |
+| calibration attempts | 12 | 1,959 |
+| insufficient calibration 후보 / 날짜 | 12 / 6 | 171 / 59 |
+| edge unsupported 후보 / 날짜 | 0 / 0 | 1,508 / 514 |
+| recommendation 날짜 / 개수 | 0 / 0 | 142 / 265 |
+| COMPLETE / PENDING / UNRESOLVED | 0 / 0 / 0 | 256 / 0 / 9 |
+| evaluation eligible / excluded COMPLETE | 0 / 0 | 256 / 0 |
+| matched SPY paired / attempted dates | 0 / 0 | 132 / 142 |
+
+SPY/QQQ 어느 쪽이든 배당이 관측된 926일 중 925일이 복구됐다. 남은 1일(2022-12-13)은 QQQ 창 첫날인 수집 시작 2022-09-19의 배당을 검증할 직전 종가가 없다(`missing_dividend_reference`). 추정/대체하지 않았다. 후보 dividend_unsupported 121건은 split 창과 겹치며, 총 split 제외 122건은 유지된다. candidate excluded 총수가 늘어난 이유는 실제 feature 평가가 열리면서 weak_signal 5,196건이 판정됐기 때문이다.
+
+calibration 탈락의 주원인은 edge_not_supported 1,508/1,959(76.98%)이다. 날짜 사유는 서로 중복되며 전체 배타적 NO TRADE 분류는 edge_unsupported 435일, calibration_insufficient 39일, unsupported_market_regime 258일, no_raw_signal 67일, integrity 1일이다. 이는 threshold 완화 근거가 아니다.
+
+추천 265건 중 9건은 holding-period cash dividend로 v3 UNRESOLVED를 유지한다. matched SPY의 미해결/미성숙/평가 제외 및 unpaired 10일도 분모에서 생략하지 않는다. 새 수치는 NORMAL 고정 모델 rolling research 진단이며 저장/live 추천, untouched OOS, alpha 증명이 아니다. **Alpha evidence: INSUFFICIENT EVIDENCE.** 다음 작업은 **고정 계약의 fresh forward/shadow 통계 증거 수집** 하나로 제한한다.
+
+검증: baseline 전체 **173 passed, 0 failed, 0 skipped, 1 warning, 40.43s**; final 전체 **229 passed, 0 failed, 0 skipped, 1 warning, 53.68s**. 기존 baseline 테스트는 변경하지 않았고 56개를 추가했다. 진행 중 shadow 오류 메시지 호환 assertion을 수정한 뒤 최종 전체 통과했다. warning은 기존 pytest cache WinError 5이다. 원본 `var/richping.db` 및 기존 JSON 보고서 7개 SHA-256 동일(`var/m2-1b-integrity.json`). 새 raw vintage를 저장한 별도 DB 외 기존 datasets/recommendations/outcomes에 쓰지 않았다. CLI `--help`와 `git diff --check`도 통과했다.
+
+## 이전 Coverage Diagnostic v1 기록
+
+아래 최초 실측과 운영 점검은 M2-1B 이전 기록이다. 당시 dividend occurrence가 곧 block이던 의미는 위 현재 정의로 대체한다.
 
 M2-1A는 **COMPLETE WITH KNOWN LIMITATIONS**, **GO — close M2-1A and proceed**로 유지한다. 이번 변경은 coverage 측정이며 v3 signal/outcome, 평가 정책, pairing, action capture, PIT, immutable 저장 계약을 변경하지 않는다. M2-1B나 일반배당 지원은 시작하지 않았다.
 

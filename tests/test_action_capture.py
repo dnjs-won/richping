@@ -36,18 +36,45 @@ from richping.data import (
 from richping.store import Store
 
 
-def make_mock_yahoo(monkeypatch, frames_by_ticker=None, meta_by_ticker=None, default_has_cg=False, version="1.7.0"):
+def make_mock_yahoo(
+    monkeypatch,
+    frames_by_ticker=None,
+    meta_by_ticker=None,
+    fast_meta_by_ticker=None,
+    info_by_ticker=None,
+    default_has_cg=False,
+    version="1.7.0",
+):
     """Creates a mock yfinance module with per-ticker DataFrames, metadata, and configurable version."""
     calls = []
     frames_by_ticker = frames_by_ticker or {}
     meta_by_ticker = meta_by_ticker or {}
+    fast_meta_by_ticker = fast_meta_by_ticker or {}
+    info_by_ticker = info_by_ticker or {}
+
+    def provider_result(mapping, symbol, default):
+        result = mapping.get(symbol, default)
+        if isinstance(result, Exception):
+            raise result
+        return result
 
     class MockTicker:
         def __init__(self, symbol):
             self.symbol = symbol
 
         def get_history_metadata(self):
-            return meta_by_ticker.get(self.symbol, {"instrumentType": "EQUITY", "currency": "USD"})
+            return provider_result(
+                meta_by_ticker,
+                self.symbol,
+                {"instrumentType": "EQUITY", "currency": "USD"},
+            )
+
+        @property
+        def fast_info(self):
+            return provider_result(fast_meta_by_ticker, self.symbol, {})
+
+        def get_info(self):
+            return provider_result(info_by_ticker, self.symbol, {})
 
         def history(self, **kwargs):
             calls.append((self.symbol, kwargs))
@@ -117,6 +144,8 @@ def test_unverified_yfinance_version_yields_unknown_status(monkeypatch):
     cap = ds.metadata["action_capture"]
     assert cap["adapter_version"] == "yfinance-1.8.0"
     assert not is_verified_yfinance_adapter(cap["adapter_version"])
+    assert cap["tickers"]["ALFA"]["instrument_type"] == "EQUITY"
+    assert cap["tickers"]["ALFA"]["instrument_type_source"] == "get_history_metadata.instrumentType"
     assert cap["tickers"]["ALFA"]["capital_gains_status"] == "unknown"
 
 
@@ -132,7 +161,80 @@ def test_verified_1_7_0_equity_yields_not_applicable_by_provider(monkeypatch):
     cap = ds.metadata["action_capture"]
     assert cap["adapter_version"] == "yfinance-1.7.0"
     assert is_verified_yfinance_adapter(cap["adapter_version"])
+    assert cap["tickers"]["ALFA"]["instrument_type"] == "EQUITY"
+    assert cap["tickers"]["ALFA"]["instrument_type_source"] == "get_history_metadata.instrumentType"
     assert cap["tickers"]["ALFA"]["capital_gains_status"] == "not_applicable_by_provider"
+
+
+def test_instrument_type_uses_secondary_provider_metadata_when_primary_omits_it(monkeypatch):
+    make_mock_yahoo(
+        monkeypatch,
+        meta_by_ticker={"ALFA": {"currency": "USD"}},
+        info_by_ticker={"ALFA": {"quoteType": "EQUITY", "currency": "USD"}},
+        version="1.7.0",
+    )
+
+    ds = yahoo_dataset(("ALFA",), "2024-01-02", "2024-01-05")
+    info = ds.metadata["action_capture"]["tickers"]["ALFA"]
+
+    assert info["instrument_type"] == "EQUITY"
+    assert info["instrument_type_source"] == "get_info.quoteType"
+    assert info["instrument_type_observations"] == [
+        {"source": "get_info.quoteType", "value": "EQUITY"}
+    ]
+    assert info["capital_gains_status"] == "not_applicable_by_provider"
+
+
+def test_instrument_type_stays_unknown_when_all_provider_metadata_fails(monkeypatch):
+    failure = RuntimeError("metadata unavailable")
+    make_mock_yahoo(
+        monkeypatch,
+        meta_by_ticker={"ALFA": failure},
+        fast_meta_by_ticker={"ALFA": failure},
+        info_by_ticker={"ALFA": failure},
+        version="1.7.0",
+    )
+
+    ds = yahoo_dataset(("ALFA",), "2024-01-02", "2024-01-05")
+    info = ds.metadata["action_capture"]["tickers"]["ALFA"]
+
+    assert info["instrument_type"] is None
+    assert info["instrument_type_source"] == "unresolved"
+    assert info["instrument_type_observations"] == []
+    assert info["capital_gains_status"] == "unknown"
+
+
+def test_conflicting_instrument_metadata_fails_closed(monkeypatch):
+    make_mock_yahoo(
+        monkeypatch,
+        meta_by_ticker={"ALFA": {"instrumentType": "EQUITY", "currency": "USD"}},
+        info_by_ticker={"ALFA": {"quoteType": "ETF", "currency": "USD"}},
+        version="1.7.0",
+    )
+
+    ds = yahoo_dataset(("ALFA",), "2024-01-02", "2024-01-05")
+    info = ds.metadata["action_capture"]["tickers"]["ALFA"]
+
+    assert info["instrument_type"] is None
+    assert info["instrument_type_source"] == "conflict"
+    assert {item["value"] for item in info["instrument_type_observations"]} == {"EQUITY", "ETF"}
+    assert info["capital_gains_status"] == "unknown"
+
+
+@pytest.mark.parametrize("instrument_type", ["ETF", "MUTUALFUND"])
+def test_fund_instrument_types_are_not_approved_as_equity(monkeypatch, instrument_type):
+    make_mock_yahoo(
+        monkeypatch,
+        meta_by_ticker={"ALFA": {"instrumentType": instrument_type, "currency": "USD"}},
+        info_by_ticker={"ALFA": {"quoteType": instrument_type, "currency": "USD"}},
+        version="1.7.0",
+    )
+
+    ds = yahoo_dataset(("ALFA",), "2024-01-02", "2024-01-05")
+    info = ds.metadata["action_capture"]["tickers"]["ALFA"]
+
+    assert info["instrument_type"] == instrument_type
+    assert info["capital_gains_status"] == "unknown"
 
 
 def test_adapter_or_history_options_change_triggers_full_refetch(monkeypatch):

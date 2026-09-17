@@ -18,13 +18,14 @@ from .core import (
     timestamp,
 )
 from .data import inspect_action_capture
+from .feature_window import FEATURE_VERSION, feature_window
 
 
 def unit(value, low, high):
     return float(np.clip((value - low) / (high - low), 0.0, 1.0))
 
 
-def features(bars, benchmark):
+def features(bars, benchmark, raw_bars=None):
     closes = np.array([b.close for b in bars])
     volume = np.array([b.volume for b in bars])
     high = np.array([b.high for b in bars])
@@ -40,7 +41,7 @@ def features(bars, benchmark):
         "breakout_distance": float(closes[-1] / high[-21:-1].max() - 1),
         "relative_volume": float(volume[-1] / volume[-21:-1].mean()) if volume[-21:-1].mean() > 0 else 0.0,
         "atr": float(tr[-14:].mean()), "realized_vol": float(returns[-20:].std(ddof=1) * math.sqrt(252)),
-        "dollar_volume": float(np.mean(closes[-20:] * volume[-20:])),
+        "dollar_volume": float(np.mean([b.close * b.volume for b in (raw_bars if raw_bars is not None else bars)[-20:]])),
         "price": float(closes[-1]), "volume": float(volume[-1]),
     }
 
@@ -237,25 +238,19 @@ class Engine:
         key = (session, cutoff if mode == "shadow" else None, mode)
         if key in self._signals:
             return self._signals[key]
-        spy = self.data.window("SPY", session, 61, cutoff, mode)
-        qqq = self.data.window("QQQ", session, 61, cutoff, mode)
-        if spy is None or qqq is None:
-            raise ValueError(f"Missing/stale benchmark history at {session}")
-
-        # Benchmark input integrity checks: split, dividend, capital gains, unverified capture
-        for b_name, b_bars in (("SPY", spy), ("QQQ", qqq)):
-            if any(b.split or b.dividend for b in b_bars):
-                raise ValueError(f"Corporate action in {b_name} benchmark history at {session}")
-            b_sessions = [b.session for b in b_bars]
-            b_ac = inspect_action_capture(self.data, b_name, b_sessions, as_of=cutoff, mode=mode)
-            if mode == "shadow" and b_ac.is_pending:
-                raise ValueError(f"Benchmark {b_name} history not yet known as of {cutoff}")
-            if b_ac.has_capital_gains:
-                raise ValueError(f"Capital gains distribution in {b_name} benchmark history at {session}")
-            if not b_ac.is_confirmed:
-                raise ValueError(f"Unverified action capture in {b_name} benchmark history at {session}")
-
-        sf, qf = features(spy, spy), features(qqq, spy)
+        windows = {symbol: feature_window(self.data, symbol, session, cutoff, mode)
+                   for symbol in ("SPY", "QQQ")}
+        for symbol, window in windows.items():
+            if window.blockers:
+                if not window.raw:
+                    raise ValueError(f"Missing/stale benchmark history at {session}: {','.join(window.blockers)}")
+                if "data_not_yet_known" in window.blockers:
+                    raise ValueError(f"Benchmark {symbol} history not yet known as of {cutoff}")
+                raise ValueError(f"Corporate action in {symbol} benchmark history or invalid feature input at {session}: "
+                                 f"{','.join(window.blockers)} ({window.detail})")
+        spy, qqq = windows["SPY"].bars, windows["QQQ"].bars
+        sf = features(spy, spy, windows["SPY"].raw)
+        qf = features(qqq, spy, windows["QQQ"].raw)
         risk_on = sf["price"] > sf["ma60"] and qf["price"] > qf["ma60"]
         high_vol = sf["realized_vol"] >= 0.25
         regime = ("RISK_ON" if risk_on else "RISK_OFF") + ("_HIGH_VOL" if high_vol else "_LOW_VOL")
@@ -264,25 +259,14 @@ class Engine:
             if not self.data.active(symbol, session, cutoff, mode):
                 excluded[symbol] = "not_in_asof_universe"
                 continue
-            bars = self.data.window(symbol, session, 61, cutoff, mode)
-            if bars is None:
-                excluded[symbol] = "missing_or_unknown_history"
+            window = feature_window(self.data, symbol, session, cutoff, mode)
+            if window.blockers:
+                reason = window.blockers[0]
+                excluded[symbol] = ("corporate_action_in_feature_window"
+                                    if reason in {"split", "capital_gains", "dividend_unsupported", "unsupported_corporate_action"}
+                                    else reason)
                 continue
-            if any(b.split or b.dividend for b in bars):
-                excluded[symbol] = "corporate_action_in_feature_window"
-                continue
-            bar_sessions = [b.session for b in bars]
-            sym_ac = inspect_action_capture(self.data, symbol, bar_sessions, as_of=cutoff, mode=mode)
-            if mode == "shadow" and sym_ac.is_pending:
-                excluded[symbol] = "data_not_yet_known"
-                continue
-            if sym_ac.has_capital_gains:
-                excluded[symbol] = "corporate_action_in_feature_window"
-                continue
-            if not sym_ac.is_confirmed:
-                excluded[symbol] = "action_capture_unknown"
-                continue
-            f = features(bars, spy)
+            f = features(window.bars, spy, window.raw)
             if f["price"] < self.config.min_price or f["dollar_volume"] < self.config.min_dollar_volume:
                 excluded[symbol] = "price_or_liquidity"
                 continue
@@ -297,7 +281,9 @@ class Engine:
                 "features": f, "score": score, "contributors": parts, "entry_reference": f["price"],
                 "stop_reference": f["price"] - 2 * f["atr"], "target_reference": f["price"] + 4 * f["atr"],
                 "holding_period": self.config.horizon, "cost": self.config.cost,
-                "outcome_version": self.outcome_version})
+                "outcome_version": self.outcome_version,
+                "feature_normalization": FEATURE_VERSION, "feature_price_basis": "latest_raw_close_anchored",
+                "dollar_volume_basis": "raw_close_times_raw_volume"})
         result = {"regime": regime, "supported": risk_on and not high_vol,
                   "candidates": sorted(found, key=lambda s: (-s["score"], s["ticker"])), "excluded": excluded}
         self._signals[key] = result

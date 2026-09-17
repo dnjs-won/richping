@@ -1,3 +1,25 @@
+# Richping 구현 상태 · 2026-09-17 (M2-1B)
+
+**M2-1B status: COMPLETE**
+
+**Recommendation pipeline structurally unblocked: YES**
+
+- Root cause: provenance 복구 후에도 61-session cash dividend blanket guard가 benchmark 926/942일을 차단했다.
+- `cash_gap_backward_v1` 공통 feature helper를 benchmark/candidate/Engine.history/coverage에 적용. 과거 OHLC를 `1-D/previous_close`로 조정하고 마지막 가격에 anchor. 원본 volume 및 raw dollar-volume 유지. 단위 증거·큰 분배·split·Capital Gains·unknown·shadow cutoff는 fail closed.
+- **Feature dividend normalization ≠ Outcome dividend accounting.** v3, `cash_action_review_v1`, 모든 전략/통계/risk threshold와 boundary/embargo는 그대로다. code_hash/model_id에 새 모듈이 포함된다. DB schema 변경 없음.
+- 별도 DB `var/m2-1b-fresh.db`의 새 dataset: `7d573d75465eb054f3cc89cde451d11fdbd4787f3353c67e84b292be653af2e8`, `yfinance-1.7.0`, 10,020 bars, 116개 배당 단위 증거. 기존 `0910...5771`와 원본 OHLCV/actions 전부 동일. 기존 immutable dataset을 수정하지 않았다.
+- 942일 비교: benchmark supported **16→941**, blocked **926→1**. 남은 1일은 첫 QQQ 배당의 직전 종가 부재. capture unknown 0. 후보 supported **19→2,210**, raw candidate dates **9→754**, calibration **12→1,959**, 추천 재생 **0→142일/265건**.
+- v3 COMPLETE/PENDING/UNRESOLVED **256/0/9**. 미해결 9건 모두 holding cash dividend. 평가 eligible/excluded **256/0**, SPY paired **132/142일**.
+- Current dominant blocker: calibration의 비용 후 edge 근거 부족(`edge_not_supported` 1,508/1,959 시도).
+- Alpha evidence: **INSUFFICIENT EVIDENCE**. 현재 고정 universe의 research 진단이며 alpha 또는 무인 다일 운영 안정성 증명이 아니다.
+- Next milestone: **고정 계약의 fresh forward/shadow 통계 증거 수집**.
+- 실측·재현 명령: [Coverage Diagnostic](docs/COVERAGE_DIAGNOSTIC.md). 가격/단위/지원 범위: [Design](docs/DESIGN.md). 원본 DB와 기존 보고서 7개의 SHA-256 보존: `var/m2-1b-integrity.json`.
+- 전체 테스트: baseline **173 passed / 0 failed / 0 skipped / 1 warning (40.43s)** → final **229 passed / 0 failed / 0 skipped / 1 warning (53.68s)**. 기존 173개 테스트 변경 없이 56개 추가. warning은 기존 pytest cache WinError 5. 최종 로그 `var/m2-1b-final-tests.txt`; CLI `--help`, `git diff --check` 통과.
+
+---
+
+아래는 M2-1A 및 최초 Coverage Diagnostic의 역사적 기록이다. feature 계약과 다음 작업은 위 M2-1B 상태를 따른다.
+
 # Richping 구현 상태 · 2026-09-17 (M2-1A 종료)
 
 ## M2-1A 마일스톤 판정
