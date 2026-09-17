@@ -56,6 +56,13 @@ def validate(store, dataset, config, train=504, validation=63, oos=63):
                         "by_version": {},
                     },
                 }, []
+                spy_evaluation = {
+                    "policy": CASH_ACTION_REVIEW_POLICY,
+                    "eligible_complete": 0,
+                    "excluded_complete": 0,
+                    "by_reason": {},
+                    "by_version": {},
+                }
                 excluded_sessions = 0
                 for i in range(start, end + 1):
                     session = dataset.sessions[i]
@@ -97,16 +104,27 @@ def validate(store, dataset, config, train=504, validation=63, oos=63):
                                       "stop_reference": b.close * 0.9, "target_reference": b.close * 1.2}
                         observed = observe(spy_signal, dataset, config.horizon, cutoff_at(dataset.sessions[end]).isoformat())
                         if observed["status"] == "COMPLETE":
-                            spy_eligible, _ = evaluate_outcome_eligibility(
+                            spy_eligible, spy_reason = evaluate_outcome_eligibility(
                                 spy_signal, observed, dataset=dataset, as_of=cutoff_at(dataset.sessions[end]).isoformat(), mode="research"
                             )
+                            spy_ver = observed.get("outcome_version", LEGACY_OUTCOME_VERSION)
                             if spy_eligible:
+                                spy_evaluation["eligible_complete"] += 1
                                 benchmark_rows.append({**observed, "session": session})
+                            else:
+                                spy_evaluation["excluded_complete"] += 1
+                                spy_evaluation["by_reason"][spy_reason] = (
+                                    spy_evaluation["by_reason"].get(spy_reason, 0) + 1
+                                )
+                                spy_evaluation["by_version"][spy_ver] = (
+                                    spy_evaluation["by_version"].get(spy_ver, 0) + 1
+                                )
                 outputs[label] = {"start": dataset.sessions[start], "end": dataset.sessions[end],
                     "metrics": metrics(rows), "outcomes": counts, "invalid_sessions": excluded_sessions,
                     "recommendation_frequency": sum(counts[k] for k in ("COMPLETE", "PENDING", "UNRESOLVED")) / (end - start + 1),
                     "date_block_ci": block_ci(rows, config.bootstrap_samples, config.seed),
                     "matched_SPY": metrics(benchmark_rows),
+                    "matched_SPY_evaluation": spy_evaluation,
                     "cost_stress": metrics([{**r, "net_return": r["net_return"] - config.cost} for r in rows]),
                     "by_regime": {regime: metrics([r for r in rows if r["regime"] == regime]) for regime in sorted({r["regime"] for r in rows})}}
                 if label == "oos":

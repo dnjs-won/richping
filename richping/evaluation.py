@@ -110,6 +110,7 @@ def evaluate_outcome_eligibility(snapshot, outcome, dataset=None, as_of=None, mo
     Pure policy function: does not modify snapshot or outcome.
     Returns: (is_eligible: bool, reason: str | None)
     """
+    import math
     from .core import (
         LEGACY_OUTCOME_VERSION,
         OUTCOME_VERSION_V1,
@@ -138,29 +139,36 @@ def evaluate_outcome_eligibility(snapshot, outcome, dataset=None, as_of=None, mo
     if outcome_version == OUTCOME_VERSION_V2:
         return False, "legacy_v2_unverified_contract"
 
-    # 4. v1 requires action capture verification by current standards
-    if outcome_version == OUTCOME_VERSION_V1:
+    # 4. v1 and v3 contract verification:
+    # Defend against historical buggy stored outcomes by verifying point-in-time known-at,
+    # corporate actions, and action-capture confirmation at observed_at.
+    if outcome_version in (OUTCOME_VERSION_V1, OUTCOME_VERSION_V3):
         if dataset is None:
             return False, "action_capture_unknown"
         symbol = snapshot["ticker"]
-        horizon = snapshot.get("holding_period", 5)
+        horizon = outcome.get("horizon") or snapshot.get("holding_period", 5)
         days = next_sessions(snapshot["session"], horizon)
-        ac = inspect_action_capture(dataset, symbol, days, as_of=as_of, mode=mode)
-        if mode == "shadow" and ac.is_pending:
-            return False, "data_not_yet_known"
-        if ac.has_capital_gains:
-            return False, "unsupported_capital_gains_distribution"
-        if not ac.is_confirmed:
-            return False, "action_capture_unknown"
         bars = [dataset.by_ticker.get(symbol, {}).get(s) for s in days]
         if any(b is None for b in bars):
             return False, "missing_or_delisted_session"
-        if any(b.split or b.dividend for b in bars):
-            return False, "unverified_cash_dividend_event"
-        return True, None
+        if any(b.split for b in bars):
+            return False, "stock_split_requires_accounting"
 
-    # 5. v3 is eligible if status is COMPLETE (corporate actions already failed closed in observe)
-    if outcome_version == OUTCOME_VERSION_V3:
+        obs_at = outcome.get("observed_at") or as_of
+        ac = inspect_action_capture(dataset, symbol, days, as_of=obs_at, mode=mode)
+        if mode == "shadow" and ac.is_pending:
+            return False, ac.reason or "data_not_yet_known"
+        if ac.has_capital_gains:
+            return False, "unsupported_capital_gains_distribution"
+        if any(b.dividend > 0 for b in bars):
+            return False, "unverified_cash_dividend_event"
+        if not ac.is_confirmed:
+            return False, "action_capture_unknown"
+
+        origin = dataset.by_ticker.get(symbol, {}).get(snapshot["session"])
+        if origin is None or not math.isclose(origin.close, snapshot["entry_reference"], rel_tol=1e-8):
+            return False, "price_vintage_changed"
+
         return True, None
 
     return False, "unsupported_outcome_version"

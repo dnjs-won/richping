@@ -1617,26 +1617,145 @@ def test_r2_3_future_stored_outcome_not_used_at_past_as_of(tmp_path, five_sessio
         assert counts["PENDING"] >= 1
 
 
-def test_r2_3_validation_oos_excludes_v2(tmp_path):
-    """9. validation/OOS 통계에도 부적격 v2가 섞이지 않음"""
-    ds = synthetic_dataset(n=350, seed=42)
+def test_r2_3_validation_oos_excludes_v2(tmp_path, monkeypatch):
+    """9. validation/OOS 통계에도 부적격 v2가 섞이지 않음
+    - 계산 자체는 v2 COMPLETE일 수 있음
+    - evaluation에서는 legacy_v2_unverified_contract로 제외
+    - OOS metrics samples에는 포함되지 않음
+    - exclusion denominator/reason/version에는 남음
+    - matched SPY에 대해서도 동일한 정책 결과가 확인됨
+    """
+    import richping.validation
+    # Supply v2 COMPLETE signals and labels via Engine outcome_version=OUTCOME_VERSION_V2
+    monkeypatch.setattr(richping.validation, "Engine", lambda ds, cfg: Engine(ds, cfg, outcome_version=OUTCOME_VERSION_V2))
+
+    ds = synthetic_dataset(n=350)
     config = Config(tickers=tuple(m["ticker"] for m in ds.members), train_sessions=180)
 
-    with Store(tmp_path / "validate_eval.db") as store:
+    with Store(tmp_path / "validate_eval_v2.db") as store:
         store.save_dataset(ds)
         result = validate(store, ds, config, train=180, validation=30, oos=30)
         assert result["trial"] is not None
         assert "folds" in result
         assert len(result["folds"]) >= 1
+
+        # OOS aggregated samples must be 0 because all v2 are excluded
+        assert result["oos"]["samples"] == 0
+
         for fold in result["folds"]:
             for phase in ("validation", "oos"):
                 outcomes = fold[phase]["outcomes"]
-                assert "evaluation" in outcomes
-                assert outcomes["evaluation"]["policy"] == CASH_ACTION_REVIEW_POLICY
-                # All rows evaluated must be v3 or event-free eligible
-                m = fold[phase]["metrics"]
-                assert "samples" in m
-                assert fold[phase]["recommendation_frequency"] >= 0
+                # 1. Calculation itself was COMPLETE
+                assert outcomes["COMPLETE"] > 0
+                # 2. Evaluation excluded all v2 COMPLETEs
+                ev = outcomes["evaluation"]
+                assert ev["policy"] == CASH_ACTION_REVIEW_POLICY
+                assert ev["eligible_complete"] == 0
+                assert ev["excluded_complete"] == outcomes["COMPLETE"]
+                assert ev["by_reason"]["legacy_v2_unverified_contract"] == outcomes["COMPLETE"]
+                assert ev["by_version"][OUTCOME_VERSION_V2] == outcomes["COMPLETE"]
+
+                # 3. Metrics samples are 0 (ineligible results do NOT enter OOS metrics)
+                assert fold[phase]["metrics"]["samples"] == 0
+
+                # 4. matched SPY also evaluates to legacy_v2_unverified_contract exclusion
+                spy_ev = fold[phase]["matched_SPY_evaluation"]
+                assert spy_ev["eligible_complete"] == 0
+                assert spy_ev["excluded_complete"] > 0
+                assert spy_ev["by_reason"]["legacy_v2_unverified_contract"] == spy_ev["excluded_complete"]
+                assert spy_ev["by_version"][OUTCOME_VERSION_V2] == spy_ev["excluded_complete"]
+                assert fold[phase]["matched_SPY"]["samples"] == 0
+
+
+def test_r2_3_stored_buggy_v3_with_future_captured_at_excluded(tmp_path, five_session_dates):
+    """과거 계약상 잘못 생성됐다고 가정한 stored v3 COMPLETE + 당시 미래 captured_at -> 현재 evaluation에서 제외"""
+    dates = five_session_dates
+    origin_bar = [{"ticker": "ALFA", "session": "2024-01-02", "open": 100.0, "high": 101.0, "low": 99.0, "close": 100.0}]
+    holding_bars = make_test_bars("ALFA", dates, [100.0] * 5, [105.0] * 5)
+    ds_clean = create_mini_dataset(origin_bar + holding_bars, include_action_capture=True)
+
+    # In dataset action capture, captured_at was in the future relative to when outcome was observed
+    obs_time = cutoff_at(dates[-1]).isoformat()
+    future_captured_at = (timestamp(obs_time) + timedelta(days=2)).isoformat()
+
+    cap = dict(ds_clean.metadata["action_capture"])
+    cap["captured_at"] = future_captured_at
+    ds = Dataset(ds_clean.bars, {**ds_clean.metadata, "action_capture": cap}, ds_clean.members)
+
+    snap = v3_snapshot()
+    config = Config(tickers=("ALFA",), train_sessions=180)
+
+    # Pre-stored buggy v3 outcome in Store with status COMPLETE (as if generated before R2-2-R1)
+    stored_v3_body = {
+        "horizon": 5, "end_session": dates[-1], "observed_at": obs_time,
+        "outcome_version": OUTCOME_VERSION_V3, "status": "COMPLETE", "raw_return": 0.05, "net_return": 0.048,
+    }
+
+    with Store(tmp_path / "buggy_v3.db") as store:
+        store.save_dataset(ds)
+        store.save_model(config)
+        with store.db:
+            store.db.execute(
+                "INSERT INTO runs VALUES('run-buggy', ?, ?, '2024-01-02', 'shadow', 'SUCCEEDED', 1, NULL, NULL, ?)",
+                (ds.id, config.model_id, cutoff_at("2024-01-02").isoformat()),
+            )
+            store.db.execute(
+                "INSERT INTO recommendations VALUES('rec-buggy', 'run-buggy', 'ALFA', 1, ?)",
+                (json.dumps(snap),),
+            )
+            store.db.execute(
+                "INSERT INTO outcomes VALUES('rec-buggy', 5, ?, 'COMPLETE', ?)",
+                (ds.id, json.dumps(stored_v3_body)),
+            )
+
+        # In shadow mode, track evaluates stored outcome at as_of
+        as_of = (timestamp(obs_time) + timedelta(days=3)).isoformat()
+        counts, rows = track(store, ds, as_of)
+
+        # Buggy stored v3 COMPLETE must be excluded because captured_at was in the future at obs_time!
+        assert len(rows) == 0
+        assert counts["evaluation"]["excluded_complete"] == 1
+        assert counts["evaluation"]["by_reason"]["data_not_yet_known"] == 1
+        assert counts["evaluation"]["by_version"][OUTCOME_VERSION_V3] == 1
+
+        # Original DB outcome record is preserved unchanged
+        db_out = store.db.execute("SELECT status, body FROM outcomes WHERE recommendation_id='rec-buggy' AND horizon=5").fetchone()
+        assert db_out["status"] == "COMPLETE"
+        assert json.loads(db_out["body"])["outcome_version"] == OUTCOME_VERSION_V3
+
+
+def test_r2_3_normal_v3_complete_remains_eligible(tmp_path, five_session_dates):
+    """정상 v3 COMPLETE -> 그대로 eligible"""
+    dates = five_session_dates
+    origin_bar = [{"ticker": "ALFA", "session": "2024-01-02", "open": 100.0, "high": 101.0, "low": 99.0, "close": 100.0}]
+    holding_bars = make_test_bars("ALFA", dates, [100.0] * 5, [105.0] * 5)
+    ds = create_mini_dataset(origin_bar + holding_bars, include_action_capture=True)
+
+    snap = v3_snapshot()
+    config = Config(tickers=("ALFA",), train_sessions=180)
+
+    with Store(tmp_path / "normal_v3.db") as store:
+        store.save_dataset(ds)
+        store.save_model(config)
+        with store.db:
+            store.db.execute(
+                "INSERT INTO runs VALUES('run-norm', ?, ?, '2024-01-02', 'shadow', 'SUCCEEDED', 1, NULL, NULL, ?)",
+                (ds.id, config.model_id, cutoff_at("2024-01-02").isoformat()),
+            )
+            store.db.execute(
+                "INSERT INTO recommendations VALUES('rec-norm', 'run-norm', 'ALFA', 1, ?)",
+                (json.dumps(snap),),
+            )
+
+        as_of = cutoff_at("2024-01-12").isoformat()
+        counts, rows = track(store, ds, as_of)
+
+        assert counts["COMPLETE"] >= 1
+        assert len(rows) == 1
+        assert rows[0]["ticker"] == "ALFA"
+        assert rows[0]["outcome_version"] == OUTCOME_VERSION_V3
+        assert counts["evaluation"]["eligible_complete"] == 1
+        assert counts["evaluation"]["excluded_complete"] == 0
 
 
 
