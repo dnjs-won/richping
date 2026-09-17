@@ -49,7 +49,7 @@ Windows 작업 스케줄러에서 `powershell.exe -NoProfile -File C:\richping\s
 - Entry/Stop/Target은 추천 종가 및 ATR 기반 참고값. 실제 체결이나 예상 수익과 다르다.
 - 최소 표본이나 기대값 신뢰구간을 충족하지 않으면 정상적으로 **NO TRADE**.
 - COMPLETE / PENDING / UNRESOLVED를 모두 보고한다. 미해결 상폐/분할/미확인 배당을 0%나 정상 수익으로 바꾸지 않는다.
-- M2-1A: 단위·권리가 확인된 일반 현금배당에 대해 `v2_ordinary_cash_dividend` 결과 계산을 지원한다. 진입일 배당락 제외, 익일부터의 적격 배당 누적, 세전 비재투자 총수익, 비용 1회 차감을 적용한다. 특징 창 배당 종목 제외 규칙은 유지된다.
+- M2-1A: `v2_ordinary_cash_dividend`는 역사적 계산 계약 보존용이며, 현재 `cash_action_review_v1` 정책에서 v2 COMPLETE는 현재 성과 증거에서 제외된다. 현재 기본 계약은 `v3_cash_action_guard`로, 현금배당 자동 지원 버전이 아니라 검증되지 않은 기업행동을 fail-closed로 격리하는 계약이다. 일반 현금배당 실데이터 자동 지원은 아직 승인되지 않았으며, 특징 창 배당 종목 제외 규칙은 유지된다.
 
 ## CSV contract
 

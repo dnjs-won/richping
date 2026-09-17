@@ -58,11 +58,23 @@ def validate(store, dataset, config, train=504, validation=63, oos=63):
                 }, []
                 spy_evaluation = {
                     "policy": CASH_ACTION_REVIEW_POLICY,
+                    "COMPLETE": 0,
+                    "PENDING": 0,
+                    "UNRESOLVED": 0,
                     "eligible_complete": 0,
                     "excluded_complete": 0,
                     "by_reason": {},
                     "by_version": {},
+                    "attempted_signal_dates": 0,
+                    "paired_signal_dates": 0,
+                    "unmatched_signal_dates": 0,
+                    "candidate_only_signal_dates": 0,
+                    "spy_only_signal_dates": 0,
                 }
+                raw_spy_rows = []
+                candidate_eligible_sessions = set()
+                spy_eligible_sessions = set()
+                attempted_sessions = set()
                 excluded_sessions = 0
                 for i in range(start, end + 1):
                     session = dataset.sessions[i]
@@ -90,6 +102,7 @@ def validate(store, dataset, config, train=504, validation=63, oos=63):
                             if is_eligible:
                                 counts["evaluation"]["eligible_complete"] += 1
                                 rows.append({**outcome, "session": session, "ticker": signal["ticker"], "regime": signal["regime"]})
+                                candidate_eligible_sessions.add(session)
                             else:
                                 counts["evaluation"]["excluded_complete"] += 1
                                 counts["evaluation"]["by_reason"][reason] = (
@@ -99,18 +112,23 @@ def validate(store, dataset, config, train=504, validation=63, oos=63):
                                     counts["evaluation"]["by_version"].get(ver, 0) + 1
                                 )
                     if chosen:
+                        attempted_sessions.add(session)
                         b = dataset.by_ticker["SPY"][session]
                         spy_signal = {**chosen[0], "ticker": "SPY", "entry_reference": b.close,
                                       "stop_reference": b.close * 0.9, "target_reference": b.close * 1.2}
                         observed = observe(spy_signal, dataset, config.horizon, cutoff_at(dataset.sessions[end]).isoformat())
-                        if observed["status"] == "COMPLETE":
+                        spy_status = observed["status"]
+                        spy_evaluation[spy_status] = spy_evaluation.get(spy_status, 0) + 1
+                        spy_ver = observed.get("outcome_version", LEGACY_OUTCOME_VERSION)
+
+                        if spy_status == "COMPLETE":
                             spy_eligible, spy_reason = evaluate_outcome_eligibility(
                                 spy_signal, observed, dataset=dataset, as_of=cutoff_at(dataset.sessions[end]).isoformat(), mode="research"
                             )
-                            spy_ver = observed.get("outcome_version", LEGACY_OUTCOME_VERSION)
                             if spy_eligible:
                                 spy_evaluation["eligible_complete"] += 1
-                                benchmark_rows.append({**observed, "session": session})
+                                raw_spy_rows.append({**observed, "session": session})
+                                spy_eligible_sessions.add(session)
                             else:
                                 spy_evaluation["excluded_complete"] += 1
                                 spy_evaluation["by_reason"][spy_reason] = (
@@ -119,6 +137,25 @@ def validate(store, dataset, config, train=504, validation=63, oos=63):
                                 spy_evaluation["by_version"][spy_ver] = (
                                     spy_evaluation["by_version"].get(spy_ver, 0) + 1
                                 )
+                        else:
+                            spy_reason = observed.get("reason", "unknown")
+                            spy_evaluation["by_reason"][spy_reason] = (
+                                spy_evaluation["by_reason"].get(spy_reason, 0) + 1
+                            )
+
+                paired_dates = sorted(candidate_eligible_sessions & spy_eligible_sessions)
+                candidate_only_dates = sorted(candidate_eligible_sessions - spy_eligible_sessions)
+                spy_only_dates = sorted(spy_eligible_sessions - candidate_eligible_sessions)
+                unmatched_dates = sorted(attempted_sessions - set(paired_dates))
+
+                spy_evaluation["attempted_signal_dates"] = len(attempted_sessions)
+                spy_evaluation["paired_signal_dates"] = len(paired_dates)
+                spy_evaluation["unmatched_signal_dates"] = len(unmatched_dates)
+                spy_evaluation["candidate_only_signal_dates"] = len(candidate_only_dates)
+                spy_evaluation["spy_only_signal_dates"] = len(spy_only_dates)
+
+                paired_dates_set = set(paired_dates)
+                benchmark_rows = [r for r in raw_spy_rows if r["session"] in paired_dates_set]
                 outputs[label] = {"start": dataset.sessions[start], "end": dataset.sessions[end],
                     "metrics": metrics(rows), "outcomes": counts, "invalid_sessions": excluded_sessions,
                     "recommendation_frequency": sum(counts[k] for k in ("COMPLETE", "PENDING", "UNRESOLVED")) / (end - start + 1),

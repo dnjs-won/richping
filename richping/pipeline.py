@@ -74,12 +74,14 @@ def track(store, dataset, as_of, model_id=None, mode=None):
                 use_stored = False
                 if stored_row is not None:
                     stored_body = json.loads(stored_row["body"])
-                    end_sess = stored_body.get("end_session") or next_sessions(snap["session"], horizon)[-1]
-                    obs_at = stored_body.get("observed_at")
-                    # Enforce point-in-time rules: do not use future stored outcomes before as_of
-                    if cutoff_at(end_sess) <= timestamp(as_of) and (not obs_at or timestamp(obs_at) <= timestamp(as_of)):
-                        result = stored_body
-                        use_stored = True
+                    expected_end = next_sessions(snap["session"], horizon)[-1]
+                    end_sess = stored_body.get("end_session")
+                    if stored_body.get("horizon") == horizon and end_sess == expected_end:
+                        obs_at = stored_body.get("observed_at")
+                        # Enforce point-in-time rules: do not use future stored outcomes before as_of
+                        if cutoff_at(end_sess) <= timestamp(as_of) and (not obs_at or timestamp(obs_at) <= timestamp(as_of)):
+                            result = stored_body
+                            use_stored = True
 
                 if not use_stored:
                     result = observe(snap, dataset, horizon, as_of, rec["mode"])

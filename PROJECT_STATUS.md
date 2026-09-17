@@ -1,4 +1,4 @@
-# Richping 구현 상태 · 2026-09-17 (M2-1A-R2-2-R1)
+# Richping 구현 상태 · 2026-09-17 (M2-1A-R2 Sol Remediation)
 
 ## 완료 및 보강 범위
 
@@ -10,54 +10,29 @@
 - M2-1A-R1: 구버전 호환성과 테스트 실행 결함 수정 (보고서 및 observe 버전 dispatch 명시화, Scenario 10 통합 테스트 결정론적 보강, conftest 임시 경로 격리).
 - M2-1A-R2-1: `action_capture` 증분 provenance 보강 (수집 계층 보강 구현 완료, 검수 승인).
 - M2-1A-R2-2: `v3_cash_action_guard` 계산 엔진 및 feature window 기업행동 차단 (구현 완료).
-- M2-1A-R2-2-R1: `synthetic` shadow 시점 검사 수정 및 테스트 보강 (구현 완료, GPT-5.6 Sol High 검수 대기)
-  - `richping/data.py`의 `inspect_action_capture`:
-    - `adapter_version == "synthetic"` 예외 우회 경로 제거.
-    - synthetic 데이터도 실제 수집 데이터와 동일한 point-in-time 시점 규칙 통과 필수 (`captured_at` 및 event `known_at` <= `as_of`).
-    - `captured_at` 누락(None 또는 빈 문자열) 또는 미래 시점인 경우 `is_pending=True`, `reason="data_not_yet_known"` 반환.
-    - `captured_at <= as_of`라도 보유창 내 event 중 `known_at > as_of`인 경우 `PENDING / data_not_yet_known` 반환.
-    - research 모드는 시점 제약 없이 온전한 동작 유지.
-  - `richping/data.py`의 `synthetic_dataset`:
-    - 기본 `captured_at`을 마지막 거래일 cutoff(`days[-1]`)로 유지하여 capture 시점 계약 일관성 보존 (`captured_at` 파라미터 오버라이드 지원).
-  - `tests/test_integrity.py`:
-    - `test_future_membership_not_visible_in_shadow`에서 공유 fixture/전역 capture 변조 없이 평가일 기준 독립 fixture(`n=301`)로 구성하고, 마지막 일봉·capture 구간 끝·`captured_at`의 평가 시점 일관성을 명시적으로 assert.
-  - `tests/test_action_capture.py`:
-    - Scenario 11 결정론 테스트의 `captured_at` 기대값을 마지막 거래일(`ds1.sessions[-1]`)로 유지.
-  - `tests/test_dividends.py`:
-    - Section 4 요구 7개 필수 테스트 케이스 추가 (실제 `adapter_version="synthetic"` fixture 기반, Case 1~Case 7, 총 40개 테스트 통과).
+- M2-1A-R2-2-R1: `synthetic` shadow 시점 검사 수정 및 테스트 보강 (구현 완료).
+- M2-1A-R2-3: `cash_action_review_v1` 평가 정책 격리 및 보고서/파이프라인 분리 (구현 완료).
+- M2-1A-R2-Sol-Remediation: Sol High 통합검수 지적사항(2 HIGH + 2 MEDIUM) 국소 수정 완료:
+  - HIGH 1: stored v3 COMPLETE의 bar known_at point-in-time 검증 및 구조적 정합성(observed_at 누락/비정상, horizon/end mismatch) 실패 폐쇄.
+  - HIGH 2: matched SPY의 UNRESOLVED/PENDING 관측 분모 보존 및 signal-date 기준 pairing 진단 보존.
+  - MEDIUM 3: Yahoo 일봉 수집 시 네트워크 완료 이전 known_at 기록 방지 (`symbol_captured_at = utcnow()` 및 max `overall_captured_at`).
+  - MEDIUM 4: README 및 PROJECT_STATUS 현재 v2(역사적 계산 보존)/v3(fail-closed 가드) 계약 동기화.
 - Rolling train/validation/OOS, 통계·위험 gate 기본 함수.
 - CLI 보고서, CSV import, 실패/재시도, PowerShell 일일 실행 스크립트.
 
 ## 실제 검증 결과
 
-- Python 3.13.7, 테스트 125 passed / 0 failed / 0 skipped (추가 옵션 없는 기본 `.\.venv\Scripts\python -m pytest` 통과).
-  - `tests/test_action_capture.py`: 37 passed
-  - `tests/test_cli.py`: 2 passed
-  - `tests/test_dividends.py`: 40 passed (기존 18개 + R2-2 15개 + R2-2-R1 7개)
-  - `tests/test_evaluation.py`: 16 passed
-  - `tests/test_ingestion.py`: 4 passed
-  - `tests/test_integrity.py`: 23 passed
-  - `tests/test_validation.py`: 3 passed
-- 합성 70-session 재생: 추천 72건, 완료 horizon 결과 360개. 추천 있는 날 49일, NO TRADE 21일.
-- 합성 기본 504/63/63 walk-forward: 4 folds, 완료 OOS 추천 label 313개.
-- 실제 Yahoo 수집: 후보 8종목 + SPY/QQQ, 일봉 10,020개, 마지막 session 2026-09-14.
-- 실제 shadow scan: 시장 조건 미충족으로 NO TRADE.
-- 실제 기본 walk-forward: 5 folds, 완료 OOS 추천 54건 / 43개 날짜. 비용 후 양의 기대값을 입증하지 못함. 상세 기간·비용·분모·국면별 결과는 var/validation.json에 보존.
-- 검증 데이터는 config.toml의 현재 고정 종목군, Yahoo 수정 가능한 과거 가격, 왕복 20bps. 연구용 OOS이며 survivorship-free 또는 final holdout 증거가 아니다. 전략 portfolio NAV가 아닌 horizon 추천 수익이다.
-- 합성 수익률은 동작 검증이며 투자 성과 증거가 아니다.
-- 원본 프로젝트 파일을 수정하지 않았고 직접 복사한 원본 코드는 0개다.
-- PowerShell 일일 스크립트 구문 검사를 통과했다. 실제 예약 실행은 검증하지 않았다.
+- Python 3.13.7, 테스트 기본 `.\.venv\Scripts\python -m pytest` 통과 확인 중.
 
-## 미해결 차단 결함 및 R2 후속 단계
+## R2 진행 및 검수 상태
 
-M2-1A-R2는 Astra 감독 설계에 따라 3단계로 나누어 진행 중이다:
-- R2-1: 수집 계층 Capital Gains 보존 및 provenance 보강 (완료 및 승인)
-- R2-2: `v3_cash_action_guard` 계산 엔진 및 feature window 기업행동 차단 (R2-2-R1 수정 완료, GPT-5.6 Sol High 검수 대기)
-- R2-3: `cash_action_review_v1` 평가 정책 격리 및 보고서/파이프라인 분리 (미구현)
+M2-1A-R2 진행 상태:
+- R2-1: 수집 계층 Capital Gains 보존 및 provenance 보강 (구현 및 검수 완료)
+- R2-2 / R2-2-R1: `v3_cash_action_guard` 계산 엔진 및 feature window 기업행동 차단 (구현 완료)
+- R2-3: `cash_action_review_v1` 평가 정책 격리 및 보고서/파이프라인 분리 (구현 완료)
+- Sol High 통합검수에서 2 HIGH + 2 MEDIUM correctness 문제 발견 -> 이번 remediation 국소 수정 및 regression test 추가 완료.
 
-**M2-1A 전체 승인은 R2-3 및 최종 Astra 감사 완료 전까지 보류 상태**다.
-
-다음 검수 모델: **GPT-5.6 Sol High** (R2-2-R1 synthetic shadow 시점 검사 수정 및 7개 테스트 검수).
+**M2-1A 전체 승인은 독립 감사 완료 전까지 보류 상태**다 (PASS 판정을 미리 기록하지 않음).
 
 ## 남은 범위
 

@@ -517,10 +517,10 @@ def yahoo_dataset(symbols, start, end, previous=None, prior_capture=None):
     fetch_start = start
     if previous:
         fetch_start = previous.sessions[max(0, len(previous.sessions) - 10)]
-    now = utcnow()
     bars = []
     new_events = []
     fetched_tickers_info = {}
+    ticker_captured_times = []
     exclusive_end = (timestamp(end + "T00:00:00+00:00") + timedelta(days=1)).date().isoformat()
     for symbol in wanted:
         ticker_obj = yf.Ticker(symbol)
@@ -559,6 +559,9 @@ def yahoo_dataset(symbols, start, end, previous=None, prior_capture=None):
         except Exception:
             pass
 
+        symbol_captured_at = utcnow()
+        ticker_captured_times.append(symbol_captured_at)
+
         if not inst_type and hasattr(ticker_obj, "instrument_type"):
             inst_type = ticker_obj.instrument_type
             has_meta = True
@@ -582,7 +585,7 @@ def yahoo_dataset(symbols, start, end, previous=None, prior_capture=None):
         sym_sessions = []
         for idx, row in frame.iterrows():
             day = str(idx.date())
-            if day > end or cutoff_at(day) > timestamp(now):
+            if day > end or cutoff_at(day) > timestamp(symbol_captured_at):
                 continue
             sym_sessions.append(day)
 
@@ -605,11 +608,11 @@ def yahoo_dataset(symbols, start, end, previous=None, prior_capture=None):
                         "session": day,
                         "field": "Capital Gains",
                         "amount": cg_val,
-                        "known_at": now,
+                        "known_at": symbol_captured_at,
                     })
 
             bars.append(Bar(symbol, day, float(row["Open"]), float(row["High"]), float(row["Low"]),
-                            float(row["Close"]), float(row["Volume"]), now,
+                            float(row["Close"]), float(row["Volume"]), symbol_captured_at,
                             div_val, split_val))
 
         if sym_sessions:
@@ -619,6 +622,8 @@ def yahoo_dataset(symbols, start, end, previous=None, prior_capture=None):
                 "query_intervals": [{"start": min(sym_sessions), "end": max(sym_sessions), "capital_gains_status": status}],
                 "quote_currency": quote_curr,
             }
+
+    overall_captured_at = max(ticker_captured_times) if ticker_captured_times else utcnow()
 
     if previous:
         old = {(b.ticker, b.session): b for b in previous.bars}
@@ -706,7 +711,7 @@ def yahoo_dataset(symbols, start, end, previous=None, prior_capture=None):
         capture = create_action_capture(
             adapter_version=adapter_ver,
             history_options=history_options,
-            captured_at=now,
+            captured_at=overall_captured_at,
             tickers_info=merged_tickers,
             events=merged_events,
         )
@@ -715,7 +720,7 @@ def yahoo_dataset(symbols, start, end, previous=None, prior_capture=None):
         meta.pop("dividend_basis", None)
         meta["action_capture"] = capture
     else:
-        members = static_members(symbols, start, "2035-12-31", now)
+        members = static_members(symbols, start, "2035-12-31", overall_captured_at)
         if prior_capture:
             prior_events = {(e["ticker"], e["session"], e["field"]): e for e in prior_capture.get("events", [])}
             for e in new_events:
@@ -727,7 +732,7 @@ def yahoo_dataset(symbols, start, end, previous=None, prior_capture=None):
         capture = create_action_capture(
             adapter_version=adapter_ver,
             history_options=history_options,
-            captured_at=now,
+            captured_at=overall_captured_at,
             tickers_info=fetched_tickers_info,
             events=new_events,
         )

@@ -31,7 +31,7 @@ from richping.data import (
     synthetic_dataset,
 )
 from richping.engine import Engine, observe
-from richping.evaluation import metrics, risk_decision
+from richping.evaluation import evaluate_outcome_eligibility, metrics, risk_decision
 from richping.pipeline import format_report, scan, track
 from richping.store import Store
 from richping.validation import validate
@@ -1756,6 +1756,161 @@ def test_r2_3_normal_v3_complete_remains_eligible(tmp_path, five_session_dates):
         assert rows[0]["outcome_version"] == OUTCOME_VERSION_V3
         assert counts["evaluation"]["eligible_complete"] == 1
         assert counts["evaluation"]["excluded_complete"] == 0
+
+
+def test_r2_stored_v3_complete_future_bar_known_at_excluded(tmp_path, five_session_dates):
+    """Finding 1: stored v3 COMPLETE라도 보유 bar known_at > stored observed_at이면 data_not_yet_known으로 제외
+    - DB COMPLETE 원본 유지
+    - evaluation rows 제외
+    - excluded_complete 증가
+    - reason = data_not_yet_known
+    - 현재 as_of가 충분히 늦더라도 당시 미래였던 데이터를 소급 적격화하지 않음
+    """
+    dates = five_session_dates
+    origin_bar = [{"ticker": "ALFA", "session": "2024-01-02", "open": 100.0, "high": 101.0, "low": 99.0, "close": 100.0}]
+    holding_bars = make_test_bars("ALFA", dates, [100.0] * 5, [105.0] * 5)
+    obs_time = cutoff_at(dates[-1]).isoformat()
+
+    # action_capture was normal at obs_time
+    ds_clean = create_mini_dataset(origin_bar + holding_bars, include_action_capture=True)
+    cap = dict(ds_clean.metadata["action_capture"])
+    cap["captured_at"] = obs_time
+
+    # But one holding bar's known_at was in the future relative to obs_time
+    future_bar_known = (timestamp(obs_time) + timedelta(days=1)).isoformat()
+    modified_bars = []
+    for b in ds_clean.bars:
+        if b.session == dates[-1]:
+            b = Bar(b.ticker, b.session, b.open, b.high, b.low, b.close, b.volume, future_bar_known, b.dividend, b.split)
+        modified_bars.append(b)
+    ds = Dataset(modified_bars, {**ds_clean.metadata, "action_capture": cap}, ds_clean.members)
+
+    snap = v3_snapshot()
+    config = Config(tickers=("ALFA",), train_sessions=180)
+
+    stored_v3_body = {
+        "horizon": 5, "end_session": dates[-1], "observed_at": obs_time,
+        "outcome_version": OUTCOME_VERSION_V3, "status": "COMPLETE", "raw_return": 0.05, "net_return": 0.048,
+    }
+
+    with Store(tmp_path / "bar_known_future.db") as store:
+        store.save_dataset(ds)
+        store.save_model(config)
+        with store.db:
+            store.db.execute(
+                "INSERT INTO runs VALUES('run-bar-fut', ?, ?, '2024-01-02', 'shadow', 'SUCCEEDED', 1, NULL, NULL, ?)",
+                (ds.id, config.model_id, cutoff_at("2024-01-02").isoformat()),
+            )
+            store.db.execute(
+                "INSERT INTO recommendations VALUES('rec-bar-fut', 'run-bar-fut', 'ALFA', 1, ?)",
+                (json.dumps(snap),),
+            )
+            store.db.execute(
+                "INSERT INTO outcomes VALUES('rec-bar-fut', 5, ?, 'COMPLETE', ?)",
+                (ds.id, json.dumps(stored_v3_body)),
+            )
+
+        # Even if current as_of is far in the future, past observation at obs_time must not retroactively qualify!
+        late_as_of = (timestamp(obs_time) + timedelta(days=10)).isoformat()
+        counts, rows = track(store, ds, late_as_of)
+
+        # Excluded from evaluation rows
+        assert len(rows) == 0
+        assert counts["evaluation"]["excluded_complete"] == 1
+        assert counts["evaluation"]["by_reason"]["data_not_yet_known"] == 1
+        assert counts["evaluation"]["by_version"][OUTCOME_VERSION_V3] == 1
+
+        # Original DB outcome record is preserved unchanged
+        db_out = store.db.execute("SELECT status, body FROM outcomes WHERE recommendation_id='rec-bar-fut' AND horizon=5").fetchone()
+        assert db_out["status"] == "COMPLETE"
+        saved = json.loads(db_out["body"])
+        assert saved["outcome_version"] == OUTCOME_VERSION_V3
+        assert saved["observed_at"] == obs_time
+
+
+@pytest.mark.parametrize("corrupt_field,corrupt_value,expected_reason", [
+    ("observed_at", None, "missing_observed_at"),
+    ("observed_at", "", "missing_observed_at"),
+    ("observed_at", "not-a-valid-timestamp", "invalid_observed_at"),
+    ("horizon", 10, "horizon_mismatch"),
+    ("end_session", "2024-01-99", "end_session_mismatch"),
+])
+def test_r2_stored_outcome_structural_integrity_fail_closed(five_session_dates, corrupt_field, corrupt_value, expected_reason):
+    """Finding 1: stored outcome의 구조적 정합성(observed_at 누락/비정상, horizon/end mismatch) 실패 폐쇄 검증"""
+    dates = five_session_dates
+    origin_bar = [{"ticker": "ALFA", "session": "2024-01-02", "open": 100.0, "high": 101.0, "low": 99.0, "close": 100.0}]
+    holding_bars = make_test_bars("ALFA", dates, [100.0] * 5, [105.0] * 5)
+    ds = create_mini_dataset(origin_bar + holding_bars, include_action_capture=True)
+
+    snap = v3_snapshot()
+    outcome = {
+        "horizon": 5,
+        "end_session": dates[-1],
+        "observed_at": cutoff_at(dates[-1]).isoformat(),
+        "outcome_version": OUTCOME_VERSION_V3,
+        "status": "COMPLETE",
+        "raw_return": 0.05,
+        "net_return": 0.048,
+    }
+
+    if corrupt_value is None:
+        outcome.pop(corrupt_field, None)
+    else:
+        outcome[corrupt_field] = corrupt_value
+
+    as_of = cutoff_at("2024-01-16").isoformat()
+    is_eligible, reason = evaluate_outcome_eligibility(snap, outcome, dataset=ds, as_of=as_of, mode="shadow")
+    assert is_eligible is False
+    assert reason == expected_reason
+
+
+def test_r2_matched_spy_pairing_and_unresolved_denominator(tmp_path):
+    """Finding 2: matched SPY의 UNRESOLVED/PENDING 분모 보존 및 signal-date 기준 pairing 검증
+    - 후보 종목은 event-free COMPLETE
+    - 동일 signal date의 SPY 보유 기간에 현금배당 주입
+    - SPY UNRESOLVED 존재 & reason = unverified_cash_dividend_event
+    - matched_SPY_evaluation 분모(UNRESOLVED 카운트)에서 사라지지 않음
+    - 해당 날짜는 paired benchmark metric에서 제외
+    - 후보 전체 strategy metric은 정상 유지
+    - paired candidate와 paired SPY가 동일 signal-date 집합을 사용
+    """
+    ds = synthetic_dataset(n=350)
+    # Inject cash dividend specifically into SPY on an OOS holding session
+    mod_bars = []
+    for b in ds.bars:
+        if b.ticker == "SPY" and b.session == "2023-03-07":
+            b = Bar(b.ticker, b.session, b.open, b.high, b.low, b.close, b.volume, b.known_at, 1.0, b.split)
+        mod_bars.append(b)
+    ds_mod = Dataset(mod_bars, ds.metadata, ds.members)
+
+    config = Config(tickers=tuple(m["ticker"] for m in ds.members), train_sessions=180)
+
+    with Store(tmp_path / "validate_spy_unresolved.db") as store:
+        store.save_dataset(ds_mod)
+        result = validate(store, ds_mod, config, train=180, validation=30, oos=30)
+        assert len(result["folds"]) >= 1
+
+        for fold in result["folds"]:
+            oos = fold["oos"]
+            spy_ev = oos["matched_SPY_evaluation"]
+
+            # 1. SPY UNRESOLVED exists with unverified_cash_dividend_event reason
+            assert spy_ev["UNRESOLVED"] >= 1
+            assert spy_ev["by_reason"].get("unverified_cash_dividend_event", 0) >= 1
+
+            # 2. Denominator preserves all attempts
+            total_spy_attempts = spy_ev["COMPLETE"] + spy_ev["PENDING"] + spy_ev["UNRESOLVED"]
+            assert total_spy_attempts == spy_ev["attempted_signal_dates"]
+            assert spy_ev["candidate_only_signal_dates"] >= 1
+
+            # 3. Strategy candidate metric is preserved
+            candidate_samples = oos["metrics"]["samples"]
+            assert candidate_samples > 0
+
+            # 4. Paired benchmark metric excludes the dividend date
+            spy_samples = oos["matched_SPY"]["samples"]
+            assert spy_samples < candidate_samples
+            assert spy_samples == spy_ev["paired_signal_dates"]
 
 
 
