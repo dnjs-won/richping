@@ -102,3 +102,65 @@ def promotion_gate(evidence):
         if evidence.get(key) is not True:
             reasons.append(key)
     return {"decision": "ELIGIBLE_FOR_SHADOW_REVIEW" if not reasons else "REJECT", "reasons": reasons}
+
+
+def evaluate_outcome_eligibility(snapshot, outcome, dataset=None, as_of=None, mode="research"):
+    """Evaluate whether an outcome is eligible under CASH_ACTION_REVIEW_POLICY ("cash_action_review_v1").
+
+    Pure policy function: does not modify snapshot or outcome.
+    Returns: (is_eligible: bool, reason: str | None)
+    """
+    from .core import (
+        LEGACY_OUTCOME_VERSION,
+        OUTCOME_VERSION_V1,
+        OUTCOME_VERSION_V2,
+        OUTCOME_VERSION_V3,
+        SUPPORTED_OUTCOME_VERSIONS,
+        next_sessions,
+    )
+    from .data import inspect_action_capture
+
+    if outcome.get("status") != "COMPLETE":
+        return False, outcome.get("reason", "status_not_complete")
+
+    snap_version = snapshot.get("outcome_version", LEGACY_OUTCOME_VERSION)
+    outcome_version = outcome.get("outcome_version", LEGACY_OUTCOME_VERSION)
+
+    # 1. Snapshot and outcome version mismatch
+    if snap_version != outcome_version:
+        return False, "outcome_version_mismatch"
+
+    # 2. Unsupported version
+    if outcome_version not in SUPPORTED_OUTCOME_VERSIONS:
+        return False, "unsupported_outcome_version"
+
+    # 3. v2 contract is unconditionally excluded under cash_action_review_v1
+    if outcome_version == OUTCOME_VERSION_V2:
+        return False, "legacy_v2_unverified_contract"
+
+    # 4. v1 requires action capture verification by current standards
+    if outcome_version == OUTCOME_VERSION_V1:
+        if dataset is None:
+            return False, "action_capture_unknown"
+        symbol = snapshot["ticker"]
+        horizon = snapshot.get("holding_period", 5)
+        days = next_sessions(snapshot["session"], horizon)
+        ac = inspect_action_capture(dataset, symbol, days, as_of=as_of, mode=mode)
+        if mode == "shadow" and ac.is_pending:
+            return False, "data_not_yet_known"
+        if ac.has_capital_gains:
+            return False, "unsupported_capital_gains_distribution"
+        if not ac.is_confirmed:
+            return False, "action_capture_unknown"
+        bars = [dataset.by_ticker.get(symbol, {}).get(s) for s in days]
+        if any(b is None for b in bars):
+            return False, "missing_or_delisted_session"
+        if any(b.split or b.dividend for b in bars):
+            return False, "unverified_cash_dividend_event"
+        return True, None
+
+    # 5. v3 is eligible if status is COMPLETE (corporate actions already failed closed in observe)
+    if outcome_version == OUTCOME_VERSION_V3:
+        return True, None
+
+    return False, "unsupported_outcome_version"

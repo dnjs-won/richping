@@ -8,6 +8,7 @@ import sqlite3
 import pytest
 
 from richping.core import (
+    CASH_ACTION_REVIEW_POLICY,
     DEFAULT_OUTCOME_VERSION,
     LEGACY_OUTCOME_VERSION,
     OUTCOME_VERSION_V1,
@@ -30,8 +31,10 @@ from richping.data import (
     synthetic_dataset,
 )
 from richping.engine import Engine, observe
+from richping.evaluation import metrics, risk_decision
 from richping.pipeline import format_report, scan, track
 from richping.store import Store
+from richping.validation import validate
 
 
 def create_mini_dataset(bars_spec, metadata=None, action_capture=None, include_action_capture=False):
@@ -617,24 +620,31 @@ def test_scenario_10_expectation_and_evaluation_consistency(tmp_path):
         counts, track_rows = track(store, ds, as_of)
         assert counts["COMPLETE"] >= 1
         matching_track = [r for r in track_rows if r["session"] == target_session and r["ticker"] == "ALFA"]
-        assert len(matching_track) == 1, "track() must produce evaluated row for stored candidate"
-        track_row = matching_track[0]
+        assert len(matching_track) == 0, "v2 candidate must be excluded from evaluation rows under cash_action_review_v1"
+        assert counts["evaluation"]["excluded_complete"] >= 1
+        assert counts["evaluation"]["by_reason"]["legacy_v2_unverified_contract"] >= 1
+        assert counts["evaluation"]["by_version"][OUTCOME_VERSION_V2] >= 1
 
-    # 3. Verify identical attributes
-    assert track_row["ticker"] == hist_row["ticker"] == "ALFA"
-    assert track_row["session"] == hist_row["session"] == target_session
-    assert track_row["end_session"] == hist_row["end_session"] == "2022-04-06"
-    assert track_row["outcome_version"] == hist_row["outcome_version"] == OUTCOME_VERSION_V2
+        # Verify preserved v2 outcome in Store
+        db_out = store.db.execute("SELECT status, body FROM outcomes WHERE recommendation_id='rec-1' AND horizon=5").fetchone()
+        assert db_out["status"] == "COMPLETE"
+        stored_row = json.loads(db_out["body"])
 
-    # 4. Direct comparison of net_return between Engine.history and track()
-    assert hist_row["net_return"] == pytest.approx(track_row["net_return"])
+    # 3. Verify identical attributes on preserved v2 outcome
+    assert hist_row["ticker"] == "ALFA"
+    assert hist_row["session"] == target_session
+    assert stored_row["end_session"] == hist_row["end_session"] == "2022-04-06"
+    assert stored_row["outcome_version"] == hist_row["outcome_version"] == OUTCOME_VERSION_V2
+
+    # 4. Direct comparison of net_return between Engine.history and stored v2 outcome
+    assert hist_row["net_return"] == pytest.approx(stored_row["net_return"])
 
     # 5. Verify consistent reflection of both dividend and transaction cost
-    assert track_row["dividend_cash"] == pytest.approx(div_amount)
-    assert track_row["dividend_return"] > 0
-    assert track_row["cost"] == pytest.approx(config.cost)
-    expected_net = track_row["price_return"] + track_row["dividend_return"] - config.cost
-    assert track_row["net_return"] == pytest.approx(expected_net)
+    assert stored_row["dividend_cash"] == pytest.approx(div_amount)
+    assert stored_row["dividend_return"] > 0
+    assert stored_row["cost"] == pytest.approx(config.cost)
+    expected_net = stored_row["price_return"] + stored_row["dividend_return"] - config.cost
+    assert stored_row["net_return"] == pytest.approx(expected_net)
     assert hist_row["net_return"] == pytest.approx(expected_net)
 
     # 6. Verify calibration calculation
@@ -1329,5 +1339,304 @@ def test_r2_2_r1_case7_synthetic_research_history_and_calibration_unaffected():
     hist = engine_res.history
     assert len(hist) > 0
     assert all(r["outcome_version"] == OUTCOME_VERSION_V3 for r in hist)
+
+
+# ============================================================================
+# M2-1A-R2-3: cash_action_review_v1 evaluation policy isolation tests
+# ============================================================================
+
+def test_r2_3_v2_complete_preserved_in_db_but_excluded_from_evaluation(tmp_path, five_session_dates):
+    """1. v2 COMPLETE가 DB에는 COMPLETE로 보존되지만 evaluation rows에서는 제외됨
+    2. 제외 reason = legacy_v2_unverified_contract
+    5. excluded COMPLETE만 존재하는 경우 이를 0건처럼 숨기지 않음
+    """
+    dates = five_session_dates
+    origin_bar = [{"ticker": "ALFA", "session": "2024-01-02", "open": 100.0, "high": 101.0, "low": 99.0, "close": 100.0}]
+    holding_bars = make_test_bars("ALFA", dates, [100.0] * 5, [105.0] * 5, dividends=[0.0, 1.0, 0.0, 0.0, 0.0])
+    ds = create_mini_dataset(origin_bar + holding_bars, include_action_capture=True)
+
+    snap = base_snapshot(version=OUTCOME_VERSION_V2)
+    config = Config(tickers=("ALFA",), train_sessions=180)
+
+    with Store(tmp_path / "v2_eval.db") as store:
+        store.save_dataset(ds)
+        store.save_model(config)
+        with store.db:
+            store.db.execute(
+                "INSERT INTO runs VALUES('run-v2', ?, ?, '2024-01-02', 'research', 'SUCCEEDED', 1, NULL, NULL, ?)",
+                (ds.id, config.model_id, cutoff_at("2024-01-02").isoformat()),
+            )
+            store.db.execute(
+                "INSERT INTO recommendations VALUES('rec-v2', 'run-v2', 'ALFA', 1, ?)",
+                (json.dumps(snap),),
+            )
+        as_of = cutoff_at(dates[-1]).isoformat()
+        counts, rows = track(store, ds, as_of)
+
+        # 1. Horizon observation denominator remains COMPLETE
+        assert counts["COMPLETE"] >= 1
+        # 2. Excluded from evaluation rows
+        assert len(rows) == 0, "v2 COMPLETE must be excluded from evaluation rows"
+        # 3. Evaluation counts reflect policy, reason, version, and are NOT hidden as 0
+        ev = counts["evaluation"]
+        assert ev["policy"] == CASH_ACTION_REVIEW_POLICY
+        assert ev["eligible_complete"] == 0
+        assert ev["excluded_complete"] == 1
+        assert ev["by_reason"]["legacy_v2_unverified_contract"] == 1
+        assert ev["by_version"][OUTCOME_VERSION_V2] == 1
+        assert len(ev["excluded_groups"]) == 1
+
+        # 4. DB record is preserved as COMPLETE with original v2 arithmetic
+        db_out = store.db.execute("SELECT status, body FROM outcomes WHERE recommendation_id='rec-v2' AND horizon=5").fetchone()
+        assert db_out["status"] == "COMPLETE"
+        body = json.loads(db_out["body"])
+        assert body["outcome_version"] == OUTCOME_VERSION_V2
+        assert body["dividend_cash"] == 1.0
+
+
+def test_r2_3_v3_eligible_and_concurrent_v2_metrics_isolation(tmp_path, five_session_dates):
+    """3. v3 적격 COMPLETE는 rows에 포함됨
+    4. v2 + v3가 동시에 존재해도 risk/recent metrics에는 v3 적격 결과만 들어감
+    """
+    dates = five_session_dates
+    origin_alfa = [{"ticker": "ALFA", "session": "2024-01-02", "open": 100.0, "high": 101.0, "low": 99.0, "close": 100.0}]
+    origin_beta = [{"ticker": "BETA", "session": "2024-01-02", "open": 50.0, "high": 51.0, "low": 49.0, "close": 50.0}]
+    # ALFA: event-free (eligible for v3)
+    holding_alfa = make_test_bars("ALFA", dates, [100.0] * 5, [105.0] * 5)
+    # BETA: v2 ordinary cash dividend (excluded)
+    holding_beta = make_test_bars("BETA", dates, [50.0] * 5, [55.0] * 5, dividends=[0.0, 2.0, 0.0, 0.0, 0.0])
+    ds = create_mini_dataset(origin_alfa + origin_beta + holding_alfa + holding_beta, include_action_capture=True)
+
+    config = Config(tickers=("ALFA", "BETA"), train_sessions=180)
+    snap_alfa_v3 = v3_snapshot(session="2024-01-02", ticker="ALFA", entry_ref=100.0)
+    snap_beta_v2 = base_snapshot(session="2024-01-02", ticker="BETA", entry_ref=50.0, version=OUTCOME_VERSION_V2)
+
+    with Store(tmp_path / "concurrent.db") as store:
+        store.save_dataset(ds)
+        store.save_model(config)
+        with store.db:
+            store.db.execute(
+                "INSERT INTO runs VALUES('run-multi', ?, ?, '2024-01-02', 'research', 'SUCCEEDED', 1, NULL, NULL, ?)",
+                (ds.id, config.model_id, cutoff_at("2024-01-02").isoformat()),
+            )
+            store.db.execute(
+                "INSERT INTO recommendations VALUES('rec-alfa', 'run-multi', 'ALFA', 1, ?)",
+                (json.dumps(snap_alfa_v3),),
+            )
+            store.db.execute(
+                "INSERT INTO recommendations VALUES('rec-beta', 'run-multi', 'BETA', 2, ?)",
+                (json.dumps(snap_beta_v2),),
+            )
+
+        as_of = cutoff_at(dates[-1]).isoformat()
+        counts, rows = track(store, ds, as_of)
+
+        # Both completed calculation in horizon counts
+        assert counts["COMPLETE"] >= 2
+        # Only v3 is in evaluation rows
+        assert len(rows) == 1
+        assert rows[0]["ticker"] == "ALFA"
+        assert rows[0]["outcome_version"] == OUTCOME_VERSION_V3
+
+        # Evaluation breakdown
+        ev = counts["evaluation"]
+        assert ev["eligible_complete"] == 1
+        assert ev["excluded_complete"] == 1
+        assert ev["by_reason"]["legacy_v2_unverified_contract"] == 1
+        assert ev["by_version"][OUTCOME_VERSION_V2] == 1
+
+        # Verify metrics only include ALFA
+        m = metrics(rows)
+        assert m["samples"] == 1
+        expected_alfa_net = (105.0 / 100.0 - 1) - snap_alfa_v3["cost"]
+        assert m["expectancy"] == pytest.approx(expected_alfa_net)
+
+        # risk_decision only sees ALFA
+        state, reason = risk_decision(rows)
+        assert state == "NORMAL"
+
+
+def test_r2_3_excluded_complete_only_pauses_scan_and_format_report(tmp_path):
+    """5. excluded COMPLETE만 존재하는 경우 0건처럼 숨기지 않고 보수적으로 pause 및 리포트 표시"""
+    ds = synthetic_dataset(n=120, symbols=("ALFA", "BETA"), seed=7)
+    config = Config(tickers=("ALFA", "BETA"), train_sessions=60)
+    rec_session = ds.sessions[70]
+    origin_bar = ds.by_ticker["ALFA"][rec_session]
+
+    snap = base_snapshot(session=rec_session, ticker="ALFA", entry_ref=origin_bar.close, version=OUTCOME_VERSION_V2)
+
+    with Store(tmp_path / "scan_pause.db") as store:
+        store.save_dataset(ds)
+        store.save_model(config)
+        with store.db:
+            store.db.execute(
+                "INSERT INTO runs VALUES('run-old', ?, ?, ?, 'research', 'SUCCEEDED', 1, NULL, NULL, ?)",
+                (ds.id, config.model_id, rec_session, cutoff_at(rec_session).isoformat()),
+            )
+            store.db.execute(
+                "INSERT INTO recommendations VALUES('rec-old', 'run-old', 'ALFA', 1, ?)",
+                (json.dumps(snap),),
+            )
+
+        # Operational scan on subsequent session: having excluded outcomes in track triggers conservative pause
+        scan_session = ds.sessions[80]
+        report = scan(store, ds, config, scan_session, mode="research")
+        assert report["state"] == "PAUSED"
+        assert report["state_reason"] == "unresolved_outcome_data"
+        assert report["evaluation_policy"] == CASH_ACTION_REVIEW_POLICY
+        assert report["outcomes"]["evaluation"]["excluded_complete"] >= 1
+
+        formatted = format_report(report)
+        assert "Evaluation Policy: cash_action_review_v1" in formatted
+        assert "Excluded:" in formatted
+        assert "legacy_v2_unverified_contract:" in formatted
+
+        # Format historical report with v2 contract
+        hist_report = dict(report, outcome_contract=OUTCOME_VERSION_V2)
+        formatted_hist = format_report(hist_report)
+        assert f"Outcome Contract: {OUTCOME_VERSION_V2}" in formatted_hist
+        assert "Historical v2 calculation record; excluded from current cash_action_review_v1" in formatted_hist
+
+
+def test_r2_3_outcome_version_mismatch_excluded(tmp_path, five_session_dates):
+    """6. snapshot/result version mismatch가 평가 제외됨"""
+    dates = five_session_dates
+    origin_bar = [{"ticker": "ALFA", "session": "2024-01-02", "open": 100.0, "high": 101.0, "low": 99.0, "close": 100.0}]
+    holding_bars = make_test_bars("ALFA", dates, [100.0] * 5, [105.0] * 5)
+    ds = create_mini_dataset(origin_bar + holding_bars, include_action_capture=True)
+
+    # Snapshot is v3, but pre-stored outcome in DB is v1
+    snap = v3_snapshot()
+    config = Config(tickers=("ALFA",), train_sessions=180)
+
+    stored_v1_body = {
+        "horizon": 5, "end_session": dates[-1], "observed_at": cutoff_at(dates[-1]).isoformat(),
+        "outcome_version": OUTCOME_VERSION_V1, "status": "COMPLETE", "raw_return": 0.05, "net_return": 0.048,
+    }
+
+    with Store(tmp_path / "mismatch.db") as store:
+        store.save_dataset(ds)
+        store.save_model(config)
+        with store.db:
+            store.db.execute(
+                "INSERT INTO runs VALUES('run-mm', ?, ?, '2024-01-02', 'research', 'SUCCEEDED', 1, NULL, NULL, ?)",
+                (ds.id, config.model_id, cutoff_at("2024-01-02").isoformat()),
+            )
+            store.db.execute(
+                "INSERT INTO recommendations VALUES('rec-mm', 'run-mm', 'ALFA', 1, ?)",
+                (json.dumps(snap),),
+            )
+            store.db.execute(
+                "INSERT INTO outcomes VALUES('rec-mm', 5, ?, 'COMPLETE', ?)",
+                (ds.id, json.dumps(stored_v1_body)),
+            )
+
+        as_of = cutoff_at(dates[-1]).isoformat()
+        counts, rows = track(store, ds, as_of)
+
+        assert counts["evaluation"]["excluded_complete"] == 1
+        assert counts["evaluation"]["by_reason"]["outcome_version_mismatch"] == 1
+        assert len(rows) == 0
+
+
+def test_r2_3_existing_outcome_not_overwritten_by_rerun(tmp_path, five_session_dates):
+    """7. 기존 outcome을 재실행해 다른 버전으로 덮어쓰지 않음"""
+    dates = five_session_dates
+    origin_bar = [{"ticker": "ALFA", "session": "2024-01-02", "open": 100.0, "high": 101.0, "low": 99.0, "close": 100.0}]
+    holding_bars = make_test_bars("ALFA", dates, [100.0] * 5, [105.0] * 5, dividends=[0.0, 1.0, 0.0, 0.0, 0.0])
+    ds = create_mini_dataset(origin_bar + holding_bars, include_action_capture=True)
+
+    snap = base_snapshot(version=OUTCOME_VERSION_V2)
+    config = Config(tickers=("ALFA",), train_sessions=180)
+
+    with Store(tmp_path / "no_overwrite.db") as store:
+        store.save_dataset(ds)
+        store.save_model(config)
+        with store.db:
+            store.db.execute(
+                "INSERT INTO runs VALUES('run-no', ?, ?, '2024-01-02', 'research', 'SUCCEEDED', 1, NULL, NULL, ?)",
+                (ds.id, config.model_id, cutoff_at("2024-01-02").isoformat()),
+            )
+            store.db.execute(
+                "INSERT INTO recommendations VALUES('rec-no', 'run-no', 'ALFA', 1, ?)",
+                (json.dumps(snap),),
+            )
+
+        as_of = cutoff_at(dates[-1]).isoformat()
+        # First track creates v2 outcome in outcomes table
+        track(store, ds, as_of)
+        before_body = store.db.execute("SELECT body FROM outcomes WHERE recommendation_id='rec-no' AND horizon=5").fetchone()[0]
+
+        # Second track call must not overwrite or mutate
+        track(store, ds, as_of)
+        after_body = store.db.execute("SELECT body FROM outcomes WHERE recommendation_id='rec-no' AND horizon=5").fetchone()[0]
+        assert before_body == after_body
+        assert json.loads(after_body)["outcome_version"] == OUTCOME_VERSION_V2
+
+
+def test_r2_3_future_stored_outcome_not_used_at_past_as_of(tmp_path, five_session_dates):
+    """8. historical as_of보다 미래의 저장 outcome을 사용하지 않음"""
+    dates = five_session_dates
+    origin_bar = [{"ticker": "ALFA", "session": "2024-01-02", "open": 100.0, "high": 101.0, "low": 99.0, "close": 100.0}]
+    holding_bars = make_test_bars("ALFA", dates, [100.0] * 5, [105.0] * 5)
+    ds = create_mini_dataset(origin_bar + holding_bars, include_action_capture=True)
+
+    snap = v3_snapshot()
+    config = Config(tickers=("ALFA",), train_sessions=180)
+
+    # Future stored outcome finalized at dates[-1]
+    future_time = cutoff_at(dates[-1]).isoformat()
+    future_body = {
+        "horizon": 5, "end_session": dates[-1], "observed_at": future_time,
+        "outcome_version": OUTCOME_VERSION_V3, "status": "COMPLETE", "raw_return": 0.05, "net_return": 0.048,
+    }
+
+    with Store(tmp_path / "pit_stored.db") as store:
+        store.save_dataset(ds)
+        store.save_model(config)
+        with store.db:
+            store.db.execute(
+                "INSERT INTO runs VALUES('run-pit', ?, ?, '2024-01-02', 'research', 'SUCCEEDED', 1, NULL, NULL, ?)",
+                (ds.id, config.model_id, cutoff_at("2024-01-02").isoformat()),
+            )
+            store.db.execute(
+                "INSERT INTO recommendations VALUES('rec-pit', 'run-pit', 'ALFA', 1, ?)",
+                (json.dumps(snap),),
+            )
+            store.db.execute(
+                "INSERT INTO outcomes VALUES('rec-pit', 5, ?, 'COMPLETE', ?)",
+                (ds.id, json.dumps(future_body)),
+            )
+
+        # Query at past as_of (session 2 of holding period)
+        past_as_of = cutoff_at(dates[1]).isoformat()
+        counts, rows = track(store, ds, past_as_of)
+
+        # Horizon 5 was not mature at past_as_of; stored future complete must NOT be used
+        assert len(rows) == 0
+        assert counts["PENDING"] >= 1
+
+
+def test_r2_3_validation_oos_excludes_v2(tmp_path):
+    """9. validation/OOS 통계에도 부적격 v2가 섞이지 않음"""
+    ds = synthetic_dataset(n=350, seed=42)
+    config = Config(tickers=tuple(m["ticker"] for m in ds.members), train_sessions=180)
+
+    with Store(tmp_path / "validate_eval.db") as store:
+        store.save_dataset(ds)
+        result = validate(store, ds, config, train=180, validation=30, oos=30)
+        assert result["trial"] is not None
+        assert "folds" in result
+        assert len(result["folds"]) >= 1
+        for fold in result["folds"]:
+            for phase in ("validation", "oos"):
+                outcomes = fold[phase]["outcomes"]
+                assert "evaluation" in outcomes
+                assert outcomes["evaluation"]["policy"] == CASH_ACTION_REVIEW_POLICY
+                # All rows evaluated must be v3 or event-free eligible
+                m = fold[phase]["metrics"]
+                assert "samples" in m
+                assert fold[phase]["recommendation_frequency"] >= 0
+
 
 

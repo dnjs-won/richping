@@ -2,9 +2,9 @@
 
 from dataclasses import dataclass
 
-from .core import canonical, code_hash, cutoff_at, utcnow
+from .core import CASH_ACTION_REVIEW_POLICY, LEGACY_OUTCOME_VERSION, canonical, code_hash, cutoff_at, utcnow
 from .engine import Engine, observe
-from .evaluation import block_ci, metrics, promotion_gate
+from .evaluation import block_ci, evaluate_outcome_eligibility, metrics, promotion_gate
 
 
 @dataclass(frozen=True)
@@ -44,7 +44,18 @@ def validate(store, dataset, config, train=504, validation=63, oos=63):
             outputs = {}
             for label, start, end in (("validation", fold.validation_start, fold.validation_end),
                                        ("oos", fold.oos_start, fold.oos_end)):
-                rows, counts, benchmark_rows = [], {"COMPLETE": 0, "PENDING": 0, "UNRESOLVED": 0}, []
+                rows, counts, benchmark_rows = [], {
+                    "COMPLETE": 0,
+                    "PENDING": 0,
+                    "UNRESOLVED": 0,
+                    "evaluation": {
+                        "policy": CASH_ACTION_REVIEW_POLICY,
+                        "eligible_complete": 0,
+                        "excluded_complete": 0,
+                        "by_reason": {},
+                        "by_version": {},
+                    },
+                }, []
                 excluded_sessions = 0
                 for i in range(start, end + 1):
                     session = dataset.sessions[i]
@@ -65,17 +76,35 @@ def validate(store, dataset, config, train=504, validation=63, oos=63):
                         outcome = observe(signal, dataset, config.horizon, cutoff_at(dataset.sessions[end]).isoformat())
                         counts[outcome["status"]] += 1
                         if outcome["status"] == "COMPLETE":
-                            rows.append({**outcome, "session": session, "ticker": signal["ticker"], "regime": signal["regime"]})
+                            is_eligible, reason = evaluate_outcome_eligibility(
+                                signal, outcome, dataset=dataset, as_of=cutoff_at(dataset.sessions[end]).isoformat(), mode="research"
+                            )
+                            ver = outcome.get("outcome_version", LEGACY_OUTCOME_VERSION)
+                            if is_eligible:
+                                counts["evaluation"]["eligible_complete"] += 1
+                                rows.append({**outcome, "session": session, "ticker": signal["ticker"], "regime": signal["regime"]})
+                            else:
+                                counts["evaluation"]["excluded_complete"] += 1
+                                counts["evaluation"]["by_reason"][reason] = (
+                                    counts["evaluation"]["by_reason"].get(reason, 0) + 1
+                                )
+                                counts["evaluation"]["by_version"][ver] = (
+                                    counts["evaluation"]["by_version"].get(ver, 0) + 1
+                                )
                     if chosen:
                         b = dataset.by_ticker["SPY"][session]
                         spy_signal = {**chosen[0], "ticker": "SPY", "entry_reference": b.close,
                                       "stop_reference": b.close * 0.9, "target_reference": b.close * 1.2}
                         observed = observe(spy_signal, dataset, config.horizon, cutoff_at(dataset.sessions[end]).isoformat())
                         if observed["status"] == "COMPLETE":
-                            benchmark_rows.append({**observed, "session": session})
+                            spy_eligible, _ = evaluate_outcome_eligibility(
+                                spy_signal, observed, dataset=dataset, as_of=cutoff_at(dataset.sessions[end]).isoformat(), mode="research"
+                            )
+                            if spy_eligible:
+                                benchmark_rows.append({**observed, "session": session})
                 outputs[label] = {"start": dataset.sessions[start], "end": dataset.sessions[end],
                     "metrics": metrics(rows), "outcomes": counts, "invalid_sessions": excluded_sessions,
-                    "recommendation_frequency": sum(counts.values()) / (end - start + 1),
+                    "recommendation_frequency": sum(counts[k] for k in ("COMPLETE", "PENDING", "UNRESOLVED")) / (end - start + 1),
                     "date_block_ci": block_ci(rows, config.bootstrap_samples, config.seed),
                     "matched_SPY": metrics(benchmark_rows),
                     "cost_stress": metrics([{**r, "net_return": r["net_return"] - config.cost} for r in rows]),
