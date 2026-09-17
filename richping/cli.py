@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 import sys
 
-from .core import Config, canonical, cutoff_at, latest_session, timestamp, utcnow
+from .core import Config, LEGACY_OUTCOME_VERSION, canonical, cutoff_at, latest_session, timestamp, utcnow
 from .data import import_csv, synthetic_dataset, yahoo_dataset
 from .engine import Engine
 from .evaluation import metrics
@@ -125,7 +125,20 @@ def main(argv=None):
                     summaries = []
                     for model, mode in groups:
                         group = [r for r in rows if (r["model_id"], r["mode"]) == (model, mode)]
-                        summaries.append({"model": model, "mode": mode, "performance": metrics(group),
+                        versions = sorted({r.get("outcome_version", LEGACY_OUTCOME_VERSION) for r in group})
+                        by_version = {}
+                        for ver in versions:
+                            v_group = [r for r in group if r.get("outcome_version", LEGACY_OUTCOME_VERSION) == ver]
+                            by_version[ver] = {
+                                "samples": len(v_group),
+                                "performance": metrics(v_group),
+                                "by_regime": {regime: metrics([r for r in v_group if r["regime"] == regime])
+                                              for regime in sorted({r["regime"] for r in v_group})},
+                            }
+                        summaries.append({"model": model, "mode": mode,
+                            "outcome_versions": versions,
+                            "by_version": by_version,
+                            "performance": metrics(group),
                             "by_regime": {regime: metrics([r for r in group if r["regime"] == regime])
                                 for regime in sorted({r["regime"] for r in group})}})
                     result = {"quality": dataset.metadata["quality"], "outcomes": counts, "by_model_mode": summaries}

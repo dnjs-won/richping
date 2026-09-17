@@ -81,10 +81,25 @@ def test_shadow_cannot_see_unknown_bars(data, config):
         engine.signals(day, cutoff_at(day).isoformat(), "shadow")
 
 
-def test_future_membership_not_visible_in_shadow(data, config):
-    day = data.sessions[300]
-    members = [{**m, "known_at": (cutoff_at(day) + timedelta(days=1)).isoformat()} for m in data.members]
-    result = Engine(clone(data, members=members), config).signals(day, mode="shadow")
+def test_future_membership_not_visible_in_shadow(config):
+    # Standalone dataset covering up to the evaluated session (n=301 days; index 300 is the final session)
+    eval_dataset = synthetic_dataset(n=301)
+    day = eval_dataset.sessions[300]
+    eval_cutoff = cutoff_at(day).isoformat()
+
+    # Explicitly assert that the final bar, capture interval end, and captured_at are consistent with eval cutoff
+    assert eval_dataset.end == day
+    assert max(b.session for b in eval_dataset.bars) == day
+    cap = eval_dataset.metadata["action_capture"]
+    assert cap["captured_at"] == eval_cutoff
+    for sym, tinfo in cap["tickers"].items():
+        assert any(iv["end"] == day for iv in tinfo["query_intervals"])
+
+    # Set membership known_at strictly after the evaluated session
+    members = [{**m, "known_at": (cutoff_at(day) + timedelta(days=1)).isoformat()} for m in eval_dataset.members]
+    test_data = Dataset(eval_dataset.bars, eval_dataset.metadata, members)
+
+    result = Engine(test_data, config).signals(day, mode="shadow")
     assert result["candidates"] == []
     assert set(result["excluded"].values()) == {"not_in_asof_universe"}
 

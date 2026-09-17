@@ -1,6 +1,21 @@
 import json
 
-from .core import canonical, code_hash, cutoff_at, digest, next_sessions, open_at, timestamp, utcnow
+from .core import (
+    DEFAULT_OUTCOME_VERSION,
+    LEGACY_OUTCOME_VERSION,
+    OUTCOME_VERSION_V1,
+    OUTCOME_VERSION_V2,
+    OUTCOME_VERSION_V3,
+    SUPPORTED_OUTCOME_VERSIONS,
+    canonical,
+    code_hash,
+    cutoff_at,
+    digest,
+    next_sessions,
+    open_at,
+    timestamp,
+    utcnow,
+)
 from .engine import Engine, observe
 from .evaluation import metrics, risk_decision
 
@@ -31,8 +46,9 @@ def track(store, dataset, as_of, model_id=None, mode=None):
                         (rec["id"], horizon, dataset.id, result["status"], canonical(result)))
                 if horizon == snap["holding_period"] and result["status"] == "COMPLETE":
                     rows.append({**result, "session": snap["session"], "ticker": snap["ticker"],
-                                 "regime": snap["regime"], "recommendation_id": rec["id"],
-                                 "model_id": rec["model_id"], "mode": rec["mode"]})
+                                 "regime": snap.get("regime", ""), "recommendation_id": rec["id"],
+                                 "model_id": rec["model_id"], "mode": rec["mode"],
+                                 "outcome_version": result.get("outcome_version", LEGACY_OUTCOME_VERSION)})
     return counts, rows
 
 
@@ -96,13 +112,14 @@ def scan(store, dataset, config, session, mode="research", now=None, engine=None
         report = {"run_id": run_id, "session": session, "cutoff": cutoff.isoformat(), "mode": mode,
             "quality": dataset.metadata["quality"], "model": config.model_id, "dataset_id": dataset.id,
             "regime": signals["regime"], "state": state, "state_reason": reason,
+            "outcome_contract": DEFAULT_OUTCOME_VERSION,
             "decision": "TRADE CANDIDATES AVAILABLE" if picks else "NO TRADE",
             "reason": "qualified_candidates" if picks else (reason if state == "PAUSED" else "insufficient_evidence_or_edge"),
             "recommendations": picks, "excluded": rejected, "universe_size": len(config.tickers),
             "outcomes": counts, "recent_30": metrics(recent),
             "limitations": ["research/shadow only; no validated alpha or order execution",
                             "current-list/revised historical calibration is not point-in-time validated",
-                            "corporate-action and missing outcome windows are unresolved"]}
+                            "corporate-action windows other than ordinary cash dividends and missing outcome windows are unresolved"]}
         with store.db:
             for snap in picks:
                 store.db.execute("INSERT INTO recommendations VALUES(?,?,?,?,?)",
@@ -123,9 +140,19 @@ def scan(store, dataset, config, session, mode="research", now=None, engine=None
 def format_report(report):
     def pct(value):
         return "N/A" if value is None else f"{value:+.2%}"
+    if "outcome_contract" not in report:
+        contract = OUTCOME_VERSION_V1
+    else:
+        raw_contract = report["outcome_contract"]
+        if raw_contract in SUPPORTED_OUTCOME_VERSIONS:
+            contract = str(raw_contract)
+        elif raw_contract is None or raw_contract == "":
+            contract = "unsupported (empty)"
+        else:
+            contract = f"{raw_contract} (unsupported)"
     lines = [f"{report['session']} DAILY RECOMMENDATION", f"Data: {report['quality'].upper()} / {report['mode']}",
              f"Market: {report['regime']}", f"System: {report['state']} ({report['state_reason']})",
-             f"Model: {report['model']}", "", report["decision"]]
+             f"Model: {report['model']}", f"Outcome Contract: {contract}", "", report["decision"]]
     if not report["recommendations"]:
         lines.append("Reason: " + report["reason"])
     else:
@@ -140,9 +167,9 @@ def format_report(report):
         lines.append("     Contributors: " + ", ".join(f"{k} +{v:.1f}" for k, v in s["contributors"].items()))
         lines.append(f"     Evidence: {e['samples']} samples / {e['signal_dates']} dates; "
                      f"edge CI [{pct(e['edge_ci'][0])}, {pct(e['edge_ci'][1])}]")
-    m = report["recent_30"]
-    lines += ["", f"Recent completed recommendations: {m['samples']} | Expectancy {pct(m['expectancy'])}",
-              f"Outcome horizons: {report['outcomes']}",
+    m = report.get("recent_30", {"samples": 0, "expectancy": None})
+    lines += ["", f"Recent completed recommendations: {m.get('samples', 0)} | Expectancy {pct(m.get('expectancy'))}",
+              f"Outcome horizons: {report.get('outcomes', {})}",
               "Confidence = historical win frequency. References are not fills.",
               "Research/shadow only. Synthetic results are not investment evidence."]
     return "\n".join(lines)

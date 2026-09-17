@@ -11,7 +11,30 @@ from richping.data import Dataset, synthetic_dataset, yahoo_dataset
 
 def yahoo_fixture():
     data = synthetic_dataset(n=100, symbols=("ALFA",))
-    return Dataset(data.bars, {"source": "yfinance", "quality": "research", "price_basis": "fixture"}, data.members)
+    capture = dict(data.metadata["action_capture"])
+    capture["adapter_version"] = "yfinance-1.7.0"
+    capture["history_options"] = {
+        "actions": True,
+        "auto_adjust": False,
+        "back_adjust": False,
+        "repair": False,
+    }
+    capture["tickers"] = {
+        sym: {
+            "capital_gains_status": "unknown",
+            "instrument_type": None,
+            "query_intervals": [{"start": data.start, "end": data.end, "capital_gains_status": "unknown"}],
+            "quote_currency": "USD",
+        }
+        for sym in ("SPY", "QQQ", "ALFA")
+    }
+    meta = {
+        "source": "yfinance",
+        "quality": "research",
+        "price_basis": "fixture",
+        "action_capture": capture,
+    }
+    return Dataset(data.bars, meta, data.members)
 
 
 def fake_yahoo(monkeypatch, data, error=False):
@@ -27,7 +50,7 @@ def fake_yahoo(monkeypatch, data, error=False):
             return pd.DataFrame([{"Open": b.open, "High": b.high, "Low": b.low, "Close": b.close,
                                   "Volume": b.volume, "Dividends": b.dividend, "Stock Splits": b.split} for b in bars],
                                 index=pd.to_datetime([b.session for b in bars]))
-    monkeypatch.setitem(sys.modules, "yfinance", SimpleNamespace(Ticker=Ticker, set_tz_cache_location=lambda _: None))
+    monkeypatch.setitem(sys.modules, "yfinance", SimpleNamespace(Ticker=Ticker, set_tz_cache_location=lambda _: None, __version__="1.7.0"))
     monkeypatch.setattr("richping.data.time.sleep", lambda _: None)
     return calls
 
