@@ -40,7 +40,7 @@ wrapper는 `C:\richping`으로 이동해 `.venv\Scripts\python.exe -m richping d
 
 - `CANDIDATES_AVAILABLE`: 후보가 있으며 score, 기여요인, 다음 XNYS 시가 관측, 5번째 session 종가 평가, 종가/ATR 참고값과 calibration 근거가 표시된다.
 - `NORMAL_NO_TRADE`: 시장 상태, raw signal, calibration 또는 edge 기준으로 후보가 없다. 데이터 장애나 음의 기대값으로 바꾸어 설명하지 않는다.
-- `RISK_HALT`: 성과 PAUSED latch 등 위험 중단이다. 같은 config의 과거 model ID에 PAUSED가 있으면 reporting code로 ID가 바뀌어도 이어진다.
+- `RISK_HALT`: 성과 PAUSED latch 등 위험 중단이다. model ID가 달라도 명시적 `richping_risk_cohort_v1`의 config·투자 코드·signal/feature/calibration/outcome/evaluation/risk 계약이 모두 같으면 PAUSED, REDUCED_EXPOSURE와 적격 warmup 표본이 이어진다. 계약 정보가 없는 legacy 성과는 합치지 않고 legacy PAUSED만 보수적으로 유지한다.
 - `DATA_BLOCKED`: 미해결 outcome 또는 평가 무결성이 현재 판단을 차단했다.
 - `DATA_FAILURE`: 현재 시도가 수집 전/중 또는 보고 생성 중 실패했다. 과거 성공은 `prior_success_reference`일 뿐 오늘 판단이나 후보로 표시하지 않는다.
 

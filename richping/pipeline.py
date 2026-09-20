@@ -19,10 +19,14 @@ from .core import (
 )
 from .engine import Engine, observe
 from .evaluation import evaluate_outcome_eligibility, metrics, risk_decision
+from .risk_contract import conservative_legacy_pause_models, verified_risk_cohort_models
 
 
-def track(store, dataset, as_of, model_id=None, mode=None):
+def track(store, dataset, as_of, model_id=None, mode=None, model_ids=None):
     """Retry safe; immutable outcome vintages, pending observations aren't finalized."""
+    if model_id is not None and model_ids is not None:
+        raise ValueError("Use model_id or model_ids, not both")
+    allowed_models = set(model_ids) if model_ids is not None else None
     counts = {
         "COMPLETE": 0,
         "PENDING": 0,
@@ -42,7 +46,9 @@ def track(store, dataset, as_of, model_id=None, mode=None):
         "JOIN runs u ON u.id=r.run_id JOIN datasets d ON d.id=u.dataset_id ORDER BY u.session,r.rank").fetchall()
     with store.db:
         for rec in records:
-            if model_id and rec["model_id"] != model_id or mode and rec["mode"] != mode:
+            if ((allowed_models is not None and rec["model_id"] not in allowed_models)
+                    or (model_id and rec["model_id"] != model_id)
+                    or (mode and rec["mode"] != mode)):
                 continue
             if rec["mode"] == "research" and rec["dataset_id"] != dataset.id:
                 continue
@@ -160,6 +166,28 @@ def track(store, dataset, as_of, model_id=None, mode=None):
     return counts, rows
 
 
+def dedupe_risk_rows(rows):
+    """One eligible economic observation per session/ticker/horizon in a cohort."""
+    selected = {}
+    conflicts = set()
+    duplicates = 0
+    for row in sorted(rows, key=lambda value: (
+            value["session"], value.get("ticker", ""), value.get("horizon", 0),
+            value.get("recommendation_id", ""))):
+        key = (row["session"], row.get("ticker"), row.get("horizon"), row.get("outcome_version"))
+        evidence = {field: row.get(field) for field in (
+            "status", "end_session", "observed_at", "net_return", "outcome_version"
+        )}
+        if key not in selected:
+            selected[key] = (row, canonical(evidence))
+        elif selected[key][1] == canonical(evidence):
+            duplicates += 1
+        else:
+            conflicts.add(key)
+    result = [value[0] for key, value in selected.items() if key not in conflicts]
+    return result, {"duplicates_ignored": duplicates, "conflicts_excluded": len(conflicts)}
+
+
 def scan(store, dataset, config, session, mode="research", now=None, engine=None):
     store.save_model(config)
     if mode not in {"research", "shadow"}:
@@ -186,26 +214,36 @@ def scan(store, dataset, config, session, mode="research", now=None, engine=None
                 (run_id, dataset.id, config.model_id, session, mode, utcnow()))
     try:
         counts, rows = track(store, dataset, cutoff.isoformat(), config.model_id, mode)
+        cohort_id, cohort_contract, cohort_models = verified_risk_cohort_models(store, config, mode)
+        if set(cohort_models) == {config.model_id}:
+            risk_rows = rows
+        else:
+            _, risk_rows = track(store, dataset, cutoff.isoformat(), mode=mode, model_ids=cohort_models)
+        risk_rows, risk_dedupe = dedupe_risk_rows(risk_rows)
         prior = store.db.execute("SELECT state,since_session FROM risk_state WHERE model_id=? AND mode=?",
                                  (config.model_id, mode)).fetchone()
         inherited_latch = None
         if mode == "shadow" and (prior is None or prior["state"] != "PAUSED"):
-            # model_id includes the package code hash.  Reporting-only changes
-            # must not clear a performance PAUSED latch for the same config.
+            placeholders = ",".join("?" for _ in cohort_models)
             compatible = store.db.execute(
-                "SELECT r.model_id,r.since_session FROM risk_state r "
-                "JOIN model_versions m ON m.id=r.model_id "
-                "WHERE r.mode=? AND r.state='PAUSED' AND m.body=? AND r.model_id<>? "
-                "ORDER BY r.since_session LIMIT 1",
-                (mode, canonical(config.payload()), config.model_id),
+                f"SELECT model_id,since_session FROM risk_state WHERE mode=? AND state='PAUSED' "
+                f"AND model_id IN ({placeholders}) ORDER BY since_session LIMIT 1",
+                (mode, *cohort_models),
             ).fetchone()
-            if compatible:
-                inherited_latch = dict(compatible)
+            if compatible and compatible["model_id"] != config.model_id:
+                inherited_latch = {**dict(compatible), "compatibility": "verified_risk_cohort"}
+            if inherited_latch is None:
+                legacy = conservative_legacy_pause_models(store, config, cohort_models, mode)
+                if legacy:
+                    inherited_latch = {"model_id": legacy[0], "since_session": None,
+                                       "compatibility": "legacy_unknown_contract_conservative_pause"}
         previous = ("PAUSED" if inherited_latch else
                     prior["state"] if prior and prior["since_session"] <= session else "NORMAL")
-        state, reason = risk_decision(rows, previous)
+        state, reason = risk_decision(risk_rows, previous)
         engine = engine or Engine(dataset, config)
         signals = engine.signals(session, cutoff.isoformat(), mode)
+        if risk_dedupe["conflicts_excluded"] and state != "PAUSED":
+            state, reason = "PAUSED", "unresolved_outcome_data"
         if not signals["supported"] and state != "PAUSED":
             state, reason = "PAUSED", "unsupported_market_regime"
         if (counts["UNRESOLVED"] or counts.get("evaluation", {}).get("excluded_complete", 0)) and state != "PAUSED":
@@ -227,14 +265,20 @@ def scan(store, dataset, config, session, mode="research", now=None, engine=None
                 member = next(m for m in dataset.members if m["ticker"] == candidate["ticker"])
                 picks.append({**candidate, "calibration": calibration, "model_version": config.model_id,
                     "data_id": dataset.id, "config_hash": digest(config.payload()), "code_hash": code_hash(),
+                    "risk_cohort_id": cohort_id,
                     "mode": mode, "quality": dataset.metadata["quality"], "sector": member.get("sector"),
                     "industry": member.get("industry"), "rank": len(picks) + 1,
                     "id": digest([run_id, candidate["ticker"]])})
-        recent = sorted(rows, key=lambda r: (r["session"], r["ticker"]))[-30:]
+        recent = sorted(risk_rows, key=lambda r: (r["session"], r["ticker"]))[-30:]
         report = {"run_id": run_id, "session": session, "cutoff": cutoff.isoformat(), "mode": mode,
             "quality": dataset.metadata["quality"], "model": config.model_id, "dataset_id": dataset.id,
             "regime": signals["regime"], "state": state, "state_reason": reason,
             "risk_latch_source_model": inherited_latch["model_id"] if inherited_latch else None,
+            "risk_latch_compatibility": inherited_latch.get("compatibility") if inherited_latch else None,
+            "risk_cohort_id": cohort_id, "risk_cohort_contract": cohort_contract,
+            "risk_cohort_models": cohort_models,
+            "risk_sample_models": sorted({row["model_id"] for row in risk_rows}),
+            "risk_sample_count": len(risk_rows), "risk_sample_dedupe": risk_dedupe,
             "outcome_contract": DEFAULT_OUTCOME_VERSION,
             "evaluation_policy": CASH_ACTION_REVIEW_POLICY,
             "decision": "TRADE CANDIDATES AVAILABLE" if picks else "NO TRADE",

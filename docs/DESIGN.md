@@ -142,7 +142,7 @@ SPY/QQQ 61-session action 사유를 독립 검사하고 거래일, 후보 ticker
 
 ## 9. Kill switch
 
-최근 완료된 30개 추천의 비용 후 expectancy <0이면 REDUCED_EXPOSURE: 후보 수를 1개로 제한하고 minimum edge를 강화. 날짜 cohort diagnostic drawdown ≤-15% 또는 expectancy ≤-2%이면 PAUSED. risk-off/high-vol regime에서도 새 후보 중단. 모델/날짜/모드별 증거만 사용하고 아직 확정되지 않은 미래 outcome은 사용하지 않는다.
+최근 완료된 30개 추천의 비용 후 expectancy <0이면 REDUCED_EXPOSURE: 후보 수를 1개로 제한하고 minimum edge를 강화. 날짜 cohort diagnostic drawdown ≤-15% 또는 expectancy ≤-2%이면 PAUSED. risk-off/high-vol regime에서도 새 후보 중단. 날짜/모드별 증거만 사용하고 아직 확정되지 않은 미래 outcome은 사용하지 않는다. model/build ID가 달라도 config, signal/score/selection, feature, calibration, outcome/evaluation, risk 규칙과 해당 투자 코드 모듈 해시가 모두 같은 명시적 `richping_risk_cohort_v1` run 계약이 있을 때만 risk 표본을 이어 쓴다. 동일 session/ticker/horizon 표본은 cohort 안에서 한 번만 세며, 같은 표본의 outcome 증거가 상충하면 표본을 제외하고 `unresolved_outcome_data`로 PAUSED한다.
 
 성과에 의한 PAUSED는 DB에 유지된다. 재실행/가격 반등만으로 해제되지 않는다. Phase 3의 새로운 shadow 증거와 promotion gate가 자동 복구를 담당한다. MVP에는 임의 reset 명령이 없다. 주문·계좌 노출 제어를 의미하지 않는다. 분포 drift/추정 confidence collapse의 통계적 검사는 Phase 2 이후 확장한다.
 
@@ -174,12 +174,12 @@ var/                DB와 기존 reports/cache (ignored)
 - `Engine.history`는 research calibration이다. 실제 shadow cutoff 검사와 역사 데이터의 완전한 PIT 품질은 다르다. R0-A report는 synthetic/research/fresh shadow를 구분한다. paper/실체결은 아직 생성하지 않으며 미래 자료가 생겨도 별도 근거 수준으로 유지한다.
 - 최소 paper 원장을 R1에서 추가한다. 추천 snapshot과 별도로 자본/포지션/현금/체결 가정/실현·미실현 손익을 기록하며 NAV가 검증되기 전 portfolio MDD는 계속 N/A다. 기존 cohort drawdown은 이름과 의미를 바꾸지 않는다. 자본 배분 최적화나 자동 주문은 범위 밖이다.
 - future universe는 반복 membership·상폐·식별자·당시 알려진 유동성 기준이 필요하다. 현재 members의 ticker당 단일 row가 충분하다고 가정하지 않는다. schema 확장은 별도 버전과 호환성 테스트를 거친다.
-- 운영 보고서 변경도 전체 Python code_hash에 따라 model_id가 달라진다. 새 버전을 성과 pause 초기화 수단으로 쓰지 않으며 이전 상태·증거와의 관계를 명시한다. 기존 snapshot/model ID를 고치지 않는다.
+- 운영 보고서 변경도 전체 Python code_hash에 따라 model_id가 달라진다. model_id는 build provenance와 model별 forward 집계를 계속 담당한다. 위험 계산은 별도 risk cohort 계약이 정확히 일치할 때만 PAUSED/REDUCED_EXPOSURE와 적격 warmup 표본을 잇는다. 계약이 없거나 불완전한 legacy 성과는 합치지 않으며, legacy PAUSED만 검토 전까지 보수적으로 유지한다. 기존 snapshot/model ID를 고치지 않는다.
 
 | 계약 | 이번 변경 | 후속 호환성 영향 |
 |---|---|---|
 | M2-1B feature / v3 outcome / cash_action_review_v1 | 없음 | feature와 outcome 회계 분리 유지, 미래 사건 지원은 새 버전 |
-| score/calibration/위험/승격 gate | 없음 | 기존 gate 하한 유지; evidence builder와 portfolio 기준은 별도 정책 계약 |
+| score/calibration/위험/승격 gate | 판단 규칙·threshold는 그대로, build와 분리된 `richping_risk_cohort_v1` 연속성 추가 | 명시적 동일 계약만 위험 표본 공유; model별 forward 집계 유지; evidence builder와 portfolio 기준은 별도 정책 계약 |
 | 보고/운영 상태 | R0-A 파생 envelope/attempt/새 출력 경로 구현 | 과거 run body 불변; R0-B 실제 예약 실행 확인은 별도 |
 | portfolio | 최소 paper를 미래 범위에 추가 | 별도 원장, 과거 추천 수익을 계좌 수익으로 소급 변환 금지 |
 | 데이터/DB | 현재 schema 변경 없음 | membership/실험/승격 확장은 migration·보존 테스트 필요 |

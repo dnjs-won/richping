@@ -28,6 +28,7 @@ from .core import (
 )
 from .evaluation import evaluate_outcome_eligibility
 from .feature_window import FEATURE_VERSION
+from .risk_contract import conservative_legacy_pause_models, verified_risk_cohort_models
 
 
 REPORT_SCHEMA = "richping_operational_report_v1"
@@ -270,14 +271,24 @@ def forward_evidence_summary(store, as_of=None):
 
 
 def compatible_risk_latches(store, config, mode="shadow"):
-    expected = canonical(config.payload())
+    _, _, models = verified_risk_cohort_models(store, config, mode)
+    placeholders = ",".join("?" for _ in models)
     rows = store.db.execute(
-        "SELECT r.model_id,r.state,r.since_session,m.body FROM risk_state r "
-        "JOIN model_versions m ON m.id=r.model_id WHERE r.mode=? AND r.state='PAUSED'",
-        (mode,),
+        f"SELECT model_id,state,since_session FROM risk_state WHERE mode=? AND state='PAUSED' "
+        f"AND model_id IN ({placeholders}) ORDER BY since_session",
+        (mode, *models),
     ).fetchall()
-    return [{"model_id": row["model_id"], "state": row["state"], "since_session": row["since_session"]}
-            for row in rows if row["body"] == expected]
+    result = [{"model_id": row["model_id"], "state": row["state"],
+               "since_session": row["since_session"], "compatibility": "verified_risk_cohort"}
+              for row in rows]
+    for model_id in conservative_legacy_pause_models(store, config, models, mode):
+        row = store.db.execute(
+            "SELECT since_session FROM risk_state WHERE model_id=? AND mode=? AND state='PAUSED'",
+            (model_id, mode),
+        ).fetchone()
+        result.append({"model_id": model_id, "state": "PAUSED", "since_session": row["since_session"],
+                       "compatibility": "legacy_unknown_contract_conservative_pause"})
+    return result
 
 
 def ensure_start_manifest(root, store, config, now=None):
@@ -287,6 +298,7 @@ def ensure_start_manifest(root, store, config, now=None):
     predecessors = [row[0] for row in store.db.execute(
         "SELECT id FROM model_versions WHERE body=? AND id<>? ORDER BY rowid", (canonical(config.payload()), config.model_id)
     )]
+    risk_cohort, risk_contract, _ = verified_risk_cohort_models(store, config)
     manifest = {
         "schema": START_SCHEMA,
         "operational_start_id": digest({"created_at": timestamp(now or utcnow()).isoformat(),
@@ -299,6 +311,8 @@ def ensure_start_manifest(root, store, config, now=None):
                        "reason_for_new_model_id": "package code hash includes R0 reporting code",
                        "investment_decision_contract_changed": False},
         "risk_latch_sources": compatible_risk_latches(store, config),
+        "risk_cohort_id": risk_cohort,
+        "risk_cohort_contract": risk_contract,
         "contracts": {"feature": FEATURE_VERSION, "outcome": DEFAULT_OUTCOME_VERSION,
                       "evaluation": CASH_ACTION_REVIEW_POLICY},
     }

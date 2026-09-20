@@ -6,17 +6,26 @@ from pathlib import Path
 import pytest
 
 from richping.cli import main
-from richping.core import Config, canonical, cutoff_at
+from richping.core import (
+    CASH_ACTION_REVIEW_POLICY,
+    DEFAULT_OUTCOME_VERSION,
+    Config,
+    canonical,
+    cutoff_at,
+    digest,
+)
 from richping.data import Dataset, synthetic_dataset
-from richping.engine import Engine
+from richping.engine import Engine, observe
 from richping.operations import (
     REPORT_SCHEMA,
     artifact_root,
     build_operational_report,
     ensure_start_manifest,
+    forward_evidence_summary,
     publish_report,
 )
 from richping.pipeline import scan
+from richping.risk_contract import risk_cohort_contract
 from richping.store import Store
 
 
@@ -49,6 +58,59 @@ def shadow_fixture(tmp_path, n=100):
         store.save_dataset(data)
         report = scan(store, data, config, data.end, "shadow", now=now)
     return path, data, config, now, report
+
+
+def cohort_body(contract):
+    return {
+        "risk_cohort_id": digest(contract),
+        "risk_cohort_contract": contract,
+        "outcome_contract": contract["outcome_contract"],
+        "evaluation_policy": contract["evaluation_contract"],
+    }
+
+
+def seed_cohort_performance(store, data, config, model_id, signals, net_return=-0.001, contract=None):
+    contract = contract or risk_cohort_contract(config)
+    body = cohort_body(contract)
+    as_of = cutoff_at(data.end).isoformat()
+    with store.db:
+        store.db.execute("INSERT OR IGNORE INTO model_versions VALUES(?,?)",
+                         (model_id, canonical(config.payload())))
+        for index, signal in enumerate(signals):
+            run_id = f"{model_id}-run-{index}"
+            rec_id = f"{model_id}-rec-{index}"
+            snapshot = {
+                **signal,
+                "id": rec_id,
+                "rank": 1,
+                "model_version": model_id,
+                "data_id": data.id,
+                "mode": "shadow",
+                "quality": data.metadata["quality"],
+                "risk_cohort_id": digest(contract),
+            }
+            outcome = observe(snapshot, data, config.horizon, as_of, "shadow")
+            assert outcome["status"] == "COMPLETE"
+            outcome = {**outcome, "net_return": net_return}
+            store.db.execute("INSERT INTO runs VALUES(?,?,?,?,?,'SUCCEEDED',1,NULL,?,?)",
+                (run_id, data.id, model_id, signal["session"], "shadow", canonical(body), as_of))
+            store.db.execute("INSERT INTO recommendations VALUES(?,?,?,?,?)",
+                (rec_id, run_id, signal["ticker"], 1, canonical(snapshot)))
+            store.db.execute("INSERT INTO outcomes VALUES(?,?,?,?,?)",
+                (rec_id, config.horizon, data.id, "COMPLETE", canonical(outcome)))
+
+
+def eligible_signal_rows(data, config, count):
+    engine = Engine(data, config)
+    rows = []
+    for session in data.sessions[60:-21]:
+        signals = engine.signals(session)
+        if signals["supported"] and signals["candidates"]:
+            rows.append(signals["candidates"][0])
+            if len(rows) == count:
+                break
+    assert len(rows) == count
+    return rows
 
 
 def test_successful_normal_no_trade_report_is_explicit_and_read_only(tmp_path):
@@ -128,8 +190,12 @@ def test_reporting_model_id_change_inherits_compatible_performance_pause(tmp_pat
     old_model = "baseline-v1-pre-r0"
     with Store(path) as store:
         store.save_dataset(data)
+        contract = risk_cohort_contract(config)
         with store.db:
             store.db.execute("INSERT INTO model_versions VALUES(?,?)", (old_model, canonical(config.payload())))
+            store.db.execute("INSERT INTO runs VALUES(?,?,?,?,?,'SUCCEEDED',1,NULL,?,?)",
+                ("old-cohort-run", data.id, old_model, data.sessions[70], "shadow",
+                 canonical(cohort_body(contract)), cutoff_at(data.sessions[70]).isoformat()))
             store.db.execute("INSERT INTO risk_state VALUES(?,?,?,?)",
                              (old_model, "shadow", "PAUSED", data.sessions[70]))
         now = (cutoff_at(data.end) + timedelta(minutes=1)).isoformat()
@@ -145,9 +211,138 @@ def test_reporting_model_id_change_inherits_compatible_performance_pause(tmp_pat
     assert state == "PAUSED"
     assert old_model in manifest["predecessor_model_ids"]
     assert manifest["risk_latch_sources"] == [
-        {"model_id": old_model, "state": "PAUSED", "since_session": data.sessions[70]}
+        {"model_id": old_model, "state": "PAUSED", "since_session": data.sessions[70],
+         "compatibility": "verified_risk_cohort"}
     ]
+    assert report["risk_latch_compatibility"] == "verified_risk_cohort"
+    assert report["risk_cohort_id"] == digest(contract)
     assert manifest["provenance"]["investment_decision_contract_changed"] is False
+
+
+def test_unknown_legacy_pause_stays_conservatively_latched_without_performance_merge(tmp_path):
+    data = synthetic_dataset(n=100, symbols=("ALFA",))
+    config = Config(tickers=("ALFA",))
+    old_model = "baseline-v1-unknown-legacy"
+    with Store(tmp_path / "legacy-pause.db") as store:
+        store.save_dataset(data)
+        with store.db:
+            store.db.execute("INSERT INTO model_versions VALUES(?,?)", (old_model, canonical(config.payload())))
+            store.db.execute("INSERT INTO risk_state VALUES(?,?,?,?)",
+                             (old_model, "shadow", "PAUSED", data.sessions[70]))
+        now = (cutoff_at(data.end) + timedelta(minutes=1)).isoformat()
+        report = scan(store, data, config, data.end, "shadow", now=now)
+    assert report["state"] == "PAUSED"
+    assert report["risk_latch_source_model"] == old_model
+    assert report["risk_latch_compatibility"] == "legacy_unknown_contract_conservative_pause"
+    assert report["risk_cohort_models"] == [config.model_id]
+    assert report["risk_sample_count"] == 0
+
+
+def test_legacy_performance_without_cohort_contract_is_not_inferred_from_config(tmp_path):
+    data = synthetic_dataset(n=700, symbols=("ALFA", "BETA", "GAMA", "DELT"))
+    config = Config(tickers=("ALFA", "BETA", "GAMA", "DELT"))
+    old_model = "baseline-v1-legacy-no-contract"
+    with Store(tmp_path / "legacy-evidence.db") as store:
+        store.save_dataset(data)
+        seed_cohort_performance(store, data, config, old_model, eligible_signal_rows(data, config, 1))
+        with store.db:
+            store.db.execute("UPDATE runs SET body=? WHERE model_id=?",
+                             (canonical({"outcome_contract": DEFAULT_OUTCOME_VERSION,
+                                         "evaluation_policy": CASH_ACTION_REVIEW_POLICY}), old_model))
+        now = (cutoff_at(data.end) + timedelta(minutes=1)).isoformat()
+        report = scan(store, data, config, data.end, "shadow", now=now)
+    assert report["risk_cohort_models"] == [config.model_id]
+    assert report["risk_sample_count"] == 0
+
+
+def test_risk_cohort_carries_reduced_state_and_dedupes_recent_30(tmp_path):
+    data = synthetic_dataset(n=700, symbols=("ALFA", "BETA", "GAMA", "DELT"))
+    config = Config(tickers=("ALFA", "BETA", "GAMA", "DELT"))
+    signals = eligible_signal_rows(data, config, 30)
+    old_model = "baseline-v1-old-build"
+    duplicate_model = "baseline-v1-report-only-build"
+    with Store(tmp_path / "reduced.db") as store:
+        store.save_dataset(data)
+        seed_cohort_performance(store, data, config, old_model, signals)
+        seed_cohort_performance(store, data, config, duplicate_model, signals[:1])
+        now = (cutoff_at(data.end) + timedelta(minutes=1)).isoformat()
+        report = scan(store, data, config, data.end, "shadow", now=now)
+        state = store.db.execute(
+            "SELECT state FROM risk_state WHERE model_id=? AND mode='shadow'", (config.model_id,)
+        ).fetchone()[0]
+        groups = {group["model_id"]: group for group in forward_evidence_summary(store)["groups"]}
+    assert report["state"] == "REDUCED_EXPOSURE"
+    assert report["state_reason"] == "recent_negative_expectancy"
+    assert state == "REDUCED_EXPOSURE"
+    assert report["risk_sample_count"] == 30
+    assert report["recent_30"]["samples"] == 30
+    assert report["risk_sample_dedupe"] == {"duplicates_ignored": 1, "conflicts_excluded": 0}
+    assert set(report["risk_cohort_models"]) == {config.model_id, old_model, duplicate_model}
+    assert groups[old_model]["recommendations"] == 30
+    assert groups[duplicate_model]["recommendations"] == 1
+    assert groups[old_model]["sessions"]["count"] == 30
+    assert groups[duplicate_model]["sessions"]["count"] == 1
+
+
+def test_risk_cohort_keeps_prior_eligible_rows_during_warmup(tmp_path):
+    data = synthetic_dataset(n=700, symbols=("ALFA", "BETA", "GAMA", "DELT"))
+    config = Config(tickers=("ALFA", "BETA", "GAMA", "DELT"))
+    old_model = "baseline-v1-warmup-build"
+    with Store(tmp_path / "warmup.db") as store:
+        store.save_dataset(data)
+        seed_cohort_performance(store, data, config, old_model, eligible_signal_rows(data, config, 29))
+        now = (cutoff_at(data.end) + timedelta(minutes=1)).isoformat()
+        report = scan(store, data, config, data.end, "shadow", now=now)
+    assert report["state"] == "NORMAL"
+    assert report["state_reason"] == "risk_sample_warmup"
+    assert report["risk_sample_count"] == 29
+    assert report["recent_30"]["samples"] == 29
+    assert report["risk_sample_models"] == [old_model]
+
+
+def test_conflicting_duplicate_risk_observation_fails_closed(tmp_path):
+    data = synthetic_dataset(n=700, symbols=("ALFA", "BETA", "GAMA", "DELT"))
+    config = Config(tickers=("ALFA", "BETA", "GAMA", "DELT"))
+    signal = eligible_signal_rows(data, config, 1)
+    with Store(tmp_path / "conflicting-duplicate.db") as store:
+        store.save_dataset(data)
+        seed_cohort_performance(store, data, config, "baseline-v1-old-a", signal,
+                                net_return=-0.001)
+        seed_cohort_performance(store, data, config, "baseline-v1-old-b", signal,
+                                net_return=-0.002)
+        now = (cutoff_at(data.end) + timedelta(minutes=1)).isoformat()
+        report = scan(store, data, config, data.end, "shadow", now=now)
+    assert report["state"] == "PAUSED"
+    assert report["state_reason"] == "unresolved_outcome_data"
+    assert report["risk_sample_count"] == 0
+    assert report["risk_sample_dedupe"] == {"duplicates_ignored": 0, "conflicts_excluded": 1}
+
+
+def test_different_investment_or_evaluation_contract_cannot_supply_risk_evidence(tmp_path):
+    data = synthetic_dataset(n=700, symbols=("ALFA", "BETA", "GAMA", "DELT"))
+    config = Config(tickers=("ALFA", "BETA", "GAMA", "DELT"))
+    base = risk_cohort_contract(config)
+    contracts = []
+    for field, value in (
+        ("signal_contract", "different_strategy_v1"),
+        ("outcome_contract", "different_outcome_v1"),
+        ("evaluation_contract", "different_evaluation_v1"),
+    ):
+        other = dict(base)
+        other[field] = value
+        contracts.append((f"baseline-v1-different-{field}", other))
+    with Store(tmp_path / "different.db") as store:
+        store.save_dataset(data)
+        signal = eligible_signal_rows(data, config, 1)
+        for other_model, contract in contracts:
+            seed_cohort_performance(store, data, config, other_model, signal, contract=contract)
+        now = (cutoff_at(data.end) + timedelta(minutes=1)).isoformat()
+        report = scan(store, data, config, data.end, "shadow", now=now)
+    assert report["state"] == "NORMAL"
+    assert report["state_reason"] == "risk_sample_warmup"
+    assert report["risk_cohort_models"] == [config.model_id]
+    assert report["risk_sample_count"] == 0
+    assert all(model not in report["risk_sample_models"] for model, _ in contracts)
 
 
 def test_collection_failure_before_run_is_visible_with_prior_success(tmp_path, monkeypatch):
