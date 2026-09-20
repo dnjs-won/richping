@@ -1,5 +1,7 @@
 # M2-1A-R1 검수와 현금배당 지원 계약 결정
 
+2026-09-20 역사 주석: 아래 “아직 구현되지 않았다”, CHANGES REQUIRED 및 다음 작업은 2026-09-16 당시 판정이다. 이후 M2-1A는 COMPLETE WITH KNOWN LIMITATIONS, M2-1B는 feature-only 범위로 COMPLETE가 됐다. 아래 E의 “v4 이후 M2-1B” 순서는 후속 feature/outcome 분리 결정으로 대체됐다. 현재 계약은 [DESIGN](DESIGN.md), 미래 순서는 [ROADMAP](../ROADMAP.md)를 따른다. 일반배당 outcome 지원을 위한 사건 증거 요구는 그대로이며 feature 정규화로 충족되지 않는다. 당시 감사 기록은 삭제하지 않는다.
+
 결정일: 2026-09-16. 역할: 설계 감독·검수.
 상태: **설계 결정 및 다음 작업 지시. 아래 v3·평가 정책·수집 변경은 아직 구현되지 않았다.**
 최상위 요구사항은 `PROJECT_SPEC.md`. 현재 구현 계약은 `docs/DESIGN.md`이며, 그 v2 설명은 역사적 계약으로 보존한다. 이 문서는 다음 구현의 변경 계약을 명시한다.

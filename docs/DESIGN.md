@@ -1,5 +1,7 @@
 # MVP 설계 · 2026-09-15
 
+2026-09-20 문서 정합성 갱신: 이 문서는 현재 실행 계약과 역사적 설계를 보존한다. 미래 개발 순서는 [ROADMAP.md](../ROADMAP.md), 첫 구현은 [FIRST_MILESTONE.md](FIRST_MILESTONE.md)를 따른다. 아래 Phase/M1~M5는 원래 순서이며 새 개발의 선행조건이 아니다. 이번 갱신으로 실행 코드나 기존 가격·outcome·평가 계약을 변경하지 않았다.
+
 ## 1. 이름 / 범위
 
 프로젝트 이름은 **Richping**으로 확정한다. 이미 지정된 디렉터리와 일치하고, 간결한 투자 후보 알림이라는 제품에 맞는다. 패키지/CLI는 `richping`.
@@ -24,7 +26,7 @@
 | Kill switch | konviction `domain/risk.py`, `tests/application/test_sticky_drawdown.py` | ADAPT | 상태 강등/보수적 복구 개념만 참고; 계좌 sizing과 분리 |
 | Migration integrity tests | konviction `tests/persistence/test_migration_safety.py` | ADAPT | 기존 자료 보존과 실패 원자성 회귀 테스트 관점만 적용 |
 | Decision journal / ontology / memory | konviction `domain/decisions.py`, `application/services.py`, README | DROP | 수동 판단·기록 중심, 신규 목적과 불일치 |
-| Ledger / FX / order / portfolio NAV | konviction `application/ledger.py`, `trading.py`, `valuation.py` | DROP | 자동 추천 MVP에 불필요한 계좌 결합 |
+| Ledger / FX / order / portfolio NAV | konviction `application/ledger.py`, `trading.py`, `valuation.py` | DROP (당시 재사용 판정) | 기존 계좌 코드 미복사. 2026-09-20 이후 최소 paper 자본 회계는 신규 R1 범위; FX/주문/최적화 상속 없음 |
 | Web frontend / old phases | konviction `web/`, 양쪽 ROADMAP | DROP | CLI 보고서면 충분; 기존 순서 상속 안 함 |
 
 결론: 소스 코드 직접 복사는 0개. REUSE 판정은 검증된 독립 구현이 발견되지 않아 없다.
@@ -147,17 +149,41 @@ SPY/QQQ 61-session action 사유를 독립 검사하고 거래일, 후보 ticker
 ## 10. Repository / milestones
 
 ```text
-richping/           독립 Python package, CLI와 순수 함수
+richping/           독립 Python package, CLI, 순수 함수, R0 파생 운영 보고
 tests/              시점/결측/immutability/통계 회귀
 docs/DESIGN.md      이 문서
 config.toml        작은 기본 설정
-scripts/daily.ps1   일일 배치 진입점
-var/               ignored DB, reports, cache
+scripts/daily.ps1   lock을 포함한 일일 배치 진입점
+scripts/check_daily_task.ps1  Windows 예약 작업 읽기 전용 점검
+var/operations/     운영 attempt와 versioned JSON/Markdown (ignored)
+var/research/       custom DB와 수동 scan 출력 (ignored)
+var/                DB와 기존 reports/cache (ignored)
 ```
 
-M1: demo + data import/sync + scan + 자동 observe + report + leakage tests. M2: 실데이터 vintage/universe 계약, corporate actions/상폐, walk-forward 신뢰도 보강. M3: 제한된 challenger 자동화 및 gate. M4: discovery. M5: advanced data.
+원래 계획(역사 기록): M1: demo + data import/sync + scan + 자동 observe + report + leakage tests. M2: 실데이터 vintage/universe 계약, corporate actions/상폐, walk-forward 신뢰도 보강. M3: 제한된 challenger 자동화 및 gate. M4: discovery. M5: advanced data.
+
+미래 순서(2026-09-20): R0 일일 관찰/forward 시작 → R1 자본 기준 baseline 평가·paper, 병행 가능한 R2 universe/R3 제한 연구 → 조건부 R4 환경 데이터 → R5 증거 기반 승격/강등. R6 소액 실전 검토·운영은 자동 연구 전체 완성 대신 필요한 증거와 위험 통제에 의존한다. 단계별 완료/보류 조건은 ROADMAP이 단일 원본이다.
 
 첫 실행 결과는 DAILY RECOMMENDATION의 rank/ticker/score/expected return/risk/RR/confidence 또는 이유를 포함한 NO TRADE이며, demo replay 후 actual return/MFE/MAE/hit를 조회할 수 있어야 한다. 합성 결과는 Alpha 증거가 아니다.
+
+## 11. 목표 아키텍처와 계약 변경 경계 (R0-A 부분 구현, 나머지 계획)
+
+- 같은 modular monolith 안에서 A 운영 추천, B 격리 연구, C 평가/승격을 논리적으로 구분한다. 운영/연구 SQLite의 쓰기 책임을 분리하고 Engine/observe/validation/evaluation을 공유한다. 새로운 서비스나 에이전트 계층은 필요 없다.
+- A의 baseline은 관찰용으로 고정된 전략이며 알파 승인 전략이 아니다. B의 가설/실패 실험은 A 추천과 risk_state를 수정하지 않는다. C의 버전 있는 승인 이력만 이후 실행의 전략을 바꿀 수 있다. 현재 C writer는 없다.
+- experiments는 재사용하되 trial family, 실패 포함 탐색 수, 데이터 분할/holdout 소비, 비교 조건, 증거 ID를 후속 계약으로 보강한다. 현재 `validate()`는 `promotion_gate({})`를 반환하므로 실제 근거 연결은 미구현이다.
+- `Engine.history`는 research calibration이다. 실제 shadow cutoff 검사와 역사 데이터의 완전한 PIT 품질은 다르다. R0-A report는 synthetic/research/fresh shadow를 구분한다. paper/실체결은 아직 생성하지 않으며 미래 자료가 생겨도 별도 근거 수준으로 유지한다.
+- 최소 paper 원장을 R1에서 추가한다. 추천 snapshot과 별도로 자본/포지션/현금/체결 가정/실현·미실현 손익을 기록하며 NAV가 검증되기 전 portfolio MDD는 계속 N/A다. 기존 cohort drawdown은 이름과 의미를 바꾸지 않는다. 자본 배분 최적화나 자동 주문은 범위 밖이다.
+- future universe는 반복 membership·상폐·식별자·당시 알려진 유동성 기준이 필요하다. 현재 members의 ticker당 단일 row가 충분하다고 가정하지 않는다. schema 확장은 별도 버전과 호환성 테스트를 거친다.
+- 운영 보고서 변경도 전체 Python code_hash에 따라 model_id가 달라진다. 새 버전을 성과 pause 초기화 수단으로 쓰지 않으며 이전 상태·증거와의 관계를 명시한다. 기존 snapshot/model ID를 고치지 않는다.
+
+| 계약 | 이번 변경 | 후속 호환성 영향 |
+|---|---|---|
+| M2-1B feature / v3 outcome / cash_action_review_v1 | 없음 | feature와 outcome 회계 분리 유지, 미래 사건 지원은 새 버전 |
+| score/calibration/위험/승격 gate | 없음 | 기존 gate 하한 유지; evidence builder와 portfolio 기준은 별도 정책 계약 |
+| 보고/운영 상태 | R0-A 파생 envelope/attempt/새 출력 경로 구현 | 과거 run body 불변; R0-B 실제 예약 실행 확인은 별도 |
+| portfolio | 최소 paper를 미래 범위에 추가 | 별도 원장, 과거 추천 수익을 계좌 수익으로 소급 변환 금지 |
+| 데이터/DB | 현재 schema 변경 없음 | membership/실험/승격 확장은 migration·보존 테스트 필요 |
+| 개발 순서 | 순차 M1~M5에서 R0~R6으로 변경 | 운영 forward와 연구 병행, 과거 milestone 완료 판정 불변 |
 
 ## 참고한 외부 기술 계약
 

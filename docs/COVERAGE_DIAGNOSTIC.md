@@ -1,5 +1,7 @@
 # Coverage Diagnostic v1 · M2-1B · 2026-09-17
 
+2026-09-20 주석: 아래 수치·완료 판정·당시 다음 작업은 역사 기록으로 보존한다. 후속 로컬 research OOS/실패 분석을 확인한 현재 상태와 앞으로의 우선순위는 [ROADMAP](../ROADMAP.md) 및 [PROJECT_STATUS](../PROJECT_STATUS.md)를 따른다. “다음 작업 하나로 제한”은 당시 결정이며, 현재는 R0 forward 운영과 격리된 제한 연구의 병행을 허용한다. coverage 계약 자체는 변경하지 않는다.
+
 ## M2-1B 현재 계약과 재현
 
 **Feature dividend normalization ≠ Outcome dividend accounting.** M2-1B는 feature-only 배당 정규화를 적용하며 outcome v3/evaluation 정책은 유지한다.

@@ -98,8 +98,13 @@ class Store:
             self.db.execute("INSERT OR IGNORE INTO model_versions VALUES(?,?)",
                             (config.model_id, canonical(config.payload())))
 
-    def latest_report(self):
-        row = self.db.execute("SELECT body FROM runs WHERE status='SUCCEEDED' ORDER BY session DESC, rowid DESC LIMIT 1").fetchone()
+    def latest_report(self, mode=None):
+        query = "SELECT body FROM runs WHERE status='SUCCEEDED'"
+        values = ()
+        if mode is not None:
+            query += " AND mode=?"
+            values = (mode,)
+        row = self.db.execute(query + " ORDER BY session DESC, rowid DESC LIMIT 1", values).fetchone()
         if not row:
             raise ValueError("No successful report")
         return json.loads(row[0])

@@ -11,6 +11,17 @@ from .coverage import coverage_report, stored_run_evidence
 from .data import import_csv, synthetic_dataset, yahoo_dataset
 from .engine import Engine
 from .evaluation import metrics
+from .operations import (
+    AttemptJournal,
+    artifact_root,
+    atomic_write_json,
+    atomic_write_text,
+    build_operational_report,
+    ensure_start_manifest,
+    format_operational_report,
+    publish_report,
+    refresh_report,
+)
 from .pipeline import format_report, scan, track
 from .store import Store
 from .validation import validate
@@ -21,12 +32,8 @@ def emit(event, **values):
 
 
 def write_report(report, path):
-    # Runtime artifact generation; atomic replace prevents half-written reports.
-    path = Path(path)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temporary = path.with_suffix(path.suffix + ".tmp")
-    temporary.write_text(json.dumps(report, indent=2, ensure_ascii=False, allow_nan=False), encoding="utf-8")
-    temporary.replace(path)
+    # Backward-compatible helper used by research artifacts and tests.
+    atomic_write_json(report, path)
 
 
 def parser():
@@ -39,15 +46,20 @@ def parser():
     sync.add_argument("--start", default=None)
     run = sub.add_parser("daily", help="Sync -> track old recommendations -> pre-open shadow scan")
     run.add_argument("--start", default=None)
+    run.add_argument("--output-dir", default=None, help="Derived report/attempt root")
     imp = sub.add_parser("import-csv")
     imp.add_argument("bars")
     imp.add_argument("members")
     sc = sub.add_parser("scan")
     sc.add_argument("--session")
     sc.add_argument("--mode", choices=["research", "shadow"], default="shadow")
+    sc.add_argument("--output-dir", default=None)
     ob = sub.add_parser("observe")
     ob.add_argument("--as-of")
-    sub.add_parser("report")
+    rep = sub.add_parser("report", help="Read latest derived operational report")
+    rep.add_argument("--output-dir", default=None)
+    rep.add_argument("--as-of", default=None, help="Refresh staleness at this aware timestamp")
+    rep.add_argument("--write", action="store_true", help="Write a derived JSON/Markdown generation (DB remains read-only)")
     ev = sub.add_parser("evaluate")
     ev.add_argument("--as-of")
     va = sub.add_parser("validate")
@@ -66,9 +78,20 @@ def parser():
 def main(argv=None):
     args = parser().parse_args(argv)
     database = args.db or ("var/demo.db" if args.command == "demo" else "var/richping.db")
+    attempt = None
+    output_root = None
+    config = None
+    if args.command == "daily":
+        output_root = artifact_root(database, "daily", args.output_dir)
+        role = "operations" if Path(database).resolve() == Path("var/richping.db").resolve() else "research"
+        try:
+            attempt = AttemptJournal(output_root, "daily", database, role)
+        except Exception as exc:
+            emit("job_failed", command=args.command, error_type=type(exc).__name__, error=str(exc))
+            return 1
     try:
         config = Config.load(args.config)
-        with Store(database, read_only=args.command == "coverage") as store:
+        with Store(database, read_only=args.command in {"coverage", "report"}) as store:
             if args.command == "demo":
                 symbols = ("ALFA", "BETA", "GAMA", "DELT")
                 config = replace(config, tickers=symbols)
@@ -96,6 +119,8 @@ def main(argv=None):
                 print(store.save_dataset(dataset))
             elif args.command in {"sync", "daily"}:
                 end = latest_session()
+                if attempt:
+                    attempt.stage("COLLECTING", target_session=end)
                 start = args.start or (timestamp(end + "T00:00:00+00:00") - timedelta(days=1460)).date().isoformat()
                 try:
                     previous = store.load_dataset()
@@ -103,15 +128,41 @@ def main(argv=None):
                     previous = None
                 dataset = yahoo_dataset(config.tickers, start, end, previous)
                 store.save_dataset(dataset)
+                if attempt:
+                    attempt.stage("COLLECTED", dataset_id=dataset.id)
                 emit("data_synced", dataset=dataset.id, bars=len(dataset.bars), end=end)
                 if args.command == "daily":
+                    manifest = ensure_start_manifest(output_root, store, config)
+                    duplicate = store.db.execute(
+                        "SELECT 1 FROM runs WHERE model_id=? AND mode='shadow' AND session=? AND status='SUCCEEDED'",
+                        (config.model_id, end),
+                    ).fetchone() is not None
+                    attempt.stage("TRACKING")
                     counts, _ = track(store, dataset, utcnow())
+                    attempt.stage("SCANNING")
                     report = scan(store, dataset, config, end, "shadow")
-                    write_report(report, "var/daily-report.json")
-                    print(format_report(report))
+                    attempt.finish("SUCCEEDED", target_session=end, run_id=report["run_id"],
+                                   dataset_id=dataset.id, decision=report["decision"])
+                    derived = build_operational_report(
+                        store, config, report, attempt.record, output_root, dataset=dataset,
+                        manifest=manifest, duplicate=duplicate,
+                    )
+                    paths = publish_report(derived, output_root)
+                    print(format_operational_report(derived), end="")
                     emit("daily_complete", outcomes=counts, decision=report["decision"])
+                    emit("daily_artifacts", **paths)
             elif args.command == "report":
-                print(format_report(store.latest_report()))
+                root = artifact_root(database, "daily", args.output_dir)
+                latest = root / "latest.json"
+                if latest.exists():
+                    derived = json.loads(latest.read_text(encoding="utf-8"))
+                    derived = refresh_report(derived, args.as_of)
+                else:
+                    report = store.latest_report(mode="shadow")
+                    derived = build_operational_report(store, config, report, root=root, now=args.as_of)
+                if args.write:
+                    publish_report(derived, root)
+                print(format_operational_report(derived), end="")
             elif args.command == "recover-runs":
                 with store.db:
                     changed = store.db.execute("UPDATE runs SET status='FAILED',error='operator_recovered_interrupted_run' WHERE status='RUNNING'").rowcount
@@ -131,7 +182,10 @@ def main(argv=None):
                                       "signal_blocks": result["signal_blocks"]}, indent=2))
                 elif args.command == "scan":
                     report = scan(store, dataset, config, args.session or latest_session(), args.mode)
-                    write_report(report, "var/daily-report.json")
+                    root = artifact_root(database, "scan", args.output_dir)
+                    stem = f"{report['session']}-{report['run_id']}"
+                    atomic_write_json(report, root / "reports" / f"{stem}.json")
+                    atomic_write_text(format_report(report) + "\n", root / "reports" / f"{stem}.txt")
                     print(format_report(report))
                 elif args.command in {"observe", "evaluate"}:
                     as_of = args.as_of or utcnow()
@@ -179,6 +233,18 @@ def main(argv=None):
                                       "oos": result["oos"], "promotion": result["promotion"]}, indent=2))
         return 0
     except Exception as exc:
+        if attempt is not None:
+            try:
+                attempt.finish("FAILED", error=f"{type(exc).__name__}: {exc}")
+                if config is not None and Path(database).exists():
+                    with Store(database, read_only=True) as report_store:
+                        derived = build_operational_report(
+                            report_store, config, attempt=attempt.record, root=output_root,
+                        )
+                        publish_report(derived, output_root)
+            except Exception as report_exc:
+                emit("failure_report_failed", command=args.command,
+                     error_type=type(report_exc).__name__, error=str(report_exc))
         emit("job_failed", command=args.command, error_type=type(exc).__name__, error=str(exc))
         return 1
 

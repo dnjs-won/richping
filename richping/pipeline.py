@@ -188,7 +188,21 @@ def scan(store, dataset, config, session, mode="research", now=None, engine=None
         counts, rows = track(store, dataset, cutoff.isoformat(), config.model_id, mode)
         prior = store.db.execute("SELECT state,since_session FROM risk_state WHERE model_id=? AND mode=?",
                                  (config.model_id, mode)).fetchone()
-        previous = prior["state"] if prior and prior["since_session"] <= session else "NORMAL"
+        inherited_latch = None
+        if mode == "shadow" and (prior is None or prior["state"] != "PAUSED"):
+            # model_id includes the package code hash.  Reporting-only changes
+            # must not clear a performance PAUSED latch for the same config.
+            compatible = store.db.execute(
+                "SELECT r.model_id,r.since_session FROM risk_state r "
+                "JOIN model_versions m ON m.id=r.model_id "
+                "WHERE r.mode=? AND r.state='PAUSED' AND m.body=? AND r.model_id<>? "
+                "ORDER BY r.since_session LIMIT 1",
+                (mode, canonical(config.payload()), config.model_id),
+            ).fetchone()
+            if compatible:
+                inherited_latch = dict(compatible)
+        previous = ("PAUSED" if inherited_latch else
+                    prior["state"] if prior and prior["since_session"] <= session else "NORMAL")
         state, reason = risk_decision(rows, previous)
         engine = engine or Engine(dataset, config)
         signals = engine.signals(session, cutoff.isoformat(), mode)
@@ -220,6 +234,7 @@ def scan(store, dataset, config, session, mode="research", now=None, engine=None
         report = {"run_id": run_id, "session": session, "cutoff": cutoff.isoformat(), "mode": mode,
             "quality": dataset.metadata["quality"], "model": config.model_id, "dataset_id": dataset.id,
             "regime": signals["regime"], "state": state, "state_reason": reason,
+            "risk_latch_source_model": inherited_latch["model_id"] if inherited_latch else None,
             "outcome_contract": DEFAULT_OUTCOME_VERSION,
             "evaluation_policy": CASH_ACTION_REVIEW_POLICY,
             "decision": "TRADE CANDIDATES AVAILABLE" if picks else "NO TRADE",

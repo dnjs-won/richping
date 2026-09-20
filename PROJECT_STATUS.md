@@ -1,4 +1,38 @@
-# Richping 구현 상태 · 2026-09-17 (M2-1B)
+# Richping 현재 상태 · 2026-09-20 방향 재정립
+
+**현재 작업: R0-B 실제 forward 1회와 Windows 예약 등록 확인 완료. 예약 trigger 실행과 다일 안정성은 관찰 대기.**
+
+- R0-B는 2026-09-20 22:38 Asia/Seoul에 2026-09-18 신호일의 next-open 이전 창에서 실제 wrapper를 실행했다. 첫 sandbox 실행의 수집 `ConnectionError`/exit 1과 후속 정상 adapter 재시도/exit 0을 모두 보존했다. 성공 결과는 `NORMAL_NO_TRADE`(`insufficient_evidence_or_edge`), freshness `CURRENT`, 새 forward 관측 1건이며 수동 실행 시각은 계획 08:00 대비 `LATE`로 표시된다.
+- 정상 sync는 운영 DB에 새 immutable dataset `cf504cff91aa9d220d720660f80b4708d210b793cc16f34120bcefabaceb755f`를 추가했다. 2022-09-19~2026-09-18, 10,040 bars, `yfinance-1.7.0`, capture `2026-09-20T13:38:46.924059+00:00`, 배당 event/단위 증거 117/117건이다. 기존 dataset 3개와 기존 shadow run의 보존 및 모든 dataset content hash를 재검증했다.
+
+- R0-A는 immutable run body와 기존 DB schema를 바꾸지 않는 `richping.operations` 파생 계층을 추가했다. `daily`는 수집 전에 attempt JSON을 만들고 성공·정상 NO TRADE·수집 실패·stale·휴일/중복·outcome 분모를 JSON/Markdown에 구분한다. 기본 운영 출력은 `var/operations`, custom DB와 수동 scan 출력은 `var/research`로 분리된다.
+- 보고서는 XNYS next-open 유효시각, dataset session/capture, model/config/code/data ID, feature/outcome/evaluation 계약, 후보 score/기여요인/ATR 참고값, calibration 표본·날짜·CI, 실제 제외 사유, COMPLETE/PENDING/UNRESOLVED와 holding eligible/excluded를 표시한다. SYNTHETIC/RESEARCH/FRESH_SHADOW를 분리하며 Alpha는 **INSUFFICIENT EVIDENCE**, portfolio return은 N/A다.
+- 실행 attempt는 runs 생성 전 실패도 남긴다. 실패 보고서는 과거 성공을 `prior_success_reference`로만 표시한다. versioned JSON/Markdown이 모두 완성된 뒤 `latest.json`을 원자 교체하므로 실패한 세대를 최신으로 읽지 않는다. 기존 `var/daily-report.json`은 덮지 않는다.
+- read-only forward summary는 model/mode/source/quality/outcome/evaluation 계약별 저장 run·추천·outcome을 집계한다. 동일 recommendation/horizon의 여러 평가 vintage는 최신 저장 dataset rowid 하나만 사용하며 조회 자체는 outcome을 생성하지 않는다.
+- reporting code로 model ID는 `baseline-v1-1c499becc6025728`로 바뀌며 code hash는 `8748263a3e98ecaed95611eef2ced7c4b0631ef2ab83296758e76855840efa8e`다. pre-R0 frozen synthetic 입력에서 ticker/score/calibration/참고가격이 동일한 golden test를 통과했다. 동일 config의 과거 shadow performance PAUSED는 새 model ID로 이어져 추천을 차단한다. 계약 필드가 없는 과거 run은 현재 v3로 소급 표시하지 않고 v1/legacy/unknown으로 명시한다.
+- 실제 운영 DB는 datasets 4/bars 40,100, shadow SUCCEEDED 2 sessions(2026-09-14, 2026-09-18), 추천/outcome 0/0이다. R0-B 실행 전 `risk_state`는 없었고 실행 후 새 model의 `NORMAL/risk_sample_warmup` 상태 1건이다. 두 model의 config payload가 같고 이전 PAUSED가 없음을 확인했으므로 보고 코드 변경을 이용한 latch 우회는 없다.
+- `\Richping Daily`를 현재 사용자 `lifes`, `Interactive`/`Limited`, 매일 Asia/Seoul 08:00에 등록했다. action은 `powershell.exe -NoProfile -File "C:\richping\scripts\daily.ps1"`, working directory는 `C:\richping`, 동시 인스턴스는 `IgnoreNew`다. 동일 역할 task는 이 1건뿐이다. 상태 `Ready`, 다음 실행 2026-09-21 08:00, `LastTaskResult=267011`로 예약 trigger 자체는 아직 실행 전이다. WakeToRun은 false이며 PC가 종료·절전 또는 사용자가 로그아웃한 동안의 실행은 보장하지 않는다.
+- 보존 기준 `var/daily-report.json` SHA-256은 실행 전후 `5DD67D2A...F6CDFE`로 동일하다. 운영 DB SHA-256은 새 immutable 행 추가로 `2FAF7497...54FBE1`에서 `72C231CA...CDDA3E`로 바뀌었고 integrity는 `ok`다. 상세 manifest는 `var/operations/r0-b-start-verification.json`, 사람이 읽는 요약은 같은 이름의 `.md`, 실제 보고 예시는 `var/operations/latest.json`과 그 `artifacts.markdown`에 있다.
+- 개발 인수 테스트는 성공/후보/정상 NO TRADE/수집 전 실패/stale/휴일·중복/late guard/PENDING 만기/원자 교체 실패/read-only 조회/risk latch·판단 golden·legacy 계약 비소급을 포함한다. 전체 `.venv\Scripts\python -m pytest`는 **239 passed / 0 failed / 0 skipped / 1 warning / 57.29s**. warning은 기존 `var/.pytest_cache` WinError 5다. CLI `--help`, 실제 DB read-only `report`, `git diff --check`도 통과했다.
+- 상세 사용·실제 보고 예시·복구·예약 점검: [R0 운영 계약](docs/R0_OPERATIONS.md). **R0 개발과 실제 1회 실행·등록은 확인했지만 예약 trigger의 첫 실행과 다일 안정성·fresh 성과 증거는 아직 확인하지 않았다.**
+
+- 최종 목표는 자동 기회 발견·가설 연구·검증·추천·미래 관찰·통제된 개선을 통해 위험 대비 순수익을 개선하는 것이다. 전체 자동 개선 이전에 일일 관찰 보고서와 모의매매 효용을 제공한다.
+- 현재 판정: M1 E2E, M2-1A **COMPLETE WITH KNOWN LIMITATIONS**, M2-1B **COMPLETE** 유지. **Alpha: INSUFFICIENT EVIDENCE**, 장기 무인 안정성 **NOT_ESTABLISHED**, 자동 전략 발견/승격·포트폴리오 회계 미구현.
+- 시작 시 로컬 main/추적 origin/main/실제 GitHub main 모두 `26f565a4e6d4ccbd97f1a14a31a03736050c5373`, working tree clean. GitHub는 `git ls-remote` 확인. 아래 문서 변경은 아직 커밋/푸시하지 않았다.
+- `var/`는 Git 미추적이다. 후속 `validation-m2-1b.json`/summary 및 `failure-analysis-m2-1b.json`/summary를 직접 확인했다. 현재 model/code ID와 일치하며 핵심 결과·파일 해시는 [ROADMAP §2](ROADMAP.md#2-현재-시스템의-위치-확인한-사실과-증거)에 보존했다. 이번에 실데이터 검증을 다시 실행한 것은 아니다.
+- 후속 frozen research OOS: 5 folds, 315 sessions, 추천 157건/62일, COMPLETE/PENDING/UNRESOLVED **122/23/12**, eligible **122건/52일**. 추천 건별 비용 후 expectancy **+1.336%**, PF **2.666**, 2배 비용 expectancy **+1.136%**. 계좌 수익이 아니다.
+- SPY paired **47/62일**, 날짜 평균 초과수익 CI **-0.344%p~+1.916%p**. 적격 122건 중 첫 fold 112건, 모든 적격 결과는 RISK_ON_LOW_VOL. NVDA/AVGO가 추천 수익 단순 합계의 97.37%를 차지한다는 로컬 집중 진단도 확인. 시간·종목 안정성과 알파는 미검증이다.
+- fold 2/3의 주 병목은 raw 신호 부족이 아니라 calibration edge CI 하한이다. 종목별 calibration은 로컬 제안 가설일 뿐 미구현·미채택. 이미 본 OOS에서 개선돼도 승격 증거로 재사용하지 않는다.
+- `validate()`의 REJECT는 `promotion_gate({})` 호출 결과이며 실제 집계된 각 지표가 전부 실패했다는 의미가 아니다. evidence builder와 자동 승격 writer는 없다.
+- R0-B 후 read-only DB 실측: 운영 DB datasets 4/bars 40,100, shadow 성공 **2일**, 추천/outcome **0/0**. M2-1B 별도 DB는 dataset 1/bars 10,020, runs/recommendations/outcomes/experiments **모두 0**. 별도 파일의 `fresh`는 forward 실적이 아니다. R0-B 전 기존 dataset/run과 보존 보고서는 유지됐다.
+- 이번 검증: `.venv\Scripts\python -m pytest` **229 passed / 0 failed / 0 skipped / 1 warning / 61.29s**. warning은 기존 pytest cache WinError 5. CLI `--help`, `git diff --check`, 문서 내 로컬 파일 링크 검사 통과. 원문 OOS predictions에서 집중도·날짜 CI도 재계산해 로컬 요약과 대조했다. 기본 demo/daily/sync/validate는 기존 산출물 보존을 위해 이번 조사에서 실행하지 않았다.
+- **다음 요청은 R1-A: baseline 평가 정리와 최소 paper 회계 계약 확정.** [ROADMAP](ROADMAP.md), [R0 운영 계약](docs/R0_OPERATIONS.md)을 따른다. 예약 trigger의 첫 실행과 이후 다일 관찰은 운영 중 계속 확인한다. 옛 문서의 “다음 작업 하나”는 당시 결정이며 현재 순서는 이 계획으로 대체한다.
+
+---
+
+아래는 당시 완료 판정과 미해결 제약을 보존한 역사 기록이다. 과거 시점의 테스트 수·데이터 기간·다음 작업을 현재 상태와 혼동하지 않는다.
+
+# Richping 구현 상태 · 2026-09-17 (M2-1B, 역사 기록)
 
 **M2-1B status: COMPLETE**
 
