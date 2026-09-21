@@ -1,4 +1,32 @@
-# Richping 현재 상태 · 2026-09-20 방향 재정립
+# Richping 현재 상태 · 2026-09-21 R1-B
+
+**R1-B 최소 paper 원장·maturity follow-up 구현 및 격리 연구 replay 완료. 실제 미래 paper 수익성은 증거 대기.**
+
+- `richping.maturity`/`richping.paper`와 CLI `maturity-followup`, `paper-init`, `paper-advance`, `paper-report`를 구현했다. 운영 DB와 분리된 append-only SQLite가 manifest/source/follow-up/event/일별 NAV를 보존하며, fixed replay와 rolling 운영-policy replay 및 실제 미래 `FORWARD_PAPER` 등록을 구분한다. 자동 주문은 없다.
+- 가상 $100,000, lot $10,000, 총 신규 노출 50%, 최대 5종목, 정수주, next-open→5번째 close, side당 commission/slippage 5/5bps를 구현했다. same-ticker 재추천, 중첩/현금 부족, open 진입→close 청산→mark 순서, 갭/미체결, 실현·미실현 P&L과 MDD를 처리한다. 배당·split·Capital Gains·결측/상폐를 0 또는 확정 NAV로 바꾸지 않고 신규 진입을 중단한다.
+- 실제 원본 OOS는 **157=122 COMPLETE+23 PENDING+12 UNRESOLVED**를 재현했고 후속은 **145+0+12**, SPY paired 47/62→56/62다. 원본 DB/JSON은 보존했다.
+- Frozen paper는 추천 157/fills 5, 첫 보유 배당 권리 미해결로 known cash $101,222.33이나 NAV/MDD는 미확정이다. 격리 rolling 운영-policy replay는 315 sessions, 추천 11/fills 5, 확정 NAV **$99,479.62**, 계좌 MDD **−0.72084%**다. 둘은 calibration/위험 경로가 달라 직접 Alpha 비교가 아니다.
+- 동일 기간·자본 SPY buy-and-hold와 동일 lot·현금대기 SPY 대체 계좌를 분리했다. 배당 총수익 회계가 검증되지 않아 두 비교 모두 `COMPARISON_INCOMPLETE`; price-only 진단으로 SPY 우위를 주장하지 않는다.
+- 현재 working-tree build는 model `baseline-v1-2bf86875d8007b20`, code hash `0119d7203ff2b931da67b8d51740a41450a385d252e25ad8ae9be7daa9b5b4a2`, risk cohort `1c721fb12c067d54c40e1b54a2f00fe88ad739f5717afec0c761e0987d4cf0ca`다. R1 모듈/CLI 추가로 package model ID는 달라졌으나 투자 판단 계약 기반 risk cohort는 유지된다. 이 build로 운영 daily를 실행하거나 운영 DB의 model/risk_state를 초기화하지 않았고 operational replay는 R1 격리 DB에만 썼다.
+- 손계산 cash/P&L/MDD·갭/정수주·재추천·미해결 사건·미래 누출·멱등성·원본 보존·2배 비용 stress·SPY 배정 부족·source 충돌·forward-only 등록을 검증했다. 전체 `.venv\Scripts\python -m pytest`는 **254 passed / 0 failed / 0 skipped / 1 warning / 76.22s**. warning은 기존 pytest cache WinError 5다. CLI help와 실제 R1 보고 생성도 통과했고, 같은 입력 재실행 뒤 manifest ID와 ledger 행 수가 유지됐다.
+- **개발 완료 / 실제 forward paper 시작 미등록 / 수익성·Alpha 미래 증거 대기. Alpha: INSUFFICIENT EVIDENCE.** 핵심 회계 변경의 다음 요청은 **Q**다.
+
+---
+
+# Richping 상태 기록 · 2026-09-21 R1-A
+
+**R1-A 읽기 전용 baseline 분석·최소 paper 구현 계약 작성 완료. 아래의 R1-B 대기 표기는 당시 상태다.**
+
+- [Baseline 증거 점검](docs/R1_BASELINE_REVIEW.md): 로컬 coverage/validation/failure-analysis 원문과 해시를 확인했다. frozen OOS의 전체 선택 157건은 **122 COMPLETE+23 PENDING+12 UNRESOLVED**이며 적격 122건의 session/ticker/net_return도 원문 간 일치한다. coverage 265건/142일과 별개다.
+- 같은 원본 dataset에서 저장 선택의 관측 입력을 복원해 원래 cutoff의 157개 상태·사유와 저장 수익을 대조했다. cutoff만 후속 만기로 옮긴 읽기 전용 진단은 **145 COMPLETE+0 PENDING+12 배당 UNRESOLVED**, SPY paired **56/62일**이다. 원본 frozen **47/62일**과 구분하며 원본 OOS/DB를 재작성하지 않았다. fresh 성과나 새 확인 OOS가 아니다.
+- [R1 구현 명세](docs/R1_IMPLEMENTATION.md): maturity 원본/후속 view, 가상 $100,000·추천당 최대 $10,000·총 신규 노출 50%·5종목, next-open→5번째 session close, 비용/정수주/현금/재추천/갭/미체결/사건·미확정 NAV, 두 SPY 비교, 재사용·별도 저장·손계산 fixture·완료/보류 기준을 고정했다. 숫자는 연구 가정이며 사용자 실전 예산이 아니다.
+- 운영 읽기 전용 확인: datasets 4/bars 40,100, shadow 성공 2 sessions, 추천/outcome 0/0, 마지막 실제 model `baseline-v1-1c499becc6025728`, risk_state NORMAL 1건. 이번에 실제 daily나 예약 trigger/다일 안정성을 재검증하지 않았다. M2-1B `fresh.db`는 runs 0인 연구 dataset이다.
+- 시작 HEAD `fc6a9af93ff921c07f0182cab23b7f882949b155`; 기존 dirty `richping/pipeline.py`, `tests/test_operations.py`를 보존했다. 현재 working-tree model은 `baseline-v1-1553f44240af729f`이며 아래 R0 당시 build와 다르다. 실행 코드는 수정하지 않았다. 문서 링크/diff·분모·fixture 산술·원본 해시를 검증했으며 전체 pytest를 이번에 실행한 것으로 표기하지 않는다.
+- **계약 작성 완료 / paper 개발 미완료 / 운영 기록 확인·새 운영 검증 없음 / 미래 증거 대기. Alpha: INSUFFICIENT EVIDENCE.** 다음 요청은 **R1-B**다. R1-B 뒤 핵심 회계 검수 Q로 인계한다.
+
+---
+
+# Richping 상태 기록 · 2026-09-20 방향 재정립
 
 **현재 작업: R0-B 실제 forward 1회와 Windows 예약 등록 확인 완료. 예약 trigger 실행과 다일 안정성은 관찰 대기.**
 

@@ -175,8 +175,11 @@ def dedupe_risk_rows(rows):
             value["session"], value.get("ticker", ""), value.get("horizon", 0),
             value.get("recommendation_id", ""))):
         key = (row["session"], row.get("ticker"), row.get("horizon"), row.get("outcome_version"))
+        # track() has already validated each row's observed_at for point-in-time
+        # eligibility.  The observation timestamp is provenance, not part of the
+        # economic result used to identify duplicate cohort evidence.
         evidence = {field: row.get(field) for field in (
-            "status", "end_session", "observed_at", "net_return", "outcome_version"
+            "status", "end_session", "net_return", "outcome_version"
         )}
         if key not in selected:
             selected[key] = (row, canonical(evidence))

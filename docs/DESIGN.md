@@ -171,8 +171,8 @@ var/                DB와 기존 reports/cache (ignored)
 - 같은 modular monolith 안에서 A 운영 추천, B 격리 연구, C 평가/승격을 논리적으로 구분한다. 운영/연구 SQLite의 쓰기 책임을 분리하고 Engine/observe/validation/evaluation을 공유한다. 새로운 서비스나 에이전트 계층은 필요 없다.
 - A의 baseline은 관찰용으로 고정된 전략이며 알파 승인 전략이 아니다. B의 가설/실패 실험은 A 추천과 risk_state를 수정하지 않는다. C의 버전 있는 승인 이력만 이후 실행의 전략을 바꿀 수 있다. 현재 C writer는 없다.
 - experiments는 재사용하되 trial family, 실패 포함 탐색 수, 데이터 분할/holdout 소비, 비교 조건, 증거 ID를 후속 계약으로 보강한다. 현재 `validate()`는 `promotion_gate({})`를 반환하므로 실제 근거 연결은 미구현이다.
-- `Engine.history`는 research calibration이다. 실제 shadow cutoff 검사와 역사 데이터의 완전한 PIT 품질은 다르다. R0-A report는 synthetic/research/fresh shadow를 구분한다. paper/실체결은 아직 생성하지 않으며 미래 자료가 생겨도 별도 근거 수준으로 유지한다.
-- 최소 paper 원장을 R1에서 추가한다. 추천 snapshot과 별도로 자본/포지션/현금/체결 가정/실현·미실현 손익을 기록하며 NAV가 검증되기 전 portfolio MDD는 계속 N/A다. 기존 cohort drawdown은 이름과 의미를 바꾸지 않는다. 자본 배분 최적화나 자동 주문은 범위 밖이다.
+- `Engine.history`는 research calibration이다. 실제 shadow cutoff 검사와 역사 데이터의 완전한 PIT 품질은 다르다. R0-A report는 synthetic/research/fresh shadow를 구분한다. R1 paper도 `RESEARCH_FIXED_REPLAY`/`RESEARCH_OPERATIONAL_REPLAY`/`FORWARD_PAPER`를 구분하며 실체결과 섞지 않는다.
+- R1 최소 paper 원장은 추천 snapshot과 별도로 자본/포지션/현금/가상 체결/실현·미실현 손익을 기록한다. 미해결 권리·가격·체결이 있으면 전체 NAV/MDD를 null로 유지한다. 기존 cohort drawdown은 이름과 의미를 바꾸지 않는다. 자본 배분 최적화나 자동 주문은 범위 밖이다. 상세 계약과 구현 상태는 [R1 구현 명세](R1_IMPLEMENTATION.md)를 따른다.
 - future universe는 반복 membership·상폐·식별자·당시 알려진 유동성 기준이 필요하다. 현재 members의 ticker당 단일 row가 충분하다고 가정하지 않는다. schema 확장은 별도 버전과 호환성 테스트를 거친다.
 - 운영 보고서 변경도 전체 Python code_hash에 따라 model_id가 달라진다. model_id는 build provenance와 model별 forward 집계를 계속 담당한다. 위험 계산은 별도 risk cohort 계약이 정확히 일치할 때만 PAUSED/REDUCED_EXPOSURE와 적격 warmup 표본을 잇는다. 계약이 없거나 불완전한 legacy 성과는 합치지 않으며, legacy PAUSED만 검토 전까지 보수적으로 유지한다. 기존 snapshot/model ID를 고치지 않는다.
 
@@ -181,7 +181,7 @@ var/                DB와 기존 reports/cache (ignored)
 | M2-1B feature / v3 outcome / cash_action_review_v1 | 없음 | feature와 outcome 회계 분리 유지, 미래 사건 지원은 새 버전 |
 | score/calibration/위험/승격 gate | 판단 규칙·threshold는 그대로, build와 분리된 `richping_risk_cohort_v1` 연속성 추가 | 명시적 동일 계약만 위험 표본 공유; model별 forward 집계 유지; evidence builder와 portfolio 기준은 별도 정책 계약 |
 | 보고/운영 상태 | R0-A 파생 envelope/attempt/새 출력 경로 구현 | 과거 run body 불변; R0-B 실제 예약 실행 확인은 별도 |
-| portfolio | 최소 paper를 미래 범위에 추가 | 별도 원장, 과거 추천 수익을 계좌 수익으로 소급 변환 금지 |
+| portfolio | R1 append-only paper 원장·maturity follow-up 구현 | 별도 DB/근거 수준 유지, 과거 추천 수익을 계좌 수익으로 소급 변환 금지, 미해결 NAV null |
 | 데이터/DB | 현재 schema 변경 없음 | membership/실험/승격 확장은 migration·보존 테스트 필요 |
 | 개발 순서 | 순차 M1~M5에서 R0~R6으로 변경 | 운영 forward와 연구 병행, 과거 milestone 완료 판정 불변 |
 

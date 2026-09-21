@@ -194,8 +194,9 @@ SPY 비교는 (1) 같은 시작 자본·기간의 buy-and-hold 총수익을 기�
 
 ### R1 — 고정 baseline의 판단 가능한 평가와 모의 포트폴리오 (M~L)
 
+- 상태(2026-09-21): **R1-A 계약 및 R1-B 최소 원장 개발 완료. 핵심 회계 검수 Q와 실제 미래 paper 증거는 대기.** Frozen 157건의 원본/후속 분모를 별도 재현하고, 연구 fixed/운영-policy replay와 forward-only 등록 경로를 구현했다. Frozen replay는 배당 미해결로 NAV가 확정되지 않았고 rolling replay의 확정 NAV도 소비된 연구 자료이므로 Alpha 증거가 아니다. 두 SPY 비교는 배당 총수익 불완전으로 판정 보류다.
 - 목표: baseline을 유지/연구 전용/중단할 근거를 만들고 자본 제약 아래 모의매매를 시작한다. “검증 완료”는 양의 알파 판정과 동의어가 아니다.
-- 현재: frozen research OOS, coverage, 실패 진단은 있음. fold 경계 PENDING, holding 배당, SPY unpaired, NAV 부재가 남는다.
+- 현재: frozen research OOS, coverage, 실패 진단과 maturity follow-up, append-only paper 원장이 있다. fold 경계 PENDING 23건은 후속 COMPLETE로 설명됐고 holding 배당 12건과 SPY unpaired/총수익 불완전은 보존된다. 실제 미래 `FORWARD_PAPER` 표본과 실체결은 아직 없다.
 - 필요성: 추천 평균이 양수여도 실제 활용 가치가 낮을 수 있다. 자본과 빈도를 봐야 다음 전략의 개선 목표를 정할 수 있다.
 - 범위: validation/evaluation 재사용, 원본 결과와 분리한 maturity follow-up, vintage/제외/paired coverage 표, 최소 paper ledger와 집행 계약. 기본 next-open→5번째 close를 우선 재현하고 stop 체결 전략은 별도 후보로만 다룬다.
 - 산출물: baseline 판단 카드, 가상 자본·보유·현금·NAV·손실 분포, SPY 두 비교, 미래 shadow 누적 보고. 신규 전략 없이도 모의 운영 가능.

@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 import sys
 
-from .core import Config, LEGACY_OUTCOME_VERSION, canonical, cutoff_at, latest_session, timestamp, utcnow
+from .core import Config, LEGACY_OUTCOME_VERSION, canonical, code_hash, cutoff_at, latest_session, next_sessions, timestamp, utcnow
 from .coverage import coverage_report, stored_run_evidence
 from .data import import_csv, synthetic_dataset, yahoo_dataset
 from .engine import Engine
@@ -22,7 +22,19 @@ from .operations import (
     publish_report,
     refresh_report,
 )
+from .maturity import format_maturity_report, maturity_followup
+from .paper import (
+    PaperPolicy,
+    PaperStore,
+    format_paper_report,
+    forward_source_items,
+    operational_replay_sources,
+    paper_report,
+    persist_paper_report,
+    stored_paper_summary,
+)
 from .pipeline import format_report, scan, track
+from .risk_contract import risk_cohort_id
 from .store import Store
 from .validation import validate
 
@@ -71,8 +83,155 @@ def parser():
     coverage.add_argument("--end", help="Last target session (default: dataset end)")
     coverage.add_argument("--dataset-id", help="Immutable input vintage (default: latest stored)")
     coverage.add_argument("--output", default="var/coverage_report.json")
+    maturity = sub.add_parser("maturity-followup", help="Verify frozen OOS and write a separate R1 maturity/paper view")
+    maturity.add_argument("--source-db", default="var/m2-1b-fresh.db")
+    maturity.add_argument("--validation", default="var/validation-m2-1b.json")
+    maturity.add_argument("--failure-analysis", default="var/failure-analysis-m2-1b.json")
+    maturity.add_argument("--dataset-id")
+    maturity.add_argument("--as-of")
+    maturity.add_argument("--paper-db", default="var/research/r1/m2-1b/r1.db")
+    maturity.add_argument("--output-dir", default="var/research/r1/m2-1b")
+    paper_init = sub.add_parser("paper-init", help="Register a future-only virtual portfolio")
+    paper_init.add_argument("--source-db", default="var/richping.db")
+    paper_init.add_argument("--paper-db", default="var/paper/forward/paper.db")
+    paper_init.add_argument("--dataset-id")
+    paper_init.add_argument("--start-session")
+    paper_advance = sub.add_parser("paper-advance", help="Advance a registered future paper portfolio")
+    paper_advance.add_argument("--source-db", default="var/richping.db")
+    paper_advance.add_argument("--paper-db", default="var/paper/forward/paper.db")
+    paper_advance.add_argument("--dataset-id")
+    paper_advance.add_argument("--as-of")
+    paper_advance.add_argument("--output-dir", default="var/paper/forward")
+    paper_report_cmd = sub.add_parser("paper-report", help="Read a paper ledger without changing it")
+    paper_report_cmd.add_argument("--paper-db", default="var/paper/forward/paper.db")
+    paper_report_cmd.add_argument("--manifest-id")
     sub.add_parser("recover-runs", help="Mark interrupted RUNNING jobs failed; only run when no job is active")
     return p
+
+
+def _same_path(left, right):
+    return Path(left).resolve() == Path(right).resolve()
+
+
+def _run_r1_command(args, config):
+    if args.command == "maturity-followup":
+        if _same_path(args.source_db, args.paper_db):
+            raise ValueError("R1 output database must differ from the immutable source database")
+        maturity = maturity_followup(args.source_db, args.validation, args.failure_analysis,
+                                     args.dataset_id, args.as_of)
+        with Store(args.source_db, read_only=True) as source:
+            dataset = source.load_dataset(maturity["source"]["dataset_id"])
+        period = maturity["evaluation_period"]
+        policy = PaperPolicy()
+        fixed_payload = {"mode": "RESEARCH_FIXED_REPLAY", "dataset_id": dataset.id,
+                         "start_session": period["start"], "end_session": period["paper_end"],
+                         "source": maturity["source"], "policy": policy.payload(),
+                         "evidence": "consumed research OOS"}
+        input_hashes = {"validation": maturity["source"]["validation_sha256"],
+                        "failure_analysis": maturity["source"]["failure_analysis_sha256"]}
+        with PaperStore(args.paper_db) as paper_store:
+            fixed_manifest = paper_store.save_manifest("RESEARCH_FIXED_REPLAY", fixed_payload, input_hashes)
+            paper_store.save_source_items(fixed_manifest, maturity["source_items"])
+            paper_store.save_followup(fixed_manifest, maturity)
+            fixed = paper_report(dataset, maturity["source_items"], period["start"], period["paper_end"],
+                                 mode="RESEARCH_FIXED_REPLAY", policy=policy,
+                                 as_of=maturity["followup"]["as_of"], manifest_id=fixed_manifest)
+            persist_paper_report(paper_store, fixed_manifest, fixed)
+
+        operational_items, operational_diagnostic = operational_replay_sources(
+            args.paper_db, dataset, config, period["start"], period["last_allowed_signal_session"]
+        )
+        operational_payload = {"mode": "RESEARCH_OPERATIONAL_REPLAY", "dataset_id": dataset.id,
+                               "start_session": period["start"], "end_session": period["paper_end"],
+                               "signal_end_session": period["last_allowed_signal_session"],
+                               "policy": policy.payload(), "cold_start": "NORMAL with empty eligible history",
+                               "model_id": config.model_id, "model_code_hash": code_hash(),
+                               "risk_cohort_id": risk_cohort_id(config), "config": config.payload(),
+                               "calibration": "existing rolling past-only Engine.calibration",
+                               "risk": "existing scan/track/risk_decision in isolated R1 database"}
+        with PaperStore(args.paper_db) as paper_store:
+            operational_manifest = paper_store.save_manifest(
+                "RESEARCH_OPERATIONAL_REPLAY", operational_payload,
+                {**input_hashes, "dataset_id": dataset.id}
+            )
+            paper_store.save_source_items(operational_manifest, operational_items)
+            operational = paper_report(dataset, operational_items, period["start"], period["paper_end"],
+                                       mode="RESEARCH_OPERATIONAL_REPLAY", policy=policy,
+                                       as_of=maturity["followup"]["as_of"], manifest_id=operational_manifest)
+            persist_paper_report(paper_store, operational_manifest, operational)
+        output = {"schema": "richping_r1_delivery_v1", "maturity": maturity,
+                  "fixed_paper": fixed, "operational_paper": operational,
+                  "operational_diagnostic": operational_diagnostic,
+                  "separation": {"fixed_uses_frozen_selection": True,
+                                 "operational_uses_rolling_scan_and_risk": True,
+                                 "neither_is_fresh_forward_or_actual_fill": True}}
+        root = Path(args.output_dir)
+        atomic_write_json(output, root / "r1-report.json")
+        text = (format_maturity_report(maturity) + "\n" + format_paper_report(fixed) + "\n" +
+                "# Operational-policy replay\n\n" + format_paper_report(operational))
+        atomic_write_text(text, root / "r1-report.md")
+        print(text, end="")
+        return 0
+
+    if args.command == "paper-init":
+        if _same_path(args.source_db, args.paper_db):
+            raise ValueError("Paper database must differ from the operational source database")
+        created_at = utcnow()
+        with Store(args.source_db, read_only=True) as source:
+            dataset = source.load_dataset(args.dataset_id)
+        earliest = next_sessions(dataset.end, 1)[0]
+        start = args.start_session or earliest
+        if start < earliest:
+            raise ValueError("FORWARD_PAPER cannot register a backdated entry period")
+        payload = {"mode": "FORWARD_PAPER", "source_db": str(args.source_db),
+                   "dataset_at_registration": dataset.id, "registered_at": created_at,
+                   "start_session": start, "policy": PaperPolicy().payload(),
+                   "paper_code_hash": code_hash(),
+                   "paper_admission_block_is_not_operational_risk_state": True}
+        with PaperStore(args.paper_db) as paper_store:
+            manifest_id = paper_store.save_manifest("FORWARD_PAPER", payload,
+                                                    {"dataset_id": dataset.id}, created_at=created_at)
+        print(json.dumps({"manifest_id": manifest_id, "paper_db": args.paper_db,
+                          "start_session": start, "registered_at": created_at,
+                          "status": "WAITING_FOR_FUTURE_SHADOW_SNAPSHOTS"}, indent=2))
+        return 0
+
+    if args.command == "paper-advance":
+        if _same_path(args.source_db, args.paper_db):
+            raise ValueError("Paper database must differ from the operational source database")
+        as_of = args.as_of or utcnow()
+        with PaperStore(args.paper_db) as paper_store:
+            manifest = paper_store.manifest()
+        if manifest["kind"] != "FORWARD_PAPER":
+            raise ValueError("paper-advance requires a FORWARD_PAPER manifest")
+        with Store(args.source_db, read_only=True) as source:
+            dataset = source.load_dataset(args.dataset_id)
+        target = latest_session(as_of)
+        end = min(target, dataset.end)
+        start = manifest["payload"]["start_session"]
+        if end < start:
+            print(json.dumps({"status": "WAITING_FOR_START_SESSION", "start_session": start,
+                              "latest_available_session": end}, indent=2))
+            return 0
+        items = forward_source_items(args.source_db, manifest, dataset, as_of)
+        with PaperStore(args.paper_db) as paper_store:
+            paper_store.save_source_items(manifest["id"], items)
+            all_items = paper_store.source_items(manifest["id"])
+            result = paper_report(dataset, all_items, start, end, mode="FORWARD_PAPER",
+                                  policy=PaperPolicy(), as_of=as_of, manifest_id=manifest["id"])
+            persist_paper_report(paper_store, manifest["id"], result)
+        root = Path(args.output_dir)
+        atomic_write_json(result, root / "paper-report.json")
+        atomic_write_text(format_paper_report(result), root / "paper-report.md")
+        print(format_paper_report(result), end="")
+        return 0
+
+    if args.command == "paper-report":
+        with PaperStore(args.paper_db, read_only=True) as paper_store:
+            result = stored_paper_summary(paper_store, args.manifest_id)
+        print(json.dumps(result, indent=2, ensure_ascii=False))
+        return 0
+    return None
 
 
 def main(argv=None):
@@ -91,6 +250,8 @@ def main(argv=None):
             return 1
     try:
         config = Config.load(args.config)
+        if args.command in {"maturity-followup", "paper-init", "paper-advance", "paper-report"}:
+            return _run_r1_command(args, config)
         with Store(database, read_only=args.command in {"coverage", "report"}) as store:
             if args.command == "demo":
                 symbols = ("ALFA", "BETA", "GAMA", "DELT")

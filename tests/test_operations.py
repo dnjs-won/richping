@@ -69,7 +69,9 @@ def cohort_body(contract):
     }
 
 
-def seed_cohort_performance(store, data, config, model_id, signals, net_return=-0.001, contract=None):
+def seed_cohort_performance(
+    store, data, config, model_id, signals, net_return=-0.001, contract=None, observed_at=None,
+):
     contract = contract or risk_cohort_contract(config)
     body = cohort_body(contract)
     as_of = cutoff_at(data.end).isoformat()
@@ -92,6 +94,8 @@ def seed_cohort_performance(store, data, config, model_id, signals, net_return=-
             outcome = observe(snapshot, data, config.horizon, as_of, "shadow")
             assert outcome["status"] == "COMPLETE"
             outcome = {**outcome, "net_return": net_return}
+            if observed_at is not None:
+                outcome["observed_at"] = observed_at
             store.db.execute("INSERT INTO runs VALUES(?,?,?,?,?,'SUCCEEDED',1,NULL,?,?)",
                 (run_id, data.id, model_id, signal["session"], "shadow", canonical(body), as_of))
             store.db.execute("INSERT INTO recommendations VALUES(?,?,?,?,?)",
@@ -282,6 +286,26 @@ def test_risk_cohort_carries_reduced_state_and_dedupes_recent_30(tmp_path):
     assert groups[duplicate_model]["recommendations"] == 1
     assert groups[old_model]["sessions"]["count"] == 30
     assert groups[duplicate_model]["sessions"]["count"] == 1
+
+
+def test_risk_cohort_dedupes_same_economic_result_observed_at_different_times(tmp_path):
+    data = synthetic_dataset(n=700, symbols=("ALFA", "BETA", "GAMA", "DELT"))
+    config = Config(tickers=("ALFA", "BETA", "GAMA", "DELT"))
+    signal = eligible_signal_rows(data, config, 1)
+    later_observation = (cutoff_at(data.end) + timedelta(seconds=30)).isoformat()
+    with Store(tmp_path / "different-observation-times.db") as store:
+        store.save_dataset(data)
+        seed_cohort_performance(store, data, config, "baseline-v1-old-a", signal)
+        seed_cohort_performance(
+            store, data, config, "baseline-v1-old-b", signal,
+            observed_at=later_observation,
+        )
+        now = (cutoff_at(data.end) + timedelta(minutes=1)).isoformat()
+        report = scan(store, data, config, data.end, "shadow", now=now)
+    assert report["state"] == "NORMAL"
+    assert report["state_reason"] == "risk_sample_warmup"
+    assert report["risk_sample_count"] == 1
+    assert report["risk_sample_dedupe"] == {"duplicates_ignored": 1, "conflicts_excluded": 0}
 
 
 def test_risk_cohort_keeps_prior_eligible_rows_during_warmup(tmp_path):
