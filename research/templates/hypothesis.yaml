@@ -1,0 +1,60 @@
+schema_version: richping_research_hypothesis_v1
+hypothesis_id: H0000
+revision: 1
+status: DRAFT
+created_at: "YYYY-MM-DDTHH:MM:SSZ"
+updated_at: "YYYY-MM-DDTHH:MM:SSZ"
+supersedes: null
+
+title: ""
+thesis: ""
+
+source:
+  type: chat
+  discussion_date: "YYYY-MM-DD"
+  reference: null
+  issue: null
+
+observations:
+  - ""
+
+rules:
+  regime:
+    - ""
+  setup:
+    - ""
+  trigger:
+    - ""
+  exit:
+    - ""
+  invalidation:
+    - ""
+
+timeframes:
+  regime: []
+  signal: []
+  confirmation: []
+  execution: []
+
+required_data:
+  - ""
+
+unknowns:
+  - ""
+
+test:
+  null_hypothesis: ""
+  primary_metric: ""
+  decision_rule: ""
+  cost_assumption: ""
+  sample_unit: ""
+  discovery_period: null
+  confirmatory_period: null
+  leakage_risks:
+    - ""
+  multiple_testing_family: ""
+
+experiment_refs: []
+evidence_refs: []
+
+notes: ""
