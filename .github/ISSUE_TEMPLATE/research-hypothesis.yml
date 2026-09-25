@@ -1,0 +1,48 @@
+name: Research hypothesis
+description: Capture a trading/research idea before normalization into the Richping research contract.
+title: "[Research] "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Inbox only. An issue is not evidence or a production strategy. Normalize mature ideas into research/hypotheses using docs/RESEARCH_CAPTURE.md.
+  - type: textarea
+    id: thesis
+    attributes:
+      label: Thesis
+      description: What falsifiable relationship or behavior do you think exists?
+    validations:
+      required: true
+  - type: textarea
+    id: observations
+    attributes:
+      label: Observations
+      description: What did you observe? Keep observation separate from explanation.
+    validations:
+      required: true
+  - type: textarea
+    id: rules
+    attributes:
+      label: Candidate rules
+      description: Regime, setup, trigger, exit and invalidation if known. Unknowns are acceptable.
+  - type: textarea
+    id: timeframes
+    attributes:
+      label: Timeframes and instruments
+      description: Regime/signal/confirmation/execution timeframes and relevant instruments.
+  - type: textarea
+    id: unknowns
+    attributes:
+      label: Unknowns / alternatives
+      description: Ambiguities, competing explanations, missing data, and parameters that must not be guessed.
+  - type: textarea
+    id: test
+    attributes:
+      label: Proposed test
+      description: Null hypothesis, metric, sample unit, costs and decision rule if already known.
+  - type: textarea
+    id: provenance
+    attributes:
+      label: Source context
+      description: Chat date, discussion reference, screenshots or other provenance.
