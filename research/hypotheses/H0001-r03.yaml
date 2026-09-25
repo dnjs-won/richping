@@ -1,0 +1,163 @@
+schema_version: richping_research_hypothesis_v1
+hypothesis_id: H0001
+revision: 3
+status: DRAFT
+created_at: "2026-09-25T00:00:00Z"
+updated_at: "2026-09-25T06:00:00Z"
+supersedes: "research/hypotheses/H0001-r02.yaml"
+
+title: "일봉 롱 레짐에서 상대 MACD 극단·멀티타임프레임 반전·가격구조 청산을 결합한 전략 가설"
+thesis: >-
+  미국 주식/ETF의 일봉 상승 레짐에서만 롱을 허용하고, 1시간봉 MACD가 자체 과거 대비
+  상대적으로 깊은 하방 극단에 도달한 상태를 setup으로 사용한 뒤 15분봉에서도 상대적
+  하방 극단과 골든크로스/가격 반전이 확인될 때 진입하면 단순 MACD 교차보다 유리한
+  상승 swing을 포착할 수 있다는 가설이다. 진입 후에는 중간 MACD 데드크로스만으로
+  청산하지 않고 HH/HL 가격구조가 유지되는 동안 보유하며, 1시간봉 MACD의 상방 상대
+  극단 또는 모멘텀 악화를 exit-watch로 사용하고 15분봉에서 HH 실패→LH→직전 유효 HL
+  붕괴가 확인될 때 청산하는 비대칭 구조를 우선 연구 대상으로 둔다. 수익성·재현성은
+  아직 검증되지 않았다.
+
+source:
+  type: chat
+  discussion_date: "2026-09-25"
+  reference: null
+  issue: null
+
+observations:
+  - "0선 아래 MACD 골든크로스 뒤 단기 상승이 자주 보였다는 경험적 관찰이 있었으나 빈도와 통계적 유의성은 측정하지 않았다."
+  - "MACD의 사후 최저점/최고점은 실시간에 알 수 없으므로 절대 극값을 진입·청산 규칙으로 사용할 수 없다는 문제를 확인했다."
+  - "가격 저점, MACD 최저점, MACD 골든크로스는 동일 시각일 필요가 없으며 MACD의 EMA 평활 특성 때문에 시차가 발생할 수 있다고 논의했다."
+  - "NOK 사례에서 1시간봉의 깊은 하방 MACD 상태와 15분봉의 더 세밀한 하방 극단/반전이 함께 나타나는 구성을 진입 후보로 검토했다."
+  - "SOXX 2026-09-24 사례에서 사후적으로 약 550.73 부근이 좋은 저점 진입으로 보였으나, 핵심 검증 질문은 당시 이용 가능 정보만으로 신호가 발생했는지 여부라고 정리했다."
+  - "SOXX 사례에서 고점 부근 MACD 데드크로스 뒤에도 가격이 재상승하여 데드크로스만으로 최종 고점 또는 지속 하락을 판정하기 어렵다고 보았다."
+  - "1시간봉 MACD가 상방에서 약화되는 것은 가격구조 붕괴 전 경고가 될 수 있지만 즉시 매도 신호로 쓰면 후속 상승을 놓칠 수 있다는 문제를 확인했다."
+  - "1시간봉 MACD가 상방 상대 극단까지 가지 못하고 0선 또는 중간 영역에서 다시 하락할 가능성도 있으므로 이를 완전히 무시하지 않고 failed-upswing의 약한 exit-watch 후보로 남겼다."
+  - "15분봉에서 reference HH 이후 pullback으로 유효 swing low/HL이 형성되고, 반등이 reference HH 아래에서 끝나 LH가 된 뒤 그 HL이 붕괴되는 구조를 상승 추세 붕괴 후보로 정리했다."
+  - "reference HH 이후 새 고점이 형성되면 기존 약화 신호가 있어도 HH reference를 갱신하고 상승구조가 살아 있는 것으로 보는 예시를 논의했다."
+  - "4시간봉 상단 데드크로스와 음의 히스토그램 진행만으로 숏을 잡은 뒤 장시간 무감시 보유한 사례는 일봉 상승 문맥과 보유시간이 신호 시간축과 불일치했다는 반례로 검토했다."
+  - "MACD 최고점 이후 최저점까지 지표가 스윙한다는 사실과 가격이 같은 방향으로 동일하게 스윙한다는 명제는 동일하지 않으며, MACD 감소 중에도 가격은 상승할 수 있다고 확인했다."
+  - "월봉·주봉·일봉·4시간봉·1시간봉 등 서로 다른 시간축의 방향이 동시에 충돌할 수 있으므로 단순히 가장 큰 시간축을 무조건 우선하는 규칙만으로는 충분하지 않다는 구버전 논의를 보존한다."
+  - "5분봉/1분봉은 타점을 더 세밀하게 관찰할 수 있지만 특히 1분봉은 노이즈가 커 방향 판정의 중심으로 사용하기 어렵다는 관찰이 있었다."
+  - "고점 부근 거래량 증가와 MACD 이격 확대, divergence, OBV 감소, VWAP, 반복 지지 가격대/오더블록 가능성 등을 관찰했으나 현재 핵심 전략의 필수 규칙으로 확정하지 않았다."
+  - "옵션/0DTE dealer hedging이 intraday 랠리에 영향을 줄 수 있다는 대안 설명을 논의했지만, dealer positioning을 확인하지 않고 옵션이 가격 상승의 원인이라고 단정할 수 없다고 정리했다."
+
+rules:
+  regime:
+    - "현재 핵심 가설은 롱 전용이며, 일봉에서 상승 레짐이 확인될 때만 신규 롱 진입을 허용한다."
+    - "일봉이 상방 상대 극단/과열 및 하락 전환 위험 상태라면 신규 롱을 차단하거나 축소하는 별도 blocker가 필요하다는 방향을 둔다."
+    - "일봉 상승 레짐에서 하위 시간축의 하락 MACD 신호만으로 숏 방향을 확정하지 않는다."
+    - "숏은 현재 핵심 전략에 포함하지 않는다. 향후 연구한다면 일봉 bearish regime을 전제로 한 별도/대칭 가설로 취급한다."
+    - "일봉 상승 레짐과 상방 exhaustion/blocker의 정확한 수학적 정의는 unknown이다."
+  setup:
+    - "1시간봉 MACD가 해당 자산의 과거 분포 대비 상대적으로 깊은 하방 영역에 위치하는 상태를 롱 setup 후보로 둔다."
+    - "절대 MACD 값이나 미래에 확정되는 최종 극저점 대신 rolling percentile, ATR 정규화, rolling z-score 등 당시 계산 가능한 상대 위치를 사용한다는 원칙을 둔다."
+    - "1시간봉 자체의 골든크로스는 최초 진입의 필수조건으로 확정하지 않았으며, 15분봉 진입 후 더 큰 시간축의 확인/추가진입 후보로 논의했다."
+  trigger:
+    - "일봉 롱 레짐이 허용되고 일봉 exhaustion blocker가 활성화되지 않은 상태에서 1시간봉 상대 MACD 하방 극단이 setup을 만든다."
+    - "그 setup 안에서 15분봉 MACD도 상대적으로 깊은 하방 영역에 있고 골든크로스 또는 확인된 가격 반전이 발생하면 최초 롱 진입 후보가 된다."
+    - "첫 15분봉 반전/골든크로스가 실패한 뒤 MACD가 이전보다 더 깊은 상대 하방 극단으로 진행하고 새로운 골든크로스/반전이 발생하면 추가 진입 또는 재진입 후보가 된다."
+    - "가격이 첫 진입 뒤 정상적으로 상승한 경우에는 단지 시간이 지났다는 이유로 추가 매수하지 않는다."
+    - "추가 진입 횟수와 총 포지션 크기는 제한해야 하지만 구체적인 cap과 sizing은 unknown이다."
+    - "1시간봉 골든크로스가 최초 진입 후 발생하면 확인 또는 추가진입 신호로 사용할 수 있다는 후보를 보존하되 필수 규칙 여부는 unknown이다."
+  exit:
+    - "포지션 보유 중 15분봉의 작은 MACD 데드크로스만으로 청산하지 않고 가격이 HH/HL 상승구조를 유지하는 동안 HOLD하는 것을 우선 가설로 둔다."
+    - "1시간봉 MACD의 상방 상대 극단, histogram 수축, MACD/시그널 기울기 하락 또는 데드크로스는 EXIT-WATCH 후보이며 단독 청산 신호가 아니다."
+    - "1시간봉 MACD가 상방 상대 극단에 도달한 뒤 하락하면 STRONG EXIT-WATCH 후보로 둔다."
+    - "상방 상대 극단에 도달하지 못한 채 중간/0선 부근에서 하락하면 failed-upswing의 WEAK EXIT-WATCH 후보로 두며, 이 경우 더 강한 가격구조 확인 없이 즉시 청산하지 않는다."
+    - "EXIT-WATCH 이후 15분봉에서 reference HH 갱신에 실패하고 LH가 형성된 뒤 그 LH 형성에 관련된 직전 유효 HL/swing low가 붕괴되면 최종 청산 후보로 둔다."
+    - "reference HH 이후 더 높은 HH가 형성되면 reference HH를 새 고점으로 갱신하고 HOLD를 지속하는 후보 규칙을 둔다."
+    - "HL 붕괴를 wick으로 볼지 15분 종가 이탈로 볼지는 unknown이며, 종가 기반 확인을 노이즈 감소 후보로 논의했다."
+  invalidation:
+    - "사후적으로 확정된 MACD 최저/최고점을 실시간에 알려진 값처럼 사용하지 않는다."
+    - "MACD 극대에서 극저까지의 지표 스윙 자체를 동일 방향의 가격 스윙으로 간주하지 않는다."
+    - "MACD 교차 하나만으로 방향을 확정하지 않는다."
+    - "MACD 모멘텀 둔화만으로 전고점 돌파 실패 확률이 높다고 판정하지 않는다."
+    - "일봉 상승 레짐과 충돌하는 4시간봉 이하 하락 신호를 장시간 무감시 숏의 단독 근거로 사용하지 않는다."
+    - "확정되지 않은 미래 pivot을 과거 timestamp에서 이미 알았던 swing high/low처럼 사용하지 않는다."
+
+timeframes:
+  regime:
+    - "1d"
+  signal:
+    - "1h"
+  confirmation:
+    - "15m"
+  execution:
+    - "15m"
+    - "5m/1m은 보조 관찰·세부 타점 후보이나 공식 실행 프레임으로 확정하지 않음"
+
+required_data:
+  - "적용 universe의 point-in-time OHLCV"
+  - "15분봉 OHLCV"
+  - "1시간봉 OHLCV 또는 미래정보 누출 없이 15분봉에서 집계한 1시간봉"
+  - "일봉 OHLCV 또는 시점 정합성이 보장된 일봉 상태"
+  - "MACD(12,26,9)를 각 시간축에서 과거 데이터만 사용해 계산할 충분한 warmup"
+  - "relative MACD percentile/z-score/ATR-normalization 후보를 계산할 rolling history"
+  - "causal swing HH/HL/LH/LL을 재현할 OHLC 데이터"
+  - "거래비용·슬리피지·체결을 평가할 가격 데이터"
+  - "세션·타임존·정규장/프리마켓/애프터마켓 구분 정보"
+
+unknowns:
+  - "일봉 LONG regime의 정확한 수학적 정의"
+  - "일봉 upper-exhaustion blocker의 상대 MACD threshold와 차단/축소 방식"
+  - "4시간봉을 최신 핵심 전략에서 보조 필터로 유지할지 제외할지"
+  - "주봉·월봉을 실제 필터에 포함할지 여부"
+  - "relative MACD를 rolling percentile, ATR-normalized MACD, z-score 중 무엇으로 정의할지"
+  - "relative MACD rolling lookback 길이"
+  - "1시간봉과 15분봉의 하방 extreme threshold"
+  - "1시간봉 상방 extreme 및 weak/strong EXIT-WATCH threshold"
+  - "MACD 기울기 계산 방법과 histogram contraction의 기계적 정의"
+  - "15분봉 골든크로스만으로 trigger를 확정할지 가격 반전 조건도 필수로 할지"
+  - "가격 저점과 MACD 저점 및 골든크로스 사이의 일반적인 시차 분포"
+  - "실패한 첫 반전을 기계적으로 어떻게 정의할지"
+  - "추가 진입 최대 횟수, 각 tranche 크기, 총 risk cap"
+  - "1시간봉 골든크로스를 확인용으로만 쓸지 추가진입에도 사용할지"
+  - "causal swing high/low 정의를 ATR reversal, directional-change, k-bar confirmed pivot 등 무엇으로 할지"
+  - "k-bar pivot을 쓸 경우 pivot 시각이 아니라 실제 confirmation 시각부터만 사용할 규칙"
+  - "HL break를 wick, 15분 종가, 연속 종가 중 무엇으로 확인할지"
+  - "WEAK EXIT-WATCH와 STRONG EXIT-WATCH가 요구하는 PA 확인 강도를 실제로 다르게 할지"
+  - "trailing stop을 병행할지와 ATR 배수"
+  - "stop-loss, 최대 보유시간, overnight 허용 여부"
+  - "주문 시점과 체결 가격 가정"
+  - "5분봉/1분봉을 실제 execution에 사용할지"
+  - "거래량, divergence, OBV, VWAP, volume profile, 오더블록을 핵심 전략 feature에 포함할지"
+  - "옵션 체인, 0DTE flow, dealer gamma/GEX, Max Pain을 별도 설명변수로 추가할지"
+  - "SOXX 단일 전략인지 반도체 개별주 및 다른 ETF/주식으로 일반화할지"
+  - "정규장만 사용할지 프리마켓·애프터마켓을 포함할지"
+  - "발견 기간과 독립 confirmatory 기간"
+  - "비교 baseline"
+  - "primary metric과 사전 decision rule"
+  - "수수료·슬리피지의 구체적 비용 가정"
+
+test:
+  null_hypothesis: "unknown - 아직 검증 설계를 확정하지 않았으며 대화만으로 귀무가설을 임의 설정하지 않는다."
+  primary_metric: "unknown - 후보로 조건부 forward return, MAE, MFE, MFE capture ratio, MDD, capital utilization, turnover 등을 논의했으나 하나를 확정하지 않았다."
+  decision_rule: "unknown"
+  cost_assumption: "unknown"
+  sample_unit: "unknown - signal event 또는 completed trade 후보이나 확정하지 않았다."
+  discovery_period: null
+  confirmatory_period: null
+  leakage_risks:
+    - "NOK 및 2026-09-23~2026-09-25 SOXX 사례를 보며 규칙을 형성했으므로 해당 사례들은 독립적인 확증 증거로 재사용하지 않는다."
+    - "사후적으로 확인된 가격 저점/고점, MACD 극값, HH/HL/LH/LL을 당시 이미 알려진 값처럼 사용하면 look-ahead leakage가 발생한다."
+    - "rolling relative MACD 계산에 미래 관측치를 포함하면 leakage가 발생한다."
+    - "완성되지 않은 1시간봉/일봉 값을 하위 시간축 시점에서 사용하면 미래정보 누출이 발생한다."
+    - "k-bar/fractal pivot을 pivot timestamp부터 사용하고 실제 confirmation delay를 무시하면 미래정보 누출이 발생한다."
+    - "여러 timeframe, relative MACD 정의, threshold, PA swing 정의, exit 변형을 반복 탐색한 뒤 가장 좋은 조합만 보고하면 multiple-testing bias가 발생한다."
+    - "최근 SOXX 랠리에서 발견한 패턴을 같은 구간에서 튜닝·평가하면 discovery/confirmation contamination이 발생한다."
+    - "거래량·오더블록·옵션 흐름의 사후 원인 설명을 사전 정의 없이 규칙으로 변환하면 narrative bias가 발생한다."
+  multiple_testing_family: "unknown - regime, relative-MACD normalization/threshold, multi-timeframe trigger, scale-in, swing/BOS, exit-watch 후보군을 experiment 등록 전에 고정해야 한다."
+
+experiment_refs: []
+evidence_refs: []
+
+notes: >-
+  r03은 r02의 구세션 감사에서 보존한 반례와 미정 사항을 유지하면서, 이 세션에서 더 최근에
+  구체화된 전략을 canonical DRAFT로 반영한다. 현재 우선 구조는 Daily regime → 1H relative
+  downside extreme → 15m relative downside extreme + reversal/GC 진입 → HH/HL 유지 중 HOLD
+  → 1H momentum deterioration/upper extreme EXIT-WATCH → 15m HH failure/LH/valid-HL break
+  청산이다. 첫 반전 실패 후 더 깊은 상대 극단에서 새 반전이 확인되면 capped scale-in/re-entry
+  후보를 둔다. 4H 숏 아이디어와 5m/1m 세부 타점은 핵심 규칙에서 분리해 보존한다.
+  이 파일은 여전히 DRAFT이며 threshold, regime, causal swing, sizing, 비용, metric,
+  decision rule이 확정되지 않았으므로 실행 가능한 전략 사양이 아니다. backtest,
+  experiment, validation, production/paper 변경은 수행하지 않는다.
