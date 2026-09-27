@@ -7,6 +7,7 @@ from typing import ClassVar
 from ...core import digest
 from ..contracts import JsonObject, payload
 from .contracts import FeatureSpec, ScalarSeries, Spec, positive_int, result
+from .continuity import CONTINUITY_VERSION, is_contiguous
 
 
 @dataclass(frozen=True, slots=True)
@@ -15,12 +16,14 @@ class PercentileSpec(Spec):
     min_history: int
     include_current: bool = True
     ties: str = "midrank"
+    continuity: str = CONTINUITY_VERSION
     name: ClassVar[str] = "rolling_percentile"
     version: ClassVar[str] = "rolling_empirical_midrank_v1"
 
     def __post_init__(self):
         _window(self.window, self.min_history)
-        if self.include_current is not True or self.ties != "midrank":
+        if (self.include_current is not True or self.ties != "midrank"
+                or self.continuity != CONTINUITY_VERSION):
             raise ValueError("Unsupported percentile convention")
 
 
@@ -31,6 +34,7 @@ class ZScoreSpec(Spec):
     ddof: int
     include_current: bool = True
     zero_variance: str = "undefined"
+    continuity: str = CONTINUITY_VERSION
     name: ClassVar[str] = "rolling_zscore"
     version: ClassVar[str] = "rolling_zscore_ddof_v1"
 
@@ -38,7 +42,8 @@ class ZScoreSpec(Spec):
         _window(self.window, self.min_history)
         if type(self.ddof) is not int or self.ddof not in (0, 1) or self.min_history <= self.ddof:
             raise ValueError("ddof must be 0/1 and min_history > ddof")
-        if self.include_current is not True or self.zero_variance != "undefined":
+        if (self.include_current is not True or self.zero_variance != "undefined"
+                or self.continuity != CONTINUITY_VERSION):
             raise ValueError("Unsupported z-score convention")
 
 
@@ -57,7 +62,9 @@ def _transform(series, spec, calculate):
         **spec.definition.parameters.unpack(), "source": payload(series.source),
         "missing_policy": "retain_slots_fail_closed"}))
     status, reason, output = "READY", None, None
-    if len(points) < spec.min_history:
+    if not is_contiguous(points, series.timeframe):
+        status, reason = "NOT_READY", "noncontiguous_history"
+    elif len(points) < spec.min_history:
         status, reason = "NOT_READY", "insufficient_history"
     elif any(p.status != "READY" for p in points):
         status = "UNDEFINED" if any(p.status == "UNDEFINED" for p in points) else "NOT_READY"

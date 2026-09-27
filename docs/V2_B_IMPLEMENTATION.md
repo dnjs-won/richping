@@ -100,10 +100,64 @@ using them; these fixture contracts do not freeze H0001's future specification.
 All calculations use Python binary floating point. Bars are ordered by end_at
 within the selected symbol/timeframe; EMA/ATR use all currently visible history,
 without resetting at session boundaries. Missing observations are not filled.
-They operate on delivered observations, not a claim of complete calendar
-coverage. A delayed earlier bar can change a *new* as-of calculation; old returned
-contexts/results never change. Readiness is arithmetic readiness, not convergence
-or statistical sufficiency. No provider parity is claimed.
+Internal missing expected slots now fail closed under the contract below,
+superseding the delivered-observation behavior of audited commit `97d847e`.
+A delayed earlier bar can change a *new* as-of calculation; old returned
+contexts/results never change. Readiness requires arithmetic readiness and
+continuity of the calculation history, not convergence or statistical sufficiency.
+No provider parity is claimed.
+
+### Generic continuity: `xnys_completed_grid_v1`
+
+`features/continuity.py` supplies the common slot/contiguous-prefix checks for
+bars, scalar windows and causal structure. It uses the existing XNYS calendar:
+15m and 1H slots are anchored to official session open, with the final short
+1H bucket ending at official close; Daily is official open through close.
+Adjacency crosses directly from official close to the next trading session's
+first slot. Overnight, weekends, holidays, DST and early closes consume no
+extra observation step. An omitted trading session or intraday slot is a gap.
+Malformed bar boundaries are invalid inputs (ValueError), not missing prices.
+
+An internal gap yields **NOT_READY / noncontiguous_history**, with empty values.
+This is recoverable missing input, consistent with insufficient-history
+readiness; UNDEFINED remains for arithmetic failures such as zero variance.
+The gap reason takes precedence over insufficient_history when both apply.
+Only the interval from the first to last selected input is checked: no history
+before the first visible bar or after the last visible bar is demanded. This
+is a continuity contract, not a freshness or full-dataset coverage certificate.
+
+- EMA, MACD and ATR require the whole visible calculation history contiguous.
+  They do not restart at the gap or silently discard the earlier recurrence.
+- TR requires only its last two selected bars contiguous; with one visible bar
+  its existing high-minus-low seed applies. An older gap outside those two bars
+  does not invalidate current TR, while it still invalidates recursive ATR.
+- MACD scalar projection calculates only the contiguous prefix. Every visible
+  point from the first gap onward is null / NOT_READY / noncontiguous_history,
+  even when a downstream rolling window starts after that gap. All three
+  MACD fields follow this rule; distorted MACD cannot enter a relative sample.
+- Raw close and explicit external ScalarSeries remain sparse, timestamped
+  observations. An individual raw close can be READY independently of its
+  neighbors. `ScalarSeries.contiguous` explicitly reports full-series continuity.
+  Percentile/z-score independently check the selected window's expected grid,
+  including caller-built series whose supplied points all claim READY. A window
+  spanning an absent slot returns NOT_READY / noncontiguous_history rather than
+  compressing time or searching for replacement observations. A later raw window
+  wholly outside the gap can become READY; recursive unavailable source points
+  still propagate NOT_READY / unavailable_input (or UNDEFINED for undefined
+  sources), as before. No artificial numeric slots are inserted.
+- Swings use the same helper on each confirmation window, preserving their
+  existing window-specific readiness and immutable confirmation semantics.
+
+Once a delayed bar becomes visible and restores continuity, a new as-of result
+may be READY. Recomputed MACD scalar known_at remains the maximum arrival time
+of its full prefix. Previously returned results, scalar points and contexts
+remain immutable; no historical snapshot is rewritten.
+
+EMA/MACD/TR/ATR/percentile/z-score specs explicitly serialize the continuity
+version; raw-close source specs also declare sparse-grid policy. These added
+parameters change specification hashes (including nested source definitions),
+and the recursive engine code hash changes. Existing arithmetic version names
+and formulas are retained; old stored evidence is not reinterpreted or migrated.
 
 ### EMA: `ema_first_observation_recursive_v1`
 
@@ -135,7 +189,7 @@ cannot be misrepresented as available at its market end time.
 First observation: `TR[0]=high[0]-low[0]` (no unknown previous close).
 Subsequent observations:
 `TR[t]=max(high-low, abs(high-previous_close), abs(low-previous_close))`.
-Require one bar; use the previous visible close thereafter.
+Require one bar; use the previous contiguous completed bar's close thereafter.
 
 ### ATR: `atr_wilder_sma_seed_first_high_low_v1`
 
@@ -226,6 +280,23 @@ inserting a fictitious past confirmation. Labels have no HOLD/EXIT meaning.
 Commands use `C:/richping/.venv/Scripts/python -m pytest` from the isolated
 worktree, reusing the existing environment rather than copying its packages.
 
+Continuity audit remediation on `97d847ef2ecfb97199f6ca8637d4c0bb8076ef82`:
+
+- Full V2: **130 passed (20.08s)**, including all 47 V2-A tests and 33 new
+  calendar continuity regressions.
+- Full pytest: **384 passed (91.74s)**; no failures, skips or pytest warnings.
+- `git diff --check`: passed.
+- Regressions cover missing/delayed internal 15m, 1H and Daily inputs, restored
+  readiness, immutable prior result/series payloads, delayed scalar known_at,
+  unavailable MACD line/signal/histogram propagation, raw/external scalar windows,
+  first-visible history, TR's two-bar scope, overnight/weekend/holiday/DST,
+  early-close short buckets and missing slots on both sides of a session boundary.
+- Existing prefix-invariance, atomic-known-at and swing tests remain passing.
+  The original delayed-leading-bar test is retained: that absent bar is before
+  the first visible observation, so it is correctly not an internal gap.
+
+Initial V2-B implementation results (historical, before continuity remediation):
+
 - V2-B: 50 passed (5.00s).
 - V2-A plus V2-B: 97 passed (5.52s), including unchanged 47 V2-A tests.
 - Full regression: 351 passed (77.60s), no failures/skips/warnings.
@@ -256,12 +327,14 @@ bytewise legacy/paper DB preservation checks.
   neither alpha nor fresh/OOS/paper/live evidence.
 - This is a trusted Python API boundary, not an OS sandbox. Explicit externally
   constructed scalar series must truthfully declare source and availability;
-  the API validates timestamps/values but cannot certify arbitrary caller math.
+  the API validates timestamps/values and transforms check the selected grid,
+  but it cannot certify arbitrary caller math or undeclared upstream dependencies.
 - Full visible histories are recomputed without caching; cumulative swing output
   and provenance serialization target small fixtures. No throughput claim.
-- Missing bars are not repaired. Numeric features use the visible sequence;
-  structure additionally requires contiguous confirmation windows. Feature
-  READY does not override V2-A coverage diagnostics or certify real-data quality.
+- Missing bars are not repaired. Numeric features and scalar transforms fail
+  closed on internal gaps in their calculation history; structure requires
+  contiguous confirmation windows. Feature READY does not override V2-A coverage
+  diagnostics, certify trailing freshness, or certify real-data quality.
 - Only synthetic corporate-action-free V2-A data is supported. Provider/dataset
   ingestion, dividend normalization and outcome accounting remain later scope.
 - Only first-observation EMA and SMA-seeded Wilder ATR are implemented. **Before

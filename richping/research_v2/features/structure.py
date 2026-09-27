@@ -5,9 +5,10 @@ from datetime import datetime
 import math
 from typing import ClassVar, Protocol
 
-from ...core import close_at, digest, next_sessions, open_at, timestamp
+from ...core import digest, timestamp
 from ..contracts import JsonObject, ReplayContext, payload
 from .contracts import FeatureResult, FeatureSpec, Spec, completed_bars, positive_int, result
+from .continuity import is_contiguous
 
 
 @dataclass(frozen=True, slots=True)
@@ -53,21 +54,12 @@ class SwingDetector(Protocol):
                  spec: FractalSpec) -> FeatureResult: ...
 
 
-def _consecutive(a, b):
-    # No absent slot may later insert into a window and revise a confirmed pivot.
-    if a.session == b.session:
-        return a.end_at == b.start_at
-    following = next_sessions(a.session, 1)
-    return bool(following) and b.session == following[0] and (
-        a.end_at == close_at(a.session) and b.start_at == open_at(b.session))
-
-
 def confirmed_swings(context, symbol, timeframe, spec: FractalSpec):
     bars = completed_bars(context, symbol, timeframe)
     events, complete_windows = [], 0
     for i in range(spec.left, len(bars) - spec.right):
         window = bars[i - spec.left:i + spec.right + 1]
-        if not all(_consecutive(a, b) for a, b in zip(window, window[1:])):
+        if not is_contiguous(window, timeframe):
             continue
         complete_windows += 1
         pivot = bars[i]

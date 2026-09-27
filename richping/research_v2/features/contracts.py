@@ -6,6 +6,7 @@ import math
 
 from ...core import digest, ticker, timestamp
 from ..contracts import JsonObject, ReplayContext, TIMEFRAMES, nonempty, payload
+from .continuity import CONTINUITY_VERSION, is_contiguous, slot_bounds
 
 
 def positive_int(value):
@@ -106,6 +107,9 @@ def completed_bars(context, symbol, timeframe):
         raise ValueError("Duplicate or mixed input vintage")
     if any(b.corporate_action != "NONE_CONFIRMED" for b in bars):
         raise ValueError("Unsupported corporate action")
+    if any((b.start_at, b.end_at) != slot_bounds(b.end_at, timeframe)
+           or b.session != b.end_at.date().isoformat() for b in bars):
+        raise ValueError("Invalid completed bar grid")
     return bars
 
 
@@ -149,6 +153,7 @@ class ScalarPoint:
 
 @dataclass(frozen=True, slots=True)
 class ScalarSeries:
+    """Sparse scalar observations; numeric points do not certify continuity."""
     symbol: str
     timeframe: str
     as_of: datetime
@@ -168,10 +173,15 @@ class ScalarSeries:
         if any(a.end_at >= b.end_at for a, b in zip(self.points, self.points[1:])):
             raise ValueError("Scalar end times must strictly increase")
 
+    @property
+    def contiguous(self):
+        return is_contiguous(self.points, self.timeframe)
+
 
 def close_series(context, symbol, timeframe):
     bars = completed_bars(context, symbol, timeframe)
     return ScalarSeries(symbol, timeframe, context.as_of,
-        FeatureSpec("close", "completed_close_v1", JsonObject.of({"field": "close"})),
+        FeatureSpec("close", "completed_close_v1", JsonObject.of({
+            "field": "close", "continuity": CONTINUITY_VERSION, "missing_policy": "sparse_explicit_grid"})),
         tuple(ScalarPoint(b.end_at, b.known_at, b.close, "READY", None) for b in bars),
         digest(payload(bars)))

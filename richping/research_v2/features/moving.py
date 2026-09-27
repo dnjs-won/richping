@@ -4,6 +4,7 @@ from dataclasses import dataclass
 from typing import ClassVar
 
 from .contracts import Spec, completed_bars, positive_int, result
+from .continuity import CONTINUITY_VERSION, is_contiguous
 
 
 @dataclass(frozen=True, slots=True)
@@ -12,13 +13,15 @@ class EMASpec(Spec):
     min_history: int
     seed: str = "first_observation"
     field: str = "close"
+    continuity: str = CONTINUITY_VERSION
     name: ClassVar[str] = "ema"
     version: ClassVar[str] = "ema_first_observation_recursive_v1"
 
     def __post_init__(self):
         positive_int(self.span)
         positive_int(self.min_history)
-        if self.seed != "first_observation" or self.field != "close":
+        if (self.seed != "first_observation" or self.field != "close"
+                or self.continuity != CONTINUITY_VERSION):
             raise ValueError("Unsupported EMA convention")
 
 
@@ -33,6 +36,9 @@ def recursive_ema(values, span):
 
 def ema(context, symbol, timeframe, spec: EMASpec):
     bars = completed_bars(context, symbol, timeframe)
+    if not is_contiguous(bars, timeframe):
+        return result(spec, symbol, timeframe, context.as_of, bars,
+                      status="NOT_READY", reason="noncontiguous_history")
     if len(bars) < spec.min_history:
         return result(spec, symbol, timeframe, context.as_of, bars,
                       status="NOT_READY", reason="insufficient_history")

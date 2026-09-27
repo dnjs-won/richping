@@ -5,16 +5,18 @@ import math
 from typing import ClassVar
 
 from .contracts import Spec, completed_bars, positive_int, result
+from .continuity import CONTINUITY_VERSION, is_contiguous
 
 
 @dataclass(frozen=True, slots=True)
 class TRSpec(Spec):
     first_bar: str = "high_minus_low"
+    continuity: str = CONTINUITY_VERSION
     name: ClassVar[str] = "true_range"
     version: ClassVar[str] = "true_range_first_high_low_v1"
 
     def __post_init__(self):
-        if self.first_bar != "high_minus_low":
+        if self.first_bar != "high_minus_low" or self.continuity != CONTINUITY_VERSION:
             raise ValueError("Unsupported first TR convention")
 
 
@@ -25,6 +27,7 @@ class ATRSpec(Spec):
     smoothing: str = "wilder"
     seed: str = "sma_first_period_tr"
     first_bar: str = "high_minus_low"
+    continuity: str = CONTINUITY_VERSION
     name: ClassVar[str] = "atr"
     version: ClassVar[str] = "atr_wilder_sma_seed_first_high_low_v1"
 
@@ -36,6 +39,8 @@ class ATRSpec(Spec):
         if (self.smoothing, self.seed, self.first_bar) != (
                 "wilder", "sma_first_period_tr", "high_minus_low"):
             raise ValueError("Unsupported ATR convention")
+        if self.continuity != CONTINUITY_VERSION:
+            raise ValueError("Unsupported ATR continuity")
 
 
 def _ranges(bars):
@@ -46,6 +51,9 @@ def _ranges(bars):
 
 def true_range(context, symbol, timeframe, spec: TRSpec):
     bars = completed_bars(context, symbol, timeframe)[-2:]
+    if not is_contiguous(bars, timeframe):
+        return result(spec, symbol, timeframe, context.as_of, bars,
+                      status="NOT_READY", reason="noncontiguous_history")
     if not bars:
         return result(spec, symbol, timeframe, context.as_of, bars,
                       status="NOT_READY", reason="insufficient_history")
@@ -54,6 +62,9 @@ def true_range(context, symbol, timeframe, spec: TRSpec):
 
 def atr(context, symbol, timeframe, spec: ATRSpec):
     bars = completed_bars(context, symbol, timeframe)
+    if not is_contiguous(bars, timeframe):
+        return result(spec, symbol, timeframe, context.as_of, bars,
+                      status="NOT_READY", reason="noncontiguous_history")
     if len(bars) < spec.min_history:
         return result(spec, symbol, timeframe, context.as_of, bars,
                       status="NOT_READY", reason="insufficient_history")

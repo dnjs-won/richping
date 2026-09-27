@@ -1,3 +1,29 @@
+# Richping v2 상태 · 2026-09-27 V2-B continuity audit remediation
+
+**내부 expected timeframe bar 결손을 fail-closed하도록 수정 완료.**
+
+- `v2-b-reusable-features`의 감사 HEAD
+  `97d847ef2ecfb97199f6ca8637d4c0bb8076ef82`에서 수정했다.
+- 공통 `xnys_completed_grid_v1` 계약으로 15m·개장 기준 1H·Daily의 XNYS 연속성을
+  검사한다. 정상 overnight·주말·휴일·DST·early close는 연결하며, 실제 누락 slot이나
+  누락 거래일은 `NOT_READY / noncontiguous_history`와 빈 값으로 반환한다.
+- EMA/MACD/ATR은 전체 계산 이력, TR은 마지막 두 입력, 상대 변환과 swing은 해당
+  window를 검사한다. 첫 visible bar 이전이나 마지막 visible bar 이후의 봉은 요구하지 않는다.
+  MACD scalar는 첫 gap 이후 모든 field를 unavailable로 유지하므로 percentile/z-score의
+  window가 gap 이후로 이동해도 왜곡된 누적 값을 사용하지 않는다.
+- raw/external ScalarSeries의 timestamp gap을 상대 변환이 직접 검사한다.
+  지연 봉 도착 후 새 as-of에서 재계산할 수 있고 과거 FeatureResult/ScalarSeries/context는
+  불변이다. continuity 정책을 specification hash에 포함하고 기존 저장 증거는 변경하지 않는다.
+- V2 전체 **130 passed (20.08s)**, 전체 pytest **384 passed (91.74s)**.
+  신규 회귀 테스트 33개, 기존 prefix-invariance·atomic-known-at·swing 테스트 모두 통과.
+  실패·skip·pytest warning 없음. `git diff --check` 통과.
+- H0001·threshold·provider·execution·legacy 운영 코드는 변경하지 않았다.
+  main의 기존 미커밋 변경을 보존했다. 수익성 증거를 생성한 작업은 아니다.
+- 상세 계약은 [V2-B 구현 기록](docs/V2_B_IMPLEMENTATION.md)을 따른다.
+  아래 최초 V2-B 완료 기록은 역사 기록이다.
+
+---
+
 # Richping v2 상태 · 2026-09-27 V2-B reusable features
 
 **V2-B: COMPLETE — 전략 중립적인 reusable feature services.**

@@ -322,7 +322,8 @@ def test_atomic_multi_symbol_features_input_order_and_ticker_relabeling():
                 assert left.input_count == (index if tf == "15m" else index // 4)
 
 
-def test_delayed_bar_not_in_features_before_arrival_and_scalar_known_at():
+def test_delayed_leading_bar_not_in_features_before_arrival_and_scalar_known_at():
+    # The absent bar precedes the first visible bar: there is no internal gap.
     data = price_data([100, 2, 3, 4, 5])
     bars = list(data.bars)
     bars[0] = replace(bars[0], known_at=bars[3].known_at)
