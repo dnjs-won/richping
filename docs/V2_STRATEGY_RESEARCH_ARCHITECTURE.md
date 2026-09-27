@@ -1,7 +1,10 @@
 # Richping v2 Strategy Research Architecture
 
-Status: DESIGN / implementation not started  
+Status: DESIGN / V2-A foundation implemented; V2-B through V2-F not implemented
+
 Initial hypothesis: `research/hypotheses/H0001-r03.yaml`
+
+V2-A implementation details and limits: [V2_A_IMPLEMENTATION.md](V2_A_IMPLEMENTATION.md).
 
 ## 1. Goal
 

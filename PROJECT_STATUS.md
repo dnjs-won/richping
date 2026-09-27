@@ -1,3 +1,29 @@
+# Richping v2 상태 · 2026-09-27 V2-A
+
+**V2-A: COMPLETE — contracts and causal replay skeleton.**
+
+- `research-capture-contract`의 `f1156b7` 설계를 기반으로 별도 브랜치
+  `v2-a-causal-replay-foundation`과 `var/worktrees/v2-a` 작업 트리에서 구현했다.
+  시작 main HEAD는 `94cc2d292a83714aadaa4033ddfd5a5cfca39125`였다.
+  기존 cli/maturity/paper/pipeline 변경과 미추적 R1-Q 테스트는 원래 작업 트리에 보존했다.
+- `richping.research_v2`에 불변 bar/dataset/state/intent/fill/event 계약, 가용시각 clock,
+  XNYS RTH 완료 봉 집계, generic callback, trace/checkpoint 및 격리 SQLite를 추가했다.
+  기존 core의 canonical/digest/aware UTC/calendar helper를 재사용하고 legacy 실행 코드는 변경하지 않았다.
+- Synthetic 15m만 지원한다. 1H는 개장 기준으로 시작하고 마지막 짧은 버킷은 공식 폐장에 완료한다.
+  Daily는 모든 15m 구성 bar가 실제로 알려진 뒤에만 완료한다. 지연·결측은 보정하지 않으며
+  callback은 full dataset 참조가 없는 불변 prefix만 받는다.
+- 신규 테스트 **41 passed (2.61s)**. V2-A 작업 트리 전체 **295 passed (77.03s)**,
+  원래 dirty 작업 트리 전체 **266 passed (76.40s)**. 실패/skip 없음.
+  원래 작업 트리에만 기존 pytest cache WinError 5 warning 1건이 있다.
+  구현 전 설계 브랜치 baseline은 **254 passed (77.25s)**였다.
+- H0001-r03은 DRAFT로 유지한다. MACD·매매 규칙·수익성 backtest·provider·execution·paper 변경 없음.
+  state 저장/복원은 지원하나 checkpoint부터 엔진을 자동 재개하는 기능은 후속 범위다.
+  API는 신뢰된 Python plugin용이며 OS 보안 sandbox는 아니다.
+- 상세 계약·재사용 조사·격리 결정·테스트·후속 범위는
+  [V2-A 구현 기록](docs/V2_A_IMPLEMENTATION.md)을 참조한다. 다음 개발 단계는 V2-B의 범용 feature 서비스다.
+
+---
+
 # Richping 현재 상태 · 2026-09-21 R1-B
 
 **R1-B 최소 paper 원장·maturity follow-up 구현 및 격리 연구 replay 완료. 실제 미래 paper 수익성은 증거 대기.**
