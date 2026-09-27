@@ -1,3 +1,21 @@
+# Richping v2 상태 · 2026-09-27 V2-A availability audit remediation
+
+**동일 known_at의 atomic availability batch 수정 완료.**
+
+- 같은 known_at의 모든 base bar와 그 시점에 완료되는 higher-timeframe bar를
+  함께 공개한 뒤 strategy callback을 한 번 실행한다. Clock advance·event·trace·checkpoint는
+  batch당 한 번이다. 지연된 과거 bar와 현재 bar도 known_at이 같으면 같은 batch에 포함한다.
+- 종목 알파벳 순서는 canonical serialization에만 사용한다. 입력의 동일 end_at tie 순서는
+  정규화하며 시간 역전·duplicate 거부는 유지한다. `ReplayEvent.base_bars`에 전체 batch를 기록한다.
+- Run provenance에 `atomic_known_at_batch_v1`을 추가했다. 이전 per-bar 증거는 재작성하지 않는다.
+  SQLite schema·legacy 운영·H0001·feature 구현은 변경하지 않았다.
+- 첫 decision의 ALFA/BETA 동시 공개, ticker relabeling·입력 tie 순서 독립성,
+  지연/현재 bar 동시 공개, 두 종목 1H 동시 완료, hidden-future, batch hash·저장 멱등성을 검증했다.
+  V2 테스트 **47 passed (2.71s)**, 전체 **301 passed (74.45s)**. 실패·skip·warning 없음.
+- `v2-a-causal-replay-foundation`에서 수정했다. 아래 최초 V2-A 결과는 역사 기록이다.
+
+---
+
 # Richping v2 상태 · 2026-09-27 V2-A
 
 **V2-A: COMPLETE — contracts and causal replay skeleton.**

@@ -6,7 +6,7 @@ import json
 import sqlite3
 
 from ..core import canonical, digest, timestamp
-from .contracts import Checkpoint, StrategyState, payload
+from .contracts import AVAILABILITY_VERSION, Checkpoint, StrategyState, payload
 from .market_data import MarketDataset
 
 SCHEMA_VERSION = 1
@@ -171,7 +171,9 @@ class ResearchStore:
             spec = json.loads(run[0])
             if trace.strategy_id != spec["strategy_id"] or trace.specification_hash != spec["specification_hash"]:
                 raise ValueError("Trace strategy provenance mismatch")
-            if event.base_bar.dataset_id != spec["dataset_id"]:
+            if spec.get("availability_contract") != AVAILABILITY_VERSION:
+                raise ValueError("Trace availability contract mismatch")
+            if any(b.dataset_id != spec["dataset_id"] for b in event.completed):
                 raise ValueError("Trace dataset provenance mismatch")
             previous = self.db.execute("SELECT trace_hash,body FROM v2_traces WHERE run_id=? AND sequence=?",
                                        (event.run_id, event.sequence - 1)).fetchone()

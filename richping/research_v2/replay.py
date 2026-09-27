@@ -3,6 +3,7 @@
 from dataclasses import dataclass
 from hashlib import sha256
 from importlib.metadata import version
+from itertools import groupby
 import inspect
 from pathlib import Path
 import platform
@@ -11,7 +12,7 @@ from .. import core
 from ..core import digest
 from .aggregation import AGGREGATION_VERSION, CompletedAggregator
 from .clock import ReplayClock
-from .contracts import (CONTRACT_VERSION, Checkpoint, Decision, DecisionTrace, JsonObject,
+from .contracts import (AVAILABILITY_VERSION, CONTRACT_VERSION, Checkpoint, Decision, DecisionTrace, JsonObject,
                         ReplayContext, ReplayEvent, Strategy, StrategyState, nonempty, payload)
 from .market_data import availability_order, market_order
 
@@ -46,10 +47,10 @@ class ReplayResult:
 
 def replay(dataset, strategy: Strategy, *, store=None, timeframes=("1H", "Daily"),
            config=JsonObject(), experiment_id="fixture-only", hypothesis_revision=None):
-    """One callback per base bar, ordered by (known_at, end_at, symbol, timeframe).
+    """One atomic callback per known_at, after every batch member is aggregated.
 
-    Tied known_at values still deliver one record per event in the declared order.
-    Later records at the same time are withheld until their own delivery event.
+    Sorting within a batch only canonicalizes evidence; it creates no decision
+    priority. Old and current bars with the same known_at are published together.
     No wall time, implicit research bypass, execution or portfolio is involved.
     """
     nonempty(strategy.strategy_id)
@@ -63,7 +64,9 @@ def replay(dataset, strategy: Strategy, *, store=None, timeframes=("1H", "Daily"
             "strategy_id": strategy.strategy_id, "specification_hash": specification_hash,
             "strategy_specification": payload(strategy.specification), "config": payload(config),
             "aggregation": AGGREGATION_VERSION, "timeframes": list(aggregator.timeframes),
-            "order": "known_at,end_at,symbol,timeframe", "code": code_provenance(strategy),
+            "availability_contract": AVAILABILITY_VERSION,
+            "order": "known_at batches; canonical members: end_at,symbol,timeframe",
+            "code": code_provenance(strategy),
             "execution_contract": "none_v2_a", "experiment_id": experiment_id,
             "hypothesis_revision": hypothesis_revision}
     run_id = digest(spec)
@@ -76,12 +79,18 @@ def replay(dataset, strategy: Strategy, *, store=None, timeframes=("1H", "Daily"
         state = strategy.initialize(ReplayContext(clock.as_of))
         if not isinstance(state, StrategyState):
             raise ValueError("Strategy initialize must return StrategyState")
-        for sequence, bar in enumerate(sorted(dataset.bars, key=availability_order)):
-            clock.advance(bar.known_at)
-            completed = aggregator.accept(bar, clock.as_of)
+        batches = groupby(sorted(dataset.bars, key=availability_order), key=lambda b: b.known_at)
+        for sequence, (known_at, members) in enumerate(batches):
+            base_bars = tuple(members)
+            clock.advance(known_at)
+            # No strategy callback or context is exposed until ALL constituents
+            # and newly completed higher-timeframe bars have been processed.
+            completed = tuple(sorted((completed_bar for bar in base_bars
+                                      for completed_bar in aggregator.accept(bar, clock.as_of)),
+                                     key=market_order))
             visible.extend(completed)
             context = ReplayContext(clock.as_of, tuple(sorted(visible, key=market_order)))
-            event = ReplayEvent(run_id, sequence, clock.as_of, bar, completed)
+            event = ReplayEvent(run_id, sequence, clock.as_of, base_bars, completed)
             before = state
             decision = strategy.on_event(context, before, event)
             if type(decision) is not Decision:

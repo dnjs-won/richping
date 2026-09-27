@@ -9,6 +9,7 @@ from typing import Protocol
 from ..core import canonical, digest, ticker, timestamp
 
 CONTRACT_VERSION = "research_v2_a_v1"
+AVAILABILITY_VERSION = "atomic_known_at_batch_v1"
 TIMEFRAMES = ("15m", "1H", "Daily")
 
 
@@ -184,7 +185,7 @@ class ReplayEvent:
     run_id: str
     sequence: int
     as_of: datetime
-    base_bar: MarketBar
+    base_bars: tuple[MarketBar, ...]
     completed: tuple[MarketBar, ...]
 
     def __post_init__(self):
@@ -192,9 +193,14 @@ class ReplayEvent:
         if type(self.sequence) is not int or self.sequence < 0:
             raise ValueError("Nonnegative event sequence required")
         object.__setattr__(self, "as_of", timestamp(self.as_of))
+        object.__setattr__(self, "base_bars", tuple(self.base_bars))
         object.__setattr__(self, "completed", tuple(self.completed))
-        if not self.completed or self.completed[0] != self.base_bar:
-            raise ValueError("Event must deliver its base bar first")
+        if not self.base_bars or any(b.known_at != self.as_of for b in self.base_bars):
+            raise ValueError("Event requires a nonempty batch with identical known_at")
+        if len({b.identity for b in self.base_bars}) != len(self.base_bars):
+            raise ValueError("Duplicate bar in availability batch")
+        if any(b not in self.completed for b in self.base_bars):
+            raise ValueError("Event must expose every base bar in its batch")
         if any(b.known_at > self.as_of for b in self.completed):
             raise ValueError("Future bar in replay event")
 

@@ -31,7 +31,7 @@ def availability_order(bar):
 
 @dataclass(frozen=True, slots=True)
 class MarketDataset:
-    """Input order must be (end_at, symbol, timeframe), never silently sorted.
+    """Input end_at must never decrease; equal-end ties are canonicalized.
 
     dataset_id is an explicit vintage label; content_hash is a separate complete
     content fingerprint, avoiding a bar/dataset recursive hash definition.
@@ -73,12 +73,15 @@ class MarketDataset:
             if bar.identity in seen:
                 raise ValueError("Duplicate bar identity")
             seen.add(bar.identity)
-            if prior is not None and market_order(bar) <= prior:
+            if prior is not None and bar.end_at < prior:
                 raise ValueError("Invalid bar input ordering")
-            prior = market_order(bar)
+            prior = bar.end_at
             validate_rth(bar)
             if bar.corporate_action != "NONE_CONFIRMED":
                 raise ValueError("Unsupported or unknown corporate action")
+        # Tie order has no temporal meaning. Canonicalize only after validating
+        # chronology and identities, so a time reversal can never be repaired.
+        object.__setattr__(self, "bars", tuple(sorted(self.bars, key=market_order)))
 
     @property
     def content_hash(self):
@@ -118,6 +121,6 @@ class MarketDataset:
 
     @classmethod
     def from_records(cls, dataset_id, records, manifest):
-        """Explicit fixture/import boundary; preserve order and fail on bad rows."""
+        """Fixture/import boundary; validate chronology, canonicalize equal-end ties."""
         bars = tuple(MarketBar(**{**r, "provenance": JsonObject.of(r["provenance"])}) for r in records)
         return cls(dataset_id, bars, JsonObject.of(manifest))

@@ -164,19 +164,23 @@ status
 
 The smallest authoritative input for H0001 should be 15-minute RTH bars unless the data contract later requires a finer base feed.
 
-At each 15m close:
+At each atomic availability batch (all base bars sharing the same `known_at`):
 
-1. advance replay clock to the bar's usable `known_at`;
-2. expose only bars known by that instant;
+1. advance replay clock once to the batch's usable `known_at`;
+2. ingest all batch members before any strategy decision, including delayed older bars;
 3. update completed 15m features;
 4. causally aggregate/update 1H state only when the configured 1H bucket is complete;
 5. update Daily state only from information legally available at that instant;
 6. update causal swing/price-structure state;
-7. call the strategy plugin;
+7. expose the complete causal context and call the strategy plugin once for the batch;
 8. persist decision trace and intents;
 9. simulate fills using the declared execution timing;
 10. update lots, cash, exposure and trade lifecycle;
 11. persist state snapshot/checkpoint.
+
+All symbols and higher-timeframe bars completed at that availability time are
+visible together. Alphabetical ordering only canonicalizes serialization; it
+must not create sequential decision priority. Future `known_at` batches remain hidden.
 
 No partially completed higher-timeframe candle may be exposed as a completed 1H/Daily candle. If H0001 later explicitly wants partial higher-timeframe information, that must be a distinct feature with a distinct contract.
 

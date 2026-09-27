@@ -58,8 +58,9 @@ fixture; it counts observations and produces no orders or performance metrics.
   Identity is `(dataset_id, symbol, timeframe, end_at)`; provenance is immutable
   canonical JSON. Corporate action state is explicit.
 - `MarketDataset`: frozen tuple, nonempty normalized vintage ID, complete
-  synthetic manifest, strict `(end_at, symbol, timeframe)` input order and unique
-  identities. Capture cannot precede any record's known time. Non-RTH, unaligned,
+  synthetic manifest, nondecreasing `end_at` input order and unique identities.
+  Equal-end input ties are canonicalized by symbol/timeframe; time reversals and
+  duplicates still fail closed. Capture cannot precede any record's known time. Non-RTH, unaligned,
   unsupported timeframe, unknown/present action and non-synthetic inputs fail.
   The caller supplies the vintage label; a separate SHA-256 fingerprint covers
   all bars, IDs and manifest. This avoids recursive dataset/bar hash definitions.
@@ -78,8 +79,9 @@ fixture; it counts observations and produces no orders or performance metrics.
 - `Fill` reserves validated execution timestamp/price/quantity/cost plus intent
   and execution-contract IDs for a future executor. Returning fills from the
   strategy callback fails; no execution simulator is implemented here.
-- `ReplayEvent` binds run, sequence, availability time, one base bar and newly
-  completed bars. The event ID hashes this complete payload.
+- `ReplayEvent` binds run, batch sequence, availability time, all `base_bars`
+  with that exact `known_at`, and newly completed bars. There is no distinguished
+  first symbol or single `base_bar`. The event ID hashes this complete payload.
 - `DecisionTrace` includes the event, before/after state, intents, visible-prefix
   hash and previous trace hash. `Checkpoint` persists the post-event strategy
   state, sequence, clock and trace/visible hashes. State can be loaded and reused;
@@ -87,11 +89,24 @@ fixture; it counts observations and produces no orders or performance metrics.
 
 ## Causal clock and aggregation
 
-The host sorts a validated dataset by `(known_at, end_at, symbol, timeframe)` for
-delivery. This is deliberately different from import ordering: a late-arriving
-older candle must not hide or delay an already available newer candle. The
-clock advances monotonically to each delivered bar's `known_at`. Equal timestamps
-use the declared tie order and still trigger one callback per base bar.
+The host groups a validated dataset into atomic batches by `known_at`, processing
+those times in ascending order. A late-arriving older candle and a current candle
+with the same `known_at` belong to the same batch. The clock advances once per
+batch. All members are fed into aggregation and all newly completed higher-timeframe
+bars are computed before publishing the context and calling the strategy once.
+Each batch produces one event, state transition, trace and checkpoint.
+
+`(end_at, symbol, timeframe)` only canonicalizes batch/context serialization;
+it grants no symbol an earlier decision. Every bar known at the decision time is
+visible together, and later `known_at` batches remain hidden. Equal-end input tie
+permutations have identical dataset, context and replay hashes. Relabeling symbols
+changes identity/provenance hashes but does not change availability or decision
+timing; plugins must not interpret tuple order as a priority policy.
+
+Run provenance now declares `availability_contract=atomic_known_at_batch_v1`.
+The previous per-bar replay contract is superseded, not silently reinterpreted.
+Existing datasets, SQLite schema and stored evidence are preserved; the new run
+identity/version distinguishes batch events from prior single-bar events.
 
 Initialization receives an empty view at the earliest base interval start.
 Each callback receives a frozen tuple containing only delivered base bars and
@@ -125,7 +140,8 @@ Aggregation convention `xnys_open_anchored_short_final_v1`:
   entirely missing intermediate trading days. The trailing fixture may be an
   intentional session prefix. Pending buckets remain PENDING; elapsed incomplete
   buckets are UNRESOLVED. Neither appears in completed views.
-- Replay `status=COMPLETE` means all supplied events were processed. Separate
+- Replay `status=COMPLETE` means all supplied batches were processed; `events`
+  counts batches, not base bars. Separate
   `coverage_status` is COMPLETE/PENDING/UNRESOLVED; it is not a trade outcome or
   a profitability claim. Holidays do not generate expected trading slots.
 
@@ -173,7 +189,11 @@ fresh shadow, forward paper or live-fill evidence.
 The hidden-future test constructs eight bars before replay, then checks that the
 observer sees exactly prefixes of length 1 through 8. It checks future query
 rejection, lack of dataset/loader capabilities, frozen retained contexts, and
-unchanged early contexts when later highs/closes are changed. Other fixtures
+unchanged early contexts when later highs/closes are changed. Same-time regressions
+check first-decision multi-symbol visibility, one clock advance per batch,
+simultaneous two-symbol 1H completion, delayed-old/current batch visibility,
+input tie-order hash equality, symbol relabeling equivalence, invalid event
+batches, and batch persistence/versioning/idempotency. Other fixtures
 cover exact completion, hand-calculated OHLCV, delayed arrival, same-time symbols,
 state restoration, repeated event/result hashes, gaps, DST, holidays, early
 close, immutable rows, identity collisions, failed-run preservation and bytewise

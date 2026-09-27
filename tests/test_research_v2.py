@@ -14,7 +14,7 @@ from richping.paper import PaperStore
 from richping.research_v2.aggregation import CompletedAggregator
 from richping.research_v2.clock import ReplayClock
 from richping.research_v2.contracts import (
-    CONTRACT_VERSION, Decision, Fill, Intent, JsonObject, MarketBar,
+    AVAILABILITY_VERSION, CONTRACT_VERSION, Decision, Fill, Intent, JsonObject, MarketBar,
     ReplayContext, StrategyState, payload,
 )
 from richping.research_v2.dummy import RecorderStrategy
@@ -61,7 +61,7 @@ def test_hidden_future_replay_exposes_only_delivered_prefix():
     observer = Observer()
     result = replay(data, observer)
     assert len(result.traces) == 8
-    assert [e.base_bar for e in observer.events] == list(data.bars)
+    assert [e.base_bars for e in observer.events] == [(b,) for b in data.bars]
     for i, view in enumerate(observer.views):
         assert view.query(timeframe="15m") == data.bars[:i + 1]
         assert max(b.high for b in view.query(timeframe="15m")) == 103 + i
@@ -110,7 +110,7 @@ def test_delayed_known_at_reorders_delivery_and_never_completes_early():
     bars[0] = replace(bars[0], known_at=bars[4].end_at + timedelta(minutes=1))
     observer = Observer()
     replay(fixture_data(bars=bars), observer)
-    assert [e.base_bar for e in observer.events] == bars[1:5] + bars[:1] + bars[5:]
+    assert [e.base_bars for e in observer.events] == [(b,) for b in bars[1:5] + bars[:1] + bars[5:]]
     assert all(bars[0] not in v.bars for v in observer.views[:4])
     assert all(not v.query(timeframe="1H") for v in observer.views[:4])
     hour = observer.views[4].query(timeframe="1H")[0]
@@ -140,9 +140,11 @@ def test_ties_multi_symbol_and_deterministic_state_restore():
     second = replay(data, Observer())
     assert first == second and first.hash == second.hash
     assert [t.event.id for t in first.traces] == [t.event.id for t in second.traces]
-    assert len({t.event.id for t in first.traces}) == len(data.bars)
-    assert not observer.views[0].query(symbol="BETA")
-    assert len(observer.views[1].query(timeframe="15m")) == 2
+    assert len({t.event.id for t in first.traces}) == 4
+    assert observer.views[0].query(timeframe="15m") == data.bars[:2]
+    assert {b.symbol for b in observer.views[0].bars} == {"ALFA", "BETA"}
+    assert len(observer.views[1].query(timeframe="15m")) == 4
+    assert [t.event.base_bars for t in first.traces] == [data.bars[i:i + 2] for i in range(0, 8, 2)]
     for cp in first.checkpoints:
         assert StrategyState.loads(cp.state.dumps()) == cp.state
     assert first.run_id != replay(data, Observer(), config=JsonObject.of({"seed": 2})).run_id
@@ -150,6 +152,113 @@ def test_ties_multi_symbol_and_deterministic_state_restore():
     # A restored state gives the same next decision using the detached causal view.
     restored = StrategyState.loads(first.checkpoints[2].state.dumps())
     assert Observer().on_event(observer.views[3], restored, observer.events[3]) == first.traces[3].decision
+
+
+def test_batch_advances_clock_once_and_completes_both_symbols_before_decision(monkeypatch):
+    data = fixture_data(count=4, symbols=("ALFA", "BETA"))
+    advances = []
+    advance = ReplayClock.advance
+
+    def record_advance(clock, known_at):
+        advances.append(known_at)
+        return advance(clock, known_at)
+
+    monkeypatch.setattr(ReplayClock, "advance", record_advance)
+    observer = Observer()
+    replay(data, observer)
+    assert advances == [data.bars[i].known_at for i in range(0, 8, 2)]
+    assert len(observer.views) == 4
+    assert all(not view.query(timeframe="1H") for view in observer.views[:3])
+    hours = observer.views[3].query(timeframe="1H")
+    assert {bar.symbol for bar in hours} == {"ALFA", "BETA"}
+    assert all(bar.known_at == observer.views[3].as_of for bar in hours)
+    assert {bar.symbol for bar in observer.events[3].completed if bar.timeframe == "1H"} == {"ALFA", "BETA"}
+    for i, view in enumerate(observer.views):
+        assert view.query(timeframe="15m") == data.bars[:2 * (i + 1)]
+        assert all(bar.known_at <= view.as_of for bar in view.bars)
+
+
+def test_delayed_old_and_current_bar_share_one_atomic_batch():
+    original = fixture_data(count=6)
+    bars = list(original.bars)
+    bars[0] = replace(bars[0], known_at=bars[3].known_at)
+    observer = Observer()
+    result = replay(fixture_data(bars=bars), observer)
+    assert len(result.traces) == 5
+    assert [event.base_bars for event in observer.events] == [
+        (bars[1],), (bars[2],), (bars[0], bars[3]), (bars[4],), (bars[5],)]
+    assert all(bars[0] not in view.bars and bars[3] not in view.bars for view in observer.views[:2])
+    shared = observer.views[2]
+    assert shared.query(timeframe="15m") == tuple(bars[:4])
+    assert shared.query(timeframe="1H")[0].known_at == bars[3].known_at
+    assert bars[4] not in shared.bars and bars[5] not in shared.bars
+    assert not observer.views[1].query(timeframe="1H")
+
+
+def test_batch_event_rejects_future_duplicate_and_unexposed_members():
+    data = fixture_data(count=2, symbols=("ALFA", "BETA"))
+    event = replay(data, Observer()).traces[0].event
+    with pytest.raises(ValueError, match="identical known_at"):
+        replace(event, base_bars=event.base_bars + (data.bars[2],))
+    with pytest.raises(ValueError, match="Duplicate"):
+        replace(event, base_bars=event.base_bars + event.base_bars[:1])
+    with pytest.raises(ValueError, match="every base bar"):
+        replace(event, completed=event.completed[:1])
+
+
+class BatchDecisionRecorder(Observer):
+    """Permutation-invariant observation, with a NO_ACTION marker; no trading."""
+
+    def initialize(self, context):
+        return StrategyState("batch-recorder-v1", JsonObject.of({"events": 0}))
+
+    def on_event(self, context, state, event):
+        self.views.append(context)
+        self.events.append(event)
+        largest = max(context.query(timeframe="15m"), key=lambda bar: bar.close)
+        return Decision(StrategyState("batch-recorder-v1", JsonObject.of({
+            "events": state.data.unpack()["events"] + 1,
+            "observed_volume": sum(bar.volume for bar in context.query(timeframe="15m"))})),
+            (Intent("NO_ACTION", largest.symbol, ("record_largest_fixture_value",)),))
+
+
+def test_input_tie_order_has_identical_context_hashes_and_results():
+    data = fixture_data(count=4, symbols=("ALFA", "BETA"))
+    reversed_ties = fixture_data(symbols=("BETA", "ALFA"), count=4)
+    assert data == reversed_ties and data.content_hash == reversed_ties.content_hash
+    first, second = Observer(), Observer()
+    a, b = replay(data, first), replay(reversed_ties, second)
+    assert first.views == second.views
+    assert a == b and a.hash == b.hash
+
+
+def test_ticker_relabeling_cannot_change_observed_information_or_decision_timing():
+    data = fixture_data(count=4, symbols=("ALFA", "BETA"))
+    # Different economics, so reversing alphabetical priority is meaningful.
+    bars = [replace(b, open=b.open + 100, high=b.high + 100,
+                    low=b.low + 100, close=b.close + 100, volume=b.volume + 50)
+            if b.symbol == "BETA" else b for b in data.bars]
+    rename = {"ALFA": "ZETA", "BETA": "ABLE"}
+    undo = {v: k for k, v in rename.items()}
+    first, second = BatchDecisionRecorder(), BatchDecisionRecorder()
+    a = replay(fixture_data(bars=bars), first)
+    b = replay(fixture_data(bars=[replace(bar, symbol=rename[bar.symbol]) for bar in bars]), second)
+    assert len(a.traces) == len(b.traces) == 4
+
+    def observations(context, names):
+        # Identity/provenance hashes necessarily change on relabeling. Compare
+        # the complete causal market information after undoing the rename.
+        return sorted((names.get(bar.symbol, bar.symbol), bar.timeframe, bar.start_at,
+                       bar.end_at, bar.known_at, bar.open, bar.high, bar.low, bar.close,
+                       bar.volume, bar.session, bar.source, bar.corporate_action)
+                      for bar in context.bars)
+
+    for left, right, left_trace, right_trace in zip(first.views, second.views, a.traces, b.traces):
+        assert left.as_of == right.as_of
+        assert observations(left, {}) == observations(right, undo)
+        assert left_trace.decision.state == right_trace.decision.state
+        assert left_trace.decision.intents == tuple(replace(i, symbol=undo[i.symbol])
+                                                    for i in right_trace.decision.intents)
 
 
 def test_input_order_duplicates_and_identity_fail_closed():
@@ -266,7 +375,8 @@ def test_real_data_and_unsupported_provenance_rejected():
 
 class IntentStrategy(RecorderStrategy):
     def on_event(self, context, state, event):
-        return Decision(state, (Intent("NO_ACTION", event.base_bar.symbol, ("fixture_only",)),))
+        return Decision(state, tuple(Intent("NO_ACTION", symbol, ("fixture_only",))
+                                     for symbol in sorted({b.symbol for b in event.base_bars})))
 
 
 class InvalidFillStrategy(RecorderStrategy):
@@ -316,6 +426,27 @@ def test_store_roundtrip_idempotency_checkpoints_and_collision(tmp_path):
         assert store.load_checkpoint(first.run_id, 0) == first.checkpoints[0]
     with ResearchStore(path) as reopened:
         assert reopened.load_dataset(data.dataset_id) == data
+
+
+def test_atomic_batch_store_provenance_and_idempotency(tmp_path):
+    data = fixture_data(count=4, symbols=("ALFA", "BETA"))
+    with ResearchStore(tmp_path / "v2.sqlite") as store:
+        first = replay(data, IntentStrategy(), store=store)
+        counts = {t: store.db.execute(f"SELECT count(*) FROM {t}").fetchone()[0] for t in TABLES}
+        second = replay(fixture_data(count=4, symbols=("BETA", "ALFA")), IntentStrategy(), store=store)
+        assert first == second and first.hash == second.hash
+        assert counts == {t: store.db.execute(f"SELECT count(*) FROM {t}").fetchone()[0] for t in TABLES}
+        assert counts["v2_bars"] == 8 and counts["v2_traces"] == counts["v2_checkpoints"] == 4
+        spec = json.loads(store.db.execute("SELECT body FROM v2_replay_runs").fetchone()[0])
+        assert spec["availability_contract"] == AVAILABILITY_VERSION
+        assert digest(spec) == first.run_id
+        old_spec = {k: v for k, v in spec.items() if k != "availability_contract"}
+        old_spec["order"] = "known_at,end_at,symbol,timeframe"
+        assert digest(old_spec) != first.run_id
+        stored = json.loads(store.db.execute("SELECT body FROM v2_traces WHERE sequence=3").fetchone()[0])
+        assert len(stored["event"]["base_bars"]) == 2
+        assert {i["request"]["symbol"] for i in stored["intent_records"]} == {"ALFA", "BETA"}
+        assert store.load_checkpoint(first.run_id, 3) == first.checkpoints[3]
 
 
 @pytest.mark.parametrize("action", ["UPDATE", "DELETE"])
