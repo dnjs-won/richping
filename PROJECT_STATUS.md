@@ -1,3 +1,38 @@
+# Richping v2 상태 · 2026-09-27 V2-B reusable features
+
+**V2-B: COMPLETE — 전략 중립적인 reusable feature services.**
+
+- 감사 기준 `df2e34b42b954ad73cc89c039318059d058214e9`와 clean V2-A 작업 트리를
+  확인하고, 정확히 그 commit에서 `v2-b-reusable-features` / `var/worktrees/v2-b`를 만들었다.
+  최초 기본 작업 트리는 `main / 94cc2d292a83714aadaa4033ddfd5a5cfca39125`이며
+  기존 cli/maturity/paper/pipeline 수정과 미추적 `tests/test_r1b_q_regressions.py`를 보존했다.
+- 불변 spec/result/scalar series, first-observation recursive EMA/MACD,
+  True Range/SMA-seeded Wilder ATR, current-inclusive midrank percentile,
+  population/sample z-score, positive causal scale normalization을 구현했다.
+  span/period/window/min_history/method/seed를 versioned specification hash로 추적한다.
+- strict L-left/R-right completed-bar fractal과 별도 HH/LH/HL/LL classifier를 추가했다.
+  동일 가격은 EQH/EQL, 최초 swing은 null 분류다. pivot_at과 실제 confirmed_at을 구분하고,
+  결측 grid를 건너뛰거나 미완성·미래 봉으로 swing을 확정하지 않는다.
+- feature 입력은 detached causal context 또는 immutable scalar series다.
+  dataset/store/loader/cache 의존성이 없다. atomic_known_at_batch_v1, 1H 개장 기준 집계,
+  기존 V2-A 실행 코드·47개 테스트·isolated DB schema·legacy 실행 코드는 변경하지 않았다.
+  READY/NOT_READY/UNDEFINED를 구분하며 warmup·zero variance·zero scale을 0으로 숨기지 않는다.
+- 신규 V2-B **50 passed (5.00s)**, V2 전체 **97 passed (5.52s)**,
+  전체 pytest **351 passed (77.60s)**. 실패·skip·warning 없음. `git diff --check` 통과.
+  EMA/MACD/TR/ATR/percentile/z-score/normalization/structure 손계산,
+  100봉 중 후반 50봉 극단값 변경에 대한 모든 이전 feature 결과 불변성,
+  지연 봉·partial 1H/Daily·ticker 순서 독립성·feature 저장 멱등성·recursive code hash를 검증했다.
+- H0001-r03 YAML은 변경하지 않았고 여전히 **DRAFT**다. 전략 규칙·execution/provider·실데이터
+  backtest·optimization·walk-forward·production/paper 변경 없음. **수익성은 아직 측정하지 않았다.**
+- V2-C 전 blocker: 관찰한 chart/provider의 EMA seed/history/warmup 및 1H candle boundary를
+  확인해야 한다. XNYS 09:30–10:30 ... 15:30–16:00 convention은 그대로다.
+  H0001의 relative transform과 실제 swing detector/spec도 별도로 확정해야 한다.
+  reference fractal이나 API 예시 숫자를 H0001의 확정 사양으로 간주하지 않는다.
+- 상세 수식·readiness·causal/provenance 계약·한계·미구현 범위는
+  [V2-B 구현 기록](docs/V2_B_IMPLEMENTATION.md)을 따른다. 아래 V2-A 기록은 역사 기록이다.
+
+---
+
 # Richping v2 상태 · 2026-09-27 V2-A availability audit remediation
 
 **동일 known_at의 atomic availability batch 수정 완료.**

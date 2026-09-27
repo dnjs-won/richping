@@ -1,10 +1,14 @@
 # Richping v2 Strategy Research Architecture
 
-Status: DESIGN / V2-A foundation implemented; V2-B through V2-F not implemented
+Status: V2-A foundation and V2-B reusable features implemented; V2-C through V2-F not implemented
 
 Initial hypothesis: `research/hypotheses/H0001-r03.yaml`
 
 V2-A implementation details and limits: [V2_A_IMPLEMENTATION.md](V2_A_IMPLEMENTATION.md).
+
+V2-B feature math, readiness, confirmation and validation:
+[V2_B_IMPLEMENTATION.md](V2_B_IMPLEMENTATION.md). H0001 remains DRAFT;
+no strategy implementation or profitability measurement has been performed.
 
 ## 1. Goal
 
@@ -68,7 +72,8 @@ richping/
     aggregation.py            # causal 15m -> 1h/daily views
     clock.py                  # replay clock and availability rules
     features/
-      registry.py             # generic feature provider interface
+      contracts.py            # immutable specs/results/scalar series
+      moving.py               # first-observation recursive EMA
       macd.py                 # MACD calculation only; no trading rule
       relative.py             # rolling percentile/z-score/ATR normalization
       structure.py            # causal swing/HH/HL/LH/LL primitives
@@ -232,7 +237,14 @@ A generic relative-feature layer can transform any scalar feature by methods suc
 - rolling z-score;
 - ATR-normalized value where dimensionally appropriate.
 
-All rolling windows end at the current known observation. No full-sample normalization. Method/lookback/min-history are part of the strategy specification hash.
+All rolling windows end at the current known observation. No full-sample normalization. Method/lookback/min-history are part of the feature specification hash and must be included in the consuming strategy specification.
+
+V2-B implements explicit first-observation recursive EMA/MACD, SMA-seeded
+Wilder ATR, current-inclusive midrank percentile, population/sample z-score,
+and aligned positive causal scale division. Insufficient history is NOT_READY;
+zero variance or nonpositive normalization scale is UNDEFINED. Immutable results
+carry causal input provenance and recursively composed feature definitions.
+There is no cache, registry, provider/chart parity claim or strategy threshold.
 
 This separation lets later strategies reuse MACD or relative transforms without inheriting H0001 rules.
 
@@ -248,6 +260,13 @@ The engine should support interchangeable causal swing detectors, for example:
 The detector emits events such as `SWING_HIGH_CONFIRMED` and `SWING_LOW_CONFIRMED` with both `pivot_at` and `confirmed_at`. Strategy decisions may use the event only at or after `confirmed_at`.
 
 HH/HL/LH/LL classification is derived from confirmed swings. H0001's exact detector is a strategy-spec choice, not an engine default disguised as truth.
+
+V2-B provides a strict L-left/R-right reference fractal on contiguous completed
+bars. pivot_at is the candidate end; confirmed_at is the maximum known_at of
+the entire confirmation window. Missing or incomplete neighbors cannot confirm
+it. Events are cumulative, ordered by confirmation time; a separate classifier
+compares same-kind confirmed prices and labels equality EQH/EQL. This reference
+implementation is not H0001's finalized swing algorithm.
 
 ## 10. Data contract
 
@@ -354,11 +373,21 @@ Acceptance: synthetic 15m fixture replays into correct 15m/1H/Daily known-at vie
 
 ### V2-B — reusable features
 
-Add MACD, relative transforms and causal price-structure services with hand-calculated and leakage tests.
+Implemented: immutable strategy-neutral EMA/MACD, TR/Wilder ATR, rolling
+percentile/z-score, positive scale normalization, confirmed fractal swings and
+same-kind HH/LH/HL/LL classification. Hand fixtures, 100-bar prefix invariance,
+delayed/partial-bar isolation, atomic-symbol regressions and recursive code
+provenance are tested. See V2_B_IMPLEMENTATION.md for exact versioned contracts.
 
 Acceptance: features are strategy-neutral and reproducible from past-only bars.
 
 ### V2-C — H0001 executable specification
+
+Prerequisites: confirm the observed chart/provider's EMA seed/history/warmup and
+1H boundaries against the unchanged XNYS open-anchored buckets (09:30–10:30,
+..., 15:30–16:00); choose H0001's actual swing detector and relative transform.
+Until then, neither chart-MACD parity nor finalized H0001 feature conventions
+may be claimed. H0001-r03 remains DRAFT and profitability unmeasured.
 
 Convert r03 unknowns required for execution into an explicit versioned strategy spec. Do not choose thresholds by silently fitting the same evaluation sample. Implement H0001 plugin/state machine only after the spec is frozen.
 
