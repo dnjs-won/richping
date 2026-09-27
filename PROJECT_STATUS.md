@@ -1,3 +1,41 @@
+# Richping v2 상태 · 2026-09-27 V2-C0 executable-spec contract
+
+**V2-C0 infrastructure: COMPLETE. H0001 executable spec: DRAFT / BLOCKED_ON_DECISIONS.**
+**H0001 profitability: NOT TESTED. V2-C1 plugin은 미구현이며 아직 시작할 수 없다.**
+
+- clean `v2-b-reusable-features`와 감사 base
+  `887810629a46912bd7cd4dcfca2709b1b33d7f74`를 확인한 뒤,
+  `v2-c0-h0001-spec-contract` / `var/worktrees/v2-c0`를 분리 생성했다.
+  시작 기본 작업 트리는 `main@94cc2d292a83714aadaa4033ddfd5a5cfca39125`였고,
+  기존 cli/maturity/paper/pipeline 수정과 미추적 R1-Q 테스트를 그대로 보존했다.
+- generic immutable specification, strict YAML/JSON parser, canonical SHA-256,
+  DRAFT/FROZEN 검증, H0001-r03 필수 inventory와 별도 executable-spec draft를 구현했다.
+  필드 누락·unknown enum·잘못된 타입·중복 키·blocker 분류 하향·중첩 unknown 은폐는 거부한다.
+  parser용 PyYAML을 research/dev optional dependency에 명시했다.
+- 결정 **75개**: C1 implementation blocker **51개**, performance experiment blocker **17개**,
+  optional future extension **7개**. parameter/transition **107개 경로**가 UNRESOLVED다.
+  C1 blocker가 남으면 FROZEN 불가. 수익률 실험은 performance blocker 해소와 chart parity도 필요하다.
+  FROZEN은 구조적 신호 계약 동결이며, 사용자 결정·구현 정확성·수익성 증명이 아니다.
+- 현재 15m RTH·first-observation EMA는 엔진 capability다. 전략의 session/EMA 결정을 대신하지 않는다.
+  observed chart/provider·1H boundary·EMA/history/warmup은 미확정, parity는 UNVERIFIED다.
+  향후 engine-side 규약을 동결한 C1 synthetic 테스트와 historical reproduction의 gate를 분리했다.
+- r03 원본 byte hash는 기준 작업 트리와 동일하다. 새 r04를 만들지 않았다.
+  V2-A/B causal·atomic-known-at·readiness·continuity·provenance 코드와 기존 테스트는 변경하지 않았다.
+  generic replay/features는 H0001 모듈을 import하지 않는다. 기존 recursive V2 code hash에는
+  추가 source가 자연스럽게 반영되며 과거 증거를 재작성하지 않는다.
+- 최종 신규 C0 **159 passed (19.11s)**, V2 전체 **289 passed (39.27s)**,
+  전체 pytest **543 passed (108.38s)**. 최종 실행 실패·skip·pytest warning 없음.
+  `git diff --check` 및 staged diff check 통과. 테스트 중 ID 편집이 겹친 이전 실행은
+  폐기하고 코드/명세를 고정한 새 프로세스에서 최종 결과를 확인했다.
+- H0001 strategy/on_event/Intent, backtest, parameter optimization, provider 선정,
+  execution simulator, portfolio, production/paper 변경은 수행하지 않았다. main merge 없음.
+- Spec hash: `5e15b84787a42998ddeed7b183d7e2b5931b87f020840699803dceb56ad3dde3`.
+  다음 단계는 사용자의 결정과 freeze 검토다. 이후 research-capture revision 필요성을 별도 판단한다.
+  전체 결정 질문·후보·분류·feature mapping은
+  [V2-C0 명세와 decision matrix](docs/V2_C0_H0001_SPECIFICATION.md)를 따른다.
+
+---
+
 # Richping v2 상태 · 2026-09-27 V2-B continuity audit remediation
 
 **내부 expected timeframe bar 결손을 fail-closed하도록 수정 완료.**

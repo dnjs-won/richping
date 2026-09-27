@@ -1,0 +1,1775 @@
+# Executable-spec draft, NOT a strategy implementation or frozen decision.
+# Source r03 remains immutable. All alternatives below are unselected.
+schema_version: strategy_specification_v1
+strategy_id: H0001
+specification_version: h0001_r03_spec_v1
+hypothesis_id: H0001
+hypothesis_revision: 3
+status: DRAFT
+created_at: '2026-09-27T00:00:00Z'
+updated_at: '2026-09-27T00:00:00Z'
+source:
+  path: research/hypotheses/H0001-r03.yaml
+  sha256: 35e13276056a36d6a06de04611720fd286113f0e5db1e4255af6ceeb6a0f0bc2
+direction: LONG_ONLY
+feature_contracts:
+  macd_ema_seed:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-EMA-SEED
+  macd_signal_start:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-EMA-SEED
+  macd_price_field:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-EMA-SEED
+  macd_feature_version:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-EMA-SEED
+  macd_min_history_daily:
+    kind: integer
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-MACD-HISTORY
+  macd_min_history_1h:
+    kind: integer
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-MACD-HISTORY
+  macd_min_history_15m:
+    kind: integer
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-MACD-HISTORY
+  history_origin:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-HISTORY-ORIGIN
+  setup_1h_relative_conventions:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-RELATIVE-CONVENTIONS
+  entry_15m_relative_conventions:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-M15-RELATIVE-CONVENTIONS
+  exit_1h_relative_conventions:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-EXIT-CONVENTIONS
+  macd_fast:
+    kind: integer
+    value: 12
+    choices: []
+    decision_id: null
+  macd_slow:
+    kind: integer
+    value: 26
+    choices: []
+    decision_id: null
+  macd_signal:
+    kind: integer
+    value: 9
+    choices: []
+    decision_id: null
+timeframe_contracts:
+  session_policy:
+    kind: enum
+    value: UNRESOLVED
+    choices:
+    - RTH
+    - RTH_EXTENDED
+    decision_id: H1-SESSION
+  base:
+    kind: timeframe
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-BASE
+  regime:
+    kind: timeframe
+    value: Daily
+    choices: []
+    decision_id: null
+  setup:
+    kind: timeframe
+    value: 1H
+    choices: []
+    decision_id: null
+  confirmation:
+    kind: timeframe
+    value: 15m
+    choices: []
+    decision_id: null
+  execution:
+    kind: timeframe
+    value: 15m
+    choices: []
+    decision_id: null
+rule_parameters:
+  daily_long_permission:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-DAILY-LONG
+  daily_exhaustion_blocker:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-DAILY-BLOCKER
+  setup_1h_relative_transform:
+    kind: enum
+    value: UNRESOLVED
+    choices:
+    - ROLLING_PERCENTILE
+    - ROLLING_ZSCORE
+    - MACD_ATR
+    decision_id: H1-RELATIVE-METHOD
+  setup_1h_rolling_lookback:
+    kind: integer
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-LOOKBACK
+  setup_1h_downside_threshold:
+    kind: number
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-DOWNSIDE
+  setup_1h_downside_comparator:
+    kind: enum
+    value: UNRESOLVED
+    choices:
+    - LT
+    - LE
+    decision_id: H1-COMPARATOR
+  entry_15m_relative_transform:
+    kind: enum
+    value: UNRESOLVED
+    choices:
+    - ROLLING_PERCENTILE
+    - ROLLING_ZSCORE
+    - MACD_ATR
+    decision_id: H1-M15-RELATIVE-METHOD
+  entry_15m_rolling_lookback:
+    kind: integer
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-M15-LOOKBACK
+  entry_15m_downside_threshold:
+    kind: number
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-M15-DOWNSIDE
+  entry_15m_downside_comparator:
+    kind: enum
+    value: UNRESOLVED
+    choices:
+    - LT
+    - LE
+    decision_id: H1-M15-COMPARATOR
+  entry_15m_gc:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-M15-GC
+  entry_15m_price_reversal:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-M15-REVERSAL
+  entry_15m_trigger_conjunction:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-M15-CONJUNCTION
+  failed_first_reversal:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-FAILED-REVERSAL
+  deeper_extreme:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-DEEPER-EXTREME
+  role_of_1h_gc:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-GC-ROLE
+  exit_1h_relative_transform:
+    kind: enum
+    value: UNRESOLVED
+    choices:
+    - ROLLING_PERCENTILE
+    - ROLLING_ZSCORE
+    - MACD_ATR
+    decision_id: H1-EXIT-RELATIVE
+  exit_1h_rolling_lookback:
+    kind: integer
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-EXIT-LOOKBACK
+  exit_upper_relative_extreme:
+    kind: number
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-UPPER-EXTREME
+  exit_upper_comparator:
+    kind: enum
+    value: UNRESOLVED
+    choices:
+    - GT
+    - GE
+    decision_id: H1-UPPER-COMPARATOR
+  histogram_contraction:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-HISTOGRAM
+  macd_slope:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-MACD-SLOPE
+  signal_slope:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-SIGNAL-SLOPE
+  exit_dead_cross:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-DEAD-CROSS
+  weak_watch:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-WEAK-WATCH
+  strong_watch:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-STRONG-WATCH
+  watch_price_confirmation:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-WATCH-CONFIRMATION
+  swing_detector:
+    kind: enum
+    value: UNRESOLVED
+    choices:
+    - FRACTAL
+    - ATR_REVERSAL
+    - DIRECTIONAL_CHANGE
+    decision_id: H1-SWING-DETECTOR
+  swing_parameters:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-SWING-PARAMETERS
+  reference_hh:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-REFERENCE-HH
+  lh_definition:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-LH
+  hl_definition:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-VALID-HL
+  valid_hl_semantics:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-VALID-HL
+  hl_break_confirmation:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-HL-BREAK
+state_machine_parameters:
+  setup_persistence_expiry:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-SETUP-LIFETIME
+  reentry_add_policy:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-ADD-POLICY
+  max_adds:
+    kind: integer
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-MAX-ADDS
+  new_hh_reset:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-NEW-HH-RESET
+  stop_loss:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-STOP-LOSS
+  trailing_stop:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-TRAILING
+  max_holding:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-MAX-HOLDING
+  overnight:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-OVERNIGHT
+  decision_timing:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-DECISION-TIMING
+  transition_priority_and_resets:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-STATE-TRANSITIONS
+  initial_state:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-STATE-TRANSITIONS
+execution_requirements:
+  initial_sizing:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-SIZING
+  tranche_sizing:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-SIZING
+  total_risk_cap:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-EXPOSURE
+  exposure_cap:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-EXPOSURE
+  order_timing:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-ORDER-TIMING
+  fill_price_contract:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-FILL
+  transaction_cost:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-COSTS
+  slippage:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-COSTS
+research_requirements:
+  universe:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-UNIVERSE
+  discovery_period:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-DISCOVERY
+  confirmatory_period:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-CONFIRMATORY
+  baseline:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-BASELINE
+  primary_metric:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-PRIMARY-METRIC
+  decision_rule:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-DECISION-RULE
+  null_hypothesis:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-DECISION-RULE
+  sample_unit:
+    kind: enum
+    value: UNRESOLVED
+    choices:
+    - SIGNAL_EVENT
+    - COMPLETED_TRADE
+    decision_id: H1-SAMPLE-UNIT
+  multiple_testing_family:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-MULTIPLE-TESTING
+optional_extensions:
+  four_hour_filter:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-4H
+  weekly_monthly_filter:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-WEEKLY-MONTHLY
+  five_one_minute:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-FINE-EXECUTION
+  volume:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-VOLUME-PA
+  divergence:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-VOLUME-PA
+  obv:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-VOLUME-PA
+  vwap:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-VOLUME-PA
+  volume_profile:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-VOLUME-PA
+  order_block:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-VOLUME-PA
+  options_chain:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-OPTIONS
+  zero_dte_flow:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-OPTIONS
+  gex:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-OPTIONS
+  max_pain:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-OPTIONS
+  short_strategy:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-SHORT
+  price_macd_gc_lag_distribution:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-LAG-STUDY
+chart_parity:
+  observed_chart_provider:
+    kind: text
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-CHART-PROVIDER
+  observed_1h_boundary:
+    kind: text
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-CHART-1H
+  observed_ema_seed:
+    kind: text
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-CHART-EMA
+  observed_history_origin:
+    kind: text
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-CHART-EMA
+  observed_min_history:
+    kind: text
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-CHART-EMA
+  parity_evidence:
+    kind: text
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-CHART-VERIFICATION
+  engine_1h_boundary:
+    kind: text
+    value: XNYS open anchored; America/New_York 09:30-10:30, 10:30-11:30, ..., 15:30-16:00; early close final bucket
+      ends at official close
+    choices: []
+    decision_id: null
+  engine_ema_seed:
+    kind: text
+    value: first_observation_recursive_v1
+    choices: []
+    decision_id: null
+  parity_status:
+    kind: enum
+    value: UNVERIFIED
+    choices:
+    - UNVERIFIED
+    - VERIFIED
+    - MISMATCH
+    decision_id: null
+engine_capabilities:
+  base_timeframe:
+    kind: timeframe
+    value: 15m
+    choices: []
+    decision_id: null
+  session_policy:
+    kind: text
+    value: XNYS_RTH
+    choices: []
+    decision_id: null
+  availability:
+    kind: text
+    value: atomic_known_at_batch_v1
+    choices: []
+    decision_id: null
+  continuity:
+    kind: text
+    value: xnys_completed_grid_v1
+    choices: []
+    decision_id: null
+  aggregation:
+    kind: text
+    value: xnys_open_anchored_short_final_v1
+    choices: []
+    decision_id: null
+  macd_feature_version:
+    kind: text
+    value: macd_first_observation_recursive_v1
+    choices: []
+    decision_id: null
+  percentile_feature_version:
+    kind: text
+    value: rolling_empirical_midrank_v1
+    choices: []
+    decision_id: null
+  zscore_feature_version:
+    kind: text
+    value: rolling_zscore_ddof_v1
+    choices: []
+    decision_id: null
+  normalization_feature_version:
+    kind: text
+    value: positive_causal_scale_v1
+    choices: []
+    decision_id: null
+  atr_feature_version:
+    kind: text
+    value: atr_wilder_sma_seed_first_high_low_v1
+    choices: []
+    decision_id: null
+  swing_feature_version:
+    kind: text
+    value: fractal_k_right_strict_v1
+    choices: []
+    decision_id: null
+  classification_feature_version:
+    kind: text
+    value: confirmed_same_kind_comparison_v1
+    choices: []
+    decision_id: null
+decisions:
+  H1-SESSION:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: RTH만 사용할지 extended hours도 사용할지?
+    current_hypothesis_statement: Session choice is unknown; US equity/ETF context.
+    available_v2_primitive: V2-A supports XNYS RTH only
+    candidate_choices:
+    - RTH
+    - RTH plus extended (requires new data/feature contracts)
+    source_refs:
+    - unknowns[25]
+    - required_data[8]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-BASE:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 전략 authoritative base input은?
+    current_hypothesis_statement: 15m required; technical input must not imply strategy session selection.
+    available_v2_primitive: V2-A 15m input
+    candidate_choices:
+    - 15m
+    - finer input would require a separate capability contract
+    source_refs:
+    - required_data[1]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-EMA-SEED:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: EMA seed·signal 시작·가격 field·feature version을 무엇으로 동결할지?
+    current_hypothesis_statement: MACD(12,26,9), enough past warmup; seed and source field not specified.
+    available_v2_primitive: 'MACDSpec: first_observation, first_macd_observation, close only'
+    candidate_choices:
+    - explicitly adopt existing engine conventions
+    - new versioned convention after separate implementation
+    source_refs:
+    - required_data[4]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-MACD-HISTORY:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 각 시간축 MACD 최소 history는?
+    current_hypothesis_statement: Sufficient warmup required; count unknown.
+    available_v2_primitive: MACDSpec.min_history
+    candidate_choices:
+    - researcher-specified positive counts per timeframe
+    source_refs:
+    - required_data[4]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-HISTORY-ORIGIN:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: EMA 계산 이력 시작점·세션 간 지속 정책은?
+    current_hypothesis_statement: Past-only MACD; exact history origin unspecified.
+    available_v2_primitive: V2-B full visible contiguous history, no session reset
+    candidate_choices:
+    - explicit full visible history convention
+    - other versioned history convention
+    source_refs:
+    - required_data[4]
+    - test.leakage_risks[3]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-DAILY-LONG:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: Daily LONG regime의 정확한 수학식은?
+    current_hypothesis_statement: Allow new longs only in Daily rising regime.
+    available_v2_primitive: Completed Daily MACD and generic features; no regime predicate
+    candidate_choices:
+    - versioned Daily MACD rule
+    - versioned price/structure rule
+    - explicitly defined combination
+    source_refs:
+    - rules.regime[0]
+    - rules.regime[4]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-DAILY-BLOCKER:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: Daily 과열 blocker의 threshold·차단/축소 방식은?
+    current_hypothesis_statement: Upper exhaustion should block or reduce new longs; formula unknown.
+    available_v2_primitive: Relative transforms; no blocker predicate
+    candidate_choices:
+    - block rule with explicit threshold
+    - reduction rule with explicit threshold and exposure dependency
+    source_refs:
+    - rules.regime[1]
+    - rules.regime[4]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-RELATIVE-METHOD:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 1H setup relative MACD 정의는?
+    current_hypothesis_statement: Past-relative downside position; no final hindsight extreme.
+    available_v2_primitive: PercentileSpec / ZScoreSpec / NormalizeSpec + ATRSpec
+    candidate_choices:
+    - rolling percentile
+    - rolling z-score
+    - MACD / ATR
+    source_refs:
+    - rules.setup[1]
+    - unknowns[4]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-LOOKBACK:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 1H setup lookback 길이는?
+    current_hypothesis_statement: Rolling history required; no length selected.
+    available_v2_primitive: PercentileSpec.window / ZScoreSpec.window; ATRSpec.period for scale
+    candidate_choices:
+    - positive observation count
+    - method-specific period must be explicitly specified
+    source_refs:
+    - unknowns[5]
+    - required_data[5]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-RELATIVE-CONVENTIONS:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 1H setup 상대변환 field·min_history·ties/ddof/ATR 설정은?
+    current_hypothesis_statement: Relative transform alternatives discussed, conventions not frozen.
+    available_v2_primitive: Current-inclusive midrank / explicit ddof / aligned Wilder ATR
+    candidate_choices:
+    - versioned full transform contract including field, readiness and selected scale parameters
+    source_refs:
+    - rules.setup[1]
+    - required_data[5]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-DOWNSIDE:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 1H setup 하방 threshold 값은?
+    current_hypothesis_statement: Relatively deep downside, no numeric threshold.
+    available_v2_primitive: Relative numeric output only
+    candidate_choices:
+    - numeric cutoff after method is chosen
+    - no value proposed
+    source_refs:
+    - unknowns[6]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-COMPARATOR:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 1H setup threshold 경계 포함 여부는?
+    current_hypothesis_statement: Downside extreme; strict versus inclusive unspecified.
+    available_v2_primitive: No strategy threshold predicate
+    candidate_choices:
+    - strict less-than
+    - inclusive less-than-or-equal
+    source_refs:
+    - rules.setup[0]
+    - rules.trigger[1]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-M15-RELATIVE-METHOD:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 15m entry relative MACD 정의는?
+    current_hypothesis_statement: Past-relative downside position; no final hindsight extreme.
+    available_v2_primitive: PercentileSpec / ZScoreSpec / NormalizeSpec + ATRSpec
+    candidate_choices:
+    - rolling percentile
+    - rolling z-score
+    - MACD / ATR
+    source_refs:
+    - rules.setup[1]
+    - unknowns[4]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-M15-LOOKBACK:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 15m entry lookback 길이는?
+    current_hypothesis_statement: Rolling history required; no length selected.
+    available_v2_primitive: PercentileSpec.window / ZScoreSpec.window; ATRSpec.period for scale
+    candidate_choices:
+    - positive observation count
+    - method-specific period must be explicitly specified
+    source_refs:
+    - unknowns[5]
+    - required_data[5]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-M15-RELATIVE-CONVENTIONS:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 15m entry 상대변환 field·min_history·ties/ddof/ATR 설정은?
+    current_hypothesis_statement: Relative transform alternatives discussed, conventions not frozen.
+    available_v2_primitive: Current-inclusive midrank / explicit ddof / aligned Wilder ATR
+    candidate_choices:
+    - versioned full transform contract including field, readiness and selected scale parameters
+    source_refs:
+    - rules.setup[1]
+    - required_data[5]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-M15-DOWNSIDE:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 15m entry 하방 threshold 값은?
+    current_hypothesis_statement: Relatively deep downside, no numeric threshold.
+    available_v2_primitive: Relative numeric output only
+    candidate_choices:
+    - numeric cutoff after method is chosen
+    - no value proposed
+    source_refs:
+    - unknowns[6]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-M15-COMPARATOR:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 15m entry threshold 경계 포함 여부는?
+    current_hypothesis_statement: Downside extreme; strict versus inclusive unspecified.
+    available_v2_primitive: No strategy threshold predicate
+    candidate_choices:
+    - strict less-than
+    - inclusive less-than-or-equal
+    source_refs:
+    - rules.setup[0]
+    - rules.trigger[1]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-SETUP-LIFETIME:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 1H setup 유지·소멸·취소 조건은?
+    current_hypothesis_statement: 15m trigger occurs within the 1H setup; lifetime unspecified.
+    available_v2_primitive: No strategy lifecycle primitive
+    candidate_choices:
+    - persist while setup holds
+    - explicit time/event expiry
+    - explicit invalidation
+    source_refs:
+    - rules.trigger[0]
+    - rules.trigger[1]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-M15-GC:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: GC equality·previous/current·0선 조건을 어떻게 정의할지?
+    current_hypothesis_statement: 15m GC or confirmed reversal; below-zero observation is not a frozen rule.
+    available_v2_primitive: MACD line/signal only; NOT YET strategy predicate
+    candidate_choices:
+    - strict cross
+    - cross allowing prior equality
+    - separately decide zero-line restriction
+    source_refs:
+    - observations[0]
+    - rules.trigger[1]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-M15-REVERSAL:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 확인된 가격 반전이란?
+    current_hypothesis_statement: Confirmed price reversal is an entry candidate.
+    available_v2_primitive: Confirmed swings / classify_swings; no reversal rule
+    candidate_choices:
+    - confirmed swing reversal
+    - explicit completed-price rule
+    - explicitly unused under chosen trigger
+    source_refs:
+    - rules.trigger[1]
+    - unknowns[9]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-M15-CONJUNCTION:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 극단·GC·가격 반전의 AND/OR·순서·동시성은?
+    current_hypothesis_statement: Downside extreme with GC or reversal; timing relationship unspecified.
+    available_v2_primitive: No strategy conjunction predicate
+    candidate_choices:
+    - extreme AND GC
+    - extreme AND reversal
+    - extreme AND (GC OR reversal)
+    - require both with explicit temporal relation
+    source_refs:
+    - rules.trigger[1]
+    - observations[2]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-ADD-POLICY:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 최초 버전에 add/re-entry를 포함할지·어떻게 구분할지?
+    current_hypothesis_statement: Capped add or re-entry candidate after failed first reversal.
+    available_v2_primitive: No position lifecycle implementation
+    candidate_choices:
+    - explicitly defer both
+    - capped add
+    - re-entry
+    - both with separate prerequisites
+    source_refs:
+    - rules.trigger[2]
+    - notes
+    required_for_c1: true
+    required_for_profitability: true
+  H1-FAILED-REVERSAL:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 첫 반전 실패를 어떻게 판정할지?
+    current_hypothesis_statement: Failed first 15m reversal precedes deeper extreme and new reversal.
+    available_v2_primitive: No strategy predicate
+    candidate_choices:
+    - explicit price invalidation
+    - explicit signal invalidation
+    - explicitly disabled with add policy
+    source_refs:
+    - rules.trigger[2]
+    - unknowns[11]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-DEEPER-EXTREME:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 이전보다 깊은 극단의 reference와 비교식은?
+    current_hypothesis_statement: A deeper relative downside extreme precedes a fresh reversal.
+    available_v2_primitive: Relative transforms only
+    candidate_choices:
+    - compare prior trigger relative value
+    - compare prior setup extreme
+    - explicit reset/measurement convention
+    source_refs:
+    - rules.trigger[2]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-MAX-ADDS:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 최대 add 횟수와 counter lifecycle은?
+    current_hypothesis_statement: Adds and position size must be capped; cap unknown.
+    available_v2_primitive: No strategy counter
+    candidate_choices:
+    - explicit nonnegative cap
+    - counter reset belongs to transition contract
+    source_refs:
+    - rules.trigger[4]
+    - unknowns[12]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-SIZING:
+    classification: PERFORMANCE_EXPERIMENT_BLOCKER
+    question: 최초·추가 tranche 크기는?
+    current_hypothesis_statement: Tranche size is unknown.
+    available_v2_primitive: No V2 sizing/portfolio engine
+    candidate_choices:
+    - fixed units
+    - fixed capital fraction
+    - explicit risk sizing
+    - no value selected
+    source_refs:
+    - unknowns[12]
+    required_for_c1: false
+    required_for_profitability: true
+  H1-EXPOSURE:
+    classification: PERFORMANCE_EXPERIMENT_BLOCKER
+    question: 총 risk·종목/계좌 exposure cap은?
+    current_hypothesis_statement: Total risk and size must be limited.
+    available_v2_primitive: No V2 capital accounting
+    candidate_choices:
+    - explicit per-symbol cap
+    - explicit account cap
+    - explicit risk budget
+    source_refs:
+    - rules.trigger[4]
+    - unknowns[12]
+    required_for_c1: false
+    required_for_profitability: true
+  H1-GC-ROLE:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 1H GC는 확인용인가 추가진입 조건인가?
+    current_hypothesis_statement: Not fixed as first-entry requirement; confirmation/add candidate.
+    available_v2_primitive: MACD values only
+    candidate_choices:
+    - confirmation only
+    - add prerequisite
+    - explicitly unused
+    source_refs:
+    - rules.setup[2]
+    - rules.trigger[5]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-EXIT-RELATIVE:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 1H exit relative transform은 setup과 같은가?
+    current_hypothesis_statement: Upper relative extreme; method sharedness unspecified.
+    available_v2_primitive: PercentileSpec / ZScoreSpec / NormalizeSpec
+    candidate_choices:
+    - explicit shared setup method
+    - independent percentile/z-score/MACD-ATR choice
+    source_refs:
+    - rules.exit[1]
+    - unknowns[7]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-EXIT-LOOKBACK:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: Exit 상대변환 lookback은?
+    current_hypothesis_statement: Upper relative extreme history length unspecified.
+    available_v2_primitive: Rolling windows / ATR period
+    candidate_choices:
+    - explicit positive observation count
+    source_refs:
+    - unknowns[5]
+    - unknowns[7]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-EXIT-CONVENTIONS:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: Exit 상대변환의 전체 convention은?
+    current_hypothesis_statement: No transform convention selected.
+    available_v2_primitive: Same relative primitives as setup
+    candidate_choices:
+    - explicit field/readiness/ties/ddof/ATR contract
+    source_refs:
+    - required_data[5]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-UPPER-EXTREME:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 1H 상방 extreme threshold는?
+    current_hypothesis_statement: Upper extreme precedes strong-watch candidate.
+    available_v2_primitive: Relative output only
+    candidate_choices:
+    - numeric cutoff after transform choice
+    - no value proposed
+    source_refs:
+    - rules.exit[2]
+    - unknowns[7]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-UPPER-COMPARATOR:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 상방 threshold equality는?
+    current_hypothesis_statement: Upper extreme exact comparison unknown.
+    available_v2_primitive: No strategy threshold predicate
+    candidate_choices:
+    - strict greater-than
+    - inclusive greater-than-or-equal
+    source_refs:
+    - rules.exit[2]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-HISTOGRAM:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: Histogram 수축의 부호·기간·수식은?
+    current_hypothesis_statement: Histogram contraction is an exit-watch candidate.
+    available_v2_primitive: MACD histogram; NOT YET strategy predicate
+    candidate_choices:
+    - completed-bar difference
+    - multi-bar contraction
+    - explicit sign/threshold policy
+    source_refs:
+    - rules.exit[1]
+    - unknowns[8]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-MACD-SLOPE:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: MACD slope의 기간·수식·threshold는?
+    current_hypothesis_statement: Falling MACD slope is an exit-watch candidate.
+    available_v2_primitive: MACD line; NOT YET strategy predicate
+    candidate_choices:
+    - first difference
+    - windowed slope
+    - explicit threshold and units
+    source_refs:
+    - rules.exit[1]
+    - unknowns[8]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-SIGNAL-SLOPE:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: Signal slope의 기간·수식·threshold는?
+    current_hypothesis_statement: Falling signal slope is an exit-watch candidate.
+    available_v2_primitive: Signal line; NOT YET strategy predicate
+    candidate_choices:
+    - first difference
+    - windowed slope
+    - explicit threshold and units
+    source_refs:
+    - rules.exit[1]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-DEAD-CROSS:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: DC의 equality·시점 정의는?
+    current_hypothesis_statement: 1H DC is watch only; small 15m DC alone does not exit.
+    available_v2_primitive: MACD line/signal; NOT YET strategy predicate
+    candidate_choices:
+    - strict cross
+    - prior equality allowed
+    - explicit timing
+    source_refs:
+    - rules.exit[0]
+    - rules.exit[1]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-WEAK-WATCH:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 중간/0선 failed-upswing과 weak-watch 조합은?
+    current_hypothesis_statement: Failure before upper extreme is a weak-watch candidate.
+    available_v2_primitive: No watch predicate
+    candidate_choices:
+    - explicit midrange/zero-zone rule
+    - exact deterioration conjunction
+    source_refs:
+    - rules.exit[3]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-STRONG-WATCH:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: Strong-watch의 극단 이력·하락·조건 조합은?
+    current_hypothesis_statement: Decline after upper extreme is a strong-watch candidate.
+    available_v2_primitive: No watch predicate
+    candidate_choices:
+    - explicit upper-hit memory and deterioration rule
+    source_refs:
+    - rules.exit[2]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-WATCH-CONFIRMATION:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: Weak/strong의 가격 확인 강도를 다르게 할지?
+    current_hypothesis_statement: Weak-watch must not exit immediately without stronger PA confirmation; exact contrast
+      unknown.
+    available_v2_primitive: No strategy PA confirmation
+    candidate_choices:
+    - different confirmation rules
+    - one explicitly justified confirmation contract
+    source_refs:
+    - rules.exit[3]
+    - unknowns[17]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-SWING-DETECTOR:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 어떤 causal swing detector를 사용할지?
+    current_hypothesis_statement: ATR reversal, directional-change, k-bar pivot are candidates.
+    available_v2_primitive: FractalSpec only; alternatives NOT IMPLEMENTED
+    candidate_choices:
+    - k-bar confirmed fractal
+    - ATR reversal
+    - directional-change
+    source_refs:
+    - unknowns[14]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-SWING-PARAMETERS:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: Swing width/threshold/ties와 confirmation contract는?
+    current_hypothesis_statement: Pivot usable only from actual confirmation time; widths unknown.
+    available_v2_primitive: FractalSpec(left,right), strict ties, confirmed_at
+    candidate_choices:
+    - explicit left/right widths
+    - explicit ATR/directional threshold if implemented
+    source_refs:
+    - unknowns[15]
+    - rules.invalidation[5]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-REFERENCE-HH:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: Reference HH 초기화·갱신·실패는?
+    current_hypothesis_statement: Reference HH after which pullback HL and failed rebound LH form.
+    available_v2_primitive: classify_swings labels only
+    candidate_choices:
+    - explicit confirmed HH selection and failure definition
+    source_refs:
+    - observations[8]
+    - rules.exit[4]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-LH:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: Reference HH 아래 LH를 언제 확정할지?
+    current_hypothesis_statement: Rebound ends below reference HH before HL breaks.
+    available_v2_primitive: Same-kind LH is available, strategy reference relation is not
+    candidate_choices:
+    - confirmed rebound high below reference
+    - explicit tie and sequence policy
+    source_refs:
+    - observations[8]
+    - rules.exit[4]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-VALID-HL:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 어떤 HL/swing low가 유효하며 어느 LH와 연결되는가?
+    current_hypothesis_statement: Break the previous valid HL/swing low related to that LH.
+    available_v2_primitive: classify_swings HL label; NOT valid-HL/BOS semantics
+    candidate_choices:
+    - explicit association and confirmation order
+    - explicit equality/initial-low handling
+    source_refs:
+    - observations[8]
+    - rules.exit[4]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-HL-BREAK:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: HL break는 wick·종가·연속 종가 중 무엇인가?
+    current_hypothesis_statement: Wick versus completed 15m close remains unknown.
+    available_v2_primitive: Completed OHLC only
+    candidate_choices:
+    - wick
+    - one completed close
+    - consecutive completed closes with explicit count
+    source_refs:
+    - rules.exit[6]
+    - unknowns[16]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-NEW-HH-RESET:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 새 HH가 reference/watch/LH/HL 중 무엇을 reset하는가?
+    current_hypothesis_statement: New HH updates reference and continues HOLD candidate.
+    available_v2_primitive: Confirmed HH labels only
+    candidate_choices:
+    - explicit reference update and watch/structure memory reset policy
+    source_refs:
+    - rules.exit[5]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-STOP-LOSS:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: Stop loss를 병행할지·정확한 signal 규칙은?
+    current_hypothesis_statement: Stop-loss unknown.
+    available_v2_primitive: ATR primitive only; no stop execution
+    candidate_choices:
+    - explicitly disabled
+    - fixed-price/percentage rule
+    - ATR rule with explicit parameters
+    source_refs:
+    - unknowns[19]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-TRAILING:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: Trailing stop 여부·ATR 배수·갱신 규칙은?
+    current_hypothesis_statement: Trailing and ATR multiple unknown.
+    available_v2_primitive: ATR primitive only
+    candidate_choices:
+    - explicitly disabled
+    - versioned ATR trail
+    - versioned structure trail
+    source_refs:
+    - unknowns[18]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-MAX-HOLDING:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 최대 보유시간과 만료 signal 규칙은?
+    current_hypothesis_statement: Max holding unknown; timeframe mismatch noted.
+    available_v2_primitive: Clock/completed bars, no lifecycle rule
+    candidate_choices:
+    - explicitly disabled
+    - elapsed-time limit
+    - completed-bar/session limit
+    source_refs:
+    - unknowns[19]
+    - observations[10]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-OVERNIGHT:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: Overnight 허용·세션 종료 처리 규칙은?
+    current_hypothesis_statement: Overnight policy unknown.
+    available_v2_primitive: XNYS boundaries only
+    candidate_choices:
+    - allow with explicit persistence
+    - disallow with explicit flatten signal timing
+    source_refs:
+    - unknowns[19]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-DECISION-TIMING:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 어떤 완료/known-at event에서 판단·freshness 제한을 적용할지?
+    current_hypothesis_statement: Only then-known completed data; decision cadence/stale handling unspecified.
+    available_v2_primitive: Atomic known_at batches, READY/NOT_READY/UNDEFINED
+    candidate_choices:
+    - explicit event cadence, stale higher-frame policy and unavailable-input behavior
+    source_refs:
+    - test.leakage_risks[3]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-STATE-TRANSITIONS:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: 동시 조건 우선순위·regime 소실·setup 취소·reset·initial state는?
+    current_hypothesis_statement: Narrative candidate flow; complete transition table not supplied.
+    available_v2_primitive: Immutable StrategyState / atomic ReplayEvent
+    candidate_choices:
+    - explicit deterministic transition table with state memory and reset rules
+    source_refs:
+    - notes
+    - rules.trigger
+    - rules.exit
+    required_for_c1: true
+    required_for_profitability: true
+  H1-ORDER-TIMING:
+    classification: PERFORMANCE_EXPERIMENT_BLOCKER
+    question: 신호 이후 주문 시점은?
+    current_hypothesis_statement: Order timing unknown.
+    available_v2_primitive: Intent/Fill boundary reserved; executor absent
+    candidate_choices:
+    - explicit next eligible event
+    - explicit latency model
+    source_refs:
+    - unknowns[20]
+    required_for_c1: false
+    required_for_profitability: true
+  H1-FILL:
+    classification: PERFORMANCE_EXPERIMENT_BLOCKER
+    question: 가격·gap·부분체결·미체결·stop 충돌 가정은?
+    current_hypothesis_statement: Fill-price assumptions unknown.
+    available_v2_primitive: Fill value contract only; NO simulator
+    candidate_choices:
+    - explicit causal market/limit fill contract
+    - explicit incomplete/unavailable outcome handling
+    source_refs:
+    - unknowns[20]
+    - required_data[7]
+    required_for_c1: false
+    required_for_profitability: true
+  H1-COSTS:
+    classification: PERFORMANCE_EXPERIMENT_BLOCKER
+    question: 수수료·슬리피지·stress 비용 규칙은?
+    current_hypothesis_statement: No cost assumptions fixed.
+    available_v2_primitive: No V2 cost engine; legacy costs not inherited
+    candidate_choices:
+    - explicit commission schedule
+    - explicit spread/slippage model
+    - declared stress scenarios
+    source_refs:
+    - unknowns[29]
+    - test.cost_assumption
+    required_for_c1: false
+    required_for_profitability: true
+  H1-UNIVERSE:
+    classification: PERFORMANCE_EXPERIMENT_BLOCKER
+    question: SOXX 단일/반도체/다른 주식·ETF 중 적용 universe는?
+    current_hypothesis_statement: Universe choice unknown; point-in-time membership required.
+    available_v2_primitive: Dataset symbol provenance; no real PIT provider selected
+    candidate_choices:
+    - SOXX scope
+    - semiconductor scope
+    - broader explicit PIT scope
+    source_refs:
+    - unknowns[24]
+    - required_data[0]
+    required_for_c1: false
+    required_for_profitability: true
+  H1-DISCOVERY:
+    classification: PERFORMANCE_EXPERIMENT_BLOCKER
+    question: 발견 기간과 이미 관찰한 사례를 어떻게 기록할지?
+    current_hypothesis_statement: NOK and Sep 23-25 SOXX examples are discovery, not independent confirmation.
+    available_v2_primitive: Existing experiment registration principles
+    candidate_choices:
+    - explicit dates and used observations
+    - no dates selected
+    source_refs:
+    - unknowns[26]
+    - test.leakage_risks[0]
+    required_for_c1: false
+    required_for_profitability: true
+  H1-CONFIRMATORY:
+    classification: PERFORMANCE_EXPERIMENT_BLOCKER
+    question: 독립 confirmatory 기간·purge/embargo는?
+    current_hypothesis_statement: Independent confirmatory period not selected.
+    available_v2_primitive: Reuse existing chronological validation principles; adapter later
+    candidate_choices:
+    - untouched chronological holdout
+    - predeclared walk-forward
+    - future observations
+    source_refs:
+    - unknowns[26]
+    - test.confirmatory_period
+    required_for_c1: false
+    required_for_profitability: true
+  H1-BASELINE:
+    classification: PERFORMANCE_EXPERIMENT_BLOCKER
+    question: 무엇과 동일 시간/자본 조건으로 비교할지?
+    current_hypothesis_statement: Simple MACD comparison discussed; actual baseline unknown.
+    available_v2_primitive: Existing evaluation principles, no V2 lifecycle adapter
+    candidate_choices:
+    - declared simple MACD comparator
+    - aligned passive comparator
+    - explicit alternative
+    source_refs:
+    - thesis
+    - unknowns[27]
+    required_for_c1: false
+    required_for_profitability: true
+  H1-PRIMARY-METRIC:
+    classification: PERFORMANCE_EXPERIMENT_BLOCKER
+    question: Primary metric과 capital accounting 분모는?
+    current_hypothesis_statement: Forward return, MAE/MFE/capture, MDD, utilization, turnover discussed; none chosen.
+    available_v2_primitive: Existing evaluation principles; portfolio NAV absent
+    candidate_choices:
+    - one predeclared primary metric
+    - explicitly separated secondary diagnostics
+    source_refs:
+    - test.primary_metric
+    - unknowns[28]
+    required_for_c1: false
+    required_for_profitability: true
+  H1-DECISION-RULE:
+    classification: PERFORMANCE_EXPERIMENT_BLOCKER
+    question: 귀무가설·사전 통과/기각 기준은?
+    current_hypothesis_statement: Null hypothesis and decision rule unknown.
+    available_v2_primitive: Reuse existing validation engine where compatible
+    candidate_choices:
+    - predeclared falsifiable null and decision thresholds
+    - no winner chosen
+    source_refs:
+    - test.null_hypothesis
+    - test.decision_rule
+    required_for_c1: false
+    required_for_profitability: true
+  H1-SAMPLE-UNIT:
+    classification: PERFORMANCE_EXPERIMENT_BLOCKER
+    question: 평가 표본 단위는?
+    current_hypothesis_statement: Signal event or completed trade candidates.
+    available_v2_primitive: No V2 trade lifecycle evaluator
+    candidate_choices:
+    - signal event
+    - completed trade
+    source_refs:
+    - test.sample_unit
+    required_for_c1: false
+    required_for_profitability: true
+  H1-MULTIPLE-TESTING:
+    classification: PERFORMANCE_EXPERIMENT_BLOCKER
+    question: 후보군·trial accounting·selection 절차는?
+    current_hypothesis_statement: Regime, normalization, thresholds, scale-in, swing and exit families must be preregistered.
+    available_v2_primitive: Existing failed-trial preservation / evaluation principles
+    candidate_choices:
+    - explicit candidate family and selection budget before experiment
+    source_refs:
+    - test.multiple_testing_family
+    - test.leakage_risks[5]
+    required_for_c1: false
+    required_for_profitability: true
+  H1-CHART-PROVIDER:
+    classification: PERFORMANCE_EXPERIMENT_BLOCKER
+    question: 관찰한 chart provider·가격조정·session 설정은?
+    current_hypothesis_statement: Observed screenshots/discussion do not identify these conventions.
+    available_v2_primitive: No provider selected or parity evidence
+    candidate_choices:
+    - record actual observed provider and settings
+    - do not select an intraday provider here
+    source_refs:
+    - source
+    - observations
+    required_for_c1: false
+    required_for_profitability: true
+  H1-CHART-1H:
+    classification: PERFORMANCE_EXPERIMENT_BLOCKER
+    question: 관찰 chart의 1H 경계·짧은 마지막 bucket은?
+    current_hypothesis_statement: Observed boundary unverified.
+    available_v2_primitive: XNYS open anchored 09:30-10:30 ... 15:30-16:00
+    candidate_choices:
+    - verify actual chart intervals including DST and early close
+    source_refs:
+    - timeframes.signal
+    required_for_c1: false
+    required_for_profitability: true
+  H1-CHART-EMA:
+    classification: PERFORMANCE_EXPERIMENT_BLOCKER
+    question: 관찰 chart EMA seed/history/warmup은?
+    current_hypothesis_statement: MACD parameters explicit; chart initialization unknown.
+    available_v2_primitive: first_observation_recursive_v1; no chart parity claim
+    candidate_choices:
+    - obtain observed seed/history/warmup convention and compare
+    source_refs:
+    - required_data[4]
+    required_for_c1: false
+    required_for_profitability: true
+  H1-CHART-VERIFICATION:
+    classification: PERFORMANCE_EXPERIMENT_BLOCKER
+    question: MACD parity 검증 결과·증거는?
+    current_hypothesis_statement: Reproduction and profitability have not been verified.
+    available_v2_primitive: Hand-calculated primitive tests only
+    candidate_choices:
+    - record reproducible boundary/EMA comparison evidence and limitations
+    source_refs:
+    - thesis
+    - required_data[4]
+    required_for_c1: false
+    required_for_profitability: true
+  H1-4H:
+    classification: OPTIONAL_FUTURE_EXTENSION
+    question: 4H를 variant로 연구할지?
+    current_hypothesis_statement: 4H auxiliary filter inclusion unknown; short anecdote is not core.
+    available_v2_primitive: 4H NOT SUPPORTED
+    candidate_choices:
+    - defer
+    - separate filter variant
+    source_refs:
+    - unknowns[2]
+    - observations[10]
+    required_for_c1: false
+    required_for_profitability: false
+  H1-WEEKLY-MONTHLY:
+    classification: OPTIONAL_FUTURE_EXTENSION
+    question: 주봉·월봉을 variant로 연구할지?
+    current_hypothesis_statement: Higher-timeframe conflict discussed; not core.
+    available_v2_primitive: Weekly/monthly NOT SUPPORTED
+    candidate_choices:
+    - defer
+    - separate higher-frame variant
+    source_refs:
+    - unknowns[3]
+    required_for_c1: false
+    required_for_profitability: false
+  H1-FINE-EXECUTION:
+    classification: OPTIONAL_FUTURE_EXTENSION
+    question: 5m/1m refinement를 연구할지?
+    current_hypothesis_statement: Finer observation candidate, not formal execution frame.
+    available_v2_primitive: 5m/1m NOT SUPPORTED
+    candidate_choices:
+    - defer
+    - separate refinement variant
+    source_refs:
+    - timeframes.execution
+    - unknowns[21]
+    required_for_c1: false
+    required_for_profitability: false
+  H1-VOLUME-PA:
+    classification: OPTIONAL_FUTURE_EXTENSION
+    question: Volume/divergence/OBV/VWAP/volume profile/order block을 연구할지?
+    current_hypothesis_statement: Observed but not mandatory core features.
+    available_v2_primitive: OHLCV only; these strategy predicates NOT IMPLEMENTED
+    candidate_choices:
+    - defer
+    - separately registered feature variants
+    source_refs:
+    - observations[14]
+    - unknowns[22]
+    required_for_c1: false
+    required_for_profitability: false
+  H1-OPTIONS:
+    classification: OPTIONAL_FUTURE_EXTENSION
+    question: Options/0DTE/GEX/Max Pain을 연구할지?
+    current_hypothesis_statement: Alternative explanation only; causality not established.
+    available_v2_primitive: NOT IMPLEMENTED
+    candidate_choices:
+    - defer
+    - separate PIT data/variant contract
+    source_refs:
+    - observations[15]
+    - unknowns[23]
+    required_for_c1: false
+    required_for_profitability: false
+  H1-SHORT:
+    classification: OPTIONAL_FUTURE_EXTENSION
+    question: Short를 별도 가설로 연구할지?
+    current_hypothesis_statement: Short excluded from current long-only core.
+    available_v2_primitive: No short strategy
+    candidate_choices:
+    - defer
+    - separate bearish-regime hypothesis
+    source_refs:
+    - rules.regime[3]
+    required_for_c1: false
+    required_for_profitability: false
+  H1-LAG-STUDY:
+    classification: OPTIONAL_FUTURE_EXTENSION
+    question: 가격저점/MACD저점/GC 시차를 별도 연구할지?
+    current_hypothesis_statement: Timing distributions unknown; do not use hindsight low as signal.
+    available_v2_primitive: No empirical lag study
+    candidate_choices:
+    - defer
+    - separate descriptive study with discovery labels
+    source_refs:
+    - observations[2]
+    - unknowns[10]
+    required_for_c1: false
+    required_for_profitability: false
+state_machine:
+  states:
+  - DISABLED
+  - DAILY_LONG_ALLOWED
+  - SETUP_1H_DOWNSIDE
+  - ENTRY_READY
+  - POSITION_OPEN
+  - ADD_READY
+  - EXIT_WATCH_WEAK
+  - EXIT_WATCH_STRONG
+  - FLAT
+  transitions:
+    daily_permission:
+      from: DISABLED
+      to: DAILY_LONG_ALLOWED
+      condition:
+        kind: contract
+        value: UNRESOLVED
+        choices: []
+        decision_id: H1-STATE-TRANSITIONS
+      prerequisites:
+      - H1-DAILY-LONG
+      - H1-DAILY-BLOCKER
+      - H1-STATE-TRANSITIONS
+    downside_setup:
+      from: DAILY_LONG_ALLOWED
+      to: SETUP_1H_DOWNSIDE
+      condition:
+        kind: contract
+        value: UNRESOLVED
+        choices: []
+        decision_id: H1-STATE-TRANSITIONS
+      prerequisites:
+      - H1-RELATIVE-METHOD
+      - H1-DOWNSIDE
+      - H1-SETUP-LIFETIME
+      - H1-STATE-TRANSITIONS
+    entry_candidate:
+      from: SETUP_1H_DOWNSIDE
+      to: ENTRY_READY
+      condition:
+        kind: contract
+        value: UNRESOLVED
+        choices: []
+        decision_id: H1-STATE-TRANSITIONS
+      prerequisites:
+      - H1-M15-RELATIVE-METHOD
+      - H1-M15-DOWNSIDE
+      - H1-M15-GC
+      - H1-M15-REVERSAL
+      - H1-M15-CONJUNCTION
+      - H1-STATE-TRANSITIONS
+    position_established:
+      from: ENTRY_READY
+      to: POSITION_OPEN
+      condition:
+        kind: contract
+        value: UNRESOLVED
+        choices: []
+        decision_id: H1-STATE-TRANSITIONS
+      prerequisites:
+      - H1-ORDER-TIMING
+      - H1-FILL
+      - H1-SIZING
+      - H1-STATE-TRANSITIONS
+    failed_reversal_add_candidate:
+      from: POSITION_OPEN
+      to: ADD_READY
+      condition:
+        kind: contract
+        value: UNRESOLVED
+        choices: []
+        decision_id: H1-STATE-TRANSITIONS
+      prerequisites:
+      - H1-ADD-POLICY
+      - H1-FAILED-REVERSAL
+      - H1-DEEPER-EXTREME
+      - H1-MAX-ADDS
+      - H1-GC-ROLE
+      - H1-STATE-TRANSITIONS
+    add_established:
+      from: ADD_READY
+      to: POSITION_OPEN
+      condition:
+        kind: contract
+        value: UNRESOLVED
+        choices: []
+        decision_id: H1-STATE-TRANSITIONS
+      prerequisites:
+      - H1-ADD-POLICY
+      - H1-ORDER-TIMING
+      - H1-FILL
+      - H1-SIZING
+      - H1-EXPOSURE
+      - H1-STATE-TRANSITIONS
+    weak_watch_candidate:
+      from: POSITION_OPEN
+      to: EXIT_WATCH_WEAK
+      condition:
+        kind: contract
+        value: UNRESOLVED
+        choices: []
+        decision_id: H1-STATE-TRANSITIONS
+      prerequisites:
+      - H1-WEAK-WATCH
+      - H1-HISTOGRAM
+      - H1-MACD-SLOPE
+      - H1-SIGNAL-SLOPE
+      - H1-DEAD-CROSS
+      - H1-STATE-TRANSITIONS
+    strong_watch_candidate:
+      from: POSITION_OPEN
+      to: EXIT_WATCH_STRONG
+      condition:
+        kind: contract
+        value: UNRESOLVED
+        choices: []
+        decision_id: H1-STATE-TRANSITIONS
+      prerequisites:
+      - H1-STRONG-WATCH
+      - H1-UPPER-EXTREME
+      - H1-STATE-TRANSITIONS
+    weak_structure_exit_candidate:
+      from: EXIT_WATCH_WEAK
+      to: FLAT
+      condition:
+        kind: contract
+        value: UNRESOLVED
+        choices: []
+        decision_id: H1-STATE-TRANSITIONS
+      prerequisites:
+      - H1-WATCH-CONFIRMATION
+      - H1-REFERENCE-HH
+      - H1-LH
+      - H1-VALID-HL
+      - H1-HL-BREAK
+      - H1-FILL
+      - H1-STATE-TRANSITIONS
+    strong_structure_exit_candidate:
+      from: EXIT_WATCH_STRONG
+      to: FLAT
+      condition:
+        kind: contract
+        value: UNRESOLVED
+        choices: []
+        decision_id: H1-STATE-TRANSITIONS
+      prerequisites:
+      - H1-WATCH-CONFIRMATION
+      - H1-REFERENCE-HH
+      - H1-LH
+      - H1-VALID-HL
+      - H1-HL-BREAK
+      - H1-FILL
+      - H1-STATE-TRANSITIONS
+    hold_or_new_hh_candidate:
+      from: POSITION_OPEN
+      to: POSITION_OPEN
+      condition:
+        kind: contract
+        value: UNRESOLVED
+        choices: []
+        decision_id: H1-STATE-TRANSITIONS
+      prerequisites:
+      - H1-REFERENCE-HH
+      - H1-VALID-HL
+      - H1-NEW-HH-RESET
+      - H1-STATE-TRANSITIONS

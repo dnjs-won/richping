@@ -1,6 +1,6 @@
 # Richping v2 Strategy Research Architecture
 
-Status: V2-A foundation and V2-B reusable features implemented; V2-C through V2-F not implemented
+Status: V2-A, V2-B and V2-C0 specification infrastructure COMPLETE; V2-C1 through V2-F not implemented
 
 Initial hypothesis: `research/hypotheses/H0001-r03.yaml`
 
@@ -9,6 +9,11 @@ V2-A implementation details and limits: [V2_A_IMPLEMENTATION.md](V2_A_IMPLEMENTA
 V2-B feature math, readiness, confirmation and validation:
 [V2_B_IMPLEMENTATION.md](V2_B_IMPLEMENTATION.md). H0001 remains DRAFT;
 no strategy implementation or profitability measurement has been performed.
+
+V2-C0 schema/parser, immutable canonical hash, freeze gates, H0001 draft and
+decision matrix: [V2_C0_H0001_SPECIFICATION.md](V2_C0_H0001_SPECIFICATION.md).
+H0001 executable spec remains **DRAFT / BLOCKED_ON_DECISIONS** and profitability
+**NOT TESTED**. C0 infrastructure completion is not strategy freeze.
 
 ## 1. Goal
 
@@ -79,9 +84,9 @@ richping/
       structure.py            # causal swing/HH/HL/LH/LL primitives
       volatility.py
     strategy/
-      base.py                 # strategy protocol/state serialization
-      registry.py
-      h0001_r03.py            # only H0001-specific state machine/rules
+      specification.py        # implemented C0 generic immutable spec contract
+      h0001_spec.py           # implemented C0 mandatory r03 inventory/validation
+      h0001_r03.py            # future C1 only, NOT IMPLEMENTED
     execution/
       simulator.py            # intent -> deterministic fill
       costs.py
@@ -167,7 +172,10 @@ status
 
 ## 6. Causal multi-timeframe replay
 
-The smallest authoritative input for H0001 should be 15-minute RTH bars unless the data contract later requires a finer base feed.
+The current V2-A technical input is 15-minute XNYS RTH bars. H0001's actual
+session policy and authoritative base choice remain UNRESOLVED in the C0
+draft; that technical capability is not a researcher decision to exclude
+extended hours. r03 lists 15m as execution frame, with order/fill details unknown.
 
 At each atomic availability batch (all base bars sharing the same `known_at`):
 
@@ -193,7 +201,8 @@ Replay must be deterministic: same dataset + strategy spec + execution spec + se
 
 ## 7. H0001-r03 as first plugin
 
-The engine does not implement these rules. `strategy/h0001_r03.py` does.
+The engine does not implement these rules. A future `strategy/h0001_r03.py`
+plugin may implement them only after decision freeze; that file does not exist.
 
 Candidate state machine:
 
@@ -225,7 +234,8 @@ The executable H0001 specification must parameterize, rather than hard-code into
 - order timing/fill rule.
 - stop/max holding/overnight policy.
 
-Until these unknowns are frozen, H0001 remains DRAFT and may be replayed only for engine fixtures, not claimed as a strategy performance test.
+Until these unknowns are frozen, H0001 remains DRAFT and is not a runnable
+strategy. Existing generic engine fixtures are not H0001 performance tests.
 
 ## 8. Relative MACD service
 
@@ -381,17 +391,38 @@ provenance are tested. See V2_B_IMPLEMENTATION.md for exact versioned contracts.
 
 Acceptance: features are strategy-neutral and reproducible from past-only bars.
 
-### V2-C — H0001 executable specification
+### V2-C0 — executable-spec contract / freeze preparation
 
-Prerequisites: confirm the observed chart/provider's EMA seed/history/warmup and
-1H boundaries against the unchanged XNYS open-anchored buckets (09:30–10:30,
-..., 15:30–16:00); choose H0001's actual swing detector and relative transform.
-Until then, neither chart-MACD parity nor finalized H0001 feature conventions
-may be claimed. H0001-r03 remains DRAFT and profitability unmeasured.
+Implemented: generic immutable specification schema, strict YAML/JSON parser,
+canonical SHA-256, DRAFT/FROZEN gates, mandatory H0001-r03 inventory, separate
+draft YAML and full decision matrix. Missing values are explicit UNRESOLVED,
+classified as C1 implementation, performance experiment or optional extension.
+No strategy decisions, handlers, execution or backtests are implemented.
+See V2_C0_H0001_SPECIFICATION.md for full semantics and validation results.
 
-Convert r03 unknowns required for execution into an explicit versioned strategy spec. Do not choose thresholds by silently fitting the same evaluation sample. Implement H0001 plugin/state machine only after the spec is frozen.
+The user/researcher must choose actual feature conventions, Daily rules,
+relative methods/windows/thresholds, trigger, swing and lifecycle semantics.
+FROZEN forbids unresolved C1 blockers; profitability readiness additionally
+requires performance decisions and verified chart parity. r03 is unchanged and
+no r04 is created. C0 infrastructure is COMPLETE; H0001 remains DRAFT.
 
-Acceptance: synthetic scenarios reproduce entry, failed reversal/add, HOLD, weak/strong EXIT-WATCH, new-HH reset and structural exit.
+### V2-C1 — H0001 strategy plugin (NOT IMPLEMENTED)
+
+Start only after the executable spec is frozen. A future plugin consumes the
+H0001-specific validated contract; generic replay/features import neither it
+nor H0001. Validate all supported contract names, versions and method-specific
+parameters before implementing any signal rules.
+
+Synthetic state-machine tests can use explicitly frozen engine conventions
+while observed-chart parity remains UNVERIFIED. Historical reproduction and
+profitability experiments require observed provider/EMA seed/history/warmup
+and 1H boundaries verified against the chosen contract. Current engine buckets
+remain XNYS 09:30–10:30, ..., 15:30–16:00 with official early-close truncation.
+No chart-MACD parity claim is justified now. This refines the earlier broad
+"before V2-C" prerequisite into separate synthetic and historical gates.
+
+Future acceptance: synthetic scenarios reproduce the frozen entry, failed
+reversal/add, HOLD, weak/strong EXIT-WATCH, new-HH reset and structural exit.
 
 ### V2-D — historical intraday research dataset
 
