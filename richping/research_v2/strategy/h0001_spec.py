@@ -181,7 +181,69 @@ TRANSITIONS = {'daily_permission': ('DISABLED',
                                       'H1-WATCH-CONFIRMATION')),
  'hold_or_new_hh_candidate': ('ACTIVE_SIGNAL',
                               'ACTIVE_SIGNAL',
-                              ('H1-NEW-HH-RESET', 'H1-REFERENCE-HH', 'H1-STATE-TRANSITIONS', 'H1-VALID-HL'))}
+                              ('H1-NEW-HH-RESET', 'H1-REFERENCE-HH', 'H1-STATE-TRANSITIONS', 'H1-VALID-HL')),
+ 'inactive_daily_permission': ('INACTIVE_SIGNAL', 'DAILY_LONG_ALLOWED',
+                               ('H1-DAILY-BLOCKER', 'H1-DAILY-LONG', 'H1-STATE-TRANSITIONS')),
+ 'inactive_daily_disabled': ('INACTIVE_SIGNAL', 'DISABLED',
+                             ('H1-DAILY-BLOCKER', 'H1-DAILY-LONG', 'H1-STATE-TRANSITIONS'))}
+
+# These edges reuse the existing unresolved contract, not two new decisions or
+# two resolved guards. The target is already validated and counted by the base
+# specification; FROZEN/C1 admission still requires that target to be resolved.
+LIFECYCLE_RETURNS = ('inactive_daily_permission', 'inactive_daily_disabled')
+LIFECYCLE_CONDITION = {
+    'kind': 'contract',
+    'value': {
+        'name': 'existing_contract_reference', 'version': 'v1',
+        'parameters': {
+            'path': {'kind': 'text',
+                     'value': 'state_machine_parameters.transition_priority_and_resets',
+                     'choices': [], 'decision_id': None},
+        },
+    },
+    'choices': [], 'decision_id': 'H1-STATE-TRANSITIONS',
+}
+
+
+def validate_signal_lifecycle(machine):
+    """Check possible signal cycles, not guard truth or runtime progress.
+
+    All H0001 states are nonterminal. DISABLED is a graph entry anchor, not a
+    choice of the still-unresolved runtime initial state. A future causal setup
+    must be able to start another episode after either exit-watch branch.
+    """
+    states = set(machine['states'])
+    edges = {(t['from'], t['to']) for t in machine['transitions'].values()}
+
+    def reachable(start, excluded=()):
+        seen, pending = set(), [start]
+        while pending:
+            state = pending.pop()
+            if state in seen:
+                continue
+            seen.add(state)
+            pending.extend(b for a, b in edges if a == state and (a, b) not in excluded)
+        return seen
+
+    for state in states:
+        if not any(a == state and b != state for a, b in edges):
+            raise ValueError(f'H0001 lifecycle dead-end: {state}')
+    if reachable('DISABLED') != states:
+        raise ValueError('H0001 lifecycle contains unreachable states')
+    for state in states:
+        if not {'ENTRY_READY', 'INACTIVE_SIGNAL'} <= reachable(state):
+            raise ValueError(f'H0001 lifecycle cannot complete/restart a cycle: {state}')
+    if {b for a, b in edges if a == 'INACTIVE_SIGNAL'} != {'DAILY_LONG_ALLOWED', 'DISABLED'}:
+        raise ValueError('H0001 lifecycle must return through Daily permission evaluation')
+    # Every first activation from either inactive state must cross these edges
+    # in order. Removing any one must cut all routes to ACTIVE_SIGNAL, including
+    # indirect shortcuts through add/watch states.
+    for gate in (('DAILY_LONG_ALLOWED', 'SETUP_1H_DOWNSIDE'),
+                 ('SETUP_1H_DOWNSIDE', 'ENTRY_READY'),
+                 ('ENTRY_READY', 'ACTIVE_SIGNAL')):
+        for start in ('DISABLED', 'INACTIVE_SIGNAL'):
+            if 'ACTIVE_SIGNAL' in reachable(start, (gate,)):
+                raise ValueError('H0001 lifecycle bypasses Daily permission/setup/entry')
 
 SOURCE_SHA256 = "35e13276056a36d6a06de04611720fd286113f0e5db1e4255af6ceeb6a0f0bc2"
 
@@ -197,7 +259,7 @@ class H0001Specification(StrategySpecification):
         if (value["strategy_id"], value["hypothesis_id"], value["hypothesis_revision"], value["direction"]) != (
                 "H0001", "H0001", 3, "LONG_ONLY"):
             raise ValueError("Unsupported H0001-r03 identity")
-        if value["specification_version"] != "h0001_r03_spec_v2":
+        if value["specification_version"] != "h0001_r03_spec_v3":
             raise ValueError("Unsupported H0001 specification version")
         if value["source"] != {"path": "research/hypotheses/H0001-r03.yaml", "sha256": SOURCE_SHA256}:
             raise ValueError("H0001 source provenance mismatch")
@@ -238,6 +300,7 @@ class H0001Specification(StrategySpecification):
         machine = value["state_machine"]
         if set(machine["states"]) != set(STATES):
             raise ValueError("H0001 state inventory mismatch")
+        validate_signal_lifecycle(machine)
         exact(machine["transitions"], TRANSITIONS, "H0001 transition inventory")
         for key, (a, b, refs) in TRANSITIONS.items():
             transition = machine["transitions"][key]
@@ -247,6 +310,8 @@ class H0001Specification(StrategySpecification):
             if (condition["kind"], condition["decision_id"], condition["choices"]) != (
                     "contract", "H1-STATE-TRANSITIONS", []):
                 raise ValueError("Transition must retain its implementation blocker")
+            if key in LIFECYCLE_RETURNS and condition != LIFECYCLE_CONDITION:
+                raise ValueError("Lifecycle return must reference the existing transition contract")
         for prefix in ("setup_1h", "entry_15m", "exit_1h"):
             method = value["rule_parameters"][prefix + "_relative_transform"]["value"]
             threshold = value["rule_parameters"][prefix + "_downside_threshold" if prefix != "exit_1h"

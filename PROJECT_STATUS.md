@@ -1,3 +1,27 @@
+# Richping v2 상태 · 2026-09-29 V2-C0 lifecycle re-audit remediation
+
+**state-machine liveness finding 수정 완료. H0001은 DRAFT / BLOCKED_ON_DECISIONS다.**
+
+- `v2-c0-h0001-spec-contract` / `03438243b0ce35a456bf350adcdbdf6da5416c26`에서
+  INACTIVE_SIGNAL → DAILY_LONG_ALLOWED / DISABLED 복귀 전이를 추가했다.
+  INACTIVE_SIGNAL은 현재 active long signal 부재이며 execution position state가 아니다.
+- 분기·우선순위·reset은 기존 H1-DAILY-LONG, H1-DAILY-BLOCKER,
+  H1-STATE-TRANSITIONS 계약을 재사용한다. 새 전이는 기존 unresolved 계약의 명시적
+  reference이며 새 threshold·매매 규칙을 확정하지 않는다. 프로필은 `h0001_r03_spec_v3`다.
+- 두 exit 경로 이후 새 causal Daily permission → setup → entry 조건을 다시 거쳐
+  ENTRY_READY/ACTIVE_SIGNAL에 도달할 수 있다. 모든 nonterminal state의 reachability,
+  liveness, dead-end/닫힌 순환 및 직접·간접 재활성화 우회를 graph-level에서 검증한다.
+- 기존 **75 decisions / 107 unresolved paths**와 각 내용이 동일하다. r03 raw byte
+  SHA-256은 `abdd4f10d127ee7614a4eead734d1bfbf7dc1897ec368f8a3b70a1645e2552fc`로 불변이다.
+  execution/performance blocker의 C1 재유입을 차단하며 V2-A/B 코드는 변경하지 않았다.
+- 신규 회귀 **51개**, C0 **280개** 포함 전체 **664 passed (136.16s)**.
+  실패·skip·pytest warning 없음. CLI `--help`, `git diff --check` 통과.
+- 새 draft hash: `2f92d6b4b930d365f897e23e41ef0785822a3d6e1fe270a9eb89fb4297686ff4`.
+  C1 plugin/guard 구현 및 수익성 검증은 수행하지 않았다. main 및 기존 dirty 작업 보존,
+  main merge 없음. 상세: [V2-C0 명세](docs/V2_C0_H0001_SPECIFICATION.md).
+
+---
+
 # Richping v2 상태 · 2026-09-29 V2-C0 freeze-semantics audit remediation
 
 **두 correctness finding 수정 완료. H0001은 DRAFT / BLOCKED_ON_DECISIONS이며 C1 plugin은 미구현이다.**

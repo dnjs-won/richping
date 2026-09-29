@@ -218,10 +218,16 @@ DISABLED
   -> EXIT_WATCH_WEAK | EXIT_WATCH_STRONG
   -> EXIT_CONFIRMATION
   -> INACTIVE_SIGNAL (EXIT intent emitted)
+  -> DAILY_LONG_ALLOWED (new causal Daily permission evaluation)
+     or DISABLED (Daily permission absent/blocked)
 ```
 
 C1 owns causal signal state and Intent emission. These states claim no actual
-position or fill. Execution/portfolio owns orders, fills, position quantities,
+position or fill. INACTIVE_SIGNAL means no active long signal, not a terminal
+state. A later cycle must pass Daily permission, a new setup and entry conditions
+again; no direct reactivation is allowed. The exact return split/priority reuses
+H1-DAILY-LONG, H1-DAILY-BLOCKER and H1-STATE-TRANSITIONS without new strategy values.
+Execution/portfolio owns orders, fills, position quantities,
 sizing and exposure; those unresolved performance decisions cannot be signal
 transition prerequisites. V2-A already permits unspecified Intent quantity.
 

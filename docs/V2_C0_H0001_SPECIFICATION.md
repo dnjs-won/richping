@@ -7,7 +7,7 @@ H0001 profitability: **NOT TESTED**. No H0001 trading plugin exists.
 Draft inventory: **75 decisions** (51 C1 blockers, 17 performance blockers,
 7 optional extensions); **107 unresolved parameter/transition paths**.
 Canonical specification SHA-256:
-`28e0563158e09df737034750cbe6dfec6764869e0ebb6ceb75037280a4ffa1e5`.
+`2f92d6b4b930d365f897e23e41ef0785822a3d6e1fe270a9eb89fb4297686ff4`.
 
 ## Investigation and preserved boundary
 
@@ -80,9 +80,10 @@ or a retrofit guard on old fixture strategies.
 
 ## Schema, canonical representation and hash
 
-Schema `strategy_specification_v1`; H0001 profile `h0001_r03_spec_v2`.
-The profile version changed for signal-state ownership and capability admission;
-the hypothesis revision remains r03. Old profile v1 is not silently reinterpreted.
+Schema `strategy_specification_v1`; H0001 profile `h0001_r03_spec_v3`.
+Profile v2 introduced signal-state ownership and capability admission; v3 closes
+the signal lifecycle. The hypothesis revision remains r03. Old profiles v1/v2
+are not silently reinterpreted.
 Identity includes strategy ID, specification version, hypothesis ID/revision,
 status, UTC-aware created/updated timestamps, source path and source SHA-256.
 The source digest normalizes CRLF to LF only, matching the Git blob across
@@ -268,8 +269,9 @@ an arbitrary evidence string. No real intraday provider was selected here.
 
 States: DISABLED, DAILY_LONG_ALLOWED, SETUP_1H_DOWNSIDE, ENTRY_READY,
 ACTIVE_SIGNAL, ADD_READY, EXIT_WATCH_WEAK, EXIT_WATCH_STRONG, INACTIVE_SIGNAL.
-The YAML has named candidate transitions with prerequisite decision IDs and
-`condition.value: UNRESOLVED` for **every** transition. Prerequisites are a
+The YAML has named candidate transitions with prerequisite decision IDs.
+The original 11 conditions remain `UNRESOLVED`; the two lifecycle return edges
+reference the existing unresolved transition contract. Prerequisites are a
 decision dependency inventory, not an implicit AND/OR rule or executed guard.
 
 Candidate edges describe permission → setup → entry intent → ACTIVE_SIGNAL,
@@ -278,23 +280,81 @@ failed-reversal add candidate → add intent → ACTIVE_SIGNAL, weak/strong watc
 `enter_intent_emitted` and `add_intent_emitted` depend on decision timing and
 signal transitions, never fill/order timing/sizing/exposure. Exit candidates
 also no longer depend on H1-FILL. ACTIVE_SIGNAL records a signal episode;
-INACTIVE_SIGNAL records its end, even if an executor has not filled an exit.
+INACTIVE_SIGNAL means **no current active long signal**, even if an executor has
+not filled an exit. It is nonterminal and permits evaluation of a later causal setup.
 Neither state asserts a position quantity, a successful fill, or account flatness.
-All 11 transition conditions remain UNRESOLVED. All prerequisite decisions
+All prerequisite decisions
 are C1-classified and must be resolved at admission; nested lower-stage
 dependencies are rejected. The 75-decision/107-path inventory is unchanged.
 
-This is intentionally **not** a complete transition table. Initial state,
-regime loss, setup cancellation/expiry, weak/strong switching/reset, re-entry
-after signal termination, concurrent-condition priority, stop interactions and state memory
-are all covered by the unresolved `H1-STATE-TRANSITIONS` contract (and dedicated
-lifecycle decisions). No extra edge or default transition is invented. Freeze
-must review/complete that table and change the versioned profile if required.
+Lifecycle return edges are explicit:
+
+| Transition | From | To | Existing contracts |
+|---|---|---|---|
+| inactive_daily_permission | INACTIVE_SIGNAL | DAILY_LONG_ALLOWED | H1-DAILY-LONG, H1-DAILY-BLOCKER, H1-STATE-TRANSITIONS |
+| inactive_daily_disabled | INACTIVE_SIGNAL | DISABLED | H1-DAILY-LONG, H1-DAILY-BLOCKER, H1-STATE-TRANSITIONS |
+
+At a subsequent causal evaluation, permission to begin a new long cycle is
+re-evaluated using H1-DAILY-LONG and H1-DAILY-BLOCKER. If permitted, the return is
+to DAILY_LONG_ALLOWED; if permission is absent/blocked, the return is to DISABLED.
+The exact split (including the block/reduce alternative), simultaneous-condition
+priority, evaluation timing and episode-memory reset remain owned by
+H1-STATE-TRANSITIONS with those Daily contracts. No threshold, cooldown, fresh
+Daily bar requirement, or same-event transition policy is selected here.
+
+The two `existing_contract_reference/v1` condition envelopes are structural
+references to `state_machine_parameters.transition_priority_and_resets`, not
+resolved guards. H0001 validation pins the reference path and prerequisite IDs;
+the target remains an existing UNRESOLVED path and blocks FROZEN/C1 admission.
+Each return therefore reuses an existing unknown instead of duplicating it or
+silently resolving it. All prior 107 unresolved paths and 75 decisions remain
+identical. This profile change is versioned as `h0001_r03_spec_v3`.
+
+After either exit, a later causal Daily permission/setup must be able to reach
+ENTRY_READY and then ACTIVE_SIGNAL through the existing downside_setup,
+entry_candidate and enter_intent_emitted conditions again. Prior entry/setup
+satisfaction cannot authorize the new episode. Direct INACTIVE_SIGNAL →
+ACTIVE_SIGNAL and indirect setup/entry bypasses are forbidden. Exit fill,
+position flatness, capital, sizing and performance evidence never gate this
+signal lifecycle; they remain execution/portfolio responsibilities.
+
+Graph validation checks all nine states as nonterminal: outgoing progress,
+reachability from the DISABLED graph anchor, and a path from every state to both
+INACTIVE_SIGNAL and ENTRY_READY. Removing any required permission/setup/entry
+edge must disconnect inactive states from ACTIVE_SIGNAL. DISABLED is only a
+graph anchor, not a selection of the runtime initial state. These are structural
+liveness checks under future satisfying causal inputs, not a guarantee that
+market conditions will generate a signal or an implementation of guard timing.
+
+The lifecycle graph is complete for another episode; executable transition
+predicates are still unresolved. Initial state, regime loss, setup cancellation/
+expiry, weak/strong switching/reset, priority, stops and state memory remain in
+H1-STATE-TRANSITIONS and dedicated lifecycle decisions. Freeze must review and
+resolve those contracts; no default trading rule was added.
 There is no on_event()/BUY/SELL or any other H0001 Intent generation in C0.
 
 ## Validation and next action
 
-September 29 audit remediation, starting at
+September 29 lifecycle re-audit remediation, starting at
+`03438243b0ce35a456bf350adcdbdf6da5416c26`:
+
+- Full suite: `C:/richping/.venv/Scripts/python -m pytest -q` → **664 passed
+  (136.16s)**, no failures/skips/pytest warnings. Includes **280 C0 cases**
+  (229 existing + **51 new regressions**) and unchanged V2-A/B tests.
+- Graph tests cover both exit branches and permission/no-permission returns,
+  all nine nonterminal states, dead-ends/self-loop traps, unreachable/closed
+  components, direct/indirect activation bypasses, reference integrity and
+  C1 admission while execution/performance blockers remain unresolved.
+- Original 75 decisions and all 107 unresolved paths compare identically to
+  the audit HEAD. Source r03 worktree bytes compare directly to that HEAD using
+  Git's checkout filters; raw SHA-256 remains
+  `abdd4f10d127ee7614a4eead734d1bfbf7dc1897ec368f8a3b70a1645e2552fc`.
+- CLI `--help` and `git diff --check`: passed. Hypotheses and V2-A/B source/tests
+  have zero diff. No strategy value, threshold, execution dependency or
+  performance blocker was introduced into C1 transitions. H0001 remains DRAFT;
+  this closes graph liveness, not executable predicates or profitability.
+
+Earlier September 29 audit remediation, starting at
 `e2bce5b0dd0bd49a7b132f3aced2a3fcaadbfb0f`, closes only the two freeze-semantics
 findings: current-engine admission and signal/execution state ownership.
 

@@ -2,7 +2,7 @@
 # Source r03 remains immutable. All alternatives below are unselected.
 schema_version: strategy_specification_v1
 strategy_id: H0001
-specification_version: h0001_r03_spec_v2
+specification_version: h0001_r03_spec_v3
 hypothesis_id: H0001
 hypothesis_revision: 3
 status: DRAFT
@@ -1622,7 +1622,53 @@ state_machine:
   - EXIT_WATCH_WEAK
   - EXIT_WATCH_STRONG
   - INACTIVE_SIGNAL
+  # INACTIVE_SIGNAL: no active long signal, not execution position state.
+  # All states are nonterminal. A later causal cycle must re-evaluate Daily
+  # permission, a new setup and entry; the old episode cannot reactivate itself.
   transitions:
+    # Both return edges delegate split/priority/reset to the existing unresolved
+    # H1-STATE-TRANSITIONS contract, with H1-DAILY-LONG/H1-DAILY-BLOCKER inputs.
+    # These are references, not resolved predicates or new trading decisions.
+    inactive_daily_permission:
+      from: INACTIVE_SIGNAL
+      to: DAILY_LONG_ALLOWED
+      condition:
+        kind: contract
+        value:
+          name: existing_contract_reference
+          version: v1
+          parameters:
+            path:
+              kind: text
+              value: state_machine_parameters.transition_priority_and_resets
+              choices: []
+              decision_id: null
+        choices: []
+        decision_id: H1-STATE-TRANSITIONS
+      prerequisites:
+      - H1-DAILY-LONG
+      - H1-DAILY-BLOCKER
+      - H1-STATE-TRANSITIONS
+    inactive_daily_disabled:
+      from: INACTIVE_SIGNAL
+      to: DISABLED
+      condition:
+        kind: contract
+        value:
+          name: existing_contract_reference
+          version: v1
+          parameters:
+            path:
+              kind: text
+              value: state_machine_parameters.transition_priority_and_resets
+              choices: []
+              decision_id: null
+        choices: []
+        decision_id: H1-STATE-TRANSITIONS
+      prerequisites:
+      - H1-DAILY-LONG
+      - H1-DAILY-BLOCKER
+      - H1-STATE-TRANSITIONS
     daily_permission:
       from: DISABLED
       to: DAILY_LONG_ALLOWED

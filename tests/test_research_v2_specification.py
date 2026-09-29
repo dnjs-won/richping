@@ -18,7 +18,8 @@ from richping.research_v2.strategy.specification import (
     StrategySpecification, C1, PERFORMANCE, OPTIONAL, SECTIONS, UNRESOLVED,
 )
 from richping.research_v2.strategy.h0001_spec import (
-    H0001Specification, REQUIRED, SOURCE_SHA256, load_h0001,
+    H0001Specification, REQUIRED, SOURCE_SHA256, STATES, LIFECYCLE_RETURNS,
+    load_h0001, validate_signal_lifecycle,
 )
 from richping.research_v2.features.relative import NormalizeSpec, PercentileSpec, ZScoreSpec
 from richping.research_v2.features.structure import FractalSpec
@@ -542,6 +543,145 @@ def test_remediation_preserves_every_decision_and_unresolved_strategy_parameter(
     assert len(current.unresolved_fields) == len(original.unresolved_fields) == 107
     assert len(new["decisions"]) == len(old["decisions"]) == 75
     assert [len(current.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)] == [51, 17, 7]
+
+
+def signal_paths(machine, start, end):
+    """Enumerate simple paths independently of the production graph validator."""
+    pending = [(start,)]
+    while pending:
+        path = pending.pop()
+        if path[-1] == end:
+            yield path
+            continue
+        for transition in machine['transitions'].values():
+            if transition['from'] == path[-1] and transition['to'] not in path:
+                pending.append((*path, transition['to']))
+
+
+def test_inactive_is_nonterminal_and_both_exit_branches_can_start_new_cycles():
+    machine = draft().unpack()['state_machine']
+    assert {t['to'] for t in machine['transitions'].values()
+            if t['from'] == 'INACTIVE_SIGNAL'} == {'DAILY_LONG_ALLOWED', 'DISABLED'}
+    for watch in ('EXIT_WATCH_WEAK', 'EXIT_WATCH_STRONG'):
+        paths = list(signal_paths(machine, watch, 'ACTIVE_SIGNAL'))
+        assert paths
+        assert any('DISABLED' in path for path in paths)
+        for path in paths:
+            assert path[:2] == (watch, 'INACTIVE_SIGNAL')
+            assert path[-4:] == ('DAILY_LONG_ALLOWED', 'SETUP_1H_DOWNSIDE',
+                                'ENTRY_READY', 'ACTIVE_SIGNAL')
+
+
+@pytest.mark.parametrize('state', STATES)
+def test_every_nonterminal_state_is_reachable_and_can_complete_and_restart(state):
+    machine = draft().unpack()['state_machine']
+    assert list(signal_paths(machine, 'DISABLED', state))
+    assert list(signal_paths(machine, state, 'INACTIVE_SIGNAL'))
+    assert list(signal_paths(machine, state, 'ENTRY_READY'))
+
+
+@pytest.mark.parametrize('state', STATES)
+@pytest.mark.parametrize('self_loop', [False, True])
+def test_graph_validation_rejects_every_nonterminal_dead_end(state, self_loop):
+    value = draft().unpack()
+    machine = value['state_machine']
+    for key in list(machine['transitions']):
+        edge = machine['transitions'][key]
+        if edge['from'] == state:
+            if self_loop:
+                edge['to'] = state
+            else:
+                del machine['transitions'][key]
+    with pytest.raises(ValueError, match='lifecycle dead-end'):
+        validate_signal_lifecycle(machine)
+    with pytest.raises(ValueError, match='lifecycle dead-end'):
+        H0001Specification.of(value)
+
+
+@pytest.mark.parametrize('source,target', [
+    (source, target)
+    for source in ('INACTIVE_SIGNAL', 'DISABLED', 'DAILY_LONG_ALLOWED')
+    for target in ('SETUP_1H_DOWNSIDE', 'ENTRY_READY', 'ACTIVE_SIGNAL',
+                   'ADD_READY', 'EXIT_WATCH_WEAK', 'EXIT_WATCH_STRONG')
+    if (source, target) != ('DAILY_LONG_ALLOWED', 'SETUP_1H_DOWNSIDE')
+    and (source == 'INACTIVE_SIGNAL' or not target.startswith('EXIT_WATCH'))
+])
+def test_graph_validation_rejects_direct_and_indirect_activation_bypasses(source, target):
+    value = draft().unpack()
+    machine = value['state_machine']
+    edge = dict(machine['transitions']['daily_permission'], **{'from': source, 'to': target})
+    machine['transitions']['shortcut'] = edge
+    with pytest.raises(ValueError, match='lifecycle'):
+        validate_signal_lifecycle(machine)
+    with pytest.raises(ValueError, match='lifecycle'):
+        H0001Specification.of(value)
+
+
+@pytest.mark.parametrize('unreachable', [False, True])
+def test_graph_rejects_closed_components_even_when_every_state_has_outgoing_edges(unreachable):
+    machine = draft().unpack()['state_machine']
+    if unreachable:
+        # Watch states still form a live pair, but cannot be reached from start.
+        for key in ('weak_watch_candidate', 'strong_watch_candidate'):
+            del machine['transitions'][key]
+        machine['transitions']['weak_structure_exit_candidate']['to'] = 'EXIT_WATCH_STRONG'
+        machine['transitions']['strong_structure_exit_candidate']['to'] = 'EXIT_WATCH_WEAK'
+    else:
+        for key in ('weak_structure_exit_candidate', 'strong_structure_exit_candidate'):
+            machine['transitions'][key]['to'] = 'ACTIVE_SIGNAL'
+        # INACTIVE_SIGNAL still reachable through the entry node, but the active
+        # component can never exit to it or reach a fresh ENTRY_READY again.
+        machine['transitions']['entry_to_inactive'] = {'from': 'ENTRY_READY', 'to': 'INACTIVE_SIGNAL'}
+    with pytest.raises(ValueError, match='unreachable|complete/restart'):
+        validate_signal_lifecycle(machine)
+
+
+def test_lifecycle_returns_reuse_unresolved_contract_without_resolving_or_adding_decisions():
+    before = StrategySpecification.loads(subprocess.check_output([
+        'git', 'show', '03438243b0ce35a456bf350adcdbdf6da5416c26:research/strategy_specs/H0001-r03-draft.yaml',
+    ], cwd=ROOT).decode('utf-8'))
+    current = draft()
+    assert current.unresolved_fields == before.unresolved_fields
+    assert current.unpack()['decisions'] == before.unpack()['decisions']
+    assert len(current.unresolved_fields) == 107
+    assert len(current.unpack()['decisions']) == 75
+    for key in LIFECYCLE_RETURNS:
+        edge = current.unpack()['state_machine']['transitions'][key]
+        assert set(edge['prerequisites']) == {'H1-DAILY-LONG', 'H1-DAILY-BLOCKER', 'H1-STATE-TRANSITIONS'}
+        reference = edge['condition']['value']
+        assert reference['name'] == 'existing_contract_reference'
+        target = at(current.unpack(), reference['parameters']['path']['value'])
+        assert target['value'] == UNRESOLVED
+        assert target['decision_id'] == edge['condition']['decision_id'] == 'H1-STATE-TRANSITIONS'
+    for decision in ('daily_long_permission', 'daily_exhaustion_blocker', 'transition_priority_and_resets'):
+        value = frozen_fixture()
+        section = 'state_machine_parameters' if decision == 'transition_priority_and_resets' else 'rule_parameters'
+        value[section][decision]['value'] = UNRESOLVED
+        with pytest.raises(ValueError, match='C1'):
+            H0001Specification.of(value)
+
+
+@pytest.mark.parametrize('key', LIFECYCLE_RETURNS)
+@pytest.mark.parametrize('mutation', ['target', 'guard', 'performance'])
+def test_lifecycle_reference_cannot_be_replaced_or_depend_on_execution(key, mutation):
+    value = frozen_fixture()
+    edge = value['state_machine']['transitions'][key]
+    if mutation == 'target':
+        edge['condition']['value']['parameters']['path']['value'] = 'execution_requirements.fill_price_contract'
+    elif mutation == 'guard':
+        edge['condition']['value'] = contract('unconditional_v1')
+    else:
+        edge['prerequisites'].append('H1-FILL')
+    with pytest.raises(ValueError, match='reference|prerequisites'):
+        H0001Specification.of(value)
+
+
+def test_liveness_fix_preserves_source_worktree_bytes_at_audit_head():
+    original = subprocess.check_output([
+        'git', 'cat-file', '--filters',
+        '03438243b0ce35a456bf350adcdbdf6da5416c26:research/hypotheses/H0001-r03.yaml',
+    ], cwd=ROOT)
+    assert SOURCE.read_bytes() == original
 
 
 def test_missing_or_extra_feature_convention_parameters_fail_closed():
