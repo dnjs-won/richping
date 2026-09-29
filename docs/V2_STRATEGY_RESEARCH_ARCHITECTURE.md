@@ -202,7 +202,8 @@ Replay must be deterministic: same dataset + strategy spec + execution spec + se
 ## 7. H0001-r03 as first plugin
 
 The engine does not implement these rules. A future `strategy/h0001_r03.py`
-plugin may implement them only after decision freeze; that file does not exist.
+plugin may implement them only after `require_c1_ready()` succeeds; that file
+does not exist. Structural FROZEN alone does not attest current-engine support.
 
 Candidate state machine:
 
@@ -211,13 +212,18 @@ DISABLED
   -> DAILY_LONG_ALLOWED
   -> SETUP_1H_DOWNSIDE_EXTREME
   -> ENTRY_READY_15M
-  -> POSITION_OPEN
+  -> ACTIVE_SIGNAL (ENTER intent emitted)
   -> FAILED_REVERSAL / ADD_READY
-  -> POSITION_OPEN
+  -> ACTIVE_SIGNAL (ADD intent emitted)
   -> EXIT_WATCH_WEAK | EXIT_WATCH_STRONG
   -> EXIT_CONFIRMATION
-  -> FLAT
+  -> INACTIVE_SIGNAL (EXIT intent emitted)
 ```
+
+C1 owns causal signal state and Intent emission. These states claim no actual
+position or fill. Execution/portfolio owns orders, fills, position quantities,
+sizing and exposure; those unresolved performance decisions cannot be signal
+transition prerequisites. V2-A already permits unspecified Intent quantity.
 
 The executable H0001 specification must parameterize, rather than hard-code into the engine:
 
@@ -402,13 +408,15 @@ See V2_C0_H0001_SPECIFICATION.md for full semantics and validation results.
 
 The user/researcher must choose actual feature conventions, Daily rules,
 relative methods/windows/thresholds, trigger, swing and lifecycle semantics.
-FROZEN forbids unresolved C1 blockers; profitability readiness additionally
-requires performance decisions and verified chart parity. r03 is unchanged and
+FROZEN forbids unresolved C1 blockers. C1 readiness additionally checks the
+versioned current-engine capability profile and selected feature conventions,
+and forbids lower-stage transition dependencies. Profitability readiness first
+requires C1 readiness, then performance decisions and verified chart parity. r03 is unchanged and
 no r04 is created. C0 infrastructure is COMPLETE; H0001 remains DRAFT.
 
 ### V2-C1 — H0001 strategy plugin (NOT IMPLEMENTED)
 
-Start only after the executable spec is frozen. A future plugin consumes the
+Start only after `require_c1_ready()` succeeds on the frozen spec. A future plugin consumes the
 H0001-specific validated contract; generic replay/features import neither it
 nor H0001. Validate all supported contract names, versions and method-specific
 parameters before implementing any signal rules.

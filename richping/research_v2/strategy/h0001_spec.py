@@ -4,6 +4,7 @@ from pathlib import Path
 from hashlib import sha256
 
 from .specification import StrategySpecification, UNRESOLVED, exact
+from .capabilities import current_engine, require_current_engine
 
 REQUIRED = {
     ('timeframe_contracts', 'session_policy'): ('enum', 'H1-SESSION', 'C1_IMPLEMENTATION_BLOCKER', ('RTH', 'RTH_EXTENDED')),
@@ -117,9 +118,9 @@ FIXED = {('feature_contracts', 'macd_fast'): ('integer', 12),
                                           'close'),
  ('chart_parity', 'engine_ema_seed'): ('text', 'first_observation_recursive_v1')}
 
-ENGINE_FIELDS = ('base_timeframe', 'session_policy', 'availability', 'continuity', 'aggregation', 'macd_feature_version', 'percentile_feature_version', 'zscore_feature_version', 'normalization_feature_version', 'atr_feature_version', 'swing_feature_version', 'classification_feature_version')
+ENGINE_FIELDS = tuple(current_engine())
 
-STATES = ('DISABLED', 'DAILY_LONG_ALLOWED', 'SETUP_1H_DOWNSIDE', 'ENTRY_READY', 'POSITION_OPEN', 'ADD_READY', 'EXIT_WATCH_WEAK', 'EXIT_WATCH_STRONG', 'FLAT')
+STATES = ('DISABLED', 'DAILY_LONG_ALLOWED', 'SETUP_1H_DOWNSIDE', 'ENTRY_READY', 'ACTIVE_SIGNAL', 'ADD_READY', 'EXIT_WATCH_WEAK', 'EXIT_WATCH_STRONG', 'INACTIVE_SIGNAL')
 
 TRANSITIONS = {'daily_permission': ('DISABLED',
                       'DAILY_LONG_ALLOWED',
@@ -135,10 +136,10 @@ TRANSITIONS = {'daily_permission': ('DISABLED',
                       'H1-M15-RELATIVE-METHOD',
                       'H1-M15-REVERSAL',
                       'H1-STATE-TRANSITIONS')),
- 'position_established': ('ENTRY_READY',
-                          'POSITION_OPEN',
-                          ('H1-FILL', 'H1-ORDER-TIMING', 'H1-SIZING', 'H1-STATE-TRANSITIONS')),
- 'failed_reversal_add_candidate': ('POSITION_OPEN',
+ 'enter_intent_emitted': ('ENTRY_READY',
+                          'ACTIVE_SIGNAL',
+                          ('H1-DECISION-TIMING', 'H1-STATE-TRANSITIONS')),
+ 'failed_reversal_add_candidate': ('ACTIVE_SIGNAL',
                                    'ADD_READY',
                                    ('H1-ADD-POLICY',
                                     'H1-DEEPER-EXTREME',
@@ -146,15 +147,12 @@ TRANSITIONS = {'daily_permission': ('DISABLED',
                                     'H1-GC-ROLE',
                                     'H1-MAX-ADDS',
                                     'H1-STATE-TRANSITIONS')),
- 'add_established': ('ADD_READY',
-                     'POSITION_OPEN',
+ 'add_intent_emitted': ('ADD_READY',
+                     'ACTIVE_SIGNAL',
                      ('H1-ADD-POLICY',
-                      'H1-EXPOSURE',
-                      'H1-FILL',
-                      'H1-ORDER-TIMING',
-                      'H1-SIZING',
+                      'H1-DECISION-TIMING',
                       'H1-STATE-TRANSITIONS')),
- 'weak_watch_candidate': ('POSITION_OPEN',
+ 'weak_watch_candidate': ('ACTIVE_SIGNAL',
                           'EXIT_WATCH_WEAK',
                           ('H1-DEAD-CROSS',
                            'H1-HISTOGRAM',
@@ -162,29 +160,27 @@ TRANSITIONS = {'daily_permission': ('DISABLED',
                            'H1-SIGNAL-SLOPE',
                            'H1-STATE-TRANSITIONS',
                            'H1-WEAK-WATCH')),
- 'strong_watch_candidate': ('POSITION_OPEN',
+ 'strong_watch_candidate': ('ACTIVE_SIGNAL',
                             'EXIT_WATCH_STRONG',
                             ('H1-STATE-TRANSITIONS', 'H1-STRONG-WATCH', 'H1-UPPER-EXTREME')),
  'weak_structure_exit_candidate': ('EXIT_WATCH_WEAK',
-                                   'FLAT',
-                                   ('H1-FILL',
-                                    'H1-HL-BREAK',
+                                   'INACTIVE_SIGNAL',
+                                   ('H1-HL-BREAK',
                                     'H1-LH',
                                     'H1-REFERENCE-HH',
                                     'H1-STATE-TRANSITIONS',
                                     'H1-VALID-HL',
                                     'H1-WATCH-CONFIRMATION')),
  'strong_structure_exit_candidate': ('EXIT_WATCH_STRONG',
-                                     'FLAT',
-                                     ('H1-FILL',
-                                      'H1-HL-BREAK',
+                                     'INACTIVE_SIGNAL',
+                                     ('H1-HL-BREAK',
                                       'H1-LH',
                                       'H1-REFERENCE-HH',
                                       'H1-STATE-TRANSITIONS',
                                       'H1-VALID-HL',
                                       'H1-WATCH-CONFIRMATION')),
- 'hold_or_new_hh_candidate': ('POSITION_OPEN',
-                              'POSITION_OPEN',
+ 'hold_or_new_hh_candidate': ('ACTIVE_SIGNAL',
+                              'ACTIVE_SIGNAL',
                               ('H1-NEW-HH-RESET', 'H1-REFERENCE-HH', 'H1-STATE-TRANSITIONS', 'H1-VALID-HL'))}
 
 SOURCE_SHA256 = "35e13276056a36d6a06de04611720fd286113f0e5db1e4255af6ceeb6a0f0bc2"
@@ -201,7 +197,7 @@ class H0001Specification(StrategySpecification):
         if (value["strategy_id"], value["hypothesis_id"], value["hypothesis_revision"], value["direction"]) != (
                 "H0001", "H0001", 3, "LONG_ONLY"):
             raise ValueError("Unsupported H0001-r03 identity")
-        if value["specification_version"] != "h0001_r03_spec_v1":
+        if value["specification_version"] != "h0001_r03_spec_v2":
             raise ValueError("Unsupported H0001 specification version")
         if value["source"] != {"path": "research/hypotheses/H0001-r03.yaml", "sha256": SOURCE_SHA256}:
             raise ValueError("H0001 source provenance mismatch")
@@ -258,9 +254,11 @@ class H0001Specification(StrategySpecification):
             if method == "ROLLING_PERCENTILE" and threshold != UNRESOLVED and not 0 <= threshold <= 1:
                 raise ValueError("Percentile threshold must be in [0,1]")
 
+    def _require_engine_compatibility(self, value):
+        require_current_engine(value)
+
     def require_historical_reproduction_ready(self):
-        if self.unpack()["status"] != "FROZEN":
-            raise ValueError("Historical reproduction requires FROZEN signal contract")
+        self.require_c1_ready()
         if self.unpack()["chart_parity"]["parity_status"]["value"] != "VERIFIED":
             raise ValueError("Historical reproduction blocked by unverified/mismatched chart parity")
 

@@ -7,7 +7,7 @@ H0001 profitability: **NOT TESTED**. No H0001 trading plugin exists.
 Draft inventory: **75 decisions** (51 C1 blockers, 17 performance blockers,
 7 optional extensions); **107 unresolved parameter/transition paths**.
 Canonical specification SHA-256:
-`5e15b84787a42998ddeed7b183d7e2b5931b87f020840699803dceb56ad3dde3`.
+`28e0563158e09df737034750cbe6dfec6764869e0ebb6ceb75037280a4ffa1e5`.
 
 ## Investigation and preserved boundary
 
@@ -42,7 +42,7 @@ StrategySpecification immutable parser / validation / hash
              |
 existing core canonical/digest and V2 JsonObject / timeframe vocabulary
 
-future C1 H0001 plugin -> validated frozen H0001Specification
+future C1 H0001 plugin -> H0001Specification.require_c1_ready()
                      -> generic V2-A replay / V2-B features
 ```
 
@@ -54,6 +54,10 @@ executor, portfolio, provider integration or optimization in this package.
 Install the isolated research parser dependency with
 `python -m pip install -e ".[research]"` in the intended environment. PyYAML is
 an optional research dependency; generic engine/features do not import it.
+All specification APIs, including JSON and in-memory construction, require
+`[research]` because the module imports PyYAML at runtime. The base installation
+does not promise these research APIs. Packaging tests simulate missing PyYAML
+and verify that the production CLI and generic engine/features still import.
 
 ```python
 from richping.research_v2.strategy.h0001_spec import load_h0001
@@ -65,6 +69,7 @@ spec = load_h0001(
 spec.specification_hash
 spec.unresolved_fields  # detached path -> decision_id + classification mapping
 # spec.plugin_specification() raises: DRAFT cannot be handed to a plugin.
+# spec.require_c1_ready() also rejects unsupported FROZEN contracts.
 ```
 
 `StrategySpecification` validates the generic structural contract. A future
@@ -75,7 +80,9 @@ or a retrofit guard on old fixture strategies.
 
 ## Schema, canonical representation and hash
 
-Schema `strategy_specification_v1`; H0001 profile `h0001_r03_spec_v1`.
+Schema `strategy_specification_v1`; H0001 profile `h0001_r03_spec_v2`.
+The profile version changed for signal-state ownership and capability admission;
+the hypothesis revision remains r03. Old profile v1 is not silently reinterpreted.
 Identity includes strategy ID, specification version, hypothesis ID/revision,
 status, UTC-aware created/updated timestamps, source path and source SHA-256.
 The source digest normalizes CRLF to LF only, matching the Git blob across
@@ -103,10 +110,12 @@ A resolved `contract` value must be a structured reference:
 `{name: <identifier>, version: vN, parameters: {<name>: <typed parameter>, ...}}`.
 There is no free-prose formula accepted in a contract-valued parameter.
 Nested parameters are recursively checked and their unknowns remain blockers.
-This names a future implementation contract; C0 does not evaluate rules or
-certify that a named implementation exists. C1 must reject unknown contract
-names/versions, validate method-specific required parameters and dependencies,
-and verify the implementation against synthetic fixtures before using it.
+For engine features, C0 admission checks supported names/versions and explicit
+parameters using the existing V2-B spec validators. Strategy rule contracts
+remain declarations to implement in C1: C0 does not evaluate rules or certify
+their mathematical behavior. C1 must reject unsupported rule names/versions,
+validate their method-specific parameters and verify synthetic fixtures before
+using them. Admission is readiness to implement the plugin, not plugin completion.
 Structural FROZEN alone cannot establish mathematical correctness, researcher
 approval, provider support or profitability. Explicit disabled/deferred contracts
 are possible decisions; C0 has selected none of them for core lifecycle rules.
@@ -138,12 +147,17 @@ body, so the unmodified replay computes the same specification hash.
 - **DRAFT:** explicit unresolved values allowed. No defaulting or auto-freeze.
 - **FROZEN:** no unresolved `C1_IMPLEMENTATION_BLOCKER`, including nested
   parameters and candidate transition conditions. Missing fields fail before
-  this gate. H0001 blockers cannot be reclassified to evade it.
+  this gate. H0001 blockers cannot be reclassified to evade it. This is structural
+  strategy-contract freeze; a valid future-capability choice may remain FROZEN.
+- **C1_READY:** derived admission via `require_c1_ready()`, not a stored status.
+  Requires FROZEN, no C1 unknowns, only C1 transition dependencies, and current
+  engine compatibility. `plugin_specification()` requires this gate. Unknown
+  capability/convention/version or an unimplemented primitive fails closed.
 - **Profitability readiness:** separate method, not a success/performance status.
-  Requires FROZEN, no unresolved C1 or performance blockers, and verified chart
+  First requires C1 readiness, then no unresolved performance blockers and verified chart
   parity for H0001. Optional future decisions may remain unresolved and excluded.
   A later executor/dataset/evaluation implementation is still required.
-- **Historical reproduction readiness:** requires FROZEN and verified observed
+- **Historical reproduction readiness:** requires C1 readiness and verified observed
   chart conventions/evidence. It is stricter than C1 synthetic signal tests.
 
 Immutable means an instantiated specification cannot mutate. Editing the YAML
@@ -171,12 +185,47 @@ researcher must explicitly include or defer it, then settle failed reversal,
 deeper extreme, counter caps and 1H GC role. Stop/trailing/max-holding/overnight
 choices are C1 blockers because they can change signal/state transitions;
 disabled is a possible explicit choice, never a default. Sizing/exposure/costs
-are performance blockers: synthetic signal logic can use abstract position
-state, while actual capital/fill evaluation requires these contracts. If a
-chosen rule depends on capital availability or Daily reduction, that dependency
-must be made explicit at freeze and supplied by the later executor.
+are performance blockers. C1 owns causal signal state and Intent emission;
+the future execution/portfolio layer owns orders, fills, actual positions,
+sizing, exposure and cash. C1 can emit an Intent with `requested_quantity=None`,
+as allowed by V2-A. A signal transition cannot wait for execution confirmation
+or read unresolved execution decisions. Fill-based stops, fill-based holding
+clocks or capital-dependent rules require a future execution-aware profile;
+they cannot be hidden inside the current signal contract. Signal rule choices,
+clock origins, counters and resets remain C1 decisions, not defaults.
 
 ## Capability mapping (availability does not imply a strategy decision)
+
+`strategy/capabilities.py` exposes `v2_ab_c1_signal_v1`: 15m authoritative base,
+XNYS_RTH, atomic-known-at, completed-grid continuity, open-anchored short-final
+aggregation, and the existing V2-B feature versions. It compares the complete
+machine-readable `engine_capabilities` record, independently of narrative
+`available_v2_primitive` text. Exported V2-A/B version constants/classes are
+reused; the adapter pins conventions with no exported constant. RTH_EXTENDED,
+1H/Daily base and ATR_REVERSAL/DIRECTIONAL_CHANGE remain structurally valid
+choices but require future implementation and cannot pass C1 admission.
+
+Selected feature contract encoding (all parameters use the existing typed
+parameter envelope; no selections are written into the draft):
+
+- Empty-parameter convention IDs: `first_observation_recursive_v1`,
+  `first_macd_observation_v1`, `close_v1`, `macd_first_observation_recursive_v1`,
+  `available_completed_history_prefix_v1` (the full available completed-bar
+  prefix supplied by the replay context, with no hidden truncation/restart).
+- Primitive IDs split their actual V2-B `version` at the final `_vN` into
+  `{name, version}`. All dataclass parameters, including convention defaults,
+  must be explicit. Missing/extra parameters and unsupported conventions fail.
+- Percentile/z-score contracts additionally require a MACD projection `field`;
+  `window` must equal that rule's declared lookback. Both available methods
+  are supported without selecting one for H0001.
+- `macd_atr_normalization_v1` contains typed nested `atr` and `normalization`
+  contracts for ATRSpec and NormalizeSpec. The ATR period equals the declared
+  lookback; denominator is `atr` and numerator is an available MACD field.
+- FRACTAL parameters use `fractal_k_right_strict_v1`, including explicit
+  left/right widths, strict ties and completed-grid continuity.
+
+Min-history, widths, periods, fields and all strategy thresholds remain
+researcher decisions. This gate introduces no feature computation or winner.
 
 | H0001 need | Existing V2-B primitive | Remaining strategy work |
 |---|---|---|
@@ -218,20 +267,26 @@ an arbitrary evidence string. No real intraday provider was selected here.
 ## State-machine skeleton
 
 States: DISABLED, DAILY_LONG_ALLOWED, SETUP_1H_DOWNSIDE, ENTRY_READY,
-POSITION_OPEN, ADD_READY, EXIT_WATCH_WEAK, EXIT_WATCH_STRONG, FLAT.
+ACTIVE_SIGNAL, ADD_READY, EXIT_WATCH_WEAK, EXIT_WATCH_STRONG, INACTIVE_SIGNAL.
 The YAML has named candidate transitions with prerequisite decision IDs and
 `condition.value: UNRESOLVED` for **every** transition. Prerequisites are a
 decision dependency inventory, not an implicit AND/OR rule or executed guard.
 
-Candidate edges describe permission → setup → entry, position establishment,
-failed-reversal add candidate → position, weak/strong watches → structural exit,
-and hold/new-HH reference update. ENTRY_READY is not a fill; POSITION_OPEN/FLAT
-establishment and add completion must eventually distinguish intent from fill.
-These are narrative labels, not implemented position bookkeeping.
+Candidate edges describe permission → setup → entry intent → ACTIVE_SIGNAL,
+failed-reversal add candidate → add intent → ACTIVE_SIGNAL, weak/strong watches
+→ exit intent → INACTIVE_SIGNAL, and hold/new-HH reference update.
+`enter_intent_emitted` and `add_intent_emitted` depend on decision timing and
+signal transitions, never fill/order timing/sizing/exposure. Exit candidates
+also no longer depend on H1-FILL. ACTIVE_SIGNAL records a signal episode;
+INACTIVE_SIGNAL records its end, even if an executor has not filled an exit.
+Neither state asserts a position quantity, a successful fill, or account flatness.
+All 11 transition conditions remain UNRESOLVED. All prerequisite decisions
+are C1-classified and must be resolved at admission; nested lower-stage
+dependencies are rejected. The 75-decision/107-path inventory is unchanged.
 
 This is intentionally **not** a complete transition table. Initial state,
 regime loss, setup cancellation/expiry, weak/strong switching/reset, re-entry
-after flat, concurrent-condition priority, stop interactions and state memory
+after signal termination, concurrent-condition priority, stop interactions and state memory
 are all covered by the unresolved `H1-STATE-TRANSITIONS` contract (and dedicated
 lifecycle decisions). No extra edge or default transition is invented. Freeze
 must review/complete that table and change the versioned profile if required.
@@ -239,7 +294,31 @@ There is no on_event()/BUY/SELL or any other H0001 Intent generation in C0.
 
 ## Validation and next action
 
-Final validation from this isolated worktree using
+September 29 audit remediation, starting at
+`e2bce5b0dd0bd49a7b132f3aced2a3fcaadbfb0f`, closes only the two freeze-semantics
+findings: current-engine admission and signal/execution state ownership.
+
+- Full suite: `C:/richping/.venv/Scripts/python -m pytest -q` → **613 passed
+  (118.15s)**, no failures/skips/pytest warnings. This includes all **229 C0
+  specification cases** (159 existing + **70 new regressions**) and unchanged
+  V2-A/B tests. An intermediate targeted C0 run passed 225 cases before the
+  last four regressions were added; the full run covers the final code.
+- `python -m richping --help` and `git diff --check`: passed.
+- Raw local r03 SHA-256 before/after:
+  `abdd4f10d127ee7614a4eead734d1bfbf7dc1897ec368f8a3b70a1645e2552fc`.
+  The normalized Git-blob source digest remains `35e13276...0f0bc2` as above.
+  All hypothesis files and V2-A/B source/tests have zero diff from the starting
+  HEAD; the existing preservation test also checks the audited V2-B base.
+- No decision metadata, selected strategy values or classifications changed:
+  51 C1 + 17 performance + 7 optional = **75 decisions / 107 unresolved paths**.
+  The new resolved capability-profile ID adds no decision or unknown. Renamed
+  signal transitions retain every unresolved condition and all execution
+  decisions remain performance blockers in their own section.
+- PyYAML remains in `[research]`/`[dev]`; no production dependency was added.
+  No r04, strategy handler, backtest, provider, execution or portfolio was built.
+
+Original C0 validation before the September 29 audit remediation, from this
+isolated worktree using
 `C:/richping/.venv/Scripts/python -m pytest`:
 
 | Scope | Command arguments | Result |
@@ -249,7 +328,7 @@ Final validation from this isolated worktree using
 | Full suite | `-q` | **543 passed (108.38s)** |
 | Whitespace | `git diff --check` and staged diff check | Passed |
 
-No failures, skips or pytest warnings in these final runs. An earlier full
+No failures, skips or pytest warnings in those original final runs. An earlier full
 run overlapped a decision-ID edit and loaded old Python/new YAML; it failed
 schema consistency and was discarded. The final runs used unchanged code/spec
 through completion. Existing V2-A/B tests were not altered to pass.
@@ -262,7 +341,8 @@ strategy or constitute selected thresholds.
 Next: user/researcher answers the C1 decision matrix, including explicit
 deferral where justified. Resolve the full versioned parameter definitions,
 then review the resulting spec, source-revision implications and freeze it.
-Only then may V2-C1 implement synthetic state-machine behavior. Current C1
+Only after `require_c1_ready()` succeeds may V2-C1 implement synthetic
+state-machine behavior. Current C1
 start: **BLOCKED_ON_DECISIONS**. Performance experiment decisions, chart parity,
 real data, executor and evaluation integration remain additional later gates.
 

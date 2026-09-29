@@ -1,3 +1,31 @@
+# Richping v2 상태 · 2026-09-29 V2-C0 freeze-semantics audit remediation
+
+**두 correctness finding 수정 완료. H0001은 DRAFT / BLOCKED_ON_DECISIONS이며 C1 plugin은 미구현이다.**
+
+- 같은 `v2-c0-h0001-spec-contract` worktree에서 `e2bce5b0dd0bd49a7b132f3aced2a3fcaadbfb0f`를
+  기준으로 수정했다. main과 기존 dirty 작업은 보존했다.
+- FROZEN은 구조적 신호 계약 동결이다. 별도 `require_c1_ready()`가 status/C1 unknown,
+  transition 의존성, `v2_ab_c1_signal_v1` capability 및 선택한 feature convention/version을
+  검증한다. 미래 capability 계약은 FROZEN일 수 있지만 현재 C1 시작은 차단된다.
+  plugin export와 profitability/historical-reproduction gate도 C1 readiness를 먼저 요구한다.
+- strategy는 causal signal state + Intent emission을 소유한다. `POSITION_OPEN`/`FLAT`을
+  `ACTIVE_SIGNAL`/`INACTIVE_SIGNAL`로 바꾸고 진입·추가·청산 전이의 fill/sizing/exposure/order
+  의존성을 제거했다. 실제 order/fill/position/capital은 미래 execution/portfolio 책임이다.
+  transition conditions와 signal rule은 여전히 미결정이며 임의 trading rule을 추가하지 않았다.
+- 원본 r03 byte와 V2-A/B 구현·테스트는 그대로다. r04는 없다. 필수 결정은 여전히
+  **75개 = C1 51 + performance 17 + optional 7**, unresolved paths **107개**다.
+  H0001 전략값·threshold·Daily regime·relative method·swing winner를 선택하지 않았다.
+- H0001 specification profile만 `h0001_r03_spec_v2`로 올려 signal boundary 변경을 표시했다.
+  새 draft hash: `28e0563158e09df737034750cbe6dfec6764869e0ebb6ceb75037280a4ffa1e5`.
+  PyYAML은 모든 specification API의 `[research]` 전제로 문서/테스트에 명시했고 production
+  dependency는 늘리지 않았다.
+- 신규 회귀 **70개**, 전체 **613 passed (118.15s)**: C0 229개 및 기존 V2-A/B 포함.
+  실패·skip·pytest warning 없음. CLI `--help`, `git diff --check` 통과.
+- backtest/provider/execution/portfolio/on_event는 구현하지 않았다. main merge 없음.
+  상세 계약과 검증: [V2-C0 명세](docs/V2_C0_H0001_SPECIFICATION.md).
+
+---
+
 # Richping v2 상태 · 2026-09-27 V2-C0 executable-spec contract
 
 **V2-C0 infrastructure: COMPLETE. H0001 executable spec: DRAFT / BLOCKED_ON_DECISIONS.**

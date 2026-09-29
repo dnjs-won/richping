@@ -1,6 +1,7 @@
 """Versioned, immutable specification values, not a rule evaluator.
 
 Generic structure validates explicit typed parameters and decision references.
+Requires the optional ``richping[research]`` extra (including JSON APIs).
 Strategy-specific subclasses supply their mandatory field inventory. No imports
 from a concrete strategy, execution engine, dataset or store are permitted here.
 """
@@ -298,11 +299,26 @@ class StrategySpecification:
                              if item["classification"] == classification}))
 
     def require_profitability_ready(self):
-        if self.unpack()["status"] != "FROZEN" or self.blockers(C1) or self.blockers(PERFORMANCE):
+        self.require_c1_ready()
+        if self.blockers(PERFORMANCE):
             raise ValueError("Profitability experiment blocked; frozen complete contracts required")
 
+    def require_c1_ready(self):
+        """Implementation admission gate, not proof that a plugin exists."""
+        value = self.unpack()
+        if value["status"] != "FROZEN" or self.blockers(C1):
+            raise ValueError("C1 requires FROZEN specification without C1 blockers")
+        for key, transition in value["state_machine"]["transitions"].items():
+            refs = [*transition["prerequisites"], transition["condition"]["decision_id"]]
+            if any(ref is None or value["decisions"][ref]["classification"] != C1 for ref in refs):
+                raise ValueError(f"C1 transition {key} depends on a lower-stage decision")
+        self._require_engine_compatibility(value)
+
+    def _require_engine_compatibility(self, value):
+        # A generic structural value cannot attest a strategy's capabilities.
+        raise ValueError("C1 compatibility requires a supported strategy profile")
+
     def plugin_specification(self):
-        if self.unpack()["status"] != "FROZEN":
-            raise ValueError("Plugin requires FROZEN specification")
+        self.require_c1_ready()
         # Existing replay hashes this exact JSON body; no self-referential hash.
         return JsonObject(self.text)

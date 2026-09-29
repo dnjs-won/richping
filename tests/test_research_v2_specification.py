@@ -1,11 +1,13 @@
 """C0 contract tests only. Fixture resolutions are not H0001 decisions."""
 
 import ast
-from dataclasses import FrozenInstanceError
+from dataclasses import FrozenInstanceError, asdict
 from hashlib import sha256
 import json
 from pathlib import Path
 import subprocess
+import sys
+import tomllib
 
 import pytest
 import yaml
@@ -18,6 +20,10 @@ from richping.research_v2.strategy.specification import (
 from richping.research_v2.strategy.h0001_spec import (
     H0001Specification, REQUIRED, SOURCE_SHA256, load_h0001,
 )
+from richping.research_v2.features.relative import NormalizeSpec, PercentileSpec, ZScoreSpec
+from richping.research_v2.features.structure import FractalSpec
+from richping.research_v2.features.volatility import ATRSpec
+from richping.research_v2.strategy.capabilities import current_engine
 
 ROOT = Path(__file__).resolve().parents[1]
 DRAFT = ROOT / "research/strategy_specs/H0001-r03-draft.yaml"
@@ -50,7 +56,51 @@ def resolve_fixture(spec, categories):
             "integer": 1, "number": 0, "boolean": False, "timeframe": "15m",
             "enum": record["choices"][0] if record["choices"] else None,
         }[record["kind"]]
+    if C1 in categories:
+        compatible_features_fixture(value)
     return value
+
+
+def typed(value):
+    kind = {str: "text", int: "integer", bool: "boolean", dict: "contract"}[type(value)]
+    return {"kind": kind, "value": value, "choices": [], "decision_id": None}
+
+
+def contract(identifier, parameters=None):
+    name, version = identifier.rsplit("_", 1)
+    return {"name": name, "version": version,
+            "parameters": {k: typed(v) for k, v in (parameters or {}).items()}}
+
+
+def feature_contract(spec, **extra):
+    return contract(spec.version, {**asdict(spec), **extra})
+
+
+def compatible_features_fixture(value, method="ROLLING_PERCENTILE"):
+    """Synthetic admission fixture only: never a selection for the stored draft."""
+    value["timeframe_contracts"]["base"]["value"] = "15m"
+    value["timeframe_contracts"]["session_policy"]["value"] = "RTH"
+    value["rule_parameters"]["swing_detector"]["value"] = "FRACTAL"
+    value["rule_parameters"]["swing_parameters"]["value"] = feature_contract(FractalSpec(1, 1))
+    for key, identifier in {
+        "macd_ema_seed": "first_observation_recursive_v1",
+        "macd_signal_start": "first_macd_observation_v1",
+        "macd_price_field": "close_v1",
+        "macd_feature_version": "macd_first_observation_recursive_v1",
+        "history_origin": "available_completed_history_prefix_v1",
+    }.items():
+        value["feature_contracts"][key]["value"] = contract(identifier)
+    for prefix in ("setup_1h", "entry_15m", "exit_1h"):
+        value["rule_parameters"][prefix + "_relative_transform"]["value"] = method
+        convention = {
+            "ROLLING_PERCENTILE": feature_contract(PercentileSpec(1, 1), field="macd_line"),
+            "ROLLING_ZSCORE": feature_contract(ZScoreSpec(1, 1, ddof=0), field="macd_line"),
+            "MACD_ATR": contract("macd_atr_normalization_v1", {
+                "normalization": feature_contract(NormalizeSpec("macd_line", "atr")),
+                "atr": feature_contract(ATRSpec(1, 1)),
+            }),
+        }[method]
+        value["feature_contracts"][prefix + "_relative_conventions"]["value"] = convention
 
 
 def test_draft_inventory_and_no_plugin_or_profitability_export():
@@ -58,7 +108,7 @@ def test_draft_inventory_and_no_plugin_or_profitability_export():
     assert spec.unpack()["status"] == "DRAFT"
     assert len(spec.unresolved_fields) == 107
     assert sum(len(spec.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)) == 75
-    for method in (spec.plugin_specification, spec.require_profitability_ready,
+    for method in (spec.require_c1_ready, spec.plugin_specification, spec.require_profitability_ready,
                    spec.require_historical_reproduction_ready):
         with pytest.raises(ValueError):
             method()
@@ -72,6 +122,7 @@ def test_signal_freeze_leaves_performance_and_optional_decisions_blocked():
     value = resolve_fixture(draft(), {C1})
     value["status"] = "FROZEN"
     frozen = H0001Specification.of(value)
+    frozen.require_c1_ready()
     assert not frozen.blockers(C1)
     assert frozen.blockers(PERFORMANCE) and frozen.blockers(OPTIONAL)
     assert digest(payload(frozen.plugin_specification())) == frozen.specification_hash
@@ -106,7 +157,7 @@ def test_yaml_json_mapping_order_comments_and_timestamp_spelling_canonicalize():
     original = draft()
     value = original.unpack()
     value["created_at"] = "2026-09-27T09:00:00+09:00"
-    value["updated_at"] = "2026-09-27T00:00:00Z"
+    value["updated_at"] = "2026-09-29T09:00:00+09:00"
     value["state_machine"]["states"].reverse()
     for decision in value["decisions"].values():
         decision["candidate_choices"].reverse()
@@ -302,3 +353,228 @@ def test_decision_matrix_contains_every_decision_and_resolvable_source_reference
             for name, index in re.findall(r"([a-z_]+)|\[(\d+)\]", ref):
                 current = current[name] if name else current[int(index)]
             assert current is not None or ref == "test.confirmatory_period"
+
+
+def frozen_fixture(*, performance=False):
+    value = resolve_fixture(draft(), {C1, PERFORMANCE} if performance else {C1})
+    value["status"] = "FROZEN"
+    if performance:
+        value["chart_parity"]["parity_status"]["value"] = "VERIFIED"
+    return value
+
+
+@pytest.mark.parametrize("method", ["ROLLING_PERCENTILE", "ROLLING_ZSCORE", "MACD_ATR"])
+def test_current_feature_contracts_admit_all_available_relative_methods(method):
+    value = frozen_fixture()
+    compatible_features_fixture(value, method)
+    spec = H0001Specification.of(value)
+    spec.require_c1_ready()
+    assert spec.blockers(PERFORMANCE)
+    assert payload(spec.plugin_specification()) == spec.unpack()
+
+
+@pytest.mark.parametrize("section,field,choice", [
+    ("timeframe_contracts", "session_policy", "RTH_EXTENDED"),
+    ("timeframe_contracts", "base", "1H"),
+    ("timeframe_contracts", "base", "Daily"),
+    ("rule_parameters", "swing_detector", "ATR_REVERSAL"),
+    ("rule_parameters", "swing_detector", "DIRECTIONAL_CHANGE"),
+])
+def test_valid_frozen_future_contract_cannot_start_current_c1_or_profitability(section, field, choice):
+    value = frozen_fixture(performance=True)
+    value[section][field]["value"] = choice
+    spec = H0001Specification.of(value)
+    assert not spec.blockers(C1) and not spec.blockers(PERFORMANCE)
+    assert H0001Specification.loads(spec.text, format="json") == spec
+    for gate in (spec.require_c1_ready, spec.plugin_specification,
+                 spec.require_profitability_ready, spec.require_historical_reproduction_ready):
+        with pytest.raises(ValueError, match="C1.*future implementation"):
+            gate()
+
+
+@pytest.mark.parametrize("field", list(current_engine()))
+def test_every_engine_capability_mismatch_fails_closed(field):
+    value = frozen_fixture(performance=True)
+    value["engine_capabilities"][field]["value"] = "1H" if field == "base_timeframe" else "future_v999"
+    spec = H0001Specification.of(value)
+    for gate in (spec.require_c1_ready, spec.require_profitability_ready):
+        with pytest.raises(ValueError, match="capability/version mismatch"):
+            gate()
+
+
+@pytest.mark.parametrize("section,field", [
+    ("feature_contracts", "macd_ema_seed"),
+    ("feature_contracts", "macd_signal_start"),
+    ("feature_contracts", "macd_price_field"),
+    ("feature_contracts", "macd_feature_version"),
+    ("feature_contracts", "history_origin"),
+    ("feature_contracts", "setup_1h_relative_conventions"),
+    ("feature_contracts", "entry_15m_relative_conventions"),
+    ("feature_contracts", "exit_1h_relative_conventions"),
+    ("rule_parameters", "swing_parameters"),
+])
+@pytest.mark.parametrize("part", ["name", "version"])
+def test_selected_feature_contract_name_and_version_must_be_supported(section, field, part):
+    value = frozen_fixture(performance=True)
+    value[section][field]["value"][part] = "future_contract" if part == "name" else "v999"
+    spec = H0001Specification.of(value)
+    with pytest.raises(ValueError, match="unsupported contract"):
+        spec.require_c1_ready()
+    with pytest.raises(ValueError, match="unsupported contract"):
+        spec.require_profitability_ready()
+
+
+@pytest.mark.parametrize("method,parameter,bad", [
+    ("ROLLING_PERCENTILE", "ties", "first"),
+    ("ROLLING_PERCENTILE", "include_current", False),
+    ("ROLLING_PERCENTILE", "window", 2),
+    ("ROLLING_PERCENTILE", "min_history", 2),
+    ("ROLLING_PERCENTILE", "field", "unknown_field"),
+    ("ROLLING_PERCENTILE", "continuity", "future_grid_v2"),
+    ("ROLLING_ZSCORE", "ddof", 2),
+    ("ROLLING_ZSCORE", "zero_variance", "zero"),
+])
+def test_relative_conventions_cannot_hide_unsupported_parameters(method, parameter, bad):
+    value = frozen_fixture()
+    compatible_features_fixture(value, method)
+    params = value["feature_contracts"]["setup_1h_relative_conventions"]["value"]["parameters"]
+    params[parameter] = typed(bad)
+    with pytest.raises(ValueError, match="C1"):
+        H0001Specification.of(value).require_c1_ready()
+
+
+@pytest.mark.parametrize("part,parameter,bad", [
+    ("atr", "smoothing", "ema"), ("atr", "period", 2),
+    ("atr", "seed", "first_observation"),
+    ("normalization", "alignment", "nearest"),
+    ("normalization", "denominator_field", "close"),
+])
+def test_macd_atr_nested_conventions_are_checked(part, parameter, bad):
+    value = frozen_fixture()
+    compatible_features_fixture(value, "MACD_ATR")
+    params = value["feature_contracts"]["setup_1h_relative_conventions"]["value"]["parameters"]
+    params[part]["value"]["parameters"][parameter] = typed(bad)
+    with pytest.raises(ValueError, match="C1"):
+        H0001Specification.of(value).require_c1_ready()
+
+
+@pytest.mark.parametrize("mutation", ["missing", "extra", "ties", "width", "continuity"])
+def test_swing_convention_parameters_are_explicit_and_supported(mutation):
+    value = frozen_fixture()
+    params = value["rule_parameters"]["swing_parameters"]["value"]["parameters"]
+    if mutation == "missing":
+        del params["right"]
+    elif mutation == "extra":
+        params["atr_threshold"] = typed(1)
+    elif mutation == "ties":
+        params["ties"] = typed("allow_equal")
+    elif mutation == "width":
+        params["right"] = typed(0)
+    else:
+        params["continuity"] = typed("future_grid_v2")
+    with pytest.raises(ValueError, match="C1"):
+        H0001Specification.of(value).require_c1_ready()
+
+
+def test_all_signal_transition_prerequisites_are_available_at_c1():
+    spec = H0001Specification.of(frozen_fixture())
+    spec.require_c1_ready()
+    value = spec.unpack()
+    unavailable = {item["decision_id"] for item in spec.unresolved_fields.values()}
+    assert {"H1-FILL", "H1-SIZING", "H1-EXPOSURE", "H1-ORDER-TIMING"} <= unavailable
+    machine = value["state_machine"]
+    assert "ACTIVE_SIGNAL" in machine["states"] and "INACTIVE_SIGNAL" in machine["states"]
+    assert not {"POSITION_OPEN", "FLAT"} & set(machine["states"])
+    for transition in machine["transitions"].values():
+        for decision in [*transition["prerequisites"], transition["condition"]["decision_id"]]:
+            assert decision not in unavailable
+            assert value["decisions"][decision]["classification"] == C1
+
+
+@pytest.mark.parametrize("dependency", ["H1-FILL", "H1-ORDER-TIMING", "H1-SIZING", "H1-EXPOSURE", "H1-4H"])
+def test_lower_stage_transition_dependencies_cannot_be_smuggled_into_c1(dependency):
+    value = frozen_fixture()
+    value["state_machine"]["transitions"]["enter_intent_emitted"]["prerequisites"].append(dependency)
+    with pytest.raises(ValueError, match="prerequisites"):
+        H0001Specification.of(value)
+    # Even generic structural specs cannot export a lower-stage transition.
+    with pytest.raises(ValueError, match="lower-stage"):
+        StrategySpecification.of(value).require_c1_ready()
+
+
+def test_generic_frozen_structure_cannot_attest_current_engine_compatibility():
+    with pytest.raises(ValueError, match="supported strategy profile"):
+        StrategySpecification.of(frozen_fixture()).require_c1_ready()
+
+
+def test_capability_narrative_is_not_used_for_admission():
+    value = frozen_fixture()
+    for decision in value["decisions"].values():
+        decision["available_v2_primitive"] = "changed human explanation"
+    H0001Specification.of(value).require_c1_ready()
+
+
+def test_implementation_version_drift_rejects_old_capability_claim(monkeypatch):
+    spec = H0001Specification.of(frozen_fixture())
+    monkeypatch.setattr(PercentileSpec, "version", "rolling_empirical_midrank_v2")
+    with pytest.raises(ValueError, match="capability/version mismatch"):
+        spec.require_c1_ready()
+
+
+def test_nested_transition_contract_cannot_depend_on_unresolved_execution():
+    value = frozen_fixture()
+    condition = value["state_machine"]["transitions"]["enter_intent_emitted"]["condition"]
+    condition["value"]["parameters"]["fill"] = {
+        "kind": "contract", "value": UNRESOLVED, "choices": [], "decision_id": "H1-FILL"}
+    with pytest.raises(ValueError, match="downgrade"):
+        H0001Specification.of(value)
+
+
+def test_remediation_preserves_every_decision_and_unresolved_strategy_parameter():
+    original = StrategySpecification.loads(subprocess.check_output([
+        "git", "show", "e2bce5b0dd0bd49a7b132f3aced2a3fcaadbfb0f:research/strategy_specs/H0001-r03-draft.yaml",
+    ], cwd=ROOT).decode("utf-8"))
+    current = draft()
+    old, new = original.unpack(), current.unpack()
+    assert old["decisions"] == new["decisions"]
+    for section in set(SECTIONS) - {"engine_capabilities"}:
+        assert old[section] == new[section]
+    assert len(current.unresolved_fields) == len(original.unresolved_fields) == 107
+    assert len(new["decisions"]) == len(old["decisions"]) == 75
+    assert [len(current.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)] == [51, 17, 7]
+
+
+def test_missing_or_extra_feature_convention_parameters_fail_closed():
+    for mutation in ("missing", "extra"):
+        value = frozen_fixture()
+        params = value["feature_contracts"]["setup_1h_relative_conventions"]["value"]["parameters"]
+        if mutation == "missing":
+            del params["include_current"]
+        else:
+            params["future_option"] = typed(True)
+        with pytest.raises(ValueError, match="C1.*required/unknown"):
+            H0001Specification.of(value).require_c1_ready()
+
+
+def test_research_extra_owns_pyyaml_and_base_engine_imports_without_it():
+    project = tomllib.loads((ROOT / "pyproject.toml").read_text(encoding="utf-8"))["project"]
+    assert not any(dep.lower().startswith("pyyaml") for dep in project["dependencies"])
+    assert "PyYAML>=6,<7" in project["optional-dependencies"]["research"]
+    subprocess.run([sys.executable, "-c", """
+import importlib.abc
+import sys
+class WithoutYaml(importlib.abc.MetaPathFinder):
+    def find_spec(self, fullname, path=None, target=None):
+        if fullname == 'yaml' or fullname.startswith('yaml.'):
+            raise ModuleNotFoundError('research extra missing', name='yaml')
+sys.meta_path.insert(0, WithoutYaml())
+import richping.cli
+import richping.research_v2.replay
+import richping.research_v2.features
+try:
+    import richping.research_v2.strategy.specification
+except ModuleNotFoundError as exc:
+    assert exc.name == 'yaml'
+else:
+    raise AssertionError('Specification API requires the research extra')
+"""], cwd=ROOT, check=True)
