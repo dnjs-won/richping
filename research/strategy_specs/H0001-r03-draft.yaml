@@ -1,13 +1,13 @@
 # Executable-spec draft, NOT a strategy implementation or frozen decision.
-# Source r03 remains immutable. All alternatives below are unselected.
+# Source r03 remains immutable. Only the first five session/base/MACD decisions are resolved.
 schema_version: strategy_specification_v1
 strategy_id: H0001
-specification_version: h0001_r03_spec_v3
+specification_version: h0001_r03_spec_v4
 hypothesis_id: H0001
 hypothesis_revision: 3
 status: DRAFT
 created_at: '2026-09-27T00:00:00Z'
-updated_at: '2026-09-29T00:00:00Z'
+updated_at: '2026-09-30T00:00:00Z'
 source:
   path: research/hypotheses/H0001-r03.yaml
   sha256: 35e13276056a36d6a06de04611720fd286113f0e5db1e4255af6ceeb6a0f0bc2
@@ -15,42 +15,57 @@ direction: LONG_ONLY
 feature_contracts:
   macd_ema_seed:
     kind: contract
-    value: UNRESOLVED
+    value:
+      name: first_observation_recursive
+      version: v1
+      parameters: {}
     choices: []
     decision_id: H1-EMA-SEED
   macd_signal_start:
     kind: contract
-    value: UNRESOLVED
+    value:
+      name: first_macd_observation
+      version: v1
+      parameters: {}
     choices: []
     decision_id: H1-EMA-SEED
   macd_price_field:
     kind: contract
-    value: UNRESOLVED
+    value:
+      name: close
+      version: v1
+      parameters: {}
     choices: []
     decision_id: H1-EMA-SEED
   macd_feature_version:
     kind: contract
-    value: UNRESOLVED
+    value:
+      name: macd_first_observation_recursive
+      version: v1
+      parameters: {}
     choices: []
     decision_id: H1-EMA-SEED
   macd_min_history_daily:
     kind: integer
-    value: UNRESOLVED
+    value: 130
     choices: []
     decision_id: H1-MACD-HISTORY
   macd_min_history_1h:
     kind: integer
-    value: UNRESOLVED
+    value: 130
     choices: []
     decision_id: H1-MACD-HISTORY
   macd_min_history_15m:
     kind: integer
-    value: UNRESOLVED
+    value: 130
     choices: []
     decision_id: H1-MACD-HISTORY
   history_origin:
     kind: contract
-    value: UNRESOLVED
+    value:
+      name: available_completed_history_prefix
+      version: v1
+      parameters: {}
     choices: []
     decision_id: H1-HISTORY-ORIGIN
   setup_1h_relative_conventions:
@@ -86,14 +101,14 @@ feature_contracts:
 timeframe_contracts:
   session_policy:
     kind: enum
-    value: UNRESOLVED
+    value: RTH_EXTENDED
     choices:
     - RTH
     - RTH_EXTENDED
     decision_id: H1-SESSION
   base:
     kind: timeframe
-    value: UNRESOLVED
+    value: 15m
     choices: []
     decision_id: H1-BASE
   regime:
@@ -559,8 +574,7 @@ chart_parity:
     decision_id: H1-CHART-VERIFICATION
   engine_1h_boundary:
     kind: text
-    value: XNYS open anchored; America/New_York 09:30-10:30, 10:30-11:30, ..., 15:30-16:00; early close final bucket
-      ends at official close
+    value: America/New_York 04:00 anchored; 04:00-05:00, 05:00-06:00, ..., 19:00-20:00; standard XNYS days only; chart parity UNVERIFIED
     choices: []
     decision_id: null
   engine_ema_seed:
@@ -579,7 +593,7 @@ chart_parity:
 engine_capabilities:
   capability_profile:
     kind: text
-    value: v2_ab_c1_signal_v1
+    value: v2_extended_c1_signal_v1
     choices: []
     decision_id: null
   base_timeframe:
@@ -589,7 +603,7 @@ engine_capabilities:
     decision_id: null
   session_policy:
     kind: text
-    value: XNYS_RTH
+    value: US_EQUITY_EXTENDED_04_20
     choices: []
     decision_id: null
   availability:
@@ -599,12 +613,12 @@ engine_capabilities:
     decision_id: null
   continuity:
     kind: text
-    value: xnys_completed_grid_v1
+    value: us_equity_extended_04_20_completed_grid_v1
     choices: []
     decision_id: null
   aggregation:
     kind: text
-    value: xnys_open_anchored_short_final_v1
+    value: us_equity_extended_04_anchored_full_session_v1
     choices: []
     decision_id: null
   macd_feature_version:

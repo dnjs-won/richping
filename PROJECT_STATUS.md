@@ -1,3 +1,52 @@
+# Richping v2 상태 · 2026-09-30 extended-session research contract
+
+**Generic extended-hours capability: COMPLETE. H0001은 DRAFT / BLOCKED_ON_DECISIONS다.**
+**V2-A/B/C0 완료 상태는 유지하며 이번 작업은 H0001 C1 구현이 아니다.**
+
+- `v2-c0-extended-session-contract` / `var/worktrees/v2-extended`를 지정 HEAD
+  `73b5d3d5c096c0a2612c39191e6fd4b7980d8f7a`에서 생성했다. 루트 main의 기존
+  cli/maturity/paper/pipeline 수정과 미추적 테스트는 보존했다. main merge 없음.
+- 기존 `XNYS_RTH` capability는 유지했다. 별도 `US_EQUITY_EXTENDED_04_20` /
+  `v2_extended_c1_signal_v1`은 America/New_York 04:00–20:00의 15m 연구 grid와
+  PREMARKET/RTH/AFTER_HOURS metadata를 제공한다. 정규장은 09:30–16:00이다.
+- extended 1H는 04:00–05:00부터 19:00–20:00까지 4개 입력씩, Daily는
+  04:00–20:00 전체 64개 입력으로 집계한다. 모든 입력이 완료·도착한 후 공개하며
+  known_at=max(input known_at) 및 same-known-at atomic batch를 유지한다.
+  RTH Daily/1H와 session·aggregation version을 구분하고 혼합을 거부한다.
+- 별도 extended continuity는 09:30/16:00 전환을 연속으로 처리한다. Overnight,
+  주말, XNYS 휴일은 calendar gap이며 결측 bar가 아니다. DST는 IANA timezone을
+  따른다. 겨울 20:00의 다음 UTC 날짜도 원래 ET session으로 식별한다.
+- 조기폐장/비표준 XNYS 날짜의 extended availability는 일반화하지 않는다.
+  해당 날짜 전체와 그 날짜를 가로지르는 dataset을 fail closed 처리한다.
+  RTH 조기폐장 지원은 불변이다. 이 제한 때문에 일부 기간에서는 Daily 130개
+  연속 이력을 확보할 수 없으며 gate를 완화하거나 bar를 만들지 않는다.
+- 다섯 결정만 executable draft v4에 반영했다: H1-SESSION=RTH_EXTENDED,
+  H1-BASE=15m, H1-EMA-SEED=first_observation/first_macd_observation/close/
+  `macd_first_observation_recursive_v1`, H1-MACD-HISTORY=Daily/1H/15m 각각 130,
+  H1-HISTORY-ORIGIN=전체 available completed causal history·세션 간 유지·EMA reset 없음.
+  relative-transform lookback과 다른 strategy decision은 미결정 상태다.
+- 남은 결정은 **C1 46 + performance 17 + optional 7 = 70개**, 미결정 경로 **97개**다.
+  전체 decision ID 75개 및 state machine은 보존했다. `require_session_capability()`는
+  통과하지만 `require_c1_ready()`는 `C1 requires FROZEN specification without C1 blockers`로
+  거부한다. stale RTH claim은 거부하고 compatible extended fixture만 세션 admission을 통과한다.
+- chart parity는 **UNVERIFIED**. 선택한 strategy session과 04:00 1H anchor는
+  명시했지만 observed provider는 UNRESOLVED, observed exact 1H convention은 UNVERIFIED다.
+- r03 원본 raw byte SHA-256은
+  `abdd4f10d127ee7614a4eead734d1bfbf7dc1897ec368f8a3b70a1645e2552fc`로 불변이다.
+  r04는 생성하지 않았다. `h0001_r03_spec_v4` canonical SHA-256:
+  `8649baf0ff14e59a9e7f93ec50589299e1e38324247da7463c27c7456aa9672d`.
+- 검증: 전체 **723 passed (155.86s)**, 실패·skip·pytest warning 없음.
+  신규 extended **59개**, 기존 RTH/V2-A/B **130개** 및 C0 **280개** 포함.
+  기존 RTH 테스트 파일은 byte-identical이다. `git diff --check`, CLI `--help`,
+  extended SQLite roundtrip·run metadata·동일 replay hash도 통과했다.
+- H0001 on_event/regime/relative-selection/threshold/swing-selection/execution/fill/
+  portfolio/provider/수익성 backtest는 구현하지 않았으며 시장 데이터 수집도 하지 않았다.
+  상세 계약과 한계: [extended-session 구현 기록](docs/V2_EXTENDED_SESSION_IMPLEMENTATION.md),
+  [C0 명세](docs/V2_C0_H0001_SPECIFICATION.md),
+  [연구 아키텍처](docs/V2_STRATEGY_RESEARCH_ARCHITECTURE.md).
+
+---
+
 # Richping v2 상태 · 2026-09-29 V2-C0 lifecycle re-audit remediation
 
 **state-machine liveness finding 수정 완료. H0001은 DRAFT / BLOCKED_ON_DECISIONS다.**

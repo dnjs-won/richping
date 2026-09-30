@@ -8,7 +8,7 @@ from ..contracts import JsonObject, payload
 from .contracts import (FeatureSpec, ScalarPoint, ScalarSeries, Spec, completed_bars,
                         positive_int, result)
 from .moving import recursive_ema
-from .continuity import CONTINUITY_VERSION, contiguous_prefix_length, is_contiguous
+from .continuity import CONTINUITY_VERSION, CONTINUITY_VERSIONS, contiguous_prefix_length, is_contiguous
 
 
 @dataclass(frozen=True, slots=True)
@@ -32,7 +32,7 @@ class MACDSpec(Spec):
         if (self.seed, self.signal_start, self.field) != (
                 "first_observation", "first_macd_observation", "close"):
             raise ValueError("Unsupported MACD convention")
-        if self.continuity != CONTINUITY_VERSION:
+        if self.continuity not in CONTINUITY_VERSIONS:
             raise ValueError("Unsupported MACD continuity")
 
 
@@ -46,8 +46,8 @@ def _values(bars, spec):
 
 
 def macd(context, symbol, timeframe, spec: MACDSpec):
-    bars = completed_bars(context, symbol, timeframe)
-    if not is_contiguous(bars, timeframe):
+    bars = completed_bars(context, symbol, timeframe, spec.continuity)
+    if not is_contiguous(bars, timeframe, spec.continuity):
         return result(spec, symbol, timeframe, context.as_of, bars,
                       status="NOT_READY", reason="noncontiguous_history")
     if len(bars) < spec.min_history:
@@ -65,8 +65,8 @@ def macd_series(context, symbol, timeframe, spec: MACDSpec, *, field):
     """
     if field not in {"macd_line", "signal_line", "histogram"}:
         raise ValueError("Unknown MACD field")
-    bars = completed_bars(context, symbol, timeframe)
-    contiguous_count = contiguous_prefix_length(bars, timeframe)
+    bars = completed_bars(context, symbol, timeframe, spec.continuity)
+    contiguous_count = contiguous_prefix_length(bars, timeframe, spec.continuity)
     history = _values(bars[:contiguous_count], spec)
     points, known = [], None
     for count, bar in enumerate(bars, 1):
@@ -78,5 +78,7 @@ def macd_series(context, symbol, timeframe, spec: MACDSpec, *, field):
                                   "READY" if ready else "NOT_READY",
                                   reason))
     source = FeatureSpec("scalar_projection", "feature_field_v1",
-                         JsonObject.of({"source": payload(spec.definition), "field": field}))
+                         JsonObject.of({"source": payload(spec.definition), "field": field,
+                                        **({"continuity": spec.continuity}
+                                           if spec.continuity != CONTINUITY_VERSION else {})}))
     return ScalarSeries(symbol, timeframe, context.as_of, source, tuple(points), digest(payload(bars)))

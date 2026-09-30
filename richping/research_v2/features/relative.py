@@ -7,7 +7,7 @@ from typing import ClassVar
 from ...core import digest
 from ..contracts import JsonObject, payload
 from .contracts import FeatureSpec, ScalarSeries, Spec, positive_int, result
-from .continuity import CONTINUITY_VERSION, is_contiguous
+from .continuity import CONTINUITY_VERSION, CONTINUITY_VERSIONS, is_contiguous
 
 
 @dataclass(frozen=True, slots=True)
@@ -23,7 +23,7 @@ class PercentileSpec(Spec):
     def __post_init__(self):
         _window(self.window, self.min_history)
         if (self.include_current is not True or self.ties != "midrank"
-                or self.continuity != CONTINUITY_VERSION):
+                or self.continuity not in CONTINUITY_VERSIONS):
             raise ValueError("Unsupported percentile convention")
 
 
@@ -43,7 +43,7 @@ class ZScoreSpec(Spec):
         if type(self.ddof) is not int or self.ddof not in (0, 1) or self.min_history <= self.ddof:
             raise ValueError("ddof must be 0/1 and min_history > ddof")
         if (self.include_current is not True or self.zero_variance != "undefined"
-                or self.continuity != CONTINUITY_VERSION):
+                or self.continuity not in CONTINUITY_VERSIONS):
             raise ValueError("Unsupported z-score convention")
 
 
@@ -57,12 +57,14 @@ def _window(window, min_history):
 def _transform(series, spec, calculate):
     if not isinstance(series, ScalarSeries):
         raise ValueError("Immutable causal ScalarSeries required")
+    if series.continuity != spec.continuity:
+        raise ValueError("Scalar/session continuity mismatch")
     points = series.points[-spec.window:]
     definition = FeatureSpec(spec.name, spec.version, JsonObject.of({
         **spec.definition.parameters.unpack(), "source": payload(series.source),
         "missing_policy": "retain_slots_fail_closed"}))
     status, reason, output = "READY", None, None
-    if not is_contiguous(points, series.timeframe):
+    if not is_contiguous(points, series.timeframe, spec.continuity):
         status, reason = "NOT_READY", "noncontiguous_history"
     elif len(points) < spec.min_history:
         status, reason = "NOT_READY", "insufficient_history"

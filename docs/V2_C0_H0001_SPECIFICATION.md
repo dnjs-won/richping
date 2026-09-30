@@ -4,10 +4,16 @@ V2-C0 infrastructure: **COMPLETE** (validation results below).
 H0001 executable specification: **DRAFT / BLOCKED_ON_DECISIONS**.
 H0001 profitability: **NOT TESTED**. No H0001 trading plugin exists.
 
-Draft inventory: **75 decisions** (51 C1 blockers, 17 performance blockers,
-7 optional extensions); **107 unresolved parameter/transition paths**.
+Draft inventory: **75 decisions**, of which the first five are resolved. Remaining:
+**46 C1 blockers, 17 performance blockers, 7 optional extensions**;
+**97 unresolved parameter/transition paths**. Generic extended-hours capability
+is implemented; this is not H0001 C1. See [extended-session contract](V2_EXTENDED_SESSION_IMPLEMENTATION.md).
 Canonical specification SHA-256:
-`2f92d6b4b930d365f897e23e41ef0785822a3d6e1fe270a9eb89fb4297686ff4`.
+`8649baf0ff14e59a9e7f93ec50589299e1e38324247da7463c27c7456aa9672d`.
+
+The earlier C0 implementation/audit records below describe their original
+75-decision/107-path state. Current selections and validation are recorded in
+[the extended-session note](V2_EXTENDED_SESSION_IMPLEMENTATION.md) and PROJECT_STATUS.md.
 
 ## Investigation and preserved boundary
 
@@ -80,7 +86,10 @@ or a retrofit guard on old fixture strategies.
 
 ## Schema, canonical representation and hash
 
-Schema `strategy_specification_v1`; H0001 profile `h0001_r03_spec_v3`.
+Schema `strategy_specification_v1`; current H0001 profile `h0001_r03_spec_v4`.
+Profile v4 records the authorized first five decisions and explicit extended capability.
+The r03 hypothesis bytes remain unchanged; no r04 is required for this pre-experiment
+executable specification resolution.
 Profile v2 introduced signal-state ownership and capability admission; v3 closes
 the signal lifecycle. The hypothesis revision remains r03. Old profiles v1/v2
 are not silently reinterpreted.
@@ -176,10 +185,12 @@ structure survives → 1H exit-watch → 15m structure-break exit.
 
 MACD fast/slow/signal **12/26/9** and Daily/1H/15m roles are explicit r03 facts.
 The r03 listed execution frame is 15m; order/decision/fill timing remain separate
-unknowns. Authoritative base and actual strategy session policy remain
-UNRESOLVED. Current technical engine input **15m XNYS RTH** is a capability,
-not proof H0001 selected an RTH-only strategy. First-observation recursive EMA
-is similarly an engine fact, not a validated observed-chart strategy choice.
+unknowns. The authorized first bundle selects **15m / RTH_EXTENDED** and the
+existing first-observation MACD seed, first-MACD signal start, close field and
+`macd_first_observation_recursive_v1`. Minimum completed history is 130 on each
+of Daily/1H/15m, using full available causal history across sessions without
+EMA reset. Relative-transform lookbacks remain unresolved. Engine convention
+selection does not validate observed-chart parity.
 
 Add/re-entry is a narrative candidate, not silently included behavior. The
 researcher must explicitly include or defer it, then settle failed reversal,
@@ -202,12 +213,16 @@ XNYS_RTH, atomic-known-at, completed-grid continuity, open-anchored short-final
 aggregation, and the existing V2-B feature versions. It compares the complete
 machine-readable `engine_capabilities` record, independently of narrative
 `available_v2_primitive` text. Exported V2-A/B version constants/classes are
-reused; the adapter pins conventions with no exported constant. RTH_EXTENDED,
-1H/Daily base and ATR_REVERSAL/DIRECTIONAL_CHANGE remain structurally valid
-choices but require future implementation and cannot pass C1 admission.
+reused; the adapter pins conventions with no exported constant. A separate
+`v2_extended_c1_signal_v1` selects `US_EQUITY_EXTENDED_04_20` with its own session,
+continuity and aggregation definitions. Availability remains atomic-known-at.
+RTH_EXTENDED passes the session portion only with that explicit compatible
+profile; a stale RTH claim fails. 1H/Daily base and ATR_REVERSAL/DIRECTIONAL_CHANGE
+still require future implementation and cannot pass C1 admission. Full admission
+remains blocked by DRAFT status and 46 C1 decisions.
 
 Selected feature contract encoding (all parameters use the existing typed
-parameter envelope; no selections are written into the draft):
+parameter envelope; only the first five authorized decisions are selected):
 
 - Empty-parameter convention IDs: `first_observation_recursive_v1`,
   `first_macd_observation_v1`, `close_v1`, `macd_first_observation_recursive_v1`,
@@ -249,9 +264,12 @@ Machine-readable `chart_parity` records:
 
 - observed_chart_provider, observed_1h_boundary, observed_ema_seed,
   observed_history_origin, observed_min_history, parity_evidence: UNRESOLVED.
-- engine_1h_boundary: XNYS open anchored, America/New_York
-  09:30–10:30, 10:30–11:30, …, 15:30–16:00 on a regular session;
-  official early close truncates the final bucket.
+- Selected strategy session: America/New_York 04:00–20:00 extended.
+- engine_1h_boundary: 04:00–05:00, 05:00–06:00, …, 19:00–20:00.
+  Extended Daily covers the full 04:00–20:00 session. Early-close/nonstandard
+  days fail closed, as specified in the dedicated implementation note.
+- Preserved RTH profile: 09:30 anchored, short final hour and official-close Daily.
+- Observed exact 1H convention remains UNVERIFIED; its decision remains UNRESOLVED.
 - engine_ema_seed: `first_observation_recursive_v1`;
   underlying MACD feature version `macd_first_observation_recursive_v1`.
 - parity_status: **UNVERIFIED**. No “matches observed MACD” claim.
@@ -410,15 +428,18 @@ real data, executor and evaluation integration remain additional later gates.
 
 A = C1_IMPLEMENTATION_BLOCKER; B = PERFORMANCE_EXPERIMENT_BLOCKER; C = OPTIONAL_FUTURE_EXTENSION.
 Candidates are alternatives, never recommendations. Source references index the unmodified r03 YAML (zero based).
-All rows currently have status **UNRESOLVED**. Required for profitability includes all C1 decisions.
+Only the first five rows are resolved. All remaining rows are **UNRESOLVED**.
+Required for profitability includes all C1 decisions. The source statements
+and candidate lists preserve the historical capture; the last column records
+the selected executable-spec values.
 
 | decision_id / class | question | current hypothesis statement / source | available V2 primitive | candidate choices | required for C1? | required for profitability? | current status |
 |---|---|---|---|---|---|---|---|
-| H1-SESSION / A | RTH만 사용할지 extended hours도 사용할지? | Session choice is unknown; US equity/ETF context. (unknowns[25], required_data[8]) | V2-A supports XNYS RTH only | RTH; RTH plus extended (requires new data/feature contracts) | yes | yes | UNRESOLVED |
-| H1-BASE / A | 전략 authoritative base input은? | 15m required; technical input must not imply strategy session selection. (required_data[1]) | V2-A 15m input | 15m; finer input would require a separate capability contract | yes | yes | UNRESOLVED |
-| H1-EMA-SEED / A | EMA seed·signal 시작·가격 field·feature version을 무엇으로 동결할지? | MACD(12,26,9), enough past warmup; seed and source field not specified. (required_data[4]) | MACDSpec: first_observation, first_macd_observation, close only | explicitly adopt existing engine conventions; new versioned convention after separate implementation | yes | yes | UNRESOLVED |
-| H1-MACD-HISTORY / A | 각 시간축 MACD 최소 history는? | Sufficient warmup required; count unknown. (required_data[4]) | MACDSpec.min_history | researcher-specified positive counts per timeframe | yes | yes | UNRESOLVED |
-| H1-HISTORY-ORIGIN / A | EMA 계산 이력 시작점·세션 간 지속 정책은? | Past-only MACD; exact history origin unspecified. (required_data[4], test.leakage_risks[3]) | V2-B full visible contiguous history, no session reset | explicit full visible history convention; other versioned history convention | yes | yes | UNRESOLVED |
+| H1-SESSION / A | RTH만 사용할지 extended hours도 사용할지? | Session choice was unknown in r03; observed examples include premarket. (unknowns[25], required_data[8]) | Preserved XNYS_RTH plus separate US_EQUITY_EXTENDED_04_20 | RTH; RTH plus extended | yes | yes | RTH_EXTENDED (04:00–20:00 ET) |
+| H1-BASE / A | 전략 authoritative base input은? | 15m required; technical input must not imply strategy session selection. (required_data[1]) | V2-A 15m input | 15m; finer input would require a separate capability contract | yes | yes | 15m |
+| H1-EMA-SEED / A | EMA seed·signal 시작·가격 field·feature version을 무엇으로 동결할지? | MACD(12,26,9), enough past warmup; seed and source field not specified. (required_data[4]) | MACDSpec: first_observation, first_macd_observation, close only | explicitly adopt existing engine conventions; new versioned convention after separate implementation | yes | yes | first_observation / first_macd_observation / close / macd_first_observation_recursive_v1 |
+| H1-MACD-HISTORY / A | 각 시간축 MACD 최소 history는? | Sufficient warmup required; count unknown. (required_data[4]) | MACDSpec.min_history | researcher-specified positive counts per timeframe | yes | yes | 130 / 130 / 130 (Daily / 1H / 15m) |
+| H1-HISTORY-ORIGIN / A | EMA 계산 이력 시작점·세션 간 지속 정책은? | Past-only MACD; exact history origin unspecified. (required_data[4], test.leakage_risks[3]) | V2-B full visible contiguous history, no session reset | explicit full visible history convention; other versioned history convention | yes | yes | Full available completed causal history across sessions; no EMA reset |
 | H1-DAILY-LONG / A | Daily LONG regime의 정확한 수학식은? | Allow new longs only in Daily rising regime. (rules.regime[0], rules.regime[4]) | Completed Daily MACD and generic features; no regime predicate | versioned Daily MACD rule; versioned price/structure rule; explicitly defined combination | yes | yes | UNRESOLVED |
 | H1-DAILY-BLOCKER / A | Daily 과열 blocker의 threshold·차단/축소 방식은? | Upper exhaustion should block or reduce new longs; formula unknown. (rules.regime[1], rules.regime[4]) | Relative transforms; no blocker predicate | block rule with explicit threshold; reduction rule with explicit threshold and exposure dependency | yes | yes | UNRESOLVED |
 | H1-RELATIVE-METHOD / A | 1H setup relative MACD 정의는? | Past-relative downside position; no final hindsight extreme. (rules.setup[1], unknowns[4]) | PercentileSpec / ZScoreSpec / NormalizeSpec + ATRSpec | rolling percentile; rolling z-score; MACD / ATR | yes | yes | UNRESOLVED |

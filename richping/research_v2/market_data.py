@@ -5,6 +5,7 @@ from datetime import timedelta
 
 from ..core import calendar, close_at, digest, open_at, sessions, timestamp
 from .contracts import CONTRACT_VERSION, TIMEFRAMES, JsonObject, MarketBar, nonempty, payload
+from .sessions import RTH, EXTENDED, session_profile, session_bounds, bar_profile, validate_extended
 
 BASE_INTERVAL = timedelta(minutes=15)
 
@@ -57,6 +58,10 @@ class MarketDataset:
                     "base_timeframe": "15m", "timezone": "America/New_York", "calendar": "XNYS",
                     "session_policy": "RTH", "price_basis": "synthetic_unadjusted",
                     "corporate_actions": "NONE_CONFIRMED", "known_at_policy": "explicit_per_bar"}
+        if meta["session_policy"] == "RTH_EXTENDED":
+            expected["session_policy"] = "RTH_EXTENDED"
+            if meta.get("session_contract") != session_profile(EXTENDED).metadata:
+                raise ValueError("Explicit extended session contract required")
         if any(meta[k] != v for k, v in expected.items()):
             raise ValueError("Unsupported dataset contract (V2-A accepts synthetic only)")
         for key in ("provider", "adapter_version", "membership_limitations"):
@@ -76,12 +81,22 @@ class MarketDataset:
             if prior is not None and bar.end_at < prior:
                 raise ValueError("Invalid bar input ordering")
             prior = bar.end_at
-            validate_rth(bar)
+            if bar_profile(bar) != self.session_profile:
+                raise ValueError("Mixed session capability profiles")
+            (validate_extended if self.session_profile == EXTENDED else validate_rth)(bar)
             if bar.corporate_action != "NONE_CONFIRMED":
                 raise ValueError("Unsupported or unknown corporate action")
         # Tie order has no temporal meaning. Canonicalize only after validating
         # chronology and identities, so a time reversal can never be repaired.
         object.__setattr__(self, "bars", tuple(sorted(self.bars, key=market_order)))
+        if self.session_profile == EXTENDED:
+            # An unknown early-close day is not a holiday that may be skipped.
+            for day in sessions(self.bars[0].session, self.bars[-1].session):
+                session_bounds(day, EXTENDED)
+
+    @property
+    def session_profile(self):
+        return EXTENDED if self.manifest.unpack()["session_policy"] == "RTH_EXTENDED" else RTH
 
     @property
     def content_hash(self):
@@ -99,8 +114,9 @@ class MarketDataset:
             bars = [b for b in self.bars if b.symbol == symbol]
             present = {b.end_at for b in bars}
             for day in sessions(bars[0].session, bars[-1].session):
-                end = min(close_at(day), bars[-1].end_at)
-                slot = open_at(day) + BASE_INTERVAL
+                opened, closed = session_bounds(day, self.session_profile)
+                end = min(closed, bars[-1].end_at)
+                slot = opened + BASE_INTERVAL
                 while slot <= end:
                     if slot not in present:
                         missing.append((symbol, slot.isoformat()))

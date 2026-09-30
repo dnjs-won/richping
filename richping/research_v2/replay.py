@@ -10,11 +10,12 @@ import platform
 
 from .. import core
 from ..core import digest
-from .aggregation import AGGREGATION_VERSION, CompletedAggregator
+from .aggregation import CompletedAggregator
 from .clock import ReplayClock
 from .contracts import (AVAILABILITY_VERSION, CONTRACT_VERSION, Checkpoint, Decision, DecisionTrace, JsonObject,
                         ReplayContext, ReplayEvent, Strategy, StrategyState, nonempty, payload)
 from .market_data import availability_order, market_order
+from .sessions import EXTENDED, session_profile
 
 
 def code_provenance(strategy):
@@ -57,18 +58,20 @@ def replay(dataset, strategy: Strategy, *, store=None, timeframes=("1H", "Daily"
     nonempty(experiment_id)
     if not isinstance(strategy.specification, JsonObject) or not isinstance(config, JsonObject):
         raise ValueError("Immutable specification/config required")
-    aggregator = CompletedAggregator(timeframes)
+    aggregator = CompletedAggregator(timeframes, profile=dataset.session_profile)
     specification_hash = digest(payload(strategy.specification))
     spec = {"contract": CONTRACT_VERSION, "mode": "SYNTHETIC_RESEARCH",
             "dataset_id": dataset.dataset_id, "dataset_hash": dataset.content_hash,
             "strategy_id": strategy.strategy_id, "specification_hash": specification_hash,
             "strategy_specification": payload(strategy.specification), "config": payload(config),
-            "aggregation": AGGREGATION_VERSION, "timeframes": list(aggregator.timeframes),
+            "aggregation": aggregator.profile.aggregation, "timeframes": list(aggregator.timeframes),
             "availability_contract": AVAILABILITY_VERSION,
             "order": "known_at batches; canonical members: end_at,symbol,timeframe",
             "code": code_provenance(strategy),
             "execution_contract": "none_v2_a", "experiment_id": experiment_id,
             "hypothesis_revision": hypothesis_revision}
+    if dataset.session_profile == EXTENDED:
+        spec["session_contract"] = session_profile(EXTENDED).metadata
     run_id = digest(spec)
     if store is not None:
         store.save_dataset(dataset)

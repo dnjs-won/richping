@@ -112,11 +112,12 @@ FIXED = {('feature_contracts', 'macd_fast'): ('integer', 12),
  ('timeframe_contracts', 'setup'): ('timeframe', '1H'),
  ('timeframe_contracts', 'confirmation'): ('timeframe', '15m'),
  ('timeframe_contracts', 'execution'): ('timeframe', '15m'),
- ('chart_parity', 'engine_1h_boundary'): ('text',
-                                          'XNYS open anchored; America/New_York 09:30-10:30, 10:30-11:30, '
-                                          '..., 15:30-16:00; early close final bucket ends at official '
-                                          'close'),
  ('chart_parity', 'engine_ema_seed'): ('text', 'first_observation_recursive_v1')}
+
+ENGINE_BOUNDARIES = {
+    "XNYS_RTH": "XNYS open anchored; America/New_York 09:30-10:30, 10:30-11:30, ..., 15:30-16:00; early close final bucket ends at official close",
+    "US_EQUITY_EXTENDED_04_20": "America/New_York 04:00 anchored; 04:00-05:00, 05:00-06:00, ..., 19:00-20:00; standard XNYS days only; chart parity UNVERIFIED",
+}
 
 ENGINE_FIELDS = tuple(current_engine())
 
@@ -259,7 +260,7 @@ class H0001Specification(StrategySpecification):
         if (value["strategy_id"], value["hypothesis_id"], value["hypothesis_revision"], value["direction"]) != (
                 "H0001", "H0001", 3, "LONG_ONLY"):
             raise ValueError("Unsupported H0001-r03 identity")
-        if value["specification_version"] != "h0001_r03_spec_v3":
+        if value["specification_version"] not in {"h0001_r03_spec_v3", "h0001_r03_spec_v4"}:
             raise ValueError("Unsupported H0001 specification version")
         if value["source"] != {"path": "research/hypotheses/H0001-r03.yaml", "sha256": SOURCE_SHA256}:
             raise ValueError("H0001 source provenance mismatch")
@@ -267,7 +268,7 @@ class H0001Specification(StrategySpecification):
         for section, field in (*REQUIRED, *FIXED):
             expected.setdefault(section, set()).add(field)
         expected["engine_capabilities"] = set(ENGINE_FIELDS)
-        expected["chart_parity"].add("parity_status")
+        expected["chart_parity"].update(("parity_status", "engine_1h_boundary"))
         for section, fields in expected.items():
             exact(value[section], fields, section)
         exact(value["decisions"], {entry[1] for entry in REQUIRED.values()}, "H0001 decisions")
@@ -289,6 +290,10 @@ class H0001Specification(StrategySpecification):
                     or record["decision_id"] is not None or record["choices"]):
                 raise ValueError("Explicit engine capability provenance required")
         parity = value["chart_parity"]
+        boundary = parity["engine_1h_boundary"]
+        if (boundary["kind"] != "text" or boundary["decision_id"] is not None
+                or boundary["choices"] or boundary["value"] not in ENGINE_BOUNDARIES.values()):
+            raise ValueError("Explicit engine aggregation boundary required")
         status = parity["parity_status"]
         if (status["kind"], status["choices"], status["decision_id"]) != (
                 "enum", ["MISMATCH", "UNVERIFIED", "VERIFIED"], None):
@@ -321,6 +326,9 @@ class H0001Specification(StrategySpecification):
 
     def _require_engine_compatibility(self, value):
         require_current_engine(value)
+        profile = value["engine_capabilities"]["session_policy"]["value"]
+        if value["chart_parity"]["engine_1h_boundary"]["value"] != ENGINE_BOUNDARIES[profile]:
+            raise ValueError("C1 engine aggregation boundary mismatch")
 
     def require_historical_reproduction_ready(self):
         self.require_c1_ready()

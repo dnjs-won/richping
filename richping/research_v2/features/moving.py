@@ -4,7 +4,7 @@ from dataclasses import dataclass
 from typing import ClassVar
 
 from .contracts import Spec, completed_bars, positive_int, result
-from .continuity import CONTINUITY_VERSION, is_contiguous
+from .continuity import CONTINUITY_VERSION, CONTINUITY_VERSIONS, is_contiguous
 
 
 @dataclass(frozen=True, slots=True)
@@ -21,7 +21,7 @@ class EMASpec(Spec):
         positive_int(self.span)
         positive_int(self.min_history)
         if (self.seed != "first_observation" or self.field != "close"
-                or self.continuity != CONTINUITY_VERSION):
+                or self.continuity not in CONTINUITY_VERSIONS):
             raise ValueError("Unsupported EMA convention")
 
 
@@ -35,8 +35,8 @@ def recursive_ema(values, span):
 
 
 def ema(context, symbol, timeframe, spec: EMASpec):
-    bars = completed_bars(context, symbol, timeframe)
-    if not is_contiguous(bars, timeframe):
+    bars = completed_bars(context, symbol, timeframe, spec.continuity)
+    if not is_contiguous(bars, timeframe, spec.continuity):
         return result(spec, symbol, timeframe, context.as_of, bars,
                       status="NOT_READY", reason="noncontiguous_history")
     if len(bars) < spec.min_history:

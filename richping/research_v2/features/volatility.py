@@ -5,7 +5,7 @@ import math
 from typing import ClassVar
 
 from .contracts import Spec, completed_bars, positive_int, result
-from .continuity import CONTINUITY_VERSION, is_contiguous
+from .continuity import CONTINUITY_VERSION, CONTINUITY_VERSIONS, is_contiguous
 
 
 @dataclass(frozen=True, slots=True)
@@ -16,7 +16,7 @@ class TRSpec(Spec):
     version: ClassVar[str] = "true_range_first_high_low_v1"
 
     def __post_init__(self):
-        if self.first_bar != "high_minus_low" or self.continuity != CONTINUITY_VERSION:
+        if self.first_bar != "high_minus_low" or self.continuity not in CONTINUITY_VERSIONS:
             raise ValueError("Unsupported first TR convention")
 
 
@@ -39,7 +39,7 @@ class ATRSpec(Spec):
         if (self.smoothing, self.seed, self.first_bar) != (
                 "wilder", "sma_first_period_tr", "high_minus_low"):
             raise ValueError("Unsupported ATR convention")
-        if self.continuity != CONTINUITY_VERSION:
+        if self.continuity not in CONTINUITY_VERSIONS:
             raise ValueError("Unsupported ATR continuity")
 
 
@@ -50,8 +50,8 @@ def _ranges(bars):
 
 
 def true_range(context, symbol, timeframe, spec: TRSpec):
-    bars = completed_bars(context, symbol, timeframe)[-2:]
-    if not is_contiguous(bars, timeframe):
+    bars = completed_bars(context, symbol, timeframe, spec.continuity)[-2:]
+    if not is_contiguous(bars, timeframe, spec.continuity):
         return result(spec, symbol, timeframe, context.as_of, bars,
                       status="NOT_READY", reason="noncontiguous_history")
     if not bars:
@@ -61,8 +61,8 @@ def true_range(context, symbol, timeframe, spec: TRSpec):
 
 
 def atr(context, symbol, timeframe, spec: ATRSpec):
-    bars = completed_bars(context, symbol, timeframe)
-    if not is_contiguous(bars, timeframe):
+    bars = completed_bars(context, symbol, timeframe, spec.continuity)
+    if not is_contiguous(bars, timeframe, spec.continuity):
         return result(spec, symbol, timeframe, context.as_of, bars,
                       status="NOT_READY", reason="noncontiguous_history")
     if len(bars) < spec.min_history:

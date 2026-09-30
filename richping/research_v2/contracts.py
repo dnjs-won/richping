@@ -7,6 +7,7 @@ import math
 from typing import Protocol
 
 from ..core import canonical, digest, ticker, timestamp
+from .sessions import bar_profile
 
 CONTRACT_VERSION = "research_v2_a_v1"
 AVAILABILITY_VERSION = "atomic_known_at_batch_v1"
@@ -221,6 +222,8 @@ class ReplayContext:
         object.__setattr__(self, "bars", tuple(self.bars))
         if any(b.known_at > self.as_of or b.end_at > self.as_of for b in self.bars):
             raise ValueError("Future bar in causal context")
+        if len({bar_profile(b) for b in self.bars}) > 1:
+            raise ValueError("Mixed session capability profiles in causal context")
 
     def query(self, symbol=None, timeframe=None, start_at=None, end_at=None):
         if timeframe is not None and timeframe not in TIMEFRAMES:

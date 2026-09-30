@@ -1,16 +1,18 @@
-"""Completed-only XNYS RTH views, fed exclusively by delivered base bars."""
+"""Completed-only versioned session views, fed exclusively by delivered base bars."""
 
 from datetime import timedelta
 
-from ..core import close_at, digest, open_at, timestamp
+from ..core import digest, timestamp
 from .contracts import JsonObject, MarketBar, payload
 from .market_data import BASE_INTERVAL, validate_rth
+from .sessions import (RTH, EXTENDED, session_profile, session_bounds, bar_profile,
+                       validate_extended, extended_bar_metadata)
 
 AGGREGATION_VERSION = "xnys_open_anchored_short_final_v1"
 
 
-def bucket(bar, timeframe):
-    opened, closed = open_at(bar.session), close_at(bar.session)
+def bucket(bar, timeframe, profile=RTH):
+    opened, closed = session_bounds(bar.session, profile)
     if timeframe == "Daily":
         return opened, closed
     if timeframe == "1H":
@@ -21,7 +23,8 @@ def bucket(bar, timeframe):
 
 
 class CompletedAggregator:
-    def __init__(self, timeframes=("1H", "Daily")):
+    def __init__(self, timeframes=("1H", "Daily"), *, profile=RTH):
+        self.profile = session_profile(profile)
         self.timeframes = tuple(timeframes)
         if len(set(self.timeframes)) != len(self.timeframes) or any(
                 t not in {"1H", "Daily"} for t in self.timeframes):
@@ -35,7 +38,9 @@ class CompletedAggregator:
         as_of = timestamp(as_of)
         if bar.known_at > as_of or (self._as_of is not None and as_of < self._as_of):
             raise ValueError("Noncausal aggregation input")
-        validate_rth(bar)
+        if bar_profile(bar) != self.profile.name:
+            raise ValueError("Aggregation session profile mismatch")
+        (validate_extended if self.profile.name == EXTENDED else validate_rth)(bar)
         if bar.corporate_action != "NONE_CONFIRMED":
             raise ValueError("Unsupported corporate action")
         if bar.identity in self._seen:
@@ -44,7 +49,7 @@ class CompletedAggregator:
         self._as_of = as_of
         completed = [bar]
         for timeframe in self.timeframes:
-            start, end = bucket(bar, timeframe)
+            start, end = bucket(bar, timeframe, self.profile.name)
             key = (bar.dataset_id, bar.symbol, timeframe, end)
             inputs = self._inputs.setdefault(key, {})
             inputs[bar.start_at] = bar
@@ -58,9 +63,10 @@ class CompletedAggregator:
             derived = MarketBar(bar.dataset_id, bar.symbol, timeframe, start, end, bar.session,
                 ordered[0].open, max(b.high for b in ordered), min(b.low for b in ordered),
                 ordered[-1].close, sum(b.volume for b in ordered), known,
-                "derived:" + AGGREGATION_VERSION,
-                JsonObject.of({"aggregation": AGGREGATION_VERSION,
-                               "input_hash": digest(payload(ordered)), "input_count": len(ordered)}),
+                "derived:" + self.profile.aggregation,
+                JsonObject.of({"aggregation": self.profile.aggregation,
+                               "input_hash": digest(payload(ordered)), "input_count": len(ordered),
+                               **(extended_bar_metadata(start, end) if self.profile.name == EXTENDED else {})}),
                 "NONE_CONFIRMED")
             completed.append(derived)
             self._emitted.add(key)

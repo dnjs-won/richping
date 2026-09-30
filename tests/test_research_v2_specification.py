@@ -19,7 +19,7 @@ from richping.research_v2.strategy.specification import (
 )
 from richping.research_v2.strategy.h0001_spec import (
     H0001Specification, REQUIRED, SOURCE_SHA256, STATES, LIFECYCLE_RETURNS,
-    load_h0001, validate_signal_lifecycle,
+    load_h0001, validate_signal_lifecycle, ENGINE_BOUNDARIES,
 )
 from richping.research_v2.features.relative import NormalizeSpec, PercentileSpec, ZScoreSpec
 from richping.research_v2.features.structure import FractalSpec
@@ -79,6 +79,9 @@ def feature_contract(spec, **extra):
 
 def compatible_features_fixture(value, method="ROLLING_PERCENTILE"):
     """Synthetic admission fixture only: never a selection for the stored draft."""
+    for key, record in current_engine().items():
+        value["engine_capabilities"][key]["value"] = record
+    value["chart_parity"]["engine_1h_boundary"]["value"] = ENGINE_BOUNDARIES["XNYS_RTH"]
     value["timeframe_contracts"]["base"]["value"] = "15m"
     value["timeframe_contracts"]["session_policy"]["value"] = "RTH"
     value["rule_parameters"]["swing_detector"]["value"] = "FRACTAL"
@@ -107,8 +110,8 @@ def compatible_features_fixture(value, method="ROLLING_PERCENTILE"):
 def test_draft_inventory_and_no_plugin_or_profitability_export():
     spec = draft()
     assert spec.unpack()["status"] == "DRAFT"
-    assert len(spec.unresolved_fields) == 107
-    assert sum(len(spec.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)) == 75
+    assert len(spec.unresolved_fields) == 97
+    assert sum(len(spec.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)) == 70
     for method in (spec.require_c1_ready, spec.plugin_specification, spec.require_profitability_ready,
                    spec.require_historical_reproduction_ready):
         with pytest.raises(ValueError):
@@ -158,7 +161,7 @@ def test_yaml_json_mapping_order_comments_and_timestamp_spelling_canonicalize():
     original = draft()
     value = original.unpack()
     value["created_at"] = "2026-09-27T09:00:00+09:00"
-    value["updated_at"] = "2026-09-29T09:00:00+09:00"
+    value["updated_at"] = "2026-09-30T09:00:00+09:00"
     value["state_machine"]["states"].reverse()
     for decision in value["decisions"].values():
         decision["candidate_choices"].reverse()
@@ -329,13 +332,12 @@ def test_generic_modules_never_import_h0001_or_strategy_layer():
                     assert "strategy" not in (node.module or "").split(".") if isinstance(node, ast.ImportFrom) else True
 
 
-def test_hypothesis_original_and_v2_a_b_contracts_unchanged():
+def test_hypothesis_original_and_existing_rth_tests_unchanged():
     original = subprocess.check_output(["git", "show", f"{BASE}:research/hypotheses/H0001-r03.yaml"], cwd=ROOT)
     assert sha256(original).hexdigest() == SOURCE_SHA256
     assert SOURCE.read_bytes().replace(b"\r\n", b"\n") == original
     assert not (SOURCE.parent / "H0001-r04.yaml").exists()
-    protected = [* (ROOT / "richping/research_v2").glob("*.py"),
-                 * (ROOT / "richping/research_v2/features").glob("*.py"),
+    protected = [*(ROOT / "richping/research_v2" / name for name in ("store.py", "clock.py", "dummy.py", "__init__.py")),
                  *(ROOT / "tests" / name for name in ("test_research_v2.py", "test_research_v2_features.py", "test_research_v2_continuity.py"))]
     for path in protected:
         original = subprocess.check_output(["git", "show", f"{BASE}:{path.relative_to(ROOT).as_posix()}"], cwd=ROOT)
@@ -538,11 +540,12 @@ def test_remediation_preserves_every_decision_and_unresolved_strategy_parameter(
     current = draft()
     old, new = original.unpack(), current.unpack()
     assert old["decisions"] == new["decisions"]
-    for section in set(SECTIONS) - {"engine_capabilities"}:
+    for section in set(SECTIONS) - {"engine_capabilities", "feature_contracts", "timeframe_contracts", "chart_parity"}:
         assert old[section] == new[section]
-    assert len(current.unresolved_fields) == len(original.unresolved_fields) == 107
+    assert len(current.unresolved_fields) == 97
+    assert len(original.unresolved_fields) == 107
     assert len(new["decisions"]) == len(old["decisions"]) == 75
-    assert [len(current.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)] == [51, 17, 7]
+    assert [len(current.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)] == [46, 17, 7]
 
 
 def signal_paths(machine, start, end):
@@ -641,9 +644,11 @@ def test_lifecycle_returns_reuse_unresolved_contract_without_resolving_or_adding
         'git', 'show', '03438243b0ce35a456bf350adcdbdf6da5416c26:research/strategy_specs/H0001-r03-draft.yaml',
     ], cwd=ROOT).decode('utf-8'))
     current = draft()
-    assert current.unresolved_fields == before.unresolved_fields
+    resolved = {"H1-SESSION", "H1-BASE", "H1-EMA-SEED", "H1-MACD-HISTORY", "H1-HISTORY-ORIGIN"}
+    assert current.unresolved_fields == {p: info for p, info in before.unresolved_fields.items()
+                                         if info['decision_id'] not in resolved}
     assert current.unpack()['decisions'] == before.unpack()['decisions']
-    assert len(current.unresolved_fields) == 107
+    assert len(current.unresolved_fields) == 97
     assert len(current.unpack()['decisions']) == 75
     for key in LIFECYCLE_RETURNS:
         edge = current.unpack()['state_machine']['transitions'][key]

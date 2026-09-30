@@ -1,18 +1,22 @@
-"""XNYS completed slots shared by numeric features, scalar windows and swings."""
+"""Separate versioned RTH/extended grids for numeric features and scalar windows."""
 
 from datetime import timedelta
 
-from ...core import close_at, next_sessions, open_at, timestamp
+from ...core import next_sessions, timestamp
+from ..sessions import (session_date, session_bounds, profile_for_continuity,
+                        EXTENDED_CONTINUITY)
 
 
 CONTINUITY_VERSION = "xnys_completed_grid_v1"
+CONTINUITY_VERSIONS = (CONTINUITY_VERSION, EXTENDED_CONTINUITY)
 
 
-def slot_bounds(end_at, timeframe):
-    """Official open-anchored slot, including the final short 1H bucket."""
+def slot_bounds(end_at, timeframe, continuity=CONTINUITY_VERSION):
+    """Selected session-anchored slot; only RTH permits a short final hour."""
     end = timestamp(end_at)
-    session = end.date().isoformat()  # XNYS RTH stays within its UTC date.
-    opened, closed = open_at(session), close_at(session)
+    profile = profile_for_continuity(continuity)
+    session = session_date(end)
+    opened, closed = session_bounds(session, profile.name)
     if timeframe == "Daily":
         if end != closed:
             raise ValueError("Invalid completed Daily slot")
@@ -26,7 +30,7 @@ def slot_bounds(end_at, timeframe):
     return start, end
 
 
-def contiguous_prefix_length(observations, timeframe):
+def contiguous_prefix_length(observations, timeframe, continuity=CONTINUITY_VERSION):
     """Length before the first internal missing slot; no leading/trailing claim.
 
     Inputs are market-end ordered bars or scalar points, not arrival ordered.
@@ -34,16 +38,17 @@ def contiguous_prefix_length(observations, timeframe):
     """
     previous = None
     for index, item in enumerate(observations):
-        start, end = slot_bounds(item.end_at, timeframe)
+        start, end = slot_bounds(item.end_at, timeframe, continuity)
         if previous is not None and previous != start:
-            prior_session, session = previous.date().isoformat(), end.date().isoformat()
-            if not (previous == close_at(prior_session)
+            prior_session, session = session_date(previous), session_date(end)
+            profile = profile_for_continuity(continuity).name
+            if not (previous == session_bounds(prior_session, profile)[1]
                     and next_sessions(prior_session, 1) == [session]
-                    and start == open_at(session)):
+                    and start == session_bounds(session, profile)[0]):
                 return index
         previous = end
     return len(observations)
 
 
-def is_contiguous(observations, timeframe):
-    return contiguous_prefix_length(observations, timeframe) == len(observations)
+def is_contiguous(observations, timeframe, continuity=CONTINUITY_VERSION):
+    return contiguous_prefix_length(observations, timeframe, continuity) == len(observations)

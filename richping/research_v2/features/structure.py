@@ -8,7 +8,7 @@ from typing import ClassVar, Protocol
 from ...core import digest, timestamp
 from ..contracts import JsonObject, ReplayContext, payload
 from .contracts import FeatureResult, FeatureSpec, Spec, completed_bars, positive_int, result
-from .continuity import is_contiguous
+from .continuity import is_contiguous, CONTINUITY_VERSION, EXTENDED_CONTINUITY
 
 
 @dataclass(frozen=True, slots=True)
@@ -23,7 +23,7 @@ class FractalSpec(Spec):
     def __post_init__(self):
         positive_int(self.left)
         positive_int(self.right)
-        if self.ties != "strict" or self.continuity != "xnys_completed_grid":
+        if self.ties != "strict" or self.continuity not in ("xnys_completed_grid", EXTENDED_CONTINUITY):
             raise ValueError("Unsupported fractal convention")
 
 
@@ -55,11 +55,12 @@ class SwingDetector(Protocol):
 
 
 def confirmed_swings(context, symbol, timeframe, spec: FractalSpec):
-    bars = completed_bars(context, symbol, timeframe)
+    continuity = CONTINUITY_VERSION if spec.continuity == "xnys_completed_grid" else spec.continuity
+    bars = completed_bars(context, symbol, timeframe, continuity)
     events, complete_windows = [], 0
     for i in range(spec.left, len(bars) - spec.right):
         window = bars[i - spec.left:i + spec.right + 1]
-        if not is_contiguous(window, timeframe):
+        if not is_contiguous(window, timeframe, continuity):
             continue
         complete_windows += 1
         pivot = bars[i]

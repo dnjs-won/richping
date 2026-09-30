@@ -15,6 +15,22 @@ decision matrix: [V2_C0_H0001_SPECIFICATION.md](V2_C0_H0001_SPECIFICATION.md).
 H0001 executable spec remains **DRAFT / BLOCKED_ON_DECISIONS** and profitability
 **NOT TESTED**. C0 infrastructure completion is not strategy freeze.
 
+The generic [extended-session capability](V2_EXTENDED_SESSION_IMPLEMENTATION.md)
+is implemented separately from preserved XNYS_RTH. `US_EQUITY_EXTENDED_04_20`
+uses America/New_York 04:00–20:00, explicit premarket/RTH/after-hours metadata,
+04:00-anchored completed 1H bars, and full extended-session Daily bars. It uses
+its own versioned continuity/aggregation/session definitions, while preserving
+atomic known_at availability. Weekends/holidays are calendar gaps; DST follows
+IANA local time. Early-close/nonstandard dates, including histories spanning
+one, fail closed in extended v1. RTH still follows official early closes.
+
+H0001 selects only session, 15m base, existing MACD seed conventions, 130-count
+history per timeframe, and full causal history across sessions without reset.
+46 C1 blockers, 17 performance blockers and 7 optional decisions remain (97
+unresolved paths). The executable spec is DRAFT v4; r03 bytes are unchanged.
+Chart parity is UNVERIFIED, observed provider UNRESOLVED and observed exact 1H
+convention UNVERIFIED. No strategy event handler or profitability test exists.
+
 ## 1. Goal
 
 Richping v2 is not a MACD engine. It is a strategy-neutral, point-in-time event research engine that can encode H0001-r03 as its first strategy plugin and later run other hypotheses without changing the replay core.
@@ -172,10 +188,12 @@ status
 
 ## 6. Causal multi-timeframe replay
 
-The current V2-A technical input is 15-minute XNYS RTH bars. H0001's actual
-session policy and authoritative base choice remain UNRESOLVED in the C0
-draft; that technical capability is not a researcher decision to exclude
-extended hours. r03 lists 15m as execution frame, with order/fill details unknown.
+The original V2-A technical input remains 15-minute XNYS RTH. The separate
+extended profile explicitly supports synthetic 15-minute bars from 04:00 to
+20:00 ET on standard XNYS dates, with completed-only 04:00-anchored hours and
+full-session Daily. H0001's first decision bundle selects that extended profile
+and 15m base; all other unresolved strategy rules remain blocked. See the
+[versioned session contract](V2_EXTENDED_SESSION_IMPLEMENTATION.md).
 
 At each atomic availability batch (all base bars sharing the same `known_at`):
 

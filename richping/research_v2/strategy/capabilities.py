@@ -7,24 +7,23 @@ Adding a future capability requires an implementation and a reviewed adapter.
 
 from dataclasses import fields
 
-from ..aggregation import AGGREGATION_VERSION
-from ..contracts import AVAILABILITY_VERSION
-from ..features.continuity import CONTINUITY_VERSION
 from ..features.macd import MACDSpec
 from ..features.relative import NormalizeSpec, PercentileSpec, ZScoreSpec
 from ..features.structure import FractalSpec
 from ..features.volatility import ATRSpec
 from .specification import exact
+from ..sessions import RTH, EXTENDED, session_profile
 
 
-def current_engine():
+def current_engine(profile=RTH):
+    selected = session_profile(profile)
     return {
-        "capability_profile": "v2_ab_c1_signal_v1",
+        "capability_profile": "v2_ab_c1_signal_v1" if profile == RTH else "v2_extended_c1_signal_v1",
         "base_timeframe": "15m",
-        "session_policy": "XNYS_RTH",
-        "availability": AVAILABILITY_VERSION,
-        "continuity": CONTINUITY_VERSION,
-        "aggregation": AGGREGATION_VERSION,
+        "session_policy": selected.name,
+        "availability": selected.availability,
+        "continuity": selected.continuity,
+        "aggregation": selected.aggregation,
         "macd_feature_version": MACDSpec.version,
         "percentile_feature_version": PercentileSpec.version,
         "zscore_feature_version": ZScoreSpec.version,
@@ -54,17 +53,25 @@ def _primitive(value, cls, where, *, extra=()):
     return params
 
 
-def require_current_engine(value):
-    """Validate chosen input/feature contracts independently of structural freeze."""
+def require_session_capability(value):
+    """Only session/base/profile admission, not permission to implement C1."""
     capabilities = {key: record["value"] for key, record in value["engine_capabilities"].items()}
-    if capabilities != current_engine():
+    profile = {"v2_ab_c1_signal_v1": RTH, "v2_extended_c1_signal_v1": EXTENDED}.get(
+        capabilities["capability_profile"])
+    if profile is None or capabilities != current_engine(profile):
         raise ValueError("C1 engine capability/version mismatch; future implementation required")
-    frames, rules, features = (value[key] for key in (
-        "timeframe_contracts", "rule_parameters", "feature_contracts"))
+    frames = value["timeframe_contracts"]
     if frames["base"]["value"] != capabilities["base_timeframe"]:
         raise ValueError("C1 unsupported base timeframe; future implementation required")
-    if {"RTH": "XNYS_RTH"}.get(frames["session_policy"]["value"]) != capabilities["session_policy"]:
+    if {"RTH": RTH, "RTH_EXTENDED": EXTENDED}.get(frames["session_policy"]["value"]) != capabilities["session_policy"]:
         raise ValueError("C1 unsupported session policy; future implementation required")
+    return capabilities
+
+
+def require_current_engine(value):
+    """Validate chosen input/feature contracts independently of structural freeze."""
+    capabilities = require_session_capability(value)
+    rules, features = value["rule_parameters"], value["feature_contracts"]
     if rules["swing_detector"]["value"] != "FRACTAL":
         raise ValueError("C1 unsupported swing detector; future implementation required")
 
@@ -79,7 +86,8 @@ def require_current_engine(value):
         _contract(features[key]["value"], identifier, (), key)
     for suffix in ("daily", "1h", "15m"):
         MACDSpec(*(features["macd_" + key]["value"] for key in ("fast", "slow", "signal")),
-                 min_history=features["macd_min_history_" + suffix]["value"])
+                 min_history=features["macd_min_history_" + suffix]["value"],
+                 continuity=capabilities["continuity"])
 
     for prefix in ("setup_1h", "entry_15m", "exit_1h"):
         method = rules[prefix + "_relative_transform"]["value"]
@@ -89,12 +97,16 @@ def require_current_engine(value):
         if method in {"ROLLING_PERCENTILE", "ROLLING_ZSCORE"}:
             cls = PercentileSpec if method == "ROLLING_PERCENTILE" else ZScoreSpec
             params = _primitive(convention, cls, where, extra=("field",))
+            if params["continuity"] != capabilities["continuity"]:
+                raise ValueError(f"C1 {where}: session continuity mismatch")
             field = params["field"]
             if params["window"] != lookback:
                 raise ValueError(f"C1 {where}: lookback/window mismatch")
         elif method == "MACD_ATR":
             params = _contract(convention, "macd_atr_normalization_v1", ("normalization", "atr"), where)
             scale = _primitive(params["atr"], ATRSpec, where + ".atr")
+            if scale["continuity"] != capabilities["continuity"]:
+                raise ValueError(f"C1 {where}: session continuity mismatch")
             norm = _primitive(params["normalization"], NormalizeSpec, where + ".normalization")
             field = norm["numerator_field"]
             if scale["period"] != lookback or norm["denominator_field"] != "atr":
@@ -103,4 +115,7 @@ def require_current_engine(value):
             raise ValueError(f"C1 {where}: unsupported relative method")
         if type(field) is not str or field not in {"macd_line", "signal_line", "histogram"}:
             raise ValueError(f"C1 {where}: unsupported MACD field")
-    _primitive(rules["swing_parameters"]["value"], FractalSpec, "swing_parameters")
+    swing = _primitive(rules["swing_parameters"]["value"], FractalSpec, "swing_parameters")
+    expected = "xnys_completed_grid" if capabilities["session_policy"] == RTH else capabilities["continuity"]
+    if swing["continuity"] != expected:
+        raise ValueError("C1 swing_parameters: session continuity mismatch")
