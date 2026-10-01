@@ -1,0 +1,137 @@
+# Immutable semantic decision record. No transform, selector, join or classifier.
+schema_version: daily_input_decision_record_v1
+record_id: H0001-DAILY-INPUT-FREEZE-v1
+status: FROZEN_INPUT_DECISION
+basis_commit: 382bd202ed394fbe5b2247af0752a4d29efaaa26
+decision_date: '2026-10-01'
+decision_author: user_researcher
+decision_source: explicit_user_instruction_to_freeze_three_DAILY_INPUT_choices_without_performance_or_current_chart
+proposal_provenance:
+  path: research/decision_proposals/H0001-daily-input-v1.yaml
+  status_at_proposal: PROPOSED_NOT_FROZEN
+  preservation: byte_identical_at_basis_commit
+  transition: three_unresolved_input_choices_to_RESOLVED_in_executable_v7
+executable_spec:
+  path: research/strategy_specs/H0001-r03-draft.yaml
+  version: h0001_r03_spec_v7
+  canonical_sha256: cd60f510d9d18c0dffce985f553b4fbc482915cd7a1de01d162b663981a92a26
+hypothesis:
+  path: research/hypotheses/H0001-r03.yaml
+  status: DRAFT
+  profitability: NOT_TESTED
+  preservation: byte_identical_at_basis_commit
+series_roles:
+  OBSERVED_CHART_SERIES:
+    provider: UNRESOLVED
+    session: UNRESOLVED
+    price_adjustment: UNRESOLVED
+    chart_parity: UNVERIFIED
+  RESEARCH_DAILY_SERIES:
+    choice_type: explicit_new_research_choice_not_observed_chart_reproduction
+    session: RTH_DAILY
+    session_profile: XNYS_RTH
+    price_basis: PIT_SPLIT_ADJUSTED_OHLC
+    freshness: LATEST_EXPECTED_COMPLETED_SESSION_REQUIRED
+decisions:
+  H1-DAILY-SESSION:
+    status: RESOLVED
+    selected: RTH_DAILY
+    executable_path: timeframe_contracts.daily_session_policy
+    rationale: Daily_is_the_slow_PRICE_REGIME_TREND_PERMISSION_axis_official_RTH_close_is_simple_and_reproducible_while_extended_intraday_already_carries_after_hours_information
+    predictive_superiority_claim: false
+    chart_parity_claim: false
+    EXTENDED_DAILY_generic_capability_retained: true
+    future_extended_daily_variant: separate_versioned_research_variant
+  H1-DAILY-PRICE-BASIS:
+    status: RESOLVED
+    selected: PIT_SPLIT_ADJUSTED_OHLC
+    executable_path: feature_contracts.daily_price_basis
+    rationale: remove_mechanical_split_and_reverse_split_discontinuities_consistently_across_OHLC_while_preserving_tradable_price_regime
+  H1-DAILY-FRESHNESS:
+    status: RESOLVED
+    selected: LATEST_EXPECTED_COMPLETED_SESSION_REQUIRED
+    executable_path: timeframe_contracts.daily_freshness
+    rationale: require_the_calendar_expected_completed_input_without_hidden_stale_acceptance_or_numeric_grace
+pit_split_semantics:
+  ohlc: all_four_fields_on_one_consistent_split_adjusted_basis
+  split_types: [stock_split, reverse_split]
+  eligible_action: effective_at_lte_as_of_AND_required_action_evidence_known_at_lte_as_of
+  announced_but_not_effective: forbidden_until_effective
+  effective_but_not_known: forbidden_until_required_evidence_is_known
+  future_known_factor_on_past_as_of: forbidden
+  history_rebase: after_effective_rebase_past_history_using_only_factors_known_by_current_as_of
+  old_state_snapshot_rewrite: forbidden
+  required_action_evidence_unavailable: Daily_input_and_state_UNAVAILABLE
+  raw_fallback: forbidden
+  dividend_distribution: preserve_actual_underlying_ex_date_gap
+  total_return_adjustment: false
+  reinvestment_adjustment: false
+  series_meaning: tradable_price_regime_not_TOTAL_RETURN_SERIES
+  future_total_return_variant: separate_hypothesis_or_experiment
+  state_input_known_at: maximum_bar_action_and_other_actual_transform_input_known_at
+  vintage: retain_effective_at_actual_known_at_source_action_factor_units_transform_version_and_causal_input_hash
+  synthetic_unadjusted_implements_this_choice: false
+freshness_semantics:
+  expected: latest_RTH_DAILY_calendar_trading_session_with_official_close_lte_as_of
+  eligible: latest_causally_delivered_Daily_session_date_equals_expected
+  numeric_lag_or_grace: NONE
+  previous_daily_fallback: forbidden
+  mismatch_or_absent: Daily_axis_UNAVAILABLE
+  unavailable_is_NOT_BULLISH: false
+  new_H0001_decision: unavailable_Daily_does_not_satisfy_Daily_permission
+  known_at: reuse_full_constituent_causal_aggregation_plus_required_transform_evidence
+  weekend_holiday: previous_completed_trading_session_not_calendar_day_lag
+  early_close: official_RTH_early_close_is_completion_boundary
+  unsupported_calendar: fail_closed_UNAVAILABLE_not_skipped_as_holiday
+  fixtures_only_not_runtime_selector:
+    - {as_of: '2026-10-01T06:00:00-04:00', expected: '2026-09-30', delivered: '2026-09-30', input_status: FRESH}
+    - {as_of: '2026-10-01T08:00:00-04:00', expected: '2026-09-30', delivered: '2026-09-30', input_status: FRESH}
+    - {as_of: '2026-10-01T15:00:00-04:00', expected: '2026-09-30', delivered: '2026-09-30', input_status: FRESH}
+    - {as_of: '2026-10-01T15:59:59-04:00', expected: '2026-09-30', delivered: '2026-09-30', input_status: FRESH}
+    - {as_of: '2026-10-01T16:00:00-04:00', expected: '2026-10-01', delivered: '2026-09-30', input_status: UNAVAILABLE}
+    - {as_of: '2026-10-01T16:01:00-04:00', expected: '2026-10-01', delivered: '2026-09-30', input_status: UNAVAILABLE}
+    - {as_of: '2026-10-01T16:02:00-04:00', expected: '2026-10-01', delivered: '2026-10-01', input_status: FRESH}
+    - {as_of: '2026-10-04T12:00:00-04:00', expected: '2026-10-02', delivered: '2026-10-02', input_status: FRESH}
+    - {as_of: '2026-09-07T12:00:00-04:00', expected: '2026-09-04', delivered: '2026-09-04', input_status: FRESH}
+    - {as_of: '2024-11-29T12:59:59-05:00', expected: '2024-11-27', delivered: '2024-11-27', input_status: FRESH}
+    - {as_of: '2024-11-29T13:00:00-05:00', expected: '2024-11-29', delivered: '2024-11-27', input_status: UNAVAILABLE}
+    - {as_of: '2024-11-29T13:01:00-05:00', expected: '2024-11-29', delivered: '2024-11-29', input_status: FRESH}
+    - {as_of: '2026-10-01T08:00:00-04:00', expected: '2026-09-30', delivered: null, input_status: UNAVAILABLE}
+mixed_timeframe_semantics:
+  series:
+    Daily: {session: RTH_DAILY, session_profile: XNYS_RTH, price_basis: PIT_SPLIT_ADJUSTED_OHLC}
+    1H: {session: RTH_EXTENDED, session_profile: US_EQUITY_EXTENDED_04_20, boundary: '04:00-20:00 America/New_York'}
+    15m: {session: RTH_EXTENDED, session_profile: US_EQUITY_EXTENDED_04_20, boundary: '04:00-20:00 America/New_York'}
+  at_06_ET: previous_completed_RTH_Daily_is_upper_price_regime_current_premarket_exists_only_in_1H_15m_signal_layers
+  after_RTH_close: new_RTH_Daily_replaces_prior_only_when_causally_available_until_then_Daily_UNAVAILABLE
+  concatenated_candle_stream: forbidden
+  join: as_of_only_preserving_each_series_identity_known_at_and_causal_hash
+  identity: [role, symbol, timeframe, session_profile, price_adjustment_convention, input_contract_version, source_vintage]
+  real_intraday_price_basis: not_selected_by_this_Daily_only_decision
+independent_axes:
+  resolved_scope: daily_trend_permission_input_series_semantics_only
+  definitions_not_selected: [trend_BULLISH_formula, exhaustion, price_shock, macro_state, sector_leadership, options_flow, fundamentals, final_trade_permission]
+capability_blockers:
+  V2-D_PIT_SPLIT_ACTION_TRANSFORM:
+    status: NOT_IMPLEMENTED
+    scope: actual_action_source_factor_units_coverage_vintages_and_causal_OHLC_transform
+  V2-D_MIXED_PROFILE_AS_OF_JOIN:
+    status: NOT_IMPLEMENTED
+    scope: separately_profiled_RTH_Daily_and_extended_intraday_views_with_atomic_known_at_join_C1_prerequisite
+  V2-D_SELECTED_DAILY_FRESHNESS_SELECTOR:
+    status: NOT_IMPLEMENTED
+    scope: expected_session_vs_delivered_input_eligibility_C1_prerequisite
+  V2-D_REAL_PROVIDER_SESSION_ACTION_PROVENANCE:
+    status: NOT_IMPLEMENTED
+    scope: real_provider_session_calendar_and_PIT_action_evidence_not_verified_by_synthetic_fixtures
+  early_close:
+    status: V2-D_BLOCKER
+    scope: extended_intraday_rejects_entire_early_close_nonstandard_date_RTH_Daily_selection_does_not_remove_blocker
+capability_ids_are_strategy_decision_ids: false
+trend_proposal:
+  path: research/decision_proposals/H0001-daily-price-regime-v1.yaml
+  preservation: byte_identical_at_basis_commit
+  status: PROPOSED_NOT_FROZEN
+  selected_candidate: UNRESOLVED
+  parameter_selection_ranking_backtest: NONE
+  dependency_interpretation: input_questions_in_historical_proposal_now_resolved_by_this_record_runtime_gaps_remain

@@ -1,10 +1,25 @@
-# H0001 DAILY-INPUT audit and unresolved contract
+# H0001 DAILY-INPUT semantic freeze v1
 
-Basis: `4d5d74f716d013e89536955ebe25c2e2c81b43f5` on
+Freeze basis: `382bd202ed394fbe5b2247af0752a4d29efaaa26` on
 `v2-c0-extended-session-contract`. H0001 remains **DRAFT**, profitability
 **NOT TESTED**, chart parity **UNVERIFIED**. No DLP-A/B/C rule, parameter,
 ranking, champion or experiment is selected. [Input proposal YAML](../research/decision_proposals/H0001-daily-input-v1.yaml)
-records the contract independently of the unchanged trend proposal.
+preserves the original unresolved proposal byte-for-byte. The new
+[immutable decision record](../research/decision_records/H0001-daily-input-freeze-v1.yaml)
+records the user/researcher choices, rationale and capability gaps; executable
+`h0001_r03_spec_v7` carries the versioned input contracts. The earlier audit was
+based on `4d5d74f716d013e89536955ebe25c2e2c81b43f5`.
+
+| Decision | Status | Frozen choice |
+|---|---|---|
+| H1-DAILY-SESSION | RESOLVED | RTH_DAILY |
+| H1-DAILY-PRICE-BASIS | RESOLVED | PIT_SPLIT_ADJUSTED_OHLC |
+| H1-DAILY-FRESHNESS | RESOLVED | LATEST_EXPECTED_COMPLETED_SESSION_REQUIRED |
+
+This resolves only `daily_trend_permission` input semantics. It selects no
+BULLISH formula, exhaustion, price shock, macro, sector leadership, options,
+fundamentals or final trade permission. No performance data, current SOXX chart,
+candidate ranking, trend parameter selection or backtest informed these choices.
 
 ## Philosophy provenance correction and audit
 
@@ -47,18 +62,18 @@ repository r01/r02/r03 contain no settings or timestamped Daily export proving
 them. No external provider default fills this gap.
 
 **RESEARCH_DAILY_SERIES** is a deliberately specified causal research series.
-H1-DAILY-SESSION can later choose RTH_DAILY or EXTENDED_DAILY **without first
-proving chart parity**. This must record a new versioned research choice:
-decision author/source, rationale, selected session/basis/freshness convention,
-data/action vintage, input/spec hash and the continuing observed-chart parity
-status. It must not claim "the observed strategy was reproduced". Hypothesis
+H1-DAILY-SESSION now selects RTH_DAILY **without proving chart parity**.
+This is an explicit new versioned research choice, authorized by the user's
+semantic freeze instruction. The decision record preserves source/rationale;
+future actual input records must preserve data/action vintage and input/spec
+hashes. It does not claim "the observed strategy was reproduced". Hypothesis
 revision rules still apply when behavior/experiment contracts change.
 
 Research series identity is `(role, symbol, session_profile, price_adjustment
 convention, input_contract_version, source_vintage)`. Sharing the word Daily,
 symbol or session label cannot establish equality. Session and adjustment are
-independent choices. Currently **H1-DAILY-SESSION stays UNRESOLVED**; new price
-basis and freshness contracts are also unresolved. Historical-reproduction
+independent choices. The three Daily input decisions are now **RESOLVED**.
+Historical-reproduction
 readiness continues to require verified chart parity; C1 readiness requires
 complete declared input contracts, not a claim of observed chart matching.
 
@@ -66,18 +81,39 @@ complete declared input contracts, not a claim of observed chart matching.
 
 | Item | Existing contract/code | Audit result / owner |
 |---|---|---|
-| A session | v5 independent daily_session_policy / require_daily_session_capability; generic session profiles | Research choice unresolved under H1-DAILY-SESSION; intraday remains RTH_EXTENDED |
+| A session | Independent daily_session_policy / require_daily_session_capability; generic session profiles | RTH_DAILY resolved under H1-DAILY-SESSION; intraday remains RTH_EXTENDED |
 | B completion/known_at | MarketBar requires end_at <= known_at; CompletedAggregator needs every expected constituent and end <= as_of; ReplayContext rejects future bars; replay batches equal known_at atomically | Already decided generic causality. Reuse it; no extra decision ID |
-| C freshness | Features check internal continuity only; latest visible prefix need not include latest expected completed session; no freshness selector | New H1-DAILY-FRESHNESS C1 contract; H1-DECISION-TIMING continues to own callback cadence/action coordination |
-| D price basis | MarketDataset admits only SYNTHETIC + synthetic_unadjusted + NONE_CONFIRMED; features reject unknown/present actions | Real research OHLC convention unresolved. New H1-DAILY-PRICE-BASIS C1 contract; existing synthetic restriction unchanged |
+| C freshness | Features check internal continuity only; latest visible prefix need not include latest expected completed session; no freshness selector | Strict expected-session equality resolved; selector is V2-D/C1 capability gap. H1-DECISION-TIMING still owns callback cadence/action coordination |
+| D price basis | MarketDataset admits only SYNTHETIC + synthetic_unadjusted + NONE_CONFIRMED; features reject unknown/present actions | PIT_SPLIT_ADJUSTED_OHLC resolved; real action transform/source is V2-D gap; existing synthetic restriction unchanged |
 | E dates/calendar | session_date / session_bounds use America/New_York; calendar/version provenance in replay | Reuse H1-DAILY-SESSION and versioned generic profiles; no extra timezone decision |
 | F missing/delayed | Missing constituents do not emit Daily; internal gaps give NOT_READY; delayed repair arrives at actual known_at | Input availability/reason remains separate from price classification; no missing→NOT_BULLISH conversion |
 | G provenance | MarketBar retains session, known_at, dataset_id and provenance; FeatureResult retains symbol/timeframe/as_of/input_end/count/hash/spec | Transport can retain all requested fields, but no Daily state builder exists; explicit session/basis/known_at/series role and vintage linkage need composition, not a claimed implemented classifier |
 
 No production/paper, price transform, replay, selector, indicator or classification
 behavior changes. Only executable **specification inventory/admission validation**
-is extended for the two missing contracts; declaration readiness is not an
+adds v7 profile readability; declaration readiness is not an
 implemented data adapter or policy evaluator.
+
+## Session rationale and mixed timeframe semantics
+
+Daily is H0001's slow PRICE_REGIME / TREND_PERMISSION axis. 1H/15m already use
+RTH_EXTENDED (04:00–20:00 ET). Extended Daily could strongly reflect the same
+after-hours information in both upper and lower frames. Official RTH session
+close gives a simpler, reproducible Daily reference. This is a semantic choice,
+with **no claim that RTH predicts better than extended**. EXTENDED_DAILY remains
+a generic capability and may be researched in a separate versioned variant.
+
+Daily uses RTH_DAILY + PIT_SPLIT_ADJUSTED_OHLC + strict expected-session freshness.
+1H/15m retain their distinct extended identities. At 06:00 ET, the previous
+completed RTH Daily is the upper price regime; current premarket movement
+exists only in intraday layers. At/after official RTH close, the current expected
+Daily is required: replace the older input when the new one is causally available;
+until then the Daily axis is UNAVAILABLE. No earlier-Daily fallback is eligible.
+
+Do not concatenate these into one candle stream. Preserve each Daily/1H/15m
+identity, known_at and causal input hash separately and join only at as_of.
+The Daily choice does not select a real intraday corporate-action basis.
+The mixed-profile causal adapter remains **NOT_IMPLEMENTED**.
 
 ## Session/completion facts preserved
 
@@ -103,12 +139,16 @@ implemented data adapter or policy evaluator.
   remains single-profile and rejects mixed-profile contexts. A separately
   versioned as_of view join is still an implementation gap.
 
-## Freshness facts versus unresolved eligibility policy
+## Strict freshness contract and completion boundary
 
 For a supported chosen profile and as_of, **expected_completed_session** is
 the latest session whose scheduled profile close <= as_of. Separately retain
 **available_completed_session**, the latest completely delivered Daily at as_of.
-Compare these facts before applying any still-unselected grace/action policy.
+The latest causally delivered Daily's session_date must **exactly equal**
+`latest_expected_completed_daily_session(as_of)` on the selected RTH_DAILY
+calendar. No numeric lag/grace applies. Mismatch or absent input yields Daily
+axis **UNAVAILABLE**, never NOT_BULLISH; a new H0001 decision does not satisfy
+Daily permission. Keep the reason and coverage evidence separate from price state.
 
 | Fact relation | Meaning, independent of any numeric tolerance |
 |---|---|
@@ -117,18 +157,22 @@ Compare these facts before applying any still-unselected grace/action policy.
 | NO_COMPLETED_INPUT | No delivered completed Daily exists; unavailable, not NOT_BULLISH |
 | UNSUPPORTED_SESSION | Calendar/profile cannot supply a valid expected-session contract; fail closed, not a holiday |
 
-Example: on 2026-10-01 during the chosen Daily session, Sep 30 may be exactly
-LATEST_EXPECTED_COMPLETED. After Oct 1 close, if Oct 1 has not been delivered,
-Sep 30 is BEHIND_EXPECTED_COMPLETED. Sep 28 during Oct 1 is already behind the
-expected Sep 30. Count **trading sessions**, not calendar days; do not relabel
-weekends/holidays as stale solely due to elapsed hours. Extended early-close
-unsupported dates cannot be removed to manufacture an acceptable lag.
+| as_of (ET) | Expected session | Eligible input / boundary |
+|---|---|---|
+| 10/01 06:00 or 08:00 | 09/30 | Delivered 09/30 is FRESH; current premarket belongs to intraday |
+| 10/01 15:00 or 15:59:59 | 09/30 | Delivered 09/30 is FRESH, not stale |
+| 10/01 exactly 16:00 and later | 10/01 | Official scheduled completion uses close <= as_of. If delivery/required evidence is absent, UNAVAILABLE; no 09/30 fallback |
+| 10/01 after actual full delivery/transform known_at | 10/01 | Causally available 10/01 becomes FRESH; no partial or future-known input |
+| Weekend 10/04 | Friday 10/02 | Calendar's previous completed trading session; no calendar-day lag |
+| Holiday 09/07 | Friday 09/04 | No holiday candle or stale-hours test |
+| Early close 11/29/2024 at 13:00 | 11/29 | Official RTH close is the completion boundary; if undelivered, UNAVAILABLE |
 
-No numeric threshold/grace, early-close exception or stale acceptance is chosen.
-H1-DAILY-FRESHNESS must later declare whether only the latest expected session
-is eligible or an explicit versioned grace policy applies, including unknown
-input handling, evidence/readiness and interaction with H1-DECISION-TIMING.
-Facts are representable now; their assessment/selector is **not implemented**.
+Examples use calendar facts and contract fixtures, not a runtime selector.
+At a delivery boundary, only actual evidence with known_at <= as_of is eligible;
+reuse the existing full-constituent causal aggregation and equal-known_at batching.
+H1-DECISION-TIMING still owns when callbacks evaluate this input contract and
+how lifecycle actions coordinate. A selector remains **NOT_IMPLEMENTED**.
+Unsupported dates fail closed; extended early-close dates cannot be skipped.
 
 Before an overdue input arrives, its absence at as_of cannot prove it will
 never arrive or that it will arrive at a future manifest timestamp. Use
@@ -139,7 +183,31 @@ A previously available BULLISH state can remain as a dated historical record
 while current input eligibility is unavailable; retaining it does not permit
 using it silently as current. Final trade permission is a separate policy.
 
-## Price adjustment alternatives, none selected
+## PIT split-adjusted OHLC contract
+
+Use all OHLC on one consistent split-adjusted basis to remove mechanical stock
+split/reverse split discontinuities. This is a **tradable price regime**, not
+TOTAL_RETURN_SERIES. Dividend/cash distribution ex-date gaps remain actual price
+movements; no cash/reinvestment total-return adjustment is made. A future
+total-return variant needs a separate hypothesis/experiment.
+
+For every decision as_of=t, a split is eligible only when **effective_at <= t AND
+required action evidence known_at <= t**. Preannounced but future-effective
+splits cannot rebase today's history. Effective splits with evidence not yet
+known cannot be applied. After effectiveness and evidence availability, use
+only factors known by that as_of to causally rebase prior history onto its then
+current split units; never rewrite earlier immutable states/snapshots. Today's
+future-adjusted provider history must not be projected onto past decisions.
+
+If required split action evidence is unavailable, Daily input/state is
+**UNAVAILABLE; raw fallback is forbidden**. State input known_at is the maximum
+of bar, required action and all actual transform input known_at. Late evidence
+or corrections create a new actual-known_at vintage, not a backdated state.
+Actual factor units, action-source coverage and transformation implementation
+are V2-D data capability blockers, not new unresolved strategy decision IDs.
+
+The previous alternatives below are preserved as proposal context; only the
+PIT split-adjusted convention above is selected.
 
 | Candidate | Causal / PIT interpretation | Required unresolved details / risk |
 |---|---|---|
@@ -186,9 +254,9 @@ is a veto by default. Missing input does not overwrite other axes as bearish or
 NORMAL. Final permission belongs to later policy/interaction research; no
 current narrative or capital-dependent policy is added.
 
-## Decisions, counts and unchanged trend dependencies
+## Decisions, inventory and unchanged trend dependencies
 
-New v6 fields:
+Historical v6 audit added:
 
 - **H1-DAILY-PRICE-BASIS**, C1: `feature_contracts.daily_price_basis=UNRESOLVED`.
   It changes every OHLC-derived feature and cannot be inferred from H1-SESSION,
@@ -204,11 +272,19 @@ reuse generic contracts and existing decision owners; no IDs are created merely
 to label these documentation sections. Required contract fields give **+2**:
 total decisions **76→78**, unresolved IDs **71→73**, C1 **47→49**, unresolved
 paths **98→100**. Performance 17 / optional 7 unchanged. Each new contract is
-one unresolved root now; future nested parameters are counted when declared.
+one unresolved root at v6; future nested unknowns are counted when declared.
 
-v3/v4/v5 remain readable with their original inventory; omissions of the new
-contracts cannot pass current C1 admission. v6 DRAFT admits the unresolved
-values, but FROZEN/C1_READY and plugin/profitability export remain blocked.
+Current v7 resolves three existing root fields without adding IDs or nested
+unknowns: session=RTH_DAILY, basis=pit_split_adjusted_ohlc_v1 and
+freshness=latest_expected_completed_session_required_v1. Inventory is computed
+from the actual spec: **78 decisions unchanged; 73→70 unresolved IDs;
+C1 49→46; 100→97 unresolved paths**. Performance 17 / optional 7 unchanged.
+Eight decisions are resolved in total. Classifications remain historical
+requirements, while blocker membership is derived from unresolved typed values.
+
+v3/v4/v5/v6 remain readable with their original inventory; omissions cannot
+pass current C1 admission. H0001 v7 remains DRAFT; FROZEN/C1_READY and
+plugin/profitability export remain blocked by other C1 choices.
 No state transition, DLP candidate or hypothesis r03 meaning is expanded.
 
 | Unchanged trend proposal | Input dependency only |
@@ -224,10 +300,17 @@ handled; it must not pick parameters/rank candidates from current SOXX cases.
 
 ## Next decision bundles
 
-**DAILY-INPUT remains open:** choose research session, PIT price basis and a
-freshness eligibility contract together, with documented capability gaps and
-versioned provenance. Observed-chart parity is a separate evidence question,
-not a prerequisite for explicitly choosing a new research variant.
+**DAILY-INPUT semantic freeze is complete.** Observed-chart parity remains a
+separate unverified evidence question. These V2-D data/runtime blockers remain:
+
+- PIT split-adjustment/action transform, factor-unit convention and action source.
+- RTH Daily + extended intraday causal as_of join (C1 integration prerequisite).
+- Selected strict Daily freshness selector (C1 integration prerequisite).
+- Real provider/session/calendar/action provenance.
+- Existing **V2-D_BLOCKER early-close**, unchanged for required extended intraday.
+
+They are named capability gaps in the decision record, not new strategy IDs.
+Synthetic unadjusted fixtures implement none of the real split-adjusted choice.
 
 **Then DAILY-TREND:** freeze which of the existing A/B/C family will be tested
 and one ex-ante parameter/readiness tuple per retained variant (A/B shared EMA
@@ -240,7 +323,25 @@ continuity and freshness must be identical within each declared series compariso
 independent states interact with trade eligibility, including unavailable input.
 Macro/sector/options/fundamental interactions remain separate research layers.
 
-## Validation
+## Semantic freeze validation (v7)
+
+Full `C:\richping\.venv\Scripts\python -m pytest`: **807 passed in 161.77s**,
+no failures, skips or pytest warnings. All 788 prior cases remain; 19 semantic
+contract/fixture cases are added. Original proposal/audit inventory assertions
+use the immutable basis v6 fixture; current v7 inventory has independent exact
+delta assertions. `git diff --check` passes.
+
+Coverage includes all three resolutions, retained generic EXTENDED_DAILY,
+UNVERIFIED chart parity, consistent OHLC and split-versus-total-return distinction,
+effective_at/known_at conjunction, no future action use or raw fallback,
+06:00/08:00/15:00 and exact official-close boundaries, unavailable versus
+NOT_BULLISH, weekends/holidays/early close, independent Daily/1H/15m identity,
+the exact three removed C1 roots and preserved DRAFT/unselected DLP/r03/proposals.
+Calendar and immutable transport fixtures do not attest to a selector, action
+transform, mixed-profile runtime adapter or classifier. All capability gaps
+and the extended early-close blocker remain explicit.
+
+## Historical audit validation (v6)
 
 Full `.venv\Scripts\python -m pytest`: **788 passed in 158.45s**, no failures,
 skips or pytest warnings. Existing 763 cases remain; 23 DAILY-INPUT contract cases

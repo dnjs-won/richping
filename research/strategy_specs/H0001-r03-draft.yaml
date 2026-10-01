@@ -1,9 +1,10 @@
-# Executable-spec draft, NOT a strategy implementation or frozen decision.
+# Executable-spec draft, NOT a strategy implementation or complete strategy freeze.
 # Source r03 remains immutable. The five intraday/base/MACD decisions remain resolved.
-# Daily regime session is a separate UNRESOLVED C1 decision, never inferred from intraday.
+# Three Daily input decisions are resolved; trend rules remain unresolved.
+# Decision provenance: research/decision_records/H0001-daily-input-freeze-v1.yaml.
 schema_version: strategy_specification_v1
 strategy_id: H0001
-specification_version: h0001_r03_spec_v6
+specification_version: h0001_r03_spec_v7
 hypothesis_id: H0001
 hypothesis_revision: 3
 status: DRAFT
@@ -16,7 +17,50 @@ direction: LONG_ONLY
 feature_contracts:
   daily_price_basis:
     kind: contract
-    value: UNRESOLVED
+    value:
+      name: pit_split_adjusted_ohlc
+      version: v1
+      parameters:
+        semantic_choice:
+          kind: text
+          value: PIT_SPLIT_ADJUSTED_OHLC
+          choices: []
+          decision_id: null
+        ohlc_basis:
+          kind: text
+          value: all_OHLC_consistently_rebased_to_as_of_split_units
+          choices: []
+          decision_id: null
+        split_eligibility:
+          kind: text
+          value: split_effective_at_lte_as_of_AND_required_action_evidence_known_at_lte_as_of
+          choices: []
+          decision_id: null
+        history_rebase:
+          kind: text
+          value: causal_rebase_after_effective_using_only_then_known_factors_no_past_snapshot_rewrite
+          choices: []
+          decision_id: null
+        state_input_known_at:
+          kind: text
+          value: maximum_bar_action_and_other_actual_transform_input_known_at
+          choices: []
+          decision_id: null
+        required_action_evidence_unavailable:
+          kind: text
+          value: Daily_input_and_state_UNAVAILABLE_no_raw_fallback
+          choices: []
+          decision_id: null
+        cash_distribution_treatment:
+          kind: text
+          value: preserve_actual_ex_date_price_gap_no_total_return_reinvestment_adjustment
+          choices: []
+          decision_id: null
+        total_return_series:
+          kind: boolean
+          value: false
+          choices: []
+          decision_id: null
     choices: []
     decision_id: H1-DAILY-PRICE-BASIS
   macd_ema_seed:
@@ -107,10 +151,53 @@ feature_contracts:
 timeframe_contracts:
   daily_freshness:
     kind: contract
-    value: UNRESOLVED
+    value:
+      name: latest_expected_completed_session_required
+      version: v1
+      parameters:
+        semantic_choice:
+          kind: text
+          value: LATEST_EXPECTED_COMPLETED_SESSION_REQUIRED
+          choices: []
+          decision_id: null
+        expected_session:
+          kind: text
+          value: latest_RTH_DAILY_calendar_trading_session_with_official_close_lte_as_of
+          choices: []
+          decision_id: null
+        eligibility:
+          kind: text
+          value: latest_causally_delivered_Daily_session_date_equals_expected_session
+          choices: []
+          decision_id: null
+        mismatch_or_absent:
+          kind: text
+          value: Daily_axis_UNAVAILABLE_not_NOT_BULLISH_new_decision_fails_Daily_permission
+          choices: []
+          decision_id: null
+        previous_daily_fallback:
+          kind: boolean
+          value: false
+          choices: []
+          decision_id: null
+        numeric_lag_or_grace:
+          kind: text
+          value: NONE_strict_calendar_session_equality
+          choices: []
+          decision_id: null
+        completion_known_at:
+          kind: text
+          value: all_expected_constituents_completed_and_delivered_with_actual_known_at_lte_as_of
+          choices: []
+          decision_id: null
+        unsupported_calendar:
+          kind: text
+          value: UNAVAILABLE_fail_closed_do_not_skip_as_holiday
+          choices: []
+          decision_id: null
     choices: []
     decision_id: H1-DAILY-FRESHNESS
-  # H1-SESSION applies to intraday 15m/1H only; no Daily session default.
+  # H1-SESSION applies to intraday 15m/1H only; Daily is independently selected.
   session_policy:
     kind: enum
     value: RTH_EXTENDED
@@ -120,7 +207,7 @@ timeframe_contracts:
     decision_id: H1-SESSION
   daily_session_policy:
     kind: enum
-    value: UNRESOLVED
+    value: RTH_DAILY
     choices:
     - RTH_DAILY
     - EXTENDED_DAILY

@@ -1,3 +1,63 @@
+# Richping v2 상태 · 2026-10-01 DAILY-INPUT semantic freeze
+
+**판정: DAILY-INPUT 세 의미론 동결 완료. H0001 DRAFT / BLOCKED_ON_DECISIONS;
+profitability NOT TESTED; observed chart parity UNVERIFIED.**
+
+- 기준 `v2-c0-extended-session-contract@382bd202ed394fbe5b2247af0752a4d29efaaa26`,
+  clean `var/worktrees/v2-extended`에서 진행했다. main의 별도 미커밋 작업은 보존한다.
+- RESOLVED: **H1-DAILY-SESSION=RTH_DAILY**,
+  **H1-DAILY-PRICE-BASIS=PIT_SPLIT_ADJUSTED_OHLC**,
+  **H1-DAILY-FRESHNESS=LATEST_EXPECTED_COMPLETED_SESSION_REQUIRED**.
+  성과 데이터·현재 SOXX 차트·backtest·ranking을 판단 근거로 사용하지 않았다.
+- Daily는 느린 PRICE_REGIME / TREND_PERMISSION 축이고 1H/15m은 04:00–20:00 ET
+  RTH_EXTENDED다. After-hours의 상·하위 축 중복 반영을 제한하고 official RTH close를
+  재현 가능한 기준으로 삼는 의미론 선택이며 RTH의 예측 우월성 주장도 chart 복제도 아니다.
+  generic EXTENDED_DAILY는 삭제하지 않고 후속 versioned variant로 남긴다.
+- PIT: split/reverse split의 **effective_at <= as_of AND required evidence known_at <= as_of**.
+  그 시점에 알려진 factor로 과거 OHLC 전체를 같은 단위로 causal rebase하되 과거 snapshot은
+  불변이다. 미래 split/늦게 알려진 evidence의 과거 적용 및 required action evidence 누락 시
+  raw fallback 금지; Daily input/state UNAVAILABLE. Cash dividend/distribution의 실제 ex-date
+  gap을 유지하며 total-return/reinvestment adjustment를 하지 않는다.
+- Freshness: RTH calendar의 close <= as_of인 최신 trading session과 latest delivered Daily의
+  session_date가 정확히 같아야 한다. 10/01 06:00·08:00·15:00 ET의 09/30은 정상 FRESH다.
+  정확히 16:00부터 expected는 10/01이며 미delivery/required evidence 누락 시 이전 Daily
+  fallback 없이 UNAVAILABLE (NOT_BULLISH와 다름). 주말/휴일은 직전 completed trading
+  session, early-close는 official RTH close를 경계로 사용한다. 숫자 lag/grace 없음.
+- Daily/1H/15m은 독립 series identity/known_at/causal hash로 유지하고 as_of만 join한다.
+  premarket 06:00의 현재 움직임은 1H/15m에만 존재한다. Mixed-profile adapter는 미구현이다.
+- executable **v7**: 실제 계산 **78 decisions 유지 / 73→70 unresolved IDs /
+  C1 49→46 / paths 100→97**, performance 17 / optional 7 유지. 기존 세 root path만 제거되어
+  예상과 일치한다. Canonical SHA-256:
+  `cd60f510d9d18c0dffce985f553b4fbc482915cd7a1de01d162b663981a92a26`.
+  v3/v4/v5/v6는 기존 의미 그대로 읽는다. Parser는 v7 명세 선언만 수용한다.
+- 원본 H0001-r03, Research Philosophy, DAILY-INPUT proposal v1, DLP-A/B/C proposal YAML은
+  basis Git blob과 동일하게 보존했다. [새 immutable decision record](research/decision_records/H0001-daily-input-freeze-v1.yaml)
+  로 제안→최종 선택 provenance를 연결한다. Trend formula/EMA span/slope lag/swing width,
+  exhaustion·shock·macro/sector/options/fundamental 및 최종 trade policy 미선택.
+- 별도 V2-D/C1 capability blockers: PIT split/action transform·factor units/source coverage,
+  RTH Daily + extended intraday causal as_of join, strict Daily freshness selector,
+  real provider/session/calendar/action provenance. Synthetic unadjusted가 구현했다는 주장 없음.
+  **V2-D_BLOCKER early-close 유지**: RTH Daily 선택으로 필수 extended intraday의
+  entire early-close/nonstandard date 거절 제약이 해제되지 않는다.
+- 남은 C1 46개는 Daily trend/blocker, relative transform/lookback/conventions/threshold,
+  15m trigger·reversal/conjunction, setup/add/reentry, exit-watch/structure,
+  stop/trailing/holding/overnight, decision timing 및 transition/reset 규칙이다.
+- 다음 DAILY-TREND: A/B/C bounded subset와 variant별 단일 ex-ante tuple/readiness
+  (A/B shared n/h, B k, C L/R), equality/continuity, baseline 및 independent experiment
+  protocol을 성과 전에 결정한다. 이번 단계에서는 어떠한 tuple/rule도 선택하지 않았다.
+- 완료 검증: 전체 `C:\richping\.venv\Scripts\python -m pytest` **807 passed (161.77s)**,
+  실패/skip/pytest warning 없음. 기존 788개 유지, 신규 semantic contract/fixture 19개.
+  `git diff --check` 통과; r03/철학/두 proposal의 basis Git blob 동일성 통과.
+  테스트는 calendar 경계/선언/독립 transport만 검증하며 미구현 capability를 fake runtime으로
+  대체하지 않는다. Production/paper behavior 변경,
+  provider pipeline 구축, main merge 없음. 상세: [DAILY-INPUT 계약](docs/H0001_DAILY_INPUT_CONTRACT.md),
+  [Daily 연구 dependency](docs/H0001_DAILY_PRICE_RESEARCH.md), [C0 명세](docs/V2_C0_H0001_SPECIFICATION.md).
+
+---
+
+아래 DAILY-INPUT 감사와 옛 proposal 상태/테스트 수는 각 basis의 역사 기록이다.
+현재 상태는 위 semantic freeze 항목을 따른다.
+
 # Richping v2 상태 · 2026-10-01 DAILY-INPUT / philosophy provenance audit
 
 **H0001 DRAFT / BLOCKED_ON_DECISIONS; profitability NOT TESTED; chart parity UNVERIFIED.**

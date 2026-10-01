@@ -19,7 +19,7 @@ from richping.research_v2.strategy.h0001_spec import H0001Specification, load_h0
 from richping.research_v2.strategy.specification import C1, PERFORMANCE, OPTIONAL, UNRESOLVED
 from test_research_v2 import Observer, fixture_data
 from test_research_v2_extended import bars, dataset, select_extended_fixture
-from test_research_v2_specification import resolve_fixture, prior_decision_inventory
+from test_research_v2_specification import resolve_fixture, prior_decision_inventory, input_audit_draft
 
 ROOT = Path(__file__).resolve().parents[1]
 DRAFT = ROOT / "research/strategy_specs/H0001-r03-draft.yaml"
@@ -30,7 +30,7 @@ def test_session_scope_and_daily_input_add_only_the_declared_decisions_and_paths
     before = H0001Specification.loads(subprocess.check_output([
         "git", "show", BASE + ":research/strategy_specs/H0001-r03-draft.yaml",
     ], cwd=ROOT).decode("utf-8"))
-    current = load_h0001(DRAFT)
+    current = input_audit_draft()  # Preserve the original v5/v6 audit assertions.
     old, new = before.unpack(), current.unpack()
     assert prior_decision_inventory(old) == prior_decision_inventory(new)
     assert set(new["decisions"]) - set(old["decisions"]) == {
@@ -70,11 +70,10 @@ def test_session_scope_and_daily_input_add_only_the_declared_decisions_and_paths
     assert (ROOT / "research/hypotheses/H0001-r03.yaml").read_bytes() == original
 
 
-def test_intraday_extended_and_daily_unresolved_are_valid_but_not_c1_ready():
+def test_intraday_extended_and_selected_rth_daily_are_valid_but_not_c1_ready():
     spec = load_h0001(DRAFT)
     assert require_session_capability(spec.unpack()) == current_engine(EXTENDED)
-    with pytest.raises(ValueError, match="H1-DAILY-SESSION"):
-        require_daily_session_capability(spec.unpack())
+    assert require_daily_session_capability(spec.unpack()) == current_engine(RTH)
     # Isolate Daily as the sole remaining C1 blocker; other choices are ephemeral.
     value = select_extended_fixture(resolve_fixture(spec, {C1}))
     value["timeframe_contracts"]["daily_session_policy"]["value"] = UNRESOLVED

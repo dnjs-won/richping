@@ -263,17 +263,17 @@ class H0001Specification(StrategySpecification):
         if (value["strategy_id"], value["hypothesis_id"], value["hypothesis_revision"], value["direction"]) != (
                 "H0001", "H0001", 3, "LONG_ONLY"):
             raise ValueError("Unsupported H0001-r03 identity")
-        if value["specification_version"] not in {"h0001_r03_spec_v3", "h0001_r03_spec_v4", "h0001_r03_spec_v5", "h0001_r03_spec_v6"}:
+        if value["specification_version"] not in {"h0001_r03_spec_v3", "h0001_r03_spec_v4", "h0001_r03_spec_v5", "h0001_r03_spec_v6", "h0001_r03_spec_v7"}:
             raise ValueError("Unsupported H0001 specification version")
         if value["source"] != {"path": "research/hypotheses/H0001-r03.yaml", "sha256": SOURCE_SHA256}:
             raise ValueError("H0001 source provenance mismatch")
         # Historical profiles remain readable, without imputing new input
         # choices. Their omitted contracts still prevent current C1 admission.
         required = {key: record for key, record in REQUIRED.items()
-                    if (value["specification_version"] == "h0001_r03_spec_v6"
+                    if (value["specification_version"] in {"h0001_r03_spec_v6", "h0001_r03_spec_v7"}
                         or key not in {('timeframe_contracts', 'daily_freshness'),
                                        ('feature_contracts', 'daily_price_basis')})
-                    and (value["specification_version"] in {"h0001_r03_spec_v5", "h0001_r03_spec_v6"}
+                    and (value["specification_version"] in {"h0001_r03_spec_v5", "h0001_r03_spec_v6", "h0001_r03_spec_v7"}
                          or key != ('timeframe_contracts', 'daily_session_policy'))}
         expected = {section: set() for section, _ in required}
         for section, field in (*required, *FIXED):

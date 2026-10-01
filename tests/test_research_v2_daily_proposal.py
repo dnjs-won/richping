@@ -16,7 +16,7 @@ from richping.research_v2.strategy.h0001_spec import load_h0001
 from richping.research_v2.strategy.specification import C1, PERFORMANCE, OPTIONAL
 from test_research_v2 import Observer, fixture_data
 from test_research_v2_extended import bars, dataset
-from test_research_v2_specification import at
+from test_research_v2_specification import at, input_audit_draft
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "63b815598576c2bd8a865adb503e193ff9e9f664"
@@ -52,7 +52,7 @@ def test_proposal_is_bounded_and_cannot_silently_resolve_executable_decisions():
     source_bytes = subprocess.check_output([
         "git", "cat-file", "--filters", BASE + ":" + body["hypothesis_path"]], cwd=ROOT)
     assert (ROOT / body["hypothesis_path"]).read_bytes() == source_bytes
-    spec = load_h0001(ROOT / body["executable_spec_path"])
+    spec = input_audit_draft()  # Pin this historical unresolved proposal's v6 audit.
     # The subsequent DAILY-INPUT audit adds two blockers, without choosing DLP.
     assert len(spec.unpack()["decisions"]) == 78 and len(spec.unresolved_fields) == 100
     assert [len(spec.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)] == [49, 17, 7]

@@ -9,6 +9,20 @@ The initial proposal preserved the hypothesis and executable v5 spec at its basi
 The subsequent [DAILY-INPUT audit](H0001_DAILY_INPUT_CONTRACT.md) adds two unresolved
 input contracts in v6; the original r03 and DLP-A/B/C proposal remain unchanged.
 
+Current dependency update at `382bd202ed394fbe5b2247af0752a4d29efaaa26`:
+the [DAILY-INPUT semantic freeze](H0001_DAILY_INPUT_CONTRACT.md) and
+[decision record](../research/decision_records/H0001-daily-input-freeze-v1.yaml)
+resolve RTH_DAILY / PIT_SPLIT_ADJUSTED_OHLC /
+LATEST_EXPECTED_COMPLETED_SESSION_REQUIRED in executable v7. This is a new
+research input choice with no chart parity or predictive-superiority claim.
+The proposal YAML remains byte-identical; its input UNRESOLVED entries
+are historical proposal questions superseded by that decision record.
+DLP-A/B/C, all trend parameters and experiment design remain unselected.
+Runtime PIT action transform, mixed-profile as_of join, selected freshness
+selector and real provenance remain V2-D/C1 capability gaps. Early-close
+V2-D_BLOCKER remains. The proposal/audit records below describe their
+original basis except where explicitly marked current.
+
 ## Research boundary and repository investigation
 
 Daily means this asset's **price-derived LONG permission**, not MARKET_REGIME
@@ -47,8 +61,10 @@ Daily tests. It selects no Daily price predicate.
 | v5 `chart_parity` | Provider/boundary/seed/history/evidence unresolved, status UNVERIFIED | Synthetic agreement proving observed-chart parity |
 
 The tracked research/docs inventory has no original screenshot or chart export
-with Daily configuration. There is no repository evidence to resolve the Daily
-session. **H1-DAILY-SESSION = UNRESOLVED**, candidates **RTH_DAILY / EXTENDED_DAILY**.
+with Daily configuration. There is no repository evidence to resolve the observed
+Daily chart session. At the proposal basis **H1-DAILY-SESSION = UNRESOLVED**,
+candidates **RTH_DAILY / EXTENDED_DAILY**. The current research choice is
+independently RTH_DAILY; observed chart session remains unknown.
 The engine's ability to aggregate extended Daily and the fact that intraday
 examples include premarket do not identify the observed Daily chart. No provider
 or vendor default is guessed and no external source substitutes for missing
@@ -73,12 +89,14 @@ These are implemented **synthetic research grids**, not verified vendor Daily
 prices, consolidated closing auctions, liquidity or corporate-action coverage.
 Missing inputs never become a partial Daily; delayed repair may produce the
 older Daily only when evidence arrives. At intraday time t, a usable Daily is
-the latest completed **and delivered** candle subject to an explicit future
-freshness policy. Yesterday's Daily is not today’s incomplete candle. A missing
+the latest expected completed RTH session's **delivered** candle under the
+current strict freshness contract. Until today's official close yesterday is
+normally fresh; from that close an undelivered current Daily is UNAVAILABLE,
+with no previous-Daily fallback. Yesterday's Daily is not today’s incomplete candle. A missing
 whole current session cannot silently be interpreted as a holiday.
 
 Intraday 15m/1H remains RTH_EXTENDED. Daily selection is independent in v5's
-`daily_session_policy`, whose unresolved C1 blocker prevents freeze/C1_READY.
+`daily_session_policy`, now independently resolved to RTH_DAILY in v7.
 The admission fixtures can explicitly select either Daily profile while keeping
 extended intraday. This is readiness to implement, not a combined data engine:
 current replay uses one manifest-selected profile and ReplayContext rejects
@@ -203,8 +221,9 @@ and a deliberately deferred classifier are separately explained by reason;
 an unknown definition is UNRESOLVED before calculation, not measured NORMAL.
 
 A separate policy would map this vector to final new-LONG permission and
-signal-lifecycle actions. **All action/priority/freshness/reset choices remain
-unresolved.** No OR/AND policy or automatic block/reduction is chosen. Reducing
+signal-lifecycle actions. **Action/priority/reset choices remain unresolved.**
+Input freshness is now strict calendar expected-session equality; final policy
+is separate. No OR/AND policy or automatic block/reduction is chosen. Reducing
 exposure depends on the separate execution/capital layer; current C1 cannot
 silently import unresolved sizing. No threshold-triggered state or action is
 implemented in this step.
@@ -226,15 +245,17 @@ and review the hypothesis/spec revision and mandatory decision inventory.
 At this proposal's basis, executable inventory was 76 decisions, 71 unresolved IDs (47 C1 / 17
 performance / 7 optional), 98 unresolved paths and v5 hash
 `ab0c1136d47bf1ce6b46ff7e46824b59cf715d28db93bf665b77477a8f0a50e6`.
-Current v6 inventory is 78 decisions / 73 unresolved IDs (49 C1, 17 performance,
-7 optional) / 100 paths, solely from the two DAILY-INPUT blockers; see the audit.
+The v6 audit inventory was 78 decisions / 73 unresolved IDs (49 C1, 17 performance,
+7 optional) / 100 paths, solely from the two DAILY-INPUT blockers. Current v7 is
+**78 decisions / 70 unresolved IDs (46 C1, 17 performance, 7 optional) / 97 paths**:
+exactly three existing Daily input roots resolved; see the semantic freeze.
 The sidecar's UNRESOLVED paths are proposal questions, not executable blockers;
 its bundle lists enumerate them explicitly. No resolved contract is weakened.
-H1-DAILY-SESSION, H1-DAILY-LONG and H1-DAILY-BLOCKER remain unresolved.
+H1-DAILY-SESSION is resolved; H1-DAILY-LONG and H1-DAILY-BLOCKER remain unresolved.
 
-1. **DAILY-INPUT:** choose RTH_DAILY or EXTENDED_DAILY deliberately for research
-   (or preserve unresolved pending source evidence); record origin/price basis
-   and freshness policy. To claim reproduction, supply observed provider/settings,
+1. **DAILY-INPUT:** semantic freeze complete: RTH_DAILY, PIT_SPLIT_ADJUSTED_OHLC,
+   strict latest expected completed session. Keep capability gaps separate from
+   strategy unknowns. To claim reproduction, supply observed provider/settings,
    timestamped Daily candles and initialization/adjustment evidence. Existing IDs:
    H1-DAILY-SESSION, H1-CHART-PROVIDER/EMA/VERIFICATION, H1-DECISION-TIMING.
 2. **DAILY-TREND:** approve the bounded comparison subset among A/B/C, or select

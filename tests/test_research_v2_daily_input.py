@@ -17,7 +17,7 @@ from richping.research_v2.strategy.h0001_spec import H0001Specification, load_h0
 from richping.research_v2.strategy.specification import C1, UNRESOLVED
 from test_research_v2 import Observer, fixture_data
 from test_research_v2_extended import bars, dataset, select_extended_fixture
-from test_research_v2_specification import resolve_fixture
+from test_research_v2_specification import resolve_fixture, input_audit_draft
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "4d5d74f716d013e89536955ebe25c2e2c81b43f5"
@@ -53,7 +53,7 @@ def test_original_philosophy_is_imported_without_semantic_rewriting():
 
 def test_only_two_input_decisions_change_the_v5_executable_contract():
     before = H0001Specification.loads(git_blob(BASE, DRAFT.relative_to(ROOT).as_posix()).decode())
-    current = load_h0001(DRAFT)
+    current = input_audit_draft()  # Original proposal/audit, not current v7 choices.
     value = current.unpack()
     assert value["specification_version"] == "h0001_r03_spec_v6"
     assert set(value["decisions"]) - set(before.unpack()["decisions"]) == set(NEW)
