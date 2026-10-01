@@ -26,30 +26,39 @@ DRAFT = ROOT / "research/strategy_specs/H0001-r03-draft.yaml"
 BASE = "1b3361a5f7c84765210f4f8b627ed87cbb977a7b"
 
 
-def test_session_scope_changes_only_one_decision_and_one_unresolved_path():
+def test_session_scope_and_daily_input_add_only_the_declared_decisions_and_paths():
     before = H0001Specification.loads(subprocess.check_output([
         "git", "show", BASE + ":research/strategy_specs/H0001-r03-draft.yaml",
     ], cwd=ROOT).decode("utf-8"))
     current = load_h0001(DRAFT)
     old, new = before.unpack(), current.unpack()
     assert prior_decision_inventory(old) == prior_decision_inventory(new)
-    assert set(new["decisions"]) - set(old["decisions"]) == {"H1-DAILY-SESSION"}
-    assert len(new["decisions"]) == 76
+    assert set(new["decisions"]) - set(old["decisions"]) == {
+        "H1-DAILY-SESSION", "H1-DAILY-PRICE-BASIS", "H1-DAILY-FRESHNESS"}
+    assert len(new["decisions"]) == 78
     assert current.unresolved_fields == {
         **before.unresolved_fields,
         "timeframe_contracts.daily_session_policy": {
             "decision_id": "H1-DAILY-SESSION", "classification": C1},
+        "timeframe_contracts.daily_freshness": {
+            "decision_id": "H1-DAILY-FRESHNESS", "classification": C1},
+        "feature_contracts.daily_price_basis": {
+            "decision_id": "H1-DAILY-PRICE-BASIS", "classification": C1},
     }
-    assert [len(current.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)] == [47, 17, 7]
+    assert [len(current.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)] == [49, 17, 7]
     frames = dict(new["timeframe_contracts"])
     daily = frames.pop("daily_session_policy")
+    frames.pop("daily_freshness")
     assert frames == old["timeframe_contracts"]
     assert daily == {"kind": "enum", "value": UNRESOLVED,
                      "choices": ["EXTENDED_DAILY", "RTH_DAILY"], "decision_id": "H1-DAILY-SESSION"}
     decision = new["decisions"]["H1-DAILY-SESSION"]
     assert decision["candidate_choices"] == ["EXTENDED_DAILY", "RTH_DAILY"]
     assert decision["required_for_c1"] and decision["required_for_profitability"]
-    for section in ("feature_contracts", "engine_capabilities", "rule_parameters", "state_machine",
+    features = dict(new["feature_contracts"])
+    features.pop("daily_price_basis")
+    assert features == old["feature_contracts"]
+    for section in ("engine_capabilities", "rule_parameters", "state_machine",
                     "state_machine_parameters", "execution_requirements", "research_requirements",
                     "optional_extensions", "chart_parity", "source"):
         assert new[section] == old[section]
@@ -96,6 +105,10 @@ def test_legacy_frozen_spec_cannot_infer_daily_from_intraday():
     value["specification_version"] = "h0001_r03_spec_v4"
     del value["timeframe_contracts"]["daily_session_policy"]
     del value["decisions"]["H1-DAILY-SESSION"]
+    del value["timeframe_contracts"]["daily_freshness"]
+    del value["feature_contracts"]["daily_price_basis"]
+    del value["decisions"]["H1-DAILY-FRESHNESS"]
+    del value["decisions"]["H1-DAILY-PRICE-BASIS"]
     legacy = H0001Specification.of(value)
     require_session_capability(legacy.unpack())
     with pytest.raises(ValueError, match="H1-DAILY-SESSION"):

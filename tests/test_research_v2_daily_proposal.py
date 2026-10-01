@@ -46,16 +46,17 @@ def test_proposal_is_bounded_and_cannot_silently_resolve_executable_decisions():
         assert "VARIANT" in record["evidence_status"]
     assert body["early_close_blocker"] == "V2-D_BLOCKER"
     assert body["new_executable_decision_ids"] == body["new_executable_unresolved_paths"] == []
-    for path in (body["hypothesis_path"], body["executable_spec_path"]):
+    for path in (body["hypothesis_path"],):
         original = subprocess.check_output(["git", "show", BASE + ":" + path], cwd=ROOT)
         assert (ROOT / path).read_bytes().replace(b"\r\n", b"\n") == original
     source_bytes = subprocess.check_output([
         "git", "cat-file", "--filters", BASE + ":" + body["hypothesis_path"]], cwd=ROOT)
     assert (ROOT / body["hypothesis_path"]).read_bytes() == source_bytes
     spec = load_h0001(ROOT / body["executable_spec_path"])
-    assert len(spec.unpack()["decisions"]) == 76 and len(spec.unresolved_fields) == 98
-    assert [len(spec.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)] == [47, 17, 7]
-    assert spec.specification_hash == "ab0c1136d47bf1ce6b46ff7e46824b59cf715d28db93bf665b77477a8f0a50e6"
+    # The subsequent DAILY-INPUT audit adds two blockers, without choosing DLP.
+    assert len(spec.unpack()["decisions"]) == 78 and len(spec.unresolved_fields) == 100
+    assert [len(spec.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)] == [49, 17, 7]
+    assert spec.specification_hash == "6cb514ccf372df54c775221d1d08ddbcbbae823c2799f617b58292d27b78dd98"
     with pytest.raises(ValueError):
         spec.require_c1_ready()
 

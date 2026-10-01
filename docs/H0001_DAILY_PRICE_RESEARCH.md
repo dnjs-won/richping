@@ -5,7 +5,9 @@ Basis: `v2-c0-extended-session-contract` at
 **H0001 DRAFT; profitability NOT TESTED; chart parity UNVERIFIED.**
 This proposes a small family, not a selected Daily rule or an experiment.
 Machine-readable companion: [proposal YAML](../research/decision_proposals/H0001-daily-price-regime-v1.yaml).
-The hypothesis and executable v5 spec remain byte-identical to the basis.
+The initial proposal preserved the hypothesis and executable v5 spec at its basis.
+The subsequent [DAILY-INPUT audit](H0001_DAILY_INPUT_CONTRACT.md) adds two unresolved
+input contracts in v6; the original r03 and DLP-A/B/C proposal remain unchanged.
 
 ## Research boundary and repository investigation
 
@@ -17,12 +19,13 @@ rally enters these definitions. The proposed states cannot explain the whole
 market. [Research Capture](RESEARCH_CAPTURE.md) remains authoritative for
 revision, provenance and discovery/confirmation separation.
 
-At the basis commit, `docs/RESEARCH_PHILOSOPHY.md` was absent from the branch,
-all local Git history searched with `git log --all -- <path>`, and the local
-filename inventory (cache directories were inaccessible and hold no tracked
-contract). It could not be read as an existing contract. The explicit philosophy
-boundaries in the user's task are the authority for this proposal; no missing
-document content is reconstructed from memory.
+The earlier investigation incorrectly generalized a local object/history search
+into a claim that `docs/RESEARCH_PHILOSOPHY.md` did not exist in repository history.
+The document exists at `91eff1f2ef9943c9077f79811c651a1455803e67` and has now been
+imported byte-for-byte from that Git blob, without merging or cherry-picking the
+branch. [Research Philosophy](RESEARCH_PHILOSOPHY.md) is the actual contract.
+The [DAILY-INPUT audit](H0001_DAILY_INPUT_CONTRACT.md) records provenance and its
+compatibility audit; no original philosophy text was rewritten.
 
 Investigation covered PROJECT_STATUS.md, RESEARCH_CAPTURE.md, H0001 r01/r02/r03,
 the complete executable draft, C0 specification/inventory/admission and tests,
@@ -219,10 +222,12 @@ and review the hypothesis/spec revision and mandatory decision inventory.
 
 ## Decision inventory and three next bundles
 
-**New executable decision IDs: 0. New executable unresolved paths: 0.**
-Executable inventory remains 76 decisions, 71 unresolved IDs (47 C1 / 17
+**Original trend proposal only: new executable decision IDs 0 / unresolved paths 0.**
+At this proposal's basis, executable inventory was 76 decisions, 71 unresolved IDs (47 C1 / 17
 performance / 7 optional), 98 unresolved paths and v5 hash
 `ab0c1136d47bf1ce6b46ff7e46824b59cf715d28db93bf665b77477a8f0a50e6`.
+Current v6 inventory is 78 decisions / 73 unresolved IDs (49 C1, 17 performance,
+7 optional) / 100 paths, solely from the two DAILY-INPUT blockers; see the audit.
 The sidecar's UNRESOLVED paths are proposal questions, not executable blockers;
 its bundle lists enumerate them explicitly. No resolved contract is weakened.
 H1-DAILY-SESSION, H1-DAILY-LONG and H1-DAILY-BLOCKER remain unresolved.

@@ -37,8 +37,9 @@ def draft():
 
 
 def prior_decision_inventory(value):
-    """Compare all old decisions, allowing only H1-SESSION's scope clarification."""
-    decisions = {k: dict(v) for k, v in value["decisions"].items() if k != "H1-DAILY-SESSION"}
+    """Compare historical decisions, excluding the three later Daily input IDs."""
+    decisions = {k: dict(v) for k, v in value["decisions"].items()
+                 if k not in {"H1-DAILY-SESSION", "H1-DAILY-PRICE-BASIS", "H1-DAILY-FRESHNESS"}}
     for key in ("question", "current_hypothesis_statement", "available_v2_primitive"):
         decisions["H1-SESSION"].pop(key)
     return decisions
@@ -46,7 +47,7 @@ def prior_decision_inventory(value):
 
 def prior_unresolved_fields(spec):
     return {p: info for p, info in spec.unresolved_fields.items()
-            if info["decision_id"] != "H1-DAILY-SESSION"}
+            if info["decision_id"] not in {"H1-DAILY-SESSION", "H1-DAILY-PRICE-BASIS", "H1-DAILY-FRESHNESS"}}
 
 
 def at(value, path):
@@ -125,8 +126,8 @@ def compatible_features_fixture(value, method="ROLLING_PERCENTILE"):
 def test_draft_inventory_and_no_plugin_or_profitability_export():
     spec = draft()
     assert spec.unpack()["status"] == "DRAFT"
-    assert len(spec.unresolved_fields) == 98
-    assert sum(len(spec.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)) == 71
+    assert len(spec.unresolved_fields) == 100
+    assert sum(len(spec.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)) == 73
     for method in (spec.require_c1_ready, spec.plugin_specification, spec.require_profitability_ready,
                    spec.require_historical_reproduction_ready):
         with pytest.raises(ValueError):
@@ -557,10 +558,10 @@ def test_remediation_preserves_every_decision_and_unresolved_strategy_parameter(
     assert prior_decision_inventory(old) == prior_decision_inventory(new)
     for section in set(SECTIONS) - {"engine_capabilities", "feature_contracts", "timeframe_contracts", "chart_parity"}:
         assert old[section] == new[section]
-    assert len(current.unresolved_fields) == 98
+    assert len(current.unresolved_fields) == 100
     assert len(original.unresolved_fields) == 107
-    assert len(new["decisions"]) == len(old["decisions"]) + 1 == 76
-    assert [len(current.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)] == [47, 17, 7]
+    assert len(new["decisions"]) == len(old["decisions"]) + 3 == 78
+    assert [len(current.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)] == [49, 17, 7]
 
 
 def signal_paths(machine, start, end):
@@ -663,8 +664,8 @@ def test_lifecycle_returns_reuse_unresolved_contract_without_resolving_or_adding
     assert prior_unresolved_fields(current) == {p: info for p, info in before.unresolved_fields.items()
                                          if info['decision_id'] not in resolved}
     assert prior_decision_inventory(current.unpack()) == prior_decision_inventory(before.unpack())
-    assert len(current.unresolved_fields) == 98
-    assert len(current.unpack()['decisions']) == 76
+    assert len(current.unresolved_fields) == 100
+    assert len(current.unpack()['decisions']) == 78
     for key in LIFECYCLE_RETURNS:
         edge = current.unpack()['state_machine']['transitions'][key]
         assert set(edge['prerequisites']) == {'H1-DAILY-LONG', 'H1-DAILY-BLOCKER', 'H1-STATE-TRANSITIONS'}

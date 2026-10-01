@@ -9,6 +9,8 @@ from .capabilities import current_engine, require_current_engine
 REQUIRED = {
     ('timeframe_contracts', 'session_policy'): ('enum', 'H1-SESSION', 'C1_IMPLEMENTATION_BLOCKER', ('RTH', 'RTH_EXTENDED')),
     ('timeframe_contracts', 'daily_session_policy'): ('enum', 'H1-DAILY-SESSION', 'C1_IMPLEMENTATION_BLOCKER', ('EXTENDED_DAILY', 'RTH_DAILY')),
+    ('timeframe_contracts', 'daily_freshness'): ('contract', 'H1-DAILY-FRESHNESS', 'C1_IMPLEMENTATION_BLOCKER', ()),
+    ('feature_contracts', 'daily_price_basis'): ('contract', 'H1-DAILY-PRICE-BASIS', 'C1_IMPLEMENTATION_BLOCKER', ()),
     ('timeframe_contracts', 'base'): ('timeframe', 'H1-BASE', 'C1_IMPLEMENTATION_BLOCKER', ()),
     ('feature_contracts', 'macd_ema_seed'): ('contract', 'H1-EMA-SEED', 'C1_IMPLEMENTATION_BLOCKER', ()),
     ('feature_contracts', 'macd_signal_start'): ('contract', 'H1-EMA-SEED', 'C1_IMPLEMENTATION_BLOCKER', ()),
@@ -261,15 +263,18 @@ class H0001Specification(StrategySpecification):
         if (value["strategy_id"], value["hypothesis_id"], value["hypothesis_revision"], value["direction"]) != (
                 "H0001", "H0001", 3, "LONG_ONLY"):
             raise ValueError("Unsupported H0001-r03 identity")
-        if value["specification_version"] not in {"h0001_r03_spec_v3", "h0001_r03_spec_v4", "h0001_r03_spec_v5"}:
+        if value["specification_version"] not in {"h0001_r03_spec_v3", "h0001_r03_spec_v4", "h0001_r03_spec_v5", "h0001_r03_spec_v6"}:
             raise ValueError("Unsupported H0001 specification version")
         if value["source"] != {"path": "research/hypotheses/H0001-r03.yaml", "sha256": SOURCE_SHA256}:
             raise ValueError("H0001 source provenance mismatch")
-        # Historical v3/v4 remain readable, but cannot attest a Daily session
-        # choice for C1 admission. Never infer that choice from intraday.
+        # Historical profiles remain readable, without imputing new input
+        # choices. Their omitted contracts still prevent current C1 admission.
         required = {key: record for key, record in REQUIRED.items()
-                    if value["specification_version"] == "h0001_r03_spec_v5"
-                    or key != ('timeframe_contracts', 'daily_session_policy')}
+                    if (value["specification_version"] == "h0001_r03_spec_v6"
+                        or key not in {('timeframe_contracts', 'daily_freshness'),
+                                       ('feature_contracts', 'daily_price_basis')})
+                    and (value["specification_version"] in {"h0001_r03_spec_v5", "h0001_r03_spec_v6"}
+                         or key != ('timeframe_contracts', 'daily_session_policy'))}
         expected = {section: set() for section, _ in required}
         for section, field in (*required, *FIXED):
             expected.setdefault(section, set()).add(field)
@@ -332,6 +337,10 @@ class H0001Specification(StrategySpecification):
 
     def _require_engine_compatibility(self, value):
         require_current_engine(value)
+        for section, field in (('feature_contracts', 'daily_price_basis'),
+                               ('timeframe_contracts', 'daily_freshness')):
+            if value[section].get(field, {}).get('value', UNRESOLVED) == UNRESOLVED:
+                raise ValueError(f'C1 Daily input requires explicit {field} contract')
         profile = value["engine_capabilities"]["session_policy"]["value"]
         if value["chart_parity"]["engine_1h_boundary"]["value"] != ENGINE_BOUNDARIES[profile]:
             raise ValueError("C1 engine aggregation boundary mismatch")

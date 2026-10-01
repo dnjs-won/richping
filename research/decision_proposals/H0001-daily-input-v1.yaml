@@ -1,0 +1,118 @@
+# DAILY-INPUT contract proposal; no selector, price transform or strategy evaluator.
+schema_version: daily_input_proposal_v1
+proposal_id: H0001-DAILY-INPUT-v1
+status: PROPOSED_NOT_FROZEN
+basis_commit: 4d5d74f716d013e89536955ebe25c2e2c81b43f5
+philosophy:
+  source_commit: 91eff1f2ef9943c9077f79811c651a1455803e67
+  path: docs/RESEARCH_PHILOSOPHY.md
+  sha256: e5a88b9d89273591a0655c116ee38b6e1ae7059ed7c39e9248408f4cf64429c8
+  import: exact_git_blob_no_merge_no_cherry_pick
+profitability: NOT_TESTED
+hypothesis_status: DRAFT
+series_roles:
+  OBSERVED_CHART_SERIES:
+    provider: UNRESOLVED
+    session: UNRESOLVED
+    price_adjustment: UNRESOLVED
+    chart_parity: UNVERIFIED
+    evidence: no_timestamped_Daily_export_or_settings_in_existing_observations
+  RESEARCH_DAILY_SERIES:
+    session_decision: H1-DAILY-SESSION
+    selected_session: UNRESOLVED
+    candidates: [RTH_DAILY, EXTENDED_DAILY]
+    price_basis_decision: H1-DAILY-PRICE-BASIS
+    price_basis: UNRESOLVED
+    freshness_decision: H1-DAILY-FRESHNESS
+    freshness_policy: UNRESOLVED
+    observed_chart_parity_required_for_new_research_choice: false
+    future_selection_provenance: versioned_choice_with_rationale_source_and_contract_hash_not_a_chart_reproduction_claim
+intraday_session: RTH_EXTENDED
+completion:
+  rule: all_expected_constituents_completed_and_delivered
+  bar_known_at: maximum_constituent_known_at
+  state_input_known_at: maximum_bar_action_and_other_actual_transform_input_known_at
+  no_incomplete_current_Daily: true
+  missing_or_delayed_constituents: no_partial_candle
+  timezone: America/New_York
+  session_date: local_exchange_session_date_not_UTC_date
+  continuity: selected_profile_completed_grid
+freshness_facts:
+  expected_session: latest_session_whose_selected_profile_close_is_not_after_as_of
+  available_session: latest_complete_delivered_Daily_session_not_after_as_of
+  relation_values: [LATEST_EXPECTED_COMPLETED, BEHIND_EXPECTED_COMPLETED, NO_COMPLETED_INPUT, UNSUPPORTED_SESSION]
+  intraday_previous_session_is_not_automatically_stale: true
+  trading_session_lag: explicit_observation_count_not_elapsed_calendar_days
+  tolerated_lag_or_grace: UNRESOLVED
+  eligibility_policy: UNRESOLVED
+  pre_delivery_cause: UNAVAILABLE_CAUSE_UNCONFIRMED
+  delayed_evidence: actual_arrival_after_bar_end_at_not_a_prediction_from_future_manifest
+  missing_evidence: expected_input_absent_at_as_of_not_proof_it_will_never_arrive
+  unsupported_extended_early_close: fail_closed_do_not_skip_as_holiday
+price_basis_candidates:
+  RAW_ACTION_GUARDED:
+    meaning: raw_OHLC_plus_causal_action_guard_or_explicit_accounting
+    risk: mechanical_split_or_ex_dividend_discontinuity_is_not_a_price_shock_or_trend_break_without_policy
+  PIT_SPLIT_ADJUSTED:
+    meaning: apply_only_split_information_known_by_as_of_with_explicit_factor_units_and_vintage
+    risk: current_provider_backward_adjustment_can_include_future_splits
+  PIT_DIVIDEND_OR_TOTAL_RETURN_ADJUSTED:
+    meaning: explicit_OHLC_transform_and_cash_or_reinvestment_convention_using_only_actions_known_by_as_of
+    risk: adjusted_close_alone_does_not_define_consistent_OHLC_or_execution_prices
+  current_engine:
+    meaning: synthetic_unadjusted_with_NONE_CONFIRMED_actions
+    real_adjustment_adapter: NOT_IMPLEMENTED
+    synthetic_contract_is_not_a_real_basis_selection: true
+provenance_fields:
+  - symbol
+  - session_date
+  - session_profile
+  - series_role
+  - input_end_at
+  - known_at
+  - as_of
+  - expected_completed_session
+  - available_completed_session
+  - freshness_relation
+  - trading_session_lag
+  - availability_status
+  - unavailable_reason
+  - causal_input_hash
+  - source_vintage_id
+  - source_vintage_reference
+  - price_adjustment_convention
+  - action_vintage_and_known_at_reference
+  - feature_specification_hash
+  - daily_input_contract_hash
+provenance_boundary:
+  full_future_dataset_hash: envelope_reference_only_not_feature_or_classification_input
+  past_state_or_snapshot_rewrite: forbidden
+  late_action_or_bar_correction: new_actual_known_at_vintage_only
+  mixed_series_profile_or_basis: reject_not_coerce
+independent_state_layers:
+  - daily_trend_permission
+  - daily_exhaustion_state
+  - daily_price_shock_state
+  - macro_state
+  - sector_leadership_state
+  - options_flow_state
+  - fundamental_state
+trade_permission_policy: UNRESOLVED_SEPARATE_INTERACTION_RESEARCH
+unavailable_input_is_not_NOT_BULLISH: true
+trend_candidates:
+  proposal: research/decision_proposals/H0001-daily-price-regime-v1.yaml
+  change_allowed: false
+  dependencies:
+    DLP-A: selected_series_price_basis_history_readiness_and_freshness
+    DLP-B: DLP_A_dependencies_plus_consistent_origin_and_observation_lag
+    DLP-C: selected_OHLC_basis_confirmed_at_and_continuous_coverage_plus_freshness
+early_close_blocker: V2-D_BLOCKER
+new_executable_decisions:
+  H1-DAILY-PRICE-BASIS:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    path: feature_contracts.daily_price_basis
+    value: UNRESOLVED
+  H1-DAILY-FRESHNESS:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    path: timeframe_contracts.daily_freshness
+    value: UNRESOLVED

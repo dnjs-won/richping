@@ -8,17 +8,23 @@ Daily decision research proposal (2026-10-01):
 [H0001 Daily PRICE_REGIME / TREND_PERMISSION](H0001_DAILY_PRICE_RESEARCH.md)
 records the repository-only chart audit, three unselected causal candidate
 variants, independent trend/exhaustion/price-shock axes and three next decision
-bundles. It is a separate proposal, not a change to executable v5 or its counts.
+bundles. Its candidate rules remain proposals. The subsequent
+[DAILY-INPUT audit](H0001_DAILY_INPUT_CONTRACT.md) restores the original
+[Research Philosophy](RESEARCH_PHILOSOPHY.md) and adds two unresolved input
+contracts in executable v6, without selecting any candidate.
 
-Draft inventory: **76 decisions**, of which the first five are resolved. Remaining:
-**47 C1 blockers, 17 performance blockers, 7 optional extensions**;
-**98 unresolved parameter/transition paths**. `H1-SESSION` selects intraday 15m/1H
+Draft inventory: **78 decisions**, of which the first five are resolved. Remaining:
+**49 C1 blockers, 17 performance blockers, 7 optional extensions**;
+**100 unresolved parameter/transition paths**. `H1-SESSION` selects intraday 15m/1H
 only; new `H1-DAILY-SESSION` remains **UNRESOLVED** with candidates `RTH_DAILY` and
-`EXTENDED_DAILY`. These +1 changes come solely from adding that C1 decision/path.
+`EXTENDED_DAILY`. The v5 session decision added one ID/path; v6 adds H1-DAILY-PRICE-BASIS and
+H1-DAILY-FRESHNESS, both C1/performance-required, still UNRESOLVED. Current
+unresolved IDs total 73. The v5→v6 change is exactly +2 decisions/+2 paths/+2 C1
+blockers; no previous unresolved choice was resolved or reclassified.
 Generic extended-hours capability
 is implemented; this is not H0001 C1. See [extended-session contract](V2_EXTENDED_SESSION_IMPLEMENTATION.md).
 Canonical specification SHA-256:
-`ab0c1136d47bf1ce6b46ff7e46824b59cf715d28db93bf665b77477a8f0a50e6`.
+`6cb514ccf372df54c775221d1d08ddbcbbae823c2799f617b58292d27b78dd98`.
 Early-close restrictions remain in force and are recorded as **V2-D_BLOCKER**
 in [the extended-session note](V2_EXTENDED_SESSION_IMPLEMENTATION.md).
 
@@ -97,10 +103,14 @@ or a retrofit guard on old fixture strategies.
 
 ## Schema, canonical representation and hash
 
-Schema `strategy_specification_v1`; current H0001 profile `h0001_r03_spec_v5`.
+Schema `strategy_specification_v1`; current H0001 profile `h0001_r03_spec_v6`.
 Profile v4 records the authorized first five decisions and explicit extended capability.
 Profile v5 limits H1-SESSION to intraday and adds the independent unresolved
 H1-DAILY-SESSION C1 decision without selecting either Daily candidate.
+Profile v6 requires independent Daily price-basis and freshness contracts.
+Legacy v3/v4/v5 profiles remain readable, but omitted Daily input contracts cannot
+pass C1_READY. C1 admission validates declarations; it does not implement a real
+adjustment adapter, freshness evaluator or H0001 classifier.
 The r03 hypothesis bytes remain unchanged; no r04 is required for this pre-experiment
 executable specification resolution.
 Profile v2 introduced signal-state ownership and capability admission; v3 closes
@@ -234,7 +244,7 @@ continuity and aggregation definitions. Availability remains atomic-known-at.
 RTH_EXTENDED passes the intraday session portion only with that explicit compatible
 profile; a stale RTH claim fails. 1H/Daily base and ATR_REVERSAL/DIRECTIONAL_CHANGE
 still require future implementation and cannot pass C1 admission. Full admission
-remains blocked by DRAFT status and 47 C1 decisions. `require_daily_session_capability()`
+remains blocked by DRAFT status and 49 C1 decisions. `require_daily_session_capability()`
 validates the independent Daily choice; MACD Daily continuity follows that choice
 rather than the intraday profile. The existing generic extended Daily capability
 does not resolve the strategy decision. Historical v3/v4 specifications remain
@@ -457,6 +467,8 @@ the selected executable-spec values.
 | H1-SESSION / A | Intraday 15m/1H에서 RTH만 사용할지 extended hours도 사용할지? | Intraday session choice was unknown in r03; observed examples include premarket. Daily session is separate. (unknowns[25], required_data[8]) | Preserved XNYS_RTH plus separate US_EQUITY_EXTENDED_04_20 intraday | RTH; RTH plus extended | yes | yes | RTH_EXTENDED (04:00–20:00 ET), 15m/1H only |
 | H1-DAILY-SESSION / A | Daily regime의 session semantics는? | Daily regime required; session choice unresolved, independent of intraday. (unknowns[25], required_data[8]) | Separate causal RTH Daily and generic extended Daily capabilities | RTH_DAILY; EXTENDED_DAILY | yes | yes | UNRESOLVED |
 | H1-BASE / A | 전략 authoritative base input은? | 15m required; technical input must not imply strategy session selection. (required_data[1]) | V2-A 15m input | 15m; finer input would require a separate capability contract | yes | yes | 15m |
+| H1-DAILY-PRICE-BASIS / A | Daily price-derived states의 PIT OHLC basis는? | r03 requires Daily prices, without adjustment convention. (required_data[0], required_data[3]) | Synthetic unadjusted/action-free only; real adjustment adapter gap | raw plus action guard/accounting; PIT split-adjusted; PIT dividend/total-return adjusted | yes | yes | UNRESOLVED |
+| H1-DAILY-FRESHNESS / A | latest usable Daily와 stale/missing input의 eligibility는? | Completed causal inputs required; current-session freshness policy unstated. (required_data[3], test.leakage_risks[3]) | Complete/delivery gate and internal continuity; no latest-expected-session evaluator | latest expected strict; explicit versioned grace with no threshold selected | yes | yes | UNRESOLVED |
 | H1-EMA-SEED / A | EMA seed·signal 시작·가격 field·feature version을 무엇으로 동결할지? | MACD(12,26,9), enough past warmup; seed and source field not specified. (required_data[4]) | MACDSpec: first_observation, first_macd_observation, close only | explicitly adopt existing engine conventions; new versioned convention after separate implementation | yes | yes | first_observation / first_macd_observation / close / macd_first_observation_recursive_v1 |
 | H1-MACD-HISTORY / A | 각 시간축 MACD 최소 history는? | Sufficient warmup required; count unknown. (required_data[4]) | MACDSpec.min_history | researcher-specified positive counts per timeframe | yes | yes | 130 / 130 / 130 (Daily / 1H / 15m) |
 | H1-HISTORY-ORIGIN / A | EMA 계산 이력 시작점·세션 간 지속 정책은? | Past-only MACD; exact history origin unspecified. (required_data[4], test.leakage_risks[3]) | V2-B full visible contiguous history, no session reset | explicit full visible history convention; other versioned history convention | yes | yes | Full available completed causal history across sessions; no EMA reset |

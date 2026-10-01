@@ -3,7 +3,7 @@
 # Daily regime session is a separate UNRESOLVED C1 decision, never inferred from intraday.
 schema_version: strategy_specification_v1
 strategy_id: H0001
-specification_version: h0001_r03_spec_v5
+specification_version: h0001_r03_spec_v6
 hypothesis_id: H0001
 hypothesis_revision: 3
 status: DRAFT
@@ -14,6 +14,11 @@ source:
   sha256: 35e13276056a36d6a06de04611720fd286113f0e5db1e4255af6ceeb6a0f0bc2
 direction: LONG_ONLY
 feature_contracts:
+  daily_price_basis:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-DAILY-PRICE-BASIS
   macd_ema_seed:
     kind: contract
     value:
@@ -100,6 +105,11 @@ feature_contracts:
     choices: []
     decision_id: null
 timeframe_contracts:
+  daily_freshness:
+    kind: contract
+    value: UNRESOLVED
+    choices: []
+    decision_id: H1-DAILY-FRESHNESS
   # H1-SESSION applies to intraday 15m/1H only; no Daily session default.
   session_policy:
     kind: enum
@@ -702,6 +712,33 @@ decisions:
     - finer input would require a separate capability contract
     source_refs:
     - required_data[1]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-DAILY-PRICE-BASIS:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: Research Daily OHLC의 price adjustment 및 point-in-time action convention은?
+    current_hypothesis_statement: r03 requires time-aligned Daily OHLCV but does not select raw or adjusted prices; no hypothesis expansion is implied.
+    available_v2_primitive: Synthetic unadjusted OHLC with NONE_CONFIRMED actions only; no real PIT adjustment adapter
+    candidate_choices:
+    - raw OHLC with explicit causal corporate-action guard or accounting
+    - point-in-time split-adjusted OHLC with action known_at and versioned vintage
+    - point-in-time dividend or total-return adjusted OHLC with explicit transform and action known_at
+    source_refs:
+    - required_data[0]
+    - required_data[3]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-DAILY-FRESHNESS:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: Latest expected completed Daily 대비 stale 또는 missing input의 eligibility 계약은?
+    current_hypothesis_statement: Completed then-known Daily is required; r03 does not define stale Daily acceptance and unavailable handling.
+    available_v2_primitive: Session calendar and completed known_at context; no freshness selector or policy
+    candidate_choices:
+    - require the latest expected completed session and fail closed otherwise
+    - explicit versioned grace policy with calendar lag, reasons and unavailable behavior
+    source_refs:
+    - required_data[3]
+    - test.leakage_risks[3]
     required_for_c1: true
     required_for_profitability: true
   H1-EMA-SEED:

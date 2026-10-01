@@ -1,3 +1,41 @@
+# Richping v2 상태 · 2026-10-01 DAILY-INPUT / philosophy provenance audit
+
+**H0001 DRAFT / BLOCKED_ON_DECISIONS; profitability NOT TESTED; chart parity UNVERIFIED.**
+
+- 기준 `v2-c0-extended-session-contract@4d5d74f716d013e89536955ebe25c2e2c81b43f5`와
+  실제 diff/worktree 상태를 확인했다. main의 기존 미커밋 작업은 보존하며 merge하지 않는다.
+- `91eff1f2ef9943c9077f79811c651a1455803e67:docs/RESEARCH_PHILOSOPHY.md`만 복원했다.
+  원본 Git blob과 동일하며 다른 branch merge/cherry-pick 및 의미 재작성은 없다.
+  이전 repository/history 부재 주장을 바로잡고 독립 layer·충돌 보존·PIT·narrative/
+  2026 hindsight 경계와 단순 baseline 대비 incremental-value 원칙을 감사했다.
+- OBSERVED_CHART_SERIES의 provider/session/adjustment는 unknown이다. 새 RESEARCH_DAILY_SERIES
+  선택은 parity와 독립적인 versioned research choice이며 관찰 전략 복제 주장이 아니다.
+  H1-DAILY-SESSION은 UNRESOLVED, 후보 RTH_DAILY / EXTENDED_DAILY. 15m/1H RTH_EXTENDED 유지.
+- completion/known_at은 기존 causal full-constituent gate를 재사용한다. 최신 expected completed
+  session과 actual delivered session, freshness 사실과 eligibility policy를 구분한다.
+  장중 전일 일봉은 정상일 수 있으며 늦게 올 자료를 미래정보로 미리 DELAYED라 부르지 않는다.
+- 실제 price basis와 freshness policy는 기존 코드에 없다. H1-DAILY-PRICE-BASIS 및
+  H1-DAILY-FRESHNESS를 각 하나의 C1 blocker/path로 추가했다. 숫자 threshold·조정 방식은
+  선택하지 않았다. 현재 synthetic_unadjusted/NONE_CONFIRMED를 실제 데이터 결정으로 보지 않는다.
+- v6: **78 decisions / 73 unresolved IDs = C1 49 + performance 17 + optional 7 /
+  100 unresolved paths**. v5 대비 모두 +2는 새 입력 계약에 따른 정상 변화다.
+  canonical SHA-256 `6cb514ccf372df54c775221d1d08ddbcbbae823c2799f617b58292d27b78dd98`.
+- legacy v3/v4/v5는 읽되 누락된 Daily 입력 계약을 자동 추론하여 C1_READY에 진입하지 못한다.
+  명세 validation만 변경했으며 production/paper/replay/features behavior는 그대로다.
+- 원본 H0001-r03 및 DLP-A/B/C proposal YAML은 불변. parameter/ranking/backtest/champion/
+  indicator 구현 없음. daily 3축과 macro/sector/options/fundamental의 독립성을 보존한다.
+- **V2-D_BLOCKER early-close** 유지: Daily RTH를 선택해도 필수 extended intraday 때문에
+  multi-year H0001 replay 전에 extended early-close 지원이 필요하다.
+- 산출물: [DAILY-INPUT 계약 감사](docs/H0001_DAILY_INPUT_CONTRACT.md),
+  [입력 proposal](research/decision_proposals/H0001-daily-input-v1.yaml),
+  [원본 철학](docs/RESEARCH_PHILOSOPHY.md), [C0 명세](docs/V2_C0_H0001_SPECIFICATION.md).
+- 검증: 전체 `.venv\Scripts\python -m pytest` **788 passed (158.45s)**,
+  실패·skip·pytest warning 없음. 기존 763개 유지 + 입력 contract test 23개 + 새 필수
+  field validation 2개. focused C0/Daily/extended 381개 및 새 입력 23개 통과.
+  `git diff --check` 통과. 원본 철학 exact byte 및 r03/DLP 불변을 별도로 확인했다.
+
+---
+
 # Richping v2 상태 · 2026-10-01 H0001 Daily price decision proposal
 
 **H0001 DRAFT / BLOCKED_ON_DECISIONS; profitability NOT TESTED; chart parity UNVERIFIED.**
@@ -8,8 +46,9 @@
 - repository 관찰 audit: r01/r02/r03에는 Daily provider/settings/timestamped candle
   근거가 없다. 프리마켓 관찰로 일봉 session을 추론하지 않는다.
   **H1-DAILY-SESSION UNRESOLVED**, RTH_DAILY / EXTENDED_DAILY 독립 후보 유지.
-- 요청한 `docs/RESEARCH_PHILOSOPHY.md`는 기준 브랜치·로컬 Git 이력·파일 inventory에 없다.
-  읽은 것으로 주장하지 않는다. 이번 사용자 지시의 명시적 철학 경계를 제안 문서에 기록했다.
+- 이전 로컬 검색을 저장소 전체 부재로 일반화한 기록은 잘못이었다.
+  원본 `91eff1f2ef9943c9077f79811c651a1455803e67`의 실제 문서를 이후 DAILY-INPUT
+  작업에서 exact Git blob으로 복원하고 철학 경계 준수 여부를 감사했다.
   Daily는 자산 가격 기반 PRICE_REGIME / TREND_PERMISSION이며 macro/sector/fundamental/
   options 변수는 독립 후속 feature/state/interaction 연구다.
 - 두 family / 세 variant만 제안했다: DLP-A close > EMA, DLP-B A + EMA 상승 기울기,

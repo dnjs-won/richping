@@ -315,8 +315,8 @@ def test_only_five_decisions_resolved_source_bytes_untouched():
     assert prior_decision_inventory(old) == prior_decision_inventory(new)
     assert prior_unresolved_fields(spec) == {p: info for p, info in before.unresolved_fields.items()
                                       if info["decision_id"] not in RESOLVED}
-    assert len(spec.unresolved_fields) == 98
-    assert [len(spec.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)] == [47, 17, 7]
+    assert len(spec.unresolved_fields) == 100
+    assert [len(spec.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)] == [49, 17, 7]
     assert old["state_machine"] == new["state_machine"]
     for section in ("rule_parameters", "state_machine_parameters", "execution_requirements",
                     "research_requirements", "optional_extensions"):
@@ -325,7 +325,7 @@ def test_only_five_decisions_resolved_source_bytes_untouched():
         if key != "engine_1h_boundary":
             assert new["chart_parity"][key] == record
     assert new["status"] == "DRAFT"
-    assert new["specification_version"] == "h0001_r03_spec_v5"
+    assert new["specification_version"] == "h0001_r03_spec_v6"
     assert spec.specification_hash != before.specification_hash
     raw = subprocess.check_output(["git", "show", BASE + ":research/hypotheses/H0001-r03.yaml"], cwd=ROOT)
     local = (ROOT / "research/hypotheses/H0001-r03.yaml").read_bytes()
