@@ -16,12 +16,12 @@ from ..sessions import RTH, bar_profile
 
 
 def minimum_history(span=50, residual=0.001):
-    """Frozen observation-count convention: ceil(log(epsilon)/log(1-alpha)).
+    """Observations needed for the actual first-seed residual <= residual.
 
-    This is not the literal seed coefficient after N first-seeded values:
-    that coefficient has N-1 recursive updates. See the decision record.
+    E_1=C_1; N observations perform N-1 recursive updates, so the seed's
+    coefficient is (1-alpha)**(N-1). One seed observation precedes the updates.
     """
-    return math.ceil(math.log(residual) / math.log(1 - 2 / (span + 1)))
+    return 1 + math.ceil(math.log(residual) / math.log(1 - 2 / (span + 1)))
 
 
 @dataclass(frozen=True, slots=True)
@@ -39,7 +39,7 @@ class DailyTrendSpec:
 
     @property
     def ema_spec(self):
-        return EMASpec(span=50, min_history=173)
+        return EMASpec(span=50, min_history=minimum_history())
 
     @property
     def semantics(self):
@@ -48,8 +48,10 @@ class DailyTrendSpec:
             "price_basis": "PIT_SPLIT_ADJUSTED_OHLC",
             "freshness": "LATEST_EXPECTED_COMPLETED_SESSION_REQUIRED",
             "ema_span": 50, "ema_seed": "FIRST_OBSERVATION_RECURSIVE",
-            "minimum_history": 173, "seed_residual_limit": 0.001,
+            "minimum_history": self.ema_spec.min_history, "seed_residual_limit": 0.001,
             "readiness_count": "COMPLETED_OBSERVATIONS_INCLUDING_FIRST_SEED",
+            "readiness_definition": "actual_first_seed_residual_lte_0_001",
+            "operand_readiness": "current_and_t_minus_5_prefix_independently_READY",
             "history_origin": "available_completed_history_prefix_v1",
             "level": "close_gt_ema", "level_equality": False,
             "slope_lag_observations": 5, "slope_equality": False,
@@ -143,15 +145,19 @@ class DailyTrendState:
     lag_ema: float | None
 
 
-def classify_daily_trend(prefix: PreparedDailyPrefix, as_of, spec=CANONICAL):
+def classify_daily_trend(prefix: PreparedDailyPrefix, as_of, spec=CANONICAL,
+                         *, matched_comparison=True):
     """Pure classification of a prepared causal prefix; never writes or orders.
 
-    Both A and B check exactly the same operand readiness/coverage. A omits
-    only the positive slope predicate, so availability cannot confound T1/T0.
+    By default A and B check the same operand readiness/coverage. A omits only
+    the slope predicate, so availability cannot confound T1/T0. Standalone A
+    (matched_comparison=False) needs only the current EMA; B always needs both.
     Future inputs are rejected, never filtered into a silently shortened prefix.
     """
     if type(prefix) is not PreparedDailyPrefix or type(spec) is not DailyTrendSpec:
         raise ValueError("Prepared prefix and frozen trend specification required")
+    if type(matched_comparison) is not bool:
+        raise ValueError("Explicit boolean comparison mode required")
     instant = timestamp(as_of)
     bars = prefix.bars
     n, lag_n = len(bars), max(0, len(bars) - 5)
@@ -202,10 +208,12 @@ def classify_daily_trend(prefix: PreparedDailyPrefix, as_of, spec=CANONICAL):
         current = ema(ReplayContext(instant, bars), prefix.symbol, "Daily", spec.ema_spec)
         # Same origin and same current-as_of price vintage; t-5 is a prefix,
         # not a historical snapshot from before a causal split rebase.
-        lag = ema(ReplayContext(instant, bars[:lag_n]), prefix.symbol, "Daily", spec.ema_spec)
+        lag = (ema(ReplayContext(instant, bars[:lag_n]), prefix.symbol, "Daily", spec.ema_spec)
+               if matched_comparison or spec.candidate == "DLP-B" else None)
     except ValueError:
         return output("invalid_or_unsupported_Daily_input")
     for operand, label in ((current, "current_ema"), (lag, "lag_ema")):
-        if operand.status != "READY":
+        if operand is not None and operand.status != "READY":
             return output(label + ":" + operand.reason)
-    return output(current=current.values.unpack()["ema"], lag=lag.values.unpack()["ema"])
+    return output(current=current.values.unpack()["ema"],
+                  lag=lag.values.unpack()["ema"] if lag is not None else None)

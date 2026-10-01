@@ -23,10 +23,16 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = 'f517374f66b75c84a0ea025ced91cacf866b2b8a'
 DRAFT = ROOT / 'research/strategy_specs/H0001-r03-draft.yaml'
 RECORD = ROOT / 'research/decision_records/H0001-daily-trend-freeze-v1.yaml'
+REMEDIATION_BASE = '8ad1297a4dcd2e9787d62a78fa2866884dbbc41a'
+REMEDIATION = ROOT / 'research/decision_records/H0001-daily-trend-readiness-remediation-v1.yaml'
 
 
 def record():
     return yaml.safe_load(RECORD.read_text(encoding='utf-8'))
+
+
+def remediation():
+    return yaml.safe_load(REMEDIATION.read_text(encoding='utf-8'))
 
 
 def daily(values, ending='2024-09-06'):
@@ -58,7 +64,7 @@ def test_canonical_contract_hash_and_inventory_exactly_one_root_resolves():
         'git', 'show', BASE+':'+DRAFT.relative_to(ROOT).as_posix()], cwd=ROOT).decode())
     after = load_h0001(DRAFT)
     old, new = before.unpack(), after.unpack()
-    assert new['specification_version'] == 'h0001_r03_spec_v8'
+    assert new['specification_version'] == 'h0001_r03_spec_v9'
     assert new['rule_parameters']['daily_long_permission']['value'] == CANONICAL.contract
     assert CANONICAL.version == 'DAILY_TREND_EMA_LEVEL_SLOPE_V1'
     assert len(new['decisions']) == 78
@@ -73,40 +79,52 @@ def test_canonical_contract_hash_and_inventory_exactly_one_root_resolves():
     old['specification_version'] = new['specification_version']
     old['rule_parameters']['daily_long_permission'] = new['rule_parameters']['daily_long_permission']
     assert old == new
-    assert after.specification_hash == record()['executable_spec']['canonical_sha256']
-    assert CANONICAL.hash == record()['decision']['rule_hash']
-    assert CANONICAL.ema_spec.hash == record()['decision']['ema']['feature_specification_hash']
+    assert after.specification_hash == remediation()['executable_spec']['canonical_sha256']
+    assert CANONICAL.hash == remediation()['executable_spec']['rule_sha256']
+    assert CANONICAL.ema_spec.hash == remediation()['executable_spec']['ema_feature_specification_sha256']
     for gate in (after.require_c1_ready, after.require_profitability_ready, after.plugin_specification):
         with pytest.raises(ValueError):
             gate()
 
 
 @pytest.mark.parametrize('parameter,value', [('ema_span', 20), ('slope_lag_observations', 1),
-    ('minimum_history', 174), ('level_equality', True), ('rule_hash', 'changed')])
-def test_v8_frozen_payload_cannot_be_silently_mutated(parameter, value):
+    ('minimum_history', 173), ('seed_residual_limit', 0.002),
+    ('readiness_definition', 'update_count'),
+    ('operand_readiness', 'current_only'), ('level_equality', True), ('rule_hash', 'changed')])
+def test_v9_frozen_payload_cannot_be_silently_mutated(parameter, value):
     body = load_h0001(DRAFT).unpack()
     body['rule_parameters']['daily_long_permission']['value']['parameters'][parameter]['value'] = value
     with pytest.raises(ValueError, match='Frozen Daily trend'):
         H0001Specification.of(body)
 
 
-def test_seed_residual_derivation_and_literal_seed_off_by_one_are_disclosed():
+def test_actual_first_seed_residual_formula_derives_readiness():
     alpha = 2/51
-    assert CANONICAL.ema_spec.span == 50 and CANONICAL.ema_spec.min_history == 173
-    assert minimum_history() == 173
+    assert alpha == 2 / (CANONICAL.ema_spec.span + 1)
+    assert CANONICAL.ema_spec.span == 50 and CANONICAL.ema_spec.min_history == 174
+    assert minimum_history() == 174
+    assert CANONICAL.semantics['seed_residual_limit'] == 0.001
     assert (1-alpha)**172 > 0.001 >= (1-alpha)**173
+    assert (1-alpha)**(minimum_history()-2) > 0.001
+    assert (1-alpha)**(minimum_history()-1) <= 0.001
     # Independent perturbation check of the actual primitive's N-1 updates.
     seeded = recursive_ema([1.0] + [0.0]*172, 50)[-1]
     assert seeded == pytest.approx((1-alpha)**172)
     assert seeded > 0.001
     assert recursive_ema([1.0] + [0.0]*173, 50)[-1] <= 0.001
     assert 'N-1' in record()['readiness']['off_by_one_audit']
+    for count in (173, 174):
+        boundary = remediation()['readiness'][f'N_{count}']
+        assert boundary['seed_residual'] == (1-alpha)**(count-1)
+        assert boundary['seed_residual_percent'] == pytest.approx(100*boundary['seed_residual'])
 
 
 @pytest.mark.parametrize('count,reason,lag_count', [
     (172, 'current_ema:insufficient_history', 167),
-    (173, 'lag_ema:insufficient_history', 168),
-    (177, 'lag_ema:insufficient_history', 172), (178, None, 173), (179, None, 174)])
+    (173, 'current_ema:insufficient_history', 168),
+    (174, 'lag_ema:insufficient_history', 169),
+    (177, 'lag_ema:insufficient_history', 172),
+    (178, 'lag_ema:insufficient_history', 173), (179, None, 174)])
 def test_readiness_checks_each_actual_operand_prefix(count, reason, lag_count):
     prefix = prepared(list(range(100, 100+count)))
     state = classify(prefix)
@@ -114,10 +132,70 @@ def test_readiness_checks_each_actual_operand_prefix(count, reason, lag_count):
     assert state.reason == reason
     assert state.state == ('UNAVAILABLE' if reason else 'BULLISH')
     assert classify(prefix, ABLATION).status == state.status
-    # A's underlying primitive alone is ready at 173; matched experiment gates
+    # A's underlying primitive alone is ready at 174; matched experiment gates
     # both arms on the same operands, removing only a boolean predicate.
     primitive = ema(ReplayContext(prefix.eligibility_as_of, prefix.bars), 'ALFA', 'Daily', CANONICAL.ema_spec)
-    assert (primitive.status == 'READY') == (count >= 173)
+    assert (primitive.status == 'READY') == (count >= 174)
+
+
+@pytest.mark.parametrize('count,expected', [(173, 'UNAVAILABLE'), (174, 'READY')])
+def test_standalone_a_boundary_does_not_expand_matched_sample(count, expected):
+    prefix = prepared(list(range(100, 100+count)))
+    standalone = classify_daily_trend(prefix, prefix.eligibility_as_of, ABLATION,
+                                      matched_comparison=False)
+    assert standalone.status == expected
+    assert standalone.state == ('BULLISH' if expected == 'READY' else 'UNAVAILABLE')
+    assert standalone.lag_ema is None
+    assert classify(prefix, ABLATION).status == classify(prefix).status == 'UNAVAILABLE'
+    # Turning off matched mode never removes B's lagged operand gate.
+    assert classify_daily_trend(prefix, prefix.eligibility_as_of,
+                                matched_comparison=False).status == 'UNAVAILABLE'
+
+
+@pytest.mark.parametrize('unready', ['current_ema', 'lag_ema'])
+def test_each_operand_readiness_is_independent_even_if_other_is_ready(monkeypatch, unready):
+    # A real lagged prefix cannot be longer than current. Inject feature
+    # readiness independently to verify neither operand can mask the other's
+    # unavailable result (including the otherwise impossible reversed case).
+    import richping.research_v2.strategy.daily_trend as module
+    prefix = prepared()
+    def operand(context, symbol, timeframe, spec):
+        label = 'current_ema' if len(context.bars) == len(prefix.bars) else 'lag_ema'
+        count = 173 if label == unready else 174
+        return ema(ReplayContext(context.as_of, prefix.bars[:count]), symbol, timeframe, spec)
+    monkeypatch.setattr(module, 'ema', operand)
+    state = classify(prefix)
+    assert state.state == state.status == 'UNAVAILABLE'
+    assert state.reason == unready + ':insufficient_history'
+
+
+def test_v8_history_remains_readable_immutable_and_inventory_is_unchanged():
+    historical = H0001Specification.loads(subprocess.check_output([
+        'git', 'show', REMEDIATION_BASE+':'+DRAFT.relative_to(ROOT).as_posix()], cwd=ROOT).decode())
+    current = load_h0001(DRAFT)
+    old, new = historical.unpack(), current.unpack()
+    assert historical.specification_hash == record()['executable_spec']['canonical_sha256']
+    assert old['rule_parameters']['daily_long_permission']['value']['parameters']['minimum_history']['value'] == 173
+    assert old['decisions'] == new['decisions']
+    assert historical.unresolved_fields == current.unresolved_fields
+    assert [len(current.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)] == [45, 17, 7]
+    assert len(new['decisions']) == 78 and len(current.unresolved_fields) == 96
+    old['specification_version'] = new['specification_version']
+    old['rule_parameters']['daily_long_permission'] = new['rule_parameters']['daily_long_permission']
+    assert old == new
+    # A v8 payload cannot acquire the corrected readiness under its old version.
+    new['specification_version'] = 'h0001_r03_spec_v8'
+    with pytest.raises(ValueError, match='Frozen Daily trend v8'):
+        H0001Specification.of(new)
+    for path in (RECORD.relative_to(ROOT).as_posix(),):
+        assert (ROOT/path).read_bytes().replace(b'\r\n', b'\n') == subprocess.check_output([
+            'git', 'show', REMEDIATION_BASE+':'+path], cwd=ROOT)
+    body = remediation()
+    assert body['basis_commit'] == REMEDIATION_BASE
+    assert body['classification'] == 'MATHEMATICAL_CONTRACT_REMEDIATION'
+    assert body['performance_information_used'] == 'NONE'
+    assert body['unchanged']['H1_DAILY_LONG'] == 'RESOLVED'
+    assert body['unchanged']['H1_DAILY_BLOCKER'] == 'UNRESOLVED'
 
 
 def test_close_equality_and_ready_false_are_not_unavailable_or_short_permission():

@@ -1,0 +1,109 @@
+# Mathematical correction of an immutable historical freeze; no outcome query.
+schema_version: daily_trend_readiness_remediation_v1
+record_id: H0001-DAILY-TREND-READINESS-REMEDIATION-v1
+status: FROZEN_MATHEMATICAL_REMEDIATION
+classification: MATHEMATICAL_CONTRACT_REMEDIATION
+excluded_classifications: [PARAMETER_OPTIMIZATION, PERFORMANCE_TUNING]
+basis_commit: 8ad1297a4dcd2e9787d62a78fa2866884dbbc41a
+decision_date: '2026-10-01'
+decision_author: user_researcher
+decision_source: explicit_user_instruction_preserve_actual_first_seed_residual_meaning
+reason: off_by_one_in_first_observation_recursive_seed_residual_count
+performance_information_used: NONE
+historical_performance_backtest: NOT_RUN
+supersedes_readiness_only:
+  record_id: H0001-DAILY-TREND-FREEZE-v1
+  path: research/decision_records/H0001-daily-trend-freeze-v1.yaml
+  preservation: byte_identical_at_basis_commit
+  original_minimum_history: 173
+  original_DLP_B_first_ready: 178
+  original_specification_version: h0001_r03_spec_v8
+  original_specification_sha256: 302ce8ba197dd3273a17fe7065a0c1eadd1541143f81e6b7f41fb81cfb783059
+  original_rule_sha256: a43e95d1389d35e5a8d3ed51845a7cea945c5d5d12a30439b5311e64de731de5
+  historical_snapshots: immutable_no_rewrite
+  actual_performance_evidence_under_173_contract: NONE
+changed:
+  minimum_history: {before: 173, after: 174}
+  DLP_B_first_ready_current_prefix: {before: 178, after: 179}
+  DLP_A_standalone_first_ready: {before: 173, after: 174}
+unchanged:
+  canonical_selection: DLP-B
+  rule_version: DAILY_TREND_EMA_LEVEL_SLOPE_V1
+  definition: C_t > E50_t AND E50_t > E50_t_minus_5
+  ema_span: 50
+  ema_seed: FIRST_OBSERVATION_RECURSIVE
+  slope_lag_observations: 5
+  residual_limit: 0.001
+  equality_semantics: strict_both_equalities_NOT_BULLISH_only_when_READY
+  input_freeze: research/decision_records/H0001-daily-input-freeze-v1.yaml
+  session: RTH_DAILY
+  session_profile: XNYS_RTH
+  price_basis: PIT_SPLIT_ADJUSTED_OHLC
+  freshness: LATEST_EXPECTED_COMPLETED_SESSION_REQUIRED
+  intraday_session: RTH_EXTENDED
+  experiment_family: {T0: DLP-A, T1: DLP-B}
+  DLP_C: DEFERRED_SEPARATE_RESEARCH_VARIANT
+  H1_DAILY_LONG: RESOLVED
+  H1_DAILY_BLOCKER: UNRESOLVED
+  H0001: DRAFT
+  profitability: NOT_TESTED
+  chart_parity: UNVERIFIED
+  production_paper_order_behavior: unchanged_no_connection
+readiness:
+  definition: actual_first_seed_residual_lte_0_001
+  meaning: actual_first_seed_remaining_influence_lte_0_1_percent
+  initialization: E_1 = C_1
+  alpha: 2/51
+  decay: 49/51
+  residual_limit: 0.001
+  actual_seed_residual_formula: (49/51)^(N-1)
+  count_unit: completed_Daily_observations_including_first_seed
+  required_recursive_updates: 173
+  minimum_history_derivation: 1 + ceil(log(0.001)/log(49/51)) = 174
+  N_173:
+    recursive_updates: 172
+    seed_residual: 0.0010272011006169637
+    seed_residual_percent: 0.10272011006169637
+    ema_operand_status: UNAVAILABLE
+  N_174:
+    recursive_updates: 173
+    seed_residual: 0.0009869187045143375
+    seed_residual_percent: 0.09869187045143375
+    ema_operand_status: READY
+  DLP_A_standalone: current_prefix_count_gte_174
+  DLP_B: current_and_t_minus_5_prefix_independently_READY_gte_174
+  DLP_B_boundaries:
+    - {current_prefix: 178, lagged_prefix: 173, status: UNAVAILABLE}
+    - {current_prefix: 179, lagged_prefix: 174, status: READY}
+  lag_unit: 5_completed_trading_observations_not_calendar_days
+  matched_T0_T1:
+    availability: current_and_t_minus_5_prefix_independently_READY_gte_174
+    first_ready_current_prefix: 179
+    difference_only: positive_EMA50_5_observation_slope_predicate
+    standalone_A_earlier_availability_in_matched_sample: FORBIDDEN
+executable_spec:
+  path: research/strategy_specs/H0001-r03-draft.yaml
+  version: h0001_r03_spec_v9
+  canonical_sha256: 6effcae1ae4e539adf0c84550821be507d86b63565b419b7877a4d08599d9c06
+  rule_sha256: 61bb9108c33f1fcd131a384bcf63202e9c52c5dc0e34815a26f840a7e89f1025
+  ema_feature_specification_sha256: df12721b668034c411291792a9497f93c831a8bf02518a463ea5115e03b071d6
+inventory:
+  new_strategy_question: false
+  new_unresolved_decision_id: false
+  decisions_before: 78
+  decisions_after: 78
+  unresolved_ids_before: 69
+  unresolved_ids_after: 69
+  C1_before: 45
+  C1_after: 45
+  unresolved_paths_before: 96
+  unresolved_paths_after: 96
+  performance_blockers: 17
+  optional_extensions: 7
+remaining_runtime_data_blockers:
+  - PIT_split_action_transform
+  - mixed_profile_as_of_join
+  - real_freshness_selector
+  - real_provider_session_action_provenance
+  - extended_early_close_V2_D_BLOCKER
+next_H1_DAILY_BLOCKER: separate_definition_and_action_pending_no_design_in_this_remediation

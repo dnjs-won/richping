@@ -1,6 +1,6 @@
-# H0001 Daily trend semantic freeze v1
+# H0001 Daily trend readiness remediation v1
 
-Basis: `v2-c0-extended-session-contract@f517374f66b75c84a0ea025ced91cacf866b2b8a`.
+Remediation basis: `v2-c0-extended-session-contract@8ad1297a4dcd2e9787d62a78fa2866884dbbc41a`.
 **H1-DAILY-LONG RESOLVED; H0001 DRAFT; profitability NOT TESTED;
 observed chart parity UNVERIFIED.** No historical performance backtest, current
 SOXX chart inspection, span/lag sweep or outcome query was performed.
@@ -8,8 +8,13 @@ SOXX chart inspection, span/lag sweep or outcome query was performed.
 The [immutable trend decision record](../research/decision_records/H0001-daily-trend-freeze-v1.yaml)
 supersedes only the trend selection questions in the preserved original
 [proposal](../research/decision_proposals/H0001-daily-price-regime-v1.yaml).
-The original r03, philosophy, input freeze and proposal are unchanged.
-Executable `h0001_r03_spec_v8` resolves exactly one root contract.
+The original r03, philosophy, input freeze, proposal and v1 trend record are
+unchanged. The v1 record preserves the historical 173-observation contract and
+v8 hash. The [readiness remediation record](../research/decision_records/H0001-daily-trend-readiness-remediation-v1.yaml)
+supersedes only that readiness count in executable `h0001_r03_spec_v9`.
+This is **MATHEMATICAL_CONTRACT_REMEDIATION**, with performance information
+**NONE**; it is neither PARAMETER_OPTIMIZATION nor PERFORMANCE_TUNING.
+The DLP-B canonical selection and resolved decision inventory are retained.
 
 ## Canonical rule and semantic rationale
 
@@ -46,34 +51,38 @@ versus Extended predictive quality are all **NOT TESTED**.
 
 Reuse V2-B `EMASpec`/`ema`, first-observation recursive initialization, full
 available contiguous completed prefix, one origin, no session reset.
-Alpha=2/51. The requested count convention gives:
+Alpha=2/51, decay=49/51, E_1=C_1. N completed observations have N-1 recursive
+updates. Preserve the meaning **actual first-seed influence <=0.1%**, rather
+than reinterpreting the residual limit to retain the erroneous count:
 
 ```text
-h = ceil(log(0.001) / log(49/51)) = 173
-(49/51)^172 = 0.0010272011006169637
-(49/51)^173 = 0.0009869187045143375
-minimum_history = 173 completed observations (including first seed)
+actual_seed_residual(N) = (49/51)^(N-1)
+N_min = 1 + ceil(log(0.001) / log(49/51)) = 174
+N=173: (49/51)^172 = 0.0010272011006169637 = 0.10272011006169637% > 0.1%
+N=174: (49/51)^173 = 0.0009869187045143375 = 0.09869187045143375% <= 0.1%
+minimum_history = 174 completed observations (including first seed)
+readiness_definition = actual_first_seed_residual_lte_0_001
 ```
 
-There is a mathematical distinction: E[0]=C[0] means N observations have N-1
-recursive updates. The **literal seed coefficient at 173 observations is
-0.1027201101%**, slightly above 0.1%; 174 observations give 0.0986918705%.
-The explicitly requested minimum_history=173 is preserved as the frozen
-observation-count convention. It must not be described as a literal seed
-coefficient <=0.1% at N=173. Tests independently perturb the primitive's seed
-to verify both statements. Changing the count contract needs a new revision.
+Thus the EMA operand is unavailable at N=173 and READY at N=174. Tests calculate
+the formula and independently perturb the existing recursive EMA primitive's
+first seed. The original v1 freeze used 173 by equating recursive-update count
+with observation count; it remains an immutable historical record, with no
+actual performance evidence under that contract. v9 records its correction.
 
-B checks each operand prefix separately: current count >=173 and the prefix
-ending at t-5 count >=173, with the same origin and current-as_of transformed
+B checks each operand prefix separately: current count >=174 and the prefix
+ending at t-5 count >=174, with the same origin and current-as_of transformed
 price vintage. A historical EMA snapshot from a different split vintage is
-not the slope reference. Boundary fixtures: N=177 / lag count=172 is UNAVAILABLE;
-N=178 / lag count=173 is READY. No hardcoded total-history gate replaces these
+not the slope reference. Boundary fixtures: N=178 / lag count=173 is UNAVAILABLE;
+N=179 / lag count=174 is READY. No hardcoded total-history gate replaces these
 operand checks. Weekends and holidays contribute no observation.
 
-Standalone DLP-A's EMA is READY at 173. The matched T0/T1 classifier requires
+Standalone DLP-A's EMA is READY at 174. The matched T0/T1 classifier requires
 both operands READY for both arms, preserving identical availability/sample
 conventions; only the positive slope predicate differs. A's standalone earlier
 readiness cannot introduce extra observations into the incremental comparison.
+Both matched arms first become READY at N=179; at N=174 through N=178 both
+remain UNAVAILABLE despite standalone A being calculable.
 
 ## State and lifecycle
 
@@ -92,6 +101,10 @@ classification. Old detached snapshots remain immutable.
 
 [`daily_trend.py`](../richping/research_v2/strategy/daily_trend.py) exposes
 `classify_daily_trend(PreparedDailyPrefix, as_of, DailyTrendSpec) -> DailyTrendState`.
+The default `matched_comparison=True` preserves the common operand gate.
+Use `spec=ABLATION, matched_comparison=False` explicitly for standalone DLP-A;
+DLP-B requires both operands in either mode. Standalone results are excluded
+from the matched experiment sample.
 It is pure and deterministic, reuses the existing EMA engine and validates both
 causal prefixes. Prepared input supplies exact-as_of expected-session and
 eligibility facts plus required transform/action known_at and applied action
@@ -151,10 +164,11 @@ the strategy families remain unresolved; reuse the validation engine later.
 
 ## Remaining scope and inventory
 
-Actual inventory: **78 decisions; 70→69 unresolved IDs; C1 46→45;
-97→96 unresolved paths**, performance 17 / optional 7 unchanged. Only
-`rule_parameters.daily_long_permission` is removed; decision metadata and all
-other contracts are unchanged. H0001 remains DRAFT / NOT TESTED, chart parity
+Actual remediation inventory: **78→78 decisions; 69→69 unresolved IDs;
+C1 45→45; 96→96 unresolved paths**, performance 17 / optional 7 unchanged.
+The earlier v7→v8 freeze resolved `rule_parameters.daily_long_permission`;
+v8→v9 introduces no strategy question or unresolved decision ID. Other
+contracts and decision metadata are unchanged. H0001 remains DRAFT / NOT TESTED, chart parity
 UNVERIFIED. H1-DAILY-BLOCKER is still unresolved even when trend is BULLISH.
 Exhaustion, overbought/MACD upper extreme, crash/drawdown, volatility spike and
 macro/sector/options/fundamentals are excluded from this classifier.

@@ -4,30 +4,39 @@ V2-C0 infrastructure: **COMPLETE** (validation results below).
 H0001 executable specification: **DRAFT / BLOCKED_ON_DECISIONS**.
 H0001 profitability: **NOT TESTED**. No H0001 trading plugin exists.
 
-Current Daily trend freeze (basis `f517374f66b75c84a0ea025ced91cacf866b2b8a`):
+Current Daily trend readiness remediation (basis `8ad1297a4dcd2e9787d62a78fa2866884dbbc41a`):
 [Daily research contract](H0001_DAILY_PRICE_RESEARCH.md) and
-[immutable trend record](../research/decision_records/H0001-daily-trend-freeze-v1.yaml)
+[readiness remediation record](../research/decision_records/H0001-daily-trend-readiness-remediation-v1.yaml)
 resolve **H1-DAILY-LONG** as DLP-B / `DAILY_TREND_EMA_LEVEL_SLOPE_V1`.
 `close > EMA50 AND EMA50_t > EMA50_(t-5)`, strict comparisons, completed trading
-observations; first-observation seed, minimum_history=173, separate readiness
-for current and lag prefixes. The record documents the requested h-count
-formula versus the literal N-1 seed coefficient; at N=173 the latter is slightly
-above 0.1%. Equality yields NOT_BULLISH only when every operand is READY;
+observations; first-observation seed, minimum_history=174, separate readiness
+for current and lag prefixes: `actual_first_seed_residual_lte_0_001`.
+Alpha=2/51; seed coefficient `(49/51)^(N-1)`. At N=173 it is
+0.0010272011006169637 (UNAVAILABLE); at N=174 it is 0.0009869187045143375 (READY).
+DLP-B N=178/lag=173 is UNAVAILABLE; N=179/lag=174 is READY. Equality yields NOT_BULLISH only when every operand is READY;
 missing evidence yields UNAVAILABLE, with no SHORT permission.
 
 Input freeze remains **RTH_DAILY / PIT_SPLIT_ADJUSTED_OHLC /
 LATEST_EXPECTED_COMPLETED_SESSION_REQUIRED**. Intraday 1H/15m remains
 RTH_EXTENDED. Chart parity remains UNVERIFIED. H1-DAILY-BLOCKER stays unresolved.
-The original r03, Daily input freeze, philosophy and proposal are preserved.
+The original r03, Daily input freeze, philosophy, proposal and
+[v1 trend freeze](../research/decision_records/H0001-daily-trend-freeze-v1.yaml) are
+preserved. The v1 173-count/v8 contract remains historical and readable;
+v9 corrects only the N-1 off-by-one. Classification is
+MATHEMATICAL_CONTRACT_REMEDIATION; performance information NONE; neither
+PARAMETER_OPTIMIZATION nor PERFORMANCE_TUNING. No actual performance evidence
+was generated under the 173-count H0001 contract.
 
 Draft inventory: **78 decisions**, nine resolved;
 **45 C1 blockers, 17 performance blockers, 7 optional extensions**;
 **96 unresolved parameter/transition paths**, **69 unresolved IDs**.
 v7→v8 resolves exactly `rule_parameters.daily_long_permission`, retaining all
-IDs, classifications and every other contract. Canonical specification SHA-256:
-`302ce8ba197dd3273a17fe7065a0c1eadd1541143f81e6b7f41fb81cfb783059`.
+IDs, classifications and every other contract. v8→v9 changes no inventory count.
+Current v9 canonical specification SHA-256:
+`6effcae1ae4e539adf0c84550821be507d86b63565b419b7877a4d08599d9c06`.
 Trend rule SHA-256:
-`a43e95d1389d35e5a8d3ed51845a7cea945c5d5d12a30439b5311e64de731de5`.
+`61bb9108c33f1fcd131a384bcf63202e9c52c5dc0e34815a26f840a7e89f1025`.
+EMA feature SHA-256: `df12721b668034c411291792a9497f93c831a8bf02518a463ea5115e03b071d6`.
 
 `strategy/daily_trend.py` implements a pure detached research classifier using
 V2-B `EMASpec`/`ema`; prepared causal eligible inputs supply freshness/action
@@ -38,15 +47,20 @@ backtest or sweep. Extended early-close restrictions remain **V2-D_BLOCKER**.
 The preregistered Daily subfamily is only **T0 DLP-A level ablation / T1 DLP-B**.
 Both use identical operand readiness, inputs, downstream rules, sample and costs;
 only the slope predicate differs. C is DEFERRED_SEPARATE_RESEARCH_VARIANT.
+Standalone A first becomes READY at N=174; matched T0/T1 both first become
+READY at N=179, requiring current and t-5 prefixes independently READY.
 Chronological discovery/confirmation separation, contaminated NOK/SOXX exclusions,
 failed/null/inconclusive retention and new-revision requirements are frozen.
 Actual dataset/date splits and full performance protocol remain undecided until
 eligible data coverage is established, before outcomes are inspected.
 
-v8 validation: **843 passed in 166.87s**, no failures/skips/pytest warnings
+Current v9 validation: **852 passed in 178.61s**, no failures/skips/pytest warnings
+(843 existing regression cases + 9 additional remediation cases). Focused Daily
+classifier suite: **45 passed in 15.62s**. CLI `--help` and `git diff --check` pass.
+Historical v8 validation: **843 passed in 166.87s**, no failures/skips/pytest warnings
 (807 prior cases + 36 new cases). Daily classifier focused suite: 36 passed.
 CLI `--help` and `git diff --check` pass. Historical v7 validation:
-807 passed in 161.77s; current v8 validation supersedes it.
+807 passed in 161.77s. Current v9 validation is recorded in PROJECT_STATUS.md.
 
 The earlier C0 implementation/audit records below describe their original
 75-decision/107-path state. Current selections and validation are recorded in
@@ -123,7 +137,7 @@ or a retrofit guard on old fixture strategies.
 
 ## Schema, canonical representation and hash
 
-Schema `strategy_specification_v1`; current H0001 profile `h0001_r03_spec_v8`.
+Schema `strategy_specification_v1`; current H0001 profile `h0001_r03_spec_v9`.
 Profile v4 records the authorized first five decisions and explicit extended capability.
 Profile v5 limits H1-SESSION to intraday and adds the independent unresolved
 H1-DAILY-SESSION C1 decision without selecting either Daily candidate.
@@ -132,7 +146,10 @@ Profile v7 records the three user-authorized semantic choices as versioned
 contracts; their source/rationale is the new decision record, with the original
 input and DLP proposals preserved byte-for-byte at the freeze basis.
 Profile v8 freezes the versioned Daily trend contract; mutations require a new revision.
-Legacy v3/v4/v5/v6/v7 profiles remain readable, but omitted Daily input contracts cannot
+Profile v9 corrects readiness to 174 actual first-seeded observations while retaining
+the rule selection, span 50, lag 5 and residual limit 0.001. v8 is validated by
+its original immutable contract digest, so it remains readable with its original hash.
+Legacy v3/v4/v5/v6/v7/v8 profiles remain readable, but omitted Daily input contracts cannot
 pass C1_READY. C1 admission validates declarations; it does not implement a real
 adjustment adapter, freshness evaluator or H0001 classifier.
 The r03 hypothesis bytes remain unchanged; no r04 is required for this pre-experiment
@@ -309,7 +326,7 @@ parameter envelope; the first five and three Daily input decisions are selected)
 - FRACTAL parameters use `fractal_k_right_strict_v1`, including explicit
   left/right widths, strict ties and completed-grid continuity.
 
-Daily EMA50/minimum_history=173/lag=5 and the earlier MACD conventions are
+Daily EMA50/minimum_history=174/lag=5 and the earlier MACD conventions are
 selected. Other widths, periods, fields and strategy thresholds remain
 researcher decisions. The admission gate introduces no performance winner.
 

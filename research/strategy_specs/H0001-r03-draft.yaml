@@ -3,9 +3,10 @@
 # Three Daily input decisions and H1-DAILY-LONG are resolved; H0001 remains DRAFT.
 # Decision provenance: research/decision_records/H0001-daily-input-freeze-v1.yaml.
 # Trend provenance: research/decision_records/H0001-daily-trend-freeze-v1.yaml.
+# Readiness remediation: research/decision_records/H0001-daily-trend-readiness-remediation-v1.yaml.
 schema_version: strategy_specification_v1
 strategy_id: H0001
-specification_version: h0001_r03_spec_v8
+specification_version: h0001_r03_spec_v9
 hypothesis_id: H0001
 hypothesis_revision: 3
 status: DRAFT
@@ -277,7 +278,7 @@ rule_parameters:
           decision_id: null
         minimum_history:
           kind: integer
-          value: 173
+          value: 174
           choices: []
           decision_id: null
         seed_residual_limit:
@@ -288,6 +289,16 @@ rule_parameters:
         readiness_count:
           kind: text
           value: COMPLETED_OBSERVATIONS_INCLUDING_FIRST_SEED
+          choices: []
+          decision_id: null
+        readiness_definition:
+          kind: text
+          value: actual_first_seed_residual_lte_0_001
+          choices: []
+          decision_id: null
+        operand_readiness:
+          kind: text
+          value: current_and_t_minus_5_prefix_independently_READY
           choices: []
           decision_id: null
         history_origin:
@@ -342,12 +353,12 @@ rule_parameters:
           decision_id: null
         rule_hash:
           kind: text
-          value: a43e95d1389d35e5a8d3ed51845a7cea945c5d5d12a30439b5311e64de731de5
+          value: 61bb9108c33f1fcd131a384bcf63202e9c52c5dc0e34815a26f840a7e89f1025
           choices: []
           decision_id: null
         ema_feature_specification_hash:
           kind: text
-          value: 3fe37bfb0a5fef3bf6fd63e0d0daa7891ba607f2afb297e02193ab66715d78f7
+          value: df12721b668034c411291792a9497f93c831a8bf02518a463ea5115e03b071d6
           choices: []
           decision_id: null
     choices: []

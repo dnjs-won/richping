@@ -1,27 +1,31 @@
-# Richping v2 상태 · 2026-10-01 DAILY-TREND semantic freeze v1
+# Richping v2 상태 · 2026-10-01 DAILY-TREND readiness remediation v1
 
 **판정: H1-DAILY-LONG RESOLVED. H0001은 DRAFT / BLOCKED_ON_DECISIONS,
 profitability NOT TESTED, observed chart parity UNVERIFIED 유지.**
 
 - 기준 브랜치 `v2-c0-extended-session-contract`, 기준 커밋
-  `f517374f66b75c84a0ea025ced91cacf866b2b8a`의 clean worktree에서 진행했다.
+  `8ad1297a4dcd2e9787d62a78fa2866884dbbc41a`의 clean worktree에서 진행했다.
   main의 기존 수정은 보존하며 main merge 없음. 실제 historical performance
   backtest, outcome 조회, 현재 SOXX 차트 확인, parameter sweep 없음.
 - Canonical **DLP-B / DAILY_TREND_EMA_LEVEL_SLOPE_V1**:
   `close > EMA50 AND EMA50_t > EMA50_(t-5)`. r03의 일봉 상승 문맥을
   가격이 medium-term smoothed level 위이고 그 level도 상승한다는 두 조건으로
   표현하는 semantic choice다. 성과 우월성·시장 전체 bullish·SHORT permission 주장 없음.
-- **n=50 / h=173 / k=5 completed RTH Daily observations**. 50은 약 10 trading weeks,
+- **n=50 / minimum_history=174 / k=5 completed RTH Daily observations**. 50은 약 10 trading weeks,
   5는 약 한 trading week이며 calendar days가 아니다. 기존 first-observation
   recursive EMA, full contiguous available causal prefix, 동일 origin/vintage, 세션 reset 없음.
-  B는 현재와 t-5 prefix의 readiness를 각각 검사한다: N=177/lag=172는 UNAVAILABLE,
-  N=178/lag=173는 READY. 숫자 178을 단독 gate로 하드코딩하지 않았다.
-- Readiness audit: `ceil(log(.001)/log(49/51))=173`;
+  B는 현재와 t-5 prefix의 readiness를 각각 검사한다: N=178/lag=173는 UNAVAILABLE,
+  N=179/lag=174는 READY. 숫자 179를 단독 gate로 하드코딩하지 않았다.
+- Readiness remediation: `1+ceil(log(.001)/log(49/51))=174`; alpha=`2/51`;
   `(49/51)^172=.0010272011006169637`, `^173=.0009869187045143375`.
   **N개 first-seeded EMA의 실제 seed 계수는 N-1 exponent**이므로 N=173에서는
-  0.1027201101%다. 요청한 minimum_history=173 관측 수 계약은 유지하되
-  실제 seed 계수가 173개에서 0.1% 이하라는 주장은 하지 않는다. N=174가 그 경계다.
-  이 차이와 독립 seed perturbation 검증을 immutable record 및 테스트에 명시했다.
+  0.10272011006169637% > 0.1%이므로 UNAVAILABLE, N=174에서는
+  0.09869187045143375% <= 0.1%이므로 READY다. 관측치 수와 recursive update 수를
+  혼동한 off-by-one을 교정했다. 실제 first seed 영향 <=0.1% 의미 및 residual_limit=.001 유지.
+  **MATHEMATICAL_CONTRACT_REMEDIATION**, performance_information_used=NONE;
+  PARAMETER_OPTIMIZATION/PERFORMANCE_TUNING이 아니다. 원본 v1 freeze의 173 계약 및
+  v8 hash는 원본 파일/Git history에서 보존하며 새 remediation record로 교정을 연결한다.
+  기존 173 계약의 실제 performance evidence는 없고 historical snapshot 재작성 없음.
 - 입력 freeze **RTH_DAILY / PIT_SPLIT_ADJUSTED_OHLC /
   LATEST_EXPECTED_COMPLETED_SESSION_REQUIRED** 변경 없음. 1H/15m RTH_EXTENDED 유지.
   strict equality는 READY일 때 NOT_BULLISH, 입력/history/action/freshness/calculation
@@ -36,10 +40,12 @@ profitability NOT TESTED, observed chart parity UNVERIFIED 유지.**
   eligible causal input 및 exact-as_of expected-session/evidence 사실을 제공한다.
   실제 PIT transform, action coverage, freshness selector, mixed-profile join을 구현하거나
   synthetic unadjusted를 real PIT 데이터로 인정하지 않는다. production/paper/order/runtime 연결 없음.
-- **DLP-A=PREDECLARED_ABLATION_COMPARATOR**: standalone EMA readiness는 173.
+- **DLP-A=PREDECLARED_ABLATION_COMPARATOR**: standalone EMA readiness는 174.
   초기 matched T0/T1은 동일 current/lag readiness를 요구하여 availability/sample을 같게
   하고 slope predicate 하나만 다르게 한다. series/PIT basis/freshness/EMA50/seed/origin,
-  downstream rules/costs/sample은 동일해야 한다.
+  downstream rules/costs/sample은 동일해야 한다. matched 최초 READY는 양쪽 모두 N=179.
+  classifier 기본값은 matched_comparison=True; standalone A는 ABLATION과
+  matched_comparison=False로 명시하며 matched sample에 추가하지 않는다.
 - **DLP-C=DEFERRED_SEPARATE_RESEARCH_VARIANT**. 별도 swing-width 및 confirmation delay,
   새로운 Daily geometry 가설이므로 초기 family에서 제외한다. B 실패 후 본 결과를 근거로
   곧바로 C를 champion으로 선택할 수 없고 새 preregistered experiment/revision이 필요하다.
@@ -55,13 +61,16 @@ profitability NOT TESTED, observed chart parity UNVERIFIED 유지.**
   span/lag 변경은 새 revision; 추가 family는 별도 trial family; failed/null/inconclusive 보존.
   실제 eligible universe/coverage 확정 시 dataset ID/date split을 성과 조회 전 등록한다.
   임의 날짜 없음. Primary metric/null/pass-reject/costs/sample/purge/embargo는 후속 결정이다.
-- 실제 inventory: **78 decisions 유지 / unresolved IDs 70→69 / C1 46→45 /
-  unresolved paths 97→96**, performance 17 / optional 7 유지. 제거된 root는
-  `rule_parameters.daily_long_permission` 하나다. ID/classification/다른 계약 조작 없음.
-  Executable spec **v8** canonical SHA-256:
-  `302ce8ba197dd3273a17fe7065a0c1eadd1541143f81e6b7f41fb81cfb783059`.
+- 실제 remediation inventory: **78→78 decisions / unresolved IDs 69→69 / C1 45→45 /
+  unresolved paths 96→96**, performance 17 / optional 7 유지. 새 strategy question이나
+  unresolved decision ID 없음. ID/classification/다른 계약 조작 없음.
+  Executable spec **v8→v9** canonical SHA-256:
+  `302ce8ba197dd3273a17fe7065a0c1eadd1541143f81e6b7f41fb81cfb783059` →
+  `6effcae1ae4e539adf0c84550821be507d86b63565b419b7877a4d08599d9c06`.
   Frozen Daily rule SHA-256:
-  `a43e95d1389d35e5a8d3ed51845a7cea945c5d5d12a30439b5311e64de731de5`.
+  `61bb9108c33f1fcd131a384bcf63202e9c52c5dc0e34815a26f840a7e89f1025`.
+  EMA feature SHA-256: `df12721b668034c411291792a9497f93c831a8bf02518a463ea5115e03b071d6`.
+  v8 parser는 원래 contract digest를 검증하여 historical spec/hash의 의미를 보존한다.
 - **H1-DAILY-BLOCKER=UNRESOLVED**. daily_exhaustion_state는 독립 미해결 축이다.
   trend에 overbought/MACD upper extreme/crash/drawdown/volatility spike,
   macro/sector/options/fundamentals를 추가하지 않았다.
@@ -123,20 +132,24 @@ H1-WEAK-WATCH
   state-transition/reset. 이후 relative MACD, trigger, setup/add/reentry, exit-watch/
   structure, risk/holding/overnight 규칙을 동결한다. 실제 데이터 적격성 확정 후 성과 실험
   dataset/date split/metric/null/costs/sample/trial accounting을 검증 엔진과 연결한다.
-- 검증: 전체 `C:/richping/.venv/Scripts/python -m pytest -q` **843 passed (166.87s)**,
-  실패/skip/pytest warning 없음. 기존 807개 + 신규 36개; 최종 Daily classifier focused
-  **36 passed (12.05s)**. CLI `--help`, `git diff --check` 및 staged diff 검사 통과.
+- 검증: v9 전체 `C:/richping/.venv/Scripts/python -m pytest -q` **852 passed (178.61s)**,
+  실패/skip/pytest warning 없음. 기존 843개 회귀 및 추가 9개 교정 검증 통과.
+  CLI `--help`, `git diff --check` 통과. Git의 LF→CRLF 안내는 whitespace 오류가 아니다.
+  역사 v8 검증: **843 passed (166.87s)**.
+  Daily classifier focused **45 passed (15.62s)**: 수식/실제 seed perturbation,
+  A 173/174, B 178/179, 독립 operand readiness, matched availability 및 v8 provenance 검증.
 - 원본 r03/philosophy/input freeze/DLP proposal 및 production/paper/replay 파일이 basis Git
-  blob과 동일함을 테스트한다. v7 감사 테스트는 과거 snapshot으로 보존하고 현재 v8
-  계약/hash/단일 root 변경과 동일 operand comparator를 독립 검증한다.
+  blob과 동일함을 테스트한다. v7/v8 감사는 과거 snapshot으로 보존하고 원본 v8
+  historical 계약/hash를 보존하고 현재 v9 교정 및 동일 operand comparator를 독립 검증한다.
   상세: [Daily 연구 계약](docs/H0001_DAILY_PRICE_RESEARCH.md),
   [immutable trend record](research/decision_records/H0001-daily-trend-freeze-v1.yaml),
+  [readiness remediation record](research/decision_records/H0001-daily-trend-readiness-remediation-v1.yaml),
   [C0 명세](docs/V2_C0_H0001_SPECIFICATION.md).
 
 ---
 
 아래 DAILY-INPUT 및 이전 상태/테스트 수는 해당 basis의 역사 기록이다.
-현재 상태는 위 DAILY-TREND freeze를 따른다.
+현재 상태는 위 DAILY-TREND readiness remediation을 따른다.
 
 # Richping v2 상태 · 2026-10-01 DAILY-INPUT semantic freeze
 
