@@ -1,3 +1,47 @@
+# Richping v2 상태 · 2026-10-01 H0001 Daily price decision proposal
+
+**H0001 DRAFT / BLOCKED_ON_DECISIONS; profitability NOT TESTED; chart parity UNVERIFIED.**
+
+- clean `v2-c0-extended-session-contract` / `var/worktrees/v2-extended`의
+  `63b815598576c2bd8a865adb503e193ff9e9f664` 및 실제 diff를 확인했다.
+  main의 기존 cli/maturity/paper/pipeline 수정과 미추적 테스트는 그대로 보존한다.
+- repository 관찰 audit: r01/r02/r03에는 Daily provider/settings/timestamped candle
+  근거가 없다. 프리마켓 관찰로 일봉 session을 추론하지 않는다.
+  **H1-DAILY-SESSION UNRESOLVED**, RTH_DAILY / EXTENDED_DAILY 독립 후보 유지.
+- 요청한 `docs/RESEARCH_PHILOSOPHY.md`는 기준 브랜치·로컬 Git 이력·파일 inventory에 없다.
+  읽은 것으로 주장하지 않는다. 이번 사용자 지시의 명시적 철학 경계를 제안 문서에 기록했다.
+  Daily는 자산 가격 기반 PRICE_REGIME / TREND_PERMISSION이며 macro/sector/fundamental/
+  options 변수는 독립 후속 feature/state/interaction 연구다.
+- 두 family / 세 variant만 제안했다: DLP-A close > EMA, DLP-B A + EMA 상승 기울기,
+  DLP-C confirmed HH/HL + 해당 low 위 종가. 모두 **unselected research variant**다.
+  r03은 이 Daily 수학식을 직접 관찰·확정한 기록이 없다. 기간/lag/width/readiness,
+  후보 freeze, freshness, action은 미결정이다. 성과·현재 SOXX 차트로 parameter를 선택하지 않았다.
+- EMA/causal swings 등 기존 V2-B primitive로 raw 계산은 가능하다. Daily classifier,
+  C1 rule registration, mixed-profile as_of view adapter는 구현 gap으로만 기록했다.
+  SMA/새 indicator/후보 evaluator 구현 없이 제안 sidecar와 문서·테스트만 추가했다.
+- trend / exhaustion / price shock은 독립 raw state 축의 product 제안이다.
+  BULLISH+EXTENDED, BULLISH+ADVERSE_SHOCK, 세 상태 동시 조합을 보존한다.
+  상태 vocabulary·threshold·entry/action policy는 승인·구현하지 않았다.
+  shock의 core 포함은 새 variant 질문이며 macro shock을 price axis에 넣지 않는다.
+- **새 executable decision IDs 0 / unresolved paths 0**. hypothesis r03 및 executable
+  v5 내용/해시는 보존한다. 전체 76 decisions, 미결정 71 IDs (C1 47 / performance 17 /
+  optional 7), 98 paths 불변. sidecar의 열린 질문은 executable inventory에 합산하지 않는다.
+- 다음 선택은 세 bundle: DAILY-INPUT (session/provenance/freshness), DAILY-TREND
+  (bounded family/단일 parameter tuple/사전 실험 설계), DAILY-AXES-POLICY
+  (독립 exhaustion·price-shock 포함/미포함 및 action/unknown/lifecycle 정책).
+- 기존 generic extended Daily, intraday 15m/1H extended, Daily unknown 시 C1_READY 실패,
+  **V2-D_BLOCKER early-close restriction**은 그대로다. production/paper/runtime 변경 없음.
+- 산출물: [Daily 연구 제안](docs/H0001_DAILY_PRICE_RESEARCH.md),
+  [machine-readable proposal](research/decision_proposals/H0001-daily-price-regime-v1.yaml).
+  상태는 PROPOSED_NOT_FROZEN이며 executable spec이나 성과 증거가 아니다.
+- 검증: 전체 **763 passed (154.02s)**, 실패·skip·pytest warning 없음.
+  기존 **730개** 그대로 유지, 신규 contract-level **33개** (27 state 조합,
+  4 missing/delayed Daily availability, 2 proposal/inventory 계약).
+  `git diff --check` 통과. 기존 runtime·hypothesis/spec·V2-A/B/C0/extended 테스트 diff 없음.
+  main의 기존 미커밋 상태는 불변이며 main merge 없음.
+
+---
+
 # Richping v2 상태 · 2026-10-01 H0001 session-scope correction
 
 **H0001은 DRAFT / BLOCKED_ON_DECISIONS, chart parity는 UNVERIFIED다.**

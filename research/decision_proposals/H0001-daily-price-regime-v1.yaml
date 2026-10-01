@@ -1,0 +1,122 @@
+# Research proposal only. Not accepted by the executable-spec loader or replay.
+schema_version: daily_price_regime_proposal_v1
+proposal_id: H0001-DAILY-PRICE-v1
+status: PROPOSED_NOT_FROZEN
+basis_commit: 63b815598576c2bd8a865adb503e193ff9e9f664
+hypothesis_path: research/hypotheses/H0001-r03.yaml
+executable_spec_path: research/strategy_specs/H0001-r03-draft.yaml
+profitability: NOT_TESTED
+scope: PRICE_REGIME_TREND_PERMISSION
+chart_parity: UNVERIFIED
+daily_session_decision: H1-DAILY-SESSION
+daily_session_selection: UNRESOLVED
+daily_session_candidates: [RTH_DAILY, EXTENDED_DAILY]
+intraday_session_selection: RTH_EXTENDED
+selected_trend_candidate: UNRESOLVED
+family_freeze: UNRESOLVED
+parameter_sweep: NONE_AUTHORIZED
+new_executable_decision_ids: []
+new_executable_unresolved_paths: []
+
+causal_input_contract:
+  timeframe: Daily
+  bars: completed_and_delivered_only
+  availability: atomic_known_at_batch_v1
+  known_at: maximum_known_at_of_all_actual_inputs
+  history: available_completed_contiguous_prefix_no_session_reset
+  history_origin_and_price_basis_evidence: UNRESOLVED
+  missing_or_unknown_input: UNAVAILABLE_not_false_or_normal
+  freshness_policy: UNRESOLVED
+  candidate_comparisons: strict_GT_as_proposed_not_selected
+  execution_or_macro_inputs: []
+
+candidates:
+  DLP-A:
+    family: EMA_LEVEL
+    causal_definition: C_t > E_n_t
+    classified_state: close_above_its_smoothed_price_level_including_recovery_under_falling_EMA
+    why_retained: minimal_level_reference_for_the_slope_ablation
+    parameters:
+      ema_span_n: UNRESOLVED
+      ema_min_history_h: UNRESOLVED
+    primitive: ema_first_observation_recursive_v1
+    calculation_available: true
+    rule_evaluator_implemented: false
+    readiness: contiguous_prefix_with_at_least_h_completed_Daily_inputs
+    evidence_status: NEW_RESEARCH_VARIANT_NOT_OBSERVED_FORMULA
+    source_refs: ['rules.regime[0]', 'rules.regime[4]', 'unknowns[0]']
+    risks: [history_origin_seed_sensitivity, current_Daily_leakage, span_selection_bias, MACD_common_close_dependence]
+  DLP-B:
+    family: EMA_LEVEL_WITH_SLOPE
+    causal_definition: C_t > E_n_t AND E_n_t > E_n_t_minus_k
+    classified_state: close_above_an_EMA_that_rose_over_k_completed_Daily_observations
+    why_retained: separates_recovery_above_a_still_falling_average_from_rising_average_context
+    parameters:
+      ema_span_n: UNRESOLVED
+      ema_min_history_h: UNRESOLVED
+      slope_lag_k: UNRESOLVED
+    shares_ema_parameters_with: DLP-A
+    primitive: ema_first_observation_recursive_v1_on_two_as_of_prefixes
+    calculation_available: true
+    rule_evaluator_implemented: false
+    readiness: both_prefixes_contiguous_and_ready_at_least_h_plus_k_completed_Daily_inputs
+    evidence_status: NEW_RESEARCH_VARIANT_NOT_OBSERVED_FORMULA
+    source_refs: ['rules.regime[0]', 'rules.regime[4]', 'unknowns[0]']
+    risks: [future_fitted_slope, calendar_day_instead_of_observation_lag, lag_selection_bias, MACD_common_close_dependence]
+  DLP-C:
+    family: CONFIRMED_PRICE_STRUCTURE
+    causal_definition: latest_confirmed_high_label_is_HH AND latest_confirmed_low_label_is_HL AND C_t > latest_confirmed_low_price
+    classified_state: jointly_rising_latest_confirmed_high_and_low_with_close_above_that_low
+    why_retained: tests_delayed_price_geometry_instead_of_a_smoothed_level
+    parameters:
+      fractal_left: UNRESOLVED
+      fractal_right: UNRESOLVED
+    primitive: fractal_k_right_strict_v1_and_confirmed_same_kind_comparison_v1
+    calculation_available: true
+    rule_evaluator_implemented: false
+    readiness: contiguous_Daily_history_and_at_least_two_confirmed_events_of_each_kind
+    confirmation_order: confirmed_at_then_pivot_at_then_kind
+    first_event_classification: UNAVAILABLE_until_same_kind_comparison_exists
+    equal_event_classification: EQH_or_EQL_does_not_satisfy_HH_or_HL
+    evidence_status: NEW_DAILY_VARIANT_INTRADAY_STRUCTURE_ANALOGY_ONLY
+    source_refs: ['rules.regime[0]', 'rules.regime[4]', 'observations[8]', 'rules.invalidation[5]', 'unknowns[14]', 'unknowns[15]']
+    risks: [pivot_timestamp_backdating, unconfirmed_future_pivot, detector_width_selection_bias, treating_local_window_READY_as_full_history_coverage]
+
+state_representation:
+  status: PROPOSED_VOCABULARY_NOT_CLASSIFIERS
+  transport: research_v2.contracts.StrategyState_with_JsonObject
+  axes:
+    daily_trend_permission:
+      proposed_values: [BULLISH, NOT_BULLISH, UNAVAILABLE]
+      definition_decision: H1-DAILY-LONG
+      selected_definition: UNRESOLVED
+    daily_exhaustion_state:
+      proposed_values: [NORMAL, EXTENDED, UNAVAILABLE]
+      definition_decision: H1-DAILY-BLOCKER
+      selected_definition: UNRESOLVED
+    daily_price_shock_state:
+      proposed_values: [NORMAL, ADVERSE_SHOCK, UNAVAILABLE]
+      inclusion_decision: UNRESOLVED
+      selected_definition: UNRESOLVED
+      evidence_status: NEW_PRICE_ONLY_RESEARCH_VARIANT
+  per_axis_provenance: [state, status, reason, input_end_at, known_at, input_hash, feature_specification_hash, session_profile]
+  unavailable_does_not_overwrite_other_axes: true
+  policy:
+    final_entry_permission: UNRESOLVED
+    exhaustion_action: UNRESOLVED
+    price_shock_action: UNRESOLVED
+    unavailable_action: UNRESOLVED
+    lifecycle_priority_resets: UNRESOLVED
+  implementation: NONE
+
+decision_bundles:
+  DAILY-INPUT:
+    existing_decisions: [H1-DAILY-SESSION, H1-CHART-PROVIDER, H1-CHART-EMA, H1-CHART-VERIFICATION, H1-DECISION-TIMING]
+    unresolved_paths: [daily_session_selection, causal_input_contract.history_origin_and_price_basis_evidence, causal_input_contract.freshness_policy]
+  DAILY-TREND:
+    existing_decisions: [H1-DAILY-LONG, H1-MULTIPLE-TESTING, H1-DISCOVERY, H1-CONFIRMATORY, H1-BASELINE, H1-PRIMARY-METRIC, H1-DECISION-RULE, H1-SAMPLE-UNIT]
+    unresolved_paths: [selected_trend_candidate, family_freeze, candidates.DLP-A.parameters.ema_span_n, candidates.DLP-A.parameters.ema_min_history_h, candidates.DLP-B.parameters.ema_span_n, candidates.DLP-B.parameters.ema_min_history_h, candidates.DLP-B.parameters.slope_lag_k, candidates.DLP-C.parameters.fractal_left, candidates.DLP-C.parameters.fractal_right]
+  DAILY-AXES-POLICY:
+    existing_decisions: [H1-DAILY-BLOCKER, H1-DECISION-TIMING, H1-STATE-TRANSITIONS]
+    unresolved_paths: [state_representation.axes.daily_trend_permission.selected_definition, state_representation.axes.daily_exhaustion_state.selected_definition, state_representation.axes.daily_price_shock_state.inclusion_decision, state_representation.axes.daily_price_shock_state.selected_definition, state_representation.policy.final_entry_permission, state_representation.policy.exhaustion_action, state_representation.policy.price_shock_action, state_representation.policy.unavailable_action, state_representation.policy.lifecycle_priority_resets]
+early_close_blocker: V2-D_BLOCKER

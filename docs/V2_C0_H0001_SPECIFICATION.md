@@ -4,6 +4,12 @@ V2-C0 infrastructure: **COMPLETE** (validation results below).
 H0001 executable specification: **DRAFT / BLOCKED_ON_DECISIONS**.
 H0001 profitability: **NOT TESTED**. No H0001 trading plugin exists.
 
+Daily decision research proposal (2026-10-01):
+[H0001 Daily PRICE_REGIME / TREND_PERMISSION](H0001_DAILY_PRICE_RESEARCH.md)
+records the repository-only chart audit, three unselected causal candidate
+variants, independent trend/exhaustion/price-shock axes and three next decision
+bundles. It is a separate proposal, not a change to executable v5 or its counts.
+
 Draft inventory: **76 decisions**, of which the first five are resolved. Remaining:
 **47 C1 blockers, 17 performance blockers, 7 optional extensions**;
 **98 unresolved parameter/transition paths**. `H1-SESSION` selects intraday 15m/1H

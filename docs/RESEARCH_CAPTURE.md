@@ -37,6 +37,14 @@ research/
 
 Execution artifacts stay in the existing research paths/DBs. Do not put backtest outputs, mutable caches, market datasets, or paper ledgers here.
 
+Pre-experiment decision proposals may live in `research/decision_proposals/`.
+They record bounded unselected candidates, capability gaps and open questions;
+they are not executable specifications or evidence and cannot change hypothesis
+status or resolve a decision. Example: [H0001 Daily price proposal](H0001_DAILY_PRICE_RESEARCH.md).
+A proposal family freeze requires an approved complete parameter/protocol
+snapshot and hash before any experiment; it is distinct from executable
+FROZEN/C1_READY. Revision and failed-trial preservation rules below still apply.
+
 ## Hypothesis states
 
 - `DRAFT`: captured but ambiguous; not executable.
