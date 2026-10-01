@@ -5,6 +5,12 @@ Implemented on `v2-c0-extended-session-contract`, based on
 data/replay extension, not H0001 C1. H0001 stays **DRAFT / BLOCKED_ON_DECISIONS**;
 chart parity stays **UNVERIFIED**. No market data was fetched.
 
+Session-scope correction on 2026-10-01, from
+`1b3361a5f7c84765210f4f8b627ed87cbb977a7b`: the current draft is
+`h0001_r03_spec_v5`. H1-SESSION applies to 15m/1H intraday only. Daily regime
+session is an independent unresolved C1 decision; generic engine availability
+does not authorize a strategy selection. H0001-r03 source bytes are unchanged.
+
 ## Two independent capabilities
 
 | Contract | Preserved RTH | New extended |
@@ -112,11 +118,11 @@ swing selection, threshold, regime, on_event, fill or portfolio logic.
 
 ## First H0001 decision bundle
 
-Only these five existing decision IDs are resolved in `h0001_r03_spec_v4`:
+Only these five existing decision IDs remain resolved in `h0001_r03_spec_v5`:
 
 | Decision | Selected value |
 |---|---|
-| H1-SESSION | RTH_EXTENDED; explicit extended engine profile |
+| H1-SESSION | RTH_EXTENDED for 15m/1H intraday only; explicit extended engine profile |
 | H1-BASE | 15m |
 | H1-EMA-SEED | first_observation; first_macd_observation; close; `macd_first_observation_recursive_v1` |
 | H1-MACD-HISTORY | Daily=130, 1H=130, 15m=130 |
@@ -130,14 +136,31 @@ selected gate is **130 observations**, not 131. MACD minimum history and a
 future relative-transform lookback are independent. Full history continues
 past 130; the engine does not truncate its EMA calculation to 130 bars.
 
-There remain **46 C1 blockers, 17 performance blockers, 7 optional decisions**:
-70 unresolved decision IDs / 97 unresolved parameter or transition paths.
-The total inventory is still 75 decision IDs. Decision descriptions and all
-remaining unresolved values, transitions and source references are preserved.
-`require_session_capability()` accepts the selected bundle;
+New **H1-DAILY-SESSION** is a C1 implementation blocker. Its separate typed
+`timeframe_contracts.daily_session_policy` has value **UNRESOLVED** and candidates
+**RTH_DAILY / EXTENDED_DAILY**. RTH Daily uses official open–close; generic
+Extended Daily uses 04:00–20:00 on supported dates. These differ in OHLCV,
+completion/known_at, aggregation provenance, input hashes and feature continuity.
+The generic extended Daily implementation is preserved; it selects no H0001 rule.
+
+There remain **47 C1 blockers, 17 performance blockers, 7 optional decisions**:
+**71 unresolved decision IDs / 98 unresolved parameter or transition paths**.
+The total inventory is **76 decision IDs**. Compared with v4, total decisions
+75→76, C1 blockers 46→47, unresolved decisions 70→71 and unresolved paths 97→98
+are normal +1 changes from adding H1-DAILY-SESSION. Performance/optional counts,
+all existing parameter values and state transitions are preserved. Only
+H1-SESSION's descriptive scope is clarified; its selected value is unchanged.
+`require_session_capability()` accepts extended intraday plus unresolved Daily;
+`require_daily_session_capability()` requires an explicit independent Daily choice.
 `require_c1_ready()` still fails because it requires FROZEN with no C1 blockers.
+Even if all other C1 decisions are resolved in a test fixture, unresolved Daily
+prevents freeze/admission. Historical v3/v4 remain readable but cannot gain
+C1 admission by inferring Daily from intraday. Daily MACD admission uses the
+Daily profile's continuity; 15m/1H admission uses the intraday profile.
 A structurally frozen fixture with RTH_EXTENDED plus stale RTH capability fails;
 a fully compatible extended fixture passes admission only in synthetic tests.
+This contract does not implement a strategy or combine different profiles into
+one replay context; existing mixed-profile rejection remains in force.
 
 `RESEARCH_CAPTURE.md` does not require a new hypothesis revision for these
 separate pre-experiment executable-spec selections. The hypothesis is not
@@ -145,13 +168,26 @@ edited and no r04 is created. r03 SHA-256 is
 `35e13276056a36d6a06de04611720fd286113f0e5db1e4255af6ceeb6a0f0bc2` (Git/LF),
 `abdd4f10d127ee7614a4eead734d1bfbf7dc1897ec368f8a3b70a1645e2552fc`
 (unchanged local CRLF bytes). New canonical executable-spec SHA-256:
-`8649baf0ff14e59a9e7f93ec50589299e1e38324247da7463c27c7456aa9672d`.
+`ab0c1136d47bf1ce6b46ff7e46824b59cf715d28db93bf665b77477a8f0a50e6`.
 
-Selected strategy session: extended 04:00–20:00 ET. Selected engine 1H:
+Selected intraday strategy session: extended 04:00–20:00 ET; Daily regime
+session: **UNRESOLVED**. Selected engine 1H:
 04:00 anchored. Observed provider: **UNRESOLVED**. Observed exact 1H convention:
 **UNVERIFIED** (its decision remains UNRESOLVED in YAML). Overall
 `parity_status=UNVERIFIED`. Selection is compatible with the observed premarket
 chart timing; it is not evidence of matching the user's chart provider.
+
+## V2-D_BLOCKER: extended early-close availability
+
+The existing extended v1 restriction is unchanged: an early-close or other
+nonstandard XNYS date rejects the entire extended session, including premarket,
+and a dataset spanning that date fails closed. This is an explicit
+**V2-D_BLOCKER** for downstream real-data coverage/replay, independent of the
+H1-DAILY-SESSION strategy decision. It can prevent 130 contiguous observations
+over some date ranges. Resolving Daily to RTH_DAILY would not unblock extended
+15m/1H data on those dates. A separately reviewed versioned availability/session
+contract and coverage evidence are needed; this patch adds no exception,
+calendar skipping, fabricated bars, or lower history gate.
 
 ## Verification
 
@@ -163,8 +199,20 @@ both DST transitions, holidays/early closes, local dates crossing UTC midnight,
 profile mismatch, admission, and preservation of all other decisions and r03.
 Existing V2-A/B/continuity test files remain byte-identical. C0 assertions were
 updated for the authorized five resolutions, and RTH admission fixtures still
-explicitly select the original profile. Final full suite: **723 passed in
+explicitly select the original profile. Prior v4 full suite: **723 passed in
 155.86s**, including 59 extended tests, 130 unchanged RTH/V2-A/B tests and 280 C0
 tests; no failures, skips or pytest warnings. `git diff --check` and CLI
 `--help` pass. An additional isolated SQLite smoke check verifies extended
 dataset roundtrip, versioned run metadata and identical repeated replay hashes.
+
+The v5 regression file additionally verifies extended intraday with unresolved
+Daily, the isolated Daily C1 blocker, both independent Daily choices, rejection
+of implicit Daily in legacy frozen fixtures, exact count/preservation deltas,
+and distinct Daily OHLCV/availability/input hashes on identical overlapping RTH
+inputs. Future after-hours edits and delayed inputs preserve causal prefixes.
+Current v5 full suite: **730 passed in 156.66s**, no failures, skips or pytest
+warnings. All prior **723 tests** are retained; six Daily session regressions
+and one additional case in the existing mandatory-field omission parametrization
+account for the seven added tests. `git diff --check` passes. Source hypothesis,
+session/aggregation implementation and V2-A/B/continuity tests have no diff from
+the starting commit. PROJECT_STATUS.md records the current counts and verification.

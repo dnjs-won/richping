@@ -1,4 +1,47 @@
-# Richping v2 상태 · 2026-09-30 extended-session research contract
+# Richping v2 상태 · 2026-10-01 H0001 session-scope correction
+
+**H0001은 DRAFT / BLOCKED_ON_DECISIONS, chart parity는 UNVERIFIED다.**
+
+- `v2-c0-extended-session-contract`의
+  `1b3361a5f7c84765210f4f8b627ed87cbb977a7b`에서 session-scope ambiguity만 수정했다.
+  같은 worktree/branch를 사용하며 main의 미커밋 작업은 보존한다. main merge 없음.
+- executable draft는 `h0001_r03_spec_v5`. `H1-SESSION`과 기존
+  `timeframe_contracts.session_policy=RTH_EXTENDED`는 **intraday 15m/1H만** 의미한다.
+  새 C1 decision `H1-DAILY-SESSION`의 `daily_session_policy`는 **UNRESOLVED**이며
+  후보는 **RTH_DAILY / EXTENDED_DAILY**다. Daily regime 전략 선택은 승인하지 않았다.
+- generic extended Daily 04:00–20:00 집계와 15m/1H extended capability는 유지한다.
+  RTH Daily와 Extended Daily는 다른 OHLCV·완료/known_at·provenance·입력 hash·continuity를
+  가진 causal series다. C1 검증의 Daily MACD continuity는 별도 Daily 선택을 따른다.
+  다른 session profile의 replay context 혼합을 허용하는 구현은 추가하지 않았다.
+- intraday capability gate는 extended + Daily unresolved를 허용한다. Daily 미결정이면
+  다른 C1 결정을 모두 테스트 fixture에서 해소해도 freeze/C1_READY는 실패한다.
+  과거 v3/v4 명세는 읽을 수 있으나 intraday로 Daily를 추론해 C1에 진입할 수 없다.
+- 새 decision/path 1개에 따른 정상 변화: 전체 decision **75→76**, C1 blocker **46→47**,
+  미결정 decision **70→71**, 미결정 parameter/transition path **97→98**.
+  현재 **C1 47 + performance 17 + optional 7 = 미결정 71개**다. 기존 다섯 결정 값,
+  state machine, 기타 strategy/feature/execution/research 값은 보존한다.
+- **V2-D_BLOCKER — extended early-close availability**: 조기폐장/비표준 XNYS 날짜 전체 및
+  이를 가로지르는 extended dataset의 fail-closed restriction을 그대로 유지한다.
+  일부 기간의 130개 연속 이력 확보를 막는다. RTH Daily를 선택해도 extended 15m/1H의
+  이 제한은 풀리지 않는다. 별도 검토된 versioned availability/session 계약과 coverage
+  증거가 후속 범위이며 이번 수정은 예외·calendar skip·synthetic bar·history gate 완화를 하지 않는다.
+- H0001-r03 원본 bytes는 불변이며 r04는 생성하지 않았다. 기존 chart parity record도 그대로다.
+  v5 canonical SHA-256:
+  `ab0c1136d47bf1ce6b46ff7e46824b59cf715d28db93bf665b77477a8f0a50e6`.
+- 검증: 전체 `.venv\Scripts\python -m pytest` **730 passed (156.66s)**,
+  실패·skip·pytest warning 없음. 기존 **723개** 유지, Daily session 회귀 **6개** 및
+  기존 필수-field 누락 parametrization의 Daily 항목 **1개** 추가.
+  `git diff --check` 통과. r03 원본 bytes와 session/aggregation 및 V2-A/B/continuity
+  테스트 파일의 baseline 대비 diff 없음. root main의 기존 미커밋 상태도 보존했다.
+- 상세 계약: [extended-session 기록](docs/V2_EXTENDED_SESSION_IMPLEMENTATION.md),
+  [C0 명세/decision matrix](docs/V2_C0_H0001_SPECIFICATION.md).
+
+---
+
+# Richping v2 상태 · 2026-09-30 extended-session research contract (v4 역사 기록)
+
+아래는 당시 구현 기록이다. H1-SESSION의 Daily 적용 ambiguity 및 현재 count/hash는
+위 2026-10-01 v5 수정 기록을 따른다. generic extended Daily 기능은 계속 보존한다.
 
 **Generic extended-hours capability: COMPLETE. H0001은 DRAFT / BLOCKED_ON_DECISIONS다.**
 **V2-A/B/C0 완료 상태는 유지하며 이번 작업은 H0001 C1 구현이 아니다.**

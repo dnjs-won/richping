@@ -8,6 +8,7 @@ from .capabilities import current_engine, require_current_engine
 
 REQUIRED = {
     ('timeframe_contracts', 'session_policy'): ('enum', 'H1-SESSION', 'C1_IMPLEMENTATION_BLOCKER', ('RTH', 'RTH_EXTENDED')),
+    ('timeframe_contracts', 'daily_session_policy'): ('enum', 'H1-DAILY-SESSION', 'C1_IMPLEMENTATION_BLOCKER', ('EXTENDED_DAILY', 'RTH_DAILY')),
     ('timeframe_contracts', 'base'): ('timeframe', 'H1-BASE', 'C1_IMPLEMENTATION_BLOCKER', ()),
     ('feature_contracts', 'macd_ema_seed'): ('contract', 'H1-EMA-SEED', 'C1_IMPLEMENTATION_BLOCKER', ()),
     ('feature_contracts', 'macd_signal_start'): ('contract', 'H1-EMA-SEED', 'C1_IMPLEMENTATION_BLOCKER', ()),
@@ -260,19 +261,24 @@ class H0001Specification(StrategySpecification):
         if (value["strategy_id"], value["hypothesis_id"], value["hypothesis_revision"], value["direction"]) != (
                 "H0001", "H0001", 3, "LONG_ONLY"):
             raise ValueError("Unsupported H0001-r03 identity")
-        if value["specification_version"] not in {"h0001_r03_spec_v3", "h0001_r03_spec_v4"}:
+        if value["specification_version"] not in {"h0001_r03_spec_v3", "h0001_r03_spec_v4", "h0001_r03_spec_v5"}:
             raise ValueError("Unsupported H0001 specification version")
         if value["source"] != {"path": "research/hypotheses/H0001-r03.yaml", "sha256": SOURCE_SHA256}:
             raise ValueError("H0001 source provenance mismatch")
-        expected = {section: set() for section, _ in REQUIRED}
-        for section, field in (*REQUIRED, *FIXED):
+        # Historical v3/v4 remain readable, but cannot attest a Daily session
+        # choice for C1 admission. Never infer that choice from intraday.
+        required = {key: record for key, record in REQUIRED.items()
+                    if value["specification_version"] == "h0001_r03_spec_v5"
+                    or key != ('timeframe_contracts', 'daily_session_policy')}
+        expected = {section: set() for section, _ in required}
+        for section, field in (*required, *FIXED):
             expected.setdefault(section, set()).add(field)
         expected["engine_capabilities"] = set(ENGINE_FIELDS)
         expected["chart_parity"].update(("parity_status", "engine_1h_boundary"))
         for section, fields in expected.items():
             exact(value[section], fields, section)
-        exact(value["decisions"], {entry[1] for entry in REQUIRED.values()}, "H0001 decisions")
-        for (section, field), (kind, decision, category, choices) in REQUIRED.items():
+        exact(value["decisions"], {entry[1] for entry in required.values()}, "H0001 decisions")
+        for (section, field), (kind, decision, category, choices) in required.items():
             record = value[section][field]
             if (record["kind"], record["decision_id"], tuple(record["choices"])) != (kind, decision, choices):
                 raise ValueError(f"H0001 field contract changed: {section}.{field}")

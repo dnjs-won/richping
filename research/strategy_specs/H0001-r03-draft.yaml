@@ -1,13 +1,14 @@
 # Executable-spec draft, NOT a strategy implementation or frozen decision.
-# Source r03 remains immutable. Only the first five session/base/MACD decisions are resolved.
+# Source r03 remains immutable. The five intraday/base/MACD decisions remain resolved.
+# Daily regime session is a separate UNRESOLVED C1 decision, never inferred from intraday.
 schema_version: strategy_specification_v1
 strategy_id: H0001
-specification_version: h0001_r03_spec_v4
+specification_version: h0001_r03_spec_v5
 hypothesis_id: H0001
 hypothesis_revision: 3
 status: DRAFT
 created_at: '2026-09-27T00:00:00Z'
-updated_at: '2026-09-30T00:00:00Z'
+updated_at: '2026-10-01T00:00:00Z'
 source:
   path: research/hypotheses/H0001-r03.yaml
   sha256: 35e13276056a36d6a06de04611720fd286113f0e5db1e4255af6ceeb6a0f0bc2
@@ -99,6 +100,7 @@ feature_contracts:
     choices: []
     decision_id: null
 timeframe_contracts:
+  # H1-SESSION applies to intraday 15m/1H only; no Daily session default.
   session_policy:
     kind: enum
     value: RTH_EXTENDED
@@ -106,6 +108,13 @@ timeframe_contracts:
     - RTH
     - RTH_EXTENDED
     decision_id: H1-SESSION
+  daily_session_policy:
+    kind: enum
+    value: UNRESOLVED
+    choices:
+    - RTH_DAILY
+    - EXTENDED_DAILY
+    decision_id: H1-DAILY-SESSION
   base:
     kind: timeframe
     value: 15m
@@ -659,12 +668,25 @@ engine_capabilities:
 decisions:
   H1-SESSION:
     classification: C1_IMPLEMENTATION_BLOCKER
-    question: RTH만 사용할지 extended hours도 사용할지?
-    current_hypothesis_statement: Session choice is unknown; US equity/ETF context.
-    available_v2_primitive: V2-A supports XNYS RTH only
+    question: Intraday 15m/1H에서 RTH만 사용할지 extended hours도 사용할지?
+    current_hypothesis_statement: Intraday session choice was unknown in r03; Daily regime session is a separate decision.
+    available_v2_primitive: XNYS_RTH and US_EQUITY_EXTENDED_04_20 intraday profiles
     candidate_choices:
     - RTH
     - RTH plus extended (requires new data/feature contracts)
+    source_refs:
+    - unknowns[25]
+    - required_data[8]
+    required_for_c1: true
+    required_for_profitability: true
+  H1-DAILY-SESSION:
+    classification: C1_IMPLEMENTATION_BLOCKER
+    question: Daily regime에 RTH Daily와 extended Daily 중 어느 causal series를 사용할지?
+    current_hypothesis_statement: Daily regime is required; its session semantics are unresolved and not selected by H1-SESSION.
+    available_v2_primitive: Separate XNYS_RTH Daily and US_EQUITY_EXTENDED_04_20 Daily aggregation capabilities
+    candidate_choices:
+    - RTH_DAILY
+    - EXTENDED_DAILY
     source_refs:
     - unknowns[25]
     - required_data[8]

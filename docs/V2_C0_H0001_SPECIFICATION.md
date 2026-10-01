@@ -4,12 +4,17 @@ V2-C0 infrastructure: **COMPLETE** (validation results below).
 H0001 executable specification: **DRAFT / BLOCKED_ON_DECISIONS**.
 H0001 profitability: **NOT TESTED**. No H0001 trading plugin exists.
 
-Draft inventory: **75 decisions**, of which the first five are resolved. Remaining:
-**46 C1 blockers, 17 performance blockers, 7 optional extensions**;
-**97 unresolved parameter/transition paths**. Generic extended-hours capability
+Draft inventory: **76 decisions**, of which the first five are resolved. Remaining:
+**47 C1 blockers, 17 performance blockers, 7 optional extensions**;
+**98 unresolved parameter/transition paths**. `H1-SESSION` selects intraday 15m/1H
+only; new `H1-DAILY-SESSION` remains **UNRESOLVED** with candidates `RTH_DAILY` and
+`EXTENDED_DAILY`. These +1 changes come solely from adding that C1 decision/path.
+Generic extended-hours capability
 is implemented; this is not H0001 C1. See [extended-session contract](V2_EXTENDED_SESSION_IMPLEMENTATION.md).
 Canonical specification SHA-256:
-`8649baf0ff14e59a9e7f93ec50589299e1e38324247da7463c27c7456aa9672d`.
+`ab0c1136d47bf1ce6b46ff7e46824b59cf715d28db93bf665b77477a8f0a50e6`.
+Early-close restrictions remain in force and are recorded as **V2-D_BLOCKER**
+in [the extended-session note](V2_EXTENDED_SESSION_IMPLEMENTATION.md).
 
 The earlier C0 implementation/audit records below describe their original
 75-decision/107-path state. Current selections and validation are recorded in
@@ -86,8 +91,10 @@ or a retrofit guard on old fixture strategies.
 
 ## Schema, canonical representation and hash
 
-Schema `strategy_specification_v1`; current H0001 profile `h0001_r03_spec_v4`.
+Schema `strategy_specification_v1`; current H0001 profile `h0001_r03_spec_v5`.
 Profile v4 records the authorized first five decisions and explicit extended capability.
+Profile v5 limits H1-SESSION to intraday and adds the independent unresolved
+H1-DAILY-SESSION C1 decision without selecting either Daily candidate.
 The r03 hypothesis bytes remain unchanged; no r04 is required for this pre-experiment
 executable specification resolution.
 Profile v2 introduced signal-state ownership and capability admission; v3 closes
@@ -185,7 +192,9 @@ structure survives → 1H exit-watch → 15m structure-break exit.
 
 MACD fast/slow/signal **12/26/9** and Daily/1H/15m roles are explicit r03 facts.
 The r03 listed execution frame is 15m; order/decision/fill timing remain separate
-unknowns. The authorized first bundle selects **15m / RTH_EXTENDED** and the
+unknowns. The authorized first bundle selects **15m / RTH_EXTENDED for 15m/1H
+intraday only**. Daily regime session remains a separate **UNRESOLVED** C1
+decision, `H1-DAILY-SESSION` (`RTH_DAILY` or `EXTENDED_DAILY`). It also selects the
 existing first-observation MACD seed, first-MACD signal start, close field and
 `macd_first_observation_recursive_v1`. Minimum completed history is 130 on each
 of Daily/1H/15m, using full available causal history across sessions without
@@ -216,10 +225,14 @@ machine-readable `engine_capabilities` record, independently of narrative
 reused; the adapter pins conventions with no exported constant. A separate
 `v2_extended_c1_signal_v1` selects `US_EQUITY_EXTENDED_04_20` with its own session,
 continuity and aggregation definitions. Availability remains atomic-known-at.
-RTH_EXTENDED passes the session portion only with that explicit compatible
+RTH_EXTENDED passes the intraday session portion only with that explicit compatible
 profile; a stale RTH claim fails. 1H/Daily base and ATR_REVERSAL/DIRECTIONAL_CHANGE
 still require future implementation and cannot pass C1 admission. Full admission
-remains blocked by DRAFT status and 46 C1 decisions.
+remains blocked by DRAFT status and 47 C1 decisions. `require_daily_session_capability()`
+validates the independent Daily choice; MACD Daily continuity follows that choice
+rather than the intraday profile. The existing generic extended Daily capability
+does not resolve the strategy decision. Historical v3/v4 specifications remain
+readable but cannot pass C1 admission without explicit Daily session semantics.
 
 Selected feature contract encoding (all parameters use the existing typed
 parameter envelope; only the first five authorized decisions are selected):
@@ -435,7 +448,8 @@ the selected executable-spec values.
 
 | decision_id / class | question | current hypothesis statement / source | available V2 primitive | candidate choices | required for C1? | required for profitability? | current status |
 |---|---|---|---|---|---|---|---|
-| H1-SESSION / A | RTH만 사용할지 extended hours도 사용할지? | Session choice was unknown in r03; observed examples include premarket. (unknowns[25], required_data[8]) | Preserved XNYS_RTH plus separate US_EQUITY_EXTENDED_04_20 | RTH; RTH plus extended | yes | yes | RTH_EXTENDED (04:00–20:00 ET) |
+| H1-SESSION / A | Intraday 15m/1H에서 RTH만 사용할지 extended hours도 사용할지? | Intraday session choice was unknown in r03; observed examples include premarket. Daily session is separate. (unknowns[25], required_data[8]) | Preserved XNYS_RTH plus separate US_EQUITY_EXTENDED_04_20 intraday | RTH; RTH plus extended | yes | yes | RTH_EXTENDED (04:00–20:00 ET), 15m/1H only |
+| H1-DAILY-SESSION / A | Daily regime의 session semantics는? | Daily regime required; session choice unresolved, independent of intraday. (unknowns[25], required_data[8]) | Separate causal RTH Daily and generic extended Daily capabilities | RTH_DAILY; EXTENDED_DAILY | yes | yes | UNRESOLVED |
 | H1-BASE / A | 전략 authoritative base input은? | 15m required; technical input must not imply strategy session selection. (required_data[1]) | V2-A 15m input | 15m; finer input would require a separate capability contract | yes | yes | 15m |
 | H1-EMA-SEED / A | EMA seed·signal 시작·가격 field·feature version을 무엇으로 동결할지? | MACD(12,26,9), enough past warmup; seed and source field not specified. (required_data[4]) | MACDSpec: first_observation, first_macd_observation, close only | explicitly adopt existing engine conventions; new versioned convention after separate implementation | yes | yes | first_observation / first_macd_observation / close / macd_first_observation_recursive_v1 |
 | H1-MACD-HISTORY / A | 각 시간축 MACD 최소 history는? | Sufficient warmup required; count unknown. (required_data[4]) | MACDSpec.min_history | researcher-specified positive counts per timeframe | yes | yes | 130 / 130 / 130 (Daily / 1H / 15m) |

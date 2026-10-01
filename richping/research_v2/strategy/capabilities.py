@@ -54,7 +54,11 @@ def _primitive(value, cls, where, *, extra=()):
 
 
 def require_session_capability(value):
-    """Only session/base/profile admission, not permission to implement C1."""
+    """Intraday (15m/1H) session/base/profile admission only, not C1 readiness.
+
+    A profile's generic Daily aggregation capability does not select H0001's
+    Daily regime series. That decision has its own admission below.
+    """
     capabilities = {key: record["value"] for key, record in value["engine_capabilities"].items()}
     profile = {"v2_ab_c1_signal_v1": RTH, "v2_extended_c1_signal_v1": EXTENDED}.get(
         capabilities["capability_profile"])
@@ -68,9 +72,19 @@ def require_session_capability(value):
     return capabilities
 
 
+def require_daily_session_capability(value):
+    """Explicit Daily regime semantics, independent of the intraday profile."""
+    daily = value["timeframe_contracts"].get("daily_session_policy", {}).get("value")
+    profile = {"RTH_DAILY": RTH, "EXTENDED_DAILY": EXTENDED}.get(daily)
+    if profile is None:
+        raise ValueError("C1 Daily session requires resolved H1-DAILY-SESSION")
+    return current_engine(profile)
+
+
 def require_current_engine(value):
     """Validate chosen input/feature contracts independently of structural freeze."""
     capabilities = require_session_capability(value)
+    daily_capabilities = require_daily_session_capability(value)
     rules, features = value["rule_parameters"], value["feature_contracts"]
     if rules["swing_detector"]["value"] != "FRACTAL":
         raise ValueError("C1 unsupported swing detector; future implementation required")
@@ -87,7 +101,7 @@ def require_current_engine(value):
     for suffix in ("daily", "1h", "15m"):
         MACDSpec(*(features["macd_" + key]["value"] for key in ("fast", "slow", "signal")),
                  min_history=features["macd_min_history_" + suffix]["value"],
-                 continuity=capabilities["continuity"])
+                 continuity=(daily_capabilities if suffix == "daily" else capabilities)["continuity"])
 
     for prefix in ("setup_1h", "entry_15m", "exit_1h"):
         method = rules[prefix + "_relative_transform"]["value"]

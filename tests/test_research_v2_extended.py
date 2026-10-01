@@ -26,7 +26,9 @@ from richping.research_v2.strategy.capabilities import current_engine, require_s
 from richping.research_v2.strategy.h0001_spec import H0001Specification, load_h0001, ENGINE_BOUNDARIES
 from richping.research_v2.strategy.specification import C1, PERFORMANCE, OPTIONAL, StrategySpecification
 from test_research_v2 import Observer, fixture_data
-from test_research_v2_specification import resolve_fixture, feature_contract
+from test_research_v2_specification import (
+    resolve_fixture, feature_contract, prior_decision_inventory, prior_unresolved_fields,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "73b5d3d5c096c0a2612c39191e6fd4b7980d8f7a"
@@ -310,11 +312,11 @@ def test_only_five_decisions_resolved_source_bytes_untouched():
     before = StrategySpecification.loads(subprocess.check_output([
         "git", "show", BASE + ":research/strategy_specs/H0001-r03-draft.yaml"], cwd=ROOT).decode())
     old, new = before.unpack(), spec.unpack()
-    assert old["decisions"] == new["decisions"]
-    assert spec.unresolved_fields == {p: info for p, info in before.unresolved_fields.items()
+    assert prior_decision_inventory(old) == prior_decision_inventory(new)
+    assert prior_unresolved_fields(spec) == {p: info for p, info in before.unresolved_fields.items()
                                       if info["decision_id"] not in RESOLVED}
-    assert len(spec.unresolved_fields) == 97
-    assert [len(spec.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)] == [46, 17, 7]
+    assert len(spec.unresolved_fields) == 98
+    assert [len(spec.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)] == [47, 17, 7]
     assert old["state_machine"] == new["state_machine"]
     for section in ("rule_parameters", "state_machine_parameters", "execution_requirements",
                     "research_requirements", "optional_extensions"):
@@ -323,7 +325,7 @@ def test_only_five_decisions_resolved_source_bytes_untouched():
         if key != "engine_1h_boundary":
             assert new["chart_parity"][key] == record
     assert new["status"] == "DRAFT"
-    assert new["specification_version"] == "h0001_r03_spec_v4"
+    assert new["specification_version"] == "h0001_r03_spec_v5"
     assert spec.specification_hash != before.specification_hash
     raw = subprocess.check_output(["git", "show", BASE + ":research/hypotheses/H0001-r03.yaml"], cwd=ROOT)
     local = (ROOT / "research/hypotheses/H0001-r03.yaml").read_bytes()

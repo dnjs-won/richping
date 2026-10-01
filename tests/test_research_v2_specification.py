@@ -36,6 +36,19 @@ def draft():
     return load_h0001(DRAFT, hypothesis_path=SOURCE)
 
 
+def prior_decision_inventory(value):
+    """Compare all old decisions, allowing only H1-SESSION's scope clarification."""
+    decisions = {k: dict(v) for k, v in value["decisions"].items() if k != "H1-DAILY-SESSION"}
+    for key in ("question", "current_hypothesis_statement", "available_v2_primitive"):
+        decisions["H1-SESSION"].pop(key)
+    return decisions
+
+
+def prior_unresolved_fields(spec):
+    return {p: info for p, info in spec.unresolved_fields.items()
+            if info["decision_id"] != "H1-DAILY-SESSION"}
+
+
 def at(value, path):
     if not path:
         return value
@@ -84,6 +97,8 @@ def compatible_features_fixture(value, method="ROLLING_PERCENTILE"):
     value["chart_parity"]["engine_1h_boundary"]["value"] = ENGINE_BOUNDARIES["XNYS_RTH"]
     value["timeframe_contracts"]["base"]["value"] = "15m"
     value["timeframe_contracts"]["session_policy"]["value"] = "RTH"
+    if "daily_session_policy" in value["timeframe_contracts"]:
+        value["timeframe_contracts"]["daily_session_policy"]["value"] = "RTH_DAILY"
     value["rule_parameters"]["swing_detector"]["value"] = "FRACTAL"
     value["rule_parameters"]["swing_parameters"]["value"] = feature_contract(FractalSpec(1, 1))
     for key, identifier in {
@@ -110,8 +125,8 @@ def compatible_features_fixture(value, method="ROLLING_PERCENTILE"):
 def test_draft_inventory_and_no_plugin_or_profitability_export():
     spec = draft()
     assert spec.unpack()["status"] == "DRAFT"
-    assert len(spec.unresolved_fields) == 97
-    assert sum(len(spec.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)) == 70
+    assert len(spec.unresolved_fields) == 98
+    assert sum(len(spec.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)) == 71
     for method in (spec.require_c1_ready, spec.plugin_specification, spec.require_profitability_ready,
                    spec.require_historical_reproduction_ready):
         with pytest.raises(ValueError):
@@ -161,7 +176,7 @@ def test_yaml_json_mapping_order_comments_and_timestamp_spelling_canonicalize():
     original = draft()
     value = original.unpack()
     value["created_at"] = "2026-09-27T09:00:00+09:00"
-    value["updated_at"] = "2026-09-30T09:00:00+09:00"
+    value["updated_at"] = "2026-10-01T09:00:00+09:00"
     value["state_machine"]["states"].reverse()
     for decision in value["decisions"].values():
         decision["candidate_choices"].reverse()
@@ -539,13 +554,13 @@ def test_remediation_preserves_every_decision_and_unresolved_strategy_parameter(
     ], cwd=ROOT).decode("utf-8"))
     current = draft()
     old, new = original.unpack(), current.unpack()
-    assert old["decisions"] == new["decisions"]
+    assert prior_decision_inventory(old) == prior_decision_inventory(new)
     for section in set(SECTIONS) - {"engine_capabilities", "feature_contracts", "timeframe_contracts", "chart_parity"}:
         assert old[section] == new[section]
-    assert len(current.unresolved_fields) == 97
+    assert len(current.unresolved_fields) == 98
     assert len(original.unresolved_fields) == 107
-    assert len(new["decisions"]) == len(old["decisions"]) == 75
-    assert [len(current.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)] == [46, 17, 7]
+    assert len(new["decisions"]) == len(old["decisions"]) + 1 == 76
+    assert [len(current.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)] == [47, 17, 7]
 
 
 def signal_paths(machine, start, end):
@@ -645,11 +660,11 @@ def test_lifecycle_returns_reuse_unresolved_contract_without_resolving_or_adding
     ], cwd=ROOT).decode('utf-8'))
     current = draft()
     resolved = {"H1-SESSION", "H1-BASE", "H1-EMA-SEED", "H1-MACD-HISTORY", "H1-HISTORY-ORIGIN"}
-    assert current.unresolved_fields == {p: info for p, info in before.unresolved_fields.items()
+    assert prior_unresolved_fields(current) == {p: info for p, info in before.unresolved_fields.items()
                                          if info['decision_id'] not in resolved}
-    assert current.unpack()['decisions'] == before.unpack()['decisions']
-    assert len(current.unresolved_fields) == 97
-    assert len(current.unpack()['decisions']) == 75
+    assert prior_decision_inventory(current.unpack()) == prior_decision_inventory(before.unpack())
+    assert len(current.unresolved_fields) == 98
+    assert len(current.unpack()['decisions']) == 76
     for key in LIFECYCLE_RETURNS:
         edge = current.unpack()['state_machine']['transitions'][key]
         assert set(edge['prerequisites']) == {'H1-DAILY-LONG', 'H1-DAILY-BLOCKER', 'H1-STATE-TRANSITIONS'}
