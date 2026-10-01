@@ -1,3 +1,53 @@
+# Richping v2 상태 · 2026-10-01 DAILY-BLOCKER bounded proposal v1
+
+**판정: DESIGN / PROPOSAL 완료. H1-DAILY-BLOCKER UNRESOLVED 유지.**
+H0001 **DRAFT**, profitability **NOT_TESTED**, chart parity **UNVERIFIED**.
+
+- 기준: clean `v2-c0-extended-session-contract` worktree, commit
+  `819e6ffebb11e9cb0b5f08bc7d98e4523c98249a`. root main의 기존 미커밋 작업은 보존했다.
+- [Daily blocker 연구 문서](docs/H0001_DAILY_BLOCKER_RESEARCH.md)와
+  [machine-readable proposal](research/decision_proposals/H0001-daily-blocker-v1.yaml)를 추가했다.
+  r03 직접 statement와 새로운 bounded operationalization, 실제 primitive capability를 구분한다.
+- Raw `daily_exhaustion_state = NORMAL / EXTENDED / UNAVAILABLE`와 action policy를 분리한다.
+  EXTENDED는 BEARISH/SELL이 아니고 NORMAL은 SAFE가 아니며 UNAVAILABLE는 NORMAL이 아니다.
+  trend/exhaustion/shock/macro/sector/options/fundamental은 독립 record로 보존한다.
+- 초기 family는 B0 no blocker / B1 Daily MACD line relative upper extreme /
+  B2 Daily positive histogram relative upper extreme뿐이다. field/transform/window/threshold/
+  action champion과 parameter grid가 없다. DLP-C와 price shock는 별도 후속 연구다.
+- PercentileSpec/ZScoreSpec은 실제 current-inclusive이며 prior-only는 미구현이다.
+  percentile midrank, z-score ddof/zero variance, ATR Wilder seed/scale semantics와 readiness,
+  causal known_at/hash를 감사했다. ATR ratio 단독은 자기 과거 분포의 extreme과 다르다.
+  후속 transform freeze는 canonical 하나 + 최대 comparator 하나로 제한하는 안이다.
+- 기존 MACD 12/26/9 및 min_history=130은 inherited capability다. MACD warmup slot을 보존하는
+  현재 full-window W의 첫 rolling readiness는 129+W completed Daily observations가 필요하다.
+  이는 blocker W 선택이나 trend minimum_history=174 교정 변경이 아니다.
+- P0 OBSERVE_ONLY / P1 BLOCK_NEW_ENTRY_ONLY / P2 BLOCK_NEW_ENTRY_AND_ADD /
+  P3 REDUCE_SIZE를 구분했다. P3는 unresolved V2 sizing/capital 의존성으로 defer한다.
+  강제 EXIT은 초기 후보에서 제외하고 기존 1H EXIT-WATCH + 15m structure exit 소유권을 유지한다.
+- 차단 전 setup과 fully eligible signal을 구분하고 counterfactual/blocked record를 삭제하지 않는
+  후속 logging 요구사항 및 17개 denominator/성과 diagnostics를 명시했다. generic immutable
+  state/trace transport는 있지만 H0001 classifier/policy/counterfactual logger/evaluator는 없다.
+- H1-DAILY-BLOCKER ID를 유지하고 nested state_definition / policy의 독립 version/hash/freeze
+  provenance를 제안했다. 신규 executable ID/unknown path는 0이며 proposal unknown은 합산하지 않는다.
+- 실제 parser inventory **78 decisions / 9 resolved / 69 unresolved IDs / C1 45 /
+  performance 17 / optional 7 / 96 unresolved paths**로 불변이다.
+  canonical v9 hash `6effcae1ae4e539adf0c84550821be507d86b63565b419b7877a4d08599d9c06` 유지.
+  H1-DAILY-LONG RESOLVED, `close > EMA50 AND EMA50_t > EMA50_(t-5)` 및
+  minimum_history=174 / canonical first-ready 179 유지. r03/spec/기존 freeze record는 불변이다.
+- 새 indicator/classifier/production/paper 구현, historical/current outcome lookup, backtest,
+  current SOXX chart 분석, threshold/lookback/field/action 선택, early-close 해결은 수행하지 않았다.
+  기존 V2-D_BLOCKER와 real PIT transform/freshness/mixed-profile/provenance gap을 유지한다.
+- 검증: 새 contract suite **28 passed (2.11s)**; 전체 **880 passed (182.84s)**,
+  기존 852 tests 회귀 유지 + 28 신규, 실패/skip/pytest warning 없음.
+  CLI `--help`, 로컬 문서 링크 10개, `git diff --check` 통과.
+  proposal/transport test는 경제적 유효성·profitability·chart parity를 입증하지 않는다.
+- 다음 freeze: field, transform subset, W/m/readiness, upper threshold/units/equality/polarity,
+  current-inclusive/prior-only 및 method convention, policy/UNAVAILABLE/reentry/cadence/lifecycle,
+  tuple/trial budget/counterfactual/denominator protocol. 성과 조회 전 데이터 적격성 및 전체 성과
+  실험 계약을 별도로 사전등록한다. 지정 브랜치에만 commit/push하며 main merge는 하지 않는다.
+
+---
+
 # Richping v2 상태 · 2026-10-01 DAILY-TREND readiness remediation v1
 
 **판정: H1-DAILY-LONG RESOLVED. H0001은 DRAFT / BLOCKED_ON_DECISIONS,

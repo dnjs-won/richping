@@ -1,0 +1,362 @@
+# Bounded design only. No classifier, selected tuple, policy evaluator or experiment.
+schema_version: daily_blocker_proposal_v1
+proposal_id: H0001-DAILY-BLOCKER-PROPOSAL-v1
+status: PROPOSED_NOT_FROZEN
+basis_branch: v2-c0-extended-session-contract
+basis_commit: 819e6ffebb11e9cb0b5f08bc7d98e4523c98249a
+hypothesis_path: research/hypotheses/H0001-r03.yaml
+executable_spec_path: research/strategy_specs/H0001-r03-draft.yaml
+executable_spec_version: h0001_r03_spec_v9
+executable_spec_sha256: 6effcae1ae4e539adf0c84550821be507d86b63565b419b7877a4d08599d9c06
+hypothesis_status: DRAFT
+profitability: NOT_TESTED
+chart_parity: UNVERIFIED
+executable_decision_status: UNRESOLVED
+new_executable_decision_ids: []
+new_executable_unresolved_paths: []
+performance_information_used: NONE
+historical_performance_backtest: NOT_RUN
+historical_outcome_lookup: NOT_RUN
+current_outcome_lookup: NOT_RUN
+current_chart_analysis: NOT_RUN
+production_paper_behavior_change: NONE
+
+source_boundary:
+  direct_statements:
+    - ref: rules.regime[1]
+      text: 일봉이 상방 상대 극단/과열 및 하락 전환 위험 상태라면 신규 롱을 차단하거나 축소하는 별도 blocker가 필요하다는 방향을 둔다.
+    - ref: rules.regime[4]
+      text: 일봉 상승 레짐과 상방 exhaustion/blocker의 정확한 수학적 정의는 unknown이다.
+    - ref: rules.trigger[0]
+      text: 일봉 롱 레짐이 허용되고 일봉 exhaustion blocker가 활성화되지 않은 상태에서 1시간봉 상대 MACD 하방 극단이 setup을 만든다.
+    - ref: unknowns[1]
+      text: 일봉 upper-exhaustion blocker의 상대 MACD threshold와 차단/축소 방식
+  contextual_refs: ['rules.setup[1]', 'unknowns[4]', 'unknowns[5]', 'required_data[4]', 'required_data[5]']
+  context_scope: relative_MACD_alternatives_not_a_selected_Daily_field_or_rule
+  B1_B2_provenance: NEW_BOUNDED_RESEARCH_OPERATIONALIZATIONS_NOT_RECOVERED_HISTORICAL_RULES
+  unsupported_as_existing_blocker_evidence:
+    - rising_rates
+    - rising_oil
+    - dollar
+    - VIX
+    - NQ_reversal
+    - option_strike_GEX
+    - sector_rotation
+    - fundamental_deterioration
+    - single_Daily_drop
+    - news_event
+  inference_limit: EXTENDED_does_not_prove_exhaustion_causality_or_predict_reversal
+
+input_contract:
+  timeframe: Daily
+  session: RTH_DAILY
+  session_profile: XNYS_RTH
+  price_basis: PIT_SPLIT_ADJUSTED_OHLC
+  freshness: LATEST_EXPECTED_COMPLETED_SESSION_REQUIRED
+  proposed_reuse: research/decision_records/H0001-daily-input-freeze-v1.yaml
+  historical_chart_identity: UNVERIFIED
+  economic_inputs: [completed_Daily_close_history]
+  scale_inputs_if_ATR: [completed_Daily_high_low_close_history]
+  validation_inputs: [calendar_continuity, actual_known_at, expected_completed_session, action_transform_evidence, causal_input_hash, source_vintage]
+  excluded_inputs: [daily_trend_permission, daily_price_shock_state, macro_state, sector_leadership_state, options_flow_state, fundamental_state, outcomes, future_observations, volume]
+  shock_price_effect: prices_may_change_MACD_or_ATR_no_direct_shock_override
+
+independent_state_contract:
+  scope: daily_exhaustion_state_only
+  axes:
+    - daily_trend_permission
+    - daily_exhaustion_state
+    - daily_price_shock_state
+    - macro_state
+    - sector_leadership_state
+    - options_flow_state
+    - fundamental_state
+  representation: product_of_independent_axis_records
+  classifiers_implemented_here: false
+  raw_vocabulary: [NORMAL, EXTENDED, UNAVAILABLE]
+  meanings:
+    NORMAL: all_required_inputs_READY_and_selected_causal_exhaustion_predicate_false
+    EXTENDED: all_required_inputs_READY_and_selected_causal_upper_exhaustion_predicate_true
+    UNAVAILABLE: input_history_feature_readiness_freshness_action_evidence_or_calculation_unavailable
+  non_equivalences:
+    EXTENDED: [BEARISH, SELL]
+    NORMAL: [SAFE]
+    UNAVAILABLE: [NORMAL]
+  unresolved_definition: not_a_measured_state_no_classifier_exists_yet
+  per_axis_provenance: [state, status, reason, symbol, as_of, session_date, session_profile, price_basis, series_role, input_end_at, known_at, input_hash, source_vintage, action_evidence_ref, feature_specification_hash, state_definition_version, state_definition_hash]
+  known_at: maximum_actual_bar_prefix_and_required_action_transform_and_reference_input_known_at_lte_as_of
+  immutable_snapshots: true
+  overwrite_other_axis: FORBIDDEN
+  forced_reset_on_trend_change: FORBIDDEN
+  price_shock_definition: DEFERRED_SEPARATE_DECISION_RESEARCH
+  lifecycle:
+    same_fresh_input: same_raw_state_and_causal_hash_at_new_as_of
+    new_expected_undelivered: exhaustion_UNAVAILABLE_no_old_EXTENDED_or_NORMAL_fallback
+    late_evidence: recompute_current_vintage_only_from_actual_known_at_no_backdating
+    trend_loss: preserve_exhaustion_record_do_not_force_NORMAL
+    exhaustion_extension: preserve_trend_record_do_not_force_NOT_BULLISH
+    shared_input_failure: both_axes_can_independently_be_UNAVAILABLE_with_own_reasons
+  valid_examples:
+    - {daily_trend_permission: BULLISH, daily_exhaustion_state: EXTENDED, daily_price_shock_state: NORMAL}
+    - {daily_trend_permission: BULLISH, daily_exhaustion_state: NORMAL, daily_price_shock_state: ADVERSE_SHOCK}
+    - {daily_trend_permission: BULLISH, daily_exhaustion_state: EXTENDED, daily_price_shock_state: ADVERSE_SHOCK}
+    - {macro_state: HOSTILE, daily_trend_permission: BULLISH, daily_exhaustion_state: NORMAL}
+
+candidate_family:
+  B0:
+    name: NO_BLOCKER
+    role: incremental_value_comparator
+    field: NONE
+    definition: canonical_Daily_trend_without_actionable_exhaustion_gate
+    raw_state_calculation: optional_observation_only_do_not_invent_NORMAL_for_no_calculation
+    policy_correspondence: P0
+  B1:
+    name: DAILY_MACD_LINE_UPPER_RELATIVE_EXTREME
+    field: macd_line
+    definition: relative_position_of_MACD_line_t_above_unselected_upper_threshold
+    meaning: fast_slow_EMA_price_unit_spread_relative_to_own_causal_history
+    parameters: {transform: UNRESOLVED, lookback: UNRESOLVED, threshold: UNRESOLVED, readiness: UNRESOLVED, window_convention: UNRESOLVED, equality: UNRESOLVED, polarity: UNRESOLVED}
+  B2:
+    name: DAILY_MACD_HISTOGRAM_UPPER_RELATIVE_EXTREME
+    field: histogram
+    definition: positive_MACD_line_minus_signal_spread_at_upper_relative_extreme
+    meaning: current_momentum_spread_from_smoothed_MACD_relative_to_own_causal_history
+    polarity_scope: positive_histogram_no_histogram_absolute_threshold_selected
+    parameters: {transform: UNRESOLVED, lookback: UNRESOLVED, threshold: UNRESOLVED, readiness: UNRESOLVED, window_convention: UNRESOLVED, equality: UNRESOLVED, positivity_contract: UNRESOLVED}
+family_boundary:
+  only_initial_members: [B0, B1, B2]
+  ranking: NONE
+  extra_indicators_or_conjunctions: FORBIDDEN
+  excluded: [RSI, stochastic, Bollinger, ADX, price_EMA_distance, volume, OBV, divergence, HH_HL, dual_MA, multi_indicator_AND_OR, macro, options, price_shock]
+  DLP_C: DEFERRED_SEPARATE_TREND_GEOMETRY_NOT_BLOCKER_MEMBER
+
+inherited_MACD_capability:
+  primitive: richping.research_v2.features.macd
+  fast: 12
+  slow: 26
+  signal: 9
+  min_history: 130
+  provenance: existing_v9_H1_MACD_HISTORY_and_H1_EMA_SEED_not_new_blocker_parameter_selection
+  seed: first_observation
+  signal_start: first_macd_observation
+  history_origin: full_visible_contiguous_completed_prefix_no_session_reset
+  line: EMA_fast_close_minus_EMA_slow_close
+  histogram: macd_line_minus_signal_line
+  fields_available: [macd_line, signal_line, histogram]
+  minimum_history_174: unchanged_EMA50_trend_operand_not_MACD_or_relative_window_readiness
+
+transform_audit:
+  ROLLING_PERCENTILE:
+    primitive: PercentileSpec_and_rolling_percentile
+    version: rolling_empirical_midrank_v1
+    scale_invariance: strictly_increasing_scalar_transforms_preserve_rank_except_numeric_rounding
+    cross_symbol: dimensionless_own_history_rank_not_equal_risk_or_common_distribution
+    outliers: magnitudes_do_not_dominate_rank_order_and_window_occupancy_still_matter
+    distribution_assumption: empirical_no_Gaussian_assumption_not_a_reversal_probability
+    current_observation: included_only_supported_convention
+    ties: midrank_less_plus_half_equal_over_count
+    min_history: explicit_positive_m_lte_window_W_all_selected_slots_must_be_READY
+    rolling_window: last_min_W_N_observation_slots_including_t_not_calendar_days
+    known_at: ScalarSeries_rejects_future_points_MACD_points_use_max_full_prefix_arrival
+    readiness: continuity_then_count_then_all_slot_status_no_drop_unavailable_slots
+  ROLLING_ZSCORE:
+    primitive: ZScoreSpec_and_rolling_zscore
+    version: rolling_zscore_ddof_v1
+    scale_invariance: positive_affine_scalar_transform_invariant_except_numeric_rounding
+    cross_symbol: dimensionless_local_dispersion_units_not_equal_tail_probability_or_risk
+    outliers: sensitive_mean_and_variance_current_extreme_can_inflate_own_denominator
+    distribution_assumption: finite_mean_variance_no_normality_needed_for_calculation_Gaussian_tail_interpretation_unjustified
+    current_observation: included_only_supported_convention
+    ties: no_rank_tie_rule_equal_values_have_equal_score_all_equal_UNDEFINED
+    ddof: explicit_0_or_1_not_selected
+    min_history: explicit_m_lte_W_and_m_gt_ddof_all_selected_slots_READY
+    rolling_window: last_min_W_N_observation_slots_including_t_not_calendar_days
+    known_at: same_causal_ScalarSeries_checks_no_result_known_at_field
+    readiness: same_window_guards_zero_variance_or_nonfinite_UNDEFINED
+  MACD_ATR:
+    primitive: NormalizeSpec_and_normalize_with_ATRSpec_and_atr
+    version: positive_causal_scale_v1
+    scale_invariance: common_positive_price_unit_rescaling_of_MACD_and_ATR_cancels_not_general_affine_invariance
+    cross_symbol: dimensionless_volatility_scaled_spread_not_own_history_percentile_or_equal_risk
+    outliers: gaps_range_shocks_change_Wilder_ATR_and_can_compress_ratio
+    distribution_assumption: no_distribution_fit_not_a_past_distribution_extreme_by_itself
+    current_observation: current_MACD_and_current_ATR_TR_include_t
+    ties: no_rank_tie_rule
+    min_history: both_MACD_M_and_ATR_A_ready_A_gte_ATR_period_p
+    rolling_window: ATR_SMA_seed_first_p_TR_then_Wilder_recursion_over_full_prefix_not_last_p_SMA
+    known_at: aligned_symbol_timeframe_as_of_end_operands_causal_but_FeatureResult_has_no_known_at
+    readiness: full_prefix_continuity_READY_operands_strictly_positive_ATR_finite_ratio
+    semantic_gap: ratio_alone_does_not_answer_B1_B2_own_causal_distribution_question
+    followup_choice: defer_or_explicitly_register_changed_volatility_relative_meaning_before_results_no_automatic_ratio_plus_rank_family
+  audit_is_selection: false
+  next_transform_budget: one_canonical_transform_and_at_most_one_comparator
+  selected_canonical: UNRESOLVED
+  selected_comparator: UNRESOLVED
+
+window_convention_audit:
+  current_inclusive:
+    reference: x_t_and_up_to_W_minus_1_previous_completed_values
+    percentile: count_less_than_x_t_plus_half_count_equal_to_x_t_divided_by_reference_count
+    percentile_unique_max: 1_minus_1_over_2_reference_count
+    consequence: self_inclusion_affects_rank_and_zscore_but_is_causal
+    V2_B_supported: true
+  prior_only:
+    reference: up_to_W_previous_completed_values_ending_t_minus_1_x_t_is_query_only
+    percentile: count_prior_less_than_x_t_plus_half_count_prior_equal_to_x_t_divided_by_prior_reference_count
+    consequence: above_all_prior_can_rank_1_current_not_in_reference_mean_variance
+    V2_B_supported: false
+    implementation_gap: new_versioned_reference_query_transform_not_current_include_current_false
+  selected_for_H1_blocker: UNRESOLVED
+  future_observations: FORBIDDEN
+
+history_count_audit:
+  notation: N_completed_Daily_from_MACD_origin_M_MACD_min_history_W_reference_slots_m_transform_min_history
+  current_inclusive_generic: K_equals_min_W_N_requires_K_gte_m_and_N_gte_M_plus_K_minus_1_with_all_K_slots_READY
+  current_MACD_series_full_window: N_gte_M_plus_W_minus_1_so_existing_M_130_requires_129_plus_W
+  prior_only_full_window_proposed: N_gte_M_plus_W_including_current_query_not_implemented
+  prior_only_partial_policy: UNRESOLVED_do_not_assume_m_shortens_retained_window
+  ATR_ratio: N_gte_max_M_A_with_A_gte_p_and_positive_ATR
+  full_pipeline: intersect_exhaustion_availability_with_independent_canonical_trend_operand_readiness_not_overwrite
+  computational_readiness_is_economic_evidence: false
+
+decision_contract_proposal:
+  existing_id: H1-DAILY-BLOCKER
+  status: UNRESOLVED
+  state_definition:
+    field: UNRESOLVED
+    transform: UNRESOLVED
+    lookback: UNRESOLVED
+    threshold: UNRESOLVED
+    window_convention: UNRESOLVED
+    readiness: UNRESOLVED
+    equality: UNRESOLVED
+    polarity: UNRESOLVED
+    transform_specific_parameters: UNRESOLVED
+  policy:
+    action: UNRESOLVED
+    unavailable_behavior: UNRESOLVED
+    reentry_scope: UNRESOLVED
+    decision_cadence_and_setup_lifecycle: UNRESOLVED
+  provenance_tracking: separate_nested_state_and_policy_version_hash_freeze_refs_plus_combined_contract_hash
+  executable_parser_now: supports_nested_typed_contract_parameters_no_specific_blocker_admission_or_hash_freeze
+  split_IDs_now: false
+  split_only_if: independent_freeze_provenance_cannot_be_tracked_by_nested_versions_hashes_and_refs
+  related_existing_owners: [H1-DECISION-TIMING, H1-STATE-TRANSITIONS, H1-ADD-POLICY, H1-SIZING, H1-EXPOSURE, H1-MULTIPLE-TESTING]
+
+policy_candidates:
+  P0:
+    action: OBSERVE_ONLY
+    on_EXTENDED: record_raw_state_without_exhaustion_permission_effect
+    baseline: B0_has_same_trading_permission_behavior_raw_calculation_optional
+    initial_C1_feasibility: semantic_signal_policy_candidate_no_evaluator_yet
+    forced_exit: false
+  P1:
+    action: BLOCK_NEW_ENTRY_ONLY
+    on_EXTENDED: block_new_initial_LONG_entry_only
+    adds: no_exhaustion_veto_existing_add_contract_still_required
+    existing_hold_exit: unaffected_by_exhaustion
+    initial_C1_feasibility: signal_gate_after_initial_add_reentry_event_definitions_frozen
+    forced_exit: false
+  P2:
+    action: BLOCK_NEW_ENTRY_AND_ADD
+    on_EXTENDED: block_new_initial_LONG_entry_and_scale_in
+    existing_hold_exit: unaffected_by_exhaustion
+    initial_C1_feasibility: signal_gate_after_add_reentry_and_lifecycle_contracts_frozen
+    forced_exit: false
+  P3:
+    action: REDUCE_SIZE
+    on_EXTENDED: reduce_new_exposure_by_unselected_sizing_contract
+    existing_hold_exit: no_forced_liquidation
+    initial_C1_feasibility: DEFERRED_PERFORMANCE_PORTFOLIO_DEPENDENCY
+    dependencies: [H1-SIZING, H1-EXPOSURE, capital_accounting, fill_cost_contract]
+    reduction_size: UNRESOLVED
+    forced_exit: false
+policy_boundary:
+  champion: UNRESOLVED
+  forced_EXIT: EXCLUDED_FROM_INITIAL_FAMILY
+  existing_exit_owner: separate_1H_EXIT_WATCH_plus_15m_price_structure_exit
+  NORMAL: no_exhaustion_veto_does_not_bypass_other_permissions
+  UNAVAILABLE: distinct_from_NORMAL_mapping_must_freeze_no_implicit_fail_open
+
+conceptual_experiments:
+  status: BOUNDED_DESIGN_ONLY_NOT_EXECUTABLE_REGISTRATION
+  E0: {trend: canonical_DLP_B, blocker: B0}
+  E1: {trend: canonical_DLP_B, blocker: B1}
+  E2: {trend: canonical_DLP_B, blocker: B2}
+  selected_tuple: UNRESOLVED
+  experiment_refs: []
+  controls: [eligible_PIT_universe, causal_Daily_series, canonical_trend, downstream_H0001_rules, aligned_opportunity_events, availability_denominators, costs, capital_fill_assumptions, chronological_split]
+  DLP_C_or_trend_sweep: FORBIDDEN
+multiple_testing:
+  Cartesian_product_search: FORBIDDEN
+  dimensions: [field, transform, lookback, threshold, action_policy]
+  before_outcomes: freeze_small_explicit_field_transform_lookback_threshold_action_tuples_and_protocol
+  result_dependent_changes: new_revision_registered_trial_and_discovery_evidence
+  retain_trials: [failed, 'null', inconclusive]
+  exposed_current_cases_independent_confirmation: FORBIDDEN_including_SOXX_2026_10_01_reversal
+  after_cost_win_rate_from_few_survivors_is_alpha: false
+
+required_future_diagnostics:
+  - total_Daily_observations
+  - trend_BULLISH_observations
+  - exhaustion_NORMAL_count
+  - exhaustion_EXTENDED_count
+  - exhaustion_UNAVAILABLE_count
+  - H0001_setup_opportunities_before_blocker
+  - blocker_removed_setup_count
+  - actual_signal_count
+  - completed_trades
+  - capital_exposure_time
+  - turnover
+  - after_cost_return
+  - MAE
+  - MFE
+  - drawdown
+  - blocked_trades_counterfactual_forward_outcome
+  - sample_suppression_ratio
+diagnostic_semantics:
+  counts: retain_symbol_session_and_opportunity_event_units_separately_cross_tab_trend_exhaustion_and_availability
+  sample_suppression_ratio: exhaustion_blocked_eligible_opportunities_over_same_preblock_eligible_opportunities_zero_denominator_null
+  readiness_suppression: separate_from_EXTENDED_policy_suppression
+  outcomes: COMPLETE_PENDING_UNRESOLVED_all_retained_not_only_completed_winners
+  account_performance: unavailable_without_declared_capital_NAV_accounting_cohort_drawdown_is_not_account_MDD
+
+counterfactual_requirements:
+  implementation: NOT_IMPLEMENTED
+  retain_blocked_opportunities: true
+  decision_example: BLOCKED_BY_DAILY_EXHAUSTION
+  counterfactual_signal_example: {would_have_entered_without_blocker: true}
+  stage_distinction: setup_only_not_necessarily_would_have_entered_require_full_preblock_signal_conditions
+  identity: [opportunity_event_id, symbol, as_of, episode_id, initial_add_reentry_kind]
+  provenance: [preblock_conditions, all_axis_records, state_definition_hash, policy_hash, strategy_spec_hash, causal_input_hash, data_action_vintage, reason, hypothetical_fill_contract_ref, cost_contract_ref, forward_outcome_contract_ref]
+  forward_label_timing: separate_later_writer_no_future_label_in_state_or_decision_no_real_order_or_fill
+  missing_outcomes: retain_PENDING_UNRESOLVED_and_denominators_no_delete_no_zero_fill
+  generic_transport: StrategyState_JsonObject_DecisionTrace_ResearchStore_can_carry_immutable_metadata_not_a_H0001_logger_or_evaluator
+
+capability_audit:
+  available: [completed_synthetic_Daily_aggregation, MACD_line_signal_histogram, causal_MACD_scalar_projection, current_inclusive_midrank, current_inclusive_zscore, aligned_positive_scale_normalization, Wilder_ATR, rolling_continuity_readiness, immutable_feature_spec_input_result_hashes, scalar_known_at_validation, immutable_state_trace_transport]
+  absent: [exhaustion_classifier, blocker_policy_evaluator, H0001_counterfactual_signal_logger, counterfactual_forward_trade_evaluator, prior_only_relative_transform, normalized_MACD_scalar_series_builder, explicit_FeatureResult_known_at, real_PIT_split_action_transform, real_freshness_selector, mixed_profile_as_of_join, real_provider_session_action_provenance, V2_sizing_capital_fill_engine]
+  early_close: V2-D_BLOCKER_UNCHANGED
+  primitive_exists_means_H0001_rule_selected: false
+  new_indicator_engine: NONE
+
+inventory_at_basis_and_after:
+  decisions: 78
+  resolved_ids: 9
+  unresolved_ids: 69
+  C1_unresolved_ids: 45
+  performance_unresolved_ids: 17
+  optional_unresolved_ids: 7
+  unresolved_paths: 96
+  proposal_unknowns_in_executable_count: false
+next_freeze_questions:
+  - field_B1_or_B2_or_explicit_no_blocker_comparator_scope
+  - one_canonical_transform_at_most_one_comparator_with_semantic_rationale
+  - reference_window_W_and_min_history_m_and_MACD_warmup_composition
+  - upper_threshold_units_value_equality_and_polarity_including_B2_positive_spread
+  - current_inclusive_or_prior_only_and_ties_ddof_or_ATR_parameters_if_retained
+  - independent_raw_state_readiness_freshness_known_at_provenance_versions_hashes
+  - action_P0_P1_P2_or_defer_P3_and_UNAVAILABLE_behavior_reentry_scope
+  - decision_cadence_setup_cancellation_and_add_reentry_interaction_under_existing_owners
+  - small_tuple_trial_budget_counterfactual_records_and_complete_denominator_protocol
+  - eligible_dataset_universe_coverage_chronological_discovery_confirmation_costs_metric_null_pass_reject_before_outcomes

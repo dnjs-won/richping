@@ -4,6 +4,16 @@ V2-C0 infrastructure: **COMPLETE** (validation results below).
 H0001 executable specification: **DRAFT / BLOCKED_ON_DECISIONS**.
 H0001 profitability: **NOT TESTED**. No H0001 trading plugin exists.
 
+Daily blocker design at basis `819e6ffebb11e9cb0b5f08bc7d98e4523c98249a`:
+[bounded exhaustion proposal](H0001_DAILY_BLOCKER_RESEARCH.md) and
+[proposal YAML](../research/decision_proposals/H0001-daily-blocker-v1.yaml).
+B0/B1/B2 and separate raw-state/P0–P3 policy contracts are design candidates only.
+No field/transform/lookback/threshold/action champion or performance experiment.
+H1-DAILY-BLOCKER remains UNRESOLVED; canonical v9 and its inventory/hash are unchanged.
+Price shock and macro/sector/options/fundamentals remain independent; forced EXIT
+is excluded and P3 sizing is deferred. Proposal questions do not enter executable
+unresolved counts. This does not change the frozen Daily trend or DLP-C deferral.
+
 Current Daily trend readiness remediation (basis `8ad1297a4dcd2e9787d62a78fa2866884dbbc41a`):
 [Daily research contract](H0001_DAILY_PRICE_RESEARCH.md) and
 [readiness remediation record](../research/decision_records/H0001-daily-trend-readiness-remediation-v1.yaml)
