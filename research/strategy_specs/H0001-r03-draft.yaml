@@ -1,10 +1,11 @@
 # Executable-spec draft, NOT a strategy implementation or complete strategy freeze.
 # Source r03 remains immutable. The five intraday/base/MACD decisions remain resolved.
-# Three Daily input decisions are resolved; trend rules remain unresolved.
+# Three Daily input decisions and H1-DAILY-LONG are resolved; H0001 remains DRAFT.
 # Decision provenance: research/decision_records/H0001-daily-input-freeze-v1.yaml.
+# Trend provenance: research/decision_records/H0001-daily-trend-freeze-v1.yaml.
 schema_version: strategy_specification_v1
 strategy_id: H0001
-specification_version: h0001_r03_spec_v7
+specification_version: h0001_r03_spec_v8
 hypothesis_id: H0001
 hypothesis_revision: 3
 status: DRAFT
@@ -240,7 +241,115 @@ timeframe_contracts:
 rule_parameters:
   daily_long_permission:
     kind: contract
-    value: UNRESOLVED
+    value:
+      name: daily_trend_ema_level_slope
+      version: v1
+      parameters:
+        session:
+          kind: text
+          value: RTH_DAILY
+          choices: []
+          decision_id: null
+        session_profile:
+          kind: text
+          value: XNYS_RTH
+          choices: []
+          decision_id: null
+        price_basis:
+          kind: text
+          value: PIT_SPLIT_ADJUSTED_OHLC
+          choices: []
+          decision_id: null
+        freshness:
+          kind: text
+          value: LATEST_EXPECTED_COMPLETED_SESSION_REQUIRED
+          choices: []
+          decision_id: null
+        ema_span:
+          kind: integer
+          value: 50
+          choices: []
+          decision_id: null
+        ema_seed:
+          kind: text
+          value: FIRST_OBSERVATION_RECURSIVE
+          choices: []
+          decision_id: null
+        minimum_history:
+          kind: integer
+          value: 173
+          choices: []
+          decision_id: null
+        seed_residual_limit:
+          kind: number
+          value: 0.001
+          choices: []
+          decision_id: null
+        readiness_count:
+          kind: text
+          value: COMPLETED_OBSERVATIONS_INCLUDING_FIRST_SEED
+          choices: []
+          decision_id: null
+        history_origin:
+          kind: text
+          value: available_completed_history_prefix_v1
+          choices: []
+          decision_id: null
+        level:
+          kind: text
+          value: close_gt_ema
+          choices: []
+          decision_id: null
+        level_equality:
+          kind: boolean
+          value: false
+          choices: []
+          decision_id: null
+        slope_lag_observations:
+          kind: integer
+          value: 5
+          choices: []
+          decision_id: null
+        slope_equality:
+          kind: boolean
+          value: false
+          choices: []
+          decision_id: null
+        require_positive_slope:
+          kind: boolean
+          value: true
+          choices: []
+          decision_id: null
+        states:
+          kind: text
+          value: BULLISH|NOT_BULLISH|UNAVAILABLE
+          choices: []
+          decision_id: null
+        unavailable:
+          kind: text
+          value: input_history_action_freshness_or_calculation_unavailable
+          choices: []
+          decision_id: null
+        lifecycle:
+          kind: text
+          value: same_fresh_Daily_same_state_new_expected_undelivered_UNAVAILABLE
+          choices: []
+          decision_id: null
+        rule_version:
+          kind: text
+          value: DAILY_TREND_EMA_LEVEL_SLOPE_V1
+          choices: []
+          decision_id: null
+        rule_hash:
+          kind: text
+          value: a43e95d1389d35e5a8d3ed51845a7cea945c5d5d12a30439b5311e64de731de5
+          choices: []
+          decision_id: null
+        ema_feature_specification_hash:
+          kind: text
+          value: 3fe37bfb0a5fef3bf6fd63e0d0daa7891ba607f2afb297e02193ab66715d78f7
+          choices: []
+          decision_id: null
     choices: []
     decision_id: H1-DAILY-LONG
   daily_exhaustion_blocker:

@@ -32,18 +32,24 @@ CHOICES = {
 }
 
 
+def input_freeze_draft():
+    return H0001Specification.loads(subprocess.check_output([
+        "git", "show", "f517374f66b75c84a0ea025ced91cacf866b2b8a:" + DRAFT.relative_to(ROOT).as_posix(),
+    ], cwd=ROOT).decode("utf-8"))
+
+
 def record():
     return yaml.safe_load(RECORD.read_text(encoding="utf-8"))
 
 
 def parameters(field, section):
-    contract = load_h0001(DRAFT).unpack()[section][field]["value"]
+    contract = input_freeze_draft().unpack()[section][field]["value"]
     assert contract["version"] == "v1"
     return {k: v["value"] for k, v in contract["parameters"].items()}
 
 
 def test_only_three_root_decisions_resolve_without_inventory_manipulation():
-    before, after = input_audit_draft(), load_h0001(DRAFT)
+    before, after = input_audit_draft(), input_freeze_draft()
     old, new = before.unpack(), after.unpack()
     assert old["specification_version"] == "h0001_r03_spec_v6"
     assert new["specification_version"] == "h0001_r03_spec_v7"
@@ -71,7 +77,7 @@ def test_only_three_root_decisions_resolve_without_inventory_manipulation():
 
 
 def test_rth_selection_keeps_generic_extended_daily_and_unverified_chart():
-    spec = load_h0001(DRAFT)
+    spec = input_freeze_draft()
     assert require_daily_session_capability(spec.unpack()) == current_engine(RTH)
     value = spec.unpack()
     value["timeframe_contracts"]["daily_session_policy"]["value"] = "EXTENDED_DAILY"
@@ -151,7 +157,7 @@ def test_mixed_timeframe_identity_is_separate_transport_only_and_join_is_missing
 
 
 def test_preserved_draft_proposals_independent_axes_and_capability_blockers():
-    spec, body = load_h0001(DRAFT), record()
+    spec, body = input_freeze_draft(), record()
     assert spec.unpack()["status"] == body["hypothesis"]["status"] == "DRAFT"
     assert body["hypothesis"]["profitability"] == "NOT_TESTED"
     for gate in (spec.require_c1_ready, spec.require_profitability_ready, spec.plugin_specification):

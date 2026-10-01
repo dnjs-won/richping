@@ -1,3 +1,178 @@
+# H0001 Daily trend semantic freeze v1
+
+Basis: `v2-c0-extended-session-contract@f517374f66b75c84a0ea025ced91cacf866b2b8a`.
+**H1-DAILY-LONG RESOLVED; H0001 DRAFT; profitability NOT TESTED;
+observed chart parity UNVERIFIED.** No historical performance backtest, current
+SOXX chart inspection, span/lag sweep or outcome query was performed.
+
+The [immutable trend decision record](../research/decision_records/H0001-daily-trend-freeze-v1.yaml)
+supersedes only the trend selection questions in the preserved original
+[proposal](../research/decision_proposals/H0001-daily-price-regime-v1.yaml).
+The original r03, philosophy, input freeze and proposal are unchanged.
+Executable `h0001_r03_spec_v8` resolves exactly one root contract.
+
+## Canonical rule and semantic rationale
+
+`DAILY_TREND_EMA_LEVEL_SLOPE_V1` / **DLP-B**:
+
+```text
+daily_trend_permission = BULLISH iff
+C_t > EMA50_t AND EMA50_t > EMA50_(t-5)
+```
+
+C_t is the latest causally usable completed **RTH_DAILY** close. Keep
+**PIT_SPLIT_ADJUSTED_OHLC** and
+**LATEST_EXPECTED_COMPLETED_SESSION_REQUIRED** from the input freeze.
+1H/15m remain **RTH_EXTENDED**. This is an asset-local, price-derived LONG
+permission; it does not classify the market or macro environment.
+
+r03 asks for a rising Daily regime. Level alone can permit a temporary rebound
+above an EMA that is still falling. B expresses price above a medium-term
+smoothed level plus that level itself rising, using two simple conditions.
+Daily confirmed HH/HL would introduce a swing detector, width and a different
+confirmation delay, extending r03's 15m exit geometry into a new Daily hypothesis.
+The first canonical revision therefore selects the simple level-and-slope rule
+for its meaning, with no claim of superior returns.
+
+Span **50 completed Daily observations** represents approximately 10 trading
+weeks: slower than 1H/15m noise, without extending to a 200-day secular filter.
+Lag **5 completed trading observations** asks for approximately one trading
+week's direction; a one-day change may be sensitive to Daily noise. No regression
+slope or additional threshold is added. These choices do not use current SOXX
+or Sep/Oct 2026 outcomes. EMA50 superiority, B versus A/C performance and RTH
+versus Extended predictive quality are all **NOT TESTED**.
+
+## Readiness and off-by-one audit
+
+Reuse V2-B `EMASpec`/`ema`, first-observation recursive initialization, full
+available contiguous completed prefix, one origin, no session reset.
+Alpha=2/51. The requested count convention gives:
+
+```text
+h = ceil(log(0.001) / log(49/51)) = 173
+(49/51)^172 = 0.0010272011006169637
+(49/51)^173 = 0.0009869187045143375
+minimum_history = 173 completed observations (including first seed)
+```
+
+There is a mathematical distinction: E[0]=C[0] means N observations have N-1
+recursive updates. The **literal seed coefficient at 173 observations is
+0.1027201101%**, slightly above 0.1%; 174 observations give 0.0986918705%.
+The explicitly requested minimum_history=173 is preserved as the frozen
+observation-count convention. It must not be described as a literal seed
+coefficient <=0.1% at N=173. Tests independently perturb the primitive's seed
+to verify both statements. Changing the count contract needs a new revision.
+
+B checks each operand prefix separately: current count >=173 and the prefix
+ending at t-5 count >=173, with the same origin and current-as_of transformed
+price vintage. A historical EMA snapshot from a different split vintage is
+not the slope reference. Boundary fixtures: N=177 / lag count=172 is UNAVAILABLE;
+N=178 / lag count=173 is READY. No hardcoded total-history gate replaces these
+operand checks. Weekends and holidays contribute no observation.
+
+Standalone DLP-A's EMA is READY at 173. The matched T0/T1 classifier requires
+both operands READY for both arms, preserving identical availability/sample
+conventions; only the positive slope predicate differs. A's standalone earlier
+readiness cannot introduce extra observations into the incremental comparison.
+
+## State and lifecycle
+
+- All operands READY, both strict inequalities true: **BULLISH**.
+- All operands READY, at least one false, including either equality:
+  **NOT_BULLISH**. This is neither BEARISH nor SHORT permission.
+- Missing input/history/action evidence/freshness/calculation: **UNAVAILABLE**,
+  with status/reason. UNAVAILABLE is distinct from a measured NOT_BULLISH.
+
+At 06:00 / 10:00 / 15:30 ET the prior completed RTH Daily supplies the same
+state, EMA and causal input hash while it remains the expected completed session.
+At official close, a newly expected but undelivered Daily makes the axis
+UNAVAILABLE; no prior BULLISH carry-forward. Recompute when the new Daily and all
+required evidence reach actual atomic known_at. Late evidence never backdates
+classification. Old detached snapshots remain immutable.
+
+[`daily_trend.py`](../richping/research_v2/strategy/daily_trend.py) exposes
+`classify_daily_trend(PreparedDailyPrefix, as_of, DailyTrendSpec) -> DailyTrendState`.
+It is pure and deterministic, reuses the existing EMA engine and validates both
+causal prefixes. Prepared input supplies exact-as_of expected-session and
+eligibility facts plus required transform/action known_at and applied action
+effective times. The classifier rejects future bars/evidence, invalid grids,
+gaps and freshness mismatch. It does **not** construct those eligibility facts,
+obtain factors, prove real action coverage or implement a freshness selector.
+Synthetic fixtures assume already transformed/eligible inputs.
+
+Output retains symbol, as_of, source session_date, state/status/reason, profile,
+price basis, input_end_at, maximum actual input known_at, causal input hash,
+source vintage, EMA specification hash and trend rule version/hash, plus actual
+operand counts/values. No production, paper, order, registry or replay connection
+is added; end-to-end real-market replay remains unavailable.
+
+## Preregistered Daily subfamily and comparison
+
+| Arm | Role | Formula |
+|---|---|---|
+| T0 / DLP-A | PREDECLARED_ABLATION_COMPARATOR | close > EMA50 |
+| T1 / DLP-B | Canonical | close > EMA50 AND EMA50_t > EMA50_(t-5) |
+| DLP-C | DEFERRED_SEPARATE_RESEARCH_VARIANT | Confirmed Daily HH/HL geometry; excluded from initial family |
+
+T0/T1 share Daily series, PIT basis, freshness, EMA50, seed, origin, operand
+readiness, downstream H0001 rules, costs and sample. The sole difference is the
+positive five-observation slope predicate. Primary question:
+
+> Does adding the predeclared positive EMA50 5-session slope condition to the
+> identical close>EMA50 rule improve H0001 conditional outcomes after costs
+> without improvement being explained only by suppressing samples?
+
+Required diagnostics: state occupancy, BULLISH session count, UNAVAILABLE count,
+downstream setup eligible count, signal count, completed trade count, exposure
+time, turnover, after-cost return, MFE, MAE, drawdown and denominator changes.
+Win rate alone does not establish incremental value; sample suppression must
+be visible. Recommendation/cohort outcomes must not become account performance.
+
+No initial span or lag sweep. Other spans/lags, dual EMA, SMA, Daily MACD,
+RSI, ADX or price-structure conjunctions cannot be appended after seeing results.
+Each change is a new registered variant/revision and separate trial family.
+C requires separate swing widths and delay, is a new Daily hypothesis, and would
+unnecessarily enlarge the initial multiple-testing family. A failed B does not
+authorize choosing C as champion from the same viewed outcomes: preregister a
+new experiment/revision first.
+
+Chronological only; discovery and confirmation separate. Already observed NOK
+and Sep/Oct 2026 SOXX cases and contemporary semiconductor narrative are
+discovery/exposure, forbidden as independent confirmation. Outcomes may be
+queried only after candidate/parameter freeze and full performance registration.
+After confirmatory results, span/lag changes require a new revision. Preserve
+failed, null and inconclusive trials. This is a Daily subfamily registration,
+not completion of H1-MULTIPLE-TESTING or full experiment design.
+
+No arbitrary dataset ID or dates: freeze the actual eligible universe/coverage,
+then dataset/date splits in performance registration **before** querying outcomes.
+Metric, null, pass/reject rule, costs, sample unit, purge/embargo and the rest of
+the strategy families remain unresolved; reuse the validation engine later.
+
+## Remaining scope and inventory
+
+Actual inventory: **78 decisions; 70→69 unresolved IDs; C1 46→45;
+97→96 unresolved paths**, performance 17 / optional 7 unchanged. Only
+`rule_parameters.daily_long_permission` is removed; decision metadata and all
+other contracts are unchanged. H0001 remains DRAFT / NOT TESTED, chart parity
+UNVERIFIED. H1-DAILY-BLOCKER is still unresolved even when trend is BULLISH.
+Exhaustion, overbought/MACD upper extreme, crash/drawdown, volatility spike and
+macro/sector/options/fundamentals are excluded from this classifier.
+
+PIT action transform, real freshness selector, mixed-profile as_of join and real
+provider/session/action provenance remain missing. Required extended intraday
+still rejects early-close/nonstandard dates: **V2-D_BLOCKER remains**.
+Next bundle: separate Daily exhaustion/blocker definition and action, then
+decision cadence, transition/reset and the remaining C1 rules; performance
+registration follows real data eligibility. No main merge.
+
+Validation results are recorded in PROJECT_STATUS.md and the C0 specification.
+
+---
+
+The proposal and earlier dependency/audit notes below are historical records
+at their named bases. Their unselected trend statements are superseded above.
+
 # H0001 Daily PRICE_REGIME / TREND_PERMISSION decision proposal
 
 Basis: `v2-c0-extended-session-contract` at

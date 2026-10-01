@@ -4,41 +4,49 @@ V2-C0 infrastructure: **COMPLETE** (validation results below).
 H0001 executable specification: **DRAFT / BLOCKED_ON_DECISIONS**.
 H0001 profitability: **NOT TESTED**. No H0001 trading plugin exists.
 
-Daily decision research proposal (2026-10-01):
-[H0001 Daily PRICE_REGIME / TREND_PERMISSION](H0001_DAILY_PRICE_RESEARCH.md)
-records the repository-only chart audit, three unselected causal candidate
-variants, independent trend/exhaustion/price-shock axes and three next decision
-bundles. Its candidate rules remain proposals. The subsequent
-[DAILY-INPUT audit](H0001_DAILY_INPUT_CONTRACT.md) restores the original
-[Research Philosophy](RESEARCH_PHILOSOPHY.md) and added two unresolved input
-contracts in executable v6. The current
-[immutable input decision record](../research/decision_records/H0001-daily-input-freeze-v1.yaml)
-resolves three Daily input choices in executable v7, without selecting a trend
-candidate or changing production/paper behavior.
+Current Daily trend freeze (basis `f517374f66b75c84a0ea025ced91cacf866b2b8a`):
+[Daily research contract](H0001_DAILY_PRICE_RESEARCH.md) and
+[immutable trend record](../research/decision_records/H0001-daily-trend-freeze-v1.yaml)
+resolve **H1-DAILY-LONG** as DLP-B / `DAILY_TREND_EMA_LEVEL_SLOPE_V1`.
+`close > EMA50 AND EMA50_t > EMA50_(t-5)`, strict comparisons, completed trading
+observations; first-observation seed, minimum_history=173, separate readiness
+for current and lag prefixes. The record documents the requested h-count
+formula versus the literal N-1 seed coefficient; at N=173 the latter is slightly
+above 0.1%. Equality yields NOT_BULLISH only when every operand is READY;
+missing evidence yields UNAVAILABLE, with no SHORT permission.
 
-Draft inventory: **78 decisions**, of which eight are resolved. Remaining:
-**46 C1 blockers, 17 performance blockers, 7 optional extensions**;
-**97 unresolved parameter/transition paths**, **70 unresolved IDs**.
-`H1-SESSION` selects intraday 15m/1H only. v7 resolves:
-H1-DAILY-SESSION=RTH_DAILY;
-H1-DAILY-PRICE-BASIS=PIT_SPLIT_ADJUSTED_OHLC;
-H1-DAILY-FRESHNESS=LATEST_EXPECTED_COMPLETED_SESSION_REQUIRED.
-The v5 session decision added one ID/path; v6 added two input contracts.
-v6→v7 retains all 78 IDs/classifications and removes exactly three unresolved
-root paths/IDs (73→70; C1 49→46; paths 100→97). This is input semantics freeze,
-not H0001 strategy freeze, chart reproduction or runtime capability completion.
-Generic extended-hours capability
-is implemented; this is not H0001 C1. See [extended-session contract](V2_EXTENDED_SESSION_IMPLEMENTATION.md).
-Canonical specification SHA-256:
-`cd60f510d9d18c0dffce985f553b4fbc482915cd7a1de01d162b663981a92a26`.
-Early-close restrictions remain in force and are recorded as **V2-D_BLOCKER**
-in [the extended-session note](V2_EXTENDED_SESSION_IMPLEMENTATION.md).
+Input freeze remains **RTH_DAILY / PIT_SPLIT_ADJUSTED_OHLC /
+LATEST_EXPECTED_COMPLETED_SESSION_REQUIRED**. Intraday 1H/15m remains
+RTH_EXTENDED. Chart parity remains UNVERIFIED. H1-DAILY-BLOCKER stays unresolved.
+The original r03, Daily input freeze, philosophy and proposal are preserved.
 
-v7 semantic freeze validation: full suite **807 passed in 161.77s**, no failures,
-skips or pytest warnings (788 prior cases + 19 new contract/fixture cases).
-`git diff --check` and immutable r03/philosophy/input/DLP proposal comparisons
-pass. Only spec profile readability changes in executable code; no real
-transform, selector, join, classifier or production/paper behavior is implemented.
+Draft inventory: **78 decisions**, nine resolved;
+**45 C1 blockers, 17 performance blockers, 7 optional extensions**;
+**96 unresolved parameter/transition paths**, **69 unresolved IDs**.
+v7→v8 resolves exactly `rule_parameters.daily_long_permission`, retaining all
+IDs, classifications and every other contract. Canonical specification SHA-256:
+`302ce8ba197dd3273a17fe7065a0c1eadd1541143f81e6b7f41fb81cfb783059`.
+Trend rule SHA-256:
+`a43e95d1389d35e5a8d3ed51845a7cea945c5d5d12a30439b5311e64de731de5`.
+
+`strategy/daily_trend.py` implements a pure detached research classifier using
+V2-B `EMASpec`/`ema`; prepared causal eligible inputs supply freshness/action
+facts. No real transform, selector or mixed-profile join is implemented, and no
+production/paper/order/plugin integration is added. No historical performance
+backtest or sweep. Extended early-close restrictions remain **V2-D_BLOCKER**.
+
+The preregistered Daily subfamily is only **T0 DLP-A level ablation / T1 DLP-B**.
+Both use identical operand readiness, inputs, downstream rules, sample and costs;
+only the slope predicate differs. C is DEFERRED_SEPARATE_RESEARCH_VARIANT.
+Chronological discovery/confirmation separation, contaminated NOK/SOXX exclusions,
+failed/null/inconclusive retention and new-revision requirements are frozen.
+Actual dataset/date splits and full performance protocol remain undecided until
+eligible data coverage is established, before outcomes are inspected.
+
+v8 validation: **843 passed in 166.87s**, no failures/skips/pytest warnings
+(807 prior cases + 36 new cases). Daily classifier focused suite: 36 passed.
+CLI `--help` and `git diff --check` pass. Historical v7 validation:
+807 passed in 161.77s; current v8 validation supersedes it.
 
 The earlier C0 implementation/audit records below describe their original
 75-decision/107-path state. Current selections and validation are recorded in
@@ -115,7 +123,7 @@ or a retrofit guard on old fixture strategies.
 
 ## Schema, canonical representation and hash
 
-Schema `strategy_specification_v1`; current H0001 profile `h0001_r03_spec_v7`.
+Schema `strategy_specification_v1`; current H0001 profile `h0001_r03_spec_v8`.
 Profile v4 records the authorized first five decisions and explicit extended capability.
 Profile v5 limits H1-SESSION to intraday and adds the independent unresolved
 H1-DAILY-SESSION C1 decision without selecting either Daily candidate.
@@ -123,7 +131,8 @@ Profile v6 requires independent Daily price-basis and freshness contracts.
 Profile v7 records the three user-authorized semantic choices as versioned
 contracts; their source/rationale is the new decision record, with the original
 input and DLP proposals preserved byte-for-byte at the freeze basis.
-Legacy v3/v4/v5/v6 profiles remain readable, but omitted Daily input contracts cannot
+Profile v8 freezes the versioned Daily trend contract; mutations require a new revision.
+Legacy v3/v4/v5/v6/v7 profiles remain readable, but omitted Daily input contracts cannot
 pass C1_READY. C1 admission validates declarations; it does not implement a real
 adjustment adapter, freshness evaluator or H0001 classifier.
 The r03 hypothesis bytes remain unchanged; no r04 is required for this pre-experiment
@@ -259,7 +268,7 @@ continuity and aggregation definitions. Availability remains atomic-known-at.
 RTH_EXTENDED passes the intraday session portion only with that explicit compatible
 profile; a stale RTH claim fails. 1H/Daily base and ATR_REVERSAL/DIRECTIONAL_CHANGE
 still require future implementation and cannot pass C1 admission. Full admission
-remains blocked by DRAFT status and 46 C1 decisions. `require_daily_session_capability()`
+remains blocked by DRAFT status and 45 C1 decisions. `require_daily_session_capability()`
 validates the independent Daily choice; MACD Daily continuity follows that choice
 rather than the intraday profile. The existing generic extended Daily capability
 is retained for a future versioned variant. Historical v3/v4 specifications remain
@@ -300,8 +309,9 @@ parameter envelope; the first five and three Daily input decisions are selected)
 - FRACTAL parameters use `fractal_k_right_strict_v1`, including explicit
   left/right widths, strict ties and completed-grid continuity.
 
-Min-history, widths, periods, fields and all strategy thresholds remain
-researcher decisions. This gate introduces no feature computation or winner.
+Daily EMA50/minimum_history=173/lag=5 and the earlier MACD conventions are
+selected. Other widths, periods, fields and strategy thresholds remain
+researcher decisions. The admission gate introduces no performance winner.
 
 | H0001 need | Existing V2-B primitive | Remaining strategy work |
 |---|---|---|
@@ -314,7 +324,7 @@ researcher decisions. This gate introduces no feature computation or winner.
 | MACD GC / DC | Raw MACD and signal lines | NOT YET strategy predicates |
 | Histogram contraction | Histogram values | NOT YET strategy predicate |
 | MACD/signal slope | Line values | NOT YET strategy predicates |
-| Daily regime / blocker | Completed Daily features | UNRESOLVED strategy rules |
+| Daily trend / blocker | EMA50 level + 5-observation slope research classifier | Trend resolved in v8; separate blocker UNRESOLVED |
 | BOS / valid-HL / break | Completed OHLC + confirmed labels | UNRESOLVED strategy semantics |
 | Execution / sizing / costs | Reserved Intent/Fill value contracts | No simulator, ledger or performance evaluation |
 

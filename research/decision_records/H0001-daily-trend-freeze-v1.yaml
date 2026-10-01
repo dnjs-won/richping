@@ -1,0 +1,171 @@
+# Immutable ex-ante semantic decision; no historical outcome was queried.
+schema_version: daily_trend_decision_record_v1
+record_id: H0001-DAILY-TREND-FREEZE-v1
+status: FROZEN_TREND_DECISION
+basis_commit: f517374f66b75c84a0ea025ced91cacf866b2b8a
+decision_date: '2026-10-01'
+decision_author: user_researcher
+decision_source: explicit_user_instruction_semantic_rationale_before_performance
+source_proposal:
+  path: research/decision_proposals/H0001-daily-price-regime-v1.yaml
+  status_at_proposal: PROPOSED_NOT_FROZEN
+  preservation: byte_identical_at_basis_commit
+input_freeze:
+  path: research/decision_records/H0001-daily-input-freeze-v1.yaml
+  preservation: byte_identical_at_basis_commit
+executable_spec:
+  path: research/strategy_specs/H0001-r03-draft.yaml
+  version: h0001_r03_spec_v8
+  canonical_sha256: 302ce8ba197dd3273a17fe7065a0c1eadd1541143f81e6b7f41fb81cfb783059
+hypothesis:
+  path: research/hypotheses/H0001-r03.yaml
+  preservation: byte_identical_at_basis_commit
+  status: DRAFT
+  profitability: NOT_TESTED
+observed_chart_parity: UNVERIFIED
+decision:
+  id: H1-DAILY-LONG
+  status: RESOLVED
+  candidate: DLP-B
+  rule_version: DAILY_TREND_EMA_LEVEL_SLOPE_V1
+  rule_hash: a43e95d1389d35e5a8d3ed51845a7cea945c5d5d12a30439b5311e64de731de5
+  definition: C_t > E50_t AND E50_t > E50_t_minus_5
+  meaning: price_derived_LONG_permission_not_market_macro_regime_or_SHORT_permission
+  session: RTH_DAILY
+  session_profile: XNYS_RTH
+  price_basis: PIT_SPLIT_ADJUSTED_OHLC
+  freshness: LATEST_EXPECTED_COMPLETED_SESSION_REQUIRED
+  ema:
+    span: 50
+    seed: FIRST_OBSERVATION_RECURSIVE
+    history_origin: available_completed_history_prefix_v1
+    reset_between_sessions: false
+    minimum_history: 173
+    feature_specification_hash: 3fe37bfb0a5fef3bf6fd63e0d0daa7891ba607f2afb297e02193ab66715d78f7
+  slope:
+    lag_observations: 5
+    unit: completed_selected_RTH_DAILY_trading_observations_not_calendar_days
+    reference: same_origin_same_current_as_of_transformed_vintage_prefix_ending_at_t_minus_5
+    regression_or_extra_threshold: NONE
+  equality:
+    close_eq_ema: NOT_BULLISH
+    ema_eq_lag_ema: NOT_BULLISH
+  states:
+    BULLISH: all_operands_READY_and_both_strict_conditions_true
+    NOT_BULLISH: all_operands_READY_and_one_or_more_conditions_false_not_BEARISH
+    UNAVAILABLE: input_history_action_evidence_freshness_or_calculation_unavailable_not_NOT_BULLISH
+semantic_rationale:
+  A: r03_requires_rising_Daily_regime_not_only_price_above_average
+  B: level_only_can_allow_temporary_reclaim_above_a_falling_average
+  C: B_minimally_combines_price_above_medium_term_smoothed_level_and_that_level_rising
+  D: Daily_HH_HL_adds_swing_width_confirmation_delay_and_a_new_Daily_hypothesis
+  E: first_canonical_revision_uses_the_simple_two_condition_rising_trend_definition
+parameter_rationale:
+  span_50:
+    - Daily_is_slower_PRICE_REGIME_axis_than_1H_and_15m
+    - 50_trading_sessions_approximately_10_trading_weeks_medium_term_trend
+    - avoid_repeating_short_term_1H_noise_without_expanding_to_200_day_secular_trend
+    - not_selected_from_current_SOXX_or_2026_09_10_results
+  lag_5:
+    - one_day_slope_may_be_sensitive_to_Daily_noise
+    - require_approximately_one_trading_week_direction
+    - no_regression_or_additional_threshold
+performance_claims:
+  EMA50_best_or_superior: NOT_TESTED
+  B_superior_to_A_or_C: NOT_TESTED
+  RTH_superior_to_Extended: NOT_TESTED
+readiness:
+  alpha: 2/51
+  residual_limit: 0.001
+  contracted_residual_formula: (1-alpha)^h
+  derivation: ceil(log(0.001)/log(49/51)) = 173
+  residual_h_172: 0.0010272011006169637
+  residual_h_173: 0.0009869187045143375
+  frozen_count_unit: completed_observations_including_first_seed
+  DLP_A_standalone_minimum_history: 173
+  off_by_one_audit: >-
+    E[0]=C[0] entails N-1 recursive updates for N observations. The literal
+    first-seed coefficient at N=173 is (49/51)^172 = 0.0010272011006169637
+    (0.1027201101%), slightly above 0.1%; at N=174 it is (49/51)^173.
+    The user explicitly freezes minimum_history=173 under the stated h-count
+    convention. Preserve that contract, disclose the distinction, and never
+    claim that the literal coefficient at 173 observations is <=0.1%.
+  B_readiness: independently_require_current_prefix_count_gte_173_and_t_minus_5_prefix_count_gte_173
+  B_boundary_fixture: current_177_lag_172_UNAVAILABLE_current_178_lag_173_READY
+  comparator_common_availability: >-
+    Standalone A needs 173. In the registered matched T0/T1 comparison both
+    classifiers require the same current AND lag operand readiness, giving
+    identical availability. A removes only the positive-slope predicate.
+as_of_lifecycle:
+  prior_fresh_Daily_intraday: same_price_state_same_input_hash_own_as_of
+  newly_expected_but_undelivered: UNAVAILABLE_no_previous_BULLISH_carry_forward
+  delivery: recompute_only_from_actual_atomic_bar_and_required_action_known_at
+  state_known_at: maximum_all_actual_bar_and_required_transform_evidence_known_at
+  future_Daily_or_action_evidence: forbidden_including_future_effective_action
+  old_snapshots: immutable
+  freshness_selector: NOT_IMPLEMENTED_expected_session_fact_supplied_to_research_classifier
+candidates:
+  DLP-A:
+    status: PREDECLARED_ABLATION_COMPARATOR
+    rule_version: DAILY_TREND_EMA_LEVEL_ABLATION_V1
+    definition: C_t > E50_t
+    canonical: false
+    comparison_difference_only: positive_EMA50_5_observation_slope_predicate
+    identical_controls: [Daily_series, PIT_price_basis, freshness, EMA50, seed, history_origin, operand_readiness, downstream_H0001_rules, costs, sample]
+  DLP-B:
+    status: CANONICAL
+  DLP-C:
+    status: DEFERRED_SEPARATE_RESEARCH_VARIANT
+    executable: false
+    initial_family_member: false
+    definition: confirmed_Daily_HH_HL_geometry
+    reasons: [separate_swing_width, different_confirmation_delay, new_Daily_extension_of_r03_15m_exit_geometry, avoid_unnecessary_initial_multiple_testing]
+    after_B_failure: cannot_select_C_champion_from_same_viewed_results_requires_new_preregistered_experiment_revision
+experiment_family:
+  status: PREDECLARED_DAILY_SUBFAMILY_NOT_FULL_PERFORMANCE_REGISTRATION
+  members:
+    T0: DLP-A
+    T1: DLP-B
+  primary_question: >-
+    Does adding the predeclared positive EMA50 5-session slope condition to
+    the identical close>EMA50 rule improve H0001 conditional outcomes after
+    costs without improvement being explained only by suppressing samples?
+  diagnostics: [state_occupancy, BULLISH_session_count, UNAVAILABLE_count, downstream_setup_eligible_count, signal_count, completed_trade_count, exposure_time, turnover, after_cost_return, MFE, MAE, drawdown, denominator_changes]
+  win_rate_alone_is_adoption_evidence: false
+  same_family_post_result_additions_forbidden: [other_EMA_span, other_slope_lag, dual_EMA, SMA, Daily_MACD, RSI, ADX, price_structure_conjunction, DLP-C]
+  parameter_sweeps: FORBIDDEN
+  new_parameter_or_family: new_registered_variant_revision_and_trial_family
+confirmatory_protocol:
+  chronological_only: true
+  discovery_confirmatory_separate: true
+  exposed_discovery: [observed_NOK, SOXX_2026_09_10_cases, contemporary_AI_semiconductor_narrative]
+  exposed_cases_independent_confirmation: FORBIDDEN
+  outcomes: only_after_candidate_and_parameter_freeze_and_full_performance_registration
+  confirmatory_span_or_lag_change: new_revision
+  additional_families: separate_trial_family
+  retain_trials: [failed, 'null', inconclusive]
+  dataset_id: NOT_YET_FROZEN
+  date_splits: NOT_YET_FROZEN
+  split_freeze: real_eligible_universe_and_coverage_then_performance_registration_before_outcomes
+  choose_splits_after_performance: FORBIDDEN
+independent_axes:
+  H1-DAILY-BLOCKER: UNRESOLVED
+  daily_exhaustion_state: separate_unresolved_axis_even_when_trend_BULLISH
+  excluded_from_trend: [overbought, MACD_upper_extreme, crash, drawdown, volatility_spike, macro, sector, options, fundamentals]
+implementation:
+  module: richping.research_v2.strategy.daily_trend
+  scope: pure_deterministic_research_classifier_on_prepared_eligible_causal_Daily_prefix
+  primitive: existing_V2_B_EMASpec_and_ema
+  runtime_paper_order_connection: NONE
+  end_to_end_real_market_replay: NOT_IMPLEMENTED
+  remaining_data_blockers: [PIT_split_action_transform, mixed_profile_as_of_join, real_freshness_selector, real_provider_session_action_provenance, extended_early_close]
+inventory:
+  decisions: 78
+  unresolved_ids_before: 70
+  unresolved_ids_after: 69
+  C1_before: 46
+  C1_after: 45
+  unresolved_paths_before: 97
+  unresolved_paths_after: 96
+  removed_root: rule_parameters.daily_long_permission
+  other_decisions_classifications: unchanged

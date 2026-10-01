@@ -263,17 +263,17 @@ class H0001Specification(StrategySpecification):
         if (value["strategy_id"], value["hypothesis_id"], value["hypothesis_revision"], value["direction"]) != (
                 "H0001", "H0001", 3, "LONG_ONLY"):
             raise ValueError("Unsupported H0001-r03 identity")
-        if value["specification_version"] not in {"h0001_r03_spec_v3", "h0001_r03_spec_v4", "h0001_r03_spec_v5", "h0001_r03_spec_v6", "h0001_r03_spec_v7"}:
+        if value["specification_version"] not in {"h0001_r03_spec_v3", "h0001_r03_spec_v4", "h0001_r03_spec_v5", "h0001_r03_spec_v6", "h0001_r03_spec_v7", "h0001_r03_spec_v8"}:
             raise ValueError("Unsupported H0001 specification version")
         if value["source"] != {"path": "research/hypotheses/H0001-r03.yaml", "sha256": SOURCE_SHA256}:
             raise ValueError("H0001 source provenance mismatch")
         # Historical profiles remain readable, without imputing new input
         # choices. Their omitted contracts still prevent current C1 admission.
         required = {key: record for key, record in REQUIRED.items()
-                    if (value["specification_version"] in {"h0001_r03_spec_v6", "h0001_r03_spec_v7"}
+                    if (value["specification_version"] in {"h0001_r03_spec_v6", "h0001_r03_spec_v7", "h0001_r03_spec_v8"}
                         or key not in {('timeframe_contracts', 'daily_freshness'),
                                        ('feature_contracts', 'daily_price_basis')})
-                    and (value["specification_version"] in {"h0001_r03_spec_v5", "h0001_r03_spec_v6", "h0001_r03_spec_v7"}
+                    and (value["specification_version"] in {"h0001_r03_spec_v5", "h0001_r03_spec_v6", "h0001_r03_spec_v7", "h0001_r03_spec_v8"}
                          or key != ('timeframe_contracts', 'daily_session_policy'))}
         expected = {section: set() for section, _ in required}
         for section, field in (*required, *FIXED):
@@ -313,6 +313,11 @@ class H0001Specification(StrategySpecification):
                 "observed_chart_provider", "observed_1h_boundary", "observed_ema_seed",
                 "observed_history_origin", "observed_min_history", "parity_evidence")):
             raise ValueError("Chart parity claim requires observed conventions and evidence")
+        if value["specification_version"] == "h0001_r03_spec_v8":
+            from .daily_trend import CANONICAL
+            rule = value["rule_parameters"]["daily_long_permission"]["value"]
+            if rule != UNRESOLVED and rule != CANONICAL.contract:
+                raise ValueError("Frozen Daily trend v1 contract changed; register a new revision")
         machine = value["state_machine"]
         if set(machine["states"]) != set(STATES):
             raise ValueError("H0001 state inventory mismatch")

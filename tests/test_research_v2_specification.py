@@ -36,6 +36,12 @@ def draft():
     return load_h0001(DRAFT, hypothesis_path=SOURCE)
 
 
+def input_freeze_draft():
+    return H0001Specification.loads(subprocess.check_output([
+        "git", "show", "f517374f66b75c84a0ea025ced91cacf866b2b8a:" + DRAFT.relative_to(ROOT).as_posix(),
+    ], cwd=ROOT).decode("utf-8"))
+
+
 def input_audit_draft():
     """Immutable v6 audit fixture; later semantic freeze has separate tests."""
     return H0001Specification.loads(subprocess.check_output([
@@ -133,8 +139,8 @@ def compatible_features_fixture(value, method="ROLLING_PERCENTILE"):
 def test_draft_inventory_and_no_plugin_or_profitability_export():
     spec = draft()
     assert spec.unpack()["status"] == "DRAFT"
-    assert len(spec.unresolved_fields) == 97
-    assert sum(len(spec.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)) == 70
+    assert len(spec.unresolved_fields) == 96
+    assert sum(len(spec.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)) == 69
     for method in (spec.require_c1_ready, spec.plugin_specification, spec.require_profitability_ready,
                    spec.require_historical_reproduction_ready):
         with pytest.raises(ValueError):
@@ -297,7 +303,7 @@ def test_h0001_cannot_hide_unknown_by_reclassifying_or_changing_schema(mutation)
 
 
 def test_nested_contract_unknowns_are_still_blockers():
-    body = resolve_fixture(draft(), {C1})
+    body = resolve_fixture(input_freeze_draft(), {C1})
     body["rule_parameters"]["daily_long_permission"]["value"]["parameters"]["threshold"] = {
         "kind": "number", "value": UNRESOLVED, "choices": [], "decision_id": "H1-DAILY-LONG"}
     d = H0001Specification.of(body)
@@ -560,7 +566,7 @@ def test_remediation_preserves_every_decision_and_unresolved_strategy_parameter(
     original = StrategySpecification.loads(subprocess.check_output([
         "git", "show", "e2bce5b0dd0bd49a7b132f3aced2a3fcaadbfb0f:research/strategy_specs/H0001-r03-draft.yaml",
     ], cwd=ROOT).decode("utf-8"))
-    current = draft()
+    current = input_freeze_draft()
     old, new = original.unpack(), current.unpack()
     assert prior_decision_inventory(old) == prior_decision_inventory(new)
     for section in set(SECTIONS) - {"engine_capabilities", "feature_contracts", "timeframe_contracts", "chart_parity"}:
@@ -666,7 +672,7 @@ def test_lifecycle_returns_reuse_unresolved_contract_without_resolving_or_adding
     before = StrategySpecification.loads(subprocess.check_output([
         'git', 'show', '03438243b0ce35a456bf350adcdbdf6da5416c26:research/strategy_specs/H0001-r03-draft.yaml',
     ], cwd=ROOT).decode('utf-8'))
-    current = draft()
+    current = input_freeze_draft()
     resolved = {"H1-SESSION", "H1-BASE", "H1-EMA-SEED", "H1-MACD-HISTORY", "H1-HISTORY-ORIGIN"}
     assert prior_unresolved_fields(current) == {p: info for p, info in before.unresolved_fields.items()
                                          if info['decision_id'] not in resolved}

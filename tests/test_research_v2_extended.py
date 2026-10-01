@@ -28,6 +28,7 @@ from richping.research_v2.strategy.specification import C1, PERFORMANCE, OPTIONA
 from test_research_v2 import Observer, fixture_data
 from test_research_v2_specification import (
     resolve_fixture, feature_contract, prior_decision_inventory, prior_unresolved_fields,
+    input_freeze_draft,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -308,7 +309,7 @@ def test_extended_manifest_and_bar_metadata_cannot_be_silently_omitted_or_forged
 
 
 def test_eight_decisions_resolved_source_bytes_untouched():
-    spec = load_h0001(DRAFT)
+    spec = input_freeze_draft()  # Historical eight-decision audit at v7.
     before = StrategySpecification.loads(subprocess.check_output([
         "git", "show", BASE + ":research/strategy_specs/H0001-r03-draft.yaml"], cwd=ROOT).decode())
     old, new = before.unpack(), spec.unpack()
