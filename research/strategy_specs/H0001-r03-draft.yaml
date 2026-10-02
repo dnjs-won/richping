@@ -1,17 +1,18 @@
+# Blocker provenance: research/decision_records/H0001-daily-blocker-freeze-v1.yaml.
 # Executable-spec draft, NOT a strategy implementation or complete strategy freeze.
 # Source r03 remains immutable. The five intraday/base/MACD decisions remain resolved.
-# Three Daily input decisions and H1-DAILY-LONG are resolved; H0001 remains DRAFT.
+# Daily input, H1-DAILY-LONG and H1-DAILY-BLOCKER are resolved; H0001 remains DRAFT.
 # Decision provenance: research/decision_records/H0001-daily-input-freeze-v1.yaml.
 # Trend provenance: research/decision_records/H0001-daily-trend-freeze-v1.yaml.
 # Readiness remediation: research/decision_records/H0001-daily-trend-readiness-remediation-v1.yaml.
 schema_version: strategy_specification_v1
 strategy_id: H0001
-specification_version: h0001_r03_spec_v9
+specification_version: h0001_r03_spec_v10
 hypothesis_id: H0001
 hypothesis_revision: 3
 status: DRAFT
 created_at: '2026-09-27T00:00:00Z'
-updated_at: '2026-10-01T00:00:00Z'
+updated_at: '2026-10-02T00:00:00Z'
 source:
   path: research/hypotheses/H0001-r03.yaml
   sha256: 35e13276056a36d6a06de04611720fd286113f0e5db1e4255af6ceeb6a0f0bc2
@@ -365,7 +366,336 @@ rule_parameters:
     decision_id: H1-DAILY-LONG
   daily_exhaustion_blocker:
     kind: contract
-    value: UNRESOLVED
+    value:
+      name: daily_blocker_macd_line_p95
+      version: v1
+      parameters:
+        state_definition:
+          kind: contract
+          value:
+            name: daily_exhaustion_macd_line_percentile
+            version: v1
+            parameters:
+              session:
+                kind: text
+                value: RTH_DAILY
+                choices: []
+                decision_id: null
+              session_profile:
+                kind: text
+                value: XNYS_RTH
+                choices: []
+                decision_id: null
+              price_basis:
+                kind: text
+                value: PIT_SPLIT_ADJUSTED_OHLC
+                choices: []
+                decision_id: null
+              freshness:
+                kind: text
+                value: LATEST_EXPECTED_COMPLETED_SESSION_REQUIRED
+                choices: []
+                decision_id: null
+              field:
+                kind: text
+                value: MACD_LINE
+                choices: []
+                decision_id: null
+              fast:
+                kind: integer
+                value: 12
+                choices: []
+                decision_id: null
+              slow:
+                kind: integer
+                value: 26
+                choices: []
+                decision_id: null
+              signal:
+                kind: integer
+                value: 9
+                choices: []
+                decision_id: null
+              macd_min_history:
+                kind: integer
+                value: 130
+                choices: []
+                decision_id: null
+              seed:
+                kind: text
+                value: first_observation
+                choices: []
+                decision_id: null
+              signal_start:
+                kind: text
+                value: first_macd_observation
+                choices: []
+                decision_id: null
+              history_origin:
+                kind: text
+                value: full_available_completed_causal_history
+                choices: []
+                decision_id: null
+              session_reset:
+                kind: boolean
+                value: false
+                choices: []
+                decision_id: null
+              relative_transform:
+                kind: text
+                value: ROLLING_PERCENTILE
+                choices: []
+                decision_id: null
+              transform_version:
+                kind: text
+                value: rolling_empirical_midrank_v1
+                choices: []
+                decision_id: null
+              window:
+                kind: integer
+                value: 252
+                choices: []
+                decision_id: null
+              min_history:
+                kind: integer
+                value: 252
+                choices: []
+                decision_id: null
+              count_unit:
+                kind: text
+                value: completed_RTH_DAILY_trading_observations_not_calendar_days
+                choices: []
+                decision_id: null
+              convention:
+                kind: text
+                value: CURRENT_INCLUSIVE
+                choices: []
+                decision_id: null
+              ties:
+                kind: text
+                value: midrank
+                choices: []
+                decision_id: null
+              partial_reference_window:
+                kind: boolean
+                value: false
+                choices: []
+                decision_id: null
+              readiness_formula:
+                kind: text
+                value: MACD_min_history_plus_percentile_window_minus_1
+                choices: []
+                decision_id: null
+              first_full_window_expected_N:
+                kind: integer
+                value: 381
+                choices: []
+                decision_id: null
+              upper_percentile:
+                kind: number
+                value: 0.95
+                choices: []
+                decision_id: null
+              comparator:
+                kind: text
+                value: GREATER_THAN_OR_EQUAL
+                choices: []
+                decision_id: null
+              macd_line_gt_zero:
+                kind: boolean
+                value: true
+                choices: []
+                decision_id: null
+              states:
+                kind: text
+                value: NORMAL|EXTENDED|UNAVAILABLE
+                choices: []
+                decision_id: null
+              unavailable:
+                kind: text
+                value: input_freshness_PIT_evidence_readiness_continuity_finite_known_at_failure
+                choices: []
+                decision_id: null
+              cadence:
+                kind: text
+                value: new_causally_usable_completed_RTH_Daily_or_actual_evidence_vintage
+                choices: []
+                decision_id: null
+              independent_from_trend:
+                kind: boolean
+                value: true
+                choices: []
+                decision_id: null
+              state_version:
+                kind: text
+                value: DAILY_EXHAUSTION_MACD_LINE_PERCENTILE_V1
+                choices: []
+                decision_id: null
+              state_definition_hash:
+                kind: text
+                value: 3129a3d8a6a2133e2b006ed31c02c6724a5848fa2d9eae60178910504fb30753
+                choices: []
+                decision_id: null
+              macd_specification_hash:
+                kind: text
+                value: 21104bfe58294d435650a3047553e43a5e37a8f83fd3bc51aa68a350f3a54fd7
+                choices: []
+                decision_id: null
+              percentile_specification_hash:
+                kind: text
+                value: 1d9002cd52295d285e584c145a9f931412a270f1824078e18747cdba0b886d8d
+                choices: []
+                decision_id: null
+          choices: []
+          decision_id: null
+        policy:
+          kind: contract
+          value:
+            name: daily_exhaustion_block_new_exposure
+            version: v1
+            parameters:
+              selected_policy:
+                kind: text
+                value: P2
+                choices: []
+                decision_id: null
+              action:
+                kind: text
+                value: BLOCK_NEW_LONG_EXPOSURE
+                choices: []
+                decision_id: null
+              candidate_types:
+                kind: text
+                value: INITIAL_ENTRY|ADD|REENTRY
+                choices: []
+                decision_id: null
+              NORMAL:
+                kind: text
+                value: ALLOW_exhaustion_veto_NONE_other_permissions_still_required
+                choices: []
+                decision_id: null
+              EXTENDED:
+                kind: text
+                value: BLOCK_EXTENDED
+                choices: []
+                decision_id: null
+              UNAVAILABLE:
+                kind: text
+                value: BLOCK_UNAVAILABLE
+                choices: []
+                decision_id: null
+              unavailable_policy:
+                kind: text
+                value: FAIL_CLOSED_FOR_NEW_EXPOSURE
+                choices: []
+                decision_id: null
+              unavailable_reason:
+                kind: text
+                value: NEW_EXPOSURE_BLOCKED_DUE_TO_EXHAUSTION_UNAVAILABLE
+                choices: []
+                decision_id: null
+              reentry_is_new_exposure:
+                kind: boolean
+                value: true
+                choices: []
+                decision_id: null
+              existing_position:
+                kind: text
+                value: NO_FORCED_EXIT_existing_HOLD_EXIT_unchanged
+                choices: []
+                decision_id: null
+              exit_owner:
+                kind: text
+                value: 1H_EXIT_WATCH_plus_15m_structure_exit
+                choices: []
+                decision_id: null
+              blocked_signal_queue:
+                kind: text
+                value: DISABLED
+                choices: []
+                decision_id: null
+              blocked_signal_lifecycle:
+                kind: text
+                value: NO_DEFERRED_EXECUTION_OF_BLOCKED_SIGNAL
+                choices: []
+                decision_id: null
+              subsequent_entry:
+                kind: text
+                value: requires_new_valid_downstream_H0001_signal_trigger
+                choices: []
+                decision_id: null
+              gate_cadence:
+                kind: text
+                value: each_future_new_exposure_candidate_latest_causal_Daily_state
+                choices: []
+                decision_id: null
+              global_decision_timing:
+                kind: text
+                value: owned_by_H1_DECISION_TIMING
+                choices: []
+                decision_id: null
+              policy_version:
+                kind: text
+                value: DAILY_EXHAUSTION_BLOCK_NEW_EXPOSURE_V1
+                choices: []
+                decision_id: null
+              policy_hash:
+                kind: text
+                value: 082a42def5d2c0e5f59591d01578558fcb40e80adaa36ddb4358523a597e8be9
+                choices: []
+                decision_id: null
+          choices: []
+          decision_id: null
+        combined_version:
+          kind: text
+          value: DAILY_BLOCKER_MACD_LINE_P95_V1
+          choices: []
+          decision_id: null
+        combined_hash:
+          kind: text
+          value: 57fa1da494cf2e2a2b21bbedb159521a3d27646912d150abbf38787f26b81fac
+          choices: []
+          decision_id: null
+        freeze_ref:
+          kind: text
+          value: research/decision_records/H0001-daily-blocker-freeze-v1.yaml
+          choices: []
+          decision_id: null
+        B0:
+          kind: text
+          value: NO_BLOCKER_optional_B1_raw_observation_no_actionable_exhaustion_veto
+          choices: []
+          decision_id: null
+        B1:
+          kind: text
+          value: CANONICAL_DAILY_MACD_LINE_UPPER_RELATIVE_EXTREME
+          choices: []
+          decision_id: null
+        B2:
+          kind: text
+          value: DEFERRED_SEPARATE_RESEARCH_VARIANT
+          choices: []
+          decision_id: null
+        initial_family:
+          kind: text
+          value: E0_NO_ACTIONABLE_BLOCKER|E1_CANONICAL_B1_FROZEN_POLICY
+          choices: []
+          decision_id: null
+        primary_comparisons:
+          kind: integer
+          value: 1
+          choices: []
+          decision_id: null
+        parameter_sweeps:
+          kind: text
+          value: FORBIDDEN
+          choices: []
+          decision_id: null
+        other_variants:
+          kind: text
+          value: new_revision_and_new_preregistered_trial_family_required
+          choices: []
+          decision_id: null
     choices: []
     decision_id: H1-DAILY-BLOCKER
   setup_1h_relative_transform:

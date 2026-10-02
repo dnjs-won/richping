@@ -3,6 +3,7 @@
 import ast
 from dataclasses import FrozenInstanceError, asdict
 from hashlib import sha256
+from datetime import datetime, timedelta, timezone
 import json
 from pathlib import Path
 import subprocess
@@ -139,8 +140,8 @@ def compatible_features_fixture(value, method="ROLLING_PERCENTILE"):
 def test_draft_inventory_and_no_plugin_or_profitability_export():
     spec = draft()
     assert spec.unpack()["status"] == "DRAFT"
-    assert len(spec.unresolved_fields) == 96
-    assert sum(len(spec.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)) == 69
+    assert len(spec.unresolved_fields) == 95
+    assert sum(len(spec.blockers(c)) for c in (C1, PERFORMANCE, OPTIONAL)) == 68
     for method in (spec.require_c1_ready, spec.plugin_specification, spec.require_profitability_ready,
                    spec.require_historical_reproduction_ready):
         with pytest.raises(ValueError):
@@ -189,8 +190,9 @@ def test_chart_claim_without_observed_conventions_fails():
 def test_yaml_json_mapping_order_comments_and_timestamp_spelling_canonicalize():
     original = draft()
     value = original.unpack()
-    value["created_at"] = "2026-09-27T09:00:00+09:00"
-    value["updated_at"] = "2026-10-01T09:00:00+09:00"
+    for field in ("created_at", "updated_at"):
+        value[field] = datetime.fromisoformat(value[field]).astimezone(
+            timezone(timedelta(hours=9))).isoformat()
     value["state_machine"]["states"].reverse()
     for decision in value["decisions"].values():
         decision["candidate_choices"].reverse()

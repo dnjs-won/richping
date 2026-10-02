@@ -10,7 +10,7 @@ import yaml
 from richping.research_v2.contracts import JsonObject, StrategyState
 from richping.research_v2.features import PercentileSpec, ZScoreSpec
 from richping.research_v2.strategy.daily_trend import CANONICAL, minimum_history
-from richping.research_v2.strategy.h0001_spec import load_h0001
+from richping.research_v2.strategy.h0001_spec import H0001Specification, load_h0001
 from richping.research_v2.strategy.specification import C1, PERFORMANCE, OPTIONAL
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -33,12 +33,18 @@ def proposal():
 ])
 def test_existing_canonical_sources_are_immutable_at_proposal_basis(path):
     original = subprocess.check_output(["git", "show", BASE + ":" + path], cwd=ROOT)
-    assert (ROOT / path).read_bytes().replace(b"\r\n", b"\n") == original
+    # Executable v9 is the immutable proposal-basis snapshot; current v10 has
+    # an independent freeze/delta test. Other source artifacts stay unchanged.
+    current = (subprocess.check_output(["git", "show", "a25b43a:" + path], cwd=ROOT)
+               if path == "research/strategy_specs/H0001-r03-draft.yaml"
+               else (ROOT / path).read_bytes().replace(b"\r\n", b"\n"))
+    assert current == original
 
 
 def test_canonical_v9_trend_readiness_inventory_and_blocker_remain_unchanged():
     body = proposal()
-    spec = load_h0001(ROOT / body["executable_spec_path"])
+    spec = H0001Specification.loads(subprocess.check_output([
+        "git", "show", BASE + ":" + body["executable_spec_path"]], cwd=ROOT).decode("utf-8"))
     draft = spec.unpack()
     assert draft["specification_version"] == body["executable_spec_version"] == "h0001_r03_spec_v9"
     assert spec.specification_hash == body["executable_spec_sha256"]
@@ -241,7 +247,7 @@ def test_conceptual_experiments_no_outcome_lookup_or_Cartesian_search():
     assert multiple["retain_trials"] == ["failed", "null", "inconclusive"]
     assert not multiple["after_cost_win_rate_from_few_survivors_is_alpha"]
     # Actual proposal diff must not introduce a runtime/backtest/experiment writer.
-    assert subprocess.check_output(["git", "diff", BASE, "--name-only", "--", "richping", "research/experiments"], cwd=ROOT) == b""
+    assert subprocess.check_output(["git", "diff", BASE, "a25b43a", "--name-only", "--", "richping", "research/experiments"], cwd=ROOT) == b""
 
 
 def test_complete_denominator_and_counterfactual_requirements_remain_non_executable():

@@ -35,6 +35,12 @@ def remediation():
     return yaml.safe_load(REMEDIATION.read_text(encoding='utf-8'))
 
 
+def v9_draft():
+    """Trend freeze/remediation inventory at its immutable pre-blocker basis."""
+    return H0001Specification.loads(subprocess.check_output([
+        'git', 'show', 'a25b43a:'+DRAFT.relative_to(ROOT).as_posix()], cwd=ROOT).decode('utf-8'))
+
+
 def daily(values, ending='2024-09-06'):
     sessions = calendar().sessions_in_range('2023-01-01', ending)[-len(values):]
     result = []
@@ -62,7 +68,7 @@ def classify(prefix, spec=CANONICAL):
 def test_canonical_contract_hash_and_inventory_exactly_one_root_resolves():
     before = H0001Specification.loads(subprocess.check_output([
         'git', 'show', BASE+':'+DRAFT.relative_to(ROOT).as_posix()], cwd=ROOT).decode())
-    after = load_h0001(DRAFT)
+    after = v9_draft()
     old, new = before.unpack(), after.unpack()
     assert new['specification_version'] == 'h0001_r03_spec_v9'
     assert new['rule_parameters']['daily_long_permission']['value'] == CANONICAL.contract
@@ -172,7 +178,7 @@ def test_each_operand_readiness_is_independent_even_if_other_is_ready(monkeypatc
 def test_v8_history_remains_readable_immutable_and_inventory_is_unchanged():
     historical = H0001Specification.loads(subprocess.check_output([
         'git', 'show', REMEDIATION_BASE+':'+DRAFT.relative_to(ROOT).as_posix()], cwd=ROOT).decode())
-    current = load_h0001(DRAFT)
+    current = v9_draft()
     old, new = historical.unpack(), current.unpack()
     assert historical.specification_hash == record()['executable_spec']['canonical_sha256']
     assert old['rule_parameters']['daily_long_permission']['value']['parameters']['minimum_history']['value'] == 173

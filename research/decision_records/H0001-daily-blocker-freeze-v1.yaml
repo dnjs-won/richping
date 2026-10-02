@@ -1,0 +1,307 @@
+# Immutable ex-ante blocker freeze; no outcome lookup or performance execution.
+schema_version: daily_blocker_decision_record_v1
+record_id: H0001-DAILY-BLOCKER-FREEZE-v1
+status: FROZEN_SEMANTIC_RESEARCH_DECISION
+basis_branch: v2-c0-extended-session-contract
+basis_commit: a25b43a59498cb3a149048dc8f206d7322cac93b
+decision_date: '2026-10-02'
+decision_author: user_researcher
+decision_source: explicit_user_ex_ante_freeze_instruction
+source_proposal:
+  path: research/decision_proposals/H0001-daily-blocker-v1.yaml
+  status_at_proposal: PROPOSED_NOT_FROZEN
+  preservation: byte_identical_at_basis_commit
+source_r03_boundary:
+  path: research/hypotheses/H0001-r03.yaml
+  direct_refs:
+  - rules.regime[1]
+  - rules.regime[4]
+  - rules.trigger[0]
+  - unknowns[1]
+  interpretation: new_ex_ante_operationalization_of_Daily_upper_relative_extension_not_recovered_historical_rule
+  preservation: byte_identical_at_basis_commit
+performance_information_used: NONE
+historical_outcome_lookup: NOT_RUN
+current_outcome_lookup: NOT_RUN
+historical_performance_backtest: NOT_RUN
+current_chart_analysis: NOT_RUN
+profitability: NOT_TESTED
+chart_parity: UNVERIFIED
+decision:
+  id: H1-DAILY-BLOCKER
+  status: RESOLVED
+  contract_version: DAILY_BLOCKER_MACD_LINE_P95_V1
+  contract_hash: 57fa1da494cf2e2a2b21bbedb159521a3d27646912d150abbf38787f26b81fac
+  executable_root: rule_parameters.daily_exhaustion_blocker
+state_definition:
+  version: DAILY_EXHAUSTION_MACD_LINE_PERCENTILE_V1
+  hash: 3129a3d8a6a2133e2b006ed31c02c6724a5848fa2d9eae60178910504fb30753
+  session: RTH_DAILY
+  session_profile: XNYS_RTH
+  price_basis: PIT_SPLIT_ADJUSTED_OHLC
+  freshness: LATEST_EXPECTED_COMPLETED_SESSION_REQUIRED
+  field: MACD_LINE
+  fast: 12
+  slow: 26
+  signal: 9
+  macd_min_history: 130
+  seed: first_observation
+  signal_start: first_macd_observation
+  history_origin: full_available_completed_causal_history
+  session_reset: false
+  relative_transform: ROLLING_PERCENTILE
+  transform_version: rolling_empirical_midrank_v1
+  window: 252
+  min_history: 252
+  count_unit: completed_RTH_DAILY_trading_observations_not_calendar_days
+  convention: CURRENT_INCLUSIVE
+  ties: midrank
+  partial_reference_window: false
+  readiness_formula: MACD_min_history_plus_percentile_window_minus_1
+  first_full_window_expected_N: 381
+  upper_percentile: 0.95
+  comparator: GREATER_THAN_OR_EQUAL
+  macd_line_gt_zero: true
+  states: NORMAL|EXTENDED|UNAVAILABLE
+  unavailable: input_freshness_PIT_evidence_readiness_continuity_finite_known_at_failure
+  cadence: new_causally_usable_completed_RTH_Daily_or_actual_evidence_vintage
+  independent_from_trend: true
+  macd_specification_hash: 21104bfe58294d435650a3047553e43a5e37a8f83fd3bc51aa68a350f3a54fd7
+  percentile_specification_hash: 1d9002cd52295d285e584c145a9f931412a270f1824078e18747cdba0b886d8d
+policy:
+  version: DAILY_EXHAUSTION_BLOCK_NEW_EXPOSURE_V1
+  hash: 082a42def5d2c0e5f59591d01578558fcb40e80adaa36ddb4358523a597e8be9
+  selected_policy: P2
+  action: BLOCK_NEW_LONG_EXPOSURE
+  candidate_types: INITIAL_ENTRY|ADD|REENTRY
+  NORMAL: ALLOW_exhaustion_veto_NONE_other_permissions_still_required
+  EXTENDED: BLOCK_EXTENDED
+  UNAVAILABLE: BLOCK_UNAVAILABLE
+  unavailable_policy: FAIL_CLOSED_FOR_NEW_EXPOSURE
+  unavailable_reason: NEW_EXPOSURE_BLOCKED_DUE_TO_EXHAUSTION_UNAVAILABLE
+  reentry_is_new_exposure: true
+  existing_position: NO_FORCED_EXIT_existing_HOLD_EXIT_unchanged
+  exit_owner: 1H_EXIT_WATCH_plus_15m_structure_exit
+  blocked_signal_queue: DISABLED
+  blocked_signal_lifecycle: NO_DEFERRED_EXECUTION_OF_BLOCKED_SIGNAL
+  subsequent_entry: requires_new_valid_downstream_H0001_signal_trigger
+  gate_cadence: each_future_new_exposure_candidate_latest_causal_Daily_state
+  global_decision_timing: owned_by_H1_DECISION_TIMING
+semantic_rationale:
+  B1: MACD_line_measures_fast_slow_EMA_spread_expansion_relative_to_own_causal_history
+  B2: histogram_measures_MACD_minus_signal_momentum_acceleration_deceleration_spread
+  selection_basis: r03_Daily_upper_relative_extreme_overheating_semantics_before_outcomes
+  W_252: approximately_one_trading_year_of_completed_RTH_observations_not_calendar_days
+  threshold_0_95: upper_five_percent_of_recent_own_distribution_simple_ex_ante_meaning_not_optimal
+  polarity: negative_or_zero_MACD_is_not_upper_positive_extension_even_at_high_relative_rank
+  unsupported_claims:
+  - B1_more_profitable_than_B2
+  - MACD_predicts_reversal
+  - EXTENDED_predicts_price_decline
+  - P95_is_optimal
+  claims_status: NOT_TESTED
+readiness_verification:
+  formula: N >= M + W - 1
+  M: 130
+  W: 252
+  m: 252
+  expected_first_READY_N: 381
+  N_380:
+    READY_reference_points: 251
+    state: UNAVAILABLE
+  N_381:
+    READY_reference_points: 252
+    classifier_status: READY
+  indexing: one_based_MACD_first_READY_at_130_zero_based_index_129_warmup_slots_retained
+  gate: actual_MACD_and_percentile_feature_status_not_hardcoded_total_count
+candidates:
+  B0:
+    name: NO_BLOCKER
+    status: INITIAL_COUNTERFACTUAL_COMPARATOR
+    raw_B1_state: calculate_record_when_possible_without_actionable_exhaustion_veto
+  B1:
+    name: DAILY_MACD_LINE_UPPER_RELATIVE_EXTREME
+    status: CANONICAL
+  B2:
+    name: DAILY_MACD_HISTOGRAM_UPPER_RELATIVE_EXTREME
+    status: DEFERRED_SEPARATE_RESEARCH_VARIANT
+    initial_family_member: false
+initial_trial_family:
+  status: PREREGISTERED_BLOCKER_SUBFAMILY_NOT_FULL_PERFORMANCE_PROTOCOL
+  members:
+    E0: canonical_H0001_plus_NO_ACTIONABLE_DAILY_EXHAUSTION_BLOCKER
+    E1: identical_canonical_H0001_plus_frozen_B1_and_P2_policy
+  comparison: E0_vs_E1
+  trial_budget: 1_primary_blocker_effect_comparison
+  primary_comparison_count: 1
+  excluded:
+  - B2
+  - z_score
+  - ATR_normalization
+  - different_percentile_window
+  - different_percentile_threshold
+  - prior_only_percentile
+  - P1
+  - P3
+  - RSI
+  - price_EMA_distance
+  - multiple_indicator_conjunction
+  sweeps: FORBIDDEN
+  future_changes: new_revision_AND_new_preregistered_trial_family
+  post_B1_result_B2_tuning_same_confirmation: FORBIDDEN
+primary_question: Does the frozen Daily MACD-line 252-observation current-inclusive >=95th-percentile
+  positive-extension blocker, with fail-closed new-exposure policy, improve H0001 after-cost outcomes
+  relative to the identical no-blocker strategy without the apparent improvement being explained only
+  by suppressed opportunities or availability differences?
+required_diagnostics:
+- total_Daily_observations
+- trend_BULLISH_observations
+- exhaustion_NORMAL_count
+- exhaustion_EXTENDED_count
+- exhaustion_UNAVAILABLE_count
+- setup_opportunities_before_blocker
+- INITIAL_ENTRY_blocked_count
+- ADD_blocked_count
+- REENTRY_blocked_count
+- BLOCK_UNAVAILABLE_count
+- actual_signals
+- completed_trades
+- exposure_time
+- turnover
+- after_cost_return
+- MAE
+- MFE
+- drawdown
+- blocked_counterfactual_outcome
+- sample_suppression_ratio
+- availability_suppression_ratio
+diagnostic_semantics:
+  win_rate_alone_adoption: FORBIDDEN
+  sample_suppression_ratio: all_exhaustion_blocked_otherwise_eligible_events_over_all_preblock_eligible_events
+  availability_suppression_ratio: BLOCK_UNAVAILABLE_otherwise_eligible_events_over_all_preblock_eligible_events
+  zero_denominator: 'null'
+  counts: symbol_session_and_opportunity_event_units_separate
+  outcomes: retain_PENDING_COMPLETE_UNRESOLVED_missing_not_zero_or_deleted
+  account_metrics: require_declared_capital_NAV_accounting_not_recommendation_or_cohort_drawdown
+counterfactual_logging:
+  schema_version: daily_blocker_counterfactual_trace_v1
+  implementation: immutable_research_trace_payload_contract_only_no_event_logger_or_label_evaluator
+  required_fields:
+  - symbol
+  - as_of
+  - strategy_id
+  - candidate_event_type
+  - without_blocker_eligible
+  - daily_trend_permission
+  - daily_exhaustion_state
+  - exhaustion_state_version
+  - exhaustion_state_hash
+  - exhaustion_policy_version
+  - exhaustion_policy_hash
+  - blocker_decision
+  - downstream_setup_trigger_provenance
+  - signal_hash
+  - input_hash
+  - known_at
+  - counterfactual_status
+  - counterfactual_forward_outcome_ref
+  candidate_event_types:
+  - INITIAL_ENTRY
+  - ADD
+  - REENTRY
+  blocker_decisions:
+  - ALLOW
+  - BLOCK_EXTENDED
+  - BLOCK_UNAVAILABLE
+  counterfactual_statuses:
+  - PENDING
+  - COMPLETE
+  - UNRESOLVED
+  forward_outcome_ref: null_until_later_actual_maturity_evaluation
+  blocked_event_is_order_or_fill: false
+  preblock_eligibility: full_downstream_signal_and_other_permissions_required_setup_alone_insufficient
+  immutable_record: retain_blocked_signal_attach_later_labels_in_separate_records_no_snapshot_rewrite
+  known_at: maximum_actual_signal_state_and_required_action_evidence_lte_as_of
+independence:
+  raw_trend_input: false
+  trend_exhaustion_combinations: all_nine_valid
+  excluded_inputs:
+  - daily_trend_permission
+  - daily_price_shock_state
+  - rates
+  - oil
+  - USD
+  - VIX
+  - macro_state
+  - sector_leadership
+  - options_GEX
+  - fundamentals
+  - volume
+  - outcomes
+  shock_override: FORBIDDEN_prices_may_naturally_change_MACD
+  non_equivalences:
+  - EXTENDED!=BEARISH
+  - EXTENDED!=SELL
+  - NORMAL!=SAFE
+  - UNAVAILABLE!=NORMAL
+  - UNAVAILABLE!=NOT_BULLISH
+implementation:
+  module: richping.research_v2.strategy.daily_exhaustion
+  classifier: classify_daily_exhaustion_prepared_causal_prefix_as_of_frozen_spec
+  evaluator: evaluate_exhaustion_policy_raw_state_candidate_exposure_type
+  reused:
+  - PreparedDailyPrefix
+  - MACDSpec
+  - macd
+  - macd_series
+  - PercentileSpec
+  - rolling_percentile
+  - FeatureResult
+  - causal_continuity_readiness_hashes
+  new_indicator_engine: false
+  production_paper_order_connection: NONE
+preserved_contracts:
+  H1_DAILY_LONG: RESOLVED
+  trend_contract: v9_byte_identical_semantic_payload
+  ema_span: 50
+  ema_minimum_history: 174
+  DLP_B_first_READY_N: 179
+  Daily_input_choices:
+  - RTH_DAILY
+  - PIT_SPLIT_ADJUSTED_OHLC
+  - LATEST_EXPECTED_COMPLETED_SESSION_REQUIRED
+  H0001: DRAFT_BLOCKED_ON_DECISIONS
+  global_decision_timing: UNRESOLVED
+discovery_contamination:
+  already_exposed:
+  - NOK
+  - SOXX_2026_09_10_cases
+  - contemporary_semiconductor_narrative
+  independent_confirmation: FORBIDDEN_for_exposed_cases
+  threshold_basis: not_current_SOXX_or_historical_outcomes
+full_performance_registration: NOT_COMPLETE_requires_eligible_PIT_universe_dataset_splits_costs_fills_capital_sample_metric_null_pass_reject_purge_embargo_before_outcomes
+remaining_runtime_data_blockers:
+- PIT_split_action_transform
+- mixed_profile_as_of_join
+- real_freshness_selector
+- real_provider_session_action_provenance
+- extended_early_close_V2_D_BLOCKER
+executable_spec:
+  path: research/strategy_specs/H0001-r03-draft.yaml
+  version_before: h0001_r03_spec_v9
+  version: h0001_r03_spec_v10
+  canonical_sha256_before: 6effcae1ae4e539adf0c84550821be507d86b63565b419b7877a4d08599d9c06
+  canonical_sha256: b9a2c69ce9ea27010b7846339bf052401b3c836dc39c0538ab3e411cb59dd7f4
+inventory:
+  new_executable_decision_ids: []
+  decisions_before: 78
+  decisions_after: 78
+  unresolved_ids_before: 69
+  unresolved_ids_after: 68
+  C1_before: 45
+  C1_after: 44
+  unresolved_paths_before: 96
+  unresolved_paths_after: 95
+  performance: 17
+  optional: 7
+  removed_root: rule_parameters.daily_exhaustion_blocker

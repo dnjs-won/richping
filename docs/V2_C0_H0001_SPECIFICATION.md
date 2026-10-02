@@ -1,3 +1,63 @@
+# V2-C0 — current H0001 Daily blocker freeze (v10)
+
+**H1-DAILY-BLOCKER RESOLVED; H0001 DRAFT / BLOCKED_ON_DECISIONS;
+profitability NOT_TESTED; chart parity UNVERIFIED.** Basis
+`a25b43a59498cb3a149048dc8f206d7322cac93b` on `v2-c0-extended-session-contract`.
+[Canonical blocker contract](H0001_DAILY_BLOCKER_RESEARCH.md) and
+[immutable decision record](../research/decision_records/H0001-daily-blocker-freeze-v1.yaml)
+supersede the selection questions in the unchanged historical proposal.
+
+**DAILY_BLOCKER_MACD_LINE_P95_V1** selects B1 Daily MACD line (12/26/9,
+first-observation seed, signal from first MACD, min_history=130, full causal
+history, no reset) + current-inclusive `rolling_empirical_midrank_v1`,
+W=252/m=252 completed RTH Daily observations. EXTENDED iff all inputs READY,
+MACD line >0 and percentile >=0.95; otherwise READY is NORMAL, failed input
+is UNAVAILABLE. N=380 has 251 READY reference points, unavailable; N=381 has
+252 READY reference points, READY. Readiness is derived from M+W-1 and actual
+primitive statuses/indexing, not a hardcoded total-history gate.
+
+P2 **DAILY_EXHAUSTION_BLOCK_NEW_EXPOSURE_V1** blocks INITIAL_ENTRY/ADD/REENTRY
+for EXTENDED and fail-closes UNAVAILABLE with separate reasons. No forced exit,
+sizing or blocked-signal queue. Later NORMAL requires a new valid downstream
+signal/trigger. Existing 1H EXIT-WATCH + 15m structure exit ownership stays intact.
+Pure research classifier/evaluator in `strategy/daily_exhaustion.py` reuse the
+V2-B primitives and prepared Daily input contract. State/policy have separate
+versions/hashes and combined contract provenance; no plugin/order/paper connection.
+Counterfactual trace schema is frozen for immutable transport; candidate logger,
+forward trade evaluator and label writer remain unimplemented.
+
+Initial blocker family only **E0/B0 NO_BLOCKER vs E1/B1 frozen P2**,
+**1 primary blocker-effect comparison**. B0 may record raw B1 without a veto.
+B2 histogram is DEFERRED_SEPARATE_RESEARCH_VARIANT. No z-score/ATR/prior-only,
+other threshold/window, P1/P3 or added indicators/sweeps. New changes require a
+new revision and new preregistered family. Full performance protocol remains
+unregistered; outcomes and backtests NOT_RUN. Win rate alone cannot justify adoption.
+
+Actual inventory: **78 decisions / 10 resolved / 68 unresolved IDs /
+44 C1 / 17 performance / 7 optional / 95 unresolved paths**.
+Exactly one removed root: `rule_parameters.daily_exhaustion_blocker`.
+Current profile **h0001_r03_spec_v10**, canonical SHA-256:
+`b9a2c69ce9ea27010b7846339bf052401b3c836dc39c0538ab3e411cb59dd7f4`.
+v10 validates the frozen blocker payload and requires the unchanged resolved
+Daily trend payload. Historical v3–v9 remain readable with their original meaning.
+
+H1-DAILY-LONG v9 semantics unchanged: close>EMA50 AND EMA50_t>EMA50_(t-5),
+minimum_history=174, DLP-B first READY=179; trend hash
+`61bb9108c33f1fcd131a384bcf63202e9c52c5dc0e34815a26f840a7e89f1025`.
+RTH_DAILY / PIT_SPLIT_ADJUSTED_OHLC / strict latest expected completed session
+unchanged; 1H/15m RTH_EXTENDED unchanged. Independent exhaustion does not consume
+trend/shock/macro/sector/options/fundamentals/volume or override exit ownership.
+Real PIT transform/freshness selector/mixed-profile join/provenance and extended
+early-close **V2-D_BLOCKER** remain. H1-DECISION-TIMING remains unresolved.
+
+Current validation: 962 passed (223.44s), existing 880 + 82 new; no failures/skips/pytest warnings. CLI --help and git diff --check pass; 60 local documentation links valid..
+
+---
+
+The earlier C0/v9 audit, proposal inventories and test totals below are historical
+records at their named bases; current v10 selections and counts are above.
+
+
 # V2-C0 — H0001 executable specification contract / freeze preparation
 
 V2-C0 infrastructure: **COMPLETE** (validation results below).

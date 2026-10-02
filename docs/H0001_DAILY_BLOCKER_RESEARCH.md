@@ -1,3 +1,270 @@
+# H0001 Daily blocker — canonical semantic freeze v1
+
+Basis: `v2-c0-extended-session-contract@a25b43a59498cb3a149048dc8f206d7322cac93b`.
+**H1-DAILY-BLOCKER RESOLVED. H0001 DRAFT / BLOCKED_ON_DECISIONS;
+profitability NOT_TESTED; chart parity UNVERIFIED.**
+The [immutable decision record](../research/decision_records/H0001-daily-blocker-freeze-v1.yaml)
+supersedes the selection questions in the preserved
+[historical proposal](../research/decision_proposals/H0001-daily-blocker-v1.yaml).
+No historical/current outcome query, performance backtest, current SOXX chart
+analysis, parameter sweep, production/paper/order connection or main merge.
+
+## Canonical measurement and semantic rationale
+
+Combined contract: **DAILY_BLOCKER_MACD_LINE_P95_V1**. State definition:
+**DAILY_EXHAUSTION_MACD_LINE_PERCENTILE_V1**. B1:
+**DAILY_MACD_LINE_UPPER_RELATIVE_EXTREME**.
+
+r03's “일봉 상방 상대 극단 / 과열” is operationalized initially as the
+fast/slow EMA spread's upper position relative to its own causal history.
+Daily MACD line measures that spread itself. Histogram measures MACD minus its
+signal, a stronger acceleration/deceleration interpretation. B1 is selected
+ex ante for the meaning of state expansion; B2 is a separate future variant.
+This is a new bounded research definition, not recovery of an observed historical
+rule. B1 superiority, reversal prediction, imminent decline and optimality of
+P95 are all **NOT_TESTED**.
+
+Inherited MACD: fast=12, slow=26, signal=9, close input,
+`seed=first_observation`, `signal_start=first_macd_observation`, min_history=130.
+`MACD_LINE_t = EMA12_t - EMA26_t`. Use the full available contiguous completed
+causal history with no session reset; do not restart EMA at the rolling window.
+B2 histogram is not the canonical field.
+
+Inputs reuse **RTH_DAILY / PIT_SPLIT_ADJUSTED_OHLC /
+LATEST_EXPECTED_COMPLETED_SESSION_REQUIRED**. Raw numeric measurement consumes
+only completed Daily closes. Generic OHLCV bars retain their existing evidence
+hashes, including transport metadata; volume is not a mathematical input or gate.
+Prepared eligibility facts supply freshness and PIT action/transform evidence.
+The classifier does not implement those real-market capabilities.
+
+## Current-inclusive relative transform, window and readiness
+
+Reuse V2-B `PercentileSpec` and `rolling_percentile`, version
+**rolling_empirical_midrank_v1**, **CURRENT_INCLUSIVE**:
+
+```text
+P_t = (count(x < MACD_LINE_t) + 0.5*count(x = MACD_LINE_t)) / reference_count
+W = 252 completed RTH Daily trading observations
+m = 252 (full window only; no partial distribution)
+```
+
+Self-equality participates in midrank. A unique maximum ranks
+`1 - 1/(2*252)`, not 1. No future observation; no prior-only primitive is added.
+252 means approximately one trading year of this series, not calendar days;
+weekends/holidays do not contribute an observation.
+
+The existing `macd_series` retains 129 unavailable warmup slots. First READY
+MACD point is one-based N=130 / zero-based index=129. A full reference requires
+252 READY points including the current point:
+
+```text
+first_READY_N = MACD.min_history + PercentileSpec.window - 1
+              = 130 + 252 - 1 = 381
+N=380: last 252 slots start at index 128; 251 READY + 1 warmup -> UNAVAILABLE
+N=381: last 252 slots start at index 129; 252 READY -> classifier READY
+```
+
+Fixtures directly verify both primitive indexing and the derived formula.
+Classifier admission checks actual MACD and percentile statuses; it does not
+hardcode `N >= 381` or silently drop unavailable slots. Computational readiness
+is not economic evidence.
+
+## Threshold, polarity and raw states
+
+```text
+EXTENDED iff every required input/operand is READY
+             AND MACD_LINE_t > 0
+             AND P_t >= 0.95
+NORMAL   iff every required input/operand is READY and that predicate is false
+UNAVAILABLE otherwise, retaining status/reason
+```
+
+P95 has the simple ex-ante meaning “upper 5% of the recent own distribution”.
+Equality at 0.95 satisfies the threshold; no tolerance or rounding is added.
+With a 252-point midrank window exact 0.95 is not attainable (steps are
+half/252), but equality semantics remain explicit and separately tested.
+MACD sign is strict: zero and negative values are NORMAL even at a high rank.
+The positive condition is EMA12 > EMA26, preventing “less negative than history”
+from being called upper positive extension.
+
+Freshness, PIT price/action evidence, MACD/percentile readiness, continuity,
+finite calculation and required known_at failures produce UNAVAILABLE.
+**EXTENDED != BEARISH/SELL; NORMAL != SAFE; UNAVAILABLE != NORMAL/NOT_BULLISH.**
+
+`daily_trend_permission` is not an exhaustion input. All nine combinations of
+BULLISH/NOT_BULLISH/UNAVAILABLE trend and NORMAL/EXTENDED/UNAVAILABLE exhaustion
+remain representable. No `close > EMA50` is duplicated inside exhaustion.
+Price shock, rates/oil/USD/VIX, macro, sector leadership, options/GEX,
+fundamentals and volume do not directly override the classifier. Price changes
+may naturally change MACD through close history; no shock flag enters it.
+
+## P2 new-exposure policy and lifecycle
+
+Policy: **DAILY_EXHAUSTION_BLOCK_NEW_EXPOSURE_V1**, meaning
+**BLOCK_NEW_LONG_EXPOSURE**. The pure evaluator handles only candidate event
+types INITIAL_ENTRY, ADD and REENTRY:
+
+| Raw state | Exhaustion decision for each candidate | Existing position |
+|---|---|---|
+| NORMAL | ALLOW (exhaustion veto only removed) | HOLD/EXIT unchanged |
+| EXTENDED | BLOCK_EXTENDED | NO_FORCED_EXIT |
+| UNAVAILABLE | BLOCK_UNAVAILABLE | NO_FORCED_EXIT |
+
+Re-entry after an exit is new exposure. P2 blocks initial entry, add/scale-in
+and re-entry while EXTENDED. UNAVAILABLE is
+**FAIL_CLOSED_FOR_NEW_EXPOSURE**, explicitly
+`NEW_EXPOSURE_BLOCKED_DUE_TO_EXHAUSTION_UNAVAILABLE`; it remains UNAVAILABLE,
+never converted to EXTENDED or NORMAL. NORMAL does not authorize an otherwise
+ineligible H0001 candidate. Add eligibility still belongs to H1-ADD-POLICY.
+
+Neither EXTENDED nor UNAVAILABLE sells, reduces or exits an existing position.
+Exit ownership remains the separate **1H EXIT-WATCH + 15m structure exit**.
+No sizing decision, forced exit, order/fill, execution or paper integration.
+
+**NO_DEFERRED_EXECUTION_OF_BLOCKED_SIGNAL**: blocked signals are recorded,
+never queued. A 10/01 trigger blocked by EXTENDED cannot execute automatically
+when a later Daily becomes NORMAL. A subsequent causal event needs a new valid
+signal/trigger under the downstream H0001 contract. Stateless policy calls
+cannot retain or replay an earlier blocked candidate.
+
+Raw state refreshes only when a new causally usable completed RTH Daily or
+actual late/corrected evidence vintage is available. The same fresh Daily
+retains raw state/input hash/state hash across intraday as_of envelopes.
+At a newly expected but undelivered Daily, input eligibility is UNAVAILABLE;
+old NORMAL/EXTENDED is not a current fallback. Late evidence is used only from
+actual known_at, with immutable old states.
+Each future new-exposure candidate retrieves the latest causally available
+Daily state. This Daily refresh contract does not resolve global
+H1-DECISION-TIMING or the 1H/15m decision cadence/transition rules.
+
+## Initial comparison family and multiple-testing boundary
+
+| Arm | Frozen definition |
+|---|---|
+| E0 / B0 | Identical canonical H0001 + NO ACTIONABLE DAILY EXHAUSTION BLOCKER |
+| E1 / B1 | Identical canonical H0001 + frozen B1 state + frozen P2 policy |
+
+B0 retains trend/setup/trigger eligibility without an exhaustion veto; calculate
+and record B1 raw state when possible, without fabricating NORMAL on missing
+calculation. This permits later event-aligned counterfactual comparison.
+B2 **DAILY_MACD_HISTOGRAM_UPPER_RELATIVE_EXTREME** is
+**DEFERRED_SEPARATE_RESEARCH_VARIANT**, excluded from the initial family.
+
+Exactly **E0 vs E1**, **1 primary blocker-effect comparison**. No B2, z-score,
+ATR normalization, other window/threshold, prior-only, P1/P3, RSI, price/EMA
+distance or multiple-indicator conjunction. No threshold/window sweep.
+Any later change needs a **new revision + new preregistered trial family**.
+B2 tuned after B1 results cannot reuse the same viewed confirmatory results.
+The Daily trend T0/T1 family is separately preserved; do not silently cross it
+with this family. H1-MULTIPLE-TESTING for the whole strategy remains unresolved.
+
+Frozen primary question:
+
+> Does the frozen Daily MACD-line 252-observation current-inclusive
+> >=95th-percentile positive-extension blocker, with fail-closed new-exposure
+> policy, improve H0001 after-cost outcomes relative to the identical no-blocker
+> strategy without the apparent improvement being explained only by suppressed
+> opportunities or availability differences?
+
+Diagnostics: total Daily and trend BULLISH observations; exhaustion NORMAL /
+EXTENDED / UNAVAILABLE counts and cross-tabs; setup opportunities before blocker;
+INITIAL_ENTRY, ADD, REENTRY blocked counts; BLOCK_UNAVAILABLE count; actual
+signals; completed trades; exposure time; turnover; after-cost return; MAE;
+MFE; drawdown; blocked counterfactual outcomes; sample suppression ratio;
+availability suppression ratio. Keep symbol-session and opportunity-event units
+separate. Sample suppression is all exhaustion-blocked otherwise eligible
+events / all preblock eligible events; availability suppression uses only
+BLOCK_UNAVAILABLE as numerator. Zero denominator is null. Retain PENDING,
+COMPLETE and UNRESOLVED labels and missing reasons. Win rate alone cannot justify
+adoption. Recommendation return/cohort drawdown is not account performance.
+
+This preregisters the blocker question and family, not a complete performance
+experiment. Eligible PIT universe/data coverage, dataset/date splits,
+chronological discovery/confirmation, costs/fills/capital, sample unit,
+primary metric/null/pass-reject, purge/embargo remain later prerequisites.
+Reuse the existing validation engine where compatible. Exposed NOK and SOXX
+2026 cases/narrative remain discovery contamination, never independent confirmation.
+
+## Counterfactual trace contract and implementation boundary
+
+Immutable payload schema **daily_blocker_counterfactual_trace_v1** requires:
+
+- symbol, as_of, strategy_id;
+- candidate_event_type: INITIAL_ENTRY / ADD / REENTRY;
+- without_blocker_eligible and daily_trend_permission;
+- daily_exhaustion_state, exhaustion_state_version/hash;
+- exhaustion_policy_version/hash, blocker_decision: ALLOW / BLOCK_EXTENDED / BLOCK_UNAVAILABLE;
+- downstream_setup_trigger_provenance, signal_hash, input_hash, known_at;
+- counterfactual_status: PENDING / COMPLETE / UNRESOLVED;
+- counterfactual_forward_outcome_ref, null until later maturity evaluation.
+
+Preserve blocked records; a setup alone is not a fully eligible preblock signal.
+known_at includes actual signal/state/action dependency arrivals <= as_of.
+A later label writer attaches separate immutable outcome records at actual
+maturity. Missing labels do not delete opportunities or become zero returns.
+**Blocked events are research counterfactual records, not actual orders/fills.**
+Existing StrategyState/JsonObject/DecisionTrace can transport this schema;
+tests verify detached immutable payload round-trip. A H0001 candidate event
+logger, counterfactual fill/forward-outcome evaluator and report writer are
+**not implemented** by this semantic freeze.
+
+[`daily_exhaustion.py`](../richping/research_v2/strategy/daily_exhaustion.py):
+`classify_daily_exhaustion(PreparedDailyPrefix, as_of, DailyExhaustionSpec)`
+and `evaluate_exhaustion_policy(raw_state, candidate_exposure_event_type)` are
+pure deterministic research functions. They reuse MACDSpec/macd/macd_series,
+PercentileSpec/rolling_percentile, existing causal readiness/continuity,
+FeatureResult and hashes. No new indicator engine or strategy event loop.
+The state preserves symbol/as_of/session, reason/status, profile/basis,
+input_end_at/max actual known_at, prefix hash/vintage, state version/hash,
+actual MACD/percentile FeatureResults and reference counts. State and policy
+have separate versions/hashes plus a combined semantic contract hash.
+
+## Canonical spec, inventory and remaining gates
+
+Executable spec **h0001_r03_spec_v9 -> h0001_r03_spec_v10**:
+
+```text
+old: 6effcae1ae4e539adf0c84550821be507d86b63565b419b7877a4d08599d9c06
+new: b9a2c69ce9ea27010b7846339bf052401b3c836dc39c0538ab3e411cb59dd7f4
+state: 3129a3d8a6a2133e2b006ed31c02c6724a5848fa2d9eae60178910504fb30753
+policy: 082a42def5d2c0e5f59591d01578558fcb40e80adaa36ddb4358523a597e8be9
+combined: 57fa1da494cf2e2a2b21bbedb159521a3d27646912d150abbf38787f26b81fac
+```
+
+Actual parser inventory: **78 -> 78 decisions; 69 -> 68 unresolved IDs;
+C1 45 -> 44; 96 -> 95 unresolved paths**. Performance 17 / optional 7 unchanged.
+Only `rule_parameters.daily_exhaustion_blocker` resolves. No new executable
+decision IDs. v10 pins the frozen nested payload and hashes; edits require a
+new revision. Historical v9 remains readable under its original hash.
+
+H1-DAILY-LONG's canonical v9 payload and classifier are unchanged:
+`close > EMA50 AND EMA50_t > EMA50_(t-5)`, span=50, minimum_history=174,
+DLP-B first READY N=179. All three Daily input choices remain unchanged.
+r03, philosophy, original proposals and prior immutable decision records stay
+byte-identical modulo checkout EOL. H0001 remains DRAFT/BLOCKED_ON_DECISIONS.
+
+Remaining runtime/data blockers: real PIT split/action transform, real freshness
+selector, mixed-profile atomic as_of join, real provider/session/action provenance,
+**V2-D_BLOCKER extended early-close/nonstandard dates**. Prepared synthetic
+fixtures attest to none of those capabilities; end-to-end real-market H0001
+replay and trading plugin remain unavailable.
+
+Next 1H relative-MACD bundle must independently decide source field, transform,
+lookback/minimum history, current-inclusive/reference/ties or method-specific
+conventions, downside threshold/equality/polarity, readiness composition and
+setup persistence. Daily's numeric tuple does not default any 1H choice.
+Global decision timing, transitions, 15m trigger, add/re-entry eligibility and
+exit structure remain their existing unresolved owners.
+
+Validation results are recorded in PROJECT_STATUS.md and the C0 specification.
+
+---
+
+The original design/proposal below is preserved as historical context at its
+named basis. Its unselected statements are superseded only by the freeze above;
+the proposal YAML itself remains unchanged.
+
+
 # H0001 Daily exhaustion blocker — bounded research proposal v1
 
 Basis: `v2-c0-extended-session-contract@819e6ffebb11e9cb0b5f08bc7d98e4523c98249a`.
