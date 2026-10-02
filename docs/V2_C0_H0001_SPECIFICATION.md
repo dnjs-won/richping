@@ -1,3 +1,17 @@
+# V2-C0 — 15m initial-entry trigger proposal (v11 unchanged)
+
+At `58e67178113b757a675858af1b4f31fca8508c60`,
+[15m design](H0001_15M_ENTRY_TRIGGER_RESEARCH.md) and
+[proposal](../research/decision_proposals/H0001-15m-entry-trigger-v1.yaml)
+bound MACD_LINE R1/R2/R3, G1/G2, Z0/Z1/Z2, PR0/PR1/PR2,
+T1–T4 and C0/C1/C2 without selection or numeric W/cutoff/K.
+Initial position-flat candidate only; same-bar and atomic-batch eligibility
+are unselected. No trigger implementation/order/fill/outcome lookup/backtest.
+Eight target decisions and timing/GC/add/reentry/exit/risk remain unresolved.
+Daily and 1H frozen payloads, v11 hash and inventory are unchanged.
+
+---
+
 # V2-C0 — 1H relative setup canonical freeze (v11)
 
 At basis `f7123b63d76501ac740f7c5369344f26325e26be`,

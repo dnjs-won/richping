@@ -1,3 +1,53 @@
+# Richping v2 상태 · 2026-10-02 15m initial-entry trigger design proposal v1
+
+**판정: DESIGN / PROPOSAL 완료, PROPOSED_NOT_FROZEN.
+H0001 DRAFT / BLOCKED_ON_DECISIONS, profitability NOT_TESTED,
+chart parity UNVERIFIED 유지. Decision RESOLVE 및 trading 구현 없음.**
+
+- 기준 `v2-c0-extended-session-contract@58e67178113b757a675858af1b4f31fca8508c60`.
+  기존 `var/worktrees/v2-extended`에서 작업; root main의 미커밋 변경 보존, main merge 없음.
+  [연구 문서](docs/H0001_15M_ENTRY_TRIGGER_RESEARCH.md),
+  [proposal YAML](research/decision_proposals/H0001-15m-entry-trigger-v1.yaml),
+  [contract tests](tests/test_research_v2_15m_trigger_proposal.py)를 추가했다.
+  Canonical spec에는 주석 reference만 추가하며 v11 selected values/전체 parsed payload는 불변이다.
+- 실제 r03 `rules.trigger[1]`, `observations[0]/[2]`, `unknowns[6]/[9]` 정확 추출 및
+  required_data/leakage-risk source paths 기록. Below-zero GC 관찰을 필수조건으로 승격하지 않는다.
+  A raw relative / B reversal event / C temporal composition / D initial candidate 역할을 분리했다.
+  Raw vocabulary INACTIVE/DOWNSIDE_EXTREME/UNAVAILABLE; extreme는 BUY/저점/반전이 아니다.
+- MACD_LINE primary candidate, R1 percentile/R2 z-score/R3 MACD/ATR만 유지.
+  실제 primitive units/current inclusion/readiness/ties/ddof/outliers/scale/known_at/continuity/hash 감사.
+  Prior-only 미구현; FeatureResult explicit known_at 없음 → composer에서 actual dependency arrivals 보존 필요.
+  15m extended 정상 세션 64 completed observations, W는 observation 단위.
+  SHORT 약3–10 / MEDIUM 약10–20 / LONG 그 이상은 의미 구간일 뿐 숫자 선택이 아니다.
+  W320 illustration은15m 약5 sessions vs1H 약20 sessions. 1H W/P05/polarity/K2 자동 상속 금지.
+  MACD M130 상속; current-inclusive full window earliest READY=M+W−1을 실제15m primitive indexing으로 검증했다.
+- POL0/POL1, G1/G2, Z0/Z1/Z2, PR0/PR1/PR2, T1–T4, C0/C1/C2를 후보로만 기록.
+  W/m/threshold/polarity/G/Z/PR/T/C/K champion 또는 numeric selection 없음.
+  GC CROSS_EVENT와 지속 MACD>signal relation 구분; exit HH/HL/LH/valid-HL 계약을 entry에 복사하지 않는다.
+- Completed15m만 사용, 미래 bars/pivots/반전 event deferred reuse 금지.
+  Same-bar extreme 자동 가정 금지. 동일 atomic known_at에서 새1H ACTIVE와15m event를 함께 사용할지,
+  다음 completed15m부터 허용할지는 H1-DECISION-TIMING UNRESOLVED.
+  Current1H ACTIVE + authoritative current Daily refs + frozen15m composition + position-flat가 candidate 경계.
+  ENTRY_CANDIDATE는 ORDER/FILL이 아니다. Add/reentry/failed reversal/deeper extreme/1H GC/exit/risk 미설계.
+- E0 denominator counterfactual~E4 conjunction conceptual matrix, multiple-testing guard,
+  raw/overlap/reversal/temporal/candidate/later denominator 및 immutable trace 요구를 기록했다.
+  다음 freeze는 작은 initial tuple 하나, 필요시 comparator 하나까지; Cartesian product 금지.
+  Temporal은 기존 H1-M15-CONJUNCTION nested contract로 추적 가능; 새 executable ID/path 없음.
+  실제 logger/15m classifier/GC/price predicate/arming/conjunction/1H+15m composer/order/fill은 미구현이다.
+- Daily input/trend/remediation/blocker 및1H freeze record, 기존 연구 계약과 r03 불변.
+  8개15m target, timing/GC/add/reentry/global state/exit/risk는 UNRESOLVED 유지.
+  실제 parser **78 decisions /16 resolved /62 unresolved IDs /C1 38 /performance17 /optional7 /89 paths** 불변.
+  v11 canonical SHA-256 `63dccca8a6c00c41b1643e3710fe48261ec8736f005076d4405d231048fe139a` 불변.
+- 검증: 신규 proposal **26 passed /3.30s**.
+  전체 기존1073+신규26 = **1099 passed /0 failed /0 skipped /0 warnings /229.24s**.
+  CLI `--help`, 문서 local links, `git diff --check` 통과.
+  Historical/current outcome lookup, performance backtest, 현재SOXX/NOK 분석, parameter grid는 NOT_RUN.
+  Production/paper/order/runtime 변경 없음. Synthetic/contract tests는 수익성·경제적 유효성 증거가 아니다.
+
+---
+
+아래는 기존 1H freeze 및 이전 작업의 역사 기록이다.
+
 # Richping v2 상태 · 2026-10-02 1H relative setup canonical freeze v1
 
 **판정: 기존 6개 1H decision RESOLVED. H0001 DRAFT / BLOCKED_ON_DECISIONS,

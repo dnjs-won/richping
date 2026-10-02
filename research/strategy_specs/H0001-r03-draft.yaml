@@ -1,3 +1,5 @@
+# 15m DESIGN only: research/decision_proposals/H0001-15m-entry-trigger-v1.yaml.
+# Eight 15m decisions remain UNRESOLVED; v11 selected values are unchanged.
 # 1H setup provenance: research/decision_records/H0001-1h-relative-setup-freeze-v1.yaml.
 # Blocker provenance: research/decision_records/H0001-daily-blocker-freeze-v1.yaml.
 # Executable-spec draft, NOT a strategy implementation or complete strategy freeze.

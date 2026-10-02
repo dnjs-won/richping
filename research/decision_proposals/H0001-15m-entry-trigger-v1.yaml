@@ -1,0 +1,481 @@
+# DESIGN ONLY. Candidate labels are not executable decision IDs.
+schema_version: h0001_15m_entry_trigger_proposal_v1
+proposal_id: H0001-15M-ENTRY-TRIGGER-v1
+status: PROPOSED_NOT_FROZEN
+basis_branch: v2-c0-extended-session-contract
+basis_commit: 58e67178113b757a675858af1b4f31fca8508c60
+hypothesis_path: research/hypotheses/H0001-r03.yaml
+hypothesis_status: DRAFT
+execution_readiness: BLOCKED_ON_DECISIONS
+profitability: NOT_TESTED
+chart_parity: UNVERIFIED
+performance_information_used: NONE
+historical_outcome_lookup: NOT_RUN
+current_outcome_lookup: NOT_RUN
+performance_backtest: NOT_RUN
+current_SOXX_NOK_analysis: NOT_RUN
+production_paper_order_connection: NONE
+main_merge: FORBIDDEN
+new_executable_decision_ids: []
+new_executable_unresolved_paths: []
+executable_spec:
+  version: h0001_r03_spec_v11
+  canonical_sha256: 63dccca8a6c00c41b1643e3710fe48261ec8736f005076d4405d231048fe139a
+  selected_values: UNCHANGED
+  source_r03: UNCHANGED
+upstream:
+  Daily_input: RTH_DAILY_PIT_SPLIT_ADJUSTED_OHLC_LATEST_EXPECTED_COMPLETED_SESSION_REQUIRED
+  Daily_trend: close_GT_EMA50_AND_EMA50_t_GT_EMA50_t_minus_5
+  Daily_exhaustion: MACD_LINE_GT_ZERO_AND_percentile_252_GE_0.95
+  H1_raw: MACD_LINE_LT_ZERO_AND_percentile_320_LE_0.05
+  H1_lifetime: last_extreme_refresh_K2_completed_1H_observations
+  Daily_and_H1_payloads_and_hashes: UNCHANGED
+  freeze_refs:
+  - research/decision_records/H0001-daily-input-freeze-v1.yaml
+  - research/decision_records/H0001-daily-trend-freeze-v1.yaml
+  - research/decision_records/H0001-daily-trend-readiness-remediation-v1.yaml
+  - research/decision_records/H0001-daily-blocker-freeze-v1.yaml
+  - research/decision_records/H0001-1h-relative-setup-freeze-v1.yaml
+source_boundary:
+  source_path: research/hypotheses/H0001-r03.yaml
+  indexing: zero_based
+  direct_refs: ['rules.trigger[1]', 'observations[0]', 'observations[2]', 'unknowns[6]', 'unknowns[9]']
+  direct_statements:
+  - ref: rules.trigger[1]
+    text: 그 setup 안에서 15분봉 MACD도 상대적으로 깊은 하방 영역에 있고 골든크로스 또는 확인된 가격 반전이 발생하면 최초 롱 진입 후보가 된다.
+  - ref: observations[0]
+    text: 0선 아래 MACD 골든크로스 뒤 단기 상승이 자주 보였다는 경험적 관찰이 있었으나 빈도와 통계적 유의성은 측정하지 않았다.
+  - ref: observations[2]
+    text: 가격 저점, MACD 최저점, MACD 골든크로스는 동일 시각일 필요가 없으며 MACD의 EMA 평활 특성 때문에 시차가 발생할 수 있다고 논의했다.
+  - ref: unknowns[6]
+    text: 1시간봉과 15분봉의 하방 extreme threshold
+  - ref: unknowns[9]
+    text: 15분봉 골든크로스만으로 trigger를 확정할지 가격 반전 조건도 필수로 할지
+  related_required_data_refs:
+  - required_data[0]
+  - required_data[1]
+  - required_data[2]
+  - required_data[3]
+  - required_data[4]
+  - required_data[5]
+  - required_data[6]
+  - required_data[7]
+  - required_data[8]
+  related_leakage_risk_refs:
+  - test.leakage_risks[0]
+  - test.leakage_risks[1]
+  - test.leakage_risks[2]
+  - test.leakage_risks[3]
+  - test.leakage_risks[4]
+  - test.leakage_risks[5]
+  - test.leakage_risks[6]
+  - test.leakage_risks[7]
+  unsupported_frozen_rules:
+  - GC_must_be_below_zero
+  - GC_alone_means_BUY
+  - price_reversal_mandatory
+  - MACD_minimum_and_GC_same_bar
+  - one_bullish_candle_confirms_reversal
+  - mandatory_5m_1m_confirmation
+  literal_T3: semantic_observation_only_not_selection
+role_layers:
+  A: RAW_RELATIVE_STATE
+  B: REVERSAL_EVIDENCE
+  C: TEMPORAL_COMPOSITION
+  D: ENTRY_CANDIDATE
+raw_state:
+  vocabulary: [INACTIVE, DOWNSIDE_EXTREME, UNAVAILABLE]
+  DOWNSIDE_EXTREME: all_operands_READY_AND_future_frozen_relative_predicate_true
+  INACTIVE: all_operands_READY_AND_predicate_false
+  UNAVAILABLE: history_continuity_feature_known_at_completed_bar_or_calculation_failure_with_reason
+  non_equivalences:
+    DOWNSIDE_EXTREME: [BUY, PRICE_BOTTOM, REVERSAL]
+    UNAVAILABLE: [INACTIVE]
+  materialization: independent_raw_15m_before_Daily_and_1H_join
+  unresolved_definition_is_measured_UNAVAILABLE: false
+field_boundary:
+  primary_candidate: MACD_LINE
+  definition: EMA12_minus_EMA26
+  excluded: [histogram, signal_line, MACD_slope, RSI, stochastic, volume, OBV, divergence, price_return]
+  signal_line_role: GC_operand_only
+inherited_MACD:
+  fast: 12
+  slow: 26
+  signal: 9
+  min_history: 130
+  seed: first_observation
+  signal_start: first_macd_observation
+  field: close
+  history: full_available_completed_causal_contiguous_prefix
+  session_reset: false
+method_candidates:
+  R1:
+    method: ROLLING_PERCENTILE
+    primitive: rolling_empirical_midrank_v1
+    units: dimensionless_rank
+    current_inclusive: required_by_existing_primitive
+    readiness: contiguous_last_W_slots_count_GE_m_all_slots_READY
+    ties_ddof: midrank_less_plus_half_equal_over_count_including_self
+    outlier_sensitivity: less_magnitude_sensitive_but_occupancy_W_and_ties_sensitive
+    scale_invariance: strictly_increasing_scalar_transform_apart_from_numeric_effects
+    own_history_distribution: empirical_rank
+    known_at: maximum_actual_MACD_prefix_scalar_and_required_input_arrivals
+    continuity: us_equity_extended_04_20_completed_grid_v1
+    feature_hash: effective_spec_source_projection_W_m_ties_include_current_continuity_missing_policy
+  R2:
+    method: ROLLING_ZSCORE
+    primitive: rolling_zscore_ddof_v1
+    units: local_standard_deviation_units
+    current_inclusive: required_by_existing_primitive
+    readiness: contiguous_last_W_slots_count_GE_m_all_READY_nonzero_finite_variance
+    ties_ddof: ddof_0_or_1_explicit_m_GT_ddof_zero_variance_UNDEFINED
+    outlier_sensitivity: mean_std_magnitude_sensitive_self_inclusion_can_dampen_extreme
+    scale_invariance: positive_affine_scalar_transform_apart_from_numeric_effects
+    own_history_distribution: local_mean_std_distance_not_Gaussian_tail_probability
+    known_at: maximum_actual_MACD_prefix_scalar_and_required_input_arrivals
+    continuity: us_equity_extended_04_20_completed_grid_v1
+    feature_hash: effective_spec_source_projection_W_m_ddof_zero_variance_continuity_missing_policy
+  R3:
+    method: MACD_ATR
+    primitive: positive_causal_scale_v1_and_atr_wilder_sma_seed_first_high_low_v1
+    units: dimensionless_current_range_units
+    current_inclusive: current_aligned_snapshots_no_rank_reference
+    readiness: MACD_ATR_READY_same_symbol_timeframe_as_of_end_ATR_GT_zero_finite_ratio
+    ties_ddof: not_applicable_ATR_period_min_history_unselected_Wilder_SMA_seed_first_TR_high_low
+    outlier_sensitivity: ATR_shock_compresses_ratio_recursive_denominator_history_sensitive
+    scale_invariance: common_positive_OHLC_unit_scaling_not_affine_translation_claim
+    own_history_distribution: false
+    known_at: maximum_actual_arrivals_of_both_operands_and_required_evidence
+    continuity: us_equity_extended_04_20_completed_grid_v1
+    feature_hash: effective_normalize_spec_nests_MACD_ATR_specs_alignment_positive_scale_policy
+  selected: UNRESOLVED
+window_conventions:
+  CURRENT_INCLUSIVE: AVAILABLE
+  PRIOR_ONLY: NOT_IMPLEMENTED
+  selected: UNRESOLVED
+  unavailable_slots: retain_slots_fail_closed_never_filter
+  FeatureResult_explicit_known_at: ABSENT_composer_must_retain_dependency_arrival
+  continuity_is_freshness: false
+session_lookback:
+  session: RTH_EXTENDED
+  ET_bounds: 04:00_to_20:00
+  standard_completed_15m_per_session: 64
+  unit: completed_selected_15m_observations
+  calendar_time_substitution: FORBIDDEN
+  SHORT: approximately_3_to_10_sessions
+  MEDIUM: approximately_10_to_20_sessions
+  LONG: more_than_20_sessions
+  illustrative_only_W320: approximately_5_standard_15m_sessions_vs_20_1H_sessions_not_selected
+  selected_W: UNRESOLVED
+  selected_m: UNRESOLVED
+  inherit_1H_method_W_cutoff_polarity_K: FORBIDDEN
+  early_close: V2-D_BLOCKER_UNCHANGED_no_skip_or_padding
+readiness:
+  M: 130
+  current_inclusive_full_window: M_plus_W_minus_1
+  zero_based_first_MACD_READY: M_minus_1
+  previous_N: W_minus_1_READY_plus_one_unavailable_warmup_slot
+  first_N: W_READY_slots
+  R2_caveat: zero_variance_still_UNDEFINED
+  partial_window: requires_explicit_audit_unavailable_slots_retained_even_if_m_LT_W
+  R3_bound: max_M_ATR_min_history_with_aligned_available_inputs
+  selected_final_N: UNRESOLVED
+polarity_candidates:
+  POL0: relative_downside_only
+  POL1: relative_downside_AND_MACD_LINE_LT_zero
+  extreme_observation_vs_reversal_bar: separate_semantic_locations
+  selected: UNRESOLVED
+threshold:
+  value: UNRESOLVED
+  comparator: UNRESOLVED
+  candidates: [LT, LE]
+gc_candidates:
+  G1:
+    name: STRICT_CROSS
+    predicate: prev_macd_LT_prev_signal_AND_curr_macd_GT_curr_signal
+  G2:
+    name: PRIOR_EQUALITY_ALLOWED
+    predicate: prev_macd_LE_prev_signal_AND_curr_macd_GT_curr_signal
+  selected: UNRESOLVED
+  operands: [previous_macd_line, previous_signal_line, current_macd_line, current_signal_line]
+  admission: completed_consecutive_selected_15m_previous_current_READY
+  event: CROSS_EVENT
+  persistent_relation: BULLISH_MACD_RELATION
+  event_persistence: FORBIDDEN
+  current_equality_policy: UNRESOLVED_both_current_candidates_exclude_equality
+  sign_zero_line_same_bar: separate_choices_not_hidden_in_cross_definition
+zero_line_candidates:
+  Z0: NO_ZERO_LINE_RESTRICTION_at_GC_extreme_polarity_separate
+  Z1: GC_event_MACD_LINE_LT_zero_extreme_polarity_separate
+  Z2: extreme_MACD_LT_zero_GC_event_unrestricted
+  Z2_POL1_consistency: REQUIRED_if_selected
+  Z0_POL1_vs_Z2: equivalent_behavior_is_not_an_independent_trial
+  selected: UNRESOLVED
+price_reversal_candidates:
+  PR0:
+    name: UNUSED
+    meaning: GC_branch_only_no_price_branch_not_fabricated_false_evidence
+  PR1:
+    name: COMPLETED_PRICE_RECLAIM
+    meaning: explicit_completed_15m_price_reclaim
+    reference_level_formula: UNRESOLVED
+    illustrations: prior_bar_high_or_local_reference_high_requires_audit
+  PR2:
+    name: CAUSAL_CONFIRMED_SWING_REVERSAL
+    meaning: reuse_causal_confirmed_swing_primitive
+    widths: UNRESOLVED
+    exact_reversal_mapping: UNRESOLVED
+    delay: right_bar_confirmation_and_actual_delivery
+    event_time: confirmed_at_max_confirmation_window_known_at_never_pivot_at
+  selected: UNRESOLVED
+  exit_HH_HL_LH_valid_HL_auto_inheritance: FORBIDDEN
+  arbitrary_candle_pattern: FORBIDDEN
+conjunction_candidates:
+  T1: DOWNSIDE_EXTREME AND GC
+  T2: DOWNSIDE_EXTREME AND PRICE_REVERSAL
+  T3: DOWNSIDE_EXTREME AND (GC OR PRICE_REVERSAL)
+  T4: DOWNSIDE_EXTREME AND GC AND PRICE_REVERSAL
+  selected: UNRESOLVED
+  D_semantics: extreme_evidence_under_selected_temporal_relation_not_automatic_same_bar
+  T4_GC_price_coincidence_order_memory: UNRESOLVED_nested_conjunction
+temporal_candidates:
+  C0:
+    name: CONTEMPORANEOUS
+    meaning: relative_predicate_still_true_at_reversal_bar
+  C1:
+    name: EXTREME_ARMED_THEN_REVERSAL
+    meaning: extreme_creates_short_arming_state_then_reversal
+    K: UNRESOLVED
+    age_anchor_refresh_consumption_reset_same_observation: UNRESOLVED
+  C2:
+    name: LAST_EXTREME_REFRESH_GRACE
+    meaning: new_extreme_refreshes_last_extreme_allow_reversal_through_short_grace_after_release
+    K: UNRESOLVED
+    age_anchor_boundary_activation_refresh_consumption_reset: UNRESOLVED
+  selected: UNRESOLVED
+  same_bar_requirement_automatic: false
+  unit: completed_selected_15m_observations
+  inherit_1H_K2: FORBIDDEN
+  unavailable_recovery_episode_binding: UNRESOLVED_nested_conjunction
+  tradeoff: C0_may_exclude_recovery_GC_long_memory_may_authorize_stale_extreme
+causality:
+  incomplete_15m: FORBIDDEN
+  future_bars_features_pivots: FORBIDDEN
+  deferred_execution_of_past_reversal_event: FORBIDDEN
+  delayed_vintage: current_actual_known_at_never_backdate
+  equal_known_at:
+    owner: H1-DECISION-TIMING
+    availability: publish_complete_atomic_batch_before_callback
+    A: SAME_ATOMIC_BATCH_new_ACTIVE_1H_and_same_15m_event_may_qualify
+    B: NEXT_15M_OBSERVATION_same_batch_event_rejected_never_deferred
+    selected: UNRESOLVED
+    next_observation: new_completed_identity_not_poll_or_correction
+    delayed_multi_observation_batch_cadence: UNRESOLVED_global_timing
+coupling:
+  raw_event: M15_REVERSAL_EVENT
+  actionable_candidate: H0001_INITIAL_ENTRY_CANDIDATE
+  required: position_flat_AND_1H_setup_ACTIVE_AND_frozen_15m_composition_satisfied
+  inactive_EXPIRED_CANCELLED_setup: no_initial_entry_candidate
+  Daily_refs: authoritative_current_causal_snapshot_refs_hashes_propagated_to_existing_1H_lifetime
+  duplicate_Daily_formula: FORBIDDEN
+  ref_mismatch_or_unavailable: suppress_and_trace
+  old_rejected_event_on_later_setup_activation: FORBIDDEN
+  armed_extreme_outside_setup_binding: UNRESOLVED_nested_conjunction_no_rejected_event_reuse
+  candidate_is_order_or_fill: false
+scope:
+  candidate_type: INITIAL_ENTRY
+  position: FLAT_only
+  repeated_GC_before_entry: distinct_raw_events_candidate_duplicate_consumption_policy_UNRESOLVED
+  repeated_GC_after_position_exists: no_automatic_add_reentry
+  designed_here: [raw_vocabulary, candidate_families, causal_boundaries, trace_requirements]
+  excluded_design: [failed_first_reversal, deeper_extreme, add, scale_in, re_entry, max_adds, 1H_GC_role, exit, risk, fill_price]
+conceptual_matrix:
+  ranking: NONE
+  E0:
+    composition: NO_15M_TRIGGER_FILTER
+    role: denominator_counterfactual_only
+    r03_fidelity: omits_trigger
+    additional_parameters: none_trigger_matched_downstream_controls_needed
+    expected_delay: no_trigger_wait
+    causal_observability: completed_eligible_opportunities_upstream_availability_retained
+    implementation_capability: counts_primitives_available_H0001_composer_missing
+    overfit_multiple_testing_cost: optional_comparator_counts_in_budget
+  E1:
+    composition: T1
+    r03_fidelity: GC_branch_only
+    additional_parameters: relative_tuple_G_Z_C_K
+    expected_delay: cross_recovery_plus_selected_memory
+    causal_observability: two_completed_READY_MACD_signal_observations
+    implementation_capability: primitives_available_predicate_composer_missing
+    overfit_multiple_testing_cost: one_branch_all_choices_preregistered
+  E2:
+    composition: T2
+    r03_fidelity: price_branch_only
+    additional_parameters: relative_tuple_PR_reference_widths_C_K
+    expected_delay: reclaim_or_swing_confirmation
+    causal_observability: completed_reclaim_or_actual_confirmed_at
+    implementation_capability: swing_available_H0001_rule_missing
+    overfit_multiple_testing_cost: additional_reversal_definition_dimensions
+  E3:
+    composition: T3
+    r03_fidelity: closest_literal_OR_unselected
+    additional_parameters: both_branches_and_temporal_identities
+    expected_delay: first_qualifying_branch_conditional_on_memory
+    causal_observability: both_causal_branch_states_traced
+    implementation_capability: predicates_composer_missing
+    overfit_multiple_testing_cost: more_hypotheses_and_availability_paths
+  E4:
+    composition: T4
+    r03_fidelity: stronger_than_literal_OR_unselected
+    additional_parameters: both_branches_and_G_P_coincidence_order_memory
+    expected_delay: conjunction_wait_no_guaranteed_arm_ordering
+    causal_observability: explicit_event_timing_and_readiness
+    implementation_capability: branch_memory_conjunction_missing
+    overfit_multiple_testing_cost: most_composition_dimensions_in_this_family
+multiple_testing:
+  Cartesian_product_search: FORBIDDEN
+  selected_tuple: UNRESOLVED
+  next_freeze_max_initial_tuples: 1
+  max_optional_comparators: 1
+  E0_counts_in_comparator_budget: true
+  cross_Daily_H1_families: FORBIDDEN
+  variants_after_viewed_results: new_revision_preregistration_independent_confirmation
+  current_SOXX_NOK_parameter_selection: FORBIDDEN
+denominators:
+  raw: [total_eligible_completed_15m_observations, MACD_READY, relative_READY, UNAVAILABLE, DOWNSIDE_EXTREME, INACTIVE]
+  overlap: [H1_setup_ACTIVE_observations, extreme_inside_active_setup, extreme_outside_active_setup]
+  reversal: [GC_count, price_reversal_count, both_same_bar, GC_only, reversal_only, neither, operand_unavailable]
+  temporal: [extreme_activation_count, extreme_refresh_count, armed_duration, latency_from_last_extreme_observations, trigger_expiry_count]
+  candidate: [initial_entry_candidate_count, rejected_H1_inactive, rejected_Daily_permission_changed, unavailable_suppression, duplicate_retrigger_suppression]
+  later: [completed_entries, no_entry_setup_episodes, MAE, MFE, forward_returns, sample_suppression, availability_suppression]
+  opportunity_identity: stable_symbol_selected_grid_completed_source_end_and_contract_refs
+  vintage_reprocessing: separate_evidence_vintage_not_extra_observation_step_dedup_policy_requires_freeze
+  sample_suppression: READY_filter_rejection_over_same_prefilter_eligible_opportunities
+  availability_suppression: unavailable_rejection_over_same_prefilter_eligible_opportunities
+  event_partition: only_joint_READY_operands_PR0_UNUSED_not_false
+  both_same_bar: diagnostic_not_T4_selection
+  simultaneous_rejections: reason_sets_and_union_no_double_counted_totals
+  zero_denominator: 'null'
+  missing_outcomes: preserve_PENDING_UNRESOLVED_missing_with_reasons_never_drop_or_zero
+  common_availability_vs_coverage: separately_preregister
+  recommendation_cohort_as_account_performance: FORBIDDEN
+trace:
+  schema_version: h0001_initial_entry_trigger_trace_proposal_v1
+  implementation: NOT_IMPLEMENTED_schema_requirements_only
+  fields:
+  - symbol
+  - as_of
+  - source_15m_end
+  - source_15m_known_at
+  - macd_line
+  - signal_line
+  - previous_macd_line
+  - previous_signal_line
+  - previous_source_15m_end
+  - relative_value
+  - relative_method
+  - relative_version
+  - relative_hash
+  - threshold
+  - comparator
+  - raw_downside_state
+  - raw_status_reason
+  - GC_event_state
+  - GC_definition_version
+  - GC_definition_hash
+  - price_reversal_state
+  - reversal_definition_version
+  - reversal_definition_hash
+  - temporal_armed_state
+  - last_extreme_at
+  - last_extreme_source_end_known_at
+  - reversal_at
+  - latency_observations
+  - conjunction_result
+  - H1_setup_episode_ref
+  - H1_setup_episode_hash
+  - Daily_permission_refs
+  - Daily_permission_hashes
+  - candidate_type
+  - candidate_identity
+  - position_flat_evidence_ref
+  - trigger_contract_version
+  - trigger_contract_hash
+  - input_hash
+  - source_vintage
+  - atomic_batch_ref_timing_choice
+  - rejection_duplicate_reason
+  candidate_type: INITIAL_ENTRY
+  immutable: true
+  order_fill_data: separate_owner_not_inferred_here
+capability_audit:
+  sources:
+  - richping/research_v2/features/macd.py
+  - richping/research_v2/features/relative.py
+  - richping/research_v2/features/volatility.py
+  - richping/research_v2/features/structure.py
+  - richping/research_v2/features/contracts.py
+  - richping/research_v2/features/continuity.py
+  - richping/research_v2/replay.py
+  - richping/research_v2/aggregation.py
+  - richping/research_v2/contracts.py
+  - richping/research_v2/strategy/h1_setup.py
+  available: [causal_completed_15m, MACD_12_26_9_line_signal_histogram, percentile, zscore, ATR, Normalize, continuity_readiness, known_at_atomic_replay, causal_confirmed_swings, immutable_state_transport]
+  missing: [15m_relative_classifier, GC_strategy_predicate, price_reversal_predicate, temporal_arming_evaluator, conjunction_evaluator, initial_entry_candidate_logger, H1_plus_15m_composer, entry_order_fill_logic, real_PIT_actions, mixed_profile_join, freshness_expected_completion_selectors]
+  strategy_implementation_added_here: false
+  schema_migration_added_here: false
+ownership:
+  H1-M15-RELATIVE-METHOD: R1_R2_R3_transform
+  H1-M15-LOOKBACK: W_completed_selected_observations
+  H1-M15-RELATIVE-CONVENTIONS: field_m_reference_ties_ddof_ATR_readiness_continuity_raw_polarity
+  H1-M15-DOWNSIDE: cutoff_value_and_units
+  H1-M15-COMPARATOR: LT_LE_equality
+  H1-M15-GC: G_current_equality_event_identity_event_zero_line
+  H1-M15-REVERSAL: PR_exact_causal_price_reference_widths_confirmation_mapping
+  H1-M15-CONJUNCTION: T_and_nested_C_K_unit_age_expiry_refresh_unavailable_episode_binding_G_P_order_coincidence_consumption
+  H1-DECISION-TIMING: global_atomic_batch_eligibility_entry_cadence_delayed_batches
+  temporal_new_ID_needed: false
+  target_UNRESOLVED:
+  - H1-M15-RELATIVE-METHOD
+  - H1-M15-LOOKBACK
+  - H1-M15-RELATIVE-CONVENTIONS
+  - H1-M15-DOWNSIDE
+  - H1-M15-COMPARATOR
+  - H1-M15-GC
+  - H1-M15-REVERSAL
+  - H1-M15-CONJUNCTION
+  other_UNRESOLVED:
+  - H1-DECISION-TIMING
+  - H1-GC-ROLE
+  - H1-ADD-POLICY
+  - H1-FAILED-REVERSAL
+  - H1-DEEPER-EXTREME
+  - H1-MAX-ADDS
+  - H1-STATE-TRANSITIONS
+  exit_risk: UNRESOLVED_UNTOUCHED
+inventory_at_basis_and_after:
+  decisions: 78
+  resolved_ids: 16
+  unresolved_ids: 62
+  C1: 38
+  performance: 17
+  optional: 7
+  unresolved_paths: 89
+candidate_reduction:
+  status: structural_guidance_not_selection_ranking_or_exclusion_of_R2_R3
+  A: MACD_LINE_percentile_negative_extreme_polarity_GC_branch_short_temporal_grace
+  B: MACD_LINE_percentile_negative_extreme_polarity_GC_OR_price_branch_short_temporal_grace
+  exact_W_m_cutoff_K_G_Z_PR: UNRESOLVED
+next_freeze:
+- method
+- W_m_reference_ties_ddof_or_ATR_period_min_history
+- threshold_comparator
+- extreme_vs_event_polarity
+- GC_definition_current_equality_zero_line
+- PR_exact_price_reference_or_swing_widths_confirmation_mapping
+- T_and_G_P_coincidence_order_memory
+- C_K_unit_age_anchor_expiry_boundary_refresh_unavailable_recovery_consumption_episode_binding
+- position_flat_evidence_duplicate_policy_and_global_state_coordination
+- immutable_trace_denominator_and_trial_budget
+- timing_bundle_same_atomic_batch_vs_next_observation_delayed_batch_cadence
+test_evidence: contract_preservation_and_synthetic_primitive_indexing_not_profitability_or_economic_validity
