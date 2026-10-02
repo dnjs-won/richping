@@ -1,0 +1,68 @@
+schema_version: 1
+updated_at: "2026-10-02"
+
+purpose: >
+  Lightweight routing index for AI PM sessions. This file does not replace canonical
+  strategy specs or immutable decision records. It tells a new session what is already
+  frozen, what remains open, and where to read the authoritative evidence.
+
+canonical_sources:
+  hypothesis: "research/hypotheses/H0001-r03.yaml"
+  executable_spec: "research/strategy_specs/H0001-r03-draft.yaml"
+  current_status: "PROJECT_STATUS.md"
+
+frozen_major_decisions:
+  daily_input:
+    status: FROZEN
+    record: "research/decision_records/H0001-daily-input-freeze-v1.yaml"
+  daily_trend:
+    status: FROZEN
+    selected: "DAILY_TREND_EMA_LEVEL_SLOPE_V1"
+    record: "research/decision_records/H0001-daily-trend-freeze-v1.yaml"
+    remediation: "research/decision_records/H0001-daily-trend-readiness-remediation-v1.yaml"
+  daily_blocker:
+    status: FROZEN
+    record: "research/decision_records/H0001-daily-blocker-freeze-v1.yaml"
+  h1_relative_setup:
+    status: FROZEN
+    selected: "H1_RELATIVE_DOWNSIDE_MACD_P05_V1"
+    record: "research/decision_records/H0001-1h-relative-setup-freeze-v1.yaml"
+  intraday_session:
+    status: FROZEN_FOR_H0001_INTRADAY
+    selected: "RTH_EXTENDED 04:00-20:00 ET, 15m base, 04:00-anchored 1H"
+    evidence: "docs/V2_EXTENDED_SESSION_IMPLEMENTATION.md"
+
+current_open_decision_groups:
+  - id: H0001_15M_ENTRY
+    status: UNRESOLVED
+    priority: CURRENT_PHASE
+    proposal: "research/decision_proposals/H0001-15m-entry-trigger-v1.yaml"
+    research: "docs/H0001_15M_ENTRY_TRIGGER_RESEARCH.md"
+    note: "Do not freeze until real-data foundation is available enough to test the actual path."
+  - id: H0001_EXIT_AND_PRICE_STRUCTURE
+    status: UNRESOLVED
+    priority: AFTER_FIRST_ENTRY_EVIDENCE
+  - id: H0001_ADD_REENTRY_RISK
+    status: UNRESOLVED
+    priority: AFTER_FIRST_ENTRY_EVIDENCE
+  - id: H0001_EXECUTION_SIZING_COSTS
+    status: UNRESOLVED
+    priority: AFTER_SIGNAL_EVIDENCE_OR_WHEN_REQUIRED_FOR_NEXT_EXPERIMENT
+  - id: H0001_RESEARCH_EVALUATION
+    status: PARTIALLY_UNRESOLVED
+    priority: REQUIRED_FOR_FIRST_EFFICACY_EXPERIMENT
+
+reopen_policy:
+  frozen_decision_may_reopen_only_if:
+    - "A causal/data-integrity defect invalidates it."
+    - "The selected real provider cannot support the contract and the incompatibility is demonstrated."
+    - "The user explicitly revises the strategy intent."
+    - "New evidence is registered under a new research revision rather than silently rewriting history."
+  forbidden:
+    - "Re-researching a frozen decision merely because a new AI session starts."
+    - "Copying values from another timeframe without an explicit decision."
+    - "Treating proposal/design completion as economic validation."
+
+pm_routing_rule: >
+  Read the canonical source only when the current NEXT_ACTION touches that decision.
+  Do not load all research documents into context by default.
