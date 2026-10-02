@@ -1,0 +1,77 @@
+schema_version: 1
+updated_at: "2026-10-02"
+
+rules:
+  - "A discovery is not automatically a task."
+  - "P0 must block a current PROJECT_CONTROL exit criterion."
+  - "P1 is next-phase/core-value work."
+  - "P2 is useful but non-blocking."
+  - "Deferred items do not interrupt NEXT_ACTION."
+
+items:
+  - id: V2_REAL_INTRADAY_DATA
+    priority: P0
+    status: ACTIVE_AS_NEXT_ACTION
+    blocks:
+      - "First reproducible H0001 real-data entry efficacy evidence"
+    summary: "V2 MarketDataset currently accepts synthetic-only input; real 15m ingestion/persistence is missing."
+    owner: AI_PM
+
+  - id: V2_MAIN_INTEGRATION_LANE
+    priority: P1
+    status: OPEN
+    summary: >
+      Active V2 workstream is ahead of and behind main. Establish a deliberate
+      integration path after the current real-data foundation is stable enough to
+      reconcile, rather than allowing V1 and V2 to become permanent parallel products.
+    guardrail: "Do not merge blindly; preserve the newer main R1 paper changes."
+
+  - id: H0001_MINIMAL_15M_ENTRY_FREEZE
+    priority: P1
+    status: QUEUED
+    depends_on:
+      - V2_REAL_INTRADAY_DATA
+    summary: "Select one minimal 15m initial-entry tuple plus at most one comparator; prohibit Cartesian grid search."
+
+  - id: H0001_ENTRY_EXECUTION_AND_COMPOSITION
+    priority: P1
+    status: QUEUED
+    depends_on:
+      - H0001_MINIMAL_15M_ENTRY_FREEZE
+    summary: "Compose frozen Daily permission/exhaustion + 1H active setup + executable 15m trigger into deterministic entry events."
+
+  - id: H0001_FIRST_ENTRY_EFFICACY
+    priority: P1
+    status: QUEUED
+    depends_on:
+      - H0001_ENTRY_EXECUTION_AND_COMPOSITION
+    summary: >
+      Generate real-data signal counts, fixed forward returns, MFE/MAE, matched
+      benchmark/excess and uncertainty before finishing the full exit/add/risk lifecycle.
+
+  - id: MINIMAL_CI
+    priority: P2
+    status: OPEN
+    summary: "Add lightweight automated regression checks once the active workstream integration path is defined."
+    reason_not_now: "CI absence does not prevent the first real-data efficacy experiment."
+
+  - id: EXTENDED_EARLY_CLOSE_SUPPORT
+    priority: P1
+    status: OPEN
+    summary: "Resolve the known extended-session early-close coverage blocker with a reviewed provider/session contract."
+    note: "May become P0 if the selected real-data range cannot satisfy H0001 history/coverage without it."
+
+  - id: OPTIONAL_4H_CONFIRMATION
+    priority: DEFERRED
+    status: CAPTURED
+    summary: "Research 4H higher-direction confirmation only after first H0001 entry evidence."
+
+  - id: OPTIONS_MACRO_VOLUME_EXPANSION
+    priority: DEFERRED
+    status: CAPTURED
+    summary: "Options, macro/news, and extra volume/indicator families remain outside the first-evidence path."
+
+  - id: COMPLEX_UI
+    priority: DEFERRED
+    status: CAPTURED
+    summary: "User-facing reporting should remain simple; no complex frontend before core evidence/automation."
