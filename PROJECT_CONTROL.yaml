@@ -1,14 +1,32 @@
 schema_version: 1
 project: richping
 updated_at: "2026-10-02"
+
 source_of_truth:
-  project_goal: PROJECT_SPEC.md
-  pm_charter: PM_CHARTER.md
-  ai_bootstrap: AGENTS.md
-  detailed_status: PROJECT_STATUS.md
-  decision_index: project/DECISION_INDEX.yaml
-  backlog: project/BACKLOG.yaml
-  user_ideas: project/USER_IDEAS.yaml
+  project_goal:
+    branch: main
+    path: PROJECT_SPEC.md
+  pm_charter:
+    branch: main
+    path: PM_CHARTER.md
+  ai_bootstrap:
+    branch: main
+    path: AGENTS.md
+  legacy_status:
+    branch: main
+    path: PROJECT_STATUS.md
+  active_workstream_status:
+    branch: v2-c0-extended-session-contract
+    path: PROJECT_STATUS.md
+  decision_index:
+    branch: main
+    path: project/DECISION_INDEX.yaml
+  backlog:
+    branch: main
+    path: project/BACKLOG.yaml
+  user_ideas:
+    branch: main
+    path: project/USER_IDEAS.yaml
 
 control_plane:
   branch: main
