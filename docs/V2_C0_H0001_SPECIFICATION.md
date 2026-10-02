@@ -1,3 +1,32 @@
+# V2-C0 — 1H relative setup canonical freeze (v11)
+
+At basis `f7123b63d76501ac740f7c5369344f26325e26be`,
+[1H setup contract](H0001_1H_RELATIVE_SETUP_RESEARCH.md) and
+[immutable freeze](../research/decision_records/H0001-1h-relative-setup-freeze-v1.yaml)
+resolve exactly six existing 1H roots. S1 **H1_RELATIVE_DOWNSIDE_MACD_P05_V1**:
+MACD_LINE<0 AND current-inclusive midrank percentile320<=.05, W=m=320,
+inherited MACD12/26/9/min_history130; first relative READY N449, N448 unavailable.
+**LAST_EXTREME_REFRESH_WITH_FIXED_GRACE_V1**, K2 completed1H: new eligible
+extreme activates, each new extreme refreshes, age0/1/2 ACTIVE, age3 EXPIRED.
+Raw unavailable, Daily trend loss or exhaustion non-NORMAL cancels immediately;
+no old observation reactivation or deferred execution. Raw measurement is
+independent from Daily. Pure classifier/evaluator/immutable trace transport only,
+no trigger/order/fill/position lifecycle or production/paper connection.
+Initial family exactly S0 no-filter counterfactual vs S1, one primary comparison;
+R2/R3 deferred, no sweeps/outcome lookup/backtest. All 15m/GC/add/reentry/timing/
+exit/risk/global state decisions remain unresolved. Daily payloads/hashes and
+original proposal/r03 preserved; extended early-close V2-D_BLOCKER unchanged.
+Actual inventory: **78 decisions / 16 resolved / 62 unresolved IDs / C1 38 /
+performance17 / optional7 / 89 paths**. v11 canonical SHA-256:
+`63dccca8a6c00c41b1643e3710fe48261ec8736f005076d4405d231048fe139a`.
+Historical v3-v10 remain readable. H0001 DRAFT/BLOCKED_ON_DECISIONS,
+NOT_TESTED, chart parity UNVERIFIED. Validation is recorded in PROJECT_STATUS.md.
+
+---
+
+Earlier proposal/freeze sections below retain their named-basis inventories;
+current 1H choices and counts are above.
+
 # V2-C0 — 1H relative setup design proposal (v10 unchanged)
 
 At basis `3a046021939b24068f4c95526496814c983af713`,

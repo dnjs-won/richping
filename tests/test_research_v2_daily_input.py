@@ -17,7 +17,7 @@ from richping.research_v2.strategy.h0001_spec import H0001Specification, load_h0
 from richping.research_v2.strategy.specification import C1, UNRESOLVED
 from test_research_v2 import Observer, fixture_data
 from test_research_v2_extended import bars, dataset, select_extended_fixture
-from test_research_v2_specification import resolve_fixture, input_audit_draft
+from test_research_v2_specification import resolve_fixture, input_audit_draft, draft
 
 ROOT = Path(__file__).resolve().parents[1]
 BASE = "4d5d74f716d013e89536955ebe25c2e2c81b43f5"
@@ -89,7 +89,9 @@ def test_each_unresolved_input_contract_independently_blocks_freeze_and_c1(decis
 
 @pytest.mark.parametrize("omitted", list(NEW.values()))
 def test_legacy_v5_readability_does_not_impute_omitted_input_contracts(omitted):
-    value = select_extended_fixture(resolve_fixture(load_h0001(DRAFT), {C1}))
+    # Downgrade the historical v10 admission shape, not v11's new polarity
+    # schema. Current v11 ownership is checked by the setup freeze tests.
+    value = select_extended_fixture(resolve_fixture(draft(), {C1}))
     value["status"] = "FROZEN"
     value["specification_version"] = "h0001_r03_spec_v5"
     for decision, (section, field) in NEW.items():
@@ -99,7 +101,7 @@ def test_legacy_v5_readability_does_not_impute_omitted_input_contracts(omitted):
     with pytest.raises(ValueError, match="daily_price_basis"):
         legacy.require_c1_ready()
     # A v6 declaration must have each explicit field, even if all others resolve.
-    value = select_extended_fixture(resolve_fixture(load_h0001(DRAFT), {C1}))
+    value = select_extended_fixture(resolve_fixture(draft(), {C1}))
     del value[omitted[0]][omitted[1]]
     with pytest.raises(ValueError):
         H0001Specification.of(value)

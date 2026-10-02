@@ -1,3 +1,4 @@
+# 1H setup provenance: research/decision_records/H0001-1h-relative-setup-freeze-v1.yaml.
 # Blocker provenance: research/decision_records/H0001-daily-blocker-freeze-v1.yaml.
 # Executable-spec draft, NOT a strategy implementation or complete strategy freeze.
 # Source r03 remains immutable. The five intraday/base/MACD decisions remain resolved.
@@ -7,12 +8,12 @@
 # Readiness remediation: research/decision_records/H0001-daily-trend-readiness-remediation-v1.yaml.
 schema_version: strategy_specification_v1
 strategy_id: H0001
-specification_version: h0001_r03_spec_v10
+specification_version: h0001_r03_spec_v11
 hypothesis_id: H0001
 hypothesis_revision: 3
 status: DRAFT
 created_at: '2026-09-27T00:00:00Z'
-updated_at: '2026-10-02T00:00:00Z'
+updated_at: '2026-10-02T01:00:00Z'
 source:
   path: research/hypotheses/H0001-r03.yaml
   sha256: 35e13276056a36d6a06de04611720fd286113f0e5db1e4255af6ceeb6a0f0bc2
@@ -123,7 +124,45 @@ feature_contracts:
     decision_id: H1-HISTORY-ORIGIN
   setup_1h_relative_conventions:
     kind: contract
-    value: UNRESOLVED
+    value:
+      name: rolling_empirical_midrank
+      version: v1
+      parameters:
+        window:
+          kind: integer
+          value: 320
+          choices: []
+          decision_id: null
+        min_history:
+          kind: integer
+          value: 320
+          choices: []
+          decision_id: null
+        include_current:
+          kind: boolean
+          value: true
+          choices: []
+          decision_id: null
+        ties:
+          kind: text
+          value: midrank
+          choices: []
+          decision_id: null
+        continuity:
+          kind: text
+          value: us_equity_extended_04_20_completed_grid_v1
+          choices: []
+          decision_id: null
+        field:
+          kind: text
+          value: macd_line
+          choices: []
+          decision_id: null
+        macd_line_lt_zero:
+          kind: boolean
+          value: true
+          choices: []
+          decision_id: null
     choices: []
     decision_id: H1-RELATIVE-CONVENTIONS
   entry_15m_relative_conventions:
@@ -700,7 +739,7 @@ rule_parameters:
     decision_id: H1-DAILY-BLOCKER
   setup_1h_relative_transform:
     kind: enum
-    value: UNRESOLVED
+    value: ROLLING_PERCENTILE
     choices:
     - ROLLING_PERCENTILE
     - ROLLING_ZSCORE
@@ -708,17 +747,17 @@ rule_parameters:
     decision_id: H1-RELATIVE-METHOD
   setup_1h_rolling_lookback:
     kind: integer
-    value: UNRESOLVED
+    value: 320
     choices: []
     decision_id: H1-LOOKBACK
   setup_1h_downside_threshold:
     kind: number
-    value: UNRESOLVED
+    value: 0.05
     choices: []
     decision_id: H1-DOWNSIDE
   setup_1h_downside_comparator:
     kind: enum
-    value: UNRESOLVED
+    value: LE
     choices:
     - LT
     - LE
@@ -879,7 +918,155 @@ rule_parameters:
 state_machine_parameters:
   setup_persistence_expiry:
     kind: contract
-    value: UNRESOLVED
+    value:
+      name: last_extreme_refresh_with_fixed_grace
+      version: v1
+      parameters:
+        K:
+          kind: integer
+          value: 2
+          choices: []
+          decision_id: null
+        unit:
+          kind: text
+          value: completed_selected_extended_1H_observations
+          choices: []
+          decision_id: null
+        age:
+          kind: text
+          value: current_index_minus_last_extreme_index
+          choices: []
+          decision_id: null
+        active:
+          kind: text
+          value: age_LE_K
+          choices: []
+          decision_id: null
+        expiry:
+          kind: text
+          value: age_GT_K
+          choices: []
+          decision_id: null
+        activation:
+          kind: text
+          value: Daily_BULLISH_AND_exhaustion_NORMAL_AND_new_1H_extreme
+          choices: []
+          decision_id: null
+        refresh:
+          kind: text
+          value: each_new_completed_extreme_resets_age_zero
+          choices: []
+          decision_id: null
+        activation_at:
+          kind: text
+          value: current_atomic_as_of_gte_actual_feature_known_at
+          choices: []
+          decision_id: null
+        UNAVAILABLE:
+          kind: text
+          value: CANCEL_1H_UNAVAILABLE
+          choices: []
+          decision_id: null
+        Daily_trend_loss:
+          kind: text
+          value: CANCEL_DAILY_PERMISSION
+          choices: []
+          decision_id: null
+        Daily_exhaustion_loss:
+          kind: text
+          value: CANCEL_DAILY_EXHAUSTION
+          choices: []
+          decision_id: null
+        cancellation_recovery:
+          kind: text
+          value: new_completed_extreme_required_no_automatic_restore
+          choices: []
+          decision_id: null
+        same_observation:
+          kind: text
+          value: no_age_increment_no_refresh_no_reactivation
+          choices: []
+          decision_id: null
+        observation_delivery:
+          kind: text
+          value: every_new_completed_identity_in_order_skips_or_origin_changes_cancel
+          choices: []
+          decision_id: null
+        session_carry:
+          kind: text
+          value: observation_clock_no_wall_time_expiry_or_session_reset
+          choices: []
+          decision_id: null
+        blocked_trigger_queue:
+          kind: text
+          value: NO_DEFERRED_EXECUTION
+          choices: []
+          decision_id: null
+        entry_consumption_add_reentry_position_open:
+          kind: text
+          value: owned_by_unresolved_downstream_decisions
+          choices: []
+          decision_id: null
+        global_state_transitions:
+          kind: text
+          value: UNRESOLVED_setup_local_only
+          choices: []
+          decision_id: null
+        lifetime_version:
+          kind: text
+          value: LAST_EXTREME_REFRESH_WITH_FIXED_GRACE_V1
+          choices: []
+          decision_id: null
+        lifetime_hash:
+          kind: text
+          value: f86cf01d714f256ec1c88250b1634fb95aff22e8bf9ebb57eb94e0cf9bd5d07b
+          choices: []
+          decision_id: null
+        raw_version:
+          kind: text
+          value: H1_RELATIVE_DOWNSIDE_MACD_P05_V1
+          choices: []
+          decision_id: null
+        raw_hash:
+          kind: text
+          value: bff5b6767b0348ec0b79356264f61b6608990fc9336b8ca3ae4c2e6664297261
+          choices: []
+          decision_id: null
+        freeze_ref:
+          kind: text
+          value: research/decision_records/H0001-1h-relative-setup-freeze-v1.yaml
+          choices: []
+          decision_id: null
+        canonical:
+          kind: text
+          value: S1
+          choices: []
+          decision_id: null
+        comparison_candidate:
+          kind: text
+          value: S0_NO_1H_DOWNSIDE_SETUP_FILTER
+          choices: []
+          decision_id: null
+        primary_comparisons:
+          kind: integer
+          value: 1
+          choices: []
+          decision_id: null
+        R2:
+          kind: text
+          value: DEFERRED_SEPARATE_RESEARCH_VARIANT
+          choices: []
+          decision_id: null
+        R3:
+          kind: text
+          value: DEFERRED_SEPARATE_RESEARCH_VARIANT
+          choices: []
+          decision_id: null
+        parameter_sweeps:
+          kind: text
+          value: FORBIDDEN
+          choices: []
+          decision_id: null
     choices: []
     decision_id: H1-SETUP-LIFETIME
   reentry_add_policy:

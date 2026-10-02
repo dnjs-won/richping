@@ -344,6 +344,8 @@ def select_extended_fixture(value):
         value["engine_capabilities"][key]["value"] = v
     value["chart_parity"]["engine_1h_boundary"]["value"] = ENGINE_BOUNDARIES[EXTENDED]
     for prefix in ("setup_1h", "entry_15m", "exit_1h"):
+        if prefix == "setup_1h" and value["specification_version"] == "h0001_r03_spec_v11":
+            continue  # Preserve the frozen setup; only fill downstream fixtures.
         value["feature_contracts"][prefix + "_relative_conventions"]["value"] = feature_contract(
             PercentileSpec(1, 1, continuity=EC), field="macd_line")
     value["rule_parameters"]["swing_parameters"]["value"] = feature_contract(FractalSpec(1, 1, continuity=EC))

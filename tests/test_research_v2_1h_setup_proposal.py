@@ -14,7 +14,7 @@ from richping.research_v2.features import (
     rolling_percentile, rolling_zscore,
 )
 from richping.research_v2.sessions import EXTENDED, EXTENDED_CONTINUITY as EC
-from richping.research_v2.strategy.h0001_spec import load_h0001
+from richping.research_v2.strategy.h0001_spec import H0001Specification
 from richping.research_v2.strategy.specification import C1, PERFORMANCE, OPTIONAL
 from test_research_v2_extended import bars
 
@@ -22,6 +22,7 @@ ROOT = Path(__file__).resolve().parents[1]
 BASE = "3a046021939b24068f4c95526496814c983af713"
 PROPOSAL = ROOT / "research/decision_proposals/H0001-1h-relative-setup-v1.yaml"
 SPEC = ROOT / "research/strategy_specs/H0001-r03-draft.yaml"
+FREEZE_BASIS = "f7123b63d76501ac740f7c5369344f26325e26be"
 
 
 def proposal():
@@ -42,12 +43,17 @@ def proposal():
 ])
 def test_upstream_contracts_remain_identical_to_basis(path):
     original = subprocess.check_output(["git", "show", BASE + ":" + path], cwd=ROOT)
-    assert (ROOT / path).read_bytes().replace(b"\r\n", b"\n") == original
+    current = (subprocess.check_output(["git", "show", FREEZE_BASIS + ":" + path], cwd=ROOT)
+               if path == "research/strategy_specs/H0001-r03-draft.yaml"
+               else (ROOT / path).read_bytes().replace(b"\r\n", b"\n"))
+    assert current == original
 
 
 def test_v10_daily_payload_hash_inventory_and_draft_admission_unchanged():
     body = proposal()
-    spec = load_h0001(SPEC)
+    # Preserve the actual v10 proposal snapshot; v11 has independent delta tests.
+    spec = H0001Specification.loads(subprocess.check_output([
+        "git", "show", FREEZE_BASIS + ":" + SPEC.relative_to(ROOT).as_posix()], cwd=ROOT).decode())
     draft = spec.unpack()
     assert draft["specification_version"] == body["executable_spec_version"] == "h0001_r03_spec_v10"
     assert spec.specification_hash == body["executable_spec_sha256"]
@@ -265,5 +271,5 @@ def test_no_execution_search_or_outcome_work_and_complete_future_audit_requireme
     assert {"H0001_1H_setup_classifier", "setup_lifetime_evaluator", "setup_activation_cancellation_logger",
             "15m_trigger_coupling", "actual_H0001_transition_predicate", "prior_only_reference_query_engine"} <= set(body["capability_audit"]["missing"])
     # Checks changed source paths only; never loads a database or outcome artifact.
-    assert subprocess.check_output(["git", "diff", BASE, "--name-only", "--", "richping", "research/hypotheses",
+    assert subprocess.check_output(["git", "diff", BASE, FREEZE_BASIS, "--name-only", "--", "richping", "research/hypotheses",
                                     "research/strategy_specs", "research/decision_records", "research/experiments"], cwd=ROOT) == b""

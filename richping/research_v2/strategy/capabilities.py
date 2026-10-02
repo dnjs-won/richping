@@ -110,7 +110,11 @@ def require_current_engine(value):
         lookback = rules[prefix + "_rolling_lookback"]["value"]
         if method in {"ROLLING_PERCENTILE", "ROLLING_ZSCORE"}:
             cls = PercentileSpec if method == "ROLLING_PERCENTILE" else ZScoreSpec
-            params = _primitive(convention, cls, where, extra=("field",))
+            extra = ("field", "macd_line_lt_zero") if (
+                value["specification_version"] == "h0001_r03_spec_v11" and prefix == "setup_1h") else ("field",)
+            params = _primitive(convention, cls, where, extra=extra)
+            if "macd_line_lt_zero" in params and params["macd_line_lt_zero"] is not True:
+                raise ValueError("C1 frozen 1H negative polarity required")
             if params["continuity"] != capabilities["continuity"]:
                 raise ValueError(f"C1 {where}: session continuity mismatch")
             field = params["field"]

@@ -34,7 +34,11 @@ BASE = "887810629a46912bd7cd4dcfca2709b1b33d7f74"
 
 
 def draft():
-    return load_h0001(DRAFT, hypothesis_path=SOURCE)
+    # These generic admission fixtures deliberately vary all relative methods.
+    # Pin their v10 basis rather than reopen the independently frozen v11 setup.
+    return H0001Specification.loads(subprocess.check_output([
+        "git", "show", "f7123b63d76501ac740f7c5369344f26325e26be:" + DRAFT.relative_to(ROOT).as_posix(),
+    ], cwd=ROOT).decode("utf-8"))
 
 
 def input_freeze_draft():
@@ -125,6 +129,10 @@ def compatible_features_fixture(value, method="ROLLING_PERCENTILE"):
     }.items():
         value["feature_contracts"][key]["value"] = contract(identifier)
     for prefix in ("setup_1h", "entry_15m", "exit_1h"):
+        # Current v11 owns its frozen setup tuple; admission fixtures may only
+        # supply the other unresolved feature contracts.
+        if prefix == "setup_1h" and value["specification_version"] == "h0001_r03_spec_v11":
+            continue
         value["rule_parameters"][prefix + "_relative_transform"]["value"] = method
         convention = {
             "ROLLING_PERCENTILE": feature_contract(PercentileSpec(1, 1), field="macd_line"),

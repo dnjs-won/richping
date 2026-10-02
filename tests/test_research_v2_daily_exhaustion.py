@@ -44,7 +44,9 @@ def prefix():
 def test_canonical_spec_resolves_exactly_the_blocker_root_and_preserves_v9():
     before = H0001Specification.loads(subprocess.check_output(
         ['git', 'show', BASE+':'+DRAFT], cwd=ROOT).decode('utf-8'))
-    after = load_h0001(ROOT / DRAFT)
+    # Immutable v10 freeze snapshot; the later six-root v11 delta is tested separately.
+    after = H0001Specification.loads(subprocess.check_output([
+        'git', 'show', 'f7123b63d76501ac740f7c5369344f26325e26be:'+DRAFT], cwd=ROOT).decode())
     old, new = before.unpack(), after.unpack()
     assert old['specification_version'] == 'h0001_r03_spec_v9'
     assert before.specification_hash == frozen_record()['executable_spec']['canonical_sha256_before']

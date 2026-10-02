@@ -1,3 +1,200 @@
+# H0001 1H relative downside setup — canonical semantic freeze v1
+
+Freeze basis: `v2-c0-extended-session-contract@f7123b63d76501ac740f7c5369344f26325e26be`.
+**Six 1H decisions RESOLVED. H0001 DRAFT / BLOCKED_ON_DECISIONS;
+profitability NOT_TESTED; chart parity UNVERIFIED.**
+[Immutable decision record](../research/decision_records/H0001-1h-relative-setup-freeze-v1.yaml)
+supersedes the selection questions in the unchanged
+[original proposal](../research/decision_proposals/H0001-1h-relative-setup-v1.yaml).
+This is an explicitly authorized ex-ante contract, not reconstructed chart
+settings or an economic validation. No historical/current outcome lookup,
+performance backtest, current SOXX/NOK analysis, sweep or main merge.
+
+## Frozen raw contract and rationale
+
+Rule **H1_RELATIVE_DOWNSIDE_MACD_P05_V1** / S1 / R1:
+
+```text
+DOWNSIDE_EXTREME iff all required inputs/operands READY
+                    AND MACD_LINE_t < 0
+                    AND rolling_percentile_320(MACD_LINE_t) <= 0.05
+INACTIVE iff all required operands READY and predicate false
+UNAVAILABLE otherwise, retaining status/reason
+```
+
+MACD_LINE=EMA12−EMA26; inherit MACD fast/slow/signal 12/26/9, first-observation
+seed, signal from first MACD, minimum history M=130, full available completed
+causal contiguous history, no session reset. Histogram/signal/slope are excluded.
+RTH_EXTENDED 04–20 ET, 15m base, 04:00-anchored completed 1H buckets remains
+unchanged: 16 completed observations per supported standard session. Extended
+early-close/nonstandard dates remain **V2-D_BLOCKER**, never skipped or padded.
+
+Reuse **rolling_empirical_midrank_v1** / **CURRENT_INCLUSIVE**:
+`(count_less + .5*count_equal)/reference_count`, including self. W=m=320,
+full window only; unavailable warmup slots are retained, not filtered out.
+W counts completed selected extended **1H observations**, never calendar hours
+or days. 320=16×20 means about 20 standard sessions / four trading weeks of
+recent 1H swing context, avoiding a few-day memory and a multi-month Daily axis.
+This is a semantic choice supplied by the user before outcomes, not optimization.
+
+Percentile directly answers r03's own-past-distribution position question;
+dimensionless rank avoids absolute MACD magnitudes and Gaussian assumptions
+and reduces extreme magnitude distortion of a local mean/std. No superiority
+over z-score, P05 optimality or subsequent price rise is claimed.
+POL1 requires negative MACD: a low local rank in a positive regime is not this
+negative downside spread. Rank comparator is inclusive LE; polarity is strict
+LT-zero. MACD=0 is INACTIVE when READY. Exact rank .05 is **attainable with
+ties at W=320**: 15 less and 2 equal gives (15+1)/320=.05; a hand fixture verifies
+this. No rounding/tolerance. PRIOR_ONLY remains unused and unimplemented.
+
+MACD first READY is one-based N=130 / index129. The current-inclusive full
+relative window first becomes READY at **M+W−1=449** completed 1H observations:
+N448 retains one unavailable warmup plus319 READY reference slots; N449 has320
+READY slots. Actual primitive statuses and projection indexing admit the
+classifier; no hardcoded `N>=449` substitutes for feature readiness.
+
+Raw state is independent from Daily trend/exhaustion, macro/rates/oil/options/
+sector/fundamentals/volume/15m trigger/price-low labels and outcomes. It is
+**SETUP/CONTEXT**, not BUY or PRICE_BOTTOM. INACTIVE is not BEARISH;
+UNAVAILABLE is not INACTIVE. Missing latest expected completed input, history,
+continuity, unsupported/incomplete grid, finite-calculation, input evidence or
+known_at failure gives UNAVAILABLE with a reason. Future evidence is rejected,
+never silently truncated into a usable prefix. Real intraday action/price basis
+is not selected by this freeze; supported primitive inputs remain synthetic.
+
+## Frozen activation and last-extreme grace
+
+Lifetime **LAST_EXTREME_REFRESH_WITH_FIXED_GRACE_V1** is the selected L2
+variant, **last-extreme based**, not a fixed duration from initial activation.
+Activation requires current Daily trend BULLISH AND exhaustion NORMAL AND a
+new causally observed completed 1H DOWNSIDE_EXTREME. Raw calculation consumes
+neither Daily axis. Every new extreme while ACTIVE refreshes last_extreme_at/
+index to the current observation without changing episode activation_at/ID.
+
+```text
+age = current_completed_1H_index - last_extreme_index
+age=0: ACTIVE, latest observation extreme
+age=1: ACTIVE, first non-extreme completed observation
+age=2: ACTIVE, second non-extreme completed observation
+age=3: EXPIRED, reason EXPIRE_GRACE
+new extreme during grace: refresh age=0
+```
+
+K=2 is short confirmation grace for a separately owned 15m reversal after 1H
+starts recovering. L0 may remove context too early; long latch may keep old
+context after substantial recovery. This rationale establishes no performance
+advantage. Clock advances only on completed selected observations. Overnight,
+weekends and holidays add no steps; no wall-time expiry or session reset is
+introduced. A new extreme after expiry creates a new episode.
+
+Raw UNAVAILABLE immediately cancels an active episode:
+**SETUP_CANCELLED_1H_UNAVAILABLE**. Trend NOT_BULLISH/UNAVAILABLE cancels with
+**SETUP_CANCELLED_DAILY_PERMISSION**; exhaustion EXTENDED/UNAVAILABLE cancels
+with **SETUP_CANCELLED_DAILY_EXHAUSTION**. All corresponding cancellation counts
+remain separate. If multiple failures coincide, unavailable is logged first,
+then trend, then exhaustion; all input states remain in the trace. This is
+setup-local reason reporting, not resolution of global state priority.
+
+Cancellation/expiry has no deferred trigger queue and cannot auto-resume when
+data or Daily permission recovers. A completed-source-end watermark prevents
+the same old extreme being replayed as activation or refresh. Daily restoration
+alone and a recalculated vintage of that same 1H identity do not reactivate;
+new activation requires a later completed extreme with current allowed Daily.
+Repeated same-identity evaluations preserve age and last_extreme_at, while
+Daily loss can cancel between hour completions.
+
+The pure evaluator expects each new causally delivered completed identity in
+order, with the same history origin during an active episode. Skipped identities
+or a shifted origin/index cancel as unavailable rather than infer unseen
+extreme refreshes. Caller composition must deliver such observations even when
+Daily gates are closed. It must not backdate an episode from a delayed batch;
+activation/refresh use the actual current atomic as_of. Ordered composition is
+not an implemented replay plugin in this freeze.
+
+Entry consumption, add/re-entry memory and position-open lifecycle are outside
+this local evaluator. H1-STATE-TRANSITIONS, H1-GC-ROLE, every 15m relative/GC/
+conjunction/price reversal decision, deeper-extreme/add/re-entry, entry timing
+and exit/risk remain unresolved. 1H GC is not required.
+
+## Completed timing, implementation and trace
+
+At 05:37 ET, 05–06 is in progress and forbidden; use only a causally available
+completed bucket. The prepared prefix supplies exact-as_of expected completion
+and input-evidence facts; it is not a freshness selector. If the latest expected
+completed hour is missing, an older delivered hour is UNAVAILABLE. Feature
+known_at is max(actual prefix bar and required input-evidence arrivals), not
+candle start/end. Equal-known_at constituent/aggregate publication uses the
+unchanged replay atomic batch contract: decision only after complete publication.
+
+[`h1_setup.py`](../richping/research_v2/strategy/h1_setup.py) implements:
+
+- `classify_h1_relative_setup(PreparedH1Prefix, as_of, frozen_spec)` reusing
+  MACDSpec/macd/macd_series/PercentileSpec/rolling_percentile and existing grids.
+- `evaluate_h1_setup_lifetime(previous, raw, current_Daily_refs)` returning
+  immutable ACTIVE/INACTIVE/EXPIRED/CANCELLED episodes and events/reasons.
+- `setup_trace(raw, episode)` and immutable StrategyState round-trip; payload
+  only, no activation logger, label writer, trigger evaluator, Intent/order/fill.
+
+Trace schema **h0001_1h_setup_trace_v1** preserves symbol/as_of/source 1H end/
+actual known_at/MACD line/percentile/version/hash/W/cutoff/LE/polarity/raw state/
+episode status/activation/last extreme/age/expiry/cancellation/Daily refs and
+hashes/input hash/source vintage/downstream trigger ref/setup contract version/
+hash. Additional raw hash/status/reason/reference count/episode ID preserves
+availability and identity. Old snapshots stay immutable; later labels belong
+to separate maturity records. FeatureResult's absent explicit known_at is
+handled by composition retaining dependency arrival, not fabricated feature end.
+
+## Initial family, denominators and remaining blockers
+
+Exactly **S0 NO_1H_DOWNSIDE_SETUP_FILTER vs S1 frozen percentile setup**, one
+primary setup-filter comparison. S0 is an incremental-effect/denominator
+counterfactual comparator, not an independent champion. R2/z-score and R3/ATR
+are **DEFERRED_SEPARATE_RESEARCH_VARIANT**, excluded from initial performance.
+No W/cutoff/polarity/LT-LE/reference/K sweep or addition of R2/R3. Any change
+needs a new strategy revision and registered family; viewed confirmation cannot
+be reused to tune deferred methods. Daily trend/blocker families are not crossed.
+
+Preregistered question: Does the frozen negative-MACD current-inclusive320
+<=5th-percentile setup with two-completed-1H last-extreme grace improve H0001
+after-cost outcomes versus the otherwise identical unfiltered strategy, beyond
+sample suppression or availability loss? The 15m/exit and remaining C1 choices
+are not frozen, so this is not an executable performance experiment.
+
+Preserve raw total eligible1H/MACD READY/percentile READY/UNAVAILABLE/extreme/
+INACTIVE; Daily permission/NORMAL/extreme overlap; episode activation/refresh/
+duration/age0-1-2/expiry/three cancellation categories; 15m opportunities inside
+and outside/entries/no-entry episodes/later MAE-MFE-forward outcomes/sample and
+availability suppression. READY-filter and availability suppression are distinct
+numerators over the same otherwise-eligible prefilter15m opportunity denominator;
+zero denominator=null. Predeclare common-availability versus coverage reporting,
+stable opportunity identity and same data/Daily/downstream/cost controls.
+Keep PENDING/UNRESOLVED/missing labels and reasons; no selective survivor alpha
+claim or recommendation/cohort drawdown represented as account performance.
+
+v10→v11 resolves exactly six existing roots, no new decision ID or unresolved
+path: **78 decisions, unresolved68→62, C1 44→38, paths95→89**; performance17 /
+optional7 unchanged. Upstream v10 Daily payloads/hashes and r03 remain unchanged.
+v10 canonical hash `b9a2c69ce9ea27010b7846339bf052401b3c836dc39c0538ab3e411cb59dd7f4`;
+v11 `63dccca8a6c00c41b1643e3710fe48261ec8736f005076d4405d231048fe139a`.
+Raw hash `bff5b6767b0348ec0b79356264f61b6608990fc9336b8ca3ae4c2e6664297261`;
+lifetime hash `f86cf01d714f256ec1c88250b1634fb95aff22e8bf9ebb57eb94e0cf9bd5d07b`.
+v11 validates exact selected parameters, polarity and lifetime; v3–v10 remain
+readable. Canonical Daily contracts cannot be reopened by this new profile.
+
+Real PIT actions, mixed-profile atomic as_of join, freshness/expected completion
+selectors, provider/session/action provenance, ordered setup trace composition
+and extended early-close remain gaps. No production/paper/order connection or
+end-to-end real-market readiness. Full performance registration still needs
+remaining strategy freezes, data/universe/splits/costs/fills/capital/sample/
+metric/null/pass-reject/purge/embargo before any outcomes. Validation results are
+recorded in PROJECT_STATUS.md; synthetic tests prove contract behavior only.
+
+---
+
+The following proposal is historical at its named basis; selections above and
+the immutable freeze record supersede only its unresolved selection questions.
+The original proposal YAML remains unchanged.
+
 # H0001 1H relative downside setup — bounded design proposal v1
 
 Basis: `v2-c0-extended-session-contract@3a046021939b24068f4c95526496814c983af713`.

@@ -1,3 +1,80 @@
+# Richping v2 상태 · 2026-10-02 1H relative setup canonical freeze v1
+
+**판정: 기존 6개 1H decision RESOLVED. H0001 DRAFT / BLOCKED_ON_DECISIONS,
+profitability NOT_TESTED, chart parity UNVERIFIED 유지.**
+
+- 기준 `v2-c0-extended-session-contract@f7123b63d76501ac740f7c5369344f26325e26be`.
+  같은 branch의 worktree에서 작업하며 root main 미커밋 변경을 보존한다. main merge 없음.
+  [연구 계약](docs/H0001_1H_RELATIVE_SETUP_RESEARCH.md),
+  [immutable freeze record](research/decision_records/H0001-1h-relative-setup-freeze-v1.yaml),
+  [canonical v11](research/strategy_specs/H0001-r03-draft.yaml)에 선택과 근거를 기록했다.
+  r03와 original proposal, Daily input/trend/remediation/blocker records 및 Daily payload/hash는 불변이다.
+- **H1_RELATIVE_DOWNSIDE_MACD_P05_V1**:
+  모든 operand READY AND **MACD_LINE<0 AND percentile<=0.05**이면 DOWNSIDE_EXTREME.
+  MACD_LINE=EMA12-EMA26, MACD 12/26/9/min_history130/first-observation seed/
+  first-MACD signal/full completed causal history/no session reset 상속.
+  Histogram/signal/slope, 1H GC, 미래 극저점, price low label을 추가하지 않는다.
+- 기존 **rolling_empirical_midrank_v1 / CURRENT_INCLUSIVE / ties=midrank / W=m=320**.
+  `(count_less+.5*count_equal)/reference_count`, partial window 금지.
+  RTH_EXTENDED 04–20 ET, 15m base, 04:00 anchored completed 1H 16/day를 상속한다.
+  320=16×20, 정상 세션 약20 trading sessions/4주 recent context이며 calendar time이 아니다.
+  r03 own-history distribution rank에 대응하는 사전 semantic 선택; P05/W/K 최적성·수익 우월성 주장 없음.
+  Prior-only engine 미구현/미사용, extended early-close **V2-D_BLOCKER** 유지.
+- 실제 synthetic completed aggregation/primitive fixture에서 first MACD READY=N130/index129.
+  **M+W-1=449**: N448에는 READY MACD319+warmup1 → UNAVAILABLE;
+  N449에는 READY320 → classifier READY. Feature status에서 도출하며 449 단독 gate 없음.
+  W320에서도 ties의 `15 less+2 equal`이면 정확히 .05이며 LE를 적용한다.
+  MACD=0은 strict negative polarity 불충족이다.
+- Raw vocabulary **INACTIVE / DOWNSIDE_EXTREME / UNAVAILABLE**.
+  DOWNSIDE_EXTREME!=BUY/PRICE_BOTTOM, INACTIVE!=BEARISH, UNAVAILABLE!=INACTIVE.
+  Raw classifier는 Daily trend/exhaustion/macro/rates/oil/options/sector/fundamentals/
+  volume/15m trigger/price-low/outcome을 입력하지 않는다.
+- Actionable activation만 current **Daily BULLISH AND exhaustion NORMAL AND new completed 1H extreme**.
+  **LAST_EXTREME_REFRESH_WITH_FIXED_GRACE_V1, K=2**:
+  매 new extreme이 last_extreme을 refresh, age0/1/2 ACTIVE, age3 EXPIRE_GRACE.
+  age1/2 중 extreme은 age0으로 복귀. Same-identity polling은 age/refresh를 늘리지 않는다.
+  Observation clock이므로 nights/weekends/holidays에 age 증가·wall-time expiry·session reset 없음.
+- Raw UNAVAILABLE는 **SETUP_CANCELLED_1H_UNAVAILABLE**, Daily trend loss는
+  **SETUP_CANCELLED_DAILY_PERMISSION**, exhaustion EXTENDED/UNAVAILABLE는
+  **SETUP_CANCELLED_DAILY_EXHAUSTION**. Fail-open/자동 복원/deferred execution 금지.
+  현재 permission 복구만으로 재활성화하지 않으며 더 늦은 completed extreme이 필요하다.
+  취소/만료 시각과 source-end watermark를 보존한다. Missed observation/index/origin 변화는
+  unseen refresh를 추론하지 않고 active episode를 unavailable로 취소한다.
+- 진행 중 1H 사용 금지. Activation/refresh는 실제 causal feature known_at 이후 current atomic as_of.
+  Equal-known-at constituent/aggregate는 기존 batch publication 완료 후에만 사용한다.
+  Expected completion/input evidence는 prepared caller 계약이며 real selector를 구현한 것이 아니다.
+- [Pure classifier/lifetime evaluator](richping/research_v2/strategy/h1_setup.py)와 immutable StrategyState/
+  trace payload를 구현했다. 기존 MACD/percentile/grid/readiness 재사용, 새 indicator engine 없음.
+  Actual logger/15m coupling/replay strategy/global transition/Intent/order/fill/production/paper 연결 없음.
+  Source end/known_at/features/spec hashes/raw state/episode/activation/refresh/age/expiry/cancellation/
+  Daily refs/input hash/vintage/downstream ref를 추적한다.
+- Initial family는 **S0 no-1H-filter vs S1 frozen percentile**, 정확히1 primary comparison.
+  R2 z-score/R3 ATR는 **DEFERRED_SEPARATE_RESEARCH_VARIANT**. W/cutoff/polarity/LT-LE/reference/K/
+  method sweep 금지; 결과 후 변경은 새 revision+registered family. 향후 raw readiness/unavailable/
+  extreme/inactive, Daily overlap, episode duration/refresh/expiry/각 cancellation, inside/outside15m/
+  entries/no-entry/MAE-MFE/forward labels 및 sample/availability suppression denominators 사전등록.
+  PENDING/UNRESOLVED/missing outcome 보존, zero denominator=null. 현재 performance experiment 실행 불가.
+- Parser: **78 decisions / 16 resolved / 62 unresolved IDs / C1 38 / performance17 / optional7 /
+  89 unresolved paths**. 기존68/44/95에서 정확히6 roots 감소, 새 ID/path 없음.
+  `H1-RELATIVE-METHOD`, `H1-LOOKBACK`, `H1-RELATIVE-CONVENTIONS`, `H1-DOWNSIDE`,
+  `H1-COMPARATOR`, `H1-SETUP-LIFETIME`만 이번에 해소했다.
+  v10 hash `b9a2c69ce9ea27010b7846339bf052401b3c836dc39c0538ab3e411cb59dd7f4` →
+  v11 `63dccca8a6c00c41b1643e3710fe48261ec8736f005076d4405d231048fe139a`.
+  Raw hash `bff5b6767b0348ec0b79356264f61b6608990fc9336b8ca3ae4c2e6664297261`;
+  lifetime hash `f86cf01d714f256ec1c88250b1634fb95aff22e8bf9ebb57eb94e0cf9bd5d07b`.
+- 남은 C1 38개 전체 ID는 freeze record의 `remaining_C1`에 보존했다.
+  H1-GC-ROLE/H1-STATE-TRANSITIONS, 모든15m relative/GC/conjunction/reversal,
+  add/reentry/deeper-extreme/entry timing/exit/risk는 UNRESOLVED 유지.
+  Real PIT action transform, mixed-profile atomic as_of join, real freshness/expected-completion selector,
+  provider/session/action provenance, ordered trace composition, extended early-close는 runtime/data gaps다.
+- 검증: 전체 **1073 passed (238.91s)**, 기존997+신규76, failures/skips/pytest warnings 없음.
+  CLI `--help`, `git diff --check` 통과, 관련 문서 local links37 valid.
+  기존 admission fixture는 v11 frozen tuple을 덮어쓰지 않고, historical generic/legacy 테스트는
+  당시 version의 payload를 검증한다. Historical/current outcome 조회, performance backtest,
+  current SOXX/NOK 분석, grid search 없음. Synthetic tests는 economic validity를 증명하지 않는다.
+
+---
+
 # Richping v2 상태 · 2026-10-02 1H relative setup DESIGN / PROPOSAL v1
 
 **판정: PROPOSED_NOT_FROZEN. H0001 DRAFT / BLOCKED_ON_DECISIONS,

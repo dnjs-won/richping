@@ -1,0 +1,560 @@
+# Immutable ex-ante six-decision freeze; no outcomes or performance execution.
+schema_version: h0001_1h_relative_setup_freeze_v1
+record_id: H0001-1H-RELATIVE-SETUP-FREEZE-v1
+status: FROZEN_SEMANTIC_RESEARCH_DECISION
+basis_branch: v2-c0-extended-session-contract
+basis_commit: f7123b63d76501ac740f7c5369344f26325e26be
+decision_date: '2026-10-02'
+decision_author: user_researcher
+decision_source: explicit_user_ex_ante_freeze_instruction
+source_proposal:
+  path: research/decision_proposals/H0001-1h-relative-setup-v1.yaml
+  status_at_proposal: PROPOSED_NOT_FROZEN
+  preservation: byte_identical_at_basis_commit
+source_boundary:
+  direct_refs:
+  - rules.setup[0]
+  - rules.setup[1]
+  - rules.setup[2]
+  - rules.trigger[0]
+  - rules.trigger[1]
+  - unknowns[4]
+  - unknowns[5]
+  - unknowns[6]
+  direct_statements:
+  - ref: rules.setup[0]
+    text: 1시간봉 MACD가 해당 자산의 과거 분포 대비 상대적으로 깊은 하방 영역에 위치하는 상태를 롱 setup 후보로 둔다.
+  - ref: rules.setup[1]
+    text: 절대 MACD 값이나 미래에 확정되는 최종 극저점 대신 rolling percentile, ATR 정규화, rolling z-score
+      등 당시 계산 가능한 상대 위치를 사용한다는 원칙을 둔다.
+  - ref: rules.setup[2]
+    text: 1시간봉 자체의 골든크로스는 최초 진입의 필수조건으로 확정하지 않았으며, 15분봉 진입 후 더 큰 시간축의 확인/추가진입 후보로
+      논의했다.
+  - ref: rules.trigger[0]
+    text: 일봉 롱 레짐이 허용되고 일봉 exhaustion blocker가 활성화되지 않은 상태에서 1시간봉 상대 MACD 하방 극단이 setup을
+      만든다.
+  - ref: rules.trigger[1]
+    text: 그 setup 안에서 15분봉 MACD도 상대적으로 깊은 하방 영역에 있고 골든크로스 또는 확인된 가격 반전이 발생하면 최초 롱
+      진입 후보가 된다.
+  - ref: unknowns[4]
+    text: relative MACD를 rolling percentile, ATR-normalized MACD, z-score 중 무엇으로 정의할지
+  - ref: unknowns[5]
+    text: relative MACD rolling lookback 길이
+  - ref: unknowns[6]
+    text: 1시간봉과 15분봉의 하방 extreme threshold
+  interpretation: bounded_new_causal_operationalization_not_recovered_chart_rule
+  unsupported_setup_rules:
+  - 1H_GC_required
+  - MACD_minimum_confirmation
+  - price_low_confirmation
+  - RSI_oversold
+  - volume_spike
+  - divergence
+  - 4H_filter
+  - macro_condition
+  - options_flow
+  - price_structure_trigger
+performance_information_used: NONE
+outcome_lookup: NOT_RUN
+historical_outcome_lookup: NOT_RUN
+current_outcome_lookup: NOT_RUN
+performance_backtest: NOT_RUN
+current_SOXX_NOK_analysis: NOT_RUN
+profitability: NOT_TESTED
+chart_parity: UNVERIFIED
+hypothesis:
+  status: DRAFT
+  readiness: BLOCKED_ON_DECISIONS
+  r03_preservation: byte_identical
+decisions:
+  H1-RELATIVE-METHOD:
+    status: RESOLVED
+    executable_root: rule_parameters.setup_1h_relative_transform
+    selected: ROLLING_PERCENTILE
+  H1-LOOKBACK:
+    status: RESOLVED
+    executable_root: rule_parameters.setup_1h_rolling_lookback
+    selected: 320
+  H1-RELATIVE-CONVENTIONS:
+    status: RESOLVED
+    executable_root: feature_contracts.setup_1h_relative_conventions
+    selected:
+      name: rolling_empirical_midrank
+      parameters:
+        continuity:
+          choices: []
+          decision_id: null
+          kind: text
+          value: us_equity_extended_04_20_completed_grid_v1
+        field:
+          choices: []
+          decision_id: null
+          kind: text
+          value: macd_line
+        include_current:
+          choices: []
+          decision_id: null
+          kind: boolean
+          value: true
+        macd_line_lt_zero:
+          choices: []
+          decision_id: null
+          kind: boolean
+          value: true
+        min_history:
+          choices: []
+          decision_id: null
+          kind: integer
+          value: 320
+        ties:
+          choices: []
+          decision_id: null
+          kind: text
+          value: midrank
+        window:
+          choices: []
+          decision_id: null
+          kind: integer
+          value: 320
+      version: v1
+  H1-DOWNSIDE:
+    status: RESOLVED
+    executable_root: rule_parameters.setup_1h_downside_threshold
+    selected: 0.05
+  H1-COMPARATOR:
+    status: RESOLVED
+    executable_root: rule_parameters.setup_1h_downside_comparator
+    selected: LE
+  H1-SETUP-LIFETIME:
+    status: RESOLVED
+    executable_root: state_machine_parameters.setup_persistence_expiry
+    selected:
+      name: last_extreme_refresh_with_fixed_grace
+      parameters:
+        Daily_exhaustion_loss:
+          choices: []
+          decision_id: null
+          kind: text
+          value: CANCEL_DAILY_EXHAUSTION
+        Daily_trend_loss:
+          choices: []
+          decision_id: null
+          kind: text
+          value: CANCEL_DAILY_PERMISSION
+        K:
+          choices: []
+          decision_id: null
+          kind: integer
+          value: 2
+        R2:
+          choices: []
+          decision_id: null
+          kind: text
+          value: DEFERRED_SEPARATE_RESEARCH_VARIANT
+        R3:
+          choices: []
+          decision_id: null
+          kind: text
+          value: DEFERRED_SEPARATE_RESEARCH_VARIANT
+        UNAVAILABLE:
+          choices: []
+          decision_id: null
+          kind: text
+          value: CANCEL_1H_UNAVAILABLE
+        activation:
+          choices: []
+          decision_id: null
+          kind: text
+          value: Daily_BULLISH_AND_exhaustion_NORMAL_AND_new_1H_extreme
+        activation_at:
+          choices: []
+          decision_id: null
+          kind: text
+          value: current_atomic_as_of_gte_actual_feature_known_at
+        active:
+          choices: []
+          decision_id: null
+          kind: text
+          value: age_LE_K
+        age:
+          choices: []
+          decision_id: null
+          kind: text
+          value: current_index_minus_last_extreme_index
+        blocked_trigger_queue:
+          choices: []
+          decision_id: null
+          kind: text
+          value: NO_DEFERRED_EXECUTION
+        cancellation_recovery:
+          choices: []
+          decision_id: null
+          kind: text
+          value: new_completed_extreme_required_no_automatic_restore
+        canonical:
+          choices: []
+          decision_id: null
+          kind: text
+          value: S1
+        comparison_candidate:
+          choices: []
+          decision_id: null
+          kind: text
+          value: S0_NO_1H_DOWNSIDE_SETUP_FILTER
+        entry_consumption_add_reentry_position_open:
+          choices: []
+          decision_id: null
+          kind: text
+          value: owned_by_unresolved_downstream_decisions
+        expiry:
+          choices: []
+          decision_id: null
+          kind: text
+          value: age_GT_K
+        freeze_ref:
+          choices: []
+          decision_id: null
+          kind: text
+          value: research/decision_records/H0001-1h-relative-setup-freeze-v1.yaml
+        global_state_transitions:
+          choices: []
+          decision_id: null
+          kind: text
+          value: UNRESOLVED_setup_local_only
+        lifetime_hash:
+          choices: []
+          decision_id: null
+          kind: text
+          value: f86cf01d714f256ec1c88250b1634fb95aff22e8bf9ebb57eb94e0cf9bd5d07b
+        lifetime_version:
+          choices: []
+          decision_id: null
+          kind: text
+          value: LAST_EXTREME_REFRESH_WITH_FIXED_GRACE_V1
+        observation_delivery:
+          choices: []
+          decision_id: null
+          kind: text
+          value: every_new_completed_identity_in_order_skips_or_origin_changes_cancel
+        parameter_sweeps:
+          choices: []
+          decision_id: null
+          kind: text
+          value: FORBIDDEN
+        primary_comparisons:
+          choices: []
+          decision_id: null
+          kind: integer
+          value: 1
+        raw_hash:
+          choices: []
+          decision_id: null
+          kind: text
+          value: bff5b6767b0348ec0b79356264f61b6608990fc9336b8ca3ae4c2e6664297261
+        raw_version:
+          choices: []
+          decision_id: null
+          kind: text
+          value: H1_RELATIVE_DOWNSIDE_MACD_P05_V1
+        refresh:
+          choices: []
+          decision_id: null
+          kind: text
+          value: each_new_completed_extreme_resets_age_zero
+        same_observation:
+          choices: []
+          decision_id: null
+          kind: text
+          value: no_age_increment_no_refresh_no_reactivation
+        session_carry:
+          choices: []
+          decision_id: null
+          kind: text
+          value: observation_clock_no_wall_time_expiry_or_session_reset
+        unit:
+          choices: []
+          decision_id: null
+          kind: text
+          value: completed_selected_extended_1H_observations
+      version: v1
+canonical: S1
+state_definition:
+  field: MACD_LINE
+  method: ROLLING_PERCENTILE
+  session: RTH_EXTENDED
+  session_profile: US_EQUITY_EXTENDED_04_20
+  count_unit: completed_selected_extended_1H_observations
+  history_origin: full_available_completed_causal_history
+  session_reset: false
+  reference: CURRENT_INCLUSIVE
+  partial_window: false
+  polarity: MACD_LINE_LT_ZERO
+  cutoff: 0.05
+  comparator: LE
+  states: INACTIVE|DOWNSIDE_EXTREME|UNAVAILABLE
+  role: SETUP_CONTEXT_NOT_BUY_OR_PRICE_BOTTOM
+  independent_from_Daily: true
+  completed_only: true
+  version: H1_RELATIVE_DOWNSIDE_MACD_P05_V1
+  hash: bff5b6767b0348ec0b79356264f61b6608990fc9336b8ca3ae4c2e6664297261
+  macd:
+    continuity: us_equity_extended_04_20_completed_grid_v1
+    fast: 12
+    field: close
+    min_history: 130
+    seed: first_observation
+    signal: 9
+    signal_start: first_macd_observation
+    slow: 26
+  percentile:
+    continuity: us_equity_extended_04_20_completed_grid_v1
+    include_current: true
+    min_history: 320
+    ties: midrank
+    window: 320
+  macd_specification_hash: 32149872dbf9833963f59173a44349ac8d3259f79875215c3b1fdd08852f450f
+  percentile_specification_hash: 3bf1151769642e329bb4bedbeafe5fdbd190b5b614621fbaccff1417a9d2b2fd
+lifetime:
+  K: 2
+  unit: completed_selected_extended_1H_observations
+  age: current_index_minus_last_extreme_index
+  active: age_LE_K
+  expiry: age_GT_K
+  activation: Daily_BULLISH_AND_exhaustion_NORMAL_AND_new_1H_extreme
+  refresh: each_new_completed_extreme_resets_age_zero
+  activation_at: current_atomic_as_of_gte_actual_feature_known_at
+  UNAVAILABLE: CANCEL_1H_UNAVAILABLE
+  Daily_trend_loss: CANCEL_DAILY_PERMISSION
+  Daily_exhaustion_loss: CANCEL_DAILY_EXHAUSTION
+  cancellation_recovery: new_completed_extreme_required_no_automatic_restore
+  same_observation: no_age_increment_no_refresh_no_reactivation
+  observation_delivery: every_new_completed_identity_in_order_skips_or_origin_changes_cancel
+  session_carry: observation_clock_no_wall_time_expiry_or_session_reset
+  blocked_trigger_queue: NO_DEFERRED_EXECUTION
+  entry_consumption_add_reentry_position_open: owned_by_unresolved_downstream_decisions
+  global_state_transitions: UNRESOLVED_setup_local_only
+  version: LAST_EXTREME_REFRESH_WITH_FIXED_GRACE_V1
+  hash: f86cf01d714f256ec1c88250b1634fb95aff22e8bf9ebb57eb94e0cf9bd5d07b
+readiness:
+  M: 130
+  W: 320
+  m: 320
+  formula: M+W-1
+  first_relative_READY: 449
+  N448:
+    READY_MACD_reference_slots: 319
+    raw_state: UNAVAILABLE
+  N449:
+    READY_MACD_reference_slots: 320
+    classifier_status: READY
+  admission: actual_feature_status_not_hardcoded_N449
+rationale:
+  percentile: direct_r03_own_past_distribution_rank_dimensionless_no_Gaussian_assumption_less_magnitude_distortion
+  W320: 16_times_20_standard_sessions_about_four_trading_weeks_recent_1H_swing_context_not_calendar_time
+  POL1: low_local_rank_in_positive_MACD_regime_is_not_negative_downside_spread
+  P05: simple_ex_ante_lower_five_percent_position_not_optimality
+  K2: short_confirmation_grace_after_1H_recovery_for_separate_15m_reversal_avoids_long_latch
+  performance_superiority_reversal_prediction_optimality: NOT_TESTED
+non_equivalences:
+  DOWNSIDE_EXTREME:
+  - BUY
+  - PRICE_BOTTOM
+  INACTIVE:
+  - BEARISH
+  UNAVAILABLE:
+  - INACTIVE
+excluded_raw_inputs:
+- Daily_trend
+- Daily_exhaustion
+- macro
+- rates
+- oil
+- options
+- sector
+- fundamentals
+- volume
+- 15m_trigger
+- price_low_label
+- outcomes
+initial_family:
+  status: PREREGISTERED_SETUP_SUBFAMILY_NOT_EXECUTABLE_PERFORMANCE_EXPERIMENT
+  members:
+    S0: NO_1H_DOWNSIDE_SETUP_FILTER
+    S1: FROZEN_PERCENTILE_SETUP
+  comparison_candidate: S0
+  primary_comparisons: 1
+  trial_budget: one_setup_filter_comparison
+  R2: DEFERRED_SEPARATE_RESEARCH_VARIANT
+  R3: DEFERRED_SEPARATE_RESEARCH_VARIANT
+  changes_forbidden:
+  - W
+  - cutoff
+  - polarity
+  - LT_LE
+  - reference
+  - K
+  - zscore
+  - ATR
+  new_change: new_strategy_revision_and_new_registered_trial_family
+  reuse_viewed_confirmatory_results_for_R2_R3_tuning: FORBIDDEN
+  parameter_grid: FORBIDDEN
+primary_question: Does requiring the frozen 1H negative-MACD current-inclusive 320-observation
+  <=5th-percentile setup, with a two-completed-1H-observation last-extreme grace,
+  improve H0001 after-cost outcomes relative to the identical strategy without the
+  1H downside-setup filter, without the apparent improvement being explained only
+  by sample suppression or availability loss?
+denominators:
+  raw:
+  - total_eligible_completed_1H
+  - MACD_READY
+  - percentile_READY
+  - UNAVAILABLE
+  - DOWNSIDE_EXTREME
+  - INACTIVE
+  overlap:
+  - Daily_permission_allowed
+  - Daily_exhaustion_NORMAL
+  - Daily_AND_1H_extreme
+  episodes:
+  - activation
+  - extreme_refresh
+  - active_duration
+  - grace_age_0_1_2
+  - expiry
+  - cancel_1H_unavailable
+  - cancel_Daily_trend
+  - cancel_Daily_blocker
+  downstream:
+  - 15m_opportunities_inside
+  - 15m_opportunities_outside
+  - entries
+  - no_entry_episodes
+  - later_MAE_MFE_forward_outcomes
+  - sample_suppression_ratio
+  - availability_suppression_ratio
+  sample_suppression: READY_setup_filter_removed_otherwise_eligible_15m_opportunities_over_all_same_prefilter_opportunities
+  availability_suppression: setup_UNAVAILABLE_removed_otherwise_eligible_15m_opportunities_over_all_same_prefilter_opportunities
+  zero_denominator: 'null'
+  missing_outcomes: retain_COMPLETE_PENDING_UNRESOLVED_and_reasons_never_delete_or_zero
+  matched_availability_and_coverage: separate_preregistered_diagnostics
+  account_metrics: require_capital_NAV_contract
+trace:
+  version: h0001_1h_setup_trace_v1
+  implementation: immutable_payload_only_no_event_logger_or_label_writer
+  fields:
+  - symbol
+  - as_of
+  - source_1h_end
+  - source_1h_known_at
+  - macd_line
+  - percentile
+  - percentile_version
+  - percentile_hash
+  - window
+  - threshold
+  - comparator
+  - polarity
+  - raw_state
+  - setup_status
+  - activation_at
+  - last_extreme_at
+  - age_since_last_extreme
+  - expiry_at
+  - cancellation_reason
+  - Daily_refs
+  - input_hash
+  - source_vintage
+  - downstream_trigger_ref
+  - setup_contract_version
+  - setup_contract_hash
+remaining_ownership:
+- H1-M15-RELATIVE-METHOD
+- H1-M15-LOOKBACK
+- H1-M15-RELATIVE-CONVENTIONS
+- H1-M15-DOWNSIDE
+- H1-M15-COMPARATOR
+- H1-M15-GC
+- H1-M15-CONJUNCTION
+- H1-M15-REVERSAL
+- H1-GC-ROLE
+- H1-STATE-TRANSITIONS
+- H1-ADD-POLICY
+- H1-DEEPER-EXTREME
+- H1-DECISION-TIMING
+runtime_data_blockers:
+- real_PIT_action_transform
+- mixed_profile_atomic_as_of_join
+- real_freshness_selector
+- provider_session_action_provenance
+- extended_early_close_V2_D_BLOCKER
+- intraday_expected_completion_selector
+- ordered_setup_trace_composition
+prior_only_engine: NOT_IMPLEMENTED_NOT_USED
+production_paper_order_connection: NONE
+implementation:
+  module: richping.research_v2.strategy.h1_setup
+  classifier: classify_h1_relative_setup
+  lifetime_evaluator: evaluate_h1_setup_lifetime
+  new_indicator_engine: false
+  entry_consumption_position_lifecycle: NOT_IMPLEMENTED_DOWNSTREAM_UNRESOLVED
+executable_spec:
+  version_before: h0001_r03_spec_v10
+  version: h0001_r03_spec_v11
+  canonical_sha256_before: b9a2c69ce9ea27010b7846339bf052401b3c836dc39c0538ab3e411cb59dd7f4
+  canonical_sha256: 63dccca8a6c00c41b1643e3710fe48261ec8736f005076d4405d231048fe139a
+inventory:
+  decisions: 78
+  unresolved_ids_before: 68
+  unresolved_ids_after: 62
+  C1_before: 44
+  C1_after: 38
+  paths_before: 95
+  paths_after: 89
+  removed_roots:
+  - feature_contracts.setup_1h_relative_conventions
+  - rule_parameters.setup_1h_downside_comparator
+  - rule_parameters.setup_1h_downside_threshold
+  - rule_parameters.setup_1h_relative_transform
+  - rule_parameters.setup_1h_rolling_lookback
+  - state_machine_parameters.setup_persistence_expiry
+  new_executable_ids: []
+remaining_C1:
+- H1-ADD-POLICY
+- H1-DEAD-CROSS
+- H1-DECISION-TIMING
+- H1-DEEPER-EXTREME
+- H1-EXIT-CONVENTIONS
+- H1-EXIT-LOOKBACK
+- H1-EXIT-RELATIVE
+- H1-FAILED-REVERSAL
+- H1-GC-ROLE
+- H1-HISTOGRAM
+- H1-HL-BREAK
+- H1-LH
+- H1-M15-COMPARATOR
+- H1-M15-CONJUNCTION
+- H1-M15-DOWNSIDE
+- H1-M15-GC
+- H1-M15-LOOKBACK
+- H1-M15-RELATIVE-CONVENTIONS
+- H1-M15-RELATIVE-METHOD
+- H1-M15-REVERSAL
+- H1-MACD-SLOPE
+- H1-MAX-ADDS
+- H1-MAX-HOLDING
+- H1-NEW-HH-RESET
+- H1-OVERNIGHT
+- H1-REFERENCE-HH
+- H1-SIGNAL-SLOPE
+- H1-STATE-TRANSITIONS
+- H1-STOP-LOSS
+- H1-STRONG-WATCH
+- H1-SWING-DETECTOR
+- H1-SWING-PARAMETERS
+- H1-TRAILING
+- H1-UPPER-COMPARATOR
+- H1-UPPER-EXTREME
+- H1-VALID-HL
+- H1-WATCH-CONFIRMATION
+- H1-WEAK-WATCH
+full_performance_registration: NOT_COMPLETE_requires_15m_exit_and_other_C1_data_universe_splits_costs_fills_capital_metric_null_pass_reject_purge_embargo
