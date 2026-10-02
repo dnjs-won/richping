@@ -39,6 +39,11 @@ CREATE TABLE IF NOT EXISTS source_items(
  id TEXT PRIMARY KEY, manifest_id TEXT NOT NULL REFERENCES manifests(id),
  source_key TEXT NOT NULL, payload TEXT NOT NULL, UNIQUE(manifest_id,source_key)
 );
+CREATE TABLE IF NOT EXISTS paper_intents(
+ id TEXT PRIMARY KEY, manifest_id TEXT NOT NULL REFERENCES manifests(id),
+ source_key TEXT NOT NULL, recorded_at TEXT NOT NULL, payload TEXT NOT NULL,
+ UNIQUE(manifest_id,source_key)
+);
 CREATE TABLE IF NOT EXISTS followup(
  id TEXT PRIMARY KEY, source_item_id TEXT NOT NULL REFERENCES source_items(id),
  dataset_id TEXT NOT NULL, as_of TEXT NOT NULL, policy TEXT NOT NULL, payload TEXT NOT NULL,
@@ -139,7 +144,7 @@ class PaperStore:
         self.db.execute("PRAGMA foreign_keys=ON")
         self.db.execute("PRAGMA journal_mode=WAL")
         self.db.executescript(PAPER_SCHEMA)
-        for table in ("manifests", "source_items", "followup", "paper_events", "paper_nav"):
+        for table in ("manifests", "source_items", "paper_intents", "followup", "paper_events", "paper_nav"):
             for action in ("UPDATE", "DELETE"):
                 self.db.execute(
                     f"CREATE TRIGGER IF NOT EXISTS freeze_{table}_{action} BEFORE {action} ON {table} "
@@ -177,6 +182,33 @@ class PaperStore:
                 if stored != payload:
                     raise ValueError("Source item identity collision")
 
+    def register_intents(self, manifest_id, items):
+        """Record the actual time paper intents were seen; callers cannot backdate it."""
+        recorded_at = utcnow()
+        with self.db:
+            for item in items:
+                key = item["source_key"]
+                values = (digest([manifest_id, key]), manifest_id, key, recorded_at, canonical(item))
+                self.db.execute("INSERT OR IGNORE INTO paper_intents VALUES(?,?,?,?,?)", values)
+        return self.intent_times(manifest_id)
+
+    def intent_times(self, manifest_id):
+        return {row["source_key"]: row["recorded_at"] for row in self.db.execute(
+            "SELECT source_key,recorded_at FROM paper_intents WHERE manifest_id=?", (manifest_id,))}
+
+    def decision_events(self, portfolio_id):
+        decisions = {}
+        for row in self.db.execute(
+                "SELECT payload FROM paper_events WHERE portfolio_id=? ORDER BY rowid", (portfolio_id,)):
+            event = json.loads(row[0])
+            if event["type"] not in {"INTENT_REJECTED", "BUY_FILL", "SELL_FILL", "EXIT_UNRESOLVED"}:
+                continue
+            key = (event["source_key"], event["session"])
+            if key in decisions and decisions[key] != event:
+                raise ValueError(f"Conflicting immutable paper decisions: {key}")
+            decisions[key] = event
+        return decisions
+
     def save_followup(self, manifest_id, report):
         rows = {row["source_key"]: row for row in report["source_items"]}
         with self.db:
@@ -206,7 +238,26 @@ class PaperStore:
                 self.db.execute("INSERT OR IGNORE INTO paper_events VALUES(?,?,?,?,?,?,?)", values)
                 stored = self.db.execute("SELECT payload FROM paper_events WHERE id=?", (event_id,)).fetchone()[0]
                 if stored != payload:
-                    raise ValueError("Paper event identity collision")
+                    if event["type"] in {"INTENT_REJECTED", "BUY_FILL", "SELL_FILL", "EXIT_UNRESOLVED"}:
+                        raise ValueError("Immutable paper decision changed")
+                    revision = {**event, "event_key": f"{event_key}:revision:{digest(payload)}",
+                                "supersedes": event_id, "revision_reason": "later_observation_or_dataset_vintage"}
+                    revised_key = revision["event_key"]
+                    revised_payload = canonical(revision)
+                    revised_id = digest([portfolio_id, revised_key])
+                    self.db.execute("INSERT OR IGNORE INTO paper_events VALUES(?,?,?,?,?,?,?)",
+                                    (revised_id, portfolio_id, revised_key, event["effective_at"],
+                                     event.get("known_at"), recorded_at, revised_payload))
+                    check = self.db.execute("SELECT payload FROM paper_events WHERE id=?", (revised_id,)).fetchone()[0]
+                    if check != revised_payload:
+                        raise ValueError("Paper event revision collision")
+                    event.clear()
+                    event.update(revision)
+                    for nav_row in nav_rows:
+                        if nav_row["session"] == revision["session"]:
+                            nav_row["session_event_keys"] = [
+                                revised_key if key == event_key else key
+                                for key in nav_row["session_event_keys"]]
             for row in nav_rows:
                 values = (portfolio_id, row["session"], row["as_of"], row.get("revision", 1), canonical(row))
                 self.db.execute("INSERT OR IGNORE INTO paper_nav VALUES(?,?,?,?,?)", values)
@@ -215,7 +266,21 @@ class PaperStore:
                     values[:4],
                 ).fetchone()[0]
                 if stored != values[-1]:
-                    raise ValueError("Paper NAV identity collision")
+                    revisions = self.db.execute(
+                        "SELECT revision,payload FROM paper_nav WHERE portfolio_id=? AND session=? AND as_of=? "
+                        "ORDER BY revision", values[:3]).fetchall()
+                    comparable = lambda payload: {key: value for key, value in json.loads(payload).items()
+                                                  if key not in {"revision", "supersedes_revision", "revision_reason"}}
+                    if any(comparable(item["payload"]) == comparable(values[-1]) for item in revisions):
+                        continue
+                    revised = {**row, "revision": revisions[-1]["revision"] + 1,
+                               "supersedes_revision": revisions[-1]["revision"],
+                               "revision_reason": "later_observation_or_dataset_vintage"}
+                    self.db.execute("INSERT INTO paper_nav VALUES(?,?,?,?,?)",
+                                    (portfolio_id, row["session"], row["as_of"], revised["revision"],
+                                     canonical(revised)))
+                    row.clear()
+                    row.update(revised)
 
     def manifest(self, manifest_id=None):
         if manifest_id:
@@ -241,8 +306,12 @@ def _bar_available(bar, as_of, mode):
         return False, "missing_or_delisted_session"
     if not _valid_price(bar.open) or not _valid_price(bar.close) or not _valid_price(bar.volume):
         return False, "invalid_or_nontrading_bar"
-    if mode == "FORWARD_PAPER" and timestamp(bar.known_at) > timestamp(as_of):
-        return False, "data_not_yet_known"
+    if mode == "FORWARD_PAPER":
+        try:
+            if timestamp(bar.known_at) > timestamp(as_of):
+                return False, "data_not_yet_known"
+        except (TypeError, ValueError):
+            return False, "data_known_at_unverified"
     return True, None
 
 
@@ -271,7 +340,7 @@ def _event(kind, source_key, session, **values):
 
 
 def replay_portfolio(dataset, source_items, start_session, end_session, *, mode="RESEARCH_FIXED_REPLAY",
-                     policy=None, as_of=None, portfolio_id=None, mirror=False):
+                     policy=None, as_of=None, portfolio_id=None, mirror=False, prior_decisions=None):
     """Replay immutable source intents into a deterministic integer-share ledger."""
     policy = policy or PaperPolicy()
     as_of = as_of or cutoff_at(end_session).isoformat()
@@ -303,6 +372,7 @@ def replay_portfolio(dataset, source_items, start_session, end_session, *, mode=
     last_marks = {}
     unresolved = {}
     accepted = []
+    prior_decisions = prior_decisions or {}
     realized = Decimal("0.00")
     confirmed_values = [policy.initial_capital]
     peak = policy.initial_capital
@@ -321,8 +391,44 @@ def replay_portfolio(dataset, source_items, start_session, end_session, *, mode=
             original_ticker = snap["ticker"]
             ticker = "SPY" if mirror else original_ticker
             source_key = item["source_key"]
+            previous = prior_decisions.get((source_key, session))
+            if previous and previous["type"] == "INTENT_REJECTED":
+                events.append(previous); session_events.append(previous)
+                continue
+            if previous and previous["type"] == "BUY_FILL":
+                debit = _money(previous["cash_debit"])
+                cash -= debit
+                if cash < 0:
+                    raise AssertionError("Frozen forward buy exceeds known cash")
+                lot_id = digest([portfolio_id, source_key, session])
+                positions.append({"lot_id": lot_id, "source_key": source_key, "ticker": ticker,
+                    "original_ticker": original_ticker, "shares": previous["shares"],
+                    "entry_session": session, "exit_session": item["exit_session"],
+                    "entry_price": _money(previous["price"]), "cost_basis": debit,
+                    "unit_unresolved": False})
+                accepted.append({"source_key": source_key,
+                    "allocation_budget": previous["allocation_budget"],
+                    "planned_allocation_budget": previous.get("planned_allocation_budget"),
+                    "allocation_shortfall": previous.get("allocation_shortfall", 0),
+                    "debit": float(debit), "shares": previous["shares"],
+                    "entry_session": session, "exit_session": item["exit_session"]})
+                events.append(previous); session_events.append(previous)
+                available_exposure = max(Decimal("0"), available_exposure - debit)
+                continue
             reason = None
-            if item.get("source_conflict"):
+            if mode == "FORWARD_PAPER" and not mirror:
+                entry_open = open_at(session)
+                try:
+                    proof_ok = (item.get("provenance") == "FROZEN_FORWARD_SHADOW_SNAPSHOT"
+                        and item.get("issuance_provenance") == "REAL_TIME"
+                        and timestamp(item["run_created_at"]) < entry_open
+                        and timestamp(item["run_created_at"]) <= timestamp(item["run_issued_at"]) < entry_open
+                        and timestamp(item["paper_intent_recorded_at"]) < entry_open)
+                except (KeyError, TypeError, ValueError):
+                    proof_ok = False
+                if not proof_ok:
+                    reason = "FORWARD_INTENT_NOT_PREOPEN"
+            if reason is None and item.get("source_conflict"):
                 reason = "SOURCE_CONFLICT"
                 unresolved[f"source:{source_key}"] = reason
                 admission_block = True
@@ -344,6 +450,12 @@ def replay_portfolio(dataset, source_items, start_session, end_session, *, mode=
                 reason = "PENDING_DATA" if unavailable_reason == "data_not_yet_known" else "UNFILLED_OR_UNKNOWN"
                 unresolved[f"fill:{source_key}"] = unavailable_reason
                 admission_block = True
+            if reason is None and not mirror:
+                entry_action = _action_reason(dataset, ticker, session, as_of, mode, bar)
+                if entry_action:
+                    reason = "ENTRY_ACTION_UNRESOLVED"
+                    unresolved[f"action:{source_key}:{session}"] = entry_action
+                    admission_block = True
             if mirror:
                 planned_budget = _d(item["allocation_budget"])
                 budget = min(planned_budget, cash)
@@ -400,6 +512,15 @@ def replay_portfolio(dataset, source_items, start_session, end_session, *, mode=
         marks = {}
         exits = []
         for position in sorted(positions, key=lambda value: value["source_key"]):
+            old_exit = prior_decisions.get((position["source_key"], session))
+            if old_exit and old_exit["type"] == "SELL_FILL":
+                cash += _money(old_exit["cash_credit"])
+                realized += _money(old_exit["realized_pnl"])
+                events.append(old_exit); session_events.append(old_exit)
+                exits.append(position)
+                continue
+            if old_exit and old_exit["type"] == "EXIT_UNRESOLVED":
+                position["unit_unresolved"] = True
             bar = dataset.by_ticker.get(position["ticker"], {}).get(session)
             available, unavailable_reason = _bar_available(bar, as_of, mode)
             if not available:
@@ -408,11 +529,15 @@ def replay_portfolio(dataset, source_items, start_session, end_session, *, mode=
                 event = _event("VALUATION_UNRESOLVED", position["source_key"], session,
                                ticker=position["ticker"], reason=reason)
                 events.append(event); session_events.append(event)
+                if session == position["exit_session"]:
+                    exit_event = old_exit or _event("EXIT_UNRESOLVED", position["source_key"], session,
+                        ticker=position["ticker"], reason="exit_price_or_units_unverified")
+                    events.append(exit_event); session_events.append(exit_event)
                 continue
             action_reason = _action_reason(dataset, position["ticker"], session, as_of, mode, bar)
             if action_reason:
                 unresolved[f"action:{position['lot_id']}:{session}"] = action_reason
-                if action_reason == "stock_split_requires_accounting":
+                if action_reason != "unresolved_cash_dividend_entitlement":
                     position["unit_unresolved"] = True
                 event = _event("CORPORATE_ACTION_UNRESOLVED", position["source_key"], session,
                                ticker=position["ticker"], reason=action_reason,
@@ -420,8 +545,10 @@ def replay_portfolio(dataset, source_items, start_session, end_session, *, mode=
                 events.append(event); session_events.append(event)
             if session == position["exit_session"]:
                 if position["unit_unresolved"]:
-                    event = _event("EXIT_UNRESOLVED", position["source_key"], session,
-                                   ticker=position["ticker"], reason="share_units_unresolved")
+                    event = old_exit or _event("EXIT_UNRESOLVED", position["source_key"], session,
+                                   ticker=position["ticker"], reason="share_units_unresolved",
+                                   unconfirmed_proceeds=float(_sell_credit(bar.close, position["shares"],
+                                       policy.commission_bps, policy.slippage_bps)[3]))
                     events.append(event); session_events.append(event)
                 else:
                     notional, commission, slippage, credit = _sell_credit(
@@ -438,7 +565,10 @@ def replay_portfolio(dataset, source_items, start_session, end_session, *, mode=
                     events.append(event); session_events.append(event)
                     exits.append(position)
                     continue
-            marks[position["lot_id"]] = _money(_d(bar.close) * position["shares"])
+            if not position["unit_unresolved"]:
+                marks[position["lot_id"]] = _money(_d(bar.close) * position["shares"])
+            else:
+                last_marks.pop(position["lot_id"], None)
         for position in exits:
             positions.remove(position)
             last_marks.pop(position["lot_id"], None)
@@ -458,6 +588,7 @@ def replay_portfolio(dataset, source_items, start_session, end_session, *, mode=
             confirmed_mdd = min(confirmed_mdd, nav / peak - Decimal("1"))
             mdd = confirmed_mdd
         row = {"session": session, "as_of": as_of, "revision": 1,
+               "observation_dataset_id": dataset.id,
                "nav_status": nav_status, "nav": _json_number(nav),
                "known_component": float(_money(known_component)), "cash": float(_money(cash)),
                "market_value": float(_money(market_value)), "realized_pnl": float(_money(realized)),
@@ -475,6 +606,9 @@ def replay_portfolio(dataset, source_items, start_session, end_session, *, mode=
 
     if cash < 0:
         raise AssertionError("Negative paper cash")
+    for event in events:
+        if event["type"] in {"VALUATION_UNRESOLVED", "CORPORATE_ACTION_UNRESOLVED"}:
+            event.setdefault("observation_dataset_id", dataset.id)
     result = {"schema": LEDGER_SCHEMA, "portfolio_id": portfolio_id, "mode": mode,
               "dataset_id": dataset.id, "period": {"start": start_session, "end": end_session},
               "as_of": as_of, "policy": policy.payload(), "source_items": len(source_items),
@@ -491,45 +625,56 @@ def replay_portfolio(dataset, source_items, start_session, end_session, *, mode=
     return result
 
 
-def spy_buy_and_hold(dataset, start_session, end_session, policy=None, as_of=None):
+def spy_buy_and_hold(dataset, start_session, end_session, policy=None, as_of=None,
+                     mode="RESEARCH_FIXED_REPLAY", liquidate=False):
     policy = policy or PaperPolicy()
     as_of = as_of or cutoff_at(end_session).isoformat()
     entry = dataset.by_ticker.get("SPY", {}).get(start_session)
     exit_bar = dataset.by_ticker.get("SPY", {}).get(end_session)
     if not entry or not exit_bar or not _valid_price(entry.open) or not _valid_price(exit_bar.close):
-        return {"status": "COMPARISON_INCOMPLETE", "reason": "missing_SPY_price", "nav": None}
+        return {"status": "COMPARISON_INCOMPLETE", "reasons": ["missing_SPY_price"],
+                "nav": None, "sale_event": None}
     shares = affordable_shares(policy.initial_capital, entry.open, policy.commission_bps, policy.slippage_bps)
     _, _, _, debit = _buy_debit(entry.open, shares, policy.commission_bps, policy.slippage_bps)
+    settled = mode != "FORWARD_PAPER" or liquidate
     _, _, _, credit = _sell_credit(exit_bar.close, shares, policy.commission_bps, policy.slippage_bps)
-    price_only_nav = policy.initial_capital - debit + credit
+    price_only_nav = policy.initial_capital - debit + (
+        credit if settled else _money(_d(exit_bar.close) * shares))
     reasons = set()
+    price_unavailable = False
     period = dataset.sessions[dataset.positions[start_session]:dataset.positions[end_session] + 1]
     for session in period:
         bar = dataset.by_ticker.get("SPY", {}).get(session)
-        available, reason = _bar_available(bar, as_of, "RESEARCH_FIXED_REPLAY")
+        available, reason = _bar_available(bar, as_of, mode)
         if not available:
             reasons.add(reason)
+            price_unavailable = True
             continue
-        action = _action_reason(dataset, "SPY", session, as_of, "RESEARCH_FIXED_REPLAY", bar)
+        action = _action_reason(dataset, "SPY", session, as_of, mode, bar)
         if action:
             reasons.add(action)
+    if mode == "FORWARD_PAPER" and not liquidate:
+        reasons.add("position_still_open")
     complete = not reasons
     return {"status": "COMPLETE" if complete else "COMPARISON_INCOMPLETE",
             "reasons": sorted(reasons), "initial_capital": float(policy.initial_capital),
             "shares": shares, "cash_remainder_after_entry": float(policy.initial_capital - debit),
-            "price_only_diagnostic_nav": float(price_only_nav),
+            "price_only_diagnostic_nav": None if price_unavailable else float(price_only_nav),
             "nav": float(price_only_nav) if complete else None,
             "return": float(price_only_nav / policy.initial_capital - 1) if complete else None,
+            "sale_event": ({"session": end_session, "cash_credit": float(credit)} if settled else None),
             "dividend_total_return_verified": complete}
 
 
 def paper_report(dataset, source_items, start_session, end_session, *, mode="RESEARCH_FIXED_REPLAY",
-                 policy=None, as_of=None, manifest_id=None):
+                 policy=None, as_of=None, manifest_id=None, prior_decisions=None,
+                 liquidate_spy=False):
     policy = policy or PaperPolicy()
     candidate_portfolio_id = digest([manifest_id, "CANDIDATE"]) if manifest_id else None
     candidate = replay_portfolio(dataset, source_items, start_session, end_session,
                                  mode=mode, policy=policy, as_of=as_of,
-                                 portfolio_id=candidate_portfolio_id)
+                                 portfolio_id=candidate_portfolio_id,
+                                 prior_decisions=(prior_decisions or {}).get("candidate"))
     stress_policy = PaperPolicy(
         initial_capital=policy.initial_capital, lot_budget=policy.lot_budget,
         position_limit=policy.position_limit, gross_exposure_limit=policy.gross_exposure_limit,
@@ -539,24 +684,35 @@ def paper_report(dataset, source_items, start_session, end_session, *, mode="RES
     stress_portfolio_id = digest([manifest_id, "CANDIDATE_2X_COST"]) if manifest_id else None
     stress = replay_portfolio(dataset, source_items, start_session, end_session,
                               mode=mode, policy=stress_policy, as_of=as_of,
-                              portfolio_id=stress_portfolio_id)
+                              portfolio_id=stress_portfolio_id,
+                              prior_decisions=(prior_decisions or {}).get("stress"))
     accepted = {row["source_key"]: row for row in candidate["accepted"]}
     mirror_items = []
+    missing_spy_sources = []
     for item in source_items:
         if item["source_key"] not in accepted:
             continue
         snap = deepcopy(item["snapshot"])
         spy_bar = dataset.by_ticker.get("SPY", {}).get(snap["session"])
         if spy_bar is None:
-            continue
-        snap.update(ticker="SPY", entry_reference=spy_bar.close,
-                    stop_reference=spy_bar.close * .9, target_reference=spy_bar.close * 1.2)
+            prior_pair = (prior_decisions or {}).get("substitute", {}).get(
+                (item["source_key"], next_sessions(snap["session"], 1)[0]))
+            if prior_pair is None:
+                missing_spy_sources.append(item["source_key"])
+                continue
+            reference = prior_pair.get("price", snap["entry_reference"])
+        else:
+            reference = spy_bar.close
+        snap.update(ticker="SPY", entry_reference=reference,
+                    stop_reference=reference * .9, target_reference=reference * 1.2)
         mirror_items.append({**deepcopy(item), "snapshot": snap,
                              "allocation_budget": accepted[item["source_key"]]["allocation_budget"]})
     substitute = replay_portfolio(dataset, mirror_items, start_session, end_session,
                                   mode=mode, policy=policy, as_of=as_of,
-                                  portfolio_id=digest([candidate["portfolio_id"], "SPY_SUBSTITUTE"]), mirror=True)
-    buy_hold = spy_buy_and_hold(dataset, start_session, end_session, policy, as_of)
+                                  portfolio_id=digest([candidate["portfolio_id"], "SPY_SUBSTITUTE"]), mirror=True,
+                                  prior_decisions=(prior_decisions or {}).get("substitute"))
+    buy_hold = spy_buy_and_hold(dataset, start_session, end_session, policy, as_of,
+                                mode=mode, liquidate=liquidate_spy)
     comparison_reasons = []
     if buy_hold["status"] != "COMPLETE":
         comparison_reasons.extend(f"buy_hold:{reason}" for reason in buy_hold.get("reasons", []))
@@ -566,6 +722,24 @@ def paper_report(dataset, source_items, start_session, end_session, *, mode="RES
         comparison_reasons.append("substitute:allocation_shortfall")
     if substitute["accepted_fills"] < len(mirror_items):
         comparison_reasons.append("substitute:allocation_or_fill_shortfall")
+    pairing = []
+    matched = {row["source_key"]: row for row in substitute["accepted"]}
+    rejected = {event["source_key"]: event["reason"] for event in substitute["events"]
+                if event["type"] == "INTENT_REJECTED"}
+    for source_key, candidate_fill in sorted(accepted.items()):
+        if source_key in missing_spy_sources:
+            reason = "missing_SPY_signal_bar"
+        elif source_key not in matched:
+            reason = rejected.get(source_key, "missing_SPY_fill")
+        elif matched[source_key].get("allocation_shortfall", 0) > 0:
+            reason = "allocation_shortfall"
+        else:
+            reason = None
+        pairing.append({"source_key": source_key, "candidate_fill": True,
+                        "spy_fill": source_key in matched, "status": "MATCHED" if reason is None else "INCOMPLETE",
+                        "reason": reason})
+    if any(row["status"] != "MATCHED" for row in pairing):
+        comparison_reasons.append("substitute:unmatched_candidate_intents")
     if candidate["final"] and candidate["final"]["nav_status"] != "CONFIRMED":
         comparison_reasons.extend(f"candidate:{item['reason']}" for item in candidate["final"]["unresolved"])
     return {"schema": LEDGER_SCHEMA, "mode": mode, "dataset_id": dataset.id,
@@ -573,6 +747,9 @@ def paper_report(dataset, source_items, start_session, end_session, *, mode="RES
             "candidate_2x_cost_stress": stress,
             "comparisons": {"status": "COMPLETE" if not comparison_reasons else "COMPARISON_INCOMPLETE",
                             "reasons": sorted(set(comparison_reasons)),
+                            "pairing": {"denominator": len(accepted),
+                                        "matched": sum(row["status"] == "MATCHED" for row in pairing),
+                                        "rows": pairing},
                             "SPY_buy_and_hold": buy_hold,
                             "SPY_cash_waiting_substitute": substitute,
                             "assumptions": {"same_initial_capital": float(policy.initial_capital),
@@ -631,16 +808,26 @@ def forward_source_items(source_db, manifest, dataset, as_of):
         rows = store.db.execute(
             "SELECT r.id run_id,r.session,r.created_at,r.body,q.ticker,q.rank,q.snapshot "
             "FROM runs r JOIN recommendations q ON q.run_id=r.id "
-            "WHERE r.mode='shadow' AND r.status='SUCCEEDED' AND r.created_at>=? AND r.session>=? "
-            "ORDER BY r.session,q.rank,q.ticker,r.created_at,r.id", (created_at, start)
+            "WHERE r.mode='shadow' AND r.status='SUCCEEDED' "
+            "ORDER BY r.session,q.rank,q.ticker,r.created_at,r.id"
         ).fetchall()
         grouped = {}
         for row in rows:
-            body = json.loads(row["body"])
-            snapshot = json.loads(row["snapshot"])
-            if timestamp(body["cutoff"]) >= timestamp(open_at(next_sessions(row["session"], 1)[0])):
+            entry_session = next_sessions(row["session"], 1)[0]
+            if entry_session < start:
                 continue
-            if timestamp(body["cutoff"]) > timestamp(as_of):
+            try:
+                issued = timestamp(row["created_at"])
+                entry_open = open_at(entry_session)
+                body = json.loads(row["body"])
+                snapshot = json.loads(row["snapshot"])
+                published = timestamp(body["issued_at"])
+                if not (body.get("issuance_provenance") == "REAL_TIME" and
+                        timestamp(created_at) <= issued <= published < entry_open and
+                        timestamp(body["cutoff"]) < entry_open and
+                        timestamp(body["cutoff"]) <= timestamp(as_of) and published <= timestamp(as_of)):
+                    continue
+            except (KeyError, TypeError, ValueError, json.JSONDecodeError):
                 continue
             if snapshot.get("data_id") != dataset.id:
                 # A newer dataset may be used only if the frozen signal close still matches;
@@ -660,6 +847,9 @@ def forward_source_items(source_db, manifest, dataset, as_of):
                           "rank": first_row["rank"], "score": first.get("score"),
                           "regime": first.get("regime"), "snapshot": first,
                           "provenance": "FROZEN_FORWARD_SHADOW_SNAPSHOT",
+                          "issuance_provenance": "REAL_TIME",
+                          "run_created_at": first_row["created_at"],
+                          "run_issued_at": json.loads(first_row["body"])["issued_at"],
                           "registered_after": created_at,
                           "duplicate_sources_ignored": 0 if conflict else len(candidates) - 1,
                           "source_conflict": ([row["run_id"] for row, _ in candidates] if conflict else None)})

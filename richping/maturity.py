@@ -9,6 +9,7 @@ from collections import Counter
 from copy import deepcopy
 from hashlib import sha256
 import json
+import math
 from pathlib import Path
 
 from .core import CASH_ACTION_REVIEW_POLICY, OUTCOME_VERSION_V3, cutoff_at, next_sessions
@@ -58,6 +59,51 @@ def _same_outcome(record, outcome):
 def _counts(rows, key):
     values = Counter(row[key]["status"] for row in rows)
     return {name: values.get(name, 0) for name in ("COMPLETE", "PENDING", "UNRESOLVED")}
+
+
+def _verify_predictions(predictions, rows, horizon):
+    """Compare frozen eligible predictions with original-cutoff reconstruction."""
+    if not isinstance(predictions, list):
+        raise ValueError("SOURCE_RECONSTRUCTION_UNVERIFIED: predictions unavailable")
+    eligible = [r for r in rows if r["original"]["eligible"]]
+    expected = {(r["session"], r["ticker"], horizon): r for r in eligible}
+    if len(expected) != len(eligible):
+        raise ValueError("SOURCE_RECONSTRUCTION_UNVERIFIED: original prediction key ambiguous")
+    actual = {}
+    for prediction in predictions:
+        if not isinstance(prediction, dict):
+            raise ValueError("SOURCE_RECONSTRUCTION_UNVERIFIED: invalid prediction")
+        key = (prediction.get("session"), prediction.get("ticker"), prediction.get("horizon"))
+        if key in actual:
+            raise ValueError(f"SOURCE_RECONSTRUCTION_UNVERIFIED: duplicate prediction {key}")
+        actual[key] = prediction
+    missing, extra = expected.keys() - actual.keys(), actual.keys() - expected.keys()
+    if missing or extra:
+        raise ValueError(f"SOURCE_RECONSTRUCTION_UNVERIFIED: prediction missing={sorted(missing)} extra={sorted(extra)}")
+    fields = ("status", "horizon", "end_session", "observed_at", "outcome_version", "entry_session",
+              "entry_price", "exit_price", "price_return", "price_net_return",
+              "raw_return", "net_return", "cost", "mfe", "mae", "target_hit",
+              "stop_hit", "first_hit", "return_basis", "reason")
+    for key, row in expected.items():
+        source = actual[key]
+        reconstructed = row["original"]
+        if "regime" in source and source["regime"] != row["regime"]:
+            raise ValueError(f"SOURCE_RECONSTRUCTION_UNVERIFIED: prediction regime mismatch {key}")
+        for field in fields:
+            if field not in source and field not in reconstructed:
+                continue
+            if field not in source or field not in reconstructed:
+                raise ValueError(f"SOURCE_RECONSTRUCTION_UNVERIFIED: prediction {field} missing {key}")
+            left, right = source[field], reconstructed[field]
+            if isinstance(left, bool) != isinstance(right, bool):
+                same = False
+            elif isinstance(left, (int, float)) and not isinstance(left, bool) and isinstance(right, (int, float)):
+                same = math.isclose(left, right, rel_tol=1e-12, abs_tol=1e-12)
+            else:
+                same = left == right
+            if not same:
+                raise ValueError(f"SOURCE_RECONSTRUCTION_UNVERIFIED: prediction {field} mismatch {key}")
+    return len(expected)
 
 
 def _pairing(rows, spy_rows, candidate_key, spy_key):
@@ -176,10 +222,9 @@ def maturity_followup(source_db, validation_path, failure_path, dataset_id=None,
             "original": {**original, "eligible": old_ok, "eligibility_reason": old_reason},
             "followup": {**later, "eligible": later_ok, "eligibility_reason": later_reason}}
 
-    stored_predictions = validation.get("oos_predictions") or []
+    stored_predictions = validation.get("oos_predictions")
     eligible_rows = [row for row in rows if row["original"]["eligible"]]
-    if len(eligible_rows) != len(stored_predictions):
-        raise ValueError("SOURCE_RECONSTRUCTION_UNVERIFIED: eligible prediction denominator mismatch")
+    matched_predictions = _verify_predictions(stored_predictions, rows, horizon)
     transitions = Counter(f"{row['original']['status']}->{row['followup']['status']}" for row in rows)
     return {
         "schema": SCHEMA,
@@ -193,7 +238,7 @@ def maturity_followup(source_db, validation_path, failure_path, dataset_id=None,
                               "paper_end": next_sessions(folds[-1]["oos"]["end"], horizon)[-1]},
         "verification": {"status": "VERIFIED", "selected_records": len(rows),
             "original_outcomes_and_returns_matched": len(rows),
-            "stored_eligible_predictions_matched": len(eligible_rows)},
+            "stored_eligible_predictions_matched": matched_predictions},
         "original": {"as_of_by_fold": {str(i + 1): cutoff_at(fold["oos"]["end"]).isoformat()
                                         for i, fold in enumerate(folds)},
             "outcomes": _counts(rows, "original"),

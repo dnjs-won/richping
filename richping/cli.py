@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 import sys
 
-from .core import Config, LEGACY_OUTCOME_VERSION, canonical, code_hash, cutoff_at, latest_session, next_sessions, timestamp, utcnow
+from .core import Config, LEGACY_OUTCOME_VERSION, canonical, code_hash, cutoff_at, digest, latest_session, next_sessions, timestamp, utcnow
 from .coverage import coverage_report, stored_run_evidence
 from .data import import_csv, synthetic_dataset, yahoo_dataset
 from .engine import Engine
@@ -206,6 +206,10 @@ def _run_r1_command(args, config):
             raise ValueError("paper-advance requires a FORWARD_PAPER manifest")
         with Store(args.source_db, read_only=True) as source:
             dataset = source.load_dataset(args.dataset_id)
+        items = forward_source_items(args.source_db, manifest, dataset, as_of)
+        with PaperStore(args.paper_db) as paper_store:
+            paper_store.save_source_items(manifest["id"], items)
+            paper_store.register_intents(manifest["id"], items)
         target = latest_session(as_of)
         end = min(target, dataset.end)
         start = manifest["payload"]["start_session"]
@@ -213,12 +217,18 @@ def _run_r1_command(args, config):
             print(json.dumps({"status": "WAITING_FOR_START_SESSION", "start_session": start,
                               "latest_available_session": end}, indent=2))
             return 0
-        items = forward_source_items(args.source_db, manifest, dataset, as_of)
         with PaperStore(args.paper_db) as paper_store:
-            paper_store.save_source_items(manifest["id"], items)
             all_items = paper_store.source_items(manifest["id"])
+            intent_times = paper_store.intent_times(manifest["id"])
+            all_items = [{**item, "paper_intent_recorded_at": intent_times.get(item["source_key"])}
+                         for item in all_items]
+            candidate_id = digest([manifest["id"], "CANDIDATE"])
+            prior = {"candidate": paper_store.decision_events(candidate_id),
+                     "stress": paper_store.decision_events(digest([manifest["id"], "CANDIDATE_2X_COST"])),
+                     "substitute": paper_store.decision_events(digest([candidate_id, "SPY_SUBSTITUTE"]))}
             result = paper_report(dataset, all_items, start, end, mode="FORWARD_PAPER",
-                                  policy=PaperPolicy(), as_of=as_of, manifest_id=manifest["id"])
+                                  policy=PaperPolicy(), as_of=as_of, manifest_id=manifest["id"],
+                                  prior_decisions=prior)
             persist_paper_report(paper_store, manifest["id"], result)
         root = Path(args.output_dir)
         atomic_write_json(result, root / "paper-report.json")

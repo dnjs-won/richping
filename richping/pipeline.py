@@ -291,6 +291,12 @@ def scan(store, dataset, config, session, mode="research", now=None, engine=None
             "limitations": ["research/shadow only; no validated alpha or order execution",
                             "current-list/revised historical calibration is not point-in-time validated",
                             "corporate-action windows (splits, capital gains, cash dividends) and missing outcome windows are unresolved in v3"]}
+        if mode == "shadow":
+            issued_at = utcnow() if now is None else cutoff.isoformat()
+            if now is None and timestamp(issued_at) >= open_at(next_sessions(session, 1)[0]):
+                raise ValueError("Stale signal: run was not issued before next session open")
+            report["issued_at"] = issued_at
+            report["issuance_provenance"] = "REAL_TIME" if now is None else "SIMULATED_AS_OF"
         with store.db:
             for snap in picks:
                 store.db.execute("INSERT INTO recommendations VALUES(?,?,?,?,?)",
