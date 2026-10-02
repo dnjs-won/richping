@@ -6,38 +6,52 @@ purpose: >
   strategy specs or immutable decision records. It tells a new session what is already
   frozen, what remains open, and where to read the authoritative evidence.
 
+default_research_branch: v2-c0-extended-session-contract
+
 canonical_sources:
-  hypothesis: "research/hypotheses/H0001-r03.yaml"
-  executable_spec: "research/strategy_specs/H0001-r03-draft.yaml"
-  current_status: "PROJECT_STATUS.md"
+  hypothesis:
+    branch: v2-c0-extended-session-contract
+    path: research/hypotheses/H0001-r03.yaml
+  executable_spec:
+    branch: v2-c0-extended-session-contract
+    path: research/strategy_specs/H0001-r03-draft.yaml
+  current_status:
+    branch: v2-c0-extended-session-contract
+    path: PROJECT_STATUS.md
 
 frozen_major_decisions:
   daily_input:
     status: FROZEN
-    record: "research/decision_records/H0001-daily-input-freeze-v1.yaml"
+    branch: v2-c0-extended-session-contract
+    record: research/decision_records/H0001-daily-input-freeze-v1.yaml
   daily_trend:
     status: FROZEN
-    selected: "DAILY_TREND_EMA_LEVEL_SLOPE_V1"
-    record: "research/decision_records/H0001-daily-trend-freeze-v1.yaml"
-    remediation: "research/decision_records/H0001-daily-trend-readiness-remediation-v1.yaml"
+    selected: DAILY_TREND_EMA_LEVEL_SLOPE_V1
+    branch: v2-c0-extended-session-contract
+    record: research/decision_records/H0001-daily-trend-freeze-v1.yaml
+    remediation: research/decision_records/H0001-daily-trend-readiness-remediation-v1.yaml
   daily_blocker:
     status: FROZEN
-    record: "research/decision_records/H0001-daily-blocker-freeze-v1.yaml"
+    branch: v2-c0-extended-session-contract
+    record: research/decision_records/H0001-daily-blocker-freeze-v1.yaml
   h1_relative_setup:
     status: FROZEN
-    selected: "H1_RELATIVE_DOWNSIDE_MACD_P05_V1"
-    record: "research/decision_records/H0001-1h-relative-setup-freeze-v1.yaml"
+    selected: H1_RELATIVE_DOWNSIDE_MACD_P05_V1
+    branch: v2-c0-extended-session-contract
+    record: research/decision_records/H0001-1h-relative-setup-freeze-v1.yaml
   intraday_session:
     status: FROZEN_FOR_H0001_INTRADAY
     selected: "RTH_EXTENDED 04:00-20:00 ET, 15m base, 04:00-anchored 1H"
-    evidence: "docs/V2_EXTENDED_SESSION_IMPLEMENTATION.md"
+    branch: v2-c0-extended-session-contract
+    evidence: docs/V2_EXTENDED_SESSION_IMPLEMENTATION.md
 
 current_open_decision_groups:
   - id: H0001_15M_ENTRY
     status: UNRESOLVED
     priority: CURRENT_PHASE
-    proposal: "research/decision_proposals/H0001-15m-entry-trigger-v1.yaml"
-    research: "docs/H0001_15M_ENTRY_TRIGGER_RESEARCH.md"
+    branch: v2-c0-extended-session-contract
+    proposal: research/decision_proposals/H0001-15m-entry-trigger-v1.yaml
+    research: docs/H0001_15M_ENTRY_TRIGGER_RESEARCH.md
     note: "Do not freeze until real-data foundation is available enough to test the actual path."
   - id: H0001_EXIT_AND_PRICE_STRUCTURE
     status: UNRESOLVED
@@ -64,5 +78,5 @@ reopen_policy:
     - "Treating proposal/design completion as economic validation."
 
 pm_routing_rule: >
-  Read the canonical source only when the current NEXT_ACTION touches that decision.
-  Do not load all research documents into context by default.
+  Read the canonical source from its declared branch only when the current NEXT_ACTION
+  touches that decision. Do not load all research documents into context by default.
