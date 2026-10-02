@@ -1,3 +1,23 @@
+# V2-C0 — 1H relative setup design proposal (v10 unchanged)
+
+At basis `3a046021939b24068f4c95526496814c983af713`,
+[1H setup research](H0001_1H_RELATIVE_SETUP_RESEARCH.md) and
+[proposal YAML](../research/decision_proposals/H0001-1h-relative-setup-v1.yaml)
+bound F1 MACD_LINE with R1 percentile / R2 z-score / R3 ATR ratio and separate
+L0/L1/L2 lifetimes. All are PROPOSED_NOT_FROZEN, with no champion or numeric
+W/cutoff/lifetime choice. Independent raw INACTIVE/DOWNSIDE_EXTREME/UNAVAILABLE
+is context for a separately owned 15m trigger, never BUY or a price bottom.
+Prior-only is an audited capability gap; no classifier or runtime code is added.
+H1-RELATIVE-METHOD/LOOKBACK/RELATIVE-CONVENTIONS/DOWNSIDE/COMPARATOR/SETUP-LIFETIME,
+H1-GC-ROLE and H1-STATE-TRANSITIONS remain UNRESOLVED. Both Daily decisions,
+canonical v10 payload/hash, r03, extended early-close blocker and the inventory
+78 decisions / 68 unresolved IDs / C1 44 / 95 paths remain unchanged.
+H0001 remains DRAFT / BLOCKED_ON_DECISIONS, NOT_TESTED, chart parity UNVERIFIED.
+No outcome lookup, performance backtest, Cartesian search or main merge.
+Validation for this proposal is recorded in PROJECT_STATUS.md.
+
+---
+
 # V2-C0 — current H0001 Daily blocker freeze (v10)
 
 **H1-DAILY-BLOCKER RESOLVED; H0001 DRAFT / BLOCKED_ON_DECISIONS;

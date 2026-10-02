@@ -1,3 +1,63 @@
+# Richping v2 상태 · 2026-10-02 1H relative setup DESIGN / PROPOSAL v1
+
+**판정: PROPOSED_NOT_FROZEN. H0001 DRAFT / BLOCKED_ON_DECISIONS,
+profitability NOT_TESTED, chart parity UNVERIFIED 유지.**
+
+- 기준 `v2-c0-extended-session-contract@3a046021939b24068f4c95526496814c983af713`의
+  기존 깨끗한 `var/worktrees/v2-extended`에서 작업했다. root main 미커밋 변경 보존, main merge 없음.
+  실제 철학/Daily input/trend/blocker 문서와 네 freeze/remediation record, r03/spec/C0/status,
+  MACD/relative/ATR/normalize/aggregation/continuity/replay/state transport/admission 및 tests를 감사했다.
+- [1H setup research](docs/H0001_1H_RELATIVE_SETUP_RESEARCH.md),
+  [machine-readable proposal](research/decision_proposals/H0001-1h-relative-setup-v1.yaml) 추가.
+  r03 setup[0:3], trigger[0:2], unknowns[4:7]의 정확한 eight source statements를 보존했다.
+  이 source를 넘는 GC 필수/가격 저점/MACD 최저점/RSI/volume/divergence/4H/macro/options/구조 trigger 추가 없음.
+- 1H 역할은 SETUP/CONTEXT이며 BUY가 아니다. INACTIVE/DOWNSIDE_EXTREME/UNAVAILABLE를 독립 raw record로
+  계산하는 안을 제안한다. DOWNSIDE_EXTREME!=BUY/PRICE_BOTTOM, INACTIVE!=BEARISH, UNAVAILABLE!=INACTIVE.
+  Daily trend/exhaustion/macro/options/sector/fundamentals/outcome을 raw classifier input에 넣지 않는다.
+  Daily BULLISH + exhaustion NORMAL + setup active는 별도 15m trigger를 기다릴 context다.
+- 초기 field F1 MACD_LINE=EMA12-EMA26; histogram/signal/slope 등 제외. F2 line/ATR는 R3 transform이며
+  별도 field 축이 아니다. R1 own empirical rank / R2 local standard-deviation distance /
+  R3 current volatility scale ratio의 의미·units·readiness·outlier·cross-symbol·leakage 차이를 기록했다.
+  R3는 own-history distribution rank가 아니며 R2를 Gaussian tail probability로 해석하지 않는다.
+- Current-inclusive midrank와 ddof0/1·zero variance UNDEFINED 지원 확인. PercentileSpec/ZScoreSpec 모두
+  include_current=False를 거부하므로 prior-only reference/query engine은 capability gap, 구현하지 않았다.
+  C0 gate에서 R1/R2 lookback=window, R3 lookback=ATR period임을 기록해 distribution W와 구분했다.
+- 기존 RTH_EXTENDED 04–20 ET, 15m base, 04-anchored completed 1H 16/day 상속.
+  W 단위는 completed selected 1H observations이며 calendar hours/days 치환 금지.
+  SHORT 약10–20 sessions / MEDIUM 약1–3 trading months / LONG 그 이상은 의미 구간일 뿐 숫자 W 선택 없음.
+  MACD min_history M=130, first READY index129, warmup slots 유지. Full-window current-inclusive
+  N_first_READY=M+W-1, prior-only proposed M+W, R3 max(M,A)+positive scale/alignment/finite.
+  synthetic extended 1H fixture에서 여러 작은 arithmetic windows 및 m<W의 indexing을 검증했다.
+- POL0 relative only / POL1 AND line<0, LT/LE equality, lower-tail q/negative z/negative ratio cutoff 모두 미선택.
+  R3 negative cutoff+positive ATR에는 POL1이 algebraically redundant임을 기록했다.
+  L0 latest completed predicate / L1 recovery latch / L2 K-observation expiry, creation/persistence 분리.
+  K/recovery·activation count/retrigger/session carry/unavailable/Daily loss/reset 선택은 다음 freeze 소유다.
+  Incomplete 1H 참조 금지, constituent max actual known_at/atomic publication/immutable vintage 유지.
+- S0 NO_1H_DOWNSIDE_SETUP_FILTER는 counterfactual/denominator 후보; S1/S2/S3는 세 상대 method 의미 비교다.
+  Ranking 없음. 다음 family 최대1 canonical tuple+1 comparator이며 S0도 comparator budget에 포함한다.
+  Cartesian grid 및 Daily family 교차 금지; 결과 뒤 조합 증가는 새 revision/preregistration 필요.
+  observations/readiness/unavailable/extreme/Daily overlap/episodes/duration/expiry/no-entry/inside-outside
+  15m opportunities/entries/later MAE-MFE-forward outcomes/suppression denominator와 trace provenance 사전등록.
+  누락/PENDING/UNRESOLVED 보존, availability loss 별도, zero denominator=null, 계좌 성과 혼동 금지.
+- 실행 코드·원본 r03·canonical spec·기존 Daily contracts/records 수정 없음. 새 classifier/lifetime evaluator/
+  activation logger/15m coupling/transition predicate/prior-only engine/order engine 미구현.
+  FeatureResult explicit known_at 부재와 future composer 책임, real PIT transform/mixed-profile join/
+  freshness/provider provenance/extended early-close **V2-D_BLOCKER** gaps 유지.
+- H1-DAILY-LONG/H1-DAILY-BLOCKER RESOLVED; six target 1H decisions, H1-GC-ROLE 및
+  H1-STATE-TRANSITIONS UNRESOLVED; 15m trigger/add/reentry/entry timing untouched.
+  Parser 결과 **78 decisions / 10 resolved / 68 unresolved IDs / C1 44 / performance17 / optional7 /
+  95 unresolved paths** 불변. Canonical v10 SHA-256
+  `b9a2c69ce9ea27010b7846339bf052401b3c836dc39c0538ab3e411cb59dd7f4` 불변.
+- 검증: 새 contract tests **35 passed (4.24s)**. 전체 **997 passed (217.06s)**,
+  기존962+신규35, failures/skips/pytest warnings 없음. CLI `--help`, `git diff --check` 통과,
+  관련 문서 local links32 valid. Tests는 economic validity/chart parity/profitability 증명이 아니다.
+  Historical/current outcome artifact 조회, performance backtest, current SOXX/NOK 분석, grid search 없음.
+- 다음 freeze: field/method/W/m/reference/ties/ddof/ATR conventions/polarity/cutoff/LT-LE/lifetime 및
+  conditional K/recovery, unavailable/reset/provenance/denominator/trial budget를 작은 tuple로 선택한다.
+  그 후에도 별도 GC/15m/state-transition/timing 및 full performance/data protocol이 필요하다.
+
+---
+
 # Richping v2 상태 · 2026-10-02 DAILY-BLOCKER canonical freeze v1
 
 **판정: H1-DAILY-BLOCKER RESOLVED. H0001 DRAFT / BLOCKED_ON_DECISIONS,
