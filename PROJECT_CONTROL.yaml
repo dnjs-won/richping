@@ -1,0 +1,91 @@
+schema_version: 1
+project: richping
+updated_at: "2026-10-02"
+source_of_truth:
+  project_goal: PROJECT_SPEC.md
+  pm_charter: PM_CHARTER.md
+  ai_bootstrap: AGENTS.md
+  detailed_status: PROJECT_STATUS.md
+  decision_index: project/DECISION_INDEX.yaml
+  backlog: project/BACKLOG.yaml
+  user_ideas: project/USER_IDEAS.yaml
+
+control_plane:
+  branch: main
+  rule: "PM state lives on main so new sessions can recover it from the default branch."
+
+active_workstream:
+  branch: v2-c0-extended-session-contract
+  status: DIVERGED_FROM_MAIN
+  observed_relation_to_main:
+    ahead_by: 27
+    behind_by: 1
+  note: >
+    V2/H0001 research implementation remains on the active workstream. Do not discard
+    or restart it. Integration sequencing is PM-managed and is not allowed to hide the
+    need for first real-data evidence.
+
+current_phase:
+  id: H0001_FIRST_REAL_EVIDENCE
+  objective: >
+    Produce the first reproducible H0001 entry-efficacy evidence from real intraday
+    market data without weakening causal/data-quality contracts.
+  user_visible_outcome: >
+    A reproducible report showing actual signal count, forward returns, MFE/MAE,
+    matched benchmark comparison and uncertainty from a fixed real dataset.
+  status: BLOCKED_ON_REAL_INTRADAY_DATA
+  exit_criteria:
+    - "A real 15m dataset is persisted locally with immutable dataset identity/provenance."
+    - "The dataset covers the required 04:00-20:00 ET research session with explicit gap/availability diagnostics."
+    - "Repeated research/replay can reload the fixed dataset without network/API calls."
+    - "A minimal frozen 15m initial-entry tuple is executable with preserved Daily and 1H frozen contracts."
+    - "Daily + 1H + 15m produce deterministic H0001 entry events on the real dataset."
+    - "A user-visible entry efficacy report is generated from real data with signal denominator, forward returns, MFE/MAE, benchmark/excess and uncertainty."
+  non_goals_until_exit:
+    - "Optional 4H confirmation"
+    - "Options-chain integration"
+    - "Macro/news overlays"
+    - "Complex UI"
+    - "Broad indicator-family expansion"
+    - "Full exit/add/portfolio optimization before entry efficacy is known"
+    - "New architecture taxonomy not required by the exit criteria"
+
+next_action:
+  id: V2_REAL_INTRADAY_DATA_FOUNDATION
+  priority: P0
+  status: READY
+  objective: >
+    Implement and prove a real 15m market-data ingestion/persistence path for V2 so
+    H0001 experiments reuse a fixed local immutable dataset instead of fetching data
+    again for each test.
+  why_now: >
+    Current V2 MarketDataset explicitly accepts synthetic input only. Therefore the
+    project cannot produce real H0001 efficacy evidence yet.
+  constraints:
+    - "Preserve existing synthetic V2 tests and causal contracts."
+    - "Do not redesign the replay/feature engine."
+    - "Do not call the provider for every experiment; network is an ingestion/update concern only."
+    - "Keep raw/provider provenance and derived/aggregated data semantics explicit."
+    - "Do not silently substitute RTH-only data for the selected extended intraday research session."
+    - "Do not claim provider/chart parity until measured."
+  acceptance_criteria:
+    - "A reviewed provider/adapter contract exists for real 15m input."
+    - "Historical real bars can be ingested into V2-compatible immutable storage."
+    - "Incremental refresh/update behavior is explicit and does not mutate old dataset vintages."
+    - "Gap, duplicate, ordering, session-boundary and timestamp validation fail closed."
+    - "At least SOXX can be materialized as a real historical research dataset suitable for the H0001 session contract, or provider limitations are demonstrated with an explicit blocker and replacement plan."
+    - "The saved dataset can be reloaded and replayed offline with identical content identity."
+    - "A coverage artifact reports date range, bar counts, missing/unsupported sessions and known limitations."
+    - "Tests cover persistence/reload and failure paths without using synthetic performance as market evidence."
+  after_success:
+    - "Freeze one minimal 15m initial-entry tuple; no Cartesian parameter search."
+    - "Implement the executable 15m trigger/composer."
+    - "Run the first real-data H0001 entry efficacy experiment."
+
+pm_policy:
+  single_next_action: true
+  discovered_non_blockers_go_to_backlog: true
+  p0_must_name_blocked_exit_criterion: true
+  strategy_quality_may_not_be_relaxed_for_demo_speed: true
+  user_visible_progress_may_not_be_faked: true
+  preserve_existing_work_by_default: true
