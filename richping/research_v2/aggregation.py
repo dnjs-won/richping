@@ -5,6 +5,7 @@ from datetime import timedelta
 from ..core import digest, timestamp
 from .contracts import JsonObject, MarketBar, payload
 from .market_data import BASE_INTERVAL, validate_rth
+from .real_data import is_research_snapshot
 from .sessions import (RTH, EXTENDED, session_profile, session_bounds, bar_profile,
                        validate_extended, extended_bar_metadata)
 
@@ -41,7 +42,8 @@ class CompletedAggregator:
         if bar_profile(bar) != self.profile.name:
             raise ValueError("Aggregation session profile mismatch")
         (validate_extended if self.profile.name == EXTENDED else validate_rth)(bar)
-        if bar.corporate_action != "NONE_CONFIRMED":
+        research_snapshot = is_research_snapshot(bar)
+        if bar.corporate_action != "NONE_CONFIRMED" and not research_snapshot:
             raise ValueError("Unsupported corporate action")
         if bar.identity in self._seen:
             raise ValueError("Duplicate aggregation input")
@@ -66,8 +68,12 @@ class CompletedAggregator:
                 "derived:" + self.profile.aggregation,
                 JsonObject.of({"aggregation": self.profile.aggregation,
                                "input_hash": digest(payload(ordered)), "input_count": len(ordered),
+                               **({k: bar.provenance.unpack()[k] for k in (
+                                   "quality", "provider", "adapter_version", "provider_version",
+                                   "captured_at", "timezone", "price_basis", "corporate_actions",
+                                   "known_at_policy", "raw_capture_hash")} if research_snapshot else {}),
                                **(extended_bar_metadata(start, end) if self.profile.name == EXTENDED else {})}),
-                "NONE_CONFIRMED")
+                "UNKNOWN" if research_snapshot else "NONE_CONFIRMED")
             completed.append(derived)
             self._emitted.add(key)
         return tuple(completed)

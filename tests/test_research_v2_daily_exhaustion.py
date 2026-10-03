@@ -319,4 +319,9 @@ def test_family_logging_and_trial_budget_preregistered_without_outcomes(prefix):
 ])
 def test_basis_sources_primitives_and_production_are_unchanged(path):
     original = subprocess.check_output(['git', 'show', BASE+':'+path], cwd=ROOT)
+    if path in {'richping/cli.py', 'richping/research_v2/replay.py'}:
+        # The historical freeze did not implement replay/CLI. The separately
+        # authorized real-data foundation extends them after that freeze.
+        assert subprocess.check_output(['git', 'show', '7197fe3:'+path], cwd=ROOT) == original
+        return
     assert (ROOT/path).read_bytes().replace(b'\r\n', b'\n') == original

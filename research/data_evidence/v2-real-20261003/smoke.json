@@ -1,0 +1,99 @@
+{
+  "status": "COMPLETE_DATA_FOUNDATION_NOT_PHASE_COMPLETE",
+  "evidence_type": "ACTUAL_PROVIDER_CAPTURE_AND_OFFLINE_MECHANICS",
+  "provider": "yahoo_chart",
+  "adapter_version": "yahoo_chart_15m_v1",
+  "provider_version": "1.7.0",
+  "canonical_local_store": "C:/richping/var/research/v2-real/market.sqlite",
+  "initial_sync": {
+    "status": "SUCCEEDED",
+    "coverage_artifact": "coverage-v1.json"
+  },
+  "explicit_overlap_refresh": {
+    "status": "SUCCEEDED",
+    "coverage_artifact": "coverage-v2.json",
+    "overlap_calendar_days": 7,
+    "revised_slots": 0,
+    "deleted_slots": 0,
+    "added_overlap_slots": 0
+  },
+  "rejected_latest_session": {
+    "status": "REJECTED",
+    "source_rows": 2625,
+    "off_grid_quote": "2026-10-02T19:59:54-04:00",
+    "artifact": "rejected-latest-session.json"
+  },
+  "offline": {
+    "network_disabled": true,
+    "provider_module_imported": false,
+    "v1": "offline-proof-v1.json",
+    "v2": "offline-proof-v2.json",
+    "raw_reimport_same_content_hash": true,
+    "reimport_store": "C:/richping/var/worktrees/v2-real/var/research/v2-real/reimport.sqlite",
+    "parent_hash_unchanged_after_refresh": true
+  },
+  "tests": {
+    "new": {
+      "passed": 41,
+      "seconds": 4.74
+    },
+    "full_workstream": {
+      "passed": 1140,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 250.58
+    },
+    "external_network_in_unit_tests": false,
+    "diff_check": "PASS",
+    "cli_help": "PASS"
+  },
+  "foundation_acceptance": [
+    {
+      "criterion": "reviewed_provider_contract",
+      "status": "SATISFIED"
+    },
+    {
+      "criterion": "real_immutable_ingestion",
+      "status": "SATISFIED"
+    },
+    {
+      "criterion": "incremental_vintages",
+      "status": "SATISFIED"
+    },
+    {
+      "criterion": "fail_closed_validation",
+      "status": "SATISFIED"
+    },
+    {
+      "criterion": "soxx_extended_session_materialized",
+      "status": "SATISFIED"
+    },
+    {
+      "criterion": "offline_identical_identity",
+      "status": "SATISFIED"
+    },
+    {
+      "criterion": "coverage_json",
+      "status": "SATISFIED"
+    },
+    {
+      "criterion": "persistence_and_failure_tests",
+      "status": "SATISFIED"
+    }
+  ],
+  "current_phase_exit_criteria_satisfied": [
+    1,
+    2,
+    3
+  ],
+  "current_phase_exit_criteria_not_satisfied": [
+    4,
+    5,
+    6
+  ],
+  "strategy_performance_tested": false,
+  "live_shadow_pit_evidence": false,
+  "daily_frozen_rth_pit_input_satisfied": false,
+  "next_action": "H0001_MINIMAL_15M_ENTRY_FREEZE",
+  "integration": "TASK_BRANCH_ONLY; main R1 paper changes preserved; integration pending"
+}

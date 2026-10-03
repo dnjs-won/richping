@@ -110,7 +110,8 @@ def completed_bars(context, symbol, timeframe, continuity=CONTINUITY_VERSION):
     bars = tuple(sorted(context.query(symbol, timeframe), key=lambda b: b.end_at))
     if len({b.end_at for b in bars}) != len(bars) or len({b.dataset_id for b in bars}) > 1:
         raise ValueError("Duplicate or mixed input vintage")
-    if any(b.corporate_action != "NONE_CONFIRMED" for b in bars):
+    from ..real_data import is_research_snapshot
+    if any(b.corporate_action != "NONE_CONFIRMED" and not is_research_snapshot(b) for b in bars):
         raise ValueError("Unsupported corporate action")
     if any((b.start_at, b.end_at) != slot_bounds(b.end_at, timeframe, continuity)
            or b.session != session_date(b.end_at) for b in bars):

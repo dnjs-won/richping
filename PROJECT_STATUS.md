@@ -1,3 +1,29 @@
+# Richping V2 — 2026-10-03 real intraday foundation
+
+**COMPLETE for the data-foundation action: IMPLEMENTED / EXECUTED_ON_REAL_DATA /
+EVIDENCE_PRODUCED. H0001 first-entry efficacy phase remains IN_PROGRESS.**
+
+- Work branch: `v2-real-intraday-data-foundation`, from `7197fe3` on the existing
+  extended workstream. Main's R1 paper fix remains preserved on main; not merged.
+- Actual SOXX 15m capture: 2026-08-05–2026-10-01, 41 sessions, 2,624/2,624 bars;
+  pre/RTH/post 902/1,066/656, no missing slots or unsupported sessions in this range.
+- Immutable v1 and explicit 7-day overlap v2 are stored in
+  `C:/richping/var/research/v2-real/market.sqlite`. Parent content hash unchanged.
+- Both vintages reload with network disabled and reproduce completed aggregation
+  and event-stream identity. Source reimport reproduces v1 identity offline.
+- Historical snapshot availability is an explicit bar-end research assumption,
+  not actual historical knowledge/PIT. UNKNOWN actions and zero extended volume
+  remain explicit; frozen RTH/PIT Daily input is not supplied.
+- New tests: 41 passed. Full workstream: 1,140 passed in 250.58s; no skips/warnings.
+- Provider/contract/commands/acceptance: [implementation evidence](docs/V2_REAL_INTRADAY_DATA_FOUNDATION.md).
+  [coverage](research/data_evidence/v2-real-20261003/coverage-v1.json),
+  [offline proof](research/data_evidence/v2-real-20261003/offline-proof-v1.json),
+  [actual API smoke](research/data_evidence/v2-real-20261003/smoke.json).
+- Next action: `H0001_MINIMAL_15M_ENTRY_FREEZE`. No strategy optimization,
+  efficacy/backtest result, chart parity, live/shadow evidence or order code.
+
+The prior status entries below are historical records.
+
 # Richping v2 상태 · 2026-10-02 15m initial-entry trigger design proposal v1
 
 **판정: DESIGN / PROPOSAL 완료, PROPOSED_NOT_FROZEN.

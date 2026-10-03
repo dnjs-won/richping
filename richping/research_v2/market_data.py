@@ -1,4 +1,4 @@
-"""Immutable synthetic input. This host-side dataset is never a strategy context."""
+"""Immutable synthetic or explicitly labelled historical research input."""
 
 from dataclasses import dataclass
 from datetime import timedelta
@@ -58,12 +58,18 @@ class MarketDataset:
                     "base_timeframe": "15m", "timezone": "America/New_York", "calendar": "XNYS",
                     "session_policy": "RTH", "price_basis": "synthetic_unadjusted",
                     "corporate_actions": "NONE_CONFIRMED", "known_at_policy": "explicit_per_bar"}
+        real = meta["quality"] == "REAL_HISTORICAL_RESEARCH"
+        if real:
+            from .real_data import validate_real_manifest
+            validate_real_manifest(meta)
+            for key in ("quality", "price_basis", "corporate_actions", "known_at_policy"):
+                expected[key] = meta[key]
         if meta["session_policy"] == "RTH_EXTENDED":
             expected["session_policy"] = "RTH_EXTENDED"
             if meta.get("session_contract") != session_profile(EXTENDED).metadata:
                 raise ValueError("Explicit extended session contract required")
         if any(meta[k] != v for k, v in expected.items()):
-            raise ValueError("Unsupported dataset contract (V2-A accepts synthetic only)")
+            raise ValueError("Unsupported dataset contract (synthetic only under SYNTHETIC provenance)")
         for key in ("provider", "adapter_version", "membership_limitations"):
             nonempty(meta[key])
         captured = timestamp(meta["captured_at"])
@@ -84,7 +90,10 @@ class MarketDataset:
             if bar_profile(bar) != self.session_profile:
                 raise ValueError("Mixed session capability profiles")
             (validate_extended if self.session_profile == EXTENDED else validate_rth)(bar)
-            if bar.corporate_action != "NONE_CONFIRMED":
+            if real:
+                from .real_data import validate_real_bar
+                validate_real_bar(bar, meta)
+            elif bar.corporate_action != "NONE_CONFIRMED":
                 raise ValueError("Unsupported or unknown corporate action")
         # Tie order has no temporal meaning. Canonicalize only after validating
         # chronology and identities, so a time reversal can never be repaired.
@@ -93,6 +102,9 @@ class MarketDataset:
             # An unknown early-close day is not a holiday that may be skipped.
             for day in sessions(self.bars[0].session, self.bars[-1].session):
                 session_bounds(day, EXTENDED)
+        if real:
+            from .real_data import validate_real_coverage
+            validate_real_coverage(self.bars, meta)
 
     @property
     def session_profile(self):
@@ -110,6 +122,12 @@ class MarketDataset:
         intentionally not asserted complete or inferred to be a trading halt.
         """
         missing = []
+        meta = self.manifest.unpack()
+        if meta["quality"] == "REAL_HISTORICAL_RESEARCH":
+            # Include leading, trailing, and entirely missing requested days.
+            return tuple((meta["symbols"][0],
+                          (timestamp(start) + BASE_INTERVAL).isoformat())
+                         for start in meta["missing_slots"])
         for symbol in sorted({b.symbol for b in self.bars}):
             bars = [b for b in self.bars if b.symbol == symbol]
             present = {b.end_at for b in bars}

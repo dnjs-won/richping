@@ -56,6 +56,9 @@ def replay(dataset, strategy: Strategy, *, store=None, timeframes=("1H", "Daily"
     """
     nonempty(strategy.strategy_id)
     nonempty(experiment_id)
+    real = dataset.manifest.unpack()["quality"] == "REAL_HISTORICAL_RESEARCH"
+    if real and dataset.manifest.unpack()["coverage_status"] != "COMPLETE_GRID":
+        raise ValueError("Real dataset UNKNOWN/UNAVAILABLE coverage; replay refused")
     if not isinstance(strategy.specification, JsonObject) or not isinstance(config, JsonObject):
         raise ValueError("Immutable specification/config required")
     aggregator = CompletedAggregator(timeframes, profile=dataset.session_profile)
@@ -70,6 +73,10 @@ def replay(dataset, strategy: Strategy, *, store=None, timeframes=("1H", "Daily"
             "code": code_provenance(strategy),
             "execution_contract": "none_v2_a", "experiment_id": experiment_id,
             "hypothesis_revision": hypothesis_revision}
+    if real:
+        spec["mode"] = "REAL_HISTORICAL_RESEARCH"
+        spec["research_availability_policy"] = dataset.manifest.unpack()["known_at_policy"]
+        spec["point_in_time_evidence"] = False
     if dataset.session_profile == EXTENDED:
         spec["session_contract"] = session_profile(EXTENDED).metadata
     run_id = digest(spec)
@@ -116,6 +123,8 @@ def replay(dataset, strategy: Strategy, *, store=None, timeframes=("1H", "Daily"
                        r["status"] == "UNRESOLVED" for r in incomplete) else "PENDING" if incomplete else "COMPLETE",
                    "gaps": payload(dataset.gaps), "incomplete": list(incomplete),
                    "execution": "NOT_IMPLEMENTED"}
+        if real:
+            summary["evidence"] = "REAL_HISTORICAL_SNAPSHOT_RESEARCH_NOT_PIT"
         if store is not None:
             store.finish_run(run_id, summary)
         return ReplayResult(run_id, tuple(traces), tuple(checkpoints), JsonObject.of(summary))

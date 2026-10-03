@@ -210,4 +210,8 @@ def test_no_strategy_implementation_outcome_search_or_execution_changes():
     assert p["conceptual_matrix"]["E0"]["role"] == "denominator_counterfactual_only"
     assert not p["capability_audit"]["strategy_implementation_added_here"]
     assert all((ROOT / path).is_file() for path in p["capability_audit"]["sources"])
-    assert subprocess.check_output(["git", "diff", BASE, "--name-only", "--", "richping", "research/hypotheses", "research/experiments", "research/decision_records"], cwd=ROOT) == b""
+    # This immutable proposal made no implementation change at its own head.
+    # Subsequent authorized data work is tested separately, not retroactively
+    # attributed to the proposal.
+    assert subprocess.check_output(["git", "diff", BASE, "7197fe3", "--name-only", "--", "richping", "research/hypotheses", "research/experiments", "research/decision_records"], cwd=ROOT) == b""
+    assert subprocess.check_output(["git", "diff", "7197fe3", "--name-only", "--", "richping/research_v2/strategy", "research/hypotheses", "research/experiments", "research/decision_records"], cwd=ROOT) == b""

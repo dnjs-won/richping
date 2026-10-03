@@ -53,6 +53,8 @@ def parser():
     p.add_argument("--db", default=None, help="SQLite path (default var/richping.db; demo uses var/demo.db)")
     p.add_argument("--config", default="config.toml")
     sub = p.add_subparsers(dest="command", required=True)
+    from .research_v2.data_cli import add_parser
+    add_parser(sub)
     sub.add_parser("demo", help="Deterministic synthetic recommendation -> outcome replay")
     sync = sub.add_parser("sync", help="Incrementally fetch completed daily Yahoo bars")
     sync.add_argument("--start", default=None)
@@ -236,6 +238,13 @@ def _run_r1_command(args, config):
 
 def main(argv=None):
     args = parser().parse_args(argv)
+    if args.command == "research-v2-data":
+        from .research_v2.data_cli import run
+        try:
+            return run(args)
+        except Exception as exc:
+            emit("v2_data_failed", error_type=type(exc).__name__, error=str(exc))
+            return 1
     database = args.db or ("var/demo.db" if args.command == "demo" else "var/richping.db")
     attempt = None
     output_root = None

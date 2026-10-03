@@ -346,9 +346,12 @@ def test_preserved_sources_family_protocol_and_no_runtime_connection():
     for path in ('research/hypotheses/H0001-r03.yaml',
                  'research/decision_records/H0001-daily-input-freeze-v1.yaml',
                  'research/decision_proposals/H0001-daily-price-regime-v1.yaml',
-                 'docs/RESEARCH_PHILOSOPHY.md', 'richping/paper.py', 'richping/pipeline.py',
-                 'richping/cli.py', 'richping/research_v2/replay.py'):
+                 'docs/RESEARCH_PHILOSOPHY.md', 'richping/paper.py', 'richping/pipeline.py'):
         assert (ROOT/path).read_bytes().replace(b'\r\n', b'\n') == subprocess.check_output(['git', 'show', BASE+':'+path], cwd=ROOT)
+    # Freeze-era no-runtime-connection evidence remains immutable. Later real
+    # data ingestion may extend CLI/replay without implementing this strategy.
+    for path in ('richping/cli.py', 'richping/research_v2/replay.py'):
+        assert subprocess.check_output(['git', 'show', '7197fe3:'+path], cwd=ROOT) == subprocess.check_output(['git', 'show', BASE+':'+path], cwd=ROOT)
     body = record()
     assert body['hypothesis']['status'] == load_h0001(DRAFT).unpack()['status'] == 'DRAFT'
     assert body['hypothesis']['profitability'] == 'NOT_TESTED'

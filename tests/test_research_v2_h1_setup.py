@@ -81,6 +81,11 @@ def test_six_root_delta_only_with_Daily_payload_and_ownership_preserved():
 ])
 def test_immutable_sources_and_production_paper_modules(path):
     original = subprocess.check_output(['git', 'show', BASE+':'+path], cwd=ROOT)
+    if path == 'richping/cli.py':
+        # Preserve the freeze's historical evidence; later ingestion CLI is
+        # covered separately and does not connect this strategy to orders.
+        assert subprocess.check_output(['git', 'show', '7197fe3:'+path], cwd=ROOT) == original
+        return
     assert (ROOT / path).read_bytes().replace(b'\r\n', b'\n') == original
 
 

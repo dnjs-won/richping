@@ -1,0 +1,21 @@
+{
+  "dataset_id": "soxx-yahoo-15m-20261003-v1",
+  "content_hash": "bb7ac246e4005d49d861301c4acc8261043bcd71818c3bcdbef5f73aa98c59b9",
+  "run_id": "996f5851ccd37f098ff3685a5e72cd451424f2068bfcfcae68cd99300e26b992",
+  "event_stream_hash": "1e735f36937f3bbe2fc63a74a2e35b198fa50468d71f95a67f0f6a8fb83c3c2d",
+  "events": 2624,
+  "completed_bars": {
+    "15m": 2624,
+    "1H": 656,
+    "Daily": 41
+  },
+  "incomplete": [],
+  "network_calls": 0,
+  "evidence": "REAL_SNAPSHOT_OFFLINE_MECHANICS_NOT_STRATEGY_OR_PIT",
+  "identical_repeated_result": true,
+  "db_file_unchanged": true,
+  "db_file_sha256": "aa4fefc942142841ecc5880a3fabec20181acfb315282bf1ec1cc0e5c258a663",
+  "network_disabled": "socket.socket and socket.create_connection raise",
+  "provider_module_imported": false,
+  "reloads": 2
+}

@@ -33,8 +33,16 @@ CREATE TABLE v2_results(run_id TEXT PRIMARY KEY REFERENCES v2_replay_runs(id), b
 
 
 class ResearchStore:
-    def __init__(self, path):
+    def __init__(self, path, *, read_only=False):
         self.path = Path(path)
+        if read_only:
+            self.db = sqlite3.connect(self.path.resolve().as_uri() + "?mode=ro", uri=True)
+            try:
+                self._check_schema(self.db)
+            except Exception:
+                self.db.close()
+                raise
+            return
         # Read-only preflight prevents even journal/schema changes to a foreign DB.
         if self.path.exists():
             with closing(sqlite3.connect(self.path.resolve().as_uri() + "?mode=ro", uri=True)) as probe:
@@ -146,6 +154,11 @@ class ResearchStore:
         if result.content_hash != row[0]:
             raise ValueError("Dataset content hash mismatch")
         return result
+
+    def list_datasets(self):
+        return tuple({"dataset_id": row[0], "content_hash": row[1],
+                      "bar_count": json.loads(row[2])["bar_count"]}
+                     for row in self.db.execute("SELECT id,content_hash,body FROM v2_datasets ORDER BY id"))
 
     def begin_run(self, specification):
         run_id = digest(specification)
