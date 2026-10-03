@@ -1,3 +1,18 @@
+# Richping V2 - 2026-10-04 longer-history provider and volume audit
+
+**COMPLETE bounded actual-access audit; longer discovery admission BLOCKED. Phase exit6 INCOMPLETE, profitability NOT_RUN.**
+
+- PM bootstrap: latest main e7082fa; implementation base58a237c. Branch v2-h0001-long-history-provider-audit. No provider selection, migration, mass capture, credential/account creation or payment.
+- Existing41-session SOXX extended15m vintage 2026-08-05..10-01 preserved. Current first/last sample probes return64/64 slots; 08-04 and older15m requests explicitly HTTP422 last60-day retention. Latest10-02 returns65 rows with extra19:59:54 point, retained as UNAVAILABLE.
+- Each successful15m sample has38 extended bars with volume0; venue/actual trading meaning UNKNOWN. Zero volume, missing bar, null value and provider/market availability remain distinct. Early closes remain unsupported; DST/grid behavior tested with existing engine, no frozen session change.
+- Native Yahoo60m returns16 rows for2025-03-10 but cannot reconstruct frozen15m-derived input. Alpaca historical SIP bars/actions, Massive raw15m, Databento metadata and Twelve Data prepost15m all returnHTTP401. No recognized credentials in documented runtime/User/Machine/config scope; no authorized longer interval established. Initial sandbox transport failures preserved separately, not called capability absence.
+- Fresh2024split Daily spot confirms event availability only; no interval/action/unit certificate reused or raw/PIT claim. Public plans describe free historical possibilities, so paid access is not assumed necessary. Every candidate still needs actual grid, volume, action knowledge and Daily/intraday unit admission.
+- Next sole P0 LONG_HISTORY_ACCESS_PATH_DECISION / USER_DECISION_REQUIRED: choose owner-approved read-only historical account route for a small admission audit. Blocks exit6; no selection based on outcome or price alone. Route LONGER_IMMUTABLE_DISCOVERY_CAPTURE only after actual admission PASS.
+- Targeted13/full1401 passed, zero failures/errors/skips. All223 preexisting code/docs/decision/evidence files checked unchanged. Frozen Daily/1H/15m/composer, thresholds, current stream0, original ZERO_SIGNAL, future126-session confirmation/stopping/protocol preserved. No new strategy replay or outcomes.
+- Evidence research/data_evidence/h0001-long-history-20261004/admission.json; decision record H0001-long-history-provider-audit-v1.yaml; docs/H0001_LONG_HISTORY_PROVIDER_AUDIT.md. Audit completion is not discovery capture, informative efficacy or profitability.
+
+The entries below are preserved historical status reports.
+
 # Richping V2 - 2026-10-03 independent ZERO_SIGNAL disposition audit
 
 **COMPLETE independent revalidation; original efficacy execution/evidence preserved. Informative efficacy remains unavailable and profitability NOT_RUN.**

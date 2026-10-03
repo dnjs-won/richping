@@ -1,0 +1,320 @@
+{
+  "all_provider_claims_documentation_only_unless_network_probe": true,
+  "sources": [
+    {
+      "archive_content_status": "PRIMARY_HTTP_DOCUMENT",
+      "content_provenance": "OFFICIAL_WEB_TOOL_EXTRACT_2026_10_03_UTC",
+      "establishes_actual_entitlement": false,
+      "http_archive": {
+        "authenticated": false,
+        "bytes": 8108,
+        "captured_at": "2026-10-03T18:03:40.380364+00:00",
+        "http_status": 200,
+        "id": "alpaca-plans",
+        "params": {},
+        "path": "research/data_evidence/h0001-long-history-20261004/raw/fb06472e5f56873c9ec6a52cc805dc9affe5ceb8a0217c47a5c6aa98d4b68b3d.bin",
+        "requested_at": "2026-10-03T18:03:39.859049+00:00",
+        "sha256": "fb06472e5f56873c9ec6a52cc805dc9affe5ceb8a0217c47a5c6aa98d4b68b3d",
+        "transport": "HTTP_RESPONSE",
+        "url": "https://docs.alpaca.markets/us/docs/about-market-data-api.md"
+      },
+      "id": "alpaca-plans",
+      "notes": "US ETFs since2016; Basic free/200 requests per minute, latest15 minutes restricted. Account required. This is documentation, not SOXX entitlement.",
+      "url": "https://docs.alpaca.markets/us/docs/about-market-data-api"
+    },
+    {
+      "archive_content_status": "PRIMARY_HTTP_DOCUMENT",
+      "content_provenance": "OFFICIAL_WEB_TOOL_EXTRACT_2026_10_03_UTC",
+      "establishes_actual_entitlement": false,
+      "http_archive": {
+        "authenticated": false,
+        "bytes": 17585,
+        "captured_at": "2026-10-03T18:03:40.959845+00:00",
+        "http_status": 200,
+        "id": "alpaca-bars",
+        "params": {},
+        "path": "research/data_evidence/h0001-long-history-20261004/raw/ce83070b28337c8e9cdaf7d734ff4fd91d23e0bc6b1979548e63de9fdfe7f722.bin",
+        "requested_at": "2026-10-03T18:03:40.380540+00:00",
+        "sha256": "ce83070b28337c8e9cdaf7d734ff4fd91d23e0bc6b1979548e63de9fdfe7f722",
+        "transport": "HTTP_RESPONSE",
+        "url": "https://docs.alpaca.markets/us/reference/stockbars.md"
+      },
+      "id": "alpaca-bars",
+      "notes": "15Min and raw are supported. Raw has no adjustments; split affects price/volume, dividend affects price. Pages up to10000; check next_page_token. End inclusive. Raw setting and actual share units require probe.",
+      "url": "https://docs.alpaca.markets/us/reference/stockbars"
+    },
+    {
+      "archive_content_status": "PRIMARY_HTTP_DOCUMENT",
+      "content_provenance": "OFFICIAL_WEB_TOOL_EXTRACT_2026_10_03_UTC",
+      "establishes_actual_entitlement": false,
+      "http_archive": {
+        "authenticated": false,
+        "bytes": 34729,
+        "captured_at": "2026-10-03T18:03:41.619162+00:00",
+        "http_status": 200,
+        "id": "alpaca-faq",
+        "params": {},
+        "path": "research/data_evidence/h0001-long-history-20261004/raw/b6d9225409d2211b60cfeed72e8716fc1e05f2d7593ffed6dc120a0b5ebaef13.bin",
+        "requested_at": "2026-10-03T18:03:40.959964+00:00",
+        "sha256": "b6d9225409d2211b60cfeed72e8716fc1e05f2d7593ffed6dc120a0b5ebaef13",
+        "transport": "HTTP_RESPONSE",
+        "url": "https://docs.alpaca.markets/us/docs/market-data-faq.md"
+      },
+      "id": "alpaca-faq",
+      "notes": "Historical SIP older than15 minutes is described without subscription. SIP is consolidated; IEX single venue. Minute price and volume eligibility differ; T extended trades update minutes; some trades produce no bar. Not a complete-grid guarantee.",
+      "url": "https://docs.alpaca.markets/us/docs/market-data-faq"
+    },
+    {
+      "archive_content_status": "PRIMARY_HTTP_DOCUMENT",
+      "content_provenance": "OFFICIAL_WEB_TOOL_EXTRACT_2026_10_03_UTC",
+      "establishes_actual_entitlement": false,
+      "http_archive": {
+        "authenticated": false,
+        "bytes": 47620,
+        "captured_at": "2026-10-03T18:03:42.102495+00:00",
+        "http_status": 200,
+        "id": "alpaca-actions",
+        "params": {},
+        "path": "research/data_evidence/h0001-long-history-20261004/raw/b3c31fadd5a7ae89f8c0e4bd7d575bc5180faceda69ea1f115b4c1710d835803.bin",
+        "requested_at": "2026-10-03T18:03:41.619324+00:00",
+        "sha256": "b3c31fadd5a7ae89f8c0e4bd7d575bc5180faceda69ea1f115b4c1710d835803",
+        "transport": "HTTP_RESPONSE",
+        "url": "https://docs.alpaca.markets/us/reference/corporateactions-1.md"
+      },
+      "id": "alpaca-actions",
+      "notes": "No guarantee on creation time; provider/processing delays possible. Event effective date is not a record availability timestamp.",
+      "url": "https://docs.alpaca.markets/us/reference/corporateactions-1"
+    },
+    {
+      "archive_content_status": "PRIMARY_HTTP_DOCUMENT",
+      "content_provenance": "OFFICIAL_WEB_TOOL_EXTRACT_2026_10_03_UTC",
+      "establishes_actual_entitlement": false,
+      "http_archive": {
+        "authenticated": false,
+        "bytes": 5594,
+        "captured_at": "2026-10-03T18:03:42.685348+00:00",
+        "http_status": 200,
+        "id": "massive-bars",
+        "params": {},
+        "path": "research/data_evidence/h0001-long-history-20261004/raw/9d1780d60fdc395300ffba3e7b33d3fff2cfa01e06375d31c91f0d709e9abd75.bin",
+        "requested_at": "2026-10-03T18:03:42.102642+00:00",
+        "sha256": "9d1780d60fdc395300ffba3e7b33d3fff2cfa01e06375d31c91f0d709e9abd75",
+        "transport": "HTTP_RESPONSE",
+        "url": "https://massive.com/docs/rest/stocks/aggregates/custom-bars.md"
+      },
+      "id": "massive-bars",
+      "notes": "ET custom qualified-trade aggregates include pre/RTH/post. adjusted=false avoids split adjustment. Limit50000 base aggregates; next_url pages. Missing aggregate is not zero volume or evidence of healthy feed.",
+      "url": "https://massive.com/docs/rest/stocks/aggregates/custom-bars"
+    },
+    {
+      "archive_content_status": "PRIMARY_HTTP_DOCUMENT",
+      "content_provenance": "OFFICIAL_WEB_TOOL_EXTRACT_2026_10_03_UTC",
+      "establishes_actual_entitlement": false,
+      "http_archive": {
+        "authenticated": false,
+        "bytes": 5634,
+        "captured_at": "2026-10-03T18:03:43.247119+00:00",
+        "http_status": 200,
+        "id": "massive-splits",
+        "params": {},
+        "path": "research/data_evidence/h0001-long-history-20261004/raw/aafb053580285f29595d28286f1202f2871409feaca75a8093e353b57a1a0b45.bin",
+        "requested_at": "2026-10-03T18:03:42.685463+00:00",
+        "sha256": "aafb053580285f29595d28286f1202f2871409feaca75a8093e353b57a1a0b45",
+        "transport": "HTTP_RESPONSE",
+        "url": "https://massive.com/docs/rest/stocks/corporate-actions/splits.md"
+      },
+      "id": "massive-splits",
+      "notes": "Execution applied overnight, including effective-date premarket. Current cumulative historical factors normalize to current units, not historical PIT. Historical receipt/revision archive not established here.",
+      "url": "https://massive.com/docs/rest/stocks/corporate-actions/splits"
+    },
+    {
+      "archive_content_status": "PRIMARY_HTTP_DOCUMENT",
+      "content_provenance": "OFFICIAL_WEB_TOOL_EXTRACT_2026_10_03_UTC",
+      "establishes_actual_entitlement": false,
+      "http_archive": {
+        "authenticated": false,
+        "bytes": 200086,
+        "captured_at": "2026-10-03T18:03:44.000968+00:00",
+        "http_status": 200,
+        "id": "massive-units",
+        "params": {},
+        "path": "research/data_evidence/h0001-long-history-20261004/raw/2e59c09f4cd1e25d7bab2a149308fed4c052f6d5579e15d1e566f83240593386.bin",
+        "requested_at": "2026-10-03T18:03:43.247271+00:00",
+        "sha256": "2e59c09f4cd1e25d7bab2a149308fed4c052f6d5579e15d1e566f83240593386",
+        "transport": "HTTP_RESPONSE",
+        "url": "https://massive.com/knowledge-base/article/is-massives-stock-data-adjusted-for-splits-or-dividends"
+      },
+      "id": "massive-units",
+      "notes": "Bars split-adjusted by default; raw adjusted=false. No dividend adjustment. Trades/quotes raw. Current adjusted history is recomputed with later splits.",
+      "url": "https://massive.com/knowledge-base/article/is-massives-stock-data-adjusted-for-splits-or-dividends"
+    },
+    {
+      "archive_content_status": "PRIMARY_HTTP_DOCUMENT",
+      "content_provenance": "OFFICIAL_WEB_TOOL_EXTRACT_2026_10_03_UTC",
+      "establishes_actual_entitlement": false,
+      "http_archive": {
+        "authenticated": false,
+        "bytes": 268582,
+        "captured_at": "2026-10-03T18:03:44.949551+00:00",
+        "http_status": 200,
+        "id": "massive-plans",
+        "params": {},
+        "path": "research/data_evidence/h0001-long-history-20261004/raw/104ccf3c54de09211e9b595774d2d74ab791e5cec2bbfd6c3dd1f72d754a42c7.bin",
+        "requested_at": "2026-10-03T18:03:44.001464+00:00",
+        "sha256": "104ccf3c54de09211e9b595774d2d74ab791e5cec2bbfd6c3dd1f72d754a42c7",
+        "transport": "HTTP_RESPONSE",
+        "url": "https://massive.com/pricing?product=stocks"
+      },
+      "id": "massive-plans",
+      "notes": "Public personal plans list Basic $0/2 years/5 calls per minute/minute aggregates; Starter $29 monthly/5 years; Developer $79/10 years. Actual SOXX access unknown; optional paid selection needs owner decision.",
+      "url": "https://massive.com/pricing?product=stocks"
+    },
+    {
+      "archive_content_status": "JS_SHELL_NOT_CONTENT_BEARING",
+      "content_provenance": "OFFICIAL_WEB_TOOL_EXTRACT_2026_10_03_UTC",
+      "establishes_actual_entitlement": false,
+      "http_archive": {
+        "authenticated": false,
+        "bytes": 15008,
+        "captured_at": "2026-10-03T18:03:45.754708+00:00",
+        "http_status": 200,
+        "id": "databento-mini",
+        "params": {},
+        "path": "research/data_evidence/h0001-long-history-20261004/raw/b7721e00e1db5d69f070067f69ea2c45eddaf37974ad96626b14c036c1cd81b9.bin",
+        "requested_at": "2026-10-03T18:03:44.949930+00:00",
+        "sha256": "b7721e00e1db5d69f070067f69ea2c45eddaf37974ad96626b14c036c1cd81b9",
+        "transport": "HTTP_RESPONSE",
+        "url": "https://databento.com/docs/venues-and-datasets/equs-mini"
+      },
+      "id": "databento-mini",
+      "notes": "OHLCV blends component venues. Not established as all-market volume. Component trade ts_recv and event timing have distinct meanings.",
+      "url": "https://databento.com/docs/venues-and-datasets/equs-mini"
+    },
+    {
+      "archive_content_status": "JS_SHELL_NOT_CONTENT_BEARING",
+      "content_provenance": "OFFICIAL_WEB_TOOL_EXTRACT_2026_10_03_UTC",
+      "establishes_actual_entitlement": false,
+      "http_archive": {
+        "authenticated": false,
+        "bytes": 15008,
+        "captured_at": "2026-10-03T18:03:46.223814+00:00",
+        "http_status": 200,
+        "id": "databento-schemas",
+        "params": {},
+        "path": "research/data_evidence/h0001-long-history-20261004/raw/b7721e00e1db5d69f070067f69ea2c45eddaf37974ad96626b14c036c1cd81b9.bin",
+        "requested_at": "2026-10-03T18:03:45.754833+00:00",
+        "sha256": "b7721e00e1db5d69f070067f69ea2c45eddaf37974ad96626b14c036c1cd81b9",
+        "transport": "HTTP_RESPONSE",
+        "url": "https://databento.com/docs/knowledge-base"
+      },
+      "id": "databento-schemas",
+      "notes": "OHLCV uses receive-time interval start; no-trade intervals omitted. Native daily uses UTC, not official RTH Daily. Selected dataset and clock must be admitted explicitly.",
+      "url": "https://databento.com/docs/knowledge-base"
+    },
+    {
+      "archive_content_status": "JS_SHELL_NOT_CONTENT_BEARING",
+      "content_provenance": "OFFICIAL_WEB_TOOL_EXTRACT_2026_10_03_UTC",
+      "establishes_actual_entitlement": false,
+      "http_archive": {
+        "authenticated": false,
+        "bytes": 15008,
+        "captured_at": "2026-10-03T18:03:46.480153+00:00",
+        "http_status": 200,
+        "id": "databento-actions",
+        "params": {},
+        "path": "research/data_evidence/h0001-long-history-20261004/raw/b7721e00e1db5d69f070067f69ea2c45eddaf37974ad96626b14c036c1cd81b9.bin",
+        "requested_at": "2026-10-03T18:03:46.223968+00:00",
+        "sha256": "b7721e00e1db5d69f070067f69ea2c45eddaf37974ad96626b14c036c1cd81b9",
+        "transport": "HTTP_RESPONSE",
+        "url": "https://databento.com/docs/schemas-and-data-formats/corporate-actions"
+      },
+      "id": "databento-actions",
+      "notes": "ts_record is last record change, ts_created record addition; effective/ex dates separate. Actual SOXX historical coverage and prior availability remain unverified.",
+      "url": "https://databento.com/docs/schemas-and-data-formats/corporate-actions"
+    },
+    {
+      "archive_content_status": "PRIMARY_HTTP_DOCUMENT",
+      "content_provenance": "OFFICIAL_WEB_TOOL_EXTRACT_2026_10_03_UTC",
+      "establishes_actual_entitlement": false,
+      "http_archive": {
+        "authenticated": false,
+        "bytes": 17781,
+        "captured_at": "2026-10-03T18:03:48.316151+00:00",
+        "http_status": 200,
+        "id": "databento-plans",
+        "params": {},
+        "path": "research/data_evidence/h0001-long-history-20261004/raw/5ba3e59b1646ed13ed4aa6f5502957866df3cbca273b2b95f897667601ff523f.bin",
+        "requested_at": "2026-10-03T18:03:46.480245+00:00",
+        "sha256": "5ba3e59b1646ed13ed4aa6f5502957866df3cbca273b2b95f897667601ff523f",
+        "transport": "HTTP_RESPONSE",
+        "url": "https://databento.com/pricing/"
+      },
+      "id": "databento-plans",
+      "notes": "Historical usage pricing possible; generic 15+ years is not SOXX/selected-dataset evidence. Exact interval cost/entitlement UNKNOWN.",
+      "url": "https://databento.com/pricing/"
+    },
+    {
+      "archive_content_status": "PRIMARY_HTTP_DOCUMENT",
+      "content_provenance": "OFFICIAL_WEB_TOOL_EXTRACT_2026_10_03_UTC",
+      "establishes_actual_entitlement": false,
+      "http_archive": {
+        "authenticated": false,
+        "bytes": 71348,
+        "captured_at": "2026-10-03T18:03:49.136525+00:00",
+        "http_status": 200,
+        "id": "twelve-extended",
+        "params": {},
+        "path": "research/data_evidence/h0001-long-history-20261004/raw/e11a5db1202ebb840afa446423157f6b631ff43f50e056abfa1262242d5b6769.bin",
+        "requested_at": "2026-10-03T18:03:48.316271+00:00",
+        "sha256": "e11a5db1202ebb840afa446423157f6b631ff43f50e056abfa1262242d5b6769",
+        "transport": "HTTP_RESPONSE",
+        "url": "https://support.twelvedata.com/en/articles/5195429-pre-post-market-data"
+      },
+      "id": "twelve-extended",
+      "notes": "Historical04:00-20:00 ET records older than1 day; prepost=true. Real-time7:00-20:00/Pro differs from historical. Actual SOXX start unknown.",
+      "url": "https://support.twelvedata.com/en/articles/5195429-pre-post-market-data"
+    },
+    {
+      "archive_content_status": "PRIMARY_HTTP_DOCUMENT",
+      "content_provenance": "OFFICIAL_WEB_TOOL_EXTRACT_2026_10_03_UTC",
+      "establishes_actual_entitlement": false,
+      "http_archive": {
+        "authenticated": false,
+        "bytes": 88795,
+        "captured_at": "2026-10-03T18:03:49.905022+00:00",
+        "http_status": 200,
+        "id": "twelve-volume",
+        "params": {},
+        "path": "research/data_evidence/h0001-long-history-20261004/raw/fb5b52f7ab78ac330143a578b4f59ed59bd20220ba70268008f6349528e58830.bin",
+        "requested_at": "2026-10-03T18:03:49.136771+00:00",
+        "sha256": "fb5b52f7ab78ac330143a578b4f59ed59bd20220ba70268008f6349528e58830",
+        "transport": "HTTP_RESPONSE",
+        "url": "https://support.twelvedata.com/en/articles/9935903-us-equities-market-data"
+      },
+      "id": "twelve-volume",
+      "notes": "Default realtime venues about5% volume. Historical/EOD described100% volume after next-day midnight and Basic. Exact SOXX15m extended realization not established.",
+      "url": "https://support.twelvedata.com/en/articles/9935903-us-equities-market-data"
+    },
+    {
+      "archive_content_status": "PRIMARY_HTTP_DOCUMENT",
+      "content_provenance": "OFFICIAL_WEB_TOOL_EXTRACT_2026_10_03_UTC",
+      "establishes_actual_entitlement": false,
+      "http_archive": {
+        "authenticated": false,
+        "bytes": 70744,
+        "captured_at": "2026-10-03T18:03:50.690580+00:00",
+        "http_status": 200,
+        "id": "twelve-pagination",
+        "params": {},
+        "path": "research/data_evidence/h0001-long-history-20261004/raw/7576dd000b132461520e08fa131ba9de6af51c1dea81c99d14034f6fa2824c65.bin",
+        "requested_at": "2026-10-03T18:03:49.905301+00:00",
+        "sha256": "7576dd000b132461520e08fa131ba9de6af51c1dea81c99d14034f6fa2824c65",
+        "transport": "HTTP_RESPONSE",
+        "url": "https://support.twelvedata.com/en/articles/5214728-getting-historical-data"
+      },
+      "id": "twelve-pagination",
+      "notes": "5000 points maximum; explicit start/end date windows and outputsize truncation must be handled deterministically. No SOXX depth or credential guarantee.",
+      "url": "https://support.twelvedata.com/en/articles/5214728-getting-historical-data"
+    }
+  ]
+}

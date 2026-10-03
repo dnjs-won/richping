@@ -1,0 +1,27 @@
+{
+  "full": {
+    "command": ".venv/Scripts/python -m pytest -q -o cache_dir=var/pytest-long-history-cache --junitxml=var/h0001-long-history-suite.xml",
+    "errors": 0,
+    "failures": 0,
+    "junit_path": "full-suite.xml",
+    "passed": 1401,
+    "seconds": 426.151,
+    "sha256": "b09b31b5bd396421bf0fe8e9d41d8ac6614aeea63adc2ca201f9e4b046c12d48",
+    "skipped": 0,
+    "tests": 1401
+  },
+  "network_tests": "NOT_IN_UNIT_SUITE",
+  "new_tests": 13,
+  "profitability": "NOT_RUN",
+  "targeted": {
+    "command": ".venv/Scripts/python -m pytest tests/test_h0001_long_history_audit.py -q -o cache_dir=var/pytest-long-history-cache --junitxml=var/h0001-long-history-targeted.xml",
+    "errors": 0,
+    "failures": 0,
+    "junit_path": "targeted-suite.xml",
+    "passed": 13,
+    "seconds": 1.361,
+    "sha256": "a9755dc2f9d33df41b1337df2a7703251a418201166975b22a1d8e9a9d01256d",
+    "skipped": 0,
+    "tests": 13
+  }
+}

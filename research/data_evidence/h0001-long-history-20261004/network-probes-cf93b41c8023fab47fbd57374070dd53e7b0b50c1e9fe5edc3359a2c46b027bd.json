@@ -1,0 +1,360 @@
+{
+  "captured_at": "2026-10-03T17:56:52.564051+00:00",
+  "credential_presence_process_environment": {
+    "alpaca": {
+      "ALPACA_API_KEY": false,
+      "ALPACA_SECRET_KEY": false,
+      "APCA_API_KEY_ID": false,
+      "APCA_API_SECRET_KEY": false
+    },
+    "alphavantage": {
+      "ALPHAVANTAGE_API_KEY": false,
+      "ALPHA_VANTAGE_API_KEY": false
+    },
+    "databento": {
+      "DATABENTO_API_KEY": false
+    },
+    "eodhd": {
+      "EODHD_API_KEY": false
+    },
+    "massive": {
+      "MASSIVE_API_KEY": false,
+      "POLYGON_API_KEY": false
+    },
+    "tiingo": {
+      "TIINGO_API_KEY": false,
+      "TIINGO_TOKEN": false
+    },
+    "twelvedata": {
+      "TWELVEDATA_API_KEY": false,
+      "TWELVE_DATA_API_KEY": false
+    }
+  },
+  "outcomes": "NOT_RUN",
+  "probes": [
+    {
+      "authenticated": false,
+      "bar_interval": "15m",
+      "bytes": 38,
+      "captured_at": "2026-10-03T17:56:52.425656+00:00",
+      "grid": {
+        "error": null,
+        "status": "PROVIDER_ERROR_NOT_GRID_EVIDENCE"
+      },
+      "http_status": null,
+      "id": "yahoo-earliest-15m",
+      "params": {
+        "events": "div,splits,capitalGains",
+        "includePrePost": true,
+        "interval": "15m",
+        "period1": 1785902400,
+        "period2": 1785988800
+      },
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/58f0648ae4f94726a488cb4c2f71aae175f1af486c8f39232ca4339de61e454c.bin",
+      "provider_error": null,
+      "requested_at": "2026-10-03T17:56:51.940615+00:00",
+      "requested_interval": [
+        "2026-08-05",
+        "2026-08-06"
+      ],
+      "sha256": "58f0648ae4f94726a488cb4c2f71aae175f1af486c8f39232ca4339de61e454c",
+      "transport": "TRANSPORT_FAILURE_CAPABILITY_UNKNOWN",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/SOXX"
+    },
+    {
+      "authenticated": false,
+      "bar_interval": "15m",
+      "bytes": 38,
+      "captured_at": "2026-10-03T17:56:52.434422+00:00",
+      "grid": {
+        "error": null,
+        "status": "PROVIDER_ERROR_NOT_GRID_EVIDENCE"
+      },
+      "http_status": null,
+      "id": "yahoo-before-retention-15m",
+      "params": {
+        "events": "div,splits,capitalGains",
+        "includePrePost": true,
+        "interval": "15m",
+        "period1": 1785729600,
+        "period2": 1785816000
+      },
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/58f0648ae4f94726a488cb4c2f71aae175f1af486c8f39232ca4339de61e454c.bin",
+      "provider_error": null,
+      "requested_at": "2026-10-03T17:56:52.425995+00:00",
+      "requested_interval": [
+        "2026-08-03",
+        "2026-08-04"
+      ],
+      "sha256": "58f0648ae4f94726a488cb4c2f71aae175f1af486c8f39232ca4339de61e454c",
+      "transport": "TRANSPORT_FAILURE_CAPABILITY_UNKNOWN",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/SOXX"
+    },
+    {
+      "authenticated": false,
+      "bar_interval": "15m",
+      "bytes": 38,
+      "captured_at": "2026-10-03T17:56:52.435469+00:00",
+      "grid": {
+        "error": null,
+        "status": "PROVIDER_ERROR_NOT_GRID_EVIDENCE"
+      },
+      "http_status": null,
+      "id": "yahoo-old-15m",
+      "params": {
+        "events": "div,splits,capitalGains",
+        "includePrePost": true,
+        "interval": "15m",
+        "period1": 1741579200,
+        "period2": 1741665600
+      },
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/58f0648ae4f94726a488cb4c2f71aae175f1af486c8f39232ca4339de61e454c.bin",
+      "provider_error": null,
+      "requested_at": "2026-10-03T17:56:52.434532+00:00",
+      "requested_interval": [
+        "2025-03-10",
+        "2025-03-11"
+      ],
+      "sha256": "58f0648ae4f94726a488cb4c2f71aae175f1af486c8f39232ca4339de61e454c",
+      "transport": "TRANSPORT_FAILURE_CAPABILITY_UNKNOWN",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/SOXX"
+    },
+    {
+      "authenticated": false,
+      "bar_interval": "15m",
+      "bytes": 38,
+      "captured_at": "2026-10-03T17:56:52.436290+00:00",
+      "grid": {
+        "error": null,
+        "status": "PROVIDER_ERROR_NOT_GRID_EVIDENCE"
+      },
+      "http_status": null,
+      "id": "yahoo-completed-15m",
+      "params": {
+        "events": "div,splits,capitalGains",
+        "includePrePost": true,
+        "interval": "15m",
+        "period1": 1790827200,
+        "period2": 1790913600
+      },
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/58f0648ae4f94726a488cb4c2f71aae175f1af486c8f39232ca4339de61e454c.bin",
+      "provider_error": null,
+      "requested_at": "2026-10-03T17:56:52.435523+00:00",
+      "requested_interval": [
+        "2026-10-01",
+        "2026-10-02"
+      ],
+      "sha256": "58f0648ae4f94726a488cb4c2f71aae175f1af486c8f39232ca4339de61e454c",
+      "transport": "TRANSPORT_FAILURE_CAPABILITY_UNKNOWN",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/SOXX"
+    },
+    {
+      "authenticated": false,
+      "bar_interval": "15m",
+      "bytes": 38,
+      "captured_at": "2026-10-03T17:56:52.437083+00:00",
+      "grid": {
+        "error": null,
+        "status": "PROVIDER_ERROR_NOT_GRID_EVIDENCE"
+      },
+      "http_status": null,
+      "id": "yahoo-latest-15m",
+      "params": {
+        "events": "div,splits,capitalGains",
+        "includePrePost": true,
+        "interval": "15m",
+        "period1": 1790913600,
+        "period2": 1791000000
+      },
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/58f0648ae4f94726a488cb4c2f71aae175f1af486c8f39232ca4339de61e454c.bin",
+      "provider_error": null,
+      "requested_at": "2026-10-03T17:56:52.436348+00:00",
+      "requested_interval": [
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "sha256": "58f0648ae4f94726a488cb4c2f71aae175f1af486c8f39232ca4339de61e454c",
+      "transport": "TRANSPORT_FAILURE_CAPABILITY_UNKNOWN",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/SOXX"
+    },
+    {
+      "authenticated": false,
+      "bar_interval": "60m",
+      "bytes": 38,
+      "captured_at": "2026-10-03T17:56:52.437868+00:00",
+      "http_status": null,
+      "id": "yahoo-old-1h",
+      "params": {
+        "events": "div,splits,capitalGains",
+        "includePrePost": true,
+        "interval": "60m",
+        "period1": 1741579200,
+        "period2": 1741665600
+      },
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/58f0648ae4f94726a488cb4c2f71aae175f1af486c8f39232ca4339de61e454c.bin",
+      "provider_error": null,
+      "requested_at": "2026-10-03T17:56:52.437132+00:00",
+      "requested_interval": [
+        "2025-03-10",
+        "2025-03-11"
+      ],
+      "sha256": "58f0648ae4f94726a488cb4c2f71aae175f1af486c8f39232ca4339de61e454c",
+      "transport": "TRANSPORT_FAILURE_CAPABILITY_UNKNOWN",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/SOXX"
+    },
+    {
+      "authenticated": false,
+      "bar_interval": "15m",
+      "bytes": 38,
+      "captured_at": "2026-10-03T17:56:52.438638+00:00",
+      "grid": {
+        "error": null,
+        "status": "PROVIDER_ERROR_NOT_GRID_EVIDENCE"
+      },
+      "http_status": null,
+      "id": "yahoo-early-close-15m",
+      "params": {
+        "events": "div,splits,capitalGains",
+        "includePrePost": true,
+        "interval": "15m",
+        "period1": 1764306000,
+        "period2": 1764392400
+      },
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/58f0648ae4f94726a488cb4c2f71aae175f1af486c8f39232ca4339de61e454c.bin",
+      "provider_error": null,
+      "requested_at": "2026-10-03T17:56:52.437908+00:00",
+      "requested_interval": [
+        "2025-11-28",
+        "2025-11-29"
+      ],
+      "sha256": "58f0648ae4f94726a488cb4c2f71aae175f1af486c8f39232ca4339de61e454c",
+      "transport": "TRANSPORT_FAILURE_CAPABILITY_UNKNOWN",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/SOXX"
+    },
+    {
+      "authenticated": false,
+      "bar_interval": "1d",
+      "bytes": 38,
+      "captured_at": "2026-10-03T17:56:52.439412+00:00",
+      "http_status": null,
+      "id": "yahoo-split-daily-unit-spot",
+      "params": {
+        "events": "div,splits,capitalGains",
+        "includePrePost": true,
+        "interval": "1d",
+        "period1": 1709701200,
+        "period2": 1709960400
+      },
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/58f0648ae4f94726a488cb4c2f71aae175f1af486c8f39232ca4339de61e454c.bin",
+      "provider_error": null,
+      "requested_at": "2026-10-03T17:56:52.438686+00:00",
+      "requested_interval": [
+        "2024-03-06",
+        "2024-03-09"
+      ],
+      "sha256": "58f0648ae4f94726a488cb4c2f71aae175f1af486c8f39232ca4339de61e454c",
+      "transport": "TRANSPORT_FAILURE_CAPABILITY_UNKNOWN",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/SOXX"
+    },
+    {
+      "authenticated": false,
+      "bytes": 37,
+      "captured_at": "2026-10-03T17:56:52.481498+00:00",
+      "http_status": null,
+      "id": "alpaca-sip-bars",
+      "params": {
+        "adjustment": "raw",
+        "end": "2025-03-11T00:00:00Z",
+        "feed": "sip",
+        "limit": 100,
+        "start": "2025-03-10T08:00:00Z",
+        "timeframe": "15Min"
+      },
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/669c5eab024d9bb5ce287692b52d3e5641114fa5946c6ad2d60f7b9250341617.bin",
+      "requested_at": "2026-10-03T17:56:52.439446+00:00",
+      "response_error": {},
+      "sha256": "669c5eab024d9bb5ce287692b52d3e5641114fa5946c6ad2d60f7b9250341617",
+      "transport": "TRANSPORT_FAILURE_CAPABILITY_UNKNOWN",
+      "url": "https://data.alpaca.markets/v2/stocks/SOXX/bars"
+    },
+    {
+      "authenticated": false,
+      "bytes": 37,
+      "captured_at": "2026-10-03T17:56:52.504168+00:00",
+      "http_status": null,
+      "id": "alpaca-actions",
+      "params": {
+        "end": "2026-10-03",
+        "limit": 1000,
+        "start": "2024-01-01",
+        "symbols": "SOXX"
+      },
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/669c5eab024d9bb5ce287692b52d3e5641114fa5946c6ad2d60f7b9250341617.bin",
+      "requested_at": "2026-10-03T17:56:52.481605+00:00",
+      "response_error": {},
+      "sha256": "669c5eab024d9bb5ce287692b52d3e5641114fa5946c6ad2d60f7b9250341617",
+      "transport": "TRANSPORT_FAILURE_CAPABILITY_UNKNOWN",
+      "url": "https://data.alpaca.markets/v1/corporate-actions"
+    },
+    {
+      "authenticated": false,
+      "bytes": 37,
+      "captured_at": "2026-10-03T17:56:52.531755+00:00",
+      "http_status": null,
+      "id": "massive-bars",
+      "params": {
+        "adjusted": "false",
+        "limit": 100,
+        "sort": "asc"
+      },
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/669c5eab024d9bb5ce287692b52d3e5641114fa5946c6ad2d60f7b9250341617.bin",
+      "requested_at": "2026-10-03T17:56:52.504240+00:00",
+      "response_error": {},
+      "sha256": "669c5eab024d9bb5ce287692b52d3e5641114fa5946c6ad2d60f7b9250341617",
+      "transport": "TRANSPORT_FAILURE_CAPABILITY_UNKNOWN",
+      "url": "https://api.massive.com/v2/aggs/ticker/SOXX/range/15/minute/2025-03-10/2025-03-10"
+    },
+    {
+      "authenticated": false,
+      "bytes": 37,
+      "captured_at": "2026-10-03T17:56:52.547026+00:00",
+      "http_status": null,
+      "id": "databento-access",
+      "params": {},
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/669c5eab024d9bb5ce287692b52d3e5641114fa5946c6ad2d60f7b9250341617.bin",
+      "requested_at": "2026-10-03T17:56:52.531884+00:00",
+      "response_error": {},
+      "sha256": "669c5eab024d9bb5ce287692b52d3e5641114fa5946c6ad2d60f7b9250341617",
+      "transport": "TRANSPORT_FAILURE_CAPABILITY_UNKNOWN",
+      "url": "https://hist.databento.com/v0/metadata.list_datasets"
+    },
+    {
+      "authenticated": false,
+      "bytes": 37,
+      "captured_at": "2026-10-03T17:56:52.563950+00:00",
+      "http_status": null,
+      "id": "twelvedata-bars",
+      "params": {
+        "adjust": "none",
+        "end_date": "2025-03-10 20:00:00",
+        "interval": "15min",
+        "outputsize": 100,
+        "prepost": "true",
+        "start_date": "2025-03-10 04:00:00",
+        "symbol": "SOXX",
+        "timezone": "America/New_York"
+      },
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/669c5eab024d9bb5ce287692b52d3e5641114fa5946c6ad2d60f7b9250341617.bin",
+      "requested_at": "2026-10-03T17:56:52.547105+00:00",
+      "response_error": {},
+      "sha256": "669c5eab024d9bb5ce287692b52d3e5641114fa5946c6ad2d60f7b9250341617",
+      "transport": "TRANSPORT_FAILURE_CAPABILITY_UNKNOWN",
+      "url": "https://api.twelvedata.com/time_series"
+    }
+  ],
+  "profitability": "NOT_RUN",
+  "schema": "h0001_long_history_network_probe_v1",
+  "scope": "BOUNDED_READ_ONLY_CAPABILITY_PROBES_NOT_DATASET_CAPTURE",
+  "strategy_execution": false,
+  "yfinance_version": "1.7.0"
+}

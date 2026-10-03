@@ -1,0 +1,342 @@
+{
+  "audit_status": "COMPLETE_BOUNDED_READ_ONLY_NETWORK_AND_DETERMINISTIC_DIAGNOSTICS",
+  "authorization_inventory": {
+    "process": {
+      "alpaca": {
+        "ALPACA_API_KEY": false,
+        "ALPACA_SECRET_KEY": false,
+        "APCA_API_KEY_ID": false,
+        "APCA_API_SECRET_KEY": false
+      },
+      "alphavantage": {
+        "ALPHAVANTAGE_API_KEY": false,
+        "ALPHA_VANTAGE_API_KEY": false
+      },
+      "databento": {
+        "DATABENTO_API_KEY": false
+      },
+      "eodhd": {
+        "EODHD_API_KEY": false
+      },
+      "massive": {
+        "MASSIVE_API_KEY": false,
+        "POLYGON_API_KEY": false
+      },
+      "tiingo": {
+        "TIINGO_API_KEY": false,
+        "TIINGO_TOKEN": false
+      },
+      "twelvedata": {
+        "TWELVEDATA_API_KEY": false,
+        "TWELVE_DATA_API_KEY": false
+      }
+    },
+    "repo_credential_files_found": [],
+    "scope_limit": "Runtime/User/Machine named variables, root config and repo filenames excluding var/.venv/.git; no vault or other-project secrets searched.",
+    "windows_machine_matching_names": [],
+    "windows_user_matching_names": []
+  },
+  "blocker": "EXISTING15M_RETENTION_LIMIT_AND_NO_CURRENT_AUTHORIZED_LONGER15M_FEED",
+  "blocks_phase_exit_criteria": [
+    6
+  ],
+  "credential_creation_account_signup_payment_performed": false,
+  "current_candidate_stream": 0,
+  "decision_status": "USER_DECISION_REQUIRED_ACCESS_ROUTE_ONLY_NO_PROVIDER_SELECTED",
+  "disposition": "BLOCKED",
+  "future_confirmation": {
+    "end": "2027-04-13",
+    "sessions": 126,
+    "start": "2026-10-12",
+    "stopping_rule_changed": false
+  },
+  "new_action_certificate_reused": false,
+  "new_history_admissible": false,
+  "next_capture_if_and_only_if_admitted": "LONGER_IMMUTABLE_DISCOVERY_CAPTURE",
+  "no_event_interpretation": "Fresh ex-post complete no-event and exact unit audit may certify identity under existing contract; no invented historical absence receipt required.",
+  "outcome_evaluation": "NOT_RUN",
+  "payment_required_now": "NOT_ESTABLISHED_FREE_ACCOUNT_ROUTES_EXIST_IN_DOCUMENTATION",
+  "profitability": "NOT_RUN",
+  "provenance": {
+    "all_referenced_raw_hashes_verified": true,
+    "base_implementation": "58a237c45feef7f64a9c3c18c59d17575401d8d3",
+    "boundary_probe": "research/data_evidence/h0001-long-history-20261004/boundary-21eb755c619aa9c47856d1caadf793753a5690f36cbfb1c6f466327876641a42.json",
+    "live_probes": "research/data_evidence/h0001-long-history-20261004/network-probes-2bf358ff1baea79527198dab5d2166c857e509cb0084bcd74bc0acca72eae94c.json",
+    "pm_main": "e7082fa",
+    "primary_content_notes": "research/data_evidence/h0001-long-history-20261004/source-notes.json",
+    "primary_source_index": "research/data_evidence/h0001-long-history-20261004/documentation-6a6cea5d87ad8ad65349b06693c1b79db3e8d22729f586b048e0316617ab5a84.json",
+    "provider_version": "1.7.0",
+    "sandbox_probes": "research/data_evidence/h0001-long-history-20261004/network-probes-cf93b41c8023fab47fbd57374070dd53e7b0b50c1e9fe5edc3359a2c46b027bd.json",
+    "time_basis": "UTC_CAPTURE_2026_10_03_LOCAL_KST2026_10_04"
+  },
+  "provider_choice_performed": false,
+  "providers": [
+    {
+      "DST_actual": "UNVERIFIED",
+      "Daily_intraday_units": "NEW_INTERVAL_CERTIFICATE_ABSENT_EXISTING_CERTIFICATE_NOT_REUSED",
+      "access": "ANONYMOUS_EXISTING_ADAPTER",
+      "action_availability": "Fresh2024_03_07_SPLIT_EVENT_IN_DAILY_SPOT_3_TO_1_NOT_HISTORICAL_KNOWLEDGE",
+      "actual_available_end": "2026-10-01",
+      "actual_available_start": "2026-08-05",
+      "actual_coverage_claim": "Existing full41-session dataset preserved; current two64-slot spot checks only, not new full interval capture.",
+      "authorization": "NO_CREDENTIAL_REQUIRED",
+      "causal_PIT_admission": "BLOCKED_NOT_PROVEN_BY_HISTORY_OR_DOCUMENTATION",
+      "cost_access": "CURRENT_ANONYMOUS_NO_PURCHASE",
+      "delayed_incomplete_bars": "UNKNOWN_NO_HISTORICAL_DELIVERY_OR_REVISION_RECONSTRUCTION",
+      "deterministic_capture": "POTENTIAL_ONLY_REQUEST_PAGES_RAW_HASH_RECEIPT_REQUIRED",
+      "disposition": "BLOCKED_ON_EXTENDED_HISTORY",
+      "dividend_adjustment": "QUOTE_OHLC_SEPARATE_FROM_ADJCLOSE_NO_LOCAL_REINVESTMENT",
+      "early_close_handling": "FROZEN_EXTENDED_V1_UNSUPPORTED_FAIL_CLOSED_RETAIN_UNAVAILABLE_ANCHORS",
+      "event_effective_knowledge_time": "EFFECTIVE_EVENT_DATE_PRESENT_KNOWLEDGE_RECEIPT_NOW_ONLY",
+      "extended_session": "04_20_ET_SAMPLE_FULL_TIMESTAMP_GRID_NOT_VOLUME_CERTIFICATE",
+      "grid_coverage_actual": "2_SAMPLES_64_EXPECTED_64_OBSERVED_PRE22_RTH26_POST16_MISSING0",
+      "historical_depth_current_authorization": "HTTP422_EXPLICIT_LAST60_CALENDAR_DAYS_2026_08_04_AND_2025_03_10_REFUSED",
+      "interval": "15m",
+      "latest_response": "2026-10-02_65ROWS_ONE_19_59_54_OFFGRID_UNAVAILABLE",
+      "missing_bars": "UNKNOWN_NOT_SYNTHETICALLY_FILLED",
+      "other_blockers": [
+        "BLOCKED_ON_VOLUME_SEMANTICS",
+        "BLOCKED_ON_ACTION_PROVENANCE",
+        "BLOCKED_ON_UNIT_COMPATIBILITY"
+      ],
+      "pagination_rate": "NO_PAGING_BEYOND_RETENTION_UNPUBLISHED_QUOTA_OR_SLA",
+      "probe_ids": [
+        "yahoo-earliest-15m",
+        "yahoo-completed-15m",
+        "yahoo-latest-15m",
+        "yahoo-retention-boundary-15m"
+      ],
+      "provider": "yahoo_chart_15m",
+      "raw_adjusted_units": "CURRENT_PROVIDER_SPLIT_NORMALIZED_SNAPSHOT_NO_LOCAL_ADJUSTMENT_NOT_GENERAL_AS_TRADED",
+      "reproducibility": "RAW_AUDIT_RESPONSES_HASHED_NO_MARKET_DATASET_CREATED",
+      "scope": "DISCOVERY_ONLY_NO_CONFIRMATION_RECLASSIFICATION",
+      "split_adjustment": "PROVIDER_SNAPSHOT_CAN_REFLECT_LATER_SPLITS",
+      "volume_semantics": "UNKNOWN_VENUE_COVERAGE_ALL38_EXTENDED_BARS_VOLUME0_IN_EACH_SAMPLE",
+      "zero_volume_semantics": "NOT_EQUIVALENT_TO_NO_TRADES_OR_MISSING_BAR"
+    },
+    {
+      "DST_actual": "UNVERIFIED",
+      "Daily_intraday_units": "UNCERTIFIED_NEW_INTERVAL",
+      "access": "ANONYMOUS_HTTP200_2025_03_10_16ROWS",
+      "action_availability": "SAME_YAHOO_SNAPSHOT_LIMITATION",
+      "actual_available_end": "2025-03-10",
+      "actual_available_start": "2025-03-10",
+      "causal_PIT_admission": "BLOCKED_NOT_PROVEN_BY_HISTORY_OR_DOCUMENTATION",
+      "delayed_incomplete_bars": "UNKNOWN_NO_HISTORICAL_DELIVERY_OR_REVISION_RECONSTRUCTION",
+      "deterministic_capture": "POTENTIAL_ONLY_REQUEST_PAGES_RAW_HASH_RECEIPT_REQUIRED",
+      "disposition": "BLOCKED_ON_GRID_COMPATIBILITY_NATIVE_HOURLY_CANNOT_RECONSTRUCT15M",
+      "early_close_handling": "FROZEN_EXTENDED_V1_UNSUPPORTED_FAIL_CLOSED_RETAIN_UNAVAILABLE_ANCHORS",
+      "extended_session": "HAS_PRE_POST_METADATA_NOT_FROZEN15M_INPUT",
+      "grid_coverage_actual": "UNVERIFIED_NO_AUTHENTICATED_BARS",
+      "historical_depth_current_authorization": "ONE_DAY_SPOT_ONLY_MAXIMUM_OR_CONTINUITY_NOT_PROBED",
+      "interval": "60m",
+      "missing_bars": "UNKNOWN_NOT_SYNTHETICALLY_FILLED",
+      "pagination_rate": "UNPUBLISHED",
+      "probe_ids": [
+        "yahoo-old-1h"
+      ],
+      "provider": "yahoo_native60m",
+      "raw_adjusted_units": "UNCERTIFIED_YAHOO_SNAPSHOT",
+      "reproducibility": "RAW_AUDIT_RESPONSES_HASHED_NO_MARKET_DATASET_CREATED",
+      "scope": "DISCOVERY_ONLY_NO_CONFIRMATION_RECLASSIFICATION",
+      "volume_semantics": "UNKNOWN",
+      "zero_volume_semantics": "NOT_EQUIVALENT_TO_NO_TRADES_OR_MISSING_BAR"
+    },
+    {
+      "DST_actual": "UNVERIFIED",
+      "Daily_intraday_units": "RTH_AUCTION_PRICE_RULES_AND_RAW_JOIN_UNVERIFIED",
+      "access": "HTTP401_BARS_AND_ACTIONS",
+      "action_availability": "API_EXISTS_HTTP401_CREATION_TIME_NOT_GUARANTEED",
+      "actual_available_end": null,
+      "actual_available_start": null,
+      "authorization": "NO_RECOGNIZED_CREDENTIAL",
+      "causal_PIT_admission": "BLOCKED_NOT_PROVEN_BY_HISTORY_OR_DOCUMENTATION",
+      "cost_access": "BASIC_FREE_OLDER_THAN15MIN_SIP_DOCUMENTED_ACCOUNT_REQUIRED_PAID_REALTIME_NOT_NEEDED_FOR_THIS_AUDIT",
+      "delayed_incomplete_bars": "UNKNOWN_NO_HISTORICAL_DELIVERY_OR_REVISION_RECONSTRUCTION",
+      "deterministic_capture": "POTENTIAL_ONLY_REQUEST_PAGES_RAW_HASH_RECEIPT_REQUIRED",
+      "disposition": "BLOCKED_ON_CREDENTIAL",
+      "dividend_adjustment": "RAW_REQUIRED_NO_DIVIDEND_ADJUSTED_SERIES",
+      "documented_depth": "SINCE2016_NOT_AUTHORIZED_SOXX_COVERAGE",
+      "early_close_handling": "FROZEN_EXTENDED_V1_UNSUPPORTED_FAIL_CLOSED_RETAIN_UNAVAILABLE_ANCHORS",
+      "event_effective_knowledge_time": "ACTUAL_SOXX_EVENT_RECORDS_UNAVAILABLE_EFFECTIVE_DATE_NOT_KNOWLEDGE",
+      "extended_session": "EXTENDED_T_CONDITION_MINUTE_AGGREGATION_DOCUMENTED_NO_ACTUAL_GRID",
+      "grid_coverage_actual": "UNVERIFIED_NO_AUTHENTICATED_BARS",
+      "historical_depth_current_authorization": "NOT_ESTABLISHED_HTTP401",
+      "interval": "15Min_DOCUMENTED_NOT_ACCESSED",
+      "missing_bars": "UNKNOWN_NOT_SYNTHETICALLY_FILLED",
+      "other_blockers": [
+        "GRID_UNVERIFIED",
+        "ACTION_PROVENANCE_UNVERIFIED",
+        "UNIT_COMPATIBILITY_UNVERIFIED"
+      ],
+      "pagination_rate": "MAX10000_NEXT_PAGE_TOKEN_BASIC200_PER_MINUTE_DOCUMENTED",
+      "probe_ids": [
+        "alpaca-sip-bars",
+        "alpaca-actions"
+      ],
+      "provider": "alpaca_sip",
+      "raw_adjusted_units": "RAW_NO_ADJUSTMENT_SPLIT_PRICE_VOLUME_DIVIDEND_PRICE_DOC_ONLY",
+      "reproducibility": "RAW_AUDIT_RESPONSES_HASHED_NO_MARKET_DATASET_CREATED",
+      "scope": "DISCOVERY_ONLY_NO_CONFIRMATION_RECLASSIFICATION",
+      "source_ids": [
+        "alpaca-plans",
+        "alpaca-faq",
+        "alpaca-bars",
+        "alpaca-actions"
+      ],
+      "split_adjustment": "RAW_REQUIRED_NO_FUTURE_CUMULATIVE_FACTOR",
+      "volume_semantics": "DOCUMENTED_CONSOLIDATED_SIP_TRADE_SIZE_CONDITION_FILTERED_NOT_IEX",
+      "zero_volume_semantics": "NOT_EQUIVALENT_TO_NO_TRADES_OR_MISSING_BAR"
+    },
+    {
+      "DST_actual": "UNVERIFIED",
+      "Daily_intraday_units": "RAW_RTH_JOIN_AND_NEW_ACTION_CERTIFICATE_UNVERIFIED",
+      "access": "HTTP401_RAW15MIN_BARS",
+      "action_availability": "SPLIT_AND_DIVIDEND_ENDPOINTS_DOCUMENTED_NO_AUTHORIZED_EVENTS",
+      "actual_available_end": null,
+      "actual_available_start": null,
+      "authorization": "NO_RECOGNIZED_CREDENTIAL",
+      "causal_PIT_admission": "BLOCKED_NOT_PROVEN_BY_HISTORY_OR_DOCUMENTATION",
+      "cost_access": "BASIC0_MONTH_2YEARS_MINUTE_AGGREGATES_DOCS_ACTUAL_ENTITLEMENT_UNKNOWN_OPTIONAL_STARTER29_DEVELOPER79_MONTH_USER_DECISION",
+      "delayed_incomplete_bars": "UNKNOWN_NO_HISTORICAL_DELIVERY_OR_REVISION_RECONSTRUCTION",
+      "deterministic_capture": "POTENTIAL_ONLY_REQUEST_PAGES_RAW_HASH_RECEIPT_REQUIRED",
+      "disposition": "BLOCKED_ON_CREDENTIAL",
+      "dividend_adjustment": "NOT_APPLIED",
+      "documented_depth": "BASIC2YEARS_STARTER5_DEVELOPER10_NOT_AUTHORIZED_SOXX_COVERAGE",
+      "early_close_handling": "FROZEN_EXTENDED_V1_UNSUPPORTED_FAIL_CLOSED_RETAIN_UNAVAILABLE_ANCHORS",
+      "event_effective_knowledge_time": "OVERNIGHT_EFFECTIVE_DATE_PREMARKET_INCLUDED_RECORD_KNOWLEDGE_UNPROVEN",
+      "extended_session": "PRE_RTH_POST_QUALIFIED_TRADE_AGGREGATES_DOCUMENTED",
+      "grid_coverage_actual": "UNVERIFIED_NO_AUTHENTICATED_BARS",
+      "historical_depth_current_authorization": "NOT_ESTABLISHED_HTTP401",
+      "interval": "15_MINUTE_DOCUMENTED_NOT_ACCESSED",
+      "missing_bars": "UNKNOWN_NOT_SYNTHETICALLY_FILLED",
+      "pagination_rate": "MAX50000_BASE_AGGREGATES_NEXT_URL_BASIC5CALLS_MIN_DOC_ONLY",
+      "probe_ids": [
+        "massive-bars"
+      ],
+      "provider": "massive_consolidated_stocks",
+      "raw_adjusted_units": "ADJUSTED_FALSE_RAW_DEFAULT_SPLIT_ADJUSTED_NO_DIVIDEND_ADJUSTMENT",
+      "reproducibility": "RAW_AUDIT_RESPONSES_HASHED_NO_MARKET_DATASET_CREATED",
+      "scope": "DISCOVERY_ONLY_NO_CONFIRMATION_RECLASSIFICATION",
+      "source_ids": [
+        "massive-bars",
+        "massive-splits",
+        "massive-units",
+        "massive-plans"
+      ],
+      "split_adjustment": "DEFAULT_HINDSIGHT_FACTOR_FORBIDDEN_USE_RAW",
+      "volume_semantics": "DOCUMENTED_CONSOLIDATED_QUALIFIED_TRADE_VOLUME_ACTUAL_UNKNOWN",
+      "zero_volume_semantics": "NOT_EQUIVALENT_TO_NO_TRADES_OR_MISSING_BAR"
+    },
+    {
+      "DST_actual": "UNVERIFIED",
+      "Daily_intraday_units": "NATIVE_UTC_DAILY_NOT_RTH_FROZEN_INPUT_JOIN_UNVERIFIED_RECEIVE_CLOCK_DIFFERS",
+      "access": "HTTP401_METADATA",
+      "action_availability": "REFERENCE_DATA_DOCUMENTED_TS_RECORD_TS_CREATED_NO_ACTUAL_SOXX_PAYLOAD",
+      "actual_available_end": null,
+      "actual_available_start": null,
+      "authorization": "NO_RECOGNIZED_CREDENTIAL",
+      "causal_PIT_admission": "BLOCKED_NOT_PROVEN_BY_HISTORY_OR_DOCUMENTATION",
+      "cost_access": "HISTORICAL_USAGE_BASED_ACCOUNT_LICENSE_COST_QUOTE_UNKNOWN_NO_SPEND",
+      "delayed_incomplete_bars": "UNKNOWN_NO_HISTORICAL_DELIVERY_OR_REVISION_RECONSTRUCTION",
+      "deterministic_capture": "POTENTIAL_ONLY_REQUEST_PAGES_RAW_HASH_RECEIPT_REQUIRED",
+      "disposition": "BLOCKED_ON_CREDENTIAL",
+      "dividend_adjustment": "SEPARATE_FROM_FEATURE_TRANSFORM_NO_OUTCOME_ACCOUNTING",
+      "documented_depth": "DATASET_SPECIFIC_UNKNOWN_NOT_MARKETING15PLUS_YEARS",
+      "early_close_handling": "FROZEN_EXTENDED_V1_UNSUPPORTED_FAIL_CLOSED_RETAIN_UNAVAILABLE_ANCHORS",
+      "event_effective_knowledge_time": "DOCS_SEPARATE_EFFECTIVE_EX_DATES_RECORD_CHANGE_CREATION_TIMESTAMPS_ACTUAL_PRIOR_HISTORY_UNKNOWN",
+      "extended_session": "VENUE_DEPENDENT_UNVERIFIED_04_20",
+      "grid_coverage_actual": "UNVERIFIED_NO_AUTHENTICATED_BARS",
+      "historical_depth_current_authorization": "NOT_ESTABLISHED_HTTP401",
+      "interval": "NATIVE1M_TRADES_LOCAL15M_AGGREGATION_REQUIRED_NOT_IMPLEMENTED",
+      "missing_bars": "UNKNOWN_NOT_SYNTHETICALLY_FILLED",
+      "pagination_rate": "STREAMING_OR_BATCH_DATASET_QUERY_METADATA_UNAVAILABLE_QUOTA_UNKNOWN",
+      "probe_ids": [
+        "databento-access"
+      ],
+      "provider": "databento_mini_or_direct_venues",
+      "raw_adjusted_units": "TRADE_DERIVED_PRICE_FIXED_SCALE_DATASET_SCHEMA_UNVERIFIED",
+      "reproducibility": "RAW_AUDIT_RESPONSES_HASHED_NO_MARKET_DATASET_CREATED",
+      "scope": "DISCOVERY_ONLY_NO_CONFIRMATION_RECLASSIFICATION",
+      "source_ids": [
+        "databento-mini",
+        "databento-schemas",
+        "databento-actions",
+        "databento-plans"
+      ],
+      "split_adjustment": "SEPARATE_REFERENCE_TRANSFORM_NOT_CURRENT_FACTOR",
+      "volume_semantics": "MINI_COMPONENT_VENUE_BLEND_DIRECT_FEEDS_VENUE_ONLY_REQUIRES_OWNER_SELECTION",
+      "zero_volume_semantics": "NOT_EQUIVALENT_TO_NO_TRADES_OR_MISSING_BAR"
+    },
+    {
+      "DST_actual": "UNVERIFIED",
+      "Daily_intraday_units": "UNKNOWN",
+      "access": "HTTP401_PREPOST_ADJUST_NONE",
+      "action_availability": "PUBLIC_CURRENT_SPLIT_HISTORY_NOT_NEW_INTERVAL_CAUSAL_CERTIFICATE",
+      "actual_available_end": null,
+      "actual_available_start": null,
+      "authorization": "NO_RECOGNIZED_CREDENTIAL",
+      "causal_PIT_admission": "BLOCKED_NOT_PROVEN_BY_HISTORY_OR_DOCUMENTATION",
+      "cost_access": "BASIC_HISTORICAL_DOCS_ACCOUNT_REQUIRED_SOXX_ENDPOINT_AND_ACTION_PLAN_UNKNOWN_NO_PAID_PLAN_INFERRED",
+      "delayed_incomplete_bars": "UNKNOWN_NO_HISTORICAL_DELIVERY_OR_REVISION_RECONSTRUCTION",
+      "deterministic_capture": "POTENTIAL_ONLY_REQUEST_PAGES_RAW_HASH_RECEIPT_REQUIRED",
+      "disposition": "BLOCKED_ON_CREDENTIAL",
+      "dividend_adjustment": "UNKNOWN_ACTUAL_ENDPOINT",
+      "documented_depth": "EXACT_SOXX_INTRADAY_START_UNKNOWN",
+      "early_close_handling": "FROZEN_EXTENDED_V1_UNSUPPORTED_FAIL_CLOSED_RETAIN_UNAVAILABLE_ANCHORS",
+      "event_effective_knowledge_time": "ACTUAL_EVENT_AVAILABILITY_UNVERIFIED",
+      "extended_session": "HISTORICAL04_20_RECORDS_OLDER_THAN1DAY_DOC_ONLY_REALTIME07_20_NOT_SUBSTITUTE",
+      "grid_coverage_actual": "UNVERIFIED_NO_AUTHENTICATED_BARS",
+      "historical_depth_current_authorization": "NOT_ESTABLISHED_HTTP401",
+      "interval": "15MIN_DOCUMENTED_NOT_ACCESSED",
+      "missing_bars": "UNKNOWN_NOT_SYNTHETICALLY_FILLED",
+      "pagination_rate": "5000_ROWS_DATE_WINDOW_OUTPUTSIZE_TRUNCATION_DOCS_ACTUAL_CREDIT_QUOTA_UNKNOWN",
+      "probe_ids": [
+        "twelvedata-bars"
+      ],
+      "provider": "twelvedata_historical",
+      "raw_adjusted_units": "ADJUST_NONE_REQUEST_NO_PAYLOAD_RAW_SPLIT_DIVIDEND_EFFECTS_UNKNOWN",
+      "reproducibility": "RAW_AUDIT_RESPONSES_HASHED_NO_MARKET_DATASET_CREATED",
+      "scope": "DISCOVERY_ONLY_NO_CONFIRMATION_RECLASSIFICATION",
+      "source_ids": [
+        "twelve-extended",
+        "twelve-volume",
+        "twelve-pagination"
+      ],
+      "split_adjustment": "UNKNOWN_ACTUAL_ENDPOINT",
+      "volume_semantics": "HISTORICAL_EOD100PCT_DOC_VS_REALTIME5PCT_ACTUAL_SOXX15M_EXTENDED_UNVERIFIED",
+      "zero_volume_semantics": "NOT_EQUIVALENT_TO_NO_TRADES_OR_MISSING_BAR"
+    }
+  ],
+  "schema": "h0001_long_history_provider_admission_v1",
+  "smallest_P0": "LONG_HISTORY_ACCESS_PATH_DECISION",
+  "strategy_execution_in_audit": false,
+  "task": "LONG_HISTORY_PROVIDER_AND_VOLUME_EVIDENCE",
+  "tests": {
+    "full": {
+      "command": ".venv/Scripts/python -m pytest -q -o cache_dir=var/pytest-long-history-cache --junitxml=var/h0001-long-history-suite.xml",
+      "errors": 0,
+      "failures": 0,
+      "junit_path": "full-suite.xml",
+      "passed": 1401,
+      "seconds": 426.151,
+      "sha256": "b09b31b5bd396421bf0fe8e9d41d8ac6614aeea63adc2ca201f9e4b046c12d48",
+      "skipped": 0,
+      "tests": 1401
+    },
+    "network_tests": "NOT_IN_UNIT_SUITE",
+    "new_tests": 13,
+    "profitability": "NOT_RUN",
+    "targeted": {
+      "command": ".venv/Scripts/python -m pytest tests/test_h0001_long_history_audit.py -q -o cache_dir=var/pytest-long-history-cache --junitxml=var/h0001-long-history-targeted.xml",
+      "errors": 0,
+      "failures": 0,
+      "junit_path": "targeted-suite.xml",
+      "passed": 13,
+      "seconds": 1.361,
+      "sha256": "a9755dc2f9d33df41b1337df2a7703251a418201166975b22a1d8e9a9d01256d",
+      "skipped": 0,
+      "tests": 13
+    }
+  }
+}

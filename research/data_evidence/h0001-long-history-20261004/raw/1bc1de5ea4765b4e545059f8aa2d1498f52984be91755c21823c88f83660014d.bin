@@ -1,0 +1,1 @@
+{"chart":{"result":null,"error":{"code":"Unprocessable Entity","description":"15m data not available for startTime=1785729600 and endTime=1785816000. The requested range must be within the last 60 days."}}}

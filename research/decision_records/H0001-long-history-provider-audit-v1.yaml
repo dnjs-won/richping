@@ -1,0 +1,83 @@
+schema_version: h0001_provider_admission_audit_v1
+record_id: H0001-LONG-HISTORY-PROVIDER-AUDIT-v1
+decision_date: '2026-10-04'
+author: AI_PM
+basis_implementation_commit: 58a237c45feef7f64a9c3c18c59d17575401d8d3
+basis_pm_main_commit: e7082fa
+user_authorization: explicit_LONG_HISTORY_PROVIDER_AND_VOLUME_EVIDENCE_read_only_audit
+status: COMPLETE_AUDIT_BLOCKED_EXPANDED_HISTORY_ADMISSION
+disposition: BLOCKED
+provider_selected: null
+next_action:
+  id: LONG_HISTORY_ACCESS_PATH_DECISION
+  priority: P0
+  status: USER_DECISION_REQUIRED
+  blocks_phase_exit_criteria: [6]
+  scope: Choose owner-approved existing/read-only account access for a small admission probe; no migration or payment authorized by this record.
+smallest_blocker: Existing Yahoo15m retention plus no currently authorized longer15m feed.
+current_admitted_discovery:
+  dataset_id: soxx-yahoo-15m-20261003-v1
+  first_session: '2026-08-05'
+  last_session: '2026-10-01'
+  sessions: 41
+  extended15m_slots: 2624
+  content_hash: bb7ac246e4005d49d861301c4acc8261043bcd71818c3bcdbef5f73aa98c59b9
+actual_new_probe_evidence:
+  yahoo15m:
+    earliest_whole_session_verified: '2026-08-05'
+    latest_whole_supported_session_verified: '2026-10-01'
+    sample_slots_per_session: 64
+    outside60day_requests: HTTP422_EXPLICIT_RETENTION_LIMIT
+    latest_2026_10_02: HTTP200_65ROWS_ONE_OFFGRID19_59_54_UNAVAILABLE
+    volume: All38 extended-hours sample bars report0; market trading/venue coverage UNKNOWN.
+  yahoo_native60m: HTTP200_2025_03_10_16ROWS_CANNOT_RECONSTRUCT_FROZEN15M_INPUT
+  alpaca_sip_bars_and_actions: HTTP401_BLOCKED_ON_CREDENTIAL
+  massive_raw15m: HTTP401_BLOCKED_ON_CREDENTIAL
+  databento_metadata: HTTP401_BLOCKED_ON_CREDENTIAL
+  twelvedata_prepost15m: HTTP401_BLOCKED_ON_CREDENTIAL
+credentials:
+  scope: Recognized process/User/Machine variables and repo filenames/root config; no arbitrary vault/other-project secrets searched.
+  found: false
+  created: false
+  account_signup: false
+  payments_or_subscriptions: false
+payment_required_now: NOT_ESTABLISHED_FREE_HISTORICAL_ACCOUNT_OPTIONS_DOCUMENTED
+research_admission:
+  longer15m_dataset_admitted: false
+  new_interval_action_certificate_reused: false
+  units: New interval certification absent; raw flags do not establish knowledge or RTH Daily compatibility.
+  volume: Actual endpoint extended-volume semantics not certified.
+  actions: Effective dates are not knowledge times; actual required event evidence remains mandatory.
+  no_event_interpretation: Existing ex-post complete no-event plus exact units identity path preserved; no new historical absence-receipt requirement.
+  PIT: Historical research bar-end assumption only when separately admitted; no live/shadow reconstruction.
+  early_close: Existing extended-v1 UNSUPPORTED_FAIL_CLOSED; no RTH substitution or anchor compression.
+  expansion_scope: DISCOVERY_ONLY
+guards:
+  frozen_Daily_1H_15m_composer_changed: false
+  thresholds_MACD_changed: false
+  candidate_stream: 0
+  original_ZERO_SIGNAL_evidence_preserved: true
+  new_strategy_replay: false
+  outcome_performance_lookup: false
+  profitability: NOT_RUN
+  phase_exit_6: INCOMPLETE
+  confirmation_sessions: 126
+  confirmation_start: '2026-10-12'
+  confirmation_end: '2027-04-13'
+  stopping_evaluation_protocol_changed: false
+  unsupported_fill_or_zero_volume_no_trade_inference: false
+evidence:
+  admission: research/data_evidence/h0001-long-history-20261004/admission.json
+  primary_sources: research/data_evidence/h0001-long-history-20261004/source-notes.json
+  tests: research/data_evidence/h0001-long-history-20261004/test-report.json
+  preservation: research/data_evidence/h0001-long-history-20261004/preservation.json
+  contract: docs/H0001_LONG_HISTORY_PROVIDER_AUDIT.md
+tests:
+  targeted: 13
+  full: 1401
+  failures: 0
+  errors: 0
+  skipped: 0
+  network_probe_separate: true
+  preexisting_files_unchanged: 223
+after_actual_admission_pass: LONGER_IMMUTABLE_DISCOVERY_CAPTURE

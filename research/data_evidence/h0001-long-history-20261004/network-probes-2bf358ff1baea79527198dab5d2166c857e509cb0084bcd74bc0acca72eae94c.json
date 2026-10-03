@@ -1,0 +1,460 @@
+{
+  "captured_at": "2026-10-03T17:59:22.865675+00:00",
+  "credential_presence_process_environment": {
+    "alpaca": {
+      "ALPACA_API_KEY": false,
+      "ALPACA_SECRET_KEY": false,
+      "APCA_API_KEY_ID": false,
+      "APCA_API_SECRET_KEY": false
+    },
+    "alphavantage": {
+      "ALPHAVANTAGE_API_KEY": false,
+      "ALPHA_VANTAGE_API_KEY": false
+    },
+    "databento": {
+      "DATABENTO_API_KEY": false
+    },
+    "eodhd": {
+      "EODHD_API_KEY": false
+    },
+    "massive": {
+      "MASSIVE_API_KEY": false,
+      "POLYGON_API_KEY": false
+    },
+    "tiingo": {
+      "TIINGO_API_KEY": false,
+      "TIINGO_TOKEN": false
+    },
+    "twelvedata": {
+      "TWELVEDATA_API_KEY": false,
+      "TWELVE_DATA_API_KEY": false
+    }
+  },
+  "outcomes": "NOT_RUN",
+  "probes": [
+    {
+      "authenticated": false,
+      "bar_interval": "15m",
+      "bytes": 5265,
+      "captured_at": "2026-10-03T17:59:17.623310+00:00",
+      "grid": {
+        "actual_sessions": [
+          "2026-08-05"
+        ],
+        "duplicates": 0,
+        "expected_slots": 64,
+        "first_start": "2026-08-05T08:00:00+00:00",
+        "incomplete_rows": 0,
+        "last_start": "2026-08-05T23:45:00+00:00",
+        "missing_count": 0,
+        "missing_interpretation": "UNKNOWN_NOT_ZERO_VOLUME_OR_PROVEN_MARKET_UNAVAILABLE",
+        "missing_slots": [],
+        "null_ohlc_rows": 0,
+        "null_volume_rows": 0,
+        "observed_rows": 64,
+        "outside_supported_grid": 0,
+        "segments": {
+          "AFTER_HOURS": 16,
+          "PREMARKET": 22,
+          "RTH": 26
+        },
+        "status": "COMPLETE_GRID_ONLY_NOT_ADMISSION",
+        "unsupported_sessions": [],
+        "zero_volume_by_segment": {
+          "AFTER_HOURS": 16,
+          "PREMARKET": 22
+        },
+        "zero_volume_interpretation": "PROVIDER_REPORTED_ZERO_NOT_PROOF_OF_NO_TRADING"
+      },
+      "http_status": 200,
+      "id": "yahoo-earliest-15m",
+      "params": {
+        "events": "div,splits,capitalGains",
+        "includePrePost": true,
+        "interval": "15m",
+        "period1": 1785902400,
+        "period2": 1785988800
+      },
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/db219b126d9bba823b71350956be06062b6e935d0e262a8a1b99b6ea3b0ebb26.bin",
+      "provider_error": null,
+      "requested_at": "2026-10-03T17:59:16.957589+00:00",
+      "requested_interval": [
+        "2026-08-05",
+        "2026-08-06"
+      ],
+      "sha256": "db219b126d9bba823b71350956be06062b6e935d0e262a8a1b99b6ea3b0ebb26",
+      "transport": "HTTP_RESPONSE",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/SOXX"
+    },
+    {
+      "authenticated": false,
+      "bar_interval": "15m",
+      "bytes": 206,
+      "captured_at": "2026-10-03T17:59:18.494837+00:00",
+      "grid": {
+        "error": {
+          "code": "Unprocessable Entity",
+          "description": "15m data not available for startTime=1785729600 and endTime=1785816000. The requested range must be within the last 60 days."
+        },
+        "status": "PROVIDER_ERROR_NOT_GRID_EVIDENCE"
+      },
+      "http_status": 422,
+      "id": "yahoo-before-retention-15m",
+      "params": {
+        "events": "div,splits,capitalGains",
+        "includePrePost": true,
+        "interval": "15m",
+        "period1": 1785729600,
+        "period2": 1785816000
+      },
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/1bc1de5ea4765b4e545059f8aa2d1498f52984be91755c21823c88f83660014d.bin",
+      "provider_error": {
+        "code": "Unprocessable Entity",
+        "description": "15m data not available for startTime=1785729600 and endTime=1785816000. The requested range must be within the last 60 days."
+      },
+      "requested_at": "2026-10-03T17:59:18.021850+00:00",
+      "requested_interval": [
+        "2026-08-03",
+        "2026-08-04"
+      ],
+      "sha256": "1bc1de5ea4765b4e545059f8aa2d1498f52984be91755c21823c88f83660014d",
+      "transport": "HTTP_RESPONSE",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/SOXX"
+    },
+    {
+      "authenticated": false,
+      "bar_interval": "15m",
+      "bytes": 206,
+      "captured_at": "2026-10-03T17:59:18.976604+00:00",
+      "grid": {
+        "error": {
+          "code": "Unprocessable Entity",
+          "description": "15m data not available for startTime=1741579200 and endTime=1741665600. The requested range must be within the last 60 days."
+        },
+        "status": "PROVIDER_ERROR_NOT_GRID_EVIDENCE"
+      },
+      "http_status": 422,
+      "id": "yahoo-old-15m",
+      "params": {
+        "events": "div,splits,capitalGains",
+        "includePrePost": true,
+        "interval": "15m",
+        "period1": 1741579200,
+        "period2": 1741665600
+      },
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/bc67f3f1b5e4b571022f4a2ce2b7fefc2fe1ec6787b3307cf5a56793ee136fdd.bin",
+      "provider_error": {
+        "code": "Unprocessable Entity",
+        "description": "15m data not available for startTime=1741579200 and endTime=1741665600. The requested range must be within the last 60 days."
+      },
+      "requested_at": "2026-10-03T17:59:18.494993+00:00",
+      "requested_interval": [
+        "2025-03-10",
+        "2025-03-11"
+      ],
+      "sha256": "bc67f3f1b5e4b571022f4a2ce2b7fefc2fe1ec6787b3307cf5a56793ee136fdd",
+      "transport": "HTTP_RESPONSE",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/SOXX"
+    },
+    {
+      "authenticated": false,
+      "bar_interval": "15m",
+      "bytes": 5345,
+      "captured_at": "2026-10-03T17:59:19.107310+00:00",
+      "grid": {
+        "actual_sessions": [
+          "2026-10-01"
+        ],
+        "duplicates": 0,
+        "expected_slots": 64,
+        "first_start": "2026-10-01T08:00:00+00:00",
+        "incomplete_rows": 0,
+        "last_start": "2026-10-01T23:45:00+00:00",
+        "missing_count": 0,
+        "missing_interpretation": "UNKNOWN_NOT_ZERO_VOLUME_OR_PROVEN_MARKET_UNAVAILABLE",
+        "missing_slots": [],
+        "null_ohlc_rows": 0,
+        "null_volume_rows": 0,
+        "observed_rows": 64,
+        "outside_supported_grid": 0,
+        "segments": {
+          "AFTER_HOURS": 16,
+          "PREMARKET": 22,
+          "RTH": 26
+        },
+        "status": "COMPLETE_GRID_ONLY_NOT_ADMISSION",
+        "unsupported_sessions": [],
+        "zero_volume_by_segment": {
+          "AFTER_HOURS": 16,
+          "PREMARKET": 22
+        },
+        "zero_volume_interpretation": "PROVIDER_REPORTED_ZERO_NOT_PROOF_OF_NO_TRADING"
+      },
+      "http_status": 200,
+      "id": "yahoo-completed-15m",
+      "params": {
+        "events": "div,splits,capitalGains",
+        "includePrePost": true,
+        "interval": "15m",
+        "period1": 1790827200,
+        "period2": 1790913600
+      },
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/78e401191677b1f114f66a280a03d8aa5b83529049cdbde66992d38bca992fec.bin",
+      "provider_error": null,
+      "requested_at": "2026-10-03T17:59:18.976811+00:00",
+      "requested_interval": [
+        "2026-10-01",
+        "2026-10-02"
+      ],
+      "sha256": "78e401191677b1f114f66a280a03d8aa5b83529049cdbde66992d38bca992fec",
+      "transport": "HTTP_RESPONSE",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/SOXX"
+    },
+    {
+      "authenticated": false,
+      "bar_interval": "15m",
+      "bytes": 5307,
+      "captured_at": "2026-10-03T17:59:19.250090+00:00",
+      "grid": {
+        "actual_sessions": [
+          "2026-10-02"
+        ],
+        "duplicates": 0,
+        "expected_slots": 64,
+        "first_start": "2026-10-02T08:00:00+00:00",
+        "incomplete_rows": 0,
+        "last_start": "2026-10-02T23:59:54+00:00",
+        "missing_count": 0,
+        "missing_interpretation": "UNKNOWN_NOT_ZERO_VOLUME_OR_PROVEN_MARKET_UNAVAILABLE",
+        "missing_slots": [],
+        "null_ohlc_rows": 0,
+        "null_volume_rows": 0,
+        "observed_rows": 65,
+        "outside_supported_grid": 1,
+        "segments": {
+          "AFTER_HOURS": 16,
+          "OUTSIDE_SUPPORTED_GRID": 1,
+          "PREMARKET": 22,
+          "RTH": 26
+        },
+        "status": "UNAVAILABLE",
+        "unsupported_sessions": [],
+        "zero_volume_by_segment": {
+          "AFTER_HOURS": 16,
+          "OUTSIDE_SUPPORTED_GRID": 1,
+          "PREMARKET": 22
+        },
+        "zero_volume_interpretation": "PROVIDER_REPORTED_ZERO_NOT_PROOF_OF_NO_TRADING"
+      },
+      "http_status": 200,
+      "id": "yahoo-latest-15m",
+      "params": {
+        "events": "div,splits,capitalGains",
+        "includePrePost": true,
+        "interval": "15m",
+        "period1": 1790913600,
+        "period2": 1791000000
+      },
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/4e4f414383903d6f22835295be04f3b8ae743d325d452cb31eb12ab6f61ac8af.bin",
+      "provider_error": null,
+      "requested_at": "2026-10-03T17:59:19.117928+00:00",
+      "requested_interval": [
+        "2026-10-02",
+        "2026-10-03"
+      ],
+      "sha256": "4e4f414383903d6f22835295be04f3b8ae743d325d452cb31eb12ab6f61ac8af",
+      "transport": "HTTP_RESPONSE",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/SOXX"
+    },
+    {
+      "authenticated": false,
+      "bar_interval": "60m",
+      "bytes": 2495,
+      "captured_at": "2026-10-03T17:59:19.389097+00:00",
+      "http_status": 200,
+      "id": "yahoo-old-1h",
+      "params": {
+        "events": "div,splits,capitalGains",
+        "includePrePost": true,
+        "interval": "60m",
+        "period1": 1741579200,
+        "period2": 1741665600
+      },
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/0ede55d87ca2349b37240e4b65574c07668e1dc0ea8fe02d4bef02b59cea33c8.bin",
+      "provider_error": null,
+      "requested_at": "2026-10-03T17:59:19.260593+00:00",
+      "requested_interval": [
+        "2025-03-10",
+        "2025-03-11"
+      ],
+      "sha256": "0ede55d87ca2349b37240e4b65574c07668e1dc0ea8fe02d4bef02b59cea33c8",
+      "transport": "HTTP_RESPONSE",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/SOXX"
+    },
+    {
+      "authenticated": false,
+      "bar_interval": "15m",
+      "bytes": 206,
+      "captured_at": "2026-10-03T17:59:19.750307+00:00",
+      "grid": {
+        "error": {
+          "code": "Unprocessable Entity",
+          "description": "15m data not available for startTime=1764306000 and endTime=1764392400. The requested range must be within the last 60 days."
+        },
+        "status": "PROVIDER_ERROR_NOT_GRID_EVIDENCE"
+      },
+      "http_status": 422,
+      "id": "yahoo-early-close-15m",
+      "params": {
+        "events": "div,splits,capitalGains",
+        "includePrePost": true,
+        "interval": "15m",
+        "period1": 1764306000,
+        "period2": 1764392400
+      },
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/4c78d8da5181d7e1a6c0c2d8ea4b326af9191ccd7e87adef1ce6126d4b0c5afc.bin",
+      "provider_error": {
+        "code": "Unprocessable Entity",
+        "description": "15m data not available for startTime=1764306000 and endTime=1764392400. The requested range must be within the last 60 days."
+      },
+      "requested_at": "2026-10-03T17:59:19.389259+00:00",
+      "requested_interval": [
+        "2025-11-28",
+        "2025-11-29"
+      ],
+      "sha256": "4c78d8da5181d7e1a6c0c2d8ea4b326af9191ccd7e87adef1ce6126d4b0c5afc",
+      "transport": "HTTP_RESPONSE",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/SOXX"
+    },
+    {
+      "authenticated": false,
+      "bar_interval": "1d",
+      "bytes": 1652,
+      "captured_at": "2026-10-03T17:59:19.902817+00:00",
+      "http_status": 200,
+      "id": "yahoo-split-daily-unit-spot",
+      "params": {
+        "events": "div,splits,capitalGains",
+        "includePrePost": true,
+        "interval": "1d",
+        "period1": 1709701200,
+        "period2": 1709960400
+      },
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/cad4ae8ca2f13f8b406f6dc7861985750789b84fcafd60334342353b664606b5.bin",
+      "provider_error": null,
+      "requested_at": "2026-10-03T17:59:19.750434+00:00",
+      "requested_interval": [
+        "2024-03-06",
+        "2024-03-09"
+      ],
+      "sha256": "cad4ae8ca2f13f8b406f6dc7861985750789b84fcafd60334342353b664606b5",
+      "transport": "HTTP_RESPONSE",
+      "url": "https://query1.finance.yahoo.com/v8/finance/chart/SOXX"
+    },
+    {
+      "authenticated": false,
+      "bytes": 574,
+      "captured_at": "2026-10-03T17:59:20.535674+00:00",
+      "http_status": 401,
+      "id": "alpaca-sip-bars",
+      "params": {
+        "adjustment": "raw",
+        "end": "2025-03-11T00:00:00Z",
+        "feed": "sip",
+        "limit": 100,
+        "start": "2025-03-10T08:00:00Z",
+        "timeframe": "15Min"
+      },
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/ac38412ed28c45b501d15067c0996649d8488e2b2f2dbc53d122cba58a8f1f3b.bin",
+      "requested_at": "2026-10-03T17:59:19.902944+00:00",
+      "sha256": "ac38412ed28c45b501d15067c0996649d8488e2b2f2dbc53d122cba58a8f1f3b",
+      "transport": "HTTP_RESPONSE",
+      "url": "https://data.alpaca.markets/v2/stocks/SOXX/bars"
+    },
+    {
+      "authenticated": false,
+      "bytes": 574,
+      "captured_at": "2026-10-03T17:59:21.137504+00:00",
+      "http_status": 401,
+      "id": "alpaca-actions",
+      "params": {
+        "end": "2026-10-03",
+        "limit": 1000,
+        "start": "2024-01-01",
+        "symbols": "SOXX"
+      },
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/ac38412ed28c45b501d15067c0996649d8488e2b2f2dbc53d122cba58a8f1f3b.bin",
+      "requested_at": "2026-10-03T17:59:20.535794+00:00",
+      "sha256": "ac38412ed28c45b501d15067c0996649d8488e2b2f2dbc53d122cba58a8f1f3b",
+      "transport": "HTTP_RESPONSE",
+      "url": "https://data.alpaca.markets/v1/corporate-actions"
+    },
+    {
+      "authenticated": false,
+      "bytes": 101,
+      "captured_at": "2026-10-03T17:59:21.694033+00:00",
+      "http_status": 401,
+      "id": "massive-bars",
+      "params": {
+        "adjusted": "false",
+        "limit": 100,
+        "sort": "asc"
+      },
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/45eb3a79730d33cab6c07780f3c3d2728924b424872a1ffb76c1a34fceaea042.bin",
+      "requested_at": "2026-10-03T17:59:21.137616+00:00",
+      "response_error": {
+        "error": "API Key was not provided",
+        "status": "ERROR"
+      },
+      "sha256": "45eb3a79730d33cab6c07780f3c3d2728924b424872a1ffb76c1a34fceaea042",
+      "transport": "HTTP_RESPONSE",
+      "url": "https://api.massive.com/v2/aggs/ticker/SOXX/range/15/minute/2025-03-10/2025-03-10"
+    },
+    {
+      "authenticated": false,
+      "bytes": 168,
+      "captured_at": "2026-10-03T17:59:22.387220+00:00",
+      "http_status": 401,
+      "id": "databento-access",
+      "params": {},
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/da41b89cd67b914b25a8f4ac8897709e97c17103be78a63003043caf18b8fecc.bin",
+      "requested_at": "2026-10-03T17:59:21.694197+00:00",
+      "response_error": {},
+      "sha256": "da41b89cd67b914b25a8f4ac8897709e97c17103be78a63003043caf18b8fecc",
+      "transport": "HTTP_RESPONSE",
+      "url": "https://hist.databento.com/v0/metadata.list_datasets"
+    },
+    {
+      "authenticated": false,
+      "bytes": 291,
+      "captured_at": "2026-10-03T17:59:22.865569+00:00",
+      "http_status": 401,
+      "id": "twelvedata-bars",
+      "params": {
+        "adjust": "none",
+        "end_date": "2025-03-10 20:00:00",
+        "interval": "15min",
+        "outputsize": 100,
+        "prepost": "true",
+        "start_date": "2025-03-10 04:00:00",
+        "symbol": "SOXX",
+        "timezone": "America/New_York"
+      },
+      "path": "research/data_evidence/h0001-long-history-20261004/raw/dbf723dd78a4eeb146bbd08f0480ab3d7036579f56e732243a5f77708ea9bc15.bin",
+      "requested_at": "2026-10-03T17:59:22.387368+00:00",
+      "response_error": {
+        "code": 401,
+        "message": "**apikey** parameter is incorrect or not specified. You can get your free API key instantly following this link: https://twelvedata.com/pricing. If you believe that everything is correct, you can contact us at https://twelvedata.com/contact/customer",
+        "status": "error"
+      },
+      "sha256": "dbf723dd78a4eeb146bbd08f0480ab3d7036579f56e732243a5f77708ea9bc15",
+      "transport": "HTTP_RESPONSE",
+      "url": "https://api.twelvedata.com/time_series"
+    }
+  ],
+  "profitability": "NOT_RUN",
+  "schema": "h0001_long_history_network_probe_v1",
+  "scope": "BOUNDED_READ_ONLY_CAPABILITY_PROBES_NOT_DATASET_CAPTURE",
+  "strategy_execution": false,
+  "yfinance_version": "1.7.0"
+}

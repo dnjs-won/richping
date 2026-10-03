@@ -1,0 +1,30 @@
+{
+  "authenticated": false,
+  "bytes": 206,
+  "captured_at": "2026-10-03T18:05:05.343655+00:00",
+  "grid": {
+    "error": {
+      "code": "Unprocessable Entity",
+      "description": "15m data not available for startTime=1785816000 and endTime=1785902400. The requested range must be within the last 60 days."
+    },
+    "status": "PROVIDER_ERROR_NOT_GRID_EVIDENCE"
+  },
+  "http_status": 422,
+  "id": "yahoo-retention-boundary-15m",
+  "params": {
+    "events": "div,splits,capitalGains",
+    "includePrePost": true,
+    "interval": "15m",
+    "period1": 1785816000,
+    "period2": 1785902400
+  },
+  "path": "research/data_evidence/h0001-long-history-20261004/raw/c82040ca8d408bc6404f426af79fd86fc3ef75c8dee51e935fbd960def62c1e7.bin",
+  "provider_error": {
+    "code": "Unprocessable Entity",
+    "description": "15m data not available for startTime=1785816000 and endTime=1785902400. The requested range must be within the last 60 days."
+  },
+  "requested_at": "2026-10-03T18:05:04.315832+00:00",
+  "sha256": "c82040ca8d408bc6404f426af79fd86fc3ef75c8dee51e935fbd960def62c1e7",
+  "transport": "HTTP_RESPONSE",
+  "url": "https://query1.finance.yahoo.com/v8/finance/chart/SOXX"
+}

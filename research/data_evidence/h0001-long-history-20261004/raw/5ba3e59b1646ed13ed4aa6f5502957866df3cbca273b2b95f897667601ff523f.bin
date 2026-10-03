@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <link rel="icon" href="/brand/favicon.ico" sizes="32x32" />
+    <link rel="icon" href="/brand/favicon.svg" type="image/svg+xml" />
+    <!-- Transparent PNG for Google Search (avoids the manifest icon being flattened onto a white background) -->
+    <link rel="icon" href="/brand/favicon-96x96.png" type="image/png" sizes="96x96" />
+    <link rel="apple-touch-icon" href="/brand/icon-180-unmasked.png" />
+
+    <!-- For progressive web app (PWA) -->
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    <!-- Primary Meta Tags -->
+    <!-- set by MetaTagUtils.setAllMetaTags -->
+    <title>Databento</title>
+    <meta name="title" content="Databento" />
+    <meta
+      name="description"
+      content="Databento provides real-time and historical market data APIs. Access data for equities, futures, options, and more with one integration. Sign up for $125 in free credits."
+    />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Databento" />
+    <meta
+      property="og:description"
+      content="Databento provides real-time and historical market data APIs. Access data for equities, futures, options, and more with one integration. Sign up for $125 in free credits."
+    />
+    <meta property="og:site_name" content="Databento" />
+    <meta property="og:image" content="https://databento.com/brand/databento-snapshot.png" />
+    <meta property="og:url" content="https://databento.com" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Databento" />
+    <meta
+      name="twitter:description"
+      content="Databento provides real-time and historical market data APIs. Access data for equities, futures, options, and more with one integration. Sign up for $125 in free credits."
+    />
+    <meta name="theme-color" content="#1a174c" />
+    <!-- <meta name="twitter:site" content="@DatabentoHQ" /> -->
+    <!-- <meta name="twitter:creator" content="@DatabentoHQ" /> -->
+    <!-- <meta name="twitter:image" content="https://databento.com/brand/twitter-800x418.png" /> -->
+    <!-- <link href="https://fonts.googleapis.com/css2?family=Inter&display=swap" rel="stylesheet"> -->
+
+    <script>
+      // Tell prerenderer when the page finishes loading
+      window.prerenderReady = false;
+
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        if ('dataLayer' in window) {
+          dataLayer.push(arguments);
+        }
+      }
+      gtag('consent', 'default', {
+        ad_storage: 'granted',
+        ad_user_data: 'granted',
+        ad_personalization: 'granted',
+        analytics_storage: 'granted',
+      });
+      function gtagEvent({ pathname, search }, category, action, label, data) {
+        gtag('event', action, {
+          page_location: `${window.location.origin}${pathname}${search}`,
+          page_path: pathname,
+          page_title: pathname, // Retrieiving title tag is slow, so best to use path
+          event_category: category,
+          event_label: label,
+          non_interaction: (data && data.non_interaction) || false,
+          ...data,
+        });
+      }
+      // The GA4 and Google Ads configs `gtag('config')` are set
+      // within the script `./google-tag-config.ts`
+    </script>
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://databento.com/about#organization",
+        "name": "Databento",
+        "url": "https://databento.com/about",
+        "logo": "https://databento.com/brand/logo/logo-large.png",
+        "legalName": "Databento, Inc.",
+        "sameAs": [
+          "https://www.crunchbase.com/organization/databento",
+          "https://www.linkedin.com/company/databento",
+          "https://twitter.com/DatabentoHQ",
+          "https://www.facebook.com/databento",
+          "https://github.com/databento",
+          "https://databento-hq.slack.com"
+        ],
+        "slogan": "A simpler, faster way to get market data",
+        "description": "Databento provides real-time and historical market data, sourced directly from colocation sites, and gives users instant access to market data APIs, with a pay-as-you-go, self-service model.",
+        "email": "support@databento.com"
+      }
+    </script>
+    <style type="text/css">
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        /* temp fix for the case what dropdown trigger the screen shaking when Intercom banner existing  */
+        transition: margin 0ms !important;
+      }
+      body[data-scroll-locked] > div > div > div#nav-external {
+        right: 11px;
+      }
+      body[data-scroll-locked] div.intercom-lightweight-app-launcher,
+      body[data-scroll-locked] div.intercom-messenger-frame {
+        right: 31px;
+      }
+      body[data-scroll-locked] div.intercom-app > div:nth-child(2) {
+        right: 31px;
+      }
+      .no-javascript {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 64px 16px;
+      }
+      .javascript-title {
+        font-family: 'Inter Variable', sans-serif;
+        font-size: 26px;
+        line-height: 36px;
+        font-weight: 600;
+        font-style: normal;
+        color: #323348;
+        margin-bottom: 32px;
+      }
+      .tabset {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        max-width: 1016px;
+      }
+      .tabset > input[type='radio'] {
+        position: absolute;
+        left: -200vw;
+      }
+      .tabset section > div {
+        display: none;
+      }
+      #tab1:checked ~ section #chrome-section,
+      #tab2:checked ~ section #safari-section,
+      #tab3:checked ~ section #opera-section,
+      #tab4:checked ~ section #firefox-section,
+      #tab5:checked ~ section #ie-section {
+        display: block;
+      }
+      .tabs {
+        display: flex;
+        margin-bottom: 32px;
+      }
+      .tabs > label {
+        position: relative;
+        display: inline-block;
+        padding: 0px 11px;
+        cursor: pointer;
+        font-weight: 600;
+        opacity: 0.3;
+      }
+      .tabs > label:first-child {
+        padding-left: 0;
+      }
+      .tabs > label:last-child {
+        padding-right: 0;
+      }
+      .input-img {
+        width: 40px;
+        height: 40px;
+      }
+      /* .tabset > label::after {
+        content: '';
+        position: absolute;
+        left: 15px;
+        bottom: 10px;
+        width: 22px;
+        height: 4px;
+        background: #8d8d8d;
+      } */
+      /* .tabs > label:hover,
+      .tabs > input:focus + label {
+        color: #06c;
+      } */
+      .tabs > label:hover,
+      #tab1:focus ~ div #tab1-img,
+      #tab2:focus ~ div #tab2-img,
+      #tab3:focus ~ div #tab3-img,
+      #tab4:focus ~ div #tab4-img,
+      #tab5:focus ~ div #tab5-img,
+      #tab1:checked ~ div #tab1-img,
+      #tab2:checked ~ div #tab2-img,
+      #tab3:checked ~ div #tab3-img,
+      #tab4:checked ~ div #tab4-img,
+      #tab5:checked ~ div #tab5-img {
+        opacity: 1;
+      }
+      *,
+      *:before,
+      *:after {
+        box-sizing: border-box;
+      }
+      .instruction {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 16px;
+      }
+      .instruction-num {
+        display: flex;
+        justify-content: center;
+        width: 20px !important;
+        height: 20px;
+        background-color: #ebe8fb;
+        border-radius: 10px;
+        font-family: 'Inter Variable', sans-serif;
+        font-size: 12px;
+        line-height: 20px;
+        font-weight: 400;
+        font-style: normal;
+        color: #323348;
+        margin-right: 12px;
+      }
+      .instruction-text {
+        width: calc(100% - 32px);
+        font-family: 'Inter Variable', sans-serif;
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 400;
+        font-style: normal;
+        color: #323348;
+      }
+      @keyframes spinner {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      /*.loading-backdrop {*/
+      /*  position: fixed;*/
+      /*  top: 0;*/
+      /*  left: 0;*/
+      /*  right: 0;*/
+      /*  bottom: 0;*/
+      /*  z-index: 1201;*/
+      /*  opacity: 1;*/
+      /*  display: none;*/
+      /*  align-items: center;*/
+      /*  justify-content: center;*/
+      /*}*/
+      /*.loading-spinner-container {*/
+      /*  display: flex;*/
+      /*}*/
+      /*.loading-spinner {*/
+      /*  animation: spinner 3s linear infinite;*/
+      /*}*/
+      @media only screen and (min-width: 600px) {
+        .no-javascript {
+          padding: 80px 24px;
+        }
+        .javascript-title {
+          margin-bottom: 64px;
+        }
+        .tabs {
+          margin-bottom: 64px;
+        }
+        .tabs > label {
+          padding: 0px 20px;
+        }
+        .input-img {
+          width: 64px;
+          height: 64px;
+        }
+        body[data-scroll-locked] > div > div > div#nav-external[data-public='true'] {
+          padding-left: 35px;
+        }
+      }
+      @media only screen and (min-width: 960px) {
+        .no-javascript {
+          padding: 128px 32px;
+        }
+
+        .javascript-title {
+          font-size: 32px;
+          line-height: 40px;
+          margin-bottom: 80px;
+        }
+
+        .tabs {
+          margin-bottom: 80px;
+        }
+      }
+      @media only screen and (min-width: 1480px) {
+        body[data-scroll-locked] > div > div > div#nav-external[data-public='true'] {
+          padding-left: calc((100vw - 1470px) / 2 + 35px);
+        }
+      }
+    </style>
+    <script type="module" crossorigin src="/assets/index-CFzO_Joo.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-DtgWwcI_.css" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" crossorigin href="/assets/index-DtgWwcI_.css"></noscript>
+  </head>
+  <body>
+    <noscript class="no-javascript">
+      <div class="javascript-title">You need to enable JavaScript to run this app</div>
+      <div class="tabset">
+        <input type="radio" name="tabs" id="tab1" aria-controls="chrome" checked />
+        <input type="radio" name="tabs" id="tab2" aria-controls="safari" />
+        <input type="radio" name="tabs" id="tab3" aria-controls="opera" />
+        <input type="radio" name="tabs" id="tab4" aria-controls="firefox" />
+        <input type="radio" name="tabs" id="tab5" aria-controls="ie" />
+        <div class="tabs">
+          <!-- Tab 1 -->
+          <label for="tab1" id="tab1-img">
+            <img class="input-img" src="/chrome.svg" />
+          </label>
+          <!-- Tab 2 -->
+          <label for="tab2" id="tab2-img">
+            <img class="input-img" src="/safari.svg" />
+          </label>
+          <!-- Tab 3 -->
+          <label for="tab3" id="tab3-img">
+            <img class="input-img" src="/opera.svg" />
+          </label>
+          <!-- Tab 4 -->
+          <label for="tab4" id="tab4-img">
+            <img class="input-img" src="/firefox.svg" />
+          </label>
+          <!-- Tab 5 -->
+          <label for="tab5" id="tab5-img">
+            <img class="input-img" src="/ie.svg" />
+          </label>
+        </div>
+        <section>
+          <div id="chrome-section" class="tab-panel">
+            <div class="instruction">
+              <div class="instruction-num">1</div>
+              <div class="instruction-text">
+                Click the "Customize" menu button in the top-right corner of the Chrome window
+              </div>
+            </div>
+            <div class="instruction">
+              <div class="instruction-num">2</div>
+              <div class="instruction-text">Select the <b>Settings</b> menu item</div>
+            </div>
+            <div class="instruction">
+              <div class="instruction-num">3</div>
+              <div class="instruction-text">At the bottom, click <b>Advanced</b></div>
+            </div>
+            <div class="instruction">
+              <div class="instruction-num">4</div>
+              <div class="instruction-text">Under <b>Privacy and security</b>, click <b>Site settings</b></div>
+            </div>
+            <div class="instruction">
+              <div class="instruction-num">5</div>
+              <div class="instruction-text">Click <b>JavaScript</b></div>
+            </div>
+            <div class="instruction">
+              <div class="instruction-num">6</div>
+              <div class="instruction-text">Turn on <b>Allowed (recommended)</b></div>
+            </div>
+          </div>
+          <div id="safari-section" class="tab-panel">
+            <div class="instruction">
+              <div class="instruction-num">1</div>
+              <div class="instruction-text">Click the Safari menu</div>
+            </div>
+            <div class="instruction">
+              <div class="instruction-num">2</div>
+              <div class="instruction-text">Click the <b>Preference</b> menu item</div>
+            </div>
+            <div class="instruction">
+              <div class="instruction-num">3</div>
+              <div class="instruction-text">Click on the <b>Security</b> tab</div>
+            </div>
+            <div class="instruction">
+              <div class="instruction-num">4</div>
+              <div class="instruction-text">Click the <b>Enable Javascript</b> checkbox</div>
+            </div>
+            <div class="instruction">
+              <div class="instruction-num">5</div>
+              <div class="instruction-text">Close the <b>Preferences</b> window. JavaScript is now enabled</div>
+            </div>
+          </div>
+          <div id="opera-section" class="tab-panel">
+            <div class="instruction">
+              <div class="instruction-num">1</div>
+              <div class="instruction-text">Open the "Easy Setup" menu In the top right corner of the Opera window</div>
+            </div>
+            <div class="instruction">
+              <div class="instruction-num">2</div>
+              <div class="instruction-text">At the very bottom, click <b>Go to browser settings</b></div>
+            </div>
+            <div class="instruction">
+              <div class="instruction-num">3</div>
+              <div class="instruction-text">Search for <b>Javascript</b></div>
+            </div>
+            <div class="instruction">
+              <div class="instruction-num">4</div>
+              <div class="instruction-text">Click <b>Site settings</b></div>
+            </div>
+            <div class="instruction">
+              <div class="instruction-num">5</div>
+              <div class="instruction-text">Click <b>JavaScript</b></div>
+            </div>
+            <div class="instruction">
+              <div class="instruction-num">6</div>
+              <div class="instruction-text">Choose your JavaScript settings</div>
+            </div>
+          </div>
+          <div id="firefox-section" class="tab-panel">
+            <div class="instruction">
+              <div class="instruction-num">1</div>
+              <div class="instruction-text">
+                Click into the Address Bar, type in <b>about:config</b> and press enter
+              </div>
+            </div>
+            <div class="instruction">
+              <div class="instruction-num">2</div>
+              <div class="instruction-text">Accept the warning about changing advanced settings</div>
+            </div>
+            <div class="instruction">
+              <div class="instruction-num">3</div>
+              <div class="instruction-text">Type <b>javascript</b> into the search field</div>
+            </div>
+            <div class="instruction">
+              <div class="instruction-num">4</div>
+              <div class="instruction-text">Find the <b>javascript:enabled</b> preference</div>
+            </div>
+            <div class="instruction">
+              <div class="instruction-num">5</div>
+              <div class="instruction-text">Reset the JavaScript preference to default (enabled)</div>
+            </div>
+          </div>
+          <div id="ie-section" class="tab-panel">
+            <div class="instruction">
+              <div class="instruction-num">1</div>
+              <div class="instruction-text">Select the <b>Tools</b> menu</div>
+            </div>
+            <div class="instruction">
+              <div class="instruction-num">2</div>
+              <div class="instruction-text">Select <b>Internet Options</b></div>
+            </div>
+            <div class="instruction">
+              <div class="instruction-num">3</div>
+              <div class="instruction-text">Select the <b>Security</b> tab</div>
+            </div>
+            <div class="instruction">
+              <div class="instruction-num">4</div>
+              <div class="instruction-text">Click the <b>Custom level...</b> button</div>
+            </div>
+            <div class="instruction">
+              <div class="instruction-num">5</div>
+              <div class="instruction-text">
+                Scroll down to the sub-section <b>Active scripting</b> under <b>Scripting</b> section, click
+                <b>Enable</b>
+              </div>
+            </div>
+            <div class="instruction">
+              <div class="instruction-num">6</div>
+              <div class="instruction-text">Confirm the change</div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </noscript>
+
+    <div id="root"></div>
+
+    <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+  </body>
+</html>
