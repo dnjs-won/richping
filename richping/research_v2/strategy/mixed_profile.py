@@ -73,7 +73,7 @@ def _reference(role, timeframe, profile, basis, vintage, source, known, input_ha
             "state_hash": state_hash, "status": status}
 
 
-def join_as_of(daily, intraday, as_of, *, published=None, m15_measurements=None, h1_cache=None):
+def join_as_of(daily, intraday, as_of, *, published=None, m15_measurements=None, h1_cache=None, return_states=False, daily_cache=None):
     """Resolve each role independently from one immutable pair of vintages.
 
     published is supplied by atomic_intraday_batches, never a strategy partial
@@ -109,8 +109,25 @@ def join_as_of(daily, intraday, as_of, *, published=None, m15_measurements=None,
             raise ValueError("Modified aggregate source identity")
     context = ReplayContext(instant, bars)  # Extended only, never concatenated Daily.
     resolution = prepare_daily(daily, instant)
-    trend = classify_daily_trend(resolution.prefix, instant)
-    exhaustion = classify_daily_exhaustion(resolution.prefix, instant)
+    # The authoritative selector/transform still runs at every atomic as_of.
+    # Cache only identical prepared causal inputs, never an older fresh state
+    # across an expected-session change or an availability/evidence failure.
+    p = resolution.prefix
+    daily_key = (p.symbol, p.bars, p.expected_session, p.source_vintage,
+                 p.transform_known_at, p.transform_effective_at, p.input_status,
+                 p.input_reason, p.session_profile, p.price_basis)
+    cached_daily = daily_cache.get(daily_key) if daily_cache is not None else None
+    if cached_daily is None:
+        trend = classify_daily_trend(p, instant)
+        exhaustion = classify_daily_exhaustion(p, instant)
+        if daily_cache is not None:
+            daily_cache.clear()
+            daily_cache[daily_key] = trend, exhaustion
+    else:
+        trend = replace(cached_daily[0], as_of=instant)
+        exhaustion = replace(cached_daily[1], as_of=instant,
+            macd_feature=replace(cached_daily[1].macd_feature, as_of=instant) if cached_daily[1].macd_feature else None,
+            percentile_feature=replace(cached_daily[1].percentile_feature, as_of=instant) if cached_daily[1].percentile_feature else None)
     references = []
     for role, state, version, rule_hash in (
         ("DAILY_TREND_PERMISSION", trend, trend.rule_version, trend.rule_hash),
@@ -172,7 +189,7 @@ def join_as_of(daily, intraday, as_of, *, published=None, m15_measurements=None,
             "constituent_state_hash": digest(references),
             "publication": "atomic_known_at_batch_v1", "concatenated_stream": False,
             "ENTRY_CANDIDATE": None, "entry_outcome": "NOT_EVALUATED", "profitability": "NOT_RUN"}
-    return body
+    return (body, trend, exhaustion, h1, m15) if return_states else body
 
 
 def mixed_proof(daily, intraday):

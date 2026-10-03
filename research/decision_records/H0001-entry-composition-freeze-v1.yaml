@@ -1,0 +1,150 @@
+schema_version: h0001_entry_composition_freeze_v1
+record_id: H0001-ENTRY-COMPOSITION-FREEZE-v1
+status: FROZEN_BEFORE_ACTUAL_CANDIDATE_REPLAY
+decision_date: '2026-10-03'
+basis_commit: 1c661d85f4da869c34945da203f29143c2556428
+author: AI_PM_under_explicit_user_delegation
+contract:
+  version: H0001_INITIAL_ENTRY_COMPOSER_V1
+  semantics:
+    gates: READY_BULLISH_Daily_AND_READY_NORMAL_exhaustion_AND_ACTIVE_H1_AND_READY_TRUE_M15_AND_explicit_FLAT_AND_unconsumed_episode
+    order: atomic_publication_Daily_H1_raw_lifetime_M15_position_consumption_evaluation_immutable_emission
+    episode: reuse_LIFETIME_episode_id_digest_symbol_activation_raw_hash_activation_as_of_lifetime_hash
+    consumption: first_candidate_consumes_initial_right_only_refresh_does_not_reset
+    new_episode: expiry_cancellation_continuity_origin_loss_then_new_completed_H1_extreme_activation
+    position: explicit_versioned_provenance_hash_missing_UNAVAILABLE_FLAT_OPEN_UNAVAILABLE_no_candidate_to_OPEN
+    research_mode: admission_for_opportunity_only_forbidden_for_execution_portfolio_evaluation
+    timing: SAME_ATOMIC_BATCH_latest_expected_completed_only_no_partial_poll_correction_or_deferred_emission
+    identity: digest_symbol_type_as_of_end_Daily_refs_episode_ref_trigger_ref_position_ref_spec_composer_causal_hash
+    store: immutable_canonical_JSON_same_identity_different_payload_collision
+    resolved: initial_entry_candidate_lifecycle_only
+    unresolved: actual_position_open_add_exit_reentry_execution_stop_trailing_sizing_fill_cost
+    outcomes: NOT_RUN
+  sources:
+    trend: 61bb9108c33f1fcd131a384bcf63202e9c52c5dc0e34815a26f840a7e89f1025
+    exhaustion: 3129a3d8a6a2133e2b006ed31c02c6724a5848fa2d9eae60178910504fb30753
+    h1_raw: bff5b6767b0348ec0b79356264f61b6608990fc9336b8ca3ae4c2e6664297261
+    h1_lifetime: f86cf01d714f256ec1c88250b1634fb95aff22e8bf9ebb57eb94e0cf9bd5d07b
+    m15: 8c7c99035683423f62213e98d029af55ef31a76737b31902147a249407691c98
+  position_version: RESEARCH_ENTRY_POSITION_EVIDENCE_V1
+  position_mode: CANDIDATE_ONLY_FLAT_RESEARCH_MODE_V1
+  episode_version: H0001_INITIAL_ENTRY_EPISODE_IDENTITY_V1
+composer_contract_hash: 7b15d414f023bde698fb89654623abaa24b40f8e6fd83a81e290e59bea9ffca8
+source_LF_sha256:
+  research/decision_records/H0001-daily-input-freeze-v1.yaml: 03577342865ed585bffe07cc39a2feb5ab04aabe19c6a01b41413b26fcad1f2d
+  research/decision_records/H0001-daily-trend-freeze-v1.yaml: ba510bd257444dd61baa0be81072618742203955906cc178bd27a11d8dc2baae
+  research/decision_records/H0001-daily-trend-readiness-remediation-v1.yaml: 3f6345b9a6706e10bd74e2e78221630ed8ee124599dfc5c5b9759865972655f3
+  research/decision_records/H0001-daily-blocker-freeze-v1.yaml: 546174ded467c7e2d22ba44c93543861f82dd2ae5c7bca1782960761818eb98d
+  research/decision_records/H0001-1h-relative-setup-freeze-v1.yaml: f0866743c6e4d5f99924ed6a8a75e69d7e539ccc8912d977426db5b270ae024c
+  research/decision_records/H0001-15m-entry-freeze-v1.yaml: 147745ca450edd1318a90a496aa3c5e908c8b3981b9d7788df06d517097e0569
+  research/decision_records/H0001-action-unit-interpretation-audit-v1.yaml: bede2224e3c17c9e9d2bf6be7f7ee4aae2da58cd2288f8828fbbb79a6e7b39e4
+  richping/research_v2/strategy/daily_trend.py: ef197f50a4adb0f06563dc8279b0a19e0187bfb9dd1c20f9ca68fa22e22747e5
+  richping/research_v2/strategy/daily_exhaustion.py: e3ed6b5e28a5697c62aa91722b9ccb2f6289d956f78c6b827cd625db8ed49b5a
+  richping/research_v2/strategy/h1_setup.py: 0a2eac470746042e7956056a4d215c3ae89fa9c5ec5fa6bdc8e87932efde382d
+  richping/research_v2/strategy/entry_15m.py: 2eebd923127e18f60ef59bf098bd2e2244d1b72ab2cf8a901d417c14292212bd
+position_evidence:
+  states:
+  - FLAT
+  - OPEN
+  - UNAVAILABLE
+  missing: UNAVAILABLE
+  mode: CANDIDATE_ONLY_FLAT_RESEARCH_MODE_V1
+  version: RESEARCH_ENTRY_POSITION_EVIDENCE_V1
+  meaning: explicit fixed-dataset research admission; no actual portfolio claim or
+    automatic OPEN; forbidden for execution/portfolio evaluation
+episode_identity:
+  version: H0001_INITIAL_ENTRY_EPISODE_IDENTITY_V1
+  definition: reuse frozen H1SetupEpisode.episode_id
+  hash_inputs:
+  - symbol
+  - activation raw.hash
+  - activation as_of
+  - frozen lifetime hash
+  refresh: same episode ID; never clears consumed
+  new: terminated episode then new completed extreme activation
+H1_STATE_TRANSITIONS:
+  overall: PARTIALLY_RESOLVED
+  initial_entry_candidate: RESOLVED
+  actual_position_open: UNRESOLVED
+  add: UNRESOLVED
+  exit: UNRESOLVED
+  reentry: UNRESOLVED
+  execution: UNRESOLVED
+specification:
+  old_version: h0001_r03_spec_v12
+  old_hash: 5b20148fb77c6a7890a02219ece7348a997d731e5e9faa508c014243c72a4685
+  new_version: h0001_r03_spec_v13
+  new_hash: bf8134733bacee17542240e53a8ec30223c1550b5bedbaa6d3994ba1444acc19
+  unresolved_paths: 84
+  unresolved_inventory:
+    C1_IMPLEMENTATION_BLOCKER:
+    - H1-ADD-POLICY
+    - H1-DEAD-CROSS
+    - H1-DEEPER-EXTREME
+    - H1-EXIT-CONVENTIONS
+    - H1-EXIT-LOOKBACK
+    - H1-EXIT-RELATIVE
+    - H1-FAILED-REVERSAL
+    - H1-GC-ROLE
+    - H1-HISTOGRAM
+    - H1-HL-BREAK
+    - H1-LH
+    - H1-MACD-SLOPE
+    - H1-MAX-ADDS
+    - H1-MAX-HOLDING
+    - H1-NEW-HH-RESET
+    - H1-OVERNIGHT
+    - H1-REFERENCE-HH
+    - H1-SIGNAL-SLOPE
+    - H1-STATE-TRANSITIONS
+    - H1-STOP-LOSS
+    - H1-STRONG-WATCH
+    - H1-SWING-DETECTOR
+    - H1-SWING-PARAMETERS
+    - H1-TRAILING
+    - H1-UPPER-COMPARATOR
+    - H1-UPPER-EXTREME
+    - H1-VALID-HL
+    - H1-WATCH-CONFIRMATION
+    - H1-WEAK-WATCH
+    PERFORMANCE_EXPERIMENT_BLOCKER:
+    - H1-BASELINE
+    - H1-CHART-1H
+    - H1-CHART-EMA
+    - H1-CHART-PROVIDER
+    - H1-CHART-VERIFICATION
+    - H1-CONFIRMATORY
+    - H1-COSTS
+    - H1-DECISION-RULE
+    - H1-DISCOVERY
+    - H1-EXPOSURE
+    - H1-FILL
+    - H1-MULTIPLE-TESTING
+    - H1-ORDER-TIMING
+    - H1-PRIMARY-METRIC
+    - H1-SAMPLE-UNIT
+    - H1-SIZING
+    - H1-UNIVERSE
+    OPTIONAL_FUTURE_EXTENSION:
+    - H1-4H
+    - H1-FINE-EXECUTION
+    - H1-LAG-STUDY
+    - H1-OPTIONS
+    - H1-SHORT
+    - H1-VOLUME-PA
+    - H1-WEEKLY-MONTHLY
+fixed_inputs:
+  daily: soxx-yahoo-rth-daily-pit-20261003-v2
+  intraday: soxx-yahoo-15m-20261003-v1
+explicit_non_claims:
+- order
+- fill
+- position
+- trade
+- profitability
+- full_C1
+- live_PIT
+- main_integration
+outcomes_queried: false
+performance_information_used: NONE
+evaluation_protocol: UNRESOLVED_REQUIRED_BEFORE_OUTCOMES

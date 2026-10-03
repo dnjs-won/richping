@@ -1,3 +1,17 @@
+# Richping V2 - 2026-10-03 initial-entry composition
+
+**COMPLETE initial-entry composition: FROZEN / IMPLEMENTED / EXECUTED_ON_REAL_DATA / EVIDENCE_PRODUCED. No main code integration or outcomes.**
+
+- Branch `v2-h0001-entry-composition`, based on `1c661d8`.
+- Immutable contract `H0001-entry-composition-freeze-v1.yaml` saved before actual replay; executable v12 -> v13. Frozen Daily/1H/15m sources are unchanged.
+- Candidate consumes only the current 1H episode's initial-entry right. Refresh retains consumption; termination then new completed extreme activation starts a new right. No position OPEN, order, fill, ADD, exit or re-entry is inferred.
+- Explicit `RESEARCH_ENTRY_POSITION_EVIDENCE_V1` / `CANDIDATE_ONLY_FLAT_RESEARCH_MODE_V1`; missing evidence is UNAVAILABLE; actual execution/portfolio reuse forbidden.
+- Two independent network-disabled real replays identical: 2624 batches, joint READY829, candidates0; timestamps []. Event stream hash `f794a31903da1a110497b4badd58ffdc4bf0e3ce6cf7ec089c68597e6e781d46`. H1 READY208 completed hourly publications, downside extremes0; no ACTIVE episode or eligible 15m arm. ZERO_SIGNAL is a valid signal-generation result, not efficacy or profitability.
+- All1346 tests passed in two disjoint partitions, new55; no failures/errors/skips. Frozen-source hashes and existing join stream preserved. Phase exit5 COMPLETE (valid deterministic empty stream); exit6 remains open. Next PM action `H0001_ENTRY_EFFICACY_PREREGISTRATION` before any outcomes.
+- See `docs/H0001_ENTRY_COMPOSITION.md` and `research/data_evidence/h0001-entry-composition-20261003/`.
+
+The entries below are preserved historical status reports.
+
 # Richping V2 - 2026-10-03 action/unit remediation
 
 **COMPLETE for the historical action/unit P0 and Daily/mixed-profile prerequisite. IMPLEMENTED / EXECUTED_ON_REAL_DATA / EVIDENCE_PRODUCED, not main integrated.**

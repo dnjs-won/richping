@@ -230,7 +230,8 @@ def test_network_disabled_immutable_fixture_store_reload(tmp_path):
 
 def test_exact_nine_root_spec_delta_inventory_and_remaining_owners():
     before = H0001Specification.loads(subprocess.check_output(['git', 'show', '8f0611f:'+SPEC], cwd=ROOT).decode())
-    after = H0001Specification.load(ROOT/SPEC)
+    # Historical v12 delta; v13 composition has a separate exact scope test.
+    after = H0001Specification.loads(subprocess.check_output(['git', 'show', 'ffabeaf9:'+SPEC], cwd=ROOT).decode())
     removed = set(before.unresolved_fields) - set(after.unresolved_fields)
     assert removed == {f'{s}.{k}' for s,k in frozen_values()}
     assert len(removed) == 9 and len(after.unresolved_fields) == 80
@@ -273,7 +274,7 @@ def test_immutable_freeze_record_matches_executable_and_offline_evidence():
     record = yaml.safe_load((ROOT/'research/decision_records/H0001-15m-entry-freeze-v1.yaml').read_text(encoding='utf-8'))
     prereg = yaml.safe_load((ROOT/record['preregistration']['path']).read_text(encoding='utf-8'))
     evidence = json.loads((ROOT/record['mechanical_evidence']['path']).read_text(encoding='utf-8'))
-    spec = H0001Specification.load(ROOT/SPEC)
+    spec = H0001Specification.loads(subprocess.check_output(['git', 'show', 'ffabeaf9:'+SPEC], cwd=ROOT).decode())
     assert spec.specification_hash == record['executable_spec']['canonical_sha256']
     assert record['selected_primary'] == prereg['primary']
     assert record['definition']['hash'] == evidence['counts']['contract_hash'] == contract_hash()

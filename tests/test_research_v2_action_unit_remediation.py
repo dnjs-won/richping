@@ -6,6 +6,7 @@ from dataclasses import replace
 from datetime import timedelta
 from hashlib import sha256
 import json
+import subprocess
 from pathlib import Path
 
 import pytest
@@ -50,7 +51,11 @@ def test_frozen_semantics_do_not_freeze_per_asof_negative_receipts():
     assert audit["frozen_decisions_changed"] is False
     assert audit["negative_receipt_requirement"]["explicitly_frozen"] is False
     for p, expected in audit["frozen_file_sha256_LF_normalized"].items():
-        assert sha256((ROOT / p).read_bytes().replace(b"\r\n", b"\n")).hexdigest() == expected
+        # v12 spec is historical evidence; current v13 preserves all primitive
+        # roots under the composition revision's separate exact-delta proof.
+        raw = (subprocess.check_output(["git", "show", "1c661d8:" + p], cwd=ROOT)
+               if p == "research/strategy_specs/H0001-r03-draft.yaml" else (ROOT / p).read_bytes())
+        assert sha256(raw.replace(b"\r\n", b"\n")).hexdigest() == expected
 
 
 def test_real_no_event_admitted_without_backdating_or_relabelling(real):

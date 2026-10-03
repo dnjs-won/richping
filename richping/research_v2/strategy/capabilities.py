@@ -111,8 +111,8 @@ def require_current_engine(value):
         if method in {"ROLLING_PERCENTILE", "ROLLING_ZSCORE"}:
             cls = PercentileSpec if method == "ROLLING_PERCENTILE" else ZScoreSpec
             extra = ("field", "macd_line_lt_zero") if (
-                value["specification_version"] in {"h0001_r03_spec_v11", "h0001_r03_spec_v12"} and prefix == "setup_1h") else ("field",)
-            if value["specification_version"] == "h0001_r03_spec_v12" and prefix == "entry_15m":
+                value["specification_version"] in {"h0001_r03_spec_v11", "h0001_r03_spec_v12", "h0001_r03_spec_v13"} and prefix == "setup_1h") else ("field",)
+            if value["specification_version"] in {"h0001_r03_spec_v12", "h0001_r03_spec_v13"} and prefix == "entry_15m":
                 extra = ("field", "macd_line_lt_zero", "first_READY_N", "session_profile",
                          "history_origin", "unavailable", "known_at")
             params = _primitive(convention, cls, where, extra=extra)

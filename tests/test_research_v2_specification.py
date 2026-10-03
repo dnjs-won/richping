@@ -131,8 +131,8 @@ def compatible_features_fixture(value, method="ROLLING_PERCENTILE"):
     for prefix in ("setup_1h", "entry_15m", "exit_1h"):
         # Current v11 owns its frozen setup tuple; admission fixtures may only
         # supply the other unresolved feature contracts.
-        if ((prefix == "setup_1h" and value["specification_version"] in {"h0001_r03_spec_v11", "h0001_r03_spec_v12"})
-                or (prefix == "entry_15m" and value["specification_version"] == "h0001_r03_spec_v12")):
+        if ((prefix == "setup_1h" and value["specification_version"] in {"h0001_r03_spec_v11", "h0001_r03_spec_v12", "h0001_r03_spec_v13"})
+                or (prefix == "entry_15m" and value["specification_version"] in {"h0001_r03_spec_v12", "h0001_r03_spec_v13"})):
             continue
         value["rule_parameters"][prefix + "_relative_transform"]["value"] = method
         convention = {

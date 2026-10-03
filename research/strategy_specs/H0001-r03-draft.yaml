@@ -1,5 +1,7 @@
 # 15m FREEZE: research/decision_records/H0001-15m-entry-freeze-v1.yaml.
-# Only nine entry/timing roots resolved; unrelated decisions remain UNRESOLVED.
+# v13 adds only initial-entry composition under partially unresolved global state.
+# The nine v12 entry/timing roots and all upstream freezes remain unchanged.
+# Composition: research/decision_records/H0001-entry-composition-freeze-v1.yaml.
 # 1H setup provenance: research/decision_records/H0001-1h-relative-setup-freeze-v1.yaml.
 # Blocker provenance: research/decision_records/H0001-daily-blocker-freeze-v1.yaml.
 # Executable-spec draft, NOT a strategy implementation or complete strategy freeze.
@@ -10,12 +12,12 @@
 # Readiness remediation: research/decision_records/H0001-daily-trend-readiness-remediation-v1.yaml.
 schema_version: strategy_specification_v1
 strategy_id: H0001
-specification_version: h0001_r03_spec_v12
+specification_version: h0001_r03_spec_v13
 hypothesis_id: H0001
 hypothesis_revision: 3
 status: DRAFT
 created_at: '2026-09-27T00:00:00Z'
-updated_at: '2026-10-03T04:00:00Z'
+updated_at: '2026-10-03T00:00:00+00:00'
 source:
   path: research/hypotheses/H0001-r03.yaml
   sha256: 35e13276056a36d6a06de04611720fd286113f0e5db1e4255af6ceeb6a0f0bc2
@@ -1392,10 +1394,108 @@ state_machine_parameters:
     choices: []
     decision_id: H1-DECISION-TIMING
   transition_priority_and_resets:
-    kind: contract
-    value: UNRESOLVED
     choices: []
     decision_id: H1-STATE-TRANSITIONS
+    kind: contract
+    value:
+      name: h0001_initial_entry_composer
+      parameters:
+        actual_position_open:
+          choices: []
+          decision_id: H1-STATE-TRANSITIONS
+          kind: contract
+          value: UNRESOLVED
+        add:
+          choices: []
+          decision_id: H1-STATE-TRANSITIONS
+          kind: contract
+          value: UNRESOLVED
+        composer_hash:
+          choices: []
+          decision_id: null
+          kind: text
+          value: 7b15d414f023bde698fb89654623abaa24b40f8e6fd83a81e290e59bea9ffca8
+        consumption:
+          choices: []
+          decision_id: null
+          kind: text
+          value: first_candidate_consumes_initial_right_only_refresh_does_not_reset
+        episode:
+          choices: []
+          decision_id: null
+          kind: text
+          value: reuse_LIFETIME_episode_id_digest_symbol_activation_raw_hash_activation_as_of_lifetime_hash
+        execution:
+          choices: []
+          decision_id: H1-STATE-TRANSITIONS
+          kind: contract
+          value: UNRESOLVED
+        exit:
+          choices: []
+          decision_id: H1-STATE-TRANSITIONS
+          kind: contract
+          value: UNRESOLVED
+        gates:
+          choices: []
+          decision_id: null
+          kind: text
+          value: READY_BULLISH_Daily_AND_READY_NORMAL_exhaustion_AND_ACTIVE_H1_AND_READY_TRUE_M15_AND_explicit_FLAT_AND_unconsumed_episode
+        identity:
+          choices: []
+          decision_id: null
+          kind: text
+          value: digest_symbol_type_as_of_end_Daily_refs_episode_ref_trigger_ref_position_ref_spec_composer_causal_hash
+        new_episode:
+          choices: []
+          decision_id: null
+          kind: text
+          value: expiry_cancellation_continuity_origin_loss_then_new_completed_H1_extreme_activation
+        order:
+          choices: []
+          decision_id: null
+          kind: text
+          value: atomic_publication_Daily_H1_raw_lifetime_M15_position_consumption_evaluation_immutable_emission
+        outcomes:
+          choices: []
+          decision_id: null
+          kind: text
+          value: NOT_RUN
+        position:
+          choices: []
+          decision_id: null
+          kind: text
+          value: explicit_versioned_provenance_hash_missing_UNAVAILABLE_FLAT_OPEN_UNAVAILABLE_no_candidate_to_OPEN
+        reentry:
+          choices: []
+          decision_id: H1-STATE-TRANSITIONS
+          kind: contract
+          value: UNRESOLVED
+        research_mode:
+          choices: []
+          decision_id: null
+          kind: text
+          value: admission_for_opportunity_only_forbidden_for_execution_portfolio_evaluation
+        resolved:
+          choices: []
+          decision_id: null
+          kind: text
+          value: initial_entry_candidate_lifecycle_only
+        store:
+          choices: []
+          decision_id: null
+          kind: text
+          value: immutable_canonical_JSON_same_identity_different_payload_collision
+        timing:
+          choices: []
+          decision_id: null
+          kind: text
+          value: SAME_ATOMIC_BATCH_latest_expected_completed_only_no_partial_poll_correction_or_deferred_emission
+        unresolved:
+          choices: []
+          decision_id: null
+          kind: text
+          value: actual_position_open_add_exit_reentry_execution_stop_trailing_sizing_fill_cost
+      version: v1
   initial_state:
     kind: contract
     value: UNRESOLVED
