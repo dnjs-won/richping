@@ -79,3 +79,28 @@ discovery cohort. No provider migration is performed in this action. More histor
 does not guarantee candidates or inference. Historical expansion remains discovery;
 the fixed future confirmation boundary, evidence floors and stopping rule stay
 frozen. Existing interval action/unit certification must not carry forward.
+
+## Independent disposition audit
+
+Latest main `bea46d6` already records the official ZERO_SIGNAL disposition.
+The follow-up `v2-h0001-efficacy-disposition-audit` branch preserves that
+implementation, manifest and all original evidence bytes. It re-executes the
+frozen evaluator twice and independently checks event count/timestamps, fixed
+dataset identities against composition proof metadata and the committed report.
+Both canonical report hashes remain
+`17f961b6b6f8950399c0f37ff5be69f2a241f09afa021b2264b2d901ef7b168f`.
+
+`scripts.h0001_efficacy_disposition_audit` adds explicit guards and counters for
+the existing outcome/return/MFE/MAE calculator, price-window accessor (including
+SOXX controls and other benchmarks), dataset loaders and statistics functions.
+All attempts abort before access/calculation. The actual empty-stream audit
+records evaluated outcomes0, outcome queries0, benchmark queries0, return and
+MFE/MAE calculations0, null metrics and null uncertainty. The metadata-only
+read test also excludes all raw price, action and outcome files.
+
+New append-only evidence lives in
+`research/data_evidence/h0001-entry-efficacy-audit-20261003/`; it does not
+replace the original disposition or protocol. This is revalidation of committed
+real signal evidence, not new market-data execution or an efficacy estimate.
+Phase exit6 remains incomplete and the sole NEXT_ACTION remains
+`LONG_HISTORY_PROVIDER_AND_VOLUME_EVIDENCE`. No provider migration occurs.

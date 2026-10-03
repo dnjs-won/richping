@@ -1,3 +1,17 @@
+# Richping V2 - 2026-10-03 independent ZERO_SIGNAL disposition audit
+
+**COMPLETE independent revalidation; original efficacy execution/evidence preserved. Informative efficacy remains unavailable and profitability NOT_RUN.**
+
+- Latest main bea46d6 already records H0001_FIRST_ENTRY_EFFICACY complete at fbef043; canonical NEXT_ACTION is LONG_HISTORY_PROVIDER_AND_VOLUME_EVIDENCE. User-requested disposition revalidation did not reset PM state or re-open strategy decisions.
+- Branch v2-h0001-efficacy-disposition-audit, based on fbef043.
+- Frozen evaluator executed twice; independently parsed current candidate stream0/timestamps[] and cross-checked fixed dataset ID/hash with composition smoke. Both report hashes17f961b6b6f8950399c0f37ff5be69f2a241f09afa021b2264b2d901ef7b168f match the original official report.
+- Explicit outcome/benchmark/return/MFE/MAE/statistics callable guards and metadata-only file reads: all actual calls0; evaluated labels0; metrics and uncertainty null. Original frozen records/spec/composer/evaluator and all previous evidence bytes unchanged.
+- Protocol074255189630fa625c4d40eb2f344fb7767d2c8f305f22c9e4c2a608e93e944c; spec v13/bf8134733bacee17542240e53a8ec30223c1550b5bedbaa6d3994ba1444acc19; streamf794a31903da1a110497b4badd58ffdc4bf0e3ce6cf7ec089c68597e6e781d46 unchanged.
+- New evidence research/data_evidence/h0001-entry-efficacy-audit-20261003/ is supplemental revalidation of committed real signal metadata, not a new market replay or economic effect estimate.
+- Full1388 tests passed/new9, no failures/errors/skips. Targeted29 passed. Phase exit6 remains incomplete; the sole next P0 is longer-history access/coverage/action-unit admission. No provider migration, outcome access or future confirmation reclassification.
+
+The entries below are preserved historical status reports.
+
 # Richping V2 - 2026-10-03 fixed-stream initial-entry disposition
 
 **COMPLETE fixed-current-stream action: IMPLEMENTED / EXECUTED_ZERO_SIGNAL / EVIDENCE_PRODUCED. Informative efficacy remains unavailable; profitability NOT_RUN.**
