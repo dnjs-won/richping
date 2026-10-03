@@ -1,0 +1,17 @@
+{
+  "schema_version": "h0001_daily_pit_tests_v1",
+  "new_contract_tests": 58,
+  "full_suite": {
+    "command": "C:/richping/.venv/Scripts/python -m pytest -q",
+    "worktree": "v2-h0001-daily-pit-join",
+    "passed": 1260,
+    "failed": 0,
+    "skipped": 0,
+    "elapsed_seconds": 434.61
+  },
+  "generic_strategy_import_boundary": "PASSED_AFTER_LAYER_PLACEMENT_FIX",
+  "fixture_split_readiness_and_delivery_tests": "CONTRACT_EVIDENCE_NOT_ACTUAL_HISTORICAL_PROVIDER_PIT",
+  "real_saved_data_evidence": "daily-readiness.json and mixed-profile-join-proof.json",
+  "profitability": "NOT_RUN",
+  "entry_outcome": "NOT_EVALUATED"
+}

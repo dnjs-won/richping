@@ -29,6 +29,7 @@ def add_parser(sub):
     for name in ("inspect", "proof"):
         inspect = actions.add_parser(name)
         inspect.add_argument("dataset_id")
+    return actions
 
 
 def offline_proof(dataset):

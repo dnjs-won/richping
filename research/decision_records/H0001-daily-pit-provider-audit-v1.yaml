@@ -1,0 +1,106 @@
+schema_version: h0001_daily_pit_provider_audit_v1
+record_id: H0001-DAILY-PIT-PROVIDER-AUDIT-v1
+recorded_at: '2026-10-03'
+status: BLOCKED_REAL_HISTORICAL_PIT_EVIDENCE
+branch: v2-h0001-daily-pit-join
+basis_commit: ffabeaf9faf872314336784b5c9c8c14522010c2
+strategy_decision_changed: false
+frozen_strategy_records_reopened: false
+profitability: NOT_RUN
+entry_outcome: NOT_EVALUATED
+implementation:
+  Daily_immutable_ingestion: IMPLEMENTED_AND_EXECUTED_ON_REAL_DATA
+  PIT_transform: IMPLEMENTED_AND_FIXTURE_VERIFIED_REAL_INPUT_ADMISSION_BLOCKED
+  freshness_selector: IMPLEMENTED_AND_OFFICIAL_CALENDAR_BOUNDARIES_VERIFIED
+  mixed_profile_join: IMPLEMENTED_REAL_OFFLINE_EXECUTION_RETAINS_DAILY_UNAVAILABLE
+  full_H0001_composer: NOT_IMPLEMENTED
+actual_Daily:
+  dataset_id: soxx-yahoo-rth-daily-20261003-v1
+  hash: 0312ed5c2ffef702e9ee1d185ff789b05221a4aa07f7f49ca5b56215b695371d
+  provider: yahoo_chart
+  range: ['2024-10-04', '2026-10-02']
+  sessions: 500
+  missing_sessions: 0
+  raw_unit_status: UNVERIFIED
+  source_price_basis: YAHOO_CURRENT_SPLIT_NORMALIZED_OHLC_NOT_CERTIFIED_AS_TRADED
+  derived_PIT_basis: NOT_ADMITTED
+  price_known_at_policy: HISTORICAL_RESEARCH_BAR_END_AVAILABILITY_ASSUMPTION_V1
+  actual_provider_latency_measured: false
+  actual_eligible_observations: 0
+  actual_trend_READY: 0
+  actual_exhaustion_READY: 0
+  actual_joint_READY: 0
+  numeric_diagnostics_only:
+    trend_N179_session: '2025-06-24'
+    exhaustion_N381_session: '2026-04-14'
+    joint_numeric_warmup_observations: 120
+    eligible_READY_claim: false
+split_free_route:
+  preferred_and_examined_first: true
+  origin_after_last_observed_effective_split: true
+  current_Yahoo_table_split_in_selected_interval: false
+  required_negative_action_evidence:
+    frozen_PIT_required_evidence_unavailable_means_UNAVAILABLE: true
+    PreparedDailyPrefix_requires_no_relevant_action_known_at: true
+    current_empty_table_backdating: FORBIDDEN
+  frozen_compatibility: NOT_PROVEN
+actual_action_source:
+  Yahoo_full_history_query: ['2001-07-10', '2026-10-02']
+  observed_split:
+    trading_ex_date: '2024-03-07'
+    new_shares: 3
+    old_shares: 1
+    known_at: ACTUAL_CURRENT_CAPTURE_RECEIPT_ONLY
+    historical_availability: UNVERIFIED
+  issuer_future_notice:
+    claimed_filed_date: '2026-08-21'
+    trading_ex_date: '2026-11-05'
+    applied_in_current_overlap: false
+    ratio_in_notice: NOT_VERIFIED
+  Alpaca:
+    current_endpoint: https://data.alpaca.markets/v1/corporate-actions
+    actual_SOXX_request_http_status: 401
+    credentials_available_in_environment: false
+    authenticated_payload_verified: false
+    process_date_as_known_at: NOT_ACCEPTED_WITHOUT_ACTUAL_AVAILABILITY_AND_REVISION_AUDIT
+    declaration_date_as_known_at: FORBIDDEN_AUTOMATIC_BACKDATE
+    actual_revision_history: UNVERIFIED
+    actual_historical_coverage: UNVERIFIED
+  import_contract: richping/research_v2/daily_data.py
+remaining_acceptance:
+  - At least 381 actual eligible PIT Daily observations, rather than only captured prices.
+  - Actual causal READY N179/N381 boundaries and joint READY on admitted real data.
+  - Actual historical action/no-action evidence and raw OHLC share units.
+  - At least one real overlap evaluation with all upstream roles causally usable.
+blocker:
+  id: H0001_HISTORICAL_ACTION_AVAILABILITY_AND_RAW_UNIT_EVIDENCE
+  priority: P0
+  blocks_phase_exit_criteria: [4, 5, 6]
+  missing: Audited action receipt/availability and revisions plus complete negative-action coverage and exact raw OHLC unit evidence.
+  forbidden_workaround: Current provider split-free knowledge cannot be backdated into past as_of; uncertain snapshot OHLC cannot silently be declared raw/PIT.
+  smallest_resolution: Obtain evidence for this 500-session interval, import a new immutable vintage, rerun existing offline proofs; audit actual API payload even if credentials become available.
+  no_strategy_reopen_without_registered_authority: true
+evidence:
+  contract: docs/H0001_DAILY_PIT_AND_MIXED_PROFILE.md
+  artifacts: research/data_evidence/h0001-daily-pit-20261003/
+  tests: tests/test_research_v2_daily_pit.py
+  actual_provider_smoke: scripts/h0001_daily_action_audit.py
+  offline_repeat: scripts/h0001_daily_offline_proof.py
+offline_execution:
+  intraday_batches: 2624
+  H1_raw_READY: 829
+  H1_raw_UNAVAILABLE: 1795
+  M15_primitive_READY: 2304
+  M15_primitive_UNAVAILABLE: 320
+  Daily_unavailable_join_evaluations: 2624
+  joint_READY_evaluations: 0
+  repeated_network_disabled_results_equal: true
+  portable_capture_reimport_equal: true
+  uncached_sample_joins_equal: true
+  join_stream_hash: 98bc674c9da861073363d32a77ad7b07085381c4b3b3e010bf41dd466fcbb506
+validation:
+  new_contract_tests: 58
+  full_suite_passed: 1260
+  failures: 0
+  skips: 0
+  seconds: 434.61

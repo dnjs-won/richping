@@ -54,7 +54,8 @@ def parser():
     p.add_argument("--config", default="config.toml")
     sub = p.add_subparsers(dest="command", required=True)
     from .research_v2.data_cli import add_parser
-    add_parser(sub)
+    from .research_v2.strategy.daily_cli import add_actions
+    add_actions(add_parser(sub))
     sub.add_parser("demo", help="Deterministic synthetic recommendation -> outcome replay")
     sync = sub.add_parser("sync", help="Incrementally fetch completed daily Yahoo bars")
     sync.add_argument("--start", default=None)
@@ -239,7 +240,10 @@ def _run_r1_command(args, config):
 def main(argv=None):
     args = parser().parse_args(argv)
     if args.command == "research-v2-data":
-        from .research_v2.data_cli import run
+        if args.data_action.startswith("daily-") or args.data_action == "mixed-proof":
+            from .research_v2.strategy.daily_cli import run
+        else:
+            from .research_v2.data_cli import run
         try:
             return run(args)
         except Exception as exc:

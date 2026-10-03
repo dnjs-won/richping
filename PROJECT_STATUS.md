@@ -1,3 +1,43 @@
+# Richping V2 - 2026-10-03 Daily PIT / mixed-profile prerequisites
+
+**BLOCKED on real historical PIT evidence. IMPLEMENTED runtime and real Daily capture;
+not COMPLETE, not full H0001 composition, not main integrated.**
+
+- Branch `v2-h0001-daily-pit-join`, based on 15m freeze `ffabeaf`.
+- Real immutable SOXX Yahoo RTH Daily: 2024-10-04 through 2026-10-02,
+  500 contiguous XNYS sessions, no missing sessions.
+  Dataset `soxx-yahoo-rth-daily-20261003-v1`, hash
+  `0312ed5c2ffef702e9ee1d185ff789b05221a4aa07f7f49ca5b56215b695371d`.
+- Daily selector uses actual official closes, including early close; delayed or
+  absent expected Daily is UNAVAILABLE. No prior Daily fallback.
+- Versioned identity/forward/reverse split transforms and separate Daily/extended
+  1H/15m as-of join implemented. No concatenation, future-known admission or
+  partial atomic publication. All frozen strategy records and v12 unchanged.
+- Actual full Yahoo history returns the 2024-03-07 3:1 split; selected origin is
+  after it. Future issuer notice is effective 2026-11-05 and is not applied.
+- Split-free status observed today does not supply past no-action known_at;
+  current split-normalized Yahoo OHLC cannot silently be certified as raw.
+  Actual Alpaca endpoint smoke returned401; no authenticated payload/revision
+  availability or completeness audit exists in this environment.
+- Actual eligible historical Daily =0, trend READY0/UNAVAILABLE500, exhaustion
+  READY0/UNAVAILABLE500, joint READY0. Numeric-only N179 boundary2025-06-24 and
+  N381 boundary2026-04-14 are separately labelled, never eligible READY claims.
+- Real offline join:2624 atomic batches; twice-identical join stream hash
+  `98bc674c9da861073363d32a77ad7b07085381c4b3b3e010bf41dd466fcbb506`.
+  H1 READY829/UNAVAILABLE1795;15m READY2304/UNAVAILABLE320. Daily UNAVAILABLE
+  throughout; joint READY0. Portable capture reimport and uncached sample joins match.
+- New58 contract tests; full1260 tests passed, no skips/failures,434.61s.
+- Profitability NOT_RUN; entry outcome NOT_EVALUATED; composer not implemented.
+- Main PM NEXT_ACTION: `H0001_HISTORICAL_ACTION_AVAILABILITY_AND_RAW_UNIT_EVIDENCE`
+  P0, phase exits4/5/6 blocked. Obtain actual source receipt/revision and negative
+  action coverage plus raw unit audit, then import a new vintage and rerun proofs.
+  `H0001_ENTRY_EXECUTION_AND_COMPOSITION` remains queued.
+- [Contract and provider audit](docs/H0001_DAILY_PIT_AND_MIXED_PROFILE.md),
+  [immutable audit record](research/decision_records/H0001-daily-pit-provider-audit-v1.yaml),
+  [evidence](research/data_evidence/h0001-daily-pit-20261003/smoke.json).
+
+The entries below are preserved historical status reports.
+
 # Richping V2 — 2026-10-03 H0001 minimal 15m entry freeze
 
 **COMPLETE for H0001_MINIMAL_15M_ENTRY_FREEZE; FROZEN / IMPLEMENTED pure
