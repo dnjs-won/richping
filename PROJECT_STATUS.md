@@ -1,3 +1,19 @@
+# Richping V2 - 2026-10-03 fixed-stream initial-entry disposition
+
+**COMPLETE fixed-current-stream action: IMPLEMENTED / EXECUTED_ZERO_SIGNAL / EVIDENCE_PRODUCED. Informative efficacy remains unavailable; profitability NOT_RUN.**
+
+- Latest main a04cf35 NEXT_ACTION was H0001_FIRST_ENTRY_EFFICACY, after composition bb72239 and preregistration 13f719b; source-of-truth routing followed.
+- Branch v2-h0001-first-entry-efficacy, based on 13f719b; no main code merge.
+- Evaluation manifest sealed before disposition; all23 frozen dependencies plus runner/helper source hashes verified. Two offline dispositions identical; report ID833369c84e614985986c866fb2a8280574681c31f769ca2fee09d253d63a085b, report hash17f961b6b6f8950399c0f37ff5be69f2a241f09afa021b2264b2d901ef7b168f.
+- Candidates0/timestamps[]; ZERO_SIGNAL. All metrics/CI null; every horizon total/complete/pending/unresolved label count0. Controls NOT_EVALUATED, eligible count null; future confirmation NOT_STARTED_NOT_EVALUATED.
+- No new market replay; reuse committed real composition metadata. Network/database/market/action/benchmark/outcome reads0; return calculations0. Nonempty cohorts fail closed pending exact frozen label/control/bootstrap adapter.
+- Signal spec v13/hashbf8134733bacee17542240e53a8ec30223c1550b5bedbaa6d3994ba1444acc19 and all frozen primitives unchanged;84 unresolved paths.
+- Full1379 tests passed/new20; no failures/errors/skips; 465.704s. Hash mutations, no-price-file reads, guards, idempotency/collisions and null-metric disposition covered.
+- Phase exit5 stays COMPLETE_VALID_EMPTY_STREAM; exit6 remains incomplete. Promote LONG_HISTORY_PROVIDER_AND_VOLUME_EVIDENCE to P0 for informative cohort admission; no migration/tuning in this action. All expanded history is discovery; future confirmation126-session boundary remains frozen.
+- Evidence: research/data_evidence/h0001-first-entry-efficacy-20261003/; docs/H0001_FIRST_ENTRY_EFFICACY.md.
+
+The entries below are preserved historical status reports.
+
 # Richping V2 - 2026-10-03 initial-entry efficacy preregistration
 
 **COMPLETE preregistration only: FROZEN / VERIFIED / EVIDENCE_PRODUCED. Efficacy and profitability NOT_RUN.**
