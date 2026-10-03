@@ -5,7 +5,7 @@ purpose: 'Lightweight routing index for AI PM sessions. This file does not repla
   evidence.
 
   '
-default_research_branch: v2-h0001-daily-pit-join
+default_research_branch: v2-h0001-action-unit-remediation
 data_foundation:
   branch: v2-real-intraday-data-foundation
   contract: docs/V2_REAL_INTRADAY_DATA_FOUNDATION.md
@@ -24,7 +24,7 @@ canonical_sources:
     specification_version: h0001_r03_spec_v12
     sha256: 5b20148fb77c6a7890a02219ece7348a997d731e5e9faa508c014243c72a4685
   current_status:
-    branch: v2-h0001-daily-pit-join
+    branch: v2-h0001-action-unit-remediation
     path: PROJECT_STATUS.md
 frozen_major_decisions:
   daily_input:
@@ -71,7 +71,7 @@ frozen_major_decisions:
     - H1-M15-REVERSAL
     - H1-M15-CONJUNCTION
     - H1-DECISION-TIMING
-    full_composition: NOT_IMPLEMENTED_DAILY_PIT_PREREQUISITES_MISSING
+    full_composition: NOT_IMPLEMENTED_PREREQUISITES_COMPLETE_NEXT_ACTION
     profitability: NOT_RUN
 current_open_decision_groups:
 - id: H0001_GLOBAL_STATE_TRANSITIONS
@@ -109,29 +109,34 @@ pm_routing_rule: 'Read the canonical source from its declared branch only when t
 composition_prerequisite:
   id: H0001_DAILY_PIT_AND_MIXED_PROFILE_PREREQUISITES
   priority: P0
-  blocks_phase_exit_criteria:
-  - 4
-  - 5
-  - 6
-  evidence_branch: v2-h0001-daily-pit-join
-  evidence: research/decision_records/H0001-daily-pit-provider-audit-v1.yaml
+  blocks_phase_exit_criteria: []
+  evidence_branch: v2-h0001-action-unit-remediation
+  evidence: research/decision_records/H0001-action-unit-interpretation-audit-v1.yaml
   trend_ready_N: 179
   exhaustion_ready_N: 381
-  current_real_sessions: 41
+  current_real_sessions: 500
   extended_Daily_substitution: FORBIDDEN
-  status: BLOCKED_REAL_HISTORICAL_PIT_EVIDENCE
+  status: COMPLETE_REAL_HISTORICAL_CAUSAL_RESEARCH_EVIDENCE
   captured_Daily_sessions: 500
-  actual_eligible_Daily_observations: 0
-  actual_joint_READY: 0
-  blocking_next_action: H0001_HISTORICAL_ACTION_AVAILABILITY_AND_RAW_UNIT_EVIDENCE
-  implementation_commit: ce6497cdc204fbe420c42c78cbbb6482432390d8
+  actual_eligible_Daily_observations: 500
+  actual_joint_READY: 829
+  implementation_commit: 1c661d85f4da869c34945da203f29143c2556428
 daily_input_implementation:
-  branch: v2-h0001-daily-pit-join
-  record: research/decision_records/H0001-daily-pit-provider-audit-v1.yaml
-  contract: docs/H0001_DAILY_PIT_AND_MIXED_PROFILE.md
-  implementation_status: IMPLEMENTED_REAL_CAPTURED_FROZEN_PIT_ADMISSION_BLOCKED
-  actual_source_smoke: Alpaca401; Yahoo current split table cross-check only
-  split_free_identity_transform_real_certification: false
+  branch: v2-h0001-action-unit-remediation
+  record: research/decision_records/H0001-action-unit-interpretation-audit-v1.yaml
+  contract: docs/H0001_ACTION_UNIT_REMEDIATION.md
+  implementation_status: COMPLETE_EXECUTED_ON_REAL_DATA_AND_EVIDENCE_PRODUCED_NOT_MAIN_INTEGRATED
+  actual_source_smoke: Official iShares/SEC + Yahoo full split history + Twelve Data split history + all500 Nasdaq
+    OHLC + issuer NAV
+  split_free_identity_transform_real_certification: true
   no_frozen_decisions_changed: true
   profitability: NOT_RUN
-  commit: ce6497cdc204fbe420c42c78cbbb6482432390d8
+  commit: 1c661d85f4da869c34945da203f29143c2556428
+  admission_capability: PIT_SPLIT_ADJUSTED_IDENTITY_INTERVAL_V1
+  historical_live_PIT_claim: false
+frozen_semantic_interpretation_audit:
+  branch: v2-h0001-action-unit-remediation
+  record: research/decision_records/H0001-action-unit-interpretation-audit-v1.yaml
+  negative_receipt_explicitly_frozen: false
+  strategy_decisions_changed: false
+  completeness_capture_is_causal_feature: false

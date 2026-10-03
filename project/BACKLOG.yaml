@@ -27,10 +27,10 @@ items:
 
     '
   guardrail: Do not merge blindly; preserve the newer main R1 paper changes.
-  active_branch: v2-h0001-daily-pit-join
+  active_branch: v2-h0001-action-unit-remediation
   observed_relation_to_main:
-    ahead_by: 30
-    behind_by: 12
+    ahead_by: 31
+    behind_by: 13
 - id: H0001_MINIMAL_15M_ENTRY_FREEZE
   priority: P1
   status: COMPLETE_FROZEN_AND_OFFLINE_MECHANICALLY_EXERCISED
@@ -43,40 +43,49 @@ items:
   evidence: research/decision_records/H0001-15m-entry-freeze-v1.yaml
 - id: H0001_DAILY_PIT_AND_MIXED_PROFILE_PREREQUISITES
   priority: P0
-  status: BLOCKED_REAL_HISTORICAL_PIT_EVIDENCE
+  status: COMPLETE_REAL_HISTORICAL_CAUSAL_RESEARCH_EVIDENCE
   blocks:
   - Daily + 1H + 15m deterministic H0001 entry events and efficacy report
-  summary: Implemented immutable long RTH Daily capture, causal split transform, official freshness and separate-profile
-    join. Captured500 contiguous sessions; actual historical eligible Daily0 because action availability/no-action
-    coverage and raw OHLC units are unverified. Cannot COMPLETE or advance composition.
-  blocks_phase_exit_criteria:
-  - 4
-  - 5
-  - 6
+  summary: 'Admitted SOXX Daily500 eligible; trend READY322/UNAVAILABLE178, exhaustion READY120/UNAVAILABLE380.
+    Actual first READY N179 2025-06-24, N381 2026-04-14. All2624 mixed joins: {''DAILY_EXHAUSTION:READY'': 2624,
+    ''DAILY_TREND_PERMISSION:READY'': 2624, ''H1_RELATIVE_SETUP_RAW:READY'': 829, ''H1_RELATIVE_SETUP_RAW:UNAVAILABLE'':
+    1795, ''M15_INITIAL_ENTRY_PRIMITIVE:READY'': 2304, ''M15_INITIAL_ENTRY_PRIMITIVE:UNAVAILABLE'': 320}; joint
+    READY829. Two network-disabled proofs identical, stream hash6de4730cb3abfaaf701d9fda0a212d5df0ad5f16dcc0e0cf4714f844d0cac57a.
+    ENTRY_CANDIDATE=null, profitability NOT_RUN, outcomes NOT_EVALUATED.'
+  blocks_phase_exit_criteria: []
   promotion_reason: Now blocks current phase exit4 executable frozen tuple with upstream inputs, exit5 deterministic
     composed events, exit6 efficacy. The15m freeze can no longer be the next action because it is complete.
-  evidence_branch: v2-h0001-daily-pit-join
-  evidence: research/decision_records/H0001-daily-pit-provider-audit-v1.yaml
-  commit: ce6497cdc204fbe420c42c78cbbb6482432390d8
-- id: H0001_HISTORICAL_ACTION_AVAILABILITY_AND_RAW_UNIT_EVIDENCE
-  priority: P0
-  status: ACTIVE_AS_NEXT_ACTION_BLOCKED_PENDING_EXTERNAL_EVIDENCE
-  blocks_phase_exit_criteria:
+  evidence_branch: v2-h0001-action-unit-remediation
+  evidence: research/decision_records/H0001-action-unit-interpretation-audit-v1.yaml
+  commit: 1c661d85f4da869c34945da203f29143c2556428
+  formerly_blocked_phase_exit_criteria:
   - 4
   - 5
   - 6
-  summary: Obtain and audit SOXX historical action availability/revision and complete no-action coverage plus exact
-    raw OHLC share-unit evidence for the captured500-session Daily interval; then import a new immutable vintage
-    and rerun existing offline readiness/join proofs.
+  resolution: Frozen semantic interpretation remediation; dataset completeness separate from causal event clocks.
+    Exact500-session Nasdaq OHLC certification; new identity vintage.
+- id: H0001_HISTORICAL_ACTION_AVAILABILITY_AND_RAW_UNIT_EVIDENCE
+  priority: P0
+  status: COMPLETE_REAL_HISTORICAL_CAUSAL_RESEARCH_EVIDENCE
+  blocks_phase_exit_criteria: []
+  summary: 'Admitted SOXX Daily500 eligible; trend READY322/UNAVAILABLE178, exhaustion READY120/UNAVAILABLE380.
+    Actual first READY N179 2025-06-24, N381 2026-04-14. All2624 mixed joins: {''DAILY_EXHAUSTION:READY'': 2624,
+    ''DAILY_TREND_PERMISSION:READY'': 2624, ''H1_RELATIVE_SETUP_RAW:READY'': 829, ''H1_RELATIVE_SETUP_RAW:UNAVAILABLE'':
+    1795, ''M15_INITIAL_ENTRY_PRIMITIVE:READY'': 2304, ''M15_INITIAL_ENTRY_PRIMITIVE:UNAVAILABLE'': 320}; joint
+    READY829. Two network-disabled proofs identical, stream hash6de4730cb3abfaaf701d9fda0a212d5df0ad5f16dcc0e0cf4714f844d0cac57a.
+    ENTRY_CANDIDATE=null, profitability NOT_RUN, outcomes NOT_EVALUATED.'
   promotion_reason: Phase exits4/5/6 require actually usable Daily+1H+15m upstream inputs; a current no-split snapshot
     and unauthenticated API401 cannot establish historical knowledge or raw units.
-  evidence_branch: v2-h0001-daily-pit-join
-  evidence: research/decision_records/H0001-daily-pit-provider-audit-v1.yaml
-  smallest_resolution: Actual audited source receipt/revision and negative-action coverage plus raw-unit evidence
-    for the existing Daily interval; new vintage and same proofs. No longer-intraday migration or strategy parameter
-    change.
+  evidence_branch: v2-h0001-action-unit-remediation
+  evidence: research/decision_records/H0001-action-unit-interpretation-audit-v1.yaml
   owner: AI_PM
-  commit: ce6497cdc204fbe420c42c78cbbb6482432390d8
+  commit: 1c661d85f4da869c34945da203f29143c2556428
+  formerly_blocked_phase_exit_criteria:
+  - 4
+  - 5
+  - 6
+  resolution: Frozen semantic interpretation remediation; dataset completeness separate from causal event clocks.
+    Exact500-session Nasdaq OHLC certification; new identity vintage.
 - id: LONG_HISTORY_PROVIDER_AND_VOLUME_EVIDENCE
   priority: P1
   status: OPEN
@@ -98,14 +107,17 @@ items:
   evidence_branch: v2-real-intraday-data-foundation
   evidence: research/data_evidence/v2-real-20261003/rejected-latest-session.json
 - id: H0001_ENTRY_EXECUTION_AND_COMPOSITION
-  priority: P1
-  status: QUEUED_BLOCKED_ON_HISTORICAL_ACTION_EVIDENCE
+  priority: P0
+  status: ACTIVE_AS_NEXT_ACTION_READY
   depends_on:
   - H0001_MINIMAL_15M_ENTRY_FREEZE
   - H0001_DAILY_PIT_AND_MIXED_PROFILE_PREREQUISITES
   - H0001_HISTORICAL_ACTION_AVAILABILITY_AND_RAW_UNIT_EVIDENCE
   summary: Compose frozen Daily permission/exhaustion + 1H active setup + executable 15m trigger into deterministic
     entry events.
+  blocks_phase_exit_criteria:
+  - 5
+  - 6
 - id: H0001_FIRST_ENTRY_EFFICACY
   priority: P1
   status: QUEUED
@@ -139,3 +151,10 @@ items:
   priority: DEFERRED
   status: CAPTURED
   summary: User-facing reporting should remain simple; no complex frontend before core evidence/automation.
+- id: HISTORICAL_EVENT_REVISION_PROVENANCE
+  priority: P1
+  status: OPEN
+  summary: For a future interval containing actual splits, audit authenticated historical event receipt/revision
+    evidence and exact pre/post units. Alpaca is a candidate, not a blocker for the current certified no-event interval.
+  evidence_branch: v2-h0001-action-unit-remediation
+  evidence: research/decision_records/H0001-action-unit-interpretation-audit-v1.yaml
