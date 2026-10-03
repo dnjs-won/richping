@@ -1,21 +1,18 @@
 schema_version: 1
-updated_at: "2026-10-03"
+updated_at: '2026-10-03'
+purpose: 'Lightweight routing index for AI PM sessions. This file does not replace canonical strategy specs or immutable
+  decision records. It tells a new session what is already frozen, what remains open, and where to read the authoritative
+  evidence.
 
-purpose: >
-  Lightweight routing index for AI PM sessions. This file does not replace canonical
-  strategy specs or immutable decision records. It tells a new session what is already
-  frozen, what remains open, and where to read the authoritative evidence.
-
-default_research_branch: v2-h0001-15m-entry-freeze
-
+  '
+default_research_branch: v2-h0001-daily-pit-join
 data_foundation:
   branch: v2-real-intraday-data-foundation
   contract: docs/V2_REAL_INTRADAY_DATA_FOUNDATION.md
   evidence: research/data_evidence/v2-real-20261003/smoke.json
   status: EXECUTED_ON_REAL_DATA_NOT_MAIN_INTEGRATED
-  note: Real-data8f0611f is unchanged. Frozen Daily/1H/r03 remain on their declared branch; current
-    executable v12 now routes to the isolated15m freeze branch.
-
+  note: Real-data8f0611f is unchanged. Frozen Daily/1H/r03 remain on their declared branch; current executable v12
+    now routes to the isolated15m freeze branch.
 canonical_sources:
   hypothesis:
     branch: v2-c0-extended-session-contract
@@ -26,11 +23,9 @@ canonical_sources:
     commit: ffabeaf9faf872314336784b5c9c8c14522010c2
     specification_version: h0001_r03_spec_v12
     sha256: 5b20148fb77c6a7890a02219ece7348a997d731e5e9faa508c014243c72a4685
-
   current_status:
-    branch: v2-h0001-15m-entry-freeze
+    branch: v2-h0001-daily-pit-join
     path: PROJECT_STATUS.md
-
 frozen_major_decisions:
   daily_input:
     status: FROZEN
@@ -53,10 +48,9 @@ frozen_major_decisions:
     record: research/decision_records/H0001-1h-relative-setup-freeze-v1.yaml
   intraday_session:
     status: FROZEN_FOR_H0001_INTRADAY
-    selected: "RTH_EXTENDED 04:00-20:00 ET, 15m base, 04:00-anchored 1H"
+    selected: RTH_EXTENDED 04:00-20:00 ET, 15m base, 04:00-anchored 1H
     branch: v2-c0-extended-session-contract
     evidence: docs/V2_EXTENDED_SESSION_IMPLEMENTATION.md
-
   m15_initial_entry:
     status: FROZEN_EX_ANTE_INITIAL_RESEARCH_TUPLE
     selected: M15_INITIAL_EXTREME_GC_PRICE_V1
@@ -68,64 +62,76 @@ frozen_major_decisions:
     contract: docs/H0001_15M_ENTRY_FREEZE.md
     evidence: research/data_evidence/h0001-15m-freeze-20261003/mechanical-check.json
     resolved_ids:
-      - H1-M15-RELATIVE-METHOD
-      - H1-M15-LOOKBACK
-      - H1-M15-RELATIVE-CONVENTIONS
-      - H1-M15-DOWNSIDE
-      - H1-M15-COMPARATOR
-      - H1-M15-GC
-      - H1-M15-REVERSAL
-      - H1-M15-CONJUNCTION
-      - H1-DECISION-TIMING
+    - H1-M15-RELATIVE-METHOD
+    - H1-M15-LOOKBACK
+    - H1-M15-RELATIVE-CONVENTIONS
+    - H1-M15-DOWNSIDE
+    - H1-M15-COMPARATOR
+    - H1-M15-GC
+    - H1-M15-REVERSAL
+    - H1-M15-CONJUNCTION
+    - H1-DECISION-TIMING
     full_composition: NOT_IMPLEMENTED_DAILY_PIT_PREREQUISITES_MISSING
     profitability: NOT_RUN
-
 current_open_decision_groups:
-  - id: H0001_GLOBAL_STATE_TRANSITIONS
-    decision_id: H1-STATE-TRANSITIONS
-    status: UNRESOLVED
-    priority: AFTER_DAILY_PREREQUISITES_FOR_COMPOSITION
-    note: Trigger-local freeze does not resolve full signal/position lifecycle, setup consumption,
-      add/reentry or execution.
-
-  - id: H0001_EXIT_AND_PRICE_STRUCTURE
-    status: UNRESOLVED
-    priority: AFTER_FIRST_ENTRY_EVIDENCE
-  - id: H0001_ADD_REENTRY_RISK
-    status: UNRESOLVED
-    priority: AFTER_FIRST_ENTRY_EVIDENCE
-  - id: H0001_EXECUTION_SIZING_COSTS
-    status: UNRESOLVED
-    priority: AFTER_SIGNAL_EVIDENCE_OR_WHEN_REQUIRED_FOR_NEXT_EXPERIMENT
-  - id: H0001_RESEARCH_EVALUATION
-    status: PARTIALLY_UNRESOLVED
-    priority: REQUIRED_FOR_FIRST_EFFICACY_EXPERIMENT
-
+- id: H0001_GLOBAL_STATE_TRANSITIONS
+  decision_id: H1-STATE-TRANSITIONS
+  status: UNRESOLVED
+  priority: AFTER_DAILY_PREREQUISITES_FOR_COMPOSITION
+  note: Trigger-local freeze does not resolve full signal/position lifecycle, setup consumption, add/reentry or
+    execution.
+- id: H0001_EXIT_AND_PRICE_STRUCTURE
+  status: UNRESOLVED
+  priority: AFTER_FIRST_ENTRY_EVIDENCE
+- id: H0001_ADD_REENTRY_RISK
+  status: UNRESOLVED
+  priority: AFTER_FIRST_ENTRY_EVIDENCE
+- id: H0001_EXECUTION_SIZING_COSTS
+  status: UNRESOLVED
+  priority: AFTER_SIGNAL_EVIDENCE_OR_WHEN_REQUIRED_FOR_NEXT_EXPERIMENT
+- id: H0001_RESEARCH_EVALUATION
+  status: PARTIALLY_UNRESOLVED
+  priority: REQUIRED_FOR_FIRST_EFFICACY_EXPERIMENT
 reopen_policy:
   frozen_decision_may_reopen_only_if:
-    - "A causal/data-integrity defect invalidates it."
-    - "The selected real provider cannot support the contract and the incompatibility is demonstrated."
-    - "The user explicitly revises the strategy intent."
-    - "New evidence is registered under a new research revision rather than silently rewriting history."
+  - A causal/data-integrity defect invalidates it.
+  - The selected real provider cannot support the contract and the incompatibility is demonstrated.
+  - The user explicitly revises the strategy intent.
+  - New evidence is registered under a new research revision rather than silently rewriting history.
   forbidden:
-    - "Re-researching a frozen decision merely because a new AI session starts."
-    - "Copying values from another timeframe without an explicit decision."
-    - "Treating proposal/design completion as economic validation."
+  - Re-researching a frozen decision merely because a new AI session starts.
+  - Copying values from another timeframe without an explicit decision.
+  - Treating proposal/design completion as economic validation.
+pm_routing_rule: 'Read the canonical source from its declared branch only when the current NEXT_ACTION touches that
+  decision. Do not load all research documents into context by default.
 
-pm_routing_rule: >
-  Read the canonical source from its declared branch only when the current NEXT_ACTION
-  touches that decision. Do not load all research documents into context by default.
-
+  '
 composition_prerequisite:
   id: H0001_DAILY_PIT_AND_MIXED_PROFILE_PREREQUISITES
   priority: P0
   blocks_phase_exit_criteria:
-    - 4
-    - 5
-    - 6
-  evidence_branch: v2-h0001-15m-entry-freeze
-  evidence: docs/H0001_15M_ENTRY_FREEZE.md
+  - 4
+  - 5
+  - 6
+  evidence_branch: v2-h0001-daily-pit-join
+  evidence: research/decision_records/H0001-daily-pit-provider-audit-v1.yaml
   trend_ready_N: 179
   exhaustion_ready_N: 381
   current_real_sessions: 41
   extended_Daily_substitution: FORBIDDEN
+  status: BLOCKED_REAL_HISTORICAL_PIT_EVIDENCE
+  captured_Daily_sessions: 500
+  actual_eligible_Daily_observations: 0
+  actual_joint_READY: 0
+  blocking_next_action: H0001_HISTORICAL_ACTION_AVAILABILITY_AND_RAW_UNIT_EVIDENCE
+  implementation_commit: ce6497cdc204fbe420c42c78cbbb6482432390d8
+daily_input_implementation:
+  branch: v2-h0001-daily-pit-join
+  record: research/decision_records/H0001-daily-pit-provider-audit-v1.yaml
+  contract: docs/H0001_DAILY_PIT_AND_MIXED_PROFILE.md
+  implementation_status: IMPLEMENTED_REAL_CAPTURED_FROZEN_PIT_ADMISSION_BLOCKED
+  actual_source_smoke: Alpaca401; Yahoo current split table cross-check only
+  split_free_identity_transform_real_certification: false
+  no_frozen_decisions_changed: true
+  profitability: NOT_RUN
+  commit: ce6497cdc204fbe420c42c78cbbb6482432390d8

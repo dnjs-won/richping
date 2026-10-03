@@ -1,130 +1,141 @@
 schema_version: 1
-updated_at: "2026-10-03"
-
+updated_at: '2026-10-03'
 rules:
-  - "A discovery is not automatically a task."
-  - "P0 must block a current PROJECT_CONTROL exit criterion."
-  - "P1 is next-phase/core-value work."
-  - "P2 is useful but non-blocking."
-  - "Deferred items do not interrupt NEXT_ACTION."
-
+- A discovery is not automatically a task.
+- P0 must block a current PROJECT_CONTROL exit criterion.
+- P1 is next-phase/core-value work.
+- P2 is useful but non-blocking.
+- Deferred items do not interrupt NEXT_ACTION.
 items:
-  - id: V2_REAL_INTRADAY_DATA
-    priority: P0
-    status: COMPLETE_DATA_FOUNDATION
-    blocks:
-      - "First reproducible H0001 real-data entry efficacy evidence"
-    summary: "Real SOXX 15m Yahoo snapshot captured, validated, stored as immutable v1/v2 and reused offline."
-    evidence_branch: v2-real-intraday-data-foundation
-    evidence: research/data_evidence/v2-real-20261003/smoke.json
-    integration: NOT_MAIN_INTEGRATED
-    limitation: "Historical research snapshot only; not strategy efficacy or frozen Daily PIT evidence."
-    owner: AI_PM
+- id: V2_REAL_INTRADAY_DATA
+  priority: P0
+  status: COMPLETE_DATA_FOUNDATION
+  blocks:
+  - First reproducible H0001 real-data entry efficacy evidence
+  summary: Real SOXX 15m Yahoo snapshot captured, validated, stored as immutable v1/v2 and reused offline.
+  evidence_branch: v2-real-intraday-data-foundation
+  evidence: research/data_evidence/v2-real-20261003/smoke.json
+  integration: NOT_MAIN_INTEGRATED
+  limitation: Historical research snapshot only; not strategy efficacy or frozen Daily PIT evidence.
+  owner: AI_PM
+- id: V2_MAIN_INTEGRATION_LANE
+  priority: P1
+  status: OPEN
+  summary: 'Active V2 workstream is ahead of and behind main. Establish a deliberate integration path after the
+    current real-data foundation is stable enough to reconcile, rather than allowing V1 and V2 to become permanent
+    parallel products.
 
-  - id: V2_MAIN_INTEGRATION_LANE
-    priority: P1
-    status: OPEN
-    summary: |
-      Active V2 workstream is ahead of and behind main. Establish a deliberate integration path after the current real-data foundation is stable enough to reconcile, rather than allowing V1 and V2 to become permanent parallel products.
-    guardrail: Do not merge blindly; preserve the newer main R1 paper changes.
-    active_branch: v2-h0001-15m-entry-freeze
-    observed_relation_to_main:
-      ahead_by: 29
-      behind_by: 11
+    '
+  guardrail: Do not merge blindly; preserve the newer main R1 paper changes.
+  active_branch: v2-h0001-daily-pit-join
+  observed_relation_to_main:
+    ahead_by: 30
+    behind_by: 12
+- id: H0001_MINIMAL_15M_ENTRY_FREEZE
+  priority: P1
+  status: COMPLETE_FROZEN_AND_OFFLINE_MECHANICALLY_EXERCISED
+  depends_on:
+  - V2_REAL_INTRADAY_DATA
+  summary: One MACD_LINE percentile192/P10-negative, first-extreme K4 GC cross plus same-bar higher close tuple
+    frozen ex ante. No comparator or outcomes. Exactly9 roots resolved; composed events remain unavailable.
+  evidence_branch: v2-h0001-15m-entry-freeze
+  commit: ffabeaf9faf872314336784b5c9c8c14522010c2
+  evidence: research/decision_records/H0001-15m-entry-freeze-v1.yaml
+- id: H0001_DAILY_PIT_AND_MIXED_PROFILE_PREREQUISITES
+  priority: P0
+  status: BLOCKED_REAL_HISTORICAL_PIT_EVIDENCE
+  blocks:
+  - Daily + 1H + 15m deterministic H0001 entry events and efficacy report
+  summary: Implemented immutable long RTH Daily capture, causal split transform, official freshness and separate-profile
+    join. Captured500 contiguous sessions; actual historical eligible Daily0 because action availability/no-action
+    coverage and raw OHLC units are unverified. Cannot COMPLETE or advance composition.
+  blocks_phase_exit_criteria:
+  - 4
+  - 5
+  - 6
+  promotion_reason: Now blocks current phase exit4 executable frozen tuple with upstream inputs, exit5 deterministic
+    composed events, exit6 efficacy. The15m freeze can no longer be the next action because it is complete.
+  evidence_branch: v2-h0001-daily-pit-join
+  evidence: research/decision_records/H0001-daily-pit-provider-audit-v1.yaml
+  commit: ce6497cdc204fbe420c42c78cbbb6482432390d8
+- id: H0001_HISTORICAL_ACTION_AVAILABILITY_AND_RAW_UNIT_EVIDENCE
+  priority: P0
+  status: ACTIVE_AS_NEXT_ACTION_BLOCKED_PENDING_EXTERNAL_EVIDENCE
+  blocks_phase_exit_criteria:
+  - 4
+  - 5
+  - 6
+  summary: Obtain and audit SOXX historical action availability/revision and complete no-action coverage plus exact
+    raw OHLC share-unit evidence for the captured500-session Daily interval; then import a new immutable vintage
+    and rerun existing offline readiness/join proofs.
+  promotion_reason: Phase exits4/5/6 require actually usable Daily+1H+15m upstream inputs; a current no-split snapshot
+    and unauthenticated API401 cannot establish historical knowledge or raw units.
+  evidence_branch: v2-h0001-daily-pit-join
+  evidence: research/decision_records/H0001-daily-pit-provider-audit-v1.yaml
+  smallest_resolution: Actual audited source receipt/revision and negative-action coverage plus raw-unit evidence
+    for the existing Daily interval; new vintage and same proofs. No longer-intraday migration or strategy parameter
+    change.
+  owner: AI_PM
+  commit: ce6497cdc204fbe420c42c78cbbb6482432390d8
+- id: LONG_HISTORY_PROVIDER_AND_VOLUME_EVIDENCE
+  priority: P1
+  status: OPEN
+  summary: 'Yahoo 15m only retains 60 calendar days and observed pre/post volume is zero. Alpaca historical SIP
+    is the most realistic reviewed longer-history candidate; account access and SOXX/session/action coverage smoke
+    remain unverified. Never fall back to IEX/RTH-only or interpret zero volume as no trading.
 
-  - id: H0001_MINIMAL_15M_ENTRY_FREEZE
-    priority: P1
-    status: COMPLETE_FROZEN_AND_OFFLINE_MECHANICALLY_EXERCISED
-    depends_on:
-      - V2_REAL_INTRADAY_DATA
-    summary: One MACD_LINE percentile192/P10-negative, first-extreme K4 GC cross plus same-bar higher
-      close tuple frozen ex ante. No comparator or outcomes. Exactly9 roots resolved; composed events
-      remain unavailable.
-    evidence_branch: v2-h0001-15m-entry-freeze
-    commit: ffabeaf9faf872314336784b5c9c8c14522010c2
-    evidence: research/decision_records/H0001-15m-entry-freeze-v1.yaml
+    '
+  evidence_branch: v2-real-intraday-data-foundation
+  evidence: docs/V2_REAL_INTRADAY_DATA_FOUNDATION.md
+- id: YAHOO_LATEST_SESSION_OFFGRID_QUOTE
+  priority: P2
+  status: OPEN_FAIL_CLOSED
+  summary: 'Actual latest-session chart response appended a 19:59:54 point after its 19:45 bar. Rejected without
+    rounding/dropping/merging; accepted fixed range ends on the previous provider session. Review any future exception
+    explicitly.
 
-  - id: H0001_DAILY_PIT_AND_MIXED_PROFILE_PREREQUISITES
-    priority: P0
-    status: ACTIVE_AS_NEXT_ACTION
-    blocks:
-      - Daily + 1H + 15m deterministic H0001 entry events and efficacy report
-    summary: Verified RTH Daily PIT_SPLIT_ADJUSTED_OHLC action evidence/transform, expected-completion
-      freshness and mixed-profile as-of join are missing. Trend first READY179; frozen exhaustion
-      NORMAL first READY381; current41 sessions cannot supply either. Preserve all frozen decisions.
-    blocks_phase_exit_criteria:
-      - 4
-      - 5
-      - 6
-    promotion_reason: Now blocks current phase exit4 executable frozen tuple with upstream inputs,
-      exit5 deterministic composed events, exit6 efficacy. The15m freeze can no longer be the next
-      action because it is complete.
-    evidence_branch: v2-h0001-15m-entry-freeze
-    evidence: docs/H0001_15M_ENTRY_FREEZE.md
+    '
+  evidence_branch: v2-real-intraday-data-foundation
+  evidence: research/data_evidence/v2-real-20261003/rejected-latest-session.json
+- id: H0001_ENTRY_EXECUTION_AND_COMPOSITION
+  priority: P1
+  status: QUEUED_BLOCKED_ON_HISTORICAL_ACTION_EVIDENCE
+  depends_on:
+  - H0001_MINIMAL_15M_ENTRY_FREEZE
+  - H0001_DAILY_PIT_AND_MIXED_PROFILE_PREREQUISITES
+  - H0001_HISTORICAL_ACTION_AVAILABILITY_AND_RAW_UNIT_EVIDENCE
+  summary: Compose frozen Daily permission/exhaustion + 1H active setup + executable 15m trigger into deterministic
+    entry events.
+- id: H0001_FIRST_ENTRY_EFFICACY
+  priority: P1
+  status: QUEUED
+  depends_on:
+  - H0001_ENTRY_EXECUTION_AND_COMPOSITION
+  summary: 'Generate real-data signal counts, fixed forward returns, MFE/MAE, matched benchmark/excess and uncertainty
+    before finishing the full exit/add/risk lifecycle.
 
-  - id: LONG_HISTORY_PROVIDER_AND_VOLUME_EVIDENCE
-    priority: P1
-    status: OPEN
-    summary: >
-      Yahoo 15m only retains 60 calendar days and observed pre/post volume is zero.
-      Alpaca historical SIP is the most realistic reviewed longer-history candidate;
-      account access and SOXX/session/action coverage smoke remain unverified.
-      Never fall back to IEX/RTH-only or interpret zero volume as no trading.
-    evidence_branch: v2-real-intraday-data-foundation
-    evidence: docs/V2_REAL_INTRADAY_DATA_FOUNDATION.md
-
-  - id: YAHOO_LATEST_SESSION_OFFGRID_QUOTE
-    priority: P2
-    status: OPEN_FAIL_CLOSED
-    summary: >
-      Actual latest-session chart response appended a 19:59:54 point after its
-      19:45 bar. Rejected without rounding/dropping/merging; accepted fixed range
-      ends on the previous provider session. Review any future exception explicitly.
-    evidence_branch: v2-real-intraday-data-foundation
-    evidence: research/data_evidence/v2-real-20261003/rejected-latest-session.json
-
-  - id: H0001_ENTRY_EXECUTION_AND_COMPOSITION
-    priority: P1
-    status: QUEUED_BLOCKED_ON_DAILY_PREREQUISITES
-    depends_on:
-      - H0001_MINIMAL_15M_ENTRY_FREEZE
-      - H0001_DAILY_PIT_AND_MIXED_PROFILE_PREREQUISITES
-    summary: Compose frozen Daily permission/exhaustion + 1H active setup + executable 15m trigger
-      into deterministic entry events.
-
-  - id: H0001_FIRST_ENTRY_EFFICACY
-    priority: P1
-    status: QUEUED
-    depends_on:
-      - H0001_ENTRY_EXECUTION_AND_COMPOSITION
-    summary: >
-      Generate real-data signal counts, fixed forward returns, MFE/MAE, matched
-      benchmark/excess and uncertainty before finishing the full exit/add/risk lifecycle.
-
-  - id: MINIMAL_CI
-    priority: P2
-    status: OPEN
-    summary: "Add lightweight automated regression checks once the active workstream integration path is defined."
-    reason_not_now: "CI absence does not prevent the first real-data efficacy experiment."
-
-  - id: EXTENDED_EARLY_CLOSE_SUPPORT
-    priority: P1
-    status: OPEN
-    summary: "Resolve the known extended-session early-close coverage blocker with a reviewed provider/session contract."
-    note: "May become P0 if the selected real-data range cannot satisfy H0001 history/coverage without it."
-    actual_evidence: "First 2026-08-05 through 2026-10-01 range contains no unsupported sessions; limitation remains unchanged."
-
-  - id: OPTIONAL_4H_CONFIRMATION
-    priority: DEFERRED
-    status: CAPTURED
-    summary: "Research 4H higher-direction confirmation only after first H0001 entry evidence."
-
-  - id: OPTIONS_MACRO_VOLUME_EXPANSION
-    priority: DEFERRED
-    status: CAPTURED
-    summary: "Options, macro/news, and extra volume/indicator families remain outside the first-evidence path."
-
-  - id: COMPLEX_UI
-    priority: DEFERRED
-    status: CAPTURED
-    summary: "User-facing reporting should remain simple; no complex frontend before core evidence/automation."
+    '
+- id: MINIMAL_CI
+  priority: P2
+  status: OPEN
+  summary: Add lightweight automated regression checks once the active workstream integration path is defined.
+  reason_not_now: CI absence does not prevent the first real-data efficacy experiment.
+- id: EXTENDED_EARLY_CLOSE_SUPPORT
+  priority: P1
+  status: OPEN
+  summary: Resolve the known extended-session early-close coverage blocker with a reviewed provider/session contract.
+  note: May become P0 if the selected real-data range cannot satisfy H0001 history/coverage without it.
+  actual_evidence: First 2026-08-05 through 2026-10-01 range contains no unsupported sessions; limitation remains
+    unchanged.
+- id: OPTIONAL_4H_CONFIRMATION
+  priority: DEFERRED
+  status: CAPTURED
+  summary: Research 4H higher-direction confirmation only after first H0001 entry evidence.
+- id: OPTIONS_MACRO_VOLUME_EXPANSION
+  priority: DEFERRED
+  status: CAPTURED
+  summary: Options, macro/news, and extra volume/indicator families remain outside the first-evidence path.
+- id: COMPLEX_UI
+  priority: DEFERRED
+  status: CAPTURED
+  summary: User-facing reporting should remain simple; no complex frontend before core evidence/automation.

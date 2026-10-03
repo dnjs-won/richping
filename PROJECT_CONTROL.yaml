@@ -1,7 +1,6 @@
 schema_version: 1
 project: richping
-updated_at: "2026-10-03"
-
+updated_at: '2026-10-03'
 source_of_truth:
   project_goal:
     branch: main
@@ -16,7 +15,7 @@ source_of_truth:
     branch: main
     path: PROJECT_STATUS.md
   active_workstream_status:
-    branch: v2-h0001-15m-entry-freeze
+    branch: v2-h0001-daily-pit-join
     path: PROJECT_STATUS.md
   decision_index:
     branch: main
@@ -27,161 +26,160 @@ source_of_truth:
   user_ideas:
     branch: main
     path: project/USER_IDEAS.yaml
-
 control_plane:
   branch: main
-  rule: "PM state lives on main so new sessions can recover it from the default branch."
-
+  rule: PM state lives on main so new sessions can recover it from the default branch.
 active_workstream:
-  branch: v2-h0001-15m-entry-freeze
-  base_branch: v2-real-intraday-data-foundation
-  base_commit: 8f0611f
-  implementation_commit: ffabeaf9faf872314336784b5c9c8c14522010c2
+  branch: v2-h0001-daily-pit-join
+  base_branch: v2-h0001-15m-entry-freeze
+  base_commit: ffabeaf9faf872314336784b5c9c8c14522010c2
+  implementation_commit: ce6497cdc204fbe420c42c78cbbb6482432390d8
   status: DIVERGED_FROM_MAIN
   observed_relation_to_main:
-    ahead_by: 29
-    behind_by: 11
-  note: Isolated 15m freeze follows 8f0611f. Original real-data/extended branches and main R1 c48851d
-    are unchanged. No integration or force push; relation includes this main PM update.
-
+    ahead_by: 30
+    behind_by: 12
+  note: Isolated Daily PIT task follows ffabeaf. Existing workstreams and main implementation remain unchanged;
+    no integration or force push. Relation includes this main PM update.
 current_phase:
   id: H0001_FIRST_REAL_EVIDENCE
-  objective: >
-    Produce the first reproducible H0001 entry-efficacy evidence from real intraday
-    market data without weakening causal/data-quality contracts.
-  user_visible_outcome: >
-    A reproducible report showing actual signal count, forward returns, MFE/MAE,
-    matched benchmark comparison and uncertainty from a fixed real dataset.
-  status: BLOCKED_ON_DAILY_PIT_AND_MIXED_PROFILE_PREREQUISITES
+  objective: 'Produce the first reproducible H0001 entry-efficacy evidence from real intraday market data without
+    weakening causal/data-quality contracts.
+
+    '
+  user_visible_outcome: 'A reproducible report showing actual signal count, forward returns, MFE/MAE, matched benchmark
+    comparison and uncertainty from a fixed real dataset.
+
+    '
+  status: BLOCKED_ON_HISTORICAL_ACTION_AVAILABILITY_AND_RAW_UNIT_EVIDENCE
   progress:
     satisfied_exit_criteria:
-      - 1
-      - 2
-      - 3
+    - 1
+    - 2
+    - 3
     remaining_exit_criteria:
-      - 4
-      - 5
-      - 6
-    actual_evidence: |-
-      SOXX Yahoo 15m 2026-08-05 through 2026-10-01, 2624 expected/observed bars, 902 premarket / 1066 RTH / 656 post, no gaps or unsupported sessions in this range. Immutable v1/v2 persisted; repeated network-disabled reload and completed aggregation/event iteration have identical identities.
-       Ex-ante v12 minimal15m tuple is frozen; offline SOXX MACD READY2495, relative READY2304/UNAVAILABLE320, extreme270, GC92, ungated15m triggers2. Repeated read-only exercise identical with network disabled; composed ENTRY_CANDIDATE=null/NOT_EVALUATED; profitability NOT_RUN.
-    limitations: |-
-      Historical bar-end known_at is a research assumption, not live/shadow PIT. Corporate actions remain UNKNOWN; extended volume zero is not no-trade proof. Yahoo's 60-day 15m window does not provide frozen Daily 179-observation warmup or RTH/PIT action input. Generic extended Daily aggregates do not replace it.
-       The separate frozen Daily exhaustion NORMAL classifier requires381 observations, beyond trend179. Current41 sessions, RTH/PIT action evidence/freshness/mixed-profile join cannot enable full Daily+1H+15m composition. Exit4 tuple semantics/pure primitives are satisfied but upstream executability is not; exits4/5/6 remain blocked.
-    blocked_exit_criteria:
-      - 4
-      - 5
-      - 6
-    frozen_15m_subtask: COMPLETE_NOT_FULL_PHASE_EXIT_4
-
-  exit_criteria:
-    - "A real 15m dataset is persisted locally with immutable dataset identity/provenance."
-    - "The dataset covers the required 04:00-20:00 ET research session with explicit gap/availability diagnostics."
-    - "Repeated research/replay can reload the fixed dataset without network/API calls."
-    - "A minimal frozen 15m initial-entry tuple is executable with preserved Daily and 1H frozen contracts."
-    - "Daily + 1H + 15m produce deterministic H0001 entry events on the real dataset."
-    - "A user-visible entry efficacy report is generated from real data with signal denominator, forward returns, MFE/MAE, benchmark/excess and uncertainty."
-  non_goals_until_exit:
-    - "Optional 4H confirmation"
-    - "Options-chain integration"
-    - "Macro/news overlays"
-    - "Complex UI"
-    - "Broad indicator-family expansion"
-    - "Full exit/add/portfolio optimization before entry efficacy is known"
-    - "New architecture taxonomy not required by the exit criteria"
-
-completed_actions:
-  - id: V2_REAL_INTRADAY_DATA_FOUNDATION
-    status: COMPLETE
-    implementation_state: EXECUTED_ON_REAL_DATA_AND_EVIDENCE_PRODUCED_NOT_MAIN_INTEGRATED
-    completed_at: "2026-10-03"
-    branch: v2-real-intraday-data-foundation
-    commit: 8f0611f
-    acceptance_criteria_satisfied: 8
-    acceptance_criteria_unmet: 0
-    evidence:
-      contract: docs/V2_REAL_INTRADAY_DATA_FOUNDATION.md
-      coverage: research/data_evidence/v2-real-20261003/coverage-v1.json
-      offline: research/data_evidence/v2-real-20261003/offline-proof-v1.json
-      smoke: research/data_evidence/v2-real-20261003/smoke.json
-    local_store: C:/richping/var/research/v2-real/market.sqlite
-    dataset_id: soxx-yahoo-15m-20261003-v1
-    content_hash: bb7ac246e4005d49d861301c4acc8261043bcd71818c3bcdbef5f73aa98c59b9
-    tests: "41 new tests and 1140 full-workstream tests passed; no skips; no external API in unit tests."
-    phase_complete: false
-    strategy_profitability_tested: false
-
-  - id: H0001_MINIMAL_15M_ENTRY_FREEZE
-    status: COMPLETE
-    completed_at: '2026-10-03'
-    implementation_state: FROZEN_AND_PURE_PRIMITIVES_EXECUTED_OFFLINE_NOT_FULL_COMPOSITION_NOT_MAIN_INTEGRATED
-    branch: v2-h0001-15m-entry-freeze
-    commit: ffabeaf9faf872314336784b5c9c8c14522010c2
-    acceptance_criteria_satisfied: 5
-    acceptance_criteria_unmet: 0
-    acceptance_criteria:
-      - One minimal initial-entry tuple and at most one comparator are recorded as an immutable decision.
-      - Readiness, units, polarity, reversal, temporal composition and same-batch decision timing
-        are explicit.
-      - Real saved intraday data can exercise the selected primitives offline; no outcome-driven grid
-        search.
-      - Existing frozen Daily/1H decisions and hypothesis revision are preserved.
-      - Remaining Daily/PIT/mixed-profile prerequisites are explicit before executable composition/efficacy.
-    user_completion_criteria_satisfied: 15
-    user_completion_criteria_unmet: 0
-    evidence:
-      freeze: research/decision_records/H0001-15m-entry-freeze-v1.yaml
-      preregistration: research/decision_records/H0001-15m-entry-preregistration-v1.yaml
-      contract: docs/H0001_15M_ENTRY_FREEZE.md
-      offline: research/data_evidence/h0001-15m-freeze-20261003/mechanical-check.json
-    specification_version: h0001_r03_spec_v12
-    specification_hash: 5b20148fb77c6a7890a02219ece7348a997d731e5e9faa508c014243c72a4685
-    tests: 62 new tests; 1202 full-workstream tests passed; no failures/skips. Mocked provider unit
-      fixture, real saved dataset offline proof separately.
-    primary_tuples: 1
-    comparators: 0
-    phase_complete: false
-    strategy_profitability_tested: false
-
-next_action:
-  id: H0001_DAILY_PIT_AND_MIXED_PROFILE_PREREQUISITES
-  priority: P0
-  status: READY
-  blocks_phase_exit_criteria:
     - 4
     - 5
     - 6
-  objective: Supply verified frozen RTH_DAILY/PIT_SPLIT_ADJUSTED_OHLC Daily inputs, sufficient common
-    warmup, freshness and mixed-profile as-of join before composed H0001 entry events.
-  why_now: '15m freeze is complete. Full preserved Daily+1H+15m composition is impossible with the41-session
-    Yahoo snapshot: trend179 and exhaustion381 warmup plus RTH/PIT actions/freshness/join are missing.
-    This is a current phase P0 prerequisite rather than an optional provider expansion.'
-  constraints:
-    - Preserve frozen Daily input/trend/exhaustion, 1H and new15m records; no outcome-driven changes.
-    - Trend requires179 and exhaustion NORMAL requires381 completed Daily observations; no warmup
-      reduction.
-    - No Extended Daily substitution, stale/raw fallback, inferred actions or fabricated historical
-      PIT known_at.
-    - Use immutable saved vintages; network only explicit ingestion/update.
-    - Demonstrate actual action evidence/effective_at/known_at and transformation basis or record
-      a concrete provider/PIT blocker.
-    - No profitability, exit/add/risk/portfolio/order work or main integration.
+    actual_evidence: "SOXX Yahoo 15m 2026-08-05 through 2026-10-01, 2624 expected/observed bars, 902 premarket /\
+      \ 1066 RTH / 656 post, no gaps or unsupported sessions in this range. Immutable v1/v2 persisted; repeated\
+      \ network-disabled reload and completed aggregation/event iteration have identical identities.\n Ex-ante v12\
+      \ minimal15m tuple is frozen; offline SOXX MACD READY2495, relative READY2304/UNAVAILABLE320, extreme270,\
+      \ GC92, ungated15m triggers2. Repeated read-only exercise identical with network disabled; composed ENTRY_CANDIDATE=null/NOT_EVALUATED;\
+      \ profitability NOT_RUN.\nReal SOXX RTH Daily captured 500 contiguous XNYS sessions 2024-10-04 through 2026-10-02,\
+      \ no missing sessions. Immutable dataset soxx-yahoo-rth-daily-20261003-v1 hash0312ed5c2ffef702e9ee1d185ff789b05221a4aa07f7f49ca5b56215b695371d.\
+      \ Daily ingestion, causal split/identity transform, official-close freshness and separate-profile join implemented;\
+      \ real action-source smoke yielded Alpaca401. Captured numeric warmup is sufficient but actual eligible Daily\
+      \ READY remains0.\nNetwork-disabled Daily reload/readiness and all2624 mixed-profile batches repeated identically.\
+      \ Extended1H READY829/UNAVAILABLE1795;15m READY2304/UNAVAILABLE320. Daily action availability/coverage UNAVAILABLE\
+      \ in all2624 joins; joint READY0. Portable archived input reimport and uncached06:00/16:00 sample joins match.\
+      \ Profitability NOT_RUN; entry outcome NOT_EVALUATED."
+    limitations: Historical bar-end known_at remains an explicit research assumption, not actual provider latency
+      or live/shadow PIT. Yahoo current split-normalized OHLC units are unverified as traded. Its current split
+      table does not supply past action availability, no-action coverage or revisions. Captured500 sessions remove
+      price-count shortage only; Daily trend/exhaustion and joined Daily roles remain UNAVAILABLE. No real fully
+      usable composition, efficacy or outcomes; exits4/5/6 remain blocked.
+    blocked_exit_criteria:
+    - 4
+    - 5
+    - 6
+    frozen_15m_subtask: COMPLETE_NOT_FULL_PHASE_EXIT_4
+    daily_prerequisite_subtask: IMPLEMENTED_AND_REAL_CAPTURED_BUT_BLOCKED_ON_ACTUAL_HISTORICAL_PIT_ADMISSION
+  exit_criteria:
+  - A real 15m dataset is persisted locally with immutable dataset identity/provenance.
+  - The dataset covers the required 04:00-20:00 ET research session with explicit gap/availability diagnostics.
+  - Repeated research/replay can reload the fixed dataset without network/API calls.
+  - A minimal frozen 15m initial-entry tuple is executable with preserved Daily and 1H frozen contracts.
+  - Daily + 1H + 15m produce deterministic H0001 entry events on the real dataset.
+  - A user-visible entry efficacy report is generated from real data with signal denominator, forward returns, MFE/MAE,
+    benchmark/excess and uncertainty.
+  non_goals_until_exit:
+  - Optional 4H confirmation
+  - Options-chain integration
+  - Macro/news overlays
+  - Complex UI
+  - Broad indicator-family expansion
+  - Full exit/add/portfolio optimization before entry efficacy is known
+  - New architecture taxonomy not required by the exit criteria
+completed_actions:
+- id: V2_REAL_INTRADAY_DATA_FOUNDATION
+  status: COMPLETE
+  implementation_state: EXECUTED_ON_REAL_DATA_AND_EVIDENCE_PRODUCED_NOT_MAIN_INTEGRATED
+  completed_at: '2026-10-03'
+  branch: v2-real-intraday-data-foundation
+  commit: 8f0611f
+  acceptance_criteria_satisfied: 8
+  acceptance_criteria_unmet: 0
+  evidence:
+    contract: docs/V2_REAL_INTRADAY_DATA_FOUNDATION.md
+    coverage: research/data_evidence/v2-real-20261003/coverage-v1.json
+    offline: research/data_evidence/v2-real-20261003/offline-proof-v1.json
+    smoke: research/data_evidence/v2-real-20261003/smoke.json
+  local_store: C:/richping/var/research/v2-real/market.sqlite
+  dataset_id: soxx-yahoo-15m-20261003-v1
+  content_hash: bb7ac246e4005d49d861301c4acc8261043bcd71818c3bcdbef5f73aa98c59b9
+  tests: 41 new tests and 1140 full-workstream tests passed; no skips; no external API in unit tests.
+  phase_complete: false
+  strategy_profitability_tested: false
+- id: H0001_MINIMAL_15M_ENTRY_FREEZE
+  status: COMPLETE
+  completed_at: '2026-10-03'
+  implementation_state: FROZEN_AND_PURE_PRIMITIVES_EXECUTED_OFFLINE_NOT_FULL_COMPOSITION_NOT_MAIN_INTEGRATED
+  branch: v2-h0001-15m-entry-freeze
+  commit: ffabeaf9faf872314336784b5c9c8c14522010c2
+  acceptance_criteria_satisfied: 5
+  acceptance_criteria_unmet: 0
   acceptance_criteria:
-    - One immutable SOXX RTH_DAILY vintage with verified frozen PIT split/action evidence and consistent
-      OHLC units is saved and reloaded offline.
-    - Daily trend179 and exhaustion381 joint readiness are met on the chosen eligible history without
-      changing frozen numerical contracts.
-    - Latest-expected-completed Daily selector fails closed at official close/delayed delivery and
-      retains actual required evidence known_at.
-    - A minimal as-of join preserves separate RTH Daily and extended1H/15m identities and current
-      authoritative references; no concatenated candle stream or partial inputs.
-    - Offline mechanical readiness/join tests pass; no performance claims. If verified historical
-      PIT cannot be supplied, record the exact blocker and affected phase exits rather than manufacture
-      data.
+  - One minimal initial-entry tuple and at most one comparator are recorded as an immutable decision.
+  - Readiness, units, polarity, reversal, temporal composition and same-batch decision timing are explicit.
+  - Real saved intraday data can exercise the selected primitives offline; no outcome-driven grid search.
+  - Existing frozen Daily/1H decisions and hypothesis revision are preserved.
+  - Remaining Daily/PIT/mixed-profile prerequisites are explicit before executable composition/efficacy.
+  user_completion_criteria_satisfied: 15
+  user_completion_criteria_unmet: 0
+  evidence:
+    freeze: research/decision_records/H0001-15m-entry-freeze-v1.yaml
+    preregistration: research/decision_records/H0001-15m-entry-preregistration-v1.yaml
+    contract: docs/H0001_15M_ENTRY_FREEZE.md
+    offline: research/data_evidence/h0001-15m-freeze-20261003/mechanical-check.json
+  specification_version: h0001_r03_spec_v12
+  specification_hash: 5b20148fb77c6a7890a02219ece7348a997d731e5e9faa508c014243c72a4685
+  tests: 62 new tests; 1202 full-workstream tests passed; no failures/skips. Mocked provider unit fixture, real
+    saved dataset offline proof separately.
+  primary_tuples: 1
+  comparators: 0
+  phase_complete: false
+  strategy_profitability_tested: false
+next_action:
+  id: H0001_HISTORICAL_ACTION_AVAILABILITY_AND_RAW_UNIT_EVIDENCE
+  priority: P0
+  status: BLOCKED_PENDING_EXTERNAL_EVIDENCE
+  blocks_phase_exit_criteria:
+  - 4
+  - 5
+  - 6
+  objective: Obtain and audit SOXX historical action availability/revision and complete no-action coverage plus
+    exact raw OHLC share-unit evidence for the captured500-session Daily interval; then import a new immutable vintage
+    and rerun existing offline readiness/join proofs.
+  why_now: The Daily runtime and500-session price capture now exist, but frozen historical input admission is impossible
+    without causal action/negative coverage and raw unit evidence. Current Yahoo capture cannot be backdated; actual
+    Alpaca smoke401 supplied no authenticated payload.
+  evidence_branch: v2-h0001-daily-pit-join
+  evidence: research/decision_records/H0001-daily-pit-provider-audit-v1.yaml
+  constraints:
+  - Preserve frozen Daily input/trend/exhaustion,1H and15m strategy decisions and N179/N381 warmup.
+  - Do not infer known_at from process/declaration/ex-date or backdate current empty action tables.
+  - 'Credentials alone are insufficient: verify actual payload, corrections, availability and completeness.'
+  - No raw/stale fallback, fabricated payload, profitability or main code integration.
+  acceptance_criteria:
+  - Actual source availability/receipt, factor units/effective times, revisions and no-action coverage are audited
+    for each used historical as_of.
+  - Exact raw OHLC unit basis and source vintage are certified, without future adjustment leakage.
+  - A new immutable Daily vintage preserves the old one and supplies at least381 eligible observations.
+  - Offline real trend/exhaustion179/381 boundaries and mixed-profile joint READY are demonstrated; repeat hashes
+    identical.
   after_success:
-    - H0001_ENTRY_EXECUTION_AND_COMPOSITION
-    - H0001_FIRST_ENTRY_EFFICACY
-
+  - H0001_ENTRY_EXECUTION_AND_COMPOSITION
+  - H0001_FIRST_ENTRY_EFFICACY
 pm_policy:
   single_next_action: true
   discovered_non_blockers_go_to_backlog: true
@@ -189,3 +187,29 @@ pm_policy:
   strategy_quality_may_not_be_relaxed_for_demo_speed: true
   user_visible_progress_may_not_be_faked: true
   preserve_existing_work_by_default: true
+blocked_actions:
+- id: H0001_DAILY_PIT_AND_MIXED_PROFILE_PREREQUISITES
+  status: BLOCKED
+  branch: v2-h0001-daily-pit-join
+  implementation_commit: ce6497cdc204fbe420c42c78cbbb6482432390d8
+  record: research/decision_records/H0001-daily-pit-provider-audit-v1.yaml
+  evidence: research/data_evidence/h0001-daily-pit-20261003/
+  dataset_id: soxx-yahoo-rth-daily-20261003-v1
+  captured_sessions: 500
+  eligible_Daily_observations: 0
+  actual_joint_READY: 0
+  reason: Split-free history cannot be backdated into past action knowledge; actual historical availability/negative
+    coverage and raw share units remain unverified.
+  remaining_acceptance:
+  - 381 actual eligible PIT Daily observations
+  - Actual READY179/READY381 boundaries and joint READY
+  - Verified historical action/no-action and raw unit evidence
+  - At least one overlap evaluation with all upstream roles causally usable
+  phase_complete: false
+  strategy_profitability_tested: false
+  tests: 58 new contract tests; full1260 passed, no failures/skips,434.61s. Real saved-data proof is separate from
+    fixture tests.
+  offline_repeat_equal: true
+  real_joined_evaluations: 2624
+  real_joint_READY_evaluations: 0
+  join_stream_hash: 98bc674c9da861073363d32a77ad7b07085381c4b3b3e010bf41dd466fcbb506
