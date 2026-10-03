@@ -150,7 +150,7 @@ class DailyVintage:
             raise ValueError("Wrong Daily request identity")
         if actions["symbol"] != req["symbol"]:
             raise ValueError("Action/Daily symbol mismatch")
-        if meta["raw_unit_status"] not in {"UNVERIFIED", "VERIFIED_AS_TRADED", "FIXTURE"}:
+        if meta["raw_unit_status"] not in {"UNVERIFIED", "VERIFIED_AS_TRADED", "FIXTURE", "VERIFIED_IDENTITY_INTERVAL"}:
             raise ValueError("Explicit raw share-unit status required")
         if meta["raw_unit_status"] == "VERIFIED_AS_TRADED":
             if meta["raw_price_basis"] != "RAW_UNADJUSTED_RTH_OHLC" or not meta.get("unit_audit_ref"):
@@ -189,6 +189,11 @@ class DailyVintage:
         missing = sorted(set(expected)-seen)
         if not self.bars or meta["missing_sessions"] != missing:
             raise ValueError("Empty/incorrect Daily coverage")
+        if meta["raw_unit_status"] == "VERIFIED_IDENTITY_INTERVAL":
+            from .daily_identity import validate_identity
+            validate_identity(meta, actions, self.bars)
+        elif "identity_interval_certification" in meta:
+            raise ValueError("Identity certification/status mismatch")
 
     @property
     def content_hash(self):
@@ -303,4 +308,6 @@ def daily_coverage(vintage):
             "known_at_policy": m["known_at_policy"], "captured_at": m["captured_at"],
             "raw_capture_hash": m["raw_capture_hash"], "session_profile": RTH,
             "action_evidence_status": vintage.actions.unpack()["status"],
+            "admission_capability": m.get("identity_interval_certification", {}).get("version"),
+            "admission_scope": m.get("identity_interval_certification", {}).get("scope"),
             "eligible_PIT_certification": False if m["raw_unit_status"] == "UNVERIFIED" else None}

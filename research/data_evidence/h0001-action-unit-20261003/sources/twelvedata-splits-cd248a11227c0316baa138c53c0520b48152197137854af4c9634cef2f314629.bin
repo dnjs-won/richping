@@ -1,0 +1,1750 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+    <head>
+        <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('consent', 'default', {"security_storage":"granted","functionality_storage":"denied","personalization_storage":"denied","analytics_storage":"denied","ad_storage":"denied","ad_user_data":"denied","ad_personalization":"denied","wait_for_update":500});
+    </script>
+
+    <script>
+            </script>
+
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-NRDG56B');</script>
+            <script>
+            dataLayer.push({'event': 'cur_instance_b'});
+        </script>
+    
+
+
+        <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","@id":"https://twelvedata.com/#organization","name":"Twelve Data","url":"https://twelvedata.com","logo":"https://twelvedata.com/build/favicons/favicon-512.png","description":"Financial data APIs for stocks, forex, cryptocurrency, and fundamental market data. Real time, historical, and EOD data.","foundingDate":"2020","areaServed":"Worldwide","sameAs":["https://twitter.com/TwelveData","https://github.com/twelvedata","https://t.me/twelvedata"],"contactPoint":[{"@type":"ContactPoint","contactType":"sales","url":"https://twelvedata.com/contact/sales"},{"@type":"ContactPoint","contactType":"customer support","url":"https://support.twelvedata.com"}]}</script>
+
+        <title>iShares Semiconductor ETF (SOXX) - Historical data, splits</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <meta charset="utf-8">
+        <meta name="_token" content="fdDgwDwSNLFLRvJer33fNSUXDzKAcvIfroUZdjm5" />
+        <meta name="description" content="Market data for iShares Semiconductor ETF (SOXX): quotes, key metrics, charts and historical prices from Twelve Data."/>
+        
+        <link rel="icon" href="https://twelvedata.com/build/favicons/favicon.ico" />
+
+
+<link rel="apple-touch-icon" sizes="180x180" href="https://twelvedata.com/build/favicons/favicon-180.png">
+
+
+<link rel="icon" type="image/png" sizes="32x32" href="https://twelvedata.com/build/favicons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://twelvedata.com/build/favicons/favicon-16.png">
+
+
+<link rel="icon" type="image/png" sizes="192x192" href="https://twelvedata.com/build/favicons/favicon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="https://twelvedata.com/build/favicons/favicon-512.png">
+
+
+<link rel="manifest" href="https://twelvedata.com/build/favicons/manifest.json">
+
+
+<meta name="msapplication-TileColor" content="#2469F0">
+<meta name="msapplication-TileImage" content="https://twelvedata.com/build/favicons/favicon-144.png">
+
+        <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin>
+        <link rel="preconnect" href="https://widget.intercom.io" crossorigin>
+        <link rel="preconnect" href="https://js.intercomcdn.com" crossorigin>
+        <link rel="preconnect" href="https://cdn.amplitude.com" crossorigin>
+        <link rel="dns-prefetch" href="https://www.clarity.ms">
+
+        <link rel="preload" as="font" type="font/woff2"
+              href="https://twelvedata.com/build/fonts/Montserrat/Montserrat-Regular.woff2" crossorigin>
+
+        <link rel="stylesheet" href="/build/css/app.css?id=2eafe8fd4243ca3a25589c3d0f6e4933">
+        <link rel="stylesheet" href="https://twelvedata.com/build/fonts/Montserrat/stylesheet.css">
+        <link rel="stylesheet" href="https://twelvedata.com/build/flag-icon-css/css/flag-icon.min.css"/>
+<style>
+    .flag-icon.flag-icon-squared {
+        width: 32px;
+        height: 32px;
+        background-size: 100% 100%;
+    }
+    .flag-icon-us.flag-icon-squared {
+        background-image: url(https://twelvedata.com/build/flag-icon-css/flags/4x3/us.svg);
+        background-size: cover;
+        background-position: left -8px center;
+    }
+    .flag-icon.flag-icon-squared-small {
+        width: 16px;
+        height: 16px;
+    }
+    .flag-icon-us.flag-icon-squared-small {
+        background-position: left -4px center;
+    }
+
+    .flag-icon-digital_currency {
+        background-image: url(https://twelvedata.com/build/images/exchanges/icons/icon-crypto.svg);
+    }
+    .flag-icon-physical_currency {
+        background-image: url(https://twelvedata.com/build/images/exchanges/icons/icon-forex.svg);
+    }
+    .flag-icon-commodity {
+        background-image: url(https://twelvedata.com/build/images/exchanges/icons/icon-forex.svg);
+    }
+</style>
+        <link rel="stylesheet" href="/build/css/cookie-banner.css?id=1b34ecbedc8c6c82b662aa293d27d66b">
+
+                            <link rel="canonical" href="https://twelvedata.com/markets/256481/etf/nasdaq/soxx/historical-data/splits" />
+            
+            <meta property="og:title" content="iShares Semiconductor ETF (SOXX) - Historical data, splits"/>
+<meta property="og:description"
+      content="Market data for iShares Semiconductor ETF (SOXX): quotes, key metrics, charts and historical prices from Twelve Data.">
+<meta property="og:url" content="https://twelvedata.com/markets/256481/etf/nasdaq/soxx/historical-data/splits"/>
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://twelvedata.com/assets/img/open_graph_logo.png"/>
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Twelve Data">
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:site" content="@TwelveData"/>
+<meta name="twitter:title" content="iShares Semiconductor ETF (SOXX) - Historical data, splits"/>
+<meta name="twitter:description" content="Market data for iShares Semiconductor ETF (SOXX): quotes, key metrics, charts and historical prices from Twelve Data."/>
+<meta name="twitter:image" content="https://twelvedata.com/assets/img/open_graph_logo.png"/>
+    <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebPage","@id":"https://twelvedata.com/markets/256481/etf/nasdaq/soxx/historical-data/splits#webpage","url":"https://twelvedata.com/markets/256481/etf/nasdaq/soxx/historical-data/splits","name":"iShares Semiconductor ETF (SOXX) \u2014 NASDAQ Price, Charts, and Data","description":"Real-time and historical market data for iShares Semiconductor ETF (SOXX) traded on NASDAQ.","isPartOf":{"@id":"https://twelvedata.com/#website"},"mainEntity":{"@id":"https://twelvedata.com/markets/256481/etf/nasdaq/soxx#organization"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","@id":"https://twelvedata.com/markets/256481/etf/nasdaq/soxx/historical-data/splits#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://twelvedata.com"},{"@type":"ListItem","position":2,"name":"Markets","item":"https://twelvedata.com/markets"},{"@type":"ListItem","position":3,"name":"ETFs","item":"https://twelvedata.com/etf"},{"@type":"ListItem","position":4,"name":"NASDAQ","item":"https://twelvedata.com/exchanges/xnms"},{"@type":"ListItem","position":5,"name":"SOXX","item":"https://twelvedata.com/markets/256481/etf/nasdaq/soxx/historical-data/splits"}]}</script>
+
+        
+        
+        <!-- Cookie Consent --><script src="https://twelvedata.com/cookie-consent/script?id=9aa331e1824c8a88136500aff8cd73f5" defer></script>    </head>
+
+    
+    <body class="" itemscope itemtype="https://schema.org/WebPage">
+                <header itemscope itemtype="http://schema.org/WPHeader">
+            <meta itemprop="headline" content="Twelve Data">
+            <meta itemprop="description" content="Company is engaged in providing real-time and historical financial data for stocks, forex and cryptocurrencies.">
+        </header>
+                    
+    <div class="page-container  stop-x-scroll ">
+        <div class="page-container__header">
+                            <div class="top-banner "  style="background-color: #002051" >
+    <div class="container d-flex align-items-lg-center">
+    <div class="d-inline d-lg-flex align-items-lg-center my-12px my-lg-0">
+        <div class="d-none d-lg-block mr-lg-12px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <g clip-path="url(#clip0_sparkles)">
+        <path d="M9.937 15.5C10.2103 15.5 10.4721 15.3907 10.6633 15.1964C10.8546 15.0022 10.9603 14.738 10.957 14.464L10.88 10.5H14.844C15.1173 10.4967 15.3791 10.3874 15.5704 10.1932C15.7616 9.99889 15.8673 9.73469 15.864 9.461C15.8673 9.18733 15.7616 8.92313 15.5704 8.72884C15.3791 8.53456 15.1173 8.4253 14.844 8.422H10.88L10.957 4.536C10.9603 4.26233 10.8546 3.99813 10.6633 3.80384C10.4721 3.60956 10.2103 3.5003 9.937 3.497C9.66371 3.5003 9.40186 3.60956 9.21064 3.80384C9.01942 3.99813 8.91371 4.26233 8.917 4.536L8.994 8.5H5.03C4.75671 8.5033 4.49486 8.61256 4.30364 8.80684C4.11242 9.00113 4.00671 9.26533 4.01 9.539C4.00671 9.81267 4.11242 10.0769 4.30364 10.2712C4.49486 10.4654 4.75671 10.5747 5.03 10.578H8.994L8.917 14.464C8.91371 14.738 9.01942 15.0022 9.21064 15.1964C9.40186 15.3907 9.66371 15.5 9.937 15.5Z" fill="white"/>
+        <path d="M17.5 20.5C17.6326 20.5 17.7598 20.4473 17.8536 20.3536C17.9473 20.2598 18 20.1326 18 20V18H20C20.1326 18 20.2598 17.9473 20.3536 17.8536C20.4473 17.7598 20.5 17.6326 20.5 17.5C20.5 17.3674 20.4473 17.2402 20.3536 17.1464C20.2598 17.0527 20.1326 17 20 17H18V15C18 14.8674 17.9473 14.7402 17.8536 14.6464C17.7598 14.5527 17.6326 14.5 17.5 14.5C17.3674 14.5 17.2402 14.5527 17.1464 14.6464C17.0527 14.7402 17 14.8674 17 15V17H15C14.8674 17 14.7402 17.0527 14.6464 17.1464C14.5527 17.2402 14.5 17.3674 14.5 17.5C14.5 17.6326 14.5527 17.7598 14.6464 17.8536C14.7402 17.9473 14.8674 18 15 18H17V20C17 20.1326 17.0527 20.2598 17.1464 20.3536C17.2402 20.4473 17.3674 20.5 17.5 20.5Z" fill="white"/>
+    </g>
+    <defs>
+        <clipPath id="clip0_sparkles">
+            <rect width="24" height="24" fill="currentColor"/>
+        </clipPath>
+    </defs>
+</svg></div>
+        <div>Now Live: Cboe Europe real-time data for all major European stocks.</div>
+        <div><a class="top-banner__link caret-right mx-lg-12px"  href="https://twelvedata.com/account/add-ons">Data add-ons</a></div>
+    </div>
+    <div id="_banner_cboe-europe" class="ml-auto mt-12px mt-lg-0" role="button" aria-label="Close banner"
+         data-role="top-banner-close"
+         data-banner-id="_banner_cboe-europe"
+         data-close-url="https://twelvedata.com/banner/close">
+        <svg class="top-banner__close" width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.667969 0.666992L11.3346 11.3337" stroke="currentColor" stroke-opacity="0.7"/>
+<path d="M11.334 0.666992L0.667318 11.3337" stroke="currentColor" stroke-opacity="0.7"/>
+</svg>    </div>
+    </div>
+</div>
+                                    <script type="application/json" id="rates-line-config">{"wsUrl":"wss:\/\/ws-site.twelvedata.com\/v1\/quotes\/price","useStub":false}</script>
+<div class="rates-line">
+        <div
+        class="ml-32px px-12px rates-line-exchange"
+        tabindex="-1"
+        role="button"
+        data-toggle="popover"
+        data-trigger="hover"
+        data-placement="bottom"
+        data-offset="0, 10"
+        data-custom-class="exchange-state-popover"
+        data-popover-content="#rates-line-exchange-state-popup"
+    >
+            <div class="flag-icon flag-icon-kr flag-icon-squared flag-icon-squared-small mr-8px rates-line-exchange__flag"></div>
+            <div class="rates-line-exchange__name mr-8px">
+            XKRX
+        </div>
+        <div
+            class="d-flex align-items-center"
+        >
+            <div class="rates-line-exchange__status rates-line-exchange__status--closed mr-8px"></div>
+            <div class="rates-line-exchange__time">opens in 1d 18h 6m</div>
+        </div>
+    </div>
+        <div class="rates-line-prices">
+        <div class="rates-line-prices__left-fade"></div>
+        <div class="d-flex rates-line-prices__tickers">
+        
+        <ul class="d-flex flex-row list-unstyled mr-auto ml-auto pl-0 mb-0">
+                                                            <li
+                class="ml-20px text-nowrap symbol drop"
+                data-symbol="0700_HKEX"
+                >
+                    <span class="symbol-name"><a href="https://twelvedata.com/markets/354132/stock/hkex/0700">0700</a></span>
+                    <span class="symbol-price symbol-price-js">421.20</span>
+                    <span class="symbol-changes"><span class="symbol-changes-js">-2.27</span>%</span>
+                </li>
+                                                            <li
+                class="ml-20px text-nowrap symbol grow"
+                data-symbol="EUR-USD"
+                >
+                    <span class="symbol-name"><a href="https://twelvedata.com/markets/503145/forex/eur-usd">EUR/USD</a></span>
+                    <span class="symbol-price symbol-price-js">1.13</span>
+                    <span class="symbol-changes"><span class="symbol-changes-js">&nbsp;0.02</span>%</span>
+                </li>
+                                                            <li
+                class="ml-20px text-nowrap symbol grow"
+                data-symbol="AAPL_NASDAQ"
+                >
+                    <span class="symbol-name"><a href="https://twelvedata.com/markets/861640/stock/nasdaq/aapl">AAPL</a></span>
+                    <span class="symbol-price symbol-price-js">333.54</span>
+                    <span class="symbol-changes"><span class="symbol-changes-js">&nbsp;0.97</span>%</span>
+                </li>
+                                                            <li
+                class="ml-20px text-nowrap symbol grow"
+                data-symbol="TSLA_NASDAQ"
+                >
+                    <span class="symbol-name"><a href="https://twelvedata.com/markets/192184/stock/nasdaq/tsla">TSLA</a></span>
+                    <span class="symbol-price symbol-price-js">371.45</span>
+                    <span class="symbol-changes"><span class="symbol-changes-js">&nbsp;4.90</span>%</span>
+                </li>
+                                                            <li
+                class="ml-20px text-nowrap symbol grow"
+                data-symbol="NESN_SIX"
+                >
+                    <span class="symbol-name"><a href="https://twelvedata.com/markets/400208/stock/six/nesn">NESN</a></span>
+                    <span class="symbol-price symbol-price-js">74.72</span>
+                    <span class="symbol-changes"><span class="symbol-changes-js">&nbsp;0.12</span>%</span>
+                </li>
+                                                            <li
+                class="ml-20px text-nowrap symbol drop"
+                data-symbol="7203_JPX"
+                >
+                    <span class="symbol-name"><a href="https://twelvedata.com/markets/188605/stock/jpx/7203">7203</a></span>
+                    <span class="symbol-price symbol-price-js">2,867.00</span>
+                    <span class="symbol-changes"><span class="symbol-changes-js">-1.98</span>%</span>
+                </li>
+                                                            <li
+                class="ml-20px text-nowrap symbol drop"
+                data-symbol="USD-JPY"
+                >
+                    <span class="symbol-name"><a href="https://twelvedata.com/markets/100641/forex/usd-jpy">USD/JPY</a></span>
+                    <span class="symbol-price symbol-price-js">157.86</span>
+                    <span class="symbol-changes"><span class="symbol-changes-js">-0.01</span>%</span>
+                </li>
+                                                            <li
+                class="ml-20px text-nowrap symbol grow"
+                data-symbol="XPT-USD"
+                >
+                    <span class="symbol-name"><a href="https://twelvedata.com/markets/609128/commodity/xpt-usd">XPT/USD</a></span>
+                    <span class="symbol-price symbol-price-js">1,003.20</span>
+                    <span class="symbol-changes"><span class="symbol-changes-js">&nbsp;0.33</span>%</span>
+                </li>
+                                                            <li
+                class="ml-20px text-nowrap symbol grow"
+                data-symbol="ETH-USD_Binance"
+                >
+                    <span class="symbol-name"><a href="https://twelvedata.com/markets/679245/crypto/binance/eth-usd">ETH/USD</a></span>
+                    <span class="symbol-price symbol-price-js">2,676.84</span>
+                    <span class="symbol-changes"><span class="symbol-changes-js">&nbsp;0.31</span>%</span>
+                </li>
+                                                            <li
+                class="ml-20px text-nowrap symbol drop"
+                data-symbol="2330_TWSE"
+                >
+                    <span class="symbol-name"><a href="https://twelvedata.com/markets/655047/stock/twse/2330">2330</a></span>
+                    <span class="symbol-price symbol-price-js">2,505.00</span>
+                    <span class="symbol-changes"><span class="symbol-changes-js">-0.20</span>%</span>
+                </li>
+                                                            <li
+                class="ml-20px text-nowrap symbol grow"
+                data-symbol="005930_KRX"
+                >
+                    <span class="symbol-name"><a href="https://twelvedata.com/markets/150300/stock/krx/005930">005930</a></span>
+                    <span class="symbol-price symbol-price-js">276,000.00</span>
+                    <span class="symbol-changes"><span class="symbol-changes-js">0.00</span>%</span>
+                </li>
+                                                            <li
+                class="ml-20px text-nowrap symbol drop"
+                data-symbol="MC_Euronext"
+                >
+                    <span class="symbol-name"><a href="https://twelvedata.com/markets/925722/stock/euronext/mc">MC</a></span>
+                    <span class="symbol-price symbol-price-js">378.55</span>
+                    <span class="symbol-changes"><span class="symbol-changes-js">-0.25</span>%</span>
+                </li>
+                                                            <li
+                class="ml-20px text-nowrap symbol drop"
+                data-symbol="AZN_LSE"
+                >
+                    <span class="symbol-name"><a href="https://twelvedata.com/markets/107973/stock/lse/azn">AZN</a></span>
+                    <span class="symbol-price symbol-price-js">11,870.00</span>
+                    <span class="symbol-changes"><span class="symbol-changes-js">-1.35</span>%</span>
+                </li>
+                                                            <li
+                class="ml-20px text-nowrap symbol grow"
+                data-symbol="ASML_Euronext"
+                >
+                    <span class="symbol-name"><a href="https://twelvedata.com/markets/890108/stock/euronext/asml">ASML</a></span>
+                    <span class="symbol-price symbol-price-js">1,653.00</span>
+                    <span class="symbol-changes"><span class="symbol-changes-js">&nbsp;3.51</span>%</span>
+                </li>
+                    </ul>
+        </div>
+    </div>
+</div>
+<div class="d-none" id="rates-line-exchange-state-popup">
+    <div class="p-24px exchange-state">
+    
+    <h5 class="pl-24px text-h8 exchange-state__header exchange-state--text-closed exchange-state__header--closed">
+        Market closed
+    </h5>
+    <p class="text-p3 mb-24px">
+        Pre-market opens in 1 day 16 hours 36 minutes
+        <br/>
+                        <span class="font-weight-bold">
+            Main market opens in 1 day 18 hours 6 minutes
+        </span>
+            </p>
+
+    
+    <div class="mb-48px exchange-state__timeline-container">
+        <div class="mt-24px d-flex exchange-state__timeline">
+                        <div class="exchange-state__timeline__item exchange-state--bg-closed" style="width: 100%"></div>
+                    </div>
+        <div class="exchange-state__current-time-marker" style="left: 62.01%">
+            <div class="mb-2px exchange-state__current-time">14:53</div>
+            <div class="exchange-state__time-indicator"></div>
+        </div>
+        <div class="mt-8px exchange-state__timeline-labels">
+                        <div class="exchange-state__timeline-label exchange-state__timeline-label--left"style="left: 0%">00:00</div>
+                        <div class="exchange-state__timeline-label exchange-state__timeline-label--right"style="left: 100%">23:59</div>
+                    </div>
+    </div>
+
+    
+    <div class="mb-12px px-20px py-16px exchange-state__trading-hours">
+        <p class="text-h9 mb-8px">Trading Hours (Monday - Friday):</p>
+                <div>
+            <div class="d-inline-block text-p3 font-weight-bold mr-4px exchange-state--text-pre">Pre-market</div>
+            <div class="d-inline-block text-p3"> 07:30 - 09:00</div>
+        </div>
+                <div>
+            <div class="d-inline-block text-p3 font-weight-bold mr-4px exchange-state--text-quotes">Main market</div>
+            <div class="d-inline-block text-p3"> 09:00 - 15:30</div>
+        </div>
+                <div>
+            <div class="d-inline-block text-p3 font-weight-bold mr-4px exchange-state--text-post">Post-market</div>
+            <div class="d-inline-block text-p3"> 15:30 - 18:00</div>
+        </div>
+            </div>
+
+    
+        <div class="text-center mb-12px">
+        <a class="btn btn-block btn-outline-primary border-1px-solid py-8px" href="https://twelvedata.com/exchanges/xkrx">Exchange details</a>
+    </div>
+    
+    
+    <div class="text-p4 text-center px-8px exchange-state__timezone-info">
+        All times are displayed in the Asia/Seoul timezone (KST, UTC+09:00).
+    </div>
+</div>
+</div>
+                        <nav class="navbar navbar-expand-lg navbar-light"
+    role="navigation" itemscope itemtype="https://www.schema.org/SiteNavigationElement">
+    <div class="container">
+        <a class="navbar-brand logo d-flex flex-wrap align-content-center mr-0" href="https://twelvedata.com">
+            <span class="twelve">twelve</span>data
+        </a>
+
+        <div class="d-flex">
+            <div role="button" aria-label="Search symbols" class="d-inline d-lg-none nav-link px-2 py-0 js-search-trigger">
+                                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_9754_7748)">
+<path d="M20.498 12.25C20.498 16.9444 16.6925 20.75 11.998 20.75C7.30363 20.75 3.49805 16.9444 3.49805 12.25C3.49805 7.55558 7.30363 3.75 11.998 3.75C16.6925 3.75 20.498 7.55558 20.498 12.25Z" stroke="#1D1D1F" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M25.498 25.75L17.998 18.25" stroke="#1D1D1F" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_9754_7748">
+<rect width="30" height="30" fill="white"/>
+</clipPath>
+</defs>
+</svg>                            </div>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+        <div class="navbar-collapse-overflow"></div>
+        <div class="collapse navbar-collapse navbarSupportedContent">
+            <ul class="navbar-nav flex-lg-grow-1 justify-content-lg-center mt-2 items">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle nav-link-padding dropdown-header-line" href="#"
+                        id="navbarProducts" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <div class="nav-item-link-outer">Products</div>
+                    </a>
+                    <div class="dropdown-menu products" aria-labelledby="navbarProducts">
+                        <div class="menu-inner soft">
+                            <div class="row">
+                                <div class="col col-12">
+                                    <div class="submenu-header marketdata">
+                                        <a href="https://twelvedata.com/market-data">Market Data
+                                            <div class="submenu-header-image"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.66602 10H16.666M16.666 10L10.666 4.16669M16.666 10L10.666 15.8334" stroke="#1D1D1F" stroke-width="2"/>
+</svg></div>
+                                        </a>
+                                    </div>
+                                    <div class="row marketdata-line">
+                                        <div class="col col-md-4 col-sm-4 col-12">
+                                            <a class="dropdown-item flexible stocks"
+                                                href="https://twelvedata.com/stocks">
+                                                <div class="submenu-item-image"><svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip250)">
+<rect width="68" height="68" rx="34" fill="#D9DEE8" class="colored"/>
+<path d="M-2.5 39H7.91511C7.97108 39 8.02643 38.9883 8.07757 38.9655L12.3457 37.0686C12.4444 37.0247 12.5565 37.0226 12.6567 37.0627L17.3046 38.9219C17.4269 38.9708 17.5655 38.9563 17.6751 38.8833L26.2455 33.1697C26.3957 33.0695 26.5944 33.0824 26.7304 33.2012L33.7293 39.3113C33.9318 39.4881 34.2475 39.4188 34.3574 39.1736L40.6935 25.0387C40.8481 24.6939 41.3505 24.7359 41.4456 25.1016L47.1975 47.2158C47.281 47.5366 47.6961 47.6225 47.9 47.3612L54.3041 39.1539C54.3799 39.0568 54.4963 39 54.6195 39H60.5666C60.6323 39 60.697 38.9838 60.755 38.9528L66.7207 35.7673C66.8384 35.7044 66.9798 35.7044 67.0975 35.7673L73.0632 38.9528C73.1212 38.9838 73.1859 39 73.2516 39H95" stroke="white" stroke-width="2" stroke-linecap="round"/>
+<rect x="40" y="-7" width="2" height="94" fill="white"/>
+<circle cx="41" cy="26" r="6" fill="white" stroke="#D9DEE8" stroke-width="2"/>
+</g>
+<defs>
+<clipPath id="clip250">
+<rect width="68" height="68" rx="34" fill="white"/>
+</clipPath>
+</defs>
+</svg></div>
+                                                <div class="submenu-item-right">
+                                                    <span class="submenu-item">Stocks</span>
+                                                    <span class="submenu-item-headline">US & global coverage</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col col-md-4 col-sm-4 col-12">
+                                            <a class="dropdown-item flexible forex"
+                                                href="https://twelvedata.com/forex">
+                                                <div class="submenu-item-image"><svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="68" height="68" rx="34" fill="#D9DEE8" class="colored"/>
+<circle cx="34" cy="35" r="21" stroke="white" stroke-width="2"/>
+<circle cx="19" cy="20" r="9" fill="#D9DEE8" stroke="white" stroke-width="2" class="colored"/>
+<circle cx="19" cy="47" r="9" fill="#D9DEE8" stroke="white" stroke-width="2" class="colored"/>
+<circle cx="49" cy="20" r="9" fill="#D9DEE8" stroke="white" stroke-width="2" class="colored"/>
+<circle cx="49" cy="47" r="9" fill="#D9DEE8" stroke="white" stroke-width="2" class="colored"/>
+<path d="M50.3462 47.5788H51.9962V48.4918H49.9392V49.0968H51.9962V50.0098H49.9392V50.9998H48.1572V50.0098H46.1002V49.0968H48.1572V48.4918H46.1002V47.5788H47.7612L44.8462 43.2998H46.7492L49.1032 46.7428L51.4792 43.2998H53.2612L50.3462 47.5788Z" fill="white"/>
+<path d="M18.2231 49.57H21.9961V51H15.3301V49.57H16.4301V47.678H15.3301V46.611H16.4301V46.325C16.4301 45.3423 16.7417 44.5723 17.3651 44.015C17.9957 43.4503 18.8757 43.168 20.0051 43.168C20.8851 43.168 21.6221 43.3366 22.2161 43.674L21.6771 45.082C21.2371 44.818 20.6871 44.686 20.0271 44.686C19.4404 44.686 18.9931 44.8216 18.6851 45.093C18.3771 45.3643 18.2231 45.764 18.2231 46.292V46.611H20.8631V47.678H18.2231V49.57Z" fill="white"/>
+<path d="M21.7101 21.7455C21.7101 22.3468 21.4901 22.8638 21.0501 23.2965C20.6101 23.7218 19.9758 23.9858 19.1471 24.0885V25.3205H18.0471V24.1215C17.5044 24.0921 16.9874 23.9968 16.4961 23.8355C16.0048 23.6741 15.6088 23.4761 15.3081 23.2415L15.9131 21.8995C16.1918 22.1048 16.5181 22.2771 16.8921 22.4165C17.2661 22.5558 17.6511 22.6438 18.0471 22.6805V20.8435C17.5264 20.7188 17.0864 20.5795 16.7271 20.4255C16.3678 20.2715 16.0671 20.0478 15.8251 19.7545C15.5831 19.4538 15.4621 19.0578 15.4621 18.5665C15.4621 17.9578 15.6821 17.4371 16.1221 17.0045C16.5694 16.5645 17.2111 16.2968 18.0471 16.2015V14.9805H19.1471V16.1795C20.0491 16.2528 20.7934 16.4765 21.3801 16.8505L20.8301 18.2035C20.2801 17.8881 19.7191 17.6975 19.1471 17.6315V19.5015C19.6604 19.6188 20.0931 19.7545 20.4451 19.9085C20.8044 20.0551 21.1051 20.2788 21.3471 20.5795C21.5891 20.8728 21.7101 21.2615 21.7101 21.7455ZM17.2331 18.4785C17.2331 18.6618 17.3028 18.8121 17.4421 18.9295C17.5814 19.0468 17.7831 19.1458 18.0471 19.2265V17.6645C17.7684 17.7305 17.5631 17.8368 17.4311 17.9835C17.2991 18.1228 17.2331 18.2878 17.2331 18.4785ZM19.1471 22.6365C19.4111 22.5778 19.6091 22.4825 19.7411 22.3505C19.8731 22.2185 19.9391 22.0608 19.9391 21.8775C19.9391 21.6941 19.8694 21.5438 19.7301 21.4265C19.5981 21.3091 19.4038 21.2065 19.1471 21.1185V22.6365Z" fill="white"/>
+<path d="M49.6541 22.614C50.4241 22.614 51.0731 22.3096 51.6011 21.701L52.7341 22.757C52.3674 23.2043 51.9127 23.5453 51.3701 23.78C50.8347 24.0146 50.2334 24.132 49.5661 24.132C48.9281 24.132 48.3341 24.0183 47.7841 23.791C47.2414 23.5636 46.7794 23.241 46.3981 22.823C46.0167 22.405 45.7417 21.921 45.5731 21.371H44.3301V20.447H45.4081C45.4007 20.381 45.3971 20.282 45.3971 20.15C45.3971 20.018 45.4007 19.919 45.4081 19.853H44.3301V18.929H45.5731C45.7417 18.379 46.0167 17.895 46.3981 17.477C46.7794 17.059 47.2414 16.7363 47.7841 16.509C48.3341 16.2816 48.9281 16.168 49.5661 16.168C50.2334 16.168 50.8347 16.2853 51.3701 16.52C51.9127 16.7546 52.3674 17.092 52.7341 17.532L51.6011 18.588C51.0657 17.9866 50.4167 17.686 49.6541 17.686C49.1701 17.686 48.7374 17.796 48.3561 18.016C47.9747 18.236 47.6814 18.5403 47.4761 18.929H50.2591V19.853H47.2011C47.1937 19.919 47.1901 20.018 47.1901 20.15C47.1901 20.282 47.1937 20.381 47.2011 20.447H50.2591V21.371H47.4761C47.6814 21.7596 47.9747 22.064 48.3561 22.284C48.7374 22.504 49.1701 22.614 49.6541 22.614Z" fill="white"/>
+</svg></div>
+                                                <div class="submenu-item-right">
+                                                    <span class="submenu-item">Forex</span>
+                                                    <span class="submenu-item-headline">Physical currency</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col col-md-4 col-sm-4 col-12">
+                                            <a class="dropdown-item flexible etf" href="https://twelvedata.com/etf">
+                                                <div class="submenu-item-image"><svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="68" height="68" rx="34" fill="#D9DEE8" class="colored"/>
+<path d="M34.0348 51.9961C38.3698 51.9964 42.5581 50.4261 45.8244 47.576L33.1255 34.8771C33.0055 34.7575 32.9103 34.6154 32.8454 34.4589C32.7804 34.3024 32.7469 34.1347 32.7469 33.9652V16C28.0883 16.3301 23.7398 18.4559 20.6179 21.9294C17.496 25.4028 15.8445 29.9526 16.0115 34.6199C16.1785 39.2872 18.151 43.7073 21.5131 46.9488C24.8753 50.1902 29.3646 51.9998 34.0348 51.9961Z" fill="white"/>
+<path d="M35.3228 16V32.6773H52.0001C51.6863 28.358 49.8285 24.296 46.7663 21.2338C43.7041 18.1715 39.642 16.3137 35.3228 16Z" fill="white"/>
+<path d="M37.144 35.2539L47.6458 45.7556C50.1982 42.8202 51.7266 39.1342 52.0002 35.2539H37.144Z" fill="white"/>
+</svg></div>
+                                                <div class="submenu-item-right">
+                                                    <span class="submenu-item">ETFs</span>
+                                                    <span class="submenu-item-headline">Exchange-traded fund</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col col-md-4 col-sm-4 col-12">
+                                            <a class="dropdown-item flexible crypto"
+                                                href="https://twelvedata.com/cryptocurrency">
+                                                <div class="submenu-item-image"><svg width="68" height="68" viewBox="0 0 68 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="68" height="68" rx="34" fill="#D9DEE8" class="colored"/>
+<path d="M35.0581 8.5V27.3487L50.9892 34.4675L35.0581 8.5Z" fill="white" fill-opacity="0.602"/>
+<path d="M35.0582 8.5L19.125 34.4675L35.0582 27.3487V8.5Z" fill="white"/>
+<path d="M35.0581 46.6826V59.49L50.9999 37.4346L35.0581 46.6826Z" fill="white" fill-opacity="0.602"/>
+<path d="M35.0582 59.49V46.6804L19.125 37.4346L35.0582 59.49Z" fill="white"/>
+<path d="M35.0581 43.7172L50.9892 34.467L35.0581 27.3525V43.7172Z" fill="white" fill-opacity="0.2"/>
+<path d="M19.125 34.467L35.0582 43.7172V27.3525L19.125 34.467Z" fill="white" fill-opacity="0.602"/>
+</svg></div>
+                                                <div class="submenu-item-right">
+                                                    <span class="submenu-item">Crypto</span>
+                                                    <span class="submenu-item-headline">Digital currency</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col col-md-4 col-sm-4 col-12">
+                                            <a class="dropdown-item flexible crypto"
+                                                href="https://twelvedata.com/commodities">
+                                                <div class="submenu-item-image"><svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="48" height="48" rx="24" fill="#FA88FC"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M23.9982 38.8236C31.7951 38.8236 38.1158 32.5029 38.1158 24.7059C38.1158 16.909 31.7951 10.5883 23.9982 10.5883C16.2012 10.5883 9.88051 16.909 9.88051 24.7059C9.88051 32.5029 16.2012 38.8236 23.9982 38.8236ZM23.9982 40.2353C32.5748 40.2353 39.5276 33.2826 39.5276 24.7059C39.5276 16.1293 32.5748 9.17651 23.9982 9.17651C15.4215 9.17651 8.46875 16.1293 8.46875 24.7059C8.46875 33.2826 15.4215 40.2353 23.9982 40.2353Z" fill="white"/>
+<path d="M20.4692 14.1177C20.4692 18.0161 17.3089 21.1765 13.4104 21.1765C9.51191 21.1765 6.35156 18.0161 6.35156 14.1177C6.35156 10.2192 9.51191 7.05884 13.4104 7.05884C17.3089 7.05884 20.4692 10.2192 20.4692 14.1177Z" fill="#FA88FC"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M13.4104 19.7647C16.5292 19.7647 19.0574 17.2364 19.0574 14.1177C19.0574 10.9989 16.5292 8.4706 13.4104 8.4706C10.2916 8.4706 7.76333 10.9989 7.76333 14.1177C7.76333 17.2364 10.2916 19.7647 13.4104 19.7647ZM13.4104 21.1765C17.3089 21.1765 20.4692 18.0161 20.4692 14.1177C20.4692 10.2192 17.3089 7.05884 13.4104 7.05884C9.51191 7.05884 6.35156 10.2192 6.35156 14.1177C6.35156 18.0161 9.51191 21.1765 13.4104 21.1765Z" fill="white"/>
+<path d="M20.4692 33.1765C20.4692 37.075 17.3089 40.2353 13.4104 40.2353C9.51191 40.2353 6.35156 37.075 6.35156 33.1765C6.35156 29.278 9.51191 26.1177 13.4104 26.1177C17.3089 26.1177 20.4692 29.278 20.4692 33.1765Z" fill="#FA88FC"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M13.4104 38.8236C16.5292 38.8236 19.0574 36.2953 19.0574 33.1765C19.0574 30.0577 16.5292 27.5294 13.4104 27.5294C10.2916 27.5294 7.76333 30.0577 7.76333 33.1765C7.76333 36.2953 10.2916 38.8236 13.4104 38.8236ZM13.4104 40.2353C17.3089 40.2353 20.4692 37.075 20.4692 33.1765C20.4692 29.278 17.3089 26.1177 13.4104 26.1177C9.51191 26.1177 6.35156 29.278 6.35156 33.1765C6.35156 37.075 9.51191 40.2353 13.4104 40.2353Z" fill="white"/>
+<path d="M41.645 14.1177C41.645 18.0161 38.4846 21.1765 34.5862 21.1765C30.6877 21.1765 27.5273 18.0161 27.5273 14.1177C27.5273 10.2192 30.6877 7.05884 34.5862 7.05884C38.4846 7.05884 41.645 10.2192 41.645 14.1177Z" fill="#FA88FC"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M34.5862 19.7647C37.705 19.7647 40.2332 17.2364 40.2332 14.1177C40.2332 10.9989 37.705 8.4706 34.5862 8.4706C31.4674 8.4706 28.9391 10.9989 28.9391 14.1177C28.9391 17.2364 31.4674 19.7647 34.5862 19.7647ZM34.5862 21.1765C38.4846 21.1765 41.645 18.0161 41.645 14.1177C41.645 10.2192 38.4846 7.05884 34.5862 7.05884C30.6877 7.05884 27.5273 10.2192 27.5273 14.1177C27.5273 18.0161 30.6877 21.1765 34.5862 21.1765Z" fill="white"/>
+<path d="M41.645 33.1765C41.645 37.075 38.4846 40.2353 34.5862 40.2353C30.6877 40.2353 27.5273 37.075 27.5273 33.1765C27.5273 29.278 30.6877 26.1177 34.5862 26.1177C38.4846 26.1177 41.645 29.278 41.645 33.1765Z" fill="#FA88FC"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M34.5862 38.8236C37.705 38.8236 40.2332 36.2953 40.2332 33.1765C40.2332 30.0577 37.705 27.5294 34.5862 27.5294C31.4674 27.5294 28.9391 30.0577 28.9391 33.1765C28.9391 36.2953 31.4674 38.8236 34.5862 38.8236ZM34.5862 40.2353C38.4846 40.2353 41.645 37.075 41.645 33.1765C41.645 29.278 38.4846 26.1177 34.5862 26.1177C30.6877 26.1177 27.5273 29.278 27.5273 33.1765C27.5273 37.075 30.6877 40.2353 34.5862 40.2353Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M34.9602 10.2139L34.5859 10.5882L34.2116 10.2139C34.4184 10.0072 34.7535 10.0072 34.9602 10.2139ZM34.5859 11.3581C34.361 11.6042 34.0637 11.9433 33.7678 12.3219C33.4682 12.7051 33.1787 13.1178 32.9664 13.5081C32.7462 13.913 32.6448 14.2303 32.6448 14.4397C32.6448 15.5351 33.52 16.4118 34.5859 16.4118C35.6518 16.4118 36.5271 15.5351 36.5271 14.4397C36.5271 14.2303 36.4257 13.913 36.2054 13.5081C35.9932 13.1178 35.7036 12.7051 35.4041 12.3219C35.1082 11.9433 34.8109 11.6042 34.5859 11.3581ZM34.2116 10.2139C34.2117 10.2138 34.2116 10.2139 34.5859 10.5882C34.9602 10.2139 34.9602 10.2138 34.9602 10.2139L34.9629 10.2165L34.969 10.2227L34.9914 10.2454C35.0107 10.2651 35.0385 10.2936 35.0737 10.3301C35.1439 10.4031 35.2434 10.5082 35.3626 10.6384C35.6003 10.8982 35.9187 11.2609 36.2383 11.6699C36.5565 12.0769 36.8846 12.5407 37.1356 13.0021C37.3786 13.4489 37.5859 13.9584 37.5859 14.4397C37.5859 16.1074 36.249 17.4706 34.5859 17.4706C32.9229 17.4706 31.5859 16.1074 31.5859 14.4397C31.5859 13.9584 31.7933 13.4489 32.0363 13.0021C32.2873 12.5407 32.6154 12.0769 32.9335 11.6699C33.2532 11.2609 33.5716 10.8982 33.8093 10.6384C33.9285 10.5082 34.028 10.4031 34.0982 10.3301C34.1333 10.2936 34.1611 10.2651 34.1804 10.2454L34.2029 10.2227L34.209 10.2165L34.2116 10.2139Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M32.3479 30.8221C32.4376 30.6427 32.6209 30.5294 32.8215 30.5294H36.3509C36.5514 30.5294 36.7347 30.6427 36.8244 30.8221L38.5891 34.3515C38.6712 34.5156 38.6624 34.7105 38.5659 34.8666C38.4695 35.0227 38.2991 35.1177 38.1156 35.1177H31.0568C30.8733 35.1177 30.7029 35.0227 30.6064 34.8666C30.5099 34.7105 30.5012 34.5156 30.5832 34.3515L32.3479 30.8221ZM33.1487 31.5882L31.9134 34.0588H37.259L36.0237 31.5882H33.1487Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10.8384 29.7901C10.9332 29.6221 11.1119 29.5189 11.3048 29.5208C12.0761 29.5286 12.6873 29.6745 13.1458 29.9566C13.6179 30.2471 13.8899 30.6592 14.0073 31.11C14.2287 31.9605 13.8909 32.8902 13.5743 33.4516C13.4795 33.6197 13.3008 33.7228 13.1079 33.7209C12.1499 33.7113 11.4457 33.4958 10.9762 33.0834C10.494 32.6598 10.3448 32.105 10.3399 31.6127C10.3351 31.1306 10.466 30.6721 10.5853 30.3514C10.6463 30.1874 10.7076 30.0508 10.7542 29.954C10.7776 29.9055 10.7975 29.8665 10.8121 29.8388C10.8194 29.8249 10.8254 29.8138 10.8298 29.8056L10.8353 29.7956L10.8372 29.7923L10.8379 29.7911L10.8382 29.7906C10.8383 29.7903 10.8384 29.7901 11.2995 30.0502L10.8384 29.7901ZM11.6274 30.5943C11.6111 30.6334 11.5944 30.6757 11.5777 30.7206C11.4799 30.9834 11.3957 31.3035 11.3987 31.6022C11.4015 31.8908 11.4829 32.1192 11.675 32.2879C11.8509 32.4424 12.1809 32.6014 12.793 32.6485C12.9772 32.2268 13.0785 31.7451 12.9826 31.3768C12.9301 31.1752 12.8175 30.9978 12.5909 30.8584C12.3944 30.7375 12.09 30.6323 11.6274 30.5943ZM11.7612 30.3094C11.7613 30.3092 11.7613 30.3091 11.7612 30.3093L11.7612 30.3094Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M9.48144 34.1601C9.42896 33.9735 9.48136 33.7739 9.6182 33.6392C10.1678 33.0978 10.7027 32.769 11.2266 32.6458C11.7659 32.5189 12.2506 32.6207 12.6538 32.8597C13.4148 33.3107 13.8381 34.2148 14.0142 34.8409C14.0667 35.0274 14.0143 35.227 13.8775 35.3618C13.1948 36.0342 12.5449 36.3791 11.9208 36.417C11.2798 36.4559 10.7802 36.1652 10.4266 35.8167C10.0803 35.4754 9.84638 35.0548 9.70233 34.7409C9.62866 34.5803 9.57464 34.4391 9.53867 34.3369C9.52062 34.2856 9.50696 34.2437 9.4975 34.2135C9.49277 34.1984 9.48908 34.1862 9.48642 34.1772L9.48317 34.1661L9.48212 34.1625L9.48173 34.1611L9.48158 34.1606C9.48151 34.1603 9.48144 34.1601 9.9895 34.0198L9.48144 34.1601ZM10.6051 34.1758C10.6217 34.2159 10.6402 34.2586 10.6607 34.3033C10.7789 34.5608 10.9476 34.85 11.1627 35.062C11.3705 35.2669 11.5912 35.373 11.8479 35.3574C12.083 35.3432 12.4303 35.2223 12.8968 34.8205C12.7265 34.3871 12.4544 33.969 12.1233 33.7728C11.9422 33.6655 11.7357 33.6183 11.4758 33.6794C11.2502 33.7325 10.9595 33.8737 10.6051 34.1758ZM10.4973 33.8785C10.4972 33.8783 10.4972 33.8782 10.4972 33.8784L10.4973 33.8785Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M15.7199 30.5572C15.5846 30.4185 15.3855 30.3641 15.2004 30.4152C14.4567 30.6205 13.9045 30.9193 13.5359 31.3114C13.1563 31.715 13.0021 32.1856 13.0075 32.6543C13.0176 33.5389 13.5889 34.3575 14.0431 34.8231C14.1784 34.9618 14.3774 35.0163 14.5626 34.9651C15.4863 34.7101 16.1099 34.3198 16.4547 33.7982C16.8089 33.2625 16.807 32.6845 16.682 32.2041C16.5596 31.7335 16.3123 31.3206 16.1124 31.0389C16.0102 30.8948 15.9149 30.7774 15.8444 30.6951C15.809 30.6539 15.7795 30.6211 15.7581 30.5978C15.7474 30.5862 15.7387 30.5769 15.7322 30.5701L15.7243 30.5617L15.7216 30.559L15.7206 30.558L15.7202 30.5575C15.72 30.5574 15.7199 30.5572 15.3444 30.927L15.7199 30.5572ZM15.1717 31.5381C15.1981 31.5725 15.2258 31.61 15.2543 31.6501C15.4182 31.8812 15.5843 32.1718 15.6604 32.4641C15.7338 32.7466 15.7154 32.9908 15.5736 33.2053C15.4436 33.4018 15.1653 33.642 14.5842 33.8452C14.2939 33.481 14.068 33.0363 14.0636 32.6515C14.0612 32.441 14.1236 32.2385 14.3065 32.044C14.4652 31.8752 14.7328 31.694 15.1717 31.5381Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M14.5832 36.7952L12.6562 33.4575L13.5732 32.9281L15.5002 36.2657C15.6464 36.519 15.5596 36.8427 15.3064 36.9889C15.0532 37.1351 14.7294 37.0484 14.5832 36.7952Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10.7293 12.7556C11.555 11.2027 13.3687 10.3587 14.8515 11.1472C16.3342 11.9356 16.6486 13.9113 15.8228 15.4641C14.9971 17.0169 13.1834 17.8609 11.7006 17.0725C10.2179 16.284 9.90356 14.3084 10.7293 12.7556Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M12.889 13.4717C13.8211 12.6269 14.6377 11.8868 14.8121 10.2865L15.8647 10.4013C15.6459 12.4096 14.5554 13.3941 13.6214 14.2372C13.5602 14.2924 13.4998 14.347 13.4403 14.4012C12.9515 14.8467 12.538 15.2552 12.2483 15.7797C11.9659 16.2911 11.7839 16.9468 11.8336 17.9015L10.7763 17.9566C10.7174 16.8266 10.9332 15.9708 11.3215 15.2678C11.7025 14.5779 12.2326 14.0693 12.7271 13.6186C12.7814 13.5692 12.8354 13.5202 12.889 13.4717Z" fill="#FA88FC"/>
+</svg>                                                </div>
+                                                <div class="submenu-item-right">
+                                                    <span class="submenu-item">Commodities</span>
+                                                    <span class="submenu-item-headline">Raw materials</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                        <div class="col col-md-4 col-sm-4 col-12">
+                                            <a class="dropdown-item flexible mutual-funds"
+                                                href="https://twelvedata.com/mutual-funds">
+                                                <div class="submenu-item-image"><svg width="32" height="32" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="48" height="48" rx="24" fill="#FC932A"/>
+<g transform="translate(11.2941 11.2941)">
+<g>
+<path d="M12.7305 25.4092C15.7904 25.4093 18.7469 24.3009 21.0526 22.2891L12.0886 13.3251C12.0039 13.2407 11.9367 13.1404 11.8908 13.0299C11.845 12.9195 11.8214 12.8011 11.8213 12.6815V0.00011489C8.53293 0.233129 5.46342 1.73369 3.25972 4.18555C1.05602 6.6374 -0.109734 9.84903 0.00814247 13.1436C0.126019 16.4381 1.51832 19.5582 3.89161 21.8463C6.26491 24.1344 9.43381 25.4118 12.7305 25.4092V25.4092Z" fill="white"/>
+<path d="M13.6396 0V11.7722H25.4119C25.1904 8.72333 23.879 5.85599 21.7175 3.69442C19.5559 1.53285 16.6885 0.221455 13.6396 0V0Z" fill="white"/>
+<path d="M14.9248 13.5911L22.3378 21.004C24.1395 18.932 25.2184 16.3301 25.4115 13.5911H14.9248Z" fill="white"/>
+</g>
+</g>
+</svg>                                                </div>
+                                                <div class="submenu-item-right">
+                                                    <span class="submenu-item">Mutual funds</span>
+                                                    <span class="submenu-item-headline">Managed investments</span>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-inner-bottom soft">
+                            <div class="row">
+                                
+                                    
+                                    
+                                        
+                                            
+                                                
+                                                
+                                                
+                                            
+                                        
+                                    
+                                <div class="col col-lg-4 col-sm-12 col-xs-12 moredata-container">
+                                    <span class="submenu-bottom-header user-select-none"><a class="">More
+                                            data</a></span>
+                                    <div class="row">
+                                        <div class="col col-12">
+                                            <a class="dropdown-item fundamentals dropdown-item-bottom"
+                                                href="https://twelvedata.com/fundamentals">
+                                                <div class="submenu-item-image"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_13169_32342)">
+<path d="M12 4L4 8L12 12L20 8L12 4Z" fill="#99BCFF" stroke="#99BCFF" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M4 12L12 16L20 12" stroke="#99BCFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M4 16L12 20L20 16" stroke="#99BCFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_13169_32342">
+<rect width="24" height="24" fill="white"/>
+</clipPath>
+</defs>
+</svg>                                                </div>
+                                                <span class="submenu-item">Fundamentals</span>
+                                            </a>
+                                        </div>
+                                        
+                                    </div>
+                                </div>
+                                <div class="col col-lg-4 col-sm-12 col-xs-12 spreadsheets-container">
+                                    <span class="submenu-bottom-header"><a
+                                            href="https://twelvedata.com/spreadsheets">Spreadsheets</a></span>
+                                    <div class="row">
+                                        <div class="col col-12">
+                                            <a class="dropdown-item google-sheets dropdown-item-bottom"
+                                                href="https://twelvedata.com/google-sheets">
+                                                <div class="submenu-item-image"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12.0004" cy="12" r="9.6" fill="#319F63"/>
+<path d="M7.19922 7.20001V16.8H16.7992V7.20001H7.19922ZM11.3992 15.4759H8.39922V13.8207H11.3992V15.4759ZM11.3992 12.8276H8.39922V11.1724H11.3992V12.8276ZM11.3992 10.1793H8.39922V8.52415H11.3992V10.1793ZM15.5992 15.4759H12.5992V13.8207H15.5992V15.4759ZM15.5992 12.8276H12.5992V11.1724H15.5992V12.8276ZM15.5992 10.1793H12.5992V8.52415H15.5992V10.1793Z" fill="white"/>
+</svg>                                                </div>
+                                                <span class="submenu-item">Google Sheets</span>
+                                            </a>
+                                        </div>
+                                        <div class="col col-12">
+                                            <a class="dropdown-item excel dropdown-item-bottom"
+                                                href="https://twelvedata.com/excel">
+                                                <div class="submenu-item-image"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12.0004" cy="12" r="9.6" fill="#319F63"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M14.6664 14.5334H13.0498L11.9471 12.9003L10.7883 14.5334H9.16466L11.1791 11.8807L9.5525 9.56081H11.1925L11.9544 10.8223L12.7663 9.56081H14.4351L12.7298 11.8807L14.6664 14.5334ZM16.7992 16.8H7.19922V7.20001H16.7992V16.8ZM8.12146 15.8344H15.8754V8.16631H8.12146" fill="white"/>
+</svg></div>
+                                                <span class="submenu-item">Excel</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col col-lg-4 col-sm-12 col-xs-12 markets-container">
+                                    <span class="submenu-bottom-header user-select-none"><a class="">Tools</a></span>
+                                    <div class="row">
+                                        <div class="col col-12">
+                                            <a class="dropdown-item google-sheets dropdown-item-bottom"
+                                                href="https://twelvedata.com/exchanges">
+                                                <div class="submenu-item-image"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M10.0413 5.75642C9.71519 6.57171 9.44976 7.56206 9.27041 8.67387C10.1382 8.59503 11.055 8.55306 12.0011 8.55306C12.9471 8.55306 13.864 8.59503 14.7317 8.67387C14.5524 7.56206 14.287 6.57171 13.9608 5.75642C13.6474 4.97279 13.2914 4.38489 12.9313 4.00418C12.5727 3.62493 12.2581 3.49755 12.0011 3.49755C11.7441 3.49755 11.4295 3.62493 11.0708 4.00418C10.7108 4.38489 10.3548 4.97279 10.0413 5.75642ZM8.76115 5.24435C8.35423 6.26164 8.042 7.48708 7.85063 8.84183C6.90863 8.98075 6.04897 9.16612 5.30337 9.3898C4.43582 9.65006 3.68353 9.97366 3.13274 10.3643C3.06251 10.4141 2.9932 10.4668 2.92578 10.5224C3.53329 6.76296 6.42089 3.76724 10.1242 2.9996C10.1057 3.01847 10.0873 3.03754 10.069 3.05681C9.54933 3.60637 9.11306 4.36459 8.76115 5.24435ZM13.8788 3.00043C13.897 3.01903 13.9151 3.03782 13.9331 3.05681C14.4528 3.60637 14.8891 4.36459 15.241 5.24435C15.6479 6.26164 15.9601 7.48708 16.1515 8.84183C17.0935 8.98075 17.9532 9.16612 18.6988 9.3898C19.5663 9.65006 20.3186 9.97366 20.8694 10.3643C20.9384 10.4132 21.0064 10.4649 21.0727 10.5193C20.4643 6.7627 17.5792 3.76919 13.8788 3.00043ZM21.0727 13.4806C21.0064 13.5351 20.9384 13.5868 20.8694 13.6357C20.3186 14.0263 19.5663 14.3499 18.6988 14.6102C17.9532 14.8339 17.0935 15.0192 16.1515 15.1582C15.9601 16.5129 15.6479 17.7384 15.241 18.7556C14.8891 19.6354 14.4528 20.3936 13.9331 20.9432C13.9151 20.9622 13.897 20.981 13.8787 20.9996C17.5792 20.2308 20.4643 17.2373 21.0727 13.4806ZM10.1242 21.0004C10.1057 20.9815 10.0873 20.9625 10.069 20.9432C9.54933 20.3936 9.11306 19.6354 8.76115 18.7556C8.35423 17.7384 8.042 16.5129 7.85063 15.1582C6.90863 15.0192 6.04897 14.8339 5.30337 14.6102C4.43582 14.3499 3.68353 14.0263 3.13274 13.6357C3.06251 13.5859 2.9932 13.5332 2.92578 13.4776C3.53329 17.237 6.42089 20.2328 10.1242 21.0004ZM5.69955 13.2896C6.28433 13.465 6.95715 13.6171 7.69872 13.7391C7.65674 13.1737 7.63495 12.5924 7.63495 12C7.63495 11.4076 7.65674 10.8263 7.69872 10.2609C6.95715 10.3829 6.28433 10.535 5.69955 10.7104C4.9037 10.9492 4.30988 11.2198 3.93041 11.4889C3.53302 11.7708 3.49862 11.9535 3.49862 12C3.49862 12.0465 3.53302 12.2292 3.93041 12.5111C4.30988 12.7802 4.9037 13.0508 5.69955 13.2896ZM9.01373 12C9.01373 12.6629 9.04263 13.3067 9.09698 13.9242C10.0033 14.0171 10.9802 14.0682 12.0011 14.0682C13.022 14.0682 13.9988 14.0171 14.9052 13.9242C14.9595 13.3067 14.9884 12.6629 14.9884 12C14.9884 11.3371 14.9595 10.6933 14.9052 10.0758C13.9988 9.98287 13.022 9.93183 12.0011 9.93183C10.9802 9.93183 10.0033 9.98287 9.09698 10.0758C9.04263 10.6933 9.01373 11.3371 9.01373 12ZM10.0413 18.2436C9.71519 17.4283 9.44976 16.4379 9.27041 15.3261C10.1382 15.405 11.055 15.4469 12.0011 15.4469C12.9471 15.4469 13.864 15.405 14.7317 15.3261C14.5524 16.4379 14.287 17.4283 13.9608 18.2436C13.6474 19.0272 13.2914 19.6151 12.9313 19.9958C12.5727 20.3751 12.2581 20.5025 12.0011 20.5025C11.7441 20.5025 11.4295 20.3751 11.0708 19.9958C10.7108 19.6151 10.3548 19.0272 10.0413 18.2436ZM18.3026 13.2896C17.7178 13.465 17.045 13.6171 16.3034 13.7391C16.3454 13.1737 16.3672 12.5924 16.3672 12C16.3672 11.4076 16.3454 10.8263 16.3034 10.2609C17.045 10.3829 17.7178 10.535 18.3026 10.7104C19.0984 10.9492 19.6923 11.2198 20.0717 11.4889C20.4691 11.7708 20.5035 11.9535 20.5035 12C20.5035 12.0465 20.4691 12.2292 20.0717 12.5111C19.6923 12.7802 19.0984 13.0508 18.3026 13.2896Z" fill="#99BCFF"/>
+</svg></div>
+                                                <span class="submenu-item">Exchanges</span>
+                                            </a>
+                                        </div>
+                                        <div class="col col-12">
+                                            <a class="dropdown-item google-sheets dropdown-item-bottom"
+                                                href="https://twelvedata.com/markets">
+                                                <div class="submenu-item-image"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_10344_51422)">
+<path d="M9.99874 3.19998C8.43445 3.56262 6.99566 4.33718 5.83162 5.44332C4.66758 6.54946 3.82068 7.94689 3.37877 9.49066C2.93686 11.0344 2.91602 12.6683 3.31843 14.2229C3.72084 15.7774 4.53183 17.196 5.66729 18.3314C6.80275 19.4669 8.22132 20.2779 9.77586 20.6803C11.3304 21.0827 12.9643 21.0619 14.5081 20.62C16.0518 20.178 17.4493 19.3311 18.5554 18.1671C19.6615 17.0031 20.4361 15.5643 20.7987 14C20.7987 13.7348 20.6934 13.4804 20.5058 13.2929C20.3183 13.1053 20.064 13 19.7987 13H15.9987C15.8169 13.699 15.4537 14.3376 14.9458 14.8511C14.4379 15.3646 13.8034 15.7348 13.1065 15.9243C12.4095 16.1138 11.6749 16.1159 10.9769 15.9302C10.2789 15.7446 9.64232 15.3778 9.13161 14.8671C8.6209 14.3564 8.25416 13.7198 8.06851 13.0219C7.88286 12.3239 7.88488 11.5892 8.07438 10.8923C8.26388 10.1953 8.63412 9.56078 9.14764 9.05289C9.66117 8.545 10.2997 8.18178 10.9987 7.99998V3.99998C10.9863 3.88151 10.9505 3.76668 10.8934 3.66215C10.8362 3.55763 10.7589 3.46548 10.6659 3.39107C10.5729 3.31665 10.466 3.26144 10.3515 3.22864C10.2369 3.19584 10.1171 3.1861 9.99874 3.19998Z" fill="#99BCFF" stroke="#99BCFF" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M15 3.5C16.2697 3.94708 17.423 4.6733 18.3748 5.62516C19.3267 6.57702 20.0529 7.73028 20.5 9H16C15.6934 8.64095 15.359 8.30659 15 8V3.5Z" stroke="#99BCFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_10344_51422">
+<rect width="24" height="24" fill="white"/>
+</clipPath>
+</defs>
+</svg></div>
+                                                <span class="submenu-item">Markets</span>
+                                            </a>
+                                        </div>
+                                        <div class="col col-12">
+                                            <a class="dropdown-item google-sheets dropdown-item-bottom" href="https://twelvedata.com/currency-converter">
+                                                <div class="submenu-item-image"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <path transform="rotate(90 12 12)" fill-rule="evenodd" clip-rule="evenodd" d="M7 3C4.79086 3 3 4.79086 3 7V17C3 19.2091 4.79086 21 7 21H17C19.2091 21 21 19.2091 21 17V7C21 4.79086 19.2091 3 17 3H7ZM11.4697 10.0303C11.7626 10.3232 12.2374 10.3232 12.5303 10.0303C12.8232 9.73744 12.8232 9.26256 12.5303 8.96967L9.53033 5.96967C9.45842 5.89776 9.37555 5.84351 9.28709 5.80691C9.20067 5.77107 9.10609 5.75093 9.00692 5.75003L9 5.75L8.99308 5.75003C8.80345 5.75177 8.61436 5.82498 8.46967 5.96967L5.46967 8.96967C5.17678 9.26256 5.17678 9.73744 5.46967 10.0303C5.76256 10.3232 6.23744 10.3232 6.53033 10.0303L8.25 8.31066V14.5C8.25 14.9142 8.58579 15.25 9 15.25C9.41421 15.25 9.75 14.9142 9.75 14.5L9.75 8.31066L11.4697 10.0303ZM15 8.75C15.4142 8.75 15.75 9.08579 15.75 9.5V15.6893L17.4697 13.9697C17.7626 13.6768 18.2374 13.6768 18.5303 13.9697C18.8232 14.2626 18.8232 14.7374 18.5303 15.0303L15.5303 18.0303C15.4584 18.1022 15.3755 18.1565 15.2871 18.1931C15.1987 18.2298 15.1017 18.25 15 18.25C14.8983 18.25 14.8013 18.2298 14.7129 18.1931C14.6245 18.1565 14.5416 18.1022 14.4697 18.0303L11.4697 15.0303C11.1768 14.7374 11.1768 14.2626 11.4697 13.9697C11.7626 13.6768 12.2374 13.6768 12.5303 13.9697L14.25 15.6893V9.5C14.25 9.08579 14.5858 8.75 15 8.75Z" fill="#99BCFF"/>
+</svg></div>
+                                                <span class="submenu-item">Currency converter</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle  nav-link-padding dropdown-header-line" href="#"
+                        id="navbarDevelopers" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <div class="nav-item-link-outer">Developers</div>
+                    </a>
+                    <div class="dropdown-menu developers" aria-labelledby="navbarDevelopers">
+                        <div class="menu-inner soft">
+                            <div class="row first-header-row">
+                                <div class="col dropdown-item-col">
+                                    <a class="dropdown-item" href="https://twelvedata.com/docs">
+                                        <div class="submenu-item-image"><svg width="52" height="41" viewBox="0 0 52 41" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M47.7664 35.2327V0C41.8633 0.491345 36.1202 1.5625 30.628 3.84055L28.2445 4.82303L27.3569 39.7007C33.8599 37.0174 38.577 35.982 47.7664 35.2327Z" fill="#8EDE9F" class="colored-light"/>
+<path d="M46.5634 35.343V0.112305L45.2094 0.225006C39.7791 0.670648 34.4528 1.9594 29.425 4.0448L27.0415 5.02728V40.1186L28.7772 39.4024C33.9801 37.2534 39.4888 35.9237 45.1046 35.4609L46.5634 35.343Z" fill="#2CC97E" class="colored"/>
+<path d="M52.3077 5.31934H49.6456V36.153C49.6474 36.6124 49.2925 36.9961 48.8311 37.034L46.5585 37.2189C45.9025 37.2727 45.2483 37.3394 44.5966 37.4189C44.3852 37.4443 44.175 37.4779 43.9649 37.5071C43.5255 37.5652 43.087 37.6241 42.6499 37.693C42.3951 37.7334 42.1421 37.7807 41.8882 37.825C41.4969 37.893 41.1048 37.9605 40.7144 38.0371C40.4479 38.09 40.1819 38.1493 39.9102 38.2066C39.5385 38.2848 39.1667 38.3649 38.7976 38.4522C38.5207 38.5176 38.2447 38.5868 37.9696 38.6565C37.6104 38.7447 37.2529 38.8398 36.8959 38.9387C36.6182 39.0144 36.3404 39.0944 36.0636 39.1753C35.7087 39.2794 35.359 39.3852 35.0085 39.4962C34.7342 39.5844 34.4595 39.6725 34.1861 39.7603C33.8352 39.8777 33.486 39.999 33.138 40.1242C32.872 40.2201 32.6055 40.3165 32.3334 40.4176C32.2117 40.4636 32.0908 40.5126 31.9695 40.5595H52.3077V5.31934Z" fill="#8EDE9F" class="colored-light"/>
+<path d="M7.09936 0.225006L5.74536 0.112305V35.3456L7.32034 35.4785C12.9326 35.9444 18.4366 37.2822 23.6308 39.4429L25.2673 40.1186V5.02728L22.8864 4.04566C17.8582 1.95983 12.531 0.670648 7.09936 0.225006Z" fill="#2CC97E" class="colored"/>
+<path d="M0 5.31934V40.5578H20.3525C20.2433 40.5152 20.1341 40.4696 20.0241 40.4292C19.7702 40.3333 19.5141 40.2416 19.2585 40.1492C18.898 40.0192 18.5379 39.8928 18.1748 39.7719C17.9123 39.6837 17.6488 39.5981 17.385 39.5147C17.0249 39.3972 16.6636 39.2867 16.3018 39.1835C16.0353 39.106 15.7693 39.0282 15.5032 38.9542C15.1384 38.854 14.7727 38.7589 14.4062 38.6655C14.1401 38.5976 13.8737 38.5296 13.6016 38.4664C13.2298 38.3782 12.8559 38.2973 12.4824 38.2178C12.2164 38.1605 11.9499 38.1025 11.6839 38.0496C11.2969 37.9739 10.9083 37.9059 10.5196 37.8384C10.2649 37.794 10.0101 37.7502 9.75489 37.705C9.32594 37.6375 8.89569 37.5803 8.46544 37.5226C8.24794 37.4938 8.03216 37.4594 7.81509 37.4349C7.1643 37.3566 6.51351 37.2899 5.86272 37.2348L3.47405 37.034C3.01347 36.9948 2.66035 36.6115 2.66208 36.153V5.31934H0Z" fill="#8EDE9F" class="colored-light"/>
+</svg></div>
+                                        <div class="submenu-item-right">
+                                            <div class="submenu-header">
+                                                <span>Documentation</span>
+                                                <div class="submenu-header-image"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.66602 10H16.666M16.666 10L10.666 4.16669M16.666 10L10.666 15.8334" stroke="#1D1D1F" stroke-width="2"/>
+</svg>                                                </div>
+                                            </div>
+                                            <!--span class="submenu-item">Documentation</span-->
+                                            <span class="submenu-item-headline">Start integrating Twelve Data’s products
+                                                and tools</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-md-6 col-xs-12">
+                                    <span class="submenu-list-title">Resources</span>
+                                    <ul class="list-unstyled">
+                                        <li><a class="dropdown-item" href="https://twelvedata.com/docs#websocket">WebSocket</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="https://twelvedata.com/docs#batch-requests">Batch
+                                                requests</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="https://twelvedata.com/docs#technical-indicators">Technical indicators</a>
+                                        </li>
+                                        <li><a class="dropdown-item" href="https://twelvedata.com/request-builder">Request
+                                                builder</a></li>
+                                    </ul>
+                                </div>
+                                <div class="col col-md-6 col-xs-12">
+                                    <span class="submenu-list-title">Guides</span>
+                                    <ul class="list-unstyled">
+                                        <li><a class="dropdown-item"
+                                                href="https://support.twelvedata.com/en/articles/5335783-trial">Free
+                                                trial</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="https://support.twelvedata.com/en/articles/5656039-how-to-get-historical-prices">Historical
+                                                data</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="https://support.twelvedata.com/en/articles/5195429-pre-post-market-data">Extended
+                                                hours data</a></li>
+                                        <li><a class="dropdown-item"
+                                                href="https://support.twelvedata.com/en/collections/3122655-faqs">FAQs</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-inner medium">
+                            <div class="row">
+                                <div class="col col-sm-6 col-xs-12">
+                                    <ul class="list-unstyled bold-items">
+                                        <li>
+                                            <a class="dropdown-item" href="https://support.twelvedata.com/">
+                                                <div class="item-image"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M18.8796 23.3718H18.5895L15.5952 23.1598C14.617 23.0891 13.3077 23.0519 11.9129 23.0519C10.5181 23.0519 9.20879 23.0891 8.23056 23.1598L5.21401 23.3607C4.12196 23.4589 3.04552 23.0471 2.2979 22.2447C1.63322 21.5067 1.30367 20.5265 1.38661 19.5366L1.60235 16.5235C1.74741 14.0691 1.74741 11.6088 1.60235 9.15442L1.38661 6.14503C1.30292 5.14623 1.63991 4.15786 2.3165 3.41834C3.06412 2.61596 4.14056 2.20417 5.23261 2.30238L8.22684 2.53301C9.20507 2.60369 10.5143 2.64089 11.9092 2.64089C13.304 2.64089 14.6133 2.60369 15.5915 2.53301L18.6043 2.32098C19.6964 2.22277 20.7728 2.63456 21.5205 3.43694C22.1851 4.17497 22.5147 5.15516 22.4317 6.14503L22.216 9.15814C22.0709 11.6125 22.0709 14.0729 22.216 16.5272L22.4317 19.5366C22.5217 20.541 22.1859 21.5372 21.5056 22.2819C20.8215 22.9969 19.869 23.3923 18.8796 23.3718ZM11.9092 22.2968C13.3226 22.2968 14.6505 22.3377 15.6287 22.4084L18.6229 22.6204C20.1427 22.7834 21.5063 21.683 21.6692 20.1634C21.6901 19.9674 21.6901 19.7699 21.6692 19.5738L21.4721 16.5607C21.3252 14.0717 21.3252 11.5764 21.4721 9.08746L21.6878 6.09295C21.8422 4.57226 20.7349 3.21412 19.2143 3.05975C19.0239 3.0404 18.832 3.04078 18.6415 3.06124L15.6287 3.27327C14.6319 3.34395 13.3077 3.38487 11.9092 3.38487C10.5106 3.38487 9.16788 3.34395 8.18964 3.27327L5.17682 3.06124C4.315 2.97679 3.46137 3.29038 2.85955 3.91309C2.31612 4.50418 2.04609 5.29652 2.11564 6.09667L2.34625 9.12094C2.49206 11.5988 2.49206 14.0829 2.34625 16.5607L2.13052 19.5738C2.06096 20.374 2.331 21.1663 2.87443 21.7574C3.47439 22.3842 4.32802 22.7023 5.1917 22.6204L8.18964 22.4084C9.16788 22.334 10.4958 22.2968 11.9092 22.2968Z" fill="#2CC97E" class="colored"/>
+<path d="M11.9088 1.68066C5.74595 1.68066 0.750244 6.67685 0.750244 12.8403C0.750244 19.0038 5.74595 24 11.9088 24C18.0717 24 23.0675 19.0038 23.0675 12.8403C23.0675 6.67685 18.0717 1.68066 11.9088 1.68066ZM11.9088 18.7922C8.6219 18.7922 5.95759 16.1276 5.95759 12.8403C5.95759 9.55307 8.6219 6.88851 11.9088 6.88851C15.1958 6.88851 17.8601 9.55307 17.8601 12.8403C17.8601 16.1276 15.1958 18.7922 11.9088 18.7922Z" fill="#2CC97E" class="colored"/>
+<path d="M17.8602 12.8405C17.8602 13.7813 17.6355 14.7083 17.2056 15.5449L22.4985 16.3595C23.2569 14.0759 23.2569 11.6088 22.4985 9.3252L17.2056 10.1361C17.6355 10.9727 17.8598 11.8997 17.8602 12.8405Z" fill="#8EDE9F" class="colored-light"/>
+<path d="M15.4275 23.4311L14.6129 18.1377C12.9161 19.0115 10.9016 19.0115 9.20471 18.1377L8.39014 23.4311C10.6747 24.1903 13.143 24.1903 15.4275 23.4311Z" fill="#8EDE9F" class="colored-light"/>
+<path d="M5.95717 12.8403C5.95717 11.9379 6.16324 11.0473 6.55974 10.2364L1.21849 9.63379C0.590257 11.7266 0.590257 13.9578 1.21849 16.0506L6.55602 15.4443C6.16063 14.6333 5.95606 13.7424 5.95717 12.8403Z" fill="#8EDE9F" class="colored-light"/>
+<path d="M8.39014 2.25009L9.20471 7.54349C10.9019 6.6708 12.9157 6.6708 14.6129 7.54349L15.4275 2.25009C13.143 1.49086 10.6747 1.49086 8.39014 2.25009Z" fill="#8EDE9F" class="colored-light"/>
+</svg></div>
+                                                Support
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="https://twelvedata.isitup.cloud"
+                                                target="_blank">
+                                                <div
+                                                    class="item-image dropdown-item__stat operational ml-8px mr-16px">
+                                                </div>
+                                                System status
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col col-sm-6 col-xs-12">
+                                    <ul class="list-unstyled bold-items">
+                                        <li>
+                                            <a class="dropdown-item" href="https://twelvedata.com/artificial-intelligence">
+                                                <div class="item-image"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_21991_56981)">
+<path d="M8.78027 14.3682H6.3291L7.55664 11.415L8.78027 14.3682Z" fill="#99BCFF"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M11.208 4.31934C11.0752 4.62608 11 4.96378 11 5.31934C11 6.71094 12.128 7.83861 13.5195 7.83887C13.6651 7.83887 13.8976 7.86336 14.1572 7.9375C14.4149 8.01112 14.6547 8.12184 14.8477 8.26074C15.0229 8.38703 15.1647 8.53988 15.2695 8.74316C15.3745 8.94687 15.4805 9.27356 15.4805 9.7998C15.4807 11.1913 16.6084 12.3193 18 12.3193C18.3556 12.3193 18.6933 12.2442 19 12.1113V19.3193C19 21.5285 17.2091 23.3193 15 23.3193H4C1.79086 23.3193 1.61066e-08 21.5285 0 19.3193V8.31934C0 6.1102 1.79086 4.31934 4 4.31934H11.208ZM3.24805 17.377H5.07812L5.76562 15.7236H9.34277L10.0273 17.377H11.9014L8.45117 9.66113H6.6875L3.24805 17.377ZM12.7031 17.377H14.4883V9.66113H12.7031V17.377Z" fill="#99BCFF"/>
+<path d="M18 0C18.4637 0.000253409 18.8398 0.376081 18.8398 0.839844C18.84 2.35758 19.4531 3.22595 20.1699 3.74219C20.9297 4.28915 21.8673 4.47948 22.4795 4.47949C22.9434 4.47949 23.3193 4.85639 23.3193 5.32031C23.3188 5.78379 22.9431 6.16016 22.4795 6.16016C21.8672 6.16016 20.9298 6.35037 20.1699 6.89746C19.4979 7.38146 18.9168 8.17473 18.8467 9.52246L18.8398 9.7998L18.835 9.88574C18.7917 10.3089 18.4345 10.6394 18 10.6396C17.5362 10.6396 17.1594 10.2635 17.1592 9.7998C17.1592 8.28192 16.5459 7.41376 15.8291 6.89746C15.0692 6.35036 14.1318 6.16016 13.5195 6.16016C13.0559 6.16016 12.6802 5.78379 12.6797 5.32031C12.6797 4.85639 13.0556 4.47949 13.5195 4.47949C15.0374 4.47949 15.9056 3.86621 16.4219 3.14941C16.9688 2.38975 17.1591 1.4521 17.1592 0.839844C17.1592 0.375925 17.5361 0 18 0Z" fill="#99BCFF"/>
+</g>
+<defs>
+<clipPath id="clip0_21991_56981">
+<rect width="24" height="24" fill="white"/>
+</clipPath>
+</defs>
+</svg></div>
+                                                Artificial Intelligence
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="https://roadmap.twelvedata.com/?statuses=open,completed&amp;view=recent">
+                                                <div class="item-image"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="3.6905" cy="9.23094" r="1.61538" stroke="#99BCFF" stroke-width="1.38462"/>
+<circle cx="3.6905" cy="21.2309" r="1.61538" stroke="#99BCFF" stroke-width="1.38462"/>
+<circle cx="12.003" cy="15.2309" r="1.61538" stroke="#99BCFF" stroke-width="1.38462"/>
+<circle cx="20.3077" cy="9.23094" r="1.61538" stroke="#99BCFF" stroke-width="1.38462"/>
+<path d="M5.53906 9.23029H10.1544" stroke="#99BCFF" stroke-width="1.38462"/>
+<path d="M5.53906 15.2303H10.1544" stroke="#99BCFF" stroke-width="1.38462"/>
+<path d="M5.53906 21.2303H10.1544" stroke="#99BCFF" stroke-width="1.38462"/>
+<path d="M13.8438 9.23029H18.4591" stroke="#99BCFF" stroke-width="1.38462"/>
+<path d="M13.8438 15.2303H18.9207" stroke="#99BCFF" stroke-width="1.38462"/>
+<path d="M20.3047 10.1535L20.3047 13.3843" stroke="#99BCFF" stroke-width="1.38462"/>
+<path d="M3.69531 16.6151L3.69531 19.8459" stroke="#99BCFF" stroke-width="1.38462"/>
+<path d="M3.69531 3.69193L3.69531 7.38423" stroke="#99BCFF" stroke-width="1.38462"/>
+<path d="M3.69531 1.38479V4.61556H9.13523C9.17436 4.61556 9.19574 4.56992 9.17069 4.53986L7.71993 2.79895C7.70567 2.78183 7.70567 2.75697 7.71993 2.73986L9.17069 0.998949C9.19574 0.968888 9.17436 0.923248 9.13523 0.923248H4.15685C3.90195 0.923248 3.69531 1.12989 3.69531 1.38479Z" stroke="#99BCFF" stroke-width="1.38462"/>
+<circle cx="3.6905" cy="15.2309" r="1.61538" fill="#99BCFF" stroke="#99BCFF" stroke-width="1.38462"/>
+<circle cx="12.003" cy="9.23094" r="1.61538" fill="#99BCFF" stroke="#99BCFF" stroke-width="1.38462"/>
+<circle cx="12.003" cy="21.2309" r="1.61538" fill="#99BCFF" stroke="#99BCFF" stroke-width="1.38462"/>
+<circle cx="20.3077" cy="15.2309" r="1.61538" fill="#99BCFF" stroke="#99BCFF" stroke-width="1.38462"/>
+</svg></div>
+                                                Roadmap
+                                            </a>
+                                        </li>
+                                        
+                                            
+                                                
+                                                
+                                                
+                                            
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown show_" style="pointer-events_: none;">
+                    <a class="nav-link dropdown-toggle nav-link-padding dropdown-header-line company" href="#"
+                        id="navbarCompany" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <div class="nav-item-link-outer">Company</div>
+                    </a>
+                    <div class="dropdown-menu company" aria-labelledby="navbarCompany">
+                        <div class="menu-inner soft">
+                            <div class="row first-header-row">
+                                <div class="col dropdown-item-col">
+                                    <a class="dropdown-item" href="https://twelvedata.com/about">
+                                        <div class="submenu-item-image"><svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M13.6148 12.6148C3.46174 22.7678 3.46174 39.2322 13.6148 49.3852C23.7678 59.5383 40.2322 59.5383 50.3852 49.3852C60.5383 39.2322 60.5383 22.7678 50.3852 12.6148C40.2322 2.46174 23.7678 2.46174 13.6148 12.6148ZM33.0427 15.9077C35.238 15.9077 36.9942 17.7187 36.9942 19.914C36.9942 22.1092 35.1831 23.9203 33.0427 23.9203C30.8475 23.9203 29.0364 22.1092 29.0364 19.8591C29.0364 17.6639 30.8475 15.9077 33.0427 15.9077ZM38.6955 42.7446C38.5858 43.0739 38.3662 43.458 38.1467 43.6776C36.7198 45.1594 34.9636 46.0375 32.8781 46.0375C31.8902 46.0375 30.9573 46.0375 29.9694 45.8728C28.3778 45.6533 26.3472 43.6776 26.6216 41.5921C26.8412 40.1652 27.0607 38.7383 27.2802 37.3113C27.7193 34.8417 28.1583 32.3172 28.5974 29.8475C28.5974 29.6829 28.6522 29.5182 28.6522 29.3536C28.6522 28.3108 28.323 27.9267 27.2802 27.8169C26.8412 27.762 26.4021 27.7071 25.9631 27.5974C25.4691 27.4327 25.1947 26.9937 25.2496 26.6095C25.3045 26.1705 25.5789 25.896 26.1277 25.7863C26.4021 25.7314 26.7314 25.7314 27.0607 25.7314C28.2681 25.7314 29.4755 25.7314 30.7377 25.7314C32.0549 25.7314 33.3172 25.7314 34.6343 25.7314C35.5673 25.7314 36.1161 26.1705 36.1161 27.1034C36.1161 27.8718 36.0063 28.6401 35.8417 29.4084C35.3478 32.2623 34.7989 35.0612 34.305 37.915C34.1404 38.848 33.9208 39.781 33.8111 40.714C33.7562 41.153 33.8111 41.647 33.9208 42.086C34.0855 42.6897 34.5245 43.019 35.1282 42.9641C35.6222 42.9092 36.1161 42.7446 36.61 42.5251C36.9942 42.3604 37.3235 42.086 37.7077 41.9763C38.3662 41.7567 38.8602 42.1409 38.6955 42.7446Z" fill="#99BCFF"/>
+</svg></div>
+                                        <div class="submenu-item-right">
+                                            <div class="submenu-header">
+                                                <span>About Twelve Data</span>
+                                                <div class="submenu-header-image"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.66602 10H16.666M16.666 10L10.666 4.16669M16.666 10L10.666 15.8334" stroke="#1D1D1F" stroke-width="2"/>
+</svg>                                                </div>
+                                            </div>
+                                            <span class="submenu-item-headline">We provide financial data, tools, and
+                                                dedicated solutions</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col col-sm-6 col-12">
+                                    <ul class="list-unstyled bold-items">
+                                        <li>
+                                            <a class="dropdown-item" href="https://twelvedata.com/expertise">
+                                                <div class="item-image"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M11.5264 2.3998C11.6796 1.9468 12.3204 1.9468 12.4736 2.3998L14.8387 9.38983H22.4205C22.9087 9.38983 23.1075 10.0178 22.7082 10.2988L16.5806 14.6102L18.931 21.5568C19.0858 22.0142 18.5665 22.4035 18.1708 22.1268L12 17.8107L5.82916 22.1268C5.43347 22.4035 4.9142 22.0142 5.06896 21.5568L7.41936 14.6102L1.2918 10.2988C0.892495 10.0178 1.09128 9.38983 1.57952 9.38983H9.16129L11.5264 2.3998Z" fill="#99BCFF"/>
+</svg></div>
+                                                Expertise
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="https://twelvedata.com/careers">
+                                                <div class="item-image"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M21.1667 5.75005H16.5833V4.83335C16.5833 3.82225 15.7611 3 14.75 3H9.25C8.2389 3 7.41665 3.82221 7.41665 4.83335V5.75H2.83335C1.82221 5.75005 1 6.57225 1 7.58335V10.3334C1 11.3445 1.82221 12.1667 2.83335 12.1667H10.1667V11.7084C10.1667 11.455 10.3717 11.25 10.625 11.25H13.375C13.6284 11.25 13.8334 11.455 13.8334 11.7084V12.1667H21.1667C22.1778 12.1667 23 11.3445 23 10.3334V7.58335C23 6.57225 22.1778 5.75005 21.1667 5.75005ZM14.75 5.75005H9.25V4.83335H14.75V5.75005Z" fill="#99BCFF"/>
+<path d="M22.7458 12.6611C22.5896 12.5837 22.4029 12.6016 22.265 12.7063C21.9392 12.953 21.5596 13.0832 21.1666 13.0832H13.8333V14.4582C13.8333 14.7116 13.6283 14.9166 13.375 14.9166H10.625C10.3717 14.9166 10.1667 14.7116 10.1667 14.4582V13.0832H2.83335C2.44036 13.0832 2.06081 12.953 1.73494 12.7063C1.59662 12.6007 1.41044 12.5828 1.2542 12.6611C1.09848 12.7386 1 12.8975 1 13.0716V19.4999C1 20.511 1.82221 21.3333 2.83335 21.3333H21.1667C22.1778 21.3333 23 20.5111 23 19.4999V13.0716C23 12.8975 22.9015 12.7386 22.7458 12.6611Z" fill="#99BCFF"/>
+</svg></div>
+                                                Careers
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="https://twelvedata.com/customers">
+                                                <div class="item-image"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_10309_49397)">
+<path d="M7.85044 10.1756C8.06909 11.5968 9.16728 13.4056 10.9711 14.0417C11.7115 14.3001 12.5215 14.3051 13.2619 14.0367C15.0359 13.3957 16.1689 11.5919 16.3925 10.1756C16.631 10.1558 16.9441 9.82283 17.282 8.62525C17.7441 6.99038 17.2522 6.74689 16.8348 6.78664C16.9143 6.56302 16.9739 6.33444 17.0137 6.1158C17.7193 1.87706 15.6322 1.73295 15.6322 1.73295C15.6322 1.73295 15.2844 1.06708 14.375 0.565186C13.7638 0.202433 12.9141 -0.0758426 11.796 0.0185724C11.4332 0.03348 11.0904 0.108018 10.7674 0.212372C10.3549 0.35151 9.97727 0.555247 9.63439 0.793769C9.21698 1.05714 8.81944 1.38511 8.4716 1.7578C7.92001 2.32429 7.42806 3.05476 7.21439 3.96413C7.03549 4.64491 7.07525 5.35551 7.22432 6.12076C7.26408 6.34438 7.32371 6.56799 7.40322 6.79161C6.9858 6.75185 6.49385 6.99535 6.95599 8.63022C7.29886 9.82283 7.61192 10.1558 7.85044 10.1756Z" fill="#99BCFF"/>
+<path d="M20.3188 15.7362C17.7795 15.0902 15.7173 13.6392 15.7173 13.6392L14.1073 18.7327L13.8042 19.6917L13.7992 19.6768L13.5358 20.4918L12.6861 18.0817C14.7732 15.1697 12.2637 15.1996 12.1246 15.2045C11.9854 15.1996 9.47597 15.1697 11.563 18.0817L10.7133 20.4918L10.4499 19.6768L10.445 19.6917L10.1418 18.7327L8.52686 13.6392C8.52686 13.6392 6.46463 15.0902 3.92537 15.7362C2.0321 16.2182 1.94265 18.4047 2.01719 19.483C2.01719 19.483 2.12651 20.9489 2.23583 21.5949C2.23583 21.5949 5.93293 23.9951 12.1246 24C18.3162 24 22.0133 21.5949 22.0133 21.5949C22.1226 20.9489 22.2319 19.483 22.2319 19.483C22.3015 18.4047 22.2121 16.2182 20.3188 15.7362Z" fill="#99BCFF"/>
+</g>
+<defs>
+<clipPath id="clip0_10309_49397">
+<rect width="24" height="24" fill="white"/>
+</clipPath>
+</defs>
+</svg></div>
+                                                Customers
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="https://security.twelvedata.com/">
+                                                <div class="item-image"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M12 2.04004C13.1134 2.04004 13.8924 2.85173 14.5322 3.52148L14.5986 3.5918C14.9125 3.92072 15.2048 4.22579 15.5195 4.47266C15.8512 4.73282 16.1838 4.90733 16.5518 4.96094C17.0606 5.03502 17.6218 5.02522 18.2012 4.99805C18.32 4.99247 18.4407 4.98589 18.5615 4.97949C19.0142 4.95553 19.4739 4.93159 19.8867 4.94727C20.4048 4.96695 20.9373 5.04969 21.3438 5.33984C21.782 5.65277 22 6.14934 22 6.81543C21.9999 9.13046 21.5094 13.9309 19.4902 17.2324C18.3849 19.0395 16.7877 20.4328 15.3535 21.373C14.635 21.8441 13.9505 22.2057 13.3789 22.4512C12.8268 22.6882 12.3279 22.8398 12 22.8398C11.6664 22.8398 11.1708 22.6879 10.625 22.4502C10.0605 22.2044 9.38798 21.8421 8.68066 21.3711C7.26796 20.4304 5.69216 19.0384 4.56543 17.2354C2.50175 13.9329 2.00006 9.13132 2 6.81543C2 6.14612 2.22423 5.64945 2.66992 5.33789C3.08239 5.04966 3.6232 4.96691 4.15137 4.94727C4.57234 4.93163 5.04144 4.95554 5.50391 4.97949C5.62741 4.98589 5.75048 4.99246 5.87207 4.99805C6.46416 5.02523 7.03889 5.03528 7.56055 4.96094C7.91209 4.9108 8.23701 4.73958 8.56543 4.47949C8.88311 4.22789 9.18004 3.91354 9.49805 3.57617L9.54297 3.52832C9.86792 3.18378 10.2197 2.81456 10.6074 2.53516C11.0016 2.25116 11.4595 2.04004 12 2.04004ZM16.3203 10.3994C15.9419 10.0464 15.3619 10.0435 14.9805 10.377L14.9072 10.4482L11.334 14.2754L9.03418 12.2061L8.95508 12.1416C8.54599 11.8421 7.96853 11.8953 7.62207 12.2803C7.27574 12.6652 7.28341 13.2448 7.62402 13.6201L7.69629 13.6924L10.7266 16.4199L10.8047 16.4834C11.2084 16.7796 11.7781 16.7321 12.127 16.3584L16.3691 11.8135C16.746 11.4097 16.7241 10.7762 16.3203 10.3994Z" fill="#99BCFF"/>
+</svg></div>
+                                                Trust
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col col-sm-6 col-12">
+                                    <ul class="list-unstyled bold-items">
+
+                                        <li>
+                                            <a class="dropdown-item" href="https://twelvedata.com/startups">
+                                                <div class="item-image"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M21.432 2.16159C17.5436 2.09187 13.109 4.1245 10.302 7.2776C7.61949 7.32823 5.00754 8.42795 3.08447 10.351C2.97242 10.4614 2.93258 10.6266 2.98155 10.776C3.03135 10.9262 3.16083 11.0349 3.31686 11.0573L6.51561 11.5155L6.12054 11.9579C5.97363 12.1222 5.9811 12.372 6.13714 12.5281L11.4714 17.8624C11.5519 17.9429 11.6582 17.9835 11.7652 17.9835C11.864 17.9835 11.9628 17.9487 12.0416 17.8781L12.484 17.4831L12.9422 20.6818C12.9646 20.8378 13.0874 20.9524 13.236 21.0022C13.2742 21.0146 13.314 21.0204 13.3547 21.0204C13.4725 21.0204 13.5929 20.969 13.6759 20.8868C15.5724 18.9903 16.6721 16.3783 16.7227 13.6958C19.8791 10.883 21.9284 6.4501 21.8379 2.56662C21.8321 2.34585 21.6536 2.1674 21.432 2.16159ZM17.6075 9.32599C17.2033 9.73019 16.6721 9.93271 16.1401 9.93271C15.6081 9.93271 15.0769 9.73019 14.6727 9.32599C13.8643 8.51676 13.8643 7.20041 14.6727 6.39118C15.4819 5.58194 16.7983 5.58194 17.6075 6.39118C18.4167 7.20041 18.4167 8.51759 17.6075 9.32599Z" fill="#99BCFF"/>
+<path d="M4.18279 16.1898C3.29471 17.0779 2.07547 21.09 1.93935 21.544C1.89536 21.6901 1.93603 21.8486 2.0431 21.9565C2.12278 22.0362 2.22819 22.0785 2.33691 22.0785C2.37675 22.0785 2.41659 22.0727 2.45643 22.0611C2.91043 21.925 6.92256 20.7057 7.81064 19.8176C8.81077 18.8175 8.81077 17.1899 7.81064 16.1898C6.80969 15.1897 5.18292 15.1905 4.18279 16.1898Z" fill="#99BCFF"/>
+</svg></div>
+                                                Startups
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="https://twelvedata.com/education">
+                                                <div class="item-image"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_10309_49402)">
+<path d="M0.917969 6.7516L2.19689 7.50383C2.50686 7.2409 2.88708 7.0741 3.29052 7.02377L12.33 5.9133C12.5607 5.88495 12.7706 6.04887 12.799 6.27955C12.8273 6.51044 12.6634 6.72037 12.4325 6.74872L3.39323 7.8594C3.25724 7.87707 3.12495 7.91692 3.00191 7.97752L12.3775 13.5034L23.8372 6.7516L12.3775 0L0.917969 6.7516Z" fill="#99BCFF"/>
+<path d="M12.1631 14.3545L3.96289 9.52374V13.9034C3.96289 15.0615 4.96409 16.1874 6.70971 16.9922C8.49888 17.7595 10.43 18.1405 12.3767 18.1103C14.3232 18.1407 16.2543 17.7597 18.0435 16.9922C19.7893 16.1874 20.7905 15.0615 20.7905 13.9034V9.52374L12.5905 14.3545C12.4587 14.4321 12.295 14.4321 12.1631 14.3545Z" fill="#99BCFF"/>
+<path d="M2.70188 23.1585L1.8605 18.5309L0.177734 23.9999L2.70188 23.1585Z" fill="#99BCFF"/>
+<path d="M3.12173 17.2687C3.12091 16.7354 2.78361 16.2607 2.28034 16.084V9.11161C2.28158 8.93454 2.3202 8.75973 2.39394 8.59869C2.51513 8.32733 2.72815 8.10754 2.9956 7.97772L2.19366 7.50403C1.97571 7.6889 1.79741 7.9163 1.67005 8.17204C1.52031 8.4627 1.44122 8.78459 1.43896 9.11161V16.084C0.835451 16.2991 0.489326 16.9326 0.634554 17.5567C0.779989 18.1807 1.37035 18.5963 2.00673 18.5225C2.64311 18.449 3.12296 17.9094 3.12173 17.2687Z" fill="#99BCFF"/>
+</g>
+<defs>
+<clipPath id="clip0_10309_49402">
+<rect width="24" height="24" fill="white"/>
+</clipPath>
+</defs>
+</svg></div>
+                                                Students
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a class="dropdown-item" href="https://twelvedata.com/brand-assets">
+                                                <div class="item-image"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<circle cx="12" cy="12" r="11" fill="#99BCFF"/>
+<path d="M8.99919 7.32272V16.692H6.83088V9.06272H4.95703V7.32272H8.99919Z" fill="white"/>
+<path d="M17.6269 14.9252V16.692H10.5465V15.2866L14.1603 11.8735C14.544 11.5076 14.8028 11.1953 14.9366 10.9366C15.0705 10.6689 15.1374 10.4056 15.1374 10.1469C15.1374 9.77211 15.008 9.48657 14.7492 9.29026C14.4994 9.08503 14.1291 8.98242 13.6383 8.98242C13.2279 8.98242 12.8575 9.06272 12.5274 9.22334C12.1972 9.37503 11.9206 9.60703 11.6975 9.91934L10.1182 8.90211C10.484 8.3578 10.9882 7.93396 11.6306 7.63057C12.2731 7.31826 13.0092 7.16211 13.8391 7.16211C14.5351 7.16211 15.1419 7.27811 15.6594 7.51011C16.1859 7.73319 16.5919 8.05442 16.8774 8.4738C17.1719 8.88426 17.3191 9.37057 17.3191 9.93272C17.3191 10.4413 17.212 10.9187 16.9979 11.3649C16.7837 11.811 16.3688 12.3196 15.7531 12.8907L13.5982 14.9252H17.6269Z" fill="white"/>
+</svg></div>
+                                                Brand assets
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="menu-inner medium">
+                            <div class="row">
+                                
+                                <div class="col col-sm-6 col-12">
+                                    <ul class="list-unstyled bold-items">
+                                        <li>
+                                            <a class="dropdown-item" href="https://twelvedata.com/news">
+                                                <div class="item-image"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M17 3H3V18C3 19.1046 3.89543 20 5 20H19C20.1046 20 21 19.1046 21 18V3H20V17.5C20 18.3284 19.3284 19 18.5 19C17.6716 19 17 18.3284 17 17.5V3ZM18 3H19V17.5C19 17.7761 18.7761 18 18.5 18C18.2239 18 18 17.7761 18 17.5V3ZM15 5H10V9H15V5ZM8 6H5V5H8V6ZM5 9H8V8H5V9ZM5 12V11H15V12H5ZM5 14V15H15V14H5ZM5 18V17H15V18H5Z" fill="#99BCFF"/>
+<path d="M18 3H19V17.5C19 17.7761 18.7761 18 18.5 18V18C18.2239 18 18 17.7761 18 17.5V3Z" fill="#99BCFF"/>
+</svg></div>
+                                                News
+                                                <div class="submenu-bottom-image"><svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M1.66602 10H16.666M16.666 10L10.666 4.16669M16.666 10L10.666 15.8334" stroke="#1D1D1F" stroke-width="2"/>
+</svg>                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item dropdown" role="presentation" itemprop="name">
+                    <a itemprop="url" class="nav-link dropdown-toggle nav-link-padding dropdown-header-line" href="#"
+                        id="navbarPricing" role="button" data-toggle="dropdown" aria-haspopup="true"
+                        aria-expanded="false">
+                        <div class="nav-item-link-outer">Pricing</div>
+                    </a>
+                    <div class="dropdown-menu pricing" aria-labelledby="navbarPricing">
+                        <div class="menu-inner soft">
+                            <div class="row">
+                                <div class="col col-12">
+                                    <a class="dropdown-item flexible pricing-individual" href="https://twelvedata.com/pricing">
+                                        <div class="submenu-item-image"><svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_22047_90007)">
+<path d="M14.9948 14.3753C18.6767 14.3753 21.6615 11.3906 21.6615 7.70866C21.6615 4.02676 18.6767 1.04199 14.9948 1.04199C11.3129 1.04199 8.32812 4.02676 8.32812 7.70866C8.32812 11.3906 11.3129 14.3753 14.9948 14.3753Z" stroke="#99BCFF" stroke-width="1.875" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M4.37109 28.7502V25.2086C4.37109 23.33 5.11737 21.5283 6.44575 20.1999C7.77414 18.8715 9.57581 18.1252 11.4544 18.1252H18.5378C20.4164 18.1252 22.2181 18.8715 23.5464 20.1999C24.8748 21.5283 25.6211 23.33 25.6211 25.2086V28.7502" fill="#99BCFF"/>
+<path d="M4.37109 28.7502V25.2086C4.37109 23.33 5.11737 21.5283 6.44575 20.1999C7.77414 18.8715 9.57581 18.1252 11.4544 18.1252H18.5378C20.4164 18.1252 22.2181 18.8715 23.5464 20.1999C24.8748 21.5283 25.6211 23.33 25.6211 25.2086V28.7502H4.37109Z" stroke="#99BCFF" stroke-width="1.875" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_22047_90007">
+<rect width="30" height="30" fill="white"/>
+</clipPath>
+</defs>
+</svg></div>
+                                        <div class="submenu-item-right">
+                                            <span class="submenu-item">For Individual</span>
+                                            <span class="submenu-item-headline">Personal &amp; non-commercial</span>
+                                        </div>
+                                    </a>
+                                    <a class="dropdown-item flexible pricing-business"
+                                        href="https://twelvedata.com/pricing-business">
+                                        <div class="submenu-item-image"><svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_22047_90015)">
+<path d="M28.124 23.6575C28.124 25.6328 26.5231 27.2345 24.5479 27.2346H5.45215C3.47673 27.2346 1.875 25.6329 1.875 23.6575V17.5618C5.96577 19.7712 10.4481 20.926 14.9971 20.926C19.5477 20.926 24.0321 19.7707 28.124 17.5598V23.6575ZM17.7266 2.34888C18.6752 2.34888 19.5851 2.72594 20.2559 3.39673C20.9265 4.06749 21.3037 4.97749 21.3037 5.92603V7.80493H24.5479C26.5231 7.8051 28.124 9.40676 28.124 11.3821V15.6653C28.0389 15.6829 27.9546 15.7136 27.875 15.759C23.8745 18.0421 19.4642 19.2278 14.9971 19.2278C10.53 19.2277 6.11962 18.0422 2.11914 15.759C2.0409 15.7144 1.95864 15.6831 1.875 15.6653V11.3821C1.875 9.40666 3.47672 7.80493 5.45215 7.80493H8.69434V5.92603C8.69434 4.97753 9.07061 4.06748 9.74121 3.39673C10.412 2.72598 11.3219 2.34892 12.2705 2.34888H17.7266ZM12.2705 4.04614C11.7723 4.04618 11.2947 4.24469 10.9424 4.59692C10.59 4.94932 10.3916 5.42766 10.3916 5.92603V7.80493H19.6055V5.92603C19.6055 5.42775 19.4079 4.9493 19.0557 4.59692C18.7033 4.24452 18.2249 4.04614 17.7266 4.04614H12.2705Z" fill="#99BCFF"/>
+</g>
+<defs>
+<clipPath id="clip0_22047_90015">
+<rect width="30" height="30" fill="white"/>
+</clipPath>
+</defs>
+</svg></div>
+                                        <div class="submenu-item-right">
+                                            <span class="submenu-item">For Business</span>
+                                            <span class="submenu-item-headline">Commercial &amp; professional</span>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <div class="navbar-mobile-bottom flex-column">
+                <a class="btn btn-primary px-24px py-8px text-btn2" href="https://calendly.com/d/ctrc-8r3-zmw/demo-of-twelve-data" target="_blank">
+                    Book a demo
+                </a>
+                <a class="btn navbar-btn-outline-secondary px-24px py-8px text-btn2 mt-16px"
+                    href="https://twelvedata.com/login">Sign in</a>
+            </div>
+            <!-- Right Side Of Navbar -->
+            <ul class="navbar-nav flex-lg-shrink-0 align-items-center ml-auto mt-2 buttons">
+                <li class="d-none d-lg-flex align-items-center nav-item ml-0">
+                    <div role="button" aria-label="Search symbols" class="nav-link pl-2 js-search-trigger">
+                                                    <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g clip-path="url(#clip0_9754_28398)">
+<path d="M16.5504 11.3C16.5504 14.8622 13.6626 17.75 10.1004 17.75C6.53815 17.75 3.65039 14.8622 3.65039 11.3C3.65039 7.73774 6.53815 4.84998 10.1004 4.84998C13.6626 4.84998 16.5504 7.73774 16.5504 11.3Z" stroke="#1D1D1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M20.9004 22.1L14.9004 16.1" stroke="#1D1D1F" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<clipPath id="clip0_9754_28398">
+<rect width="24" height="24" fill="white" transform="translate(0.5 0.5)"/>
+</clipPath>
+</defs>
+</svg>                                            </div>
+                </li>
+                <li class="nav-item">
+                    <a class="btn btn-primary px-24px py-8px ml-24px text-btn3 text-nowrap" href="https://calendly.com/d/ctrc-8r3-zmw/demo-of-twelve-data"
+                        target="_blank">
+                        Book a demo
+                    </a>
+                </li>
+                <!-- Authentication Links -->
+                                    <li class="nav-item">
+                        <a class="nav-link action ml-24px text-nowrap" href="https://twelvedata.com/login">Sign in                            <svg width="7" height="11" viewBox="0 0 7 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0.75 10L5.25 5.5L0.75 1" stroke="#1D1D1F" stroke-width="2"/>
+</svg></a>
+                    </li>
+                            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<script type="application/json" id="navbar-config">{"searchUrl":"https:\/\/twelvedata.com\/markets\/search","exchangesUrl":"https:\/\/twelvedata.com\/exchanges\/search"}</script>
+        </div>
+        <div class="page-container__content">
+            <div class="container-lg mx-md-0 mx-lg-auto mb-64px stats-container" data-role="navbar-mobile-init">
+    <div class="mt-4 mt-lg-0 symbol-container symbol-container--hidden-on-mobile">
+
+<div class="p-lg-4 stats-symbol">
+    <div class="stats-symbol__header d-flex align-items-center mb-2">
+        <img
+  class="mr-2 stats-symbol-logo-simple "
+  src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHN0eWxlPgoudGV4dCB7CiAgdGV4dC1hbmNob3I6IG1pZGRsZTsKICBkb21pbmFudC1iYXNlbGluZTogbWlkZGxlOwogIGZvbnQtZmFtaWx5OiBNb250c2VycmF0LCBzYW5zLXNlcmlmOwogIGZvbnQtc2l6ZTogMTJweDsKICBmb250LXdlaWdodDogNjAwOwogIGZpbGw6ICNCMEI4Qzk7Cn0KPC9zdHlsZT4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSIxMiIgZmlsbD0iI0VDRUZGNSIvPgogIDx0ZXh0IHg9IjEyIiB5PSIxMiIgY2xhc3M9InRleHQiPkk8L3RleHQ+Cjwvc3ZnPg=="
+  alt="iShares Semiconductor ETF logo"
+  data-src=""
+  onload="if (this.dataset.loaded === 'true') { return; } let newImg = new Image(); newImg.onload = () => { this.dataset.loaded = 'true'; this.src = newImg.src;}; newImg.src = this.dataset.src;"
+/>
+        
+        <div class="invisible"><h1 class="font-weight-bold h5 m-0">iShares Semiconductor ETF</h1></div>
+    </div>
+
+    <div class="d-flex flex-wrap stats-tag-list">
+        <div
+        class="stats-tag-list__symbol h-100"
+        data-show-exchanges-list="true"
+        >
+            <h2 class="m-0">SOXX</h2>
+                        <svg width="11" height="7" viewBox="0 0 13 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 1L6.5 7L12 1" stroke="currentColor" stroke-width="1.8"></path>
+            </svg>
+                    </div>
+        <div class="h-100">
+            <div class="stats-tag-list__tag h-100">
+                <a class="stats-tag-list__tag" href="https://twelvedata.com/exchanges/xnms">
+                    <span>NASDAQ</span>
+                </a>
+            </div>
+                        <div id="exchangesMenu" class=" exchanges-list mt-1" role="menu" aria-labelledby="exchangesBtn">
+        <a
+        href="https://twelvedata.com/markets/256481/etf/nasdaq/soxx"
+        class="exchanges-list__item"
+        role="menuitem"
+        tabindex="-1"
+         aria-current="true"
+            >
+       <div class="exchanges-list__left">
+            <div class="exchanges-list__symbol h-100">
+                <h2 class="m-0">SOXX</h2>
+            </div>
+        </div>
+        <div class="exchanges-list__right">
+            <span class="exchanges-list__exchangeName">NASDAQ</span>
+        </div>
+    </a>
+        <div class="exchanges-list__separator"></div>
+            <a
+        href="https://twelvedata.com/markets/929377/etf/iex/soxx"
+        class="exchanges-list__item"
+        role="menuitem"
+        tabindex="-1"
+            >
+       <div class="exchanges-list__left">
+            <div class="exchanges-list__symbol h-100">
+                <h2 class="m-0">SOXX</h2>
+            </div>
+        </div>
+        <div class="exchanges-list__right">
+            <span class="exchanges-list__exchangeName">IEX</span>
+        </div>
+    </a>
+        <div class="exchanges-list__separator"></div>
+            <a
+        href="https://twelvedata.com/markets/381238/etf/lse/0jg8"
+        class="exchanges-list__item"
+        role="menuitem"
+        tabindex="-1"
+            >
+       <div class="exchanges-list__left">
+            <div class="exchanges-list__symbol h-100">
+                <h2 class="m-0">0JG8</h2>
+            </div>
+        </div>
+        <div class="exchanges-list__right">
+            <span class="exchanges-list__exchangeName">LSE</span>
+        </div>
+    </a>
+        <div class="exchanges-list__separator"></div>
+            <a
+        href="https://twelvedata.com/markets/714579/etf/bmv/soxx"
+        class="exchanges-list__item"
+        role="menuitem"
+        tabindex="-1"
+            >
+       <div class="exchanges-list__left">
+            <div class="exchanges-list__symbol h-100">
+                <h2 class="m-0">SOXX</h2>
+            </div>
+        </div>
+        <div class="exchanges-list__right">
+            <span class="exchanges-list__exchangeName">BMV</span>
+        </div>
+    </a>
+        </div>
+                    </div>
+    </div>
+
+        <div class="mt-3">
+        <div class="d-flex align-items-center stats-symbol-price ">
+            <span>588.90002</span>
+            <span class="ml-1 mb-1 stats-symbol-price__currency">USD</span>
+        </div>
+        <div class="stats-symbol-price-diff">
+            <div class="stats-symbol-price-diff__text">12.57</div>
+            <div class="stats-symbol-price-diff__separator"></div>
+            <div class="stats-symbol-price-diff__text">2.18%</div>
+        </div>
+    </div>
+    
+        <div class="mt-2 stats-eod-price">Last update Oct 2, 3:59 PM EDT</div>
+    
+    <div
+        class="mt-16px stats-button stats-button--dark-gray"
+        tabindex="-1"
+        role="button"
+                data-toggle="popover"
+        data-trigger="hover"
+        data-placement="auto"
+        data-custom-class="exchange-state-popover"
+        data-popover-content="#exchange-state-popup"
+            >
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M9.47943 3.00533C9.56712 3.00533 9.65415 3.00533 9.74051 3.00533C8.88708 3.80114 8.33851 4.8719 8.19017 6.03148C8.04182 7.19107 8.30308 8.36615 8.92853 9.35249C9.55397 10.3388 10.5041 11.074 11.6136 11.4303C12.7232 11.7866 13.9221 11.7414 15.002 11.3027C14.5866 12.3057 13.9077 13.1767 13.0377 13.8228C12.1677 14.469 11.1392 14.866 10.062 14.9716C8.98475 15.0772 7.89917 14.8873 6.92104 14.4223C5.94291 13.9572 5.10891 13.2345 4.50802 12.3311C3.90712 11.4277 3.56186 10.3775 3.50907 9.29265C3.45628 8.20777 3.69794 7.12886 4.20826 6.17101C4.71859 5.21315 5.47844 4.41228 6.40677 3.85382C7.3351 3.29536 8.39708 3.00026 9.47943 3V3.00533Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>        <div>Market closed</div>
+    </div>
+
+            <div class="mt-4 stats-label">
+        <span class="mr-1"> Day range</span>
+        
+    </div>
+
+    <div class="stats-price-slider">
+        <div class="stats-price-slider__bg"></div>
+        <div class="stats-price-slider__bar" style="width: 17.95451577802%">
+            
+            <div class="invisible stats-price-slider__value">588.90002</div>
+        </div>
+        <div class="stats-price-slider__legend">
+            <div>587.25</div>
+            <div>596.44000</div>
+        </div>
+    </div>
+    
+    <div class="mt-4 stats-symbol-props-list">
+                <div>
+            <div class="stats-label">
+                <span class="mr-1">Previous close</span>
+                            </div>
+            <div>576.33002</div>
+        </div>
+                <div>
+            <div class="stats-label">
+                <span class="mr-1">Open</span>
+                            </div>
+            <div>590.59497</div>
+        </div>
+            </div>
+    
+</div>
+
+<div class="mt-4 mt-md-3 mb-4 stats-box-shadow-panel">
+    <div class="d-flex justify-content-center">Access this ETF data via API</div>
+    <a class="btn btn-block btn-primary py-8px" href="https://twelvedata.com/prime">Subscribe</a>
+</div>
+
+</div>
+
+
+    <div class="stats-sticky-symbol">
+    <div class="d-flex align-items-center">
+        <img
+  class="mr-2 stats-symbol-logo-simple  stats-symbol-logo-simple--square"
+  src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHN0eWxlPgoudGV4dCB7CiAgdGV4dC1hbmNob3I6IG1pZGRsZTsKICBkb21pbmFudC1iYXNlbGluZTogbWlkZGxlOwogIGZvbnQtZmFtaWx5OiBNb250c2VycmF0LCBzYW5zLXNlcmlmOwogIGZvbnQtc2l6ZTogMTJweDsKICBmb250LXdlaWdodDogNjAwOwogIGZpbGw6ICNCMEI4Qzk7Cn0KPC9zdHlsZT4KICA8Y2lyY2xlIGN4PSIxMiIgY3k9IjEyIiByPSIxMiIgZmlsbD0iI0VDRUZGNSIvPgogIDx0ZXh0IHg9IjEyIiB5PSIxMiIgY2xhc3M9InRleHQiPkk8L3RleHQ+Cjwvc3ZnPg=="
+  alt="iShares Semiconductor ETF logo"
+  data-src=""
+  onload="if (this.dataset.loaded === 'true') { return; } let newImg = new Image(); newImg.onload = () => { this.dataset.loaded = 'true'; this.src = newImg.src;}; newImg.src = this.dataset.src;"
+/>
+        <div class="stats-sticky-symbol__name">iShares Semiconductor ETF</div>
+    </div>
+    <div class="d-flex">
+        <div class="d-flex align-items-center mr-2 stats-sticky-symbol__price">
+            <span>588.90</span>
+            
+        </div>
+        <div class="stats-symbol-price-diff stats-symbol-price-diff--small">
+            <div class="stats-symbol-price-diff__sign"></div>
+            <div class="stats-symbol-price-diff__text">12.57</div>
+            <div class="stats-symbol-price-diff__separator"></div>
+            <div class="stats-symbol-price-diff__text">2.18%</div>
+        </div>
+    </div>
+</div>
+
+    <div class="stats-tabs-bg"></div>
+<div class="stats-tabs-bg stats-tabs-bg--top"></div>
+<ul class="mb-0 p-1 list-unstyled d-flex align-items-center stats-tabs">
+        <li class="d-flex align-items-center font-weight-bold stats-tabs__item">
+        <a href="https://twelvedata.com/markets/256481/etf/nasdaq/soxx" class="">Overview</a>
+    </li>
+        <li class="d-flex align-items-center font-weight-bold stats-tabs__item">
+        <a href="https://twelvedata.com/markets/256481/etf/nasdaq/soxx/statistics" class="">Statistics</a>
+    </li>
+        <li class="d-flex align-items-center font-weight-bold stats-tabs__item stats-tabs__item--selected">
+        <a href="https://twelvedata.com/markets/256481/etf/nasdaq/soxx/historical-data" class="">Historical&nbsp;data</a>
+    </li>
+    </ul>
+
+    <div class="mt-4 mt-md-0 stats-main-content">
+                    <h3 class="h2 mb-4 font-weight-bold">Historical data</h3>
+
+<div class="mb-4 d-flex flex-column flex-md-row">
+        <div class="mr-2">
+        <ul class="mb-0 list-unstyled align-items-center stats-link-group">
+        <li class="stats-link-group__item">
+        <a href="https://twelvedata.com/markets/256481/etf/nasdaq/soxx/historical-data">Prices</a>
+    </li>
+        <li class="stats-link-group__item stats-link-group__item--selected">
+        <a href="https://twelvedata.com/markets/256481/etf/nasdaq/soxx/historical-data/splits">Splits</a>
+    </li>
+        <li class="stats-link-group__item">
+        <a href="https://twelvedata.com/markets/256481/etf/nasdaq/soxx/historical-data/dividends">Dividends</a>
+    </li>
+    </ul>
+    </div>
+    
+    </div>
+
+
+<h4 class="h5 mb-4 font-weight-bold">Splits</h4>
+<div style="--stats-table--columns-count: 2;" class="stats-table stats-table--columns-2 mt-4 statistics-splits-table">
+<table>
+        <thead>
+        <tr>
+                        <th class="stats-table__value stats-table__value--left">
+                Date
+            </th>
+                        <th class="stats-table__value">
+                Description
+            </th>
+                    </tr>
+    </thead>
+    
+    <tbody>
+                <tr>
+                        <td class="stats-table__value stats-table__value--left">
+                Mar 07, 2024
+            </td>
+                        <td class="stats-table__value">
+                3-for-1 split
+            </td>
+                    </tr>
+            </tbody>
+</table>
+</div>
+
+<div class="px-24px py-16px stats-data-source mt-32px">
+    <div class="d-flex align-items-center">
+        <div class="mr-16px">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M6.4002 3.19995C4.63288 3.19995 3.2002 4.63264 3.2002 6.39995V25.5999C3.2002 27.3673 4.63289 28.7999 6.4002 28.7999H25.6002C27.3675 28.7999 28.8002 27.3673 28.8002 25.5999V6.39995C28.8002 4.63264 27.3675 3.19995 25.6002 3.19995H6.4002ZM13.5898 14.5229L14.1699 15.1996L13.5898 15.8764L8.79004 21.477L7.20996 20.1235L11.4297 15.1996L7.20996 10.2768L8.79004 8.92327L13.5898 14.5229ZM25.6002 19.76V21.8401H14.4V19.76H25.6002Z" fill="#4D89FE"/>
+</svg>        </div>
+        
+        <div>Access<a 
+                class="stats-data-source__link stats-data-source__link--bordered"
+                href="https://twelvedata.com/docs#splits"
+            >
+                /splits
+            </a>
+            data via our API — starting from the
+            <a href="https://twelvedata.com/pricing">Grow</a> plan (individual) and the <a href="https://twelvedata.com/pricing-business">Venture</a> plan (business) and above.
+        </div>
+    </div>
+</div>
+
+
+            </div>
+</div>
+<div class="d-none" id="exchange-state-popup">
+    <div class="p-24px exchange-state">
+    
+    <h5 class="pl-24px text-h8 exchange-state__header exchange-state--text-closed exchange-state__header--closed">
+        Market closed
+    </h5>
+    <p class="text-p3 mb-24px">
+        Pre-market opens in 2 days 2 hours 6 minutes
+        <br/>
+                        <span class="font-weight-bold">
+            Main market opens in 2 days 7 hours 36 minutes
+        </span>
+            </p>
+
+    
+    <div class="mb-48px exchange-state__timeline-container">
+        <div class="mt-24px d-flex exchange-state__timeline">
+                        <div class="exchange-state__timeline__item exchange-state--bg-closed" style="width: 100%"></div>
+                    </div>
+        <div class="exchange-state__current-time-marker" style="left: 7.85%">
+            <div class="mb-2px exchange-state__current-time">01:53</div>
+            <div class="exchange-state__time-indicator"></div>
+        </div>
+        <div class="mt-8px exchange-state__timeline-labels">
+                        <div class="exchange-state__timeline-label exchange-state__timeline-label--left"style="left: 0%">00:00</div>
+                        <div class="exchange-state__timeline-label exchange-state__timeline-label--right"style="left: 100%">23:59</div>
+                    </div>
+    </div>
+
+    
+    <div class="mb-12px px-20px py-16px exchange-state__trading-hours">
+        <p class="text-h9 mb-8px">Trading Hours (Monday - Friday):</p>
+                <div>
+            <div class="d-inline-block text-p3 font-weight-bold mr-4px exchange-state--text-pre">Pre-market</div>
+            <div class="d-inline-block text-p3"> 04:00 - 09:30</div>
+        </div>
+                <div>
+            <div class="d-inline-block text-p3 font-weight-bold mr-4px exchange-state--text-quotes">Main market</div>
+            <div class="d-inline-block text-p3"> 09:30 - 16:00</div>
+        </div>
+                <div>
+            <div class="d-inline-block text-p3 font-weight-bold mr-4px exchange-state--text-post">Post-market</div>
+            <div class="d-inline-block text-p3"> 16:00 - 20:00</div>
+        </div>
+            </div>
+
+    
+        <div class="text-center mb-12px">
+        <a class="btn btn-block btn-outline-primary border-1px-solid py-8px" href="https://twelvedata.com/exchanges/xnms">Exchange details</a>
+    </div>
+    
+    
+    <div class="text-p4 text-center px-8px exchange-state__timezone-info">
+        All times are displayed in the America/New_York timezone (EDT, UTC-04:00).
+    </div>
+</div>
+</div>
+        </div>
+                <div class="page-container__footer">
+        <footer class="page-footer power" itemtype="http://schema.org/WPFooter" style="">
+    <div class="container">
+        
+        
+        <div class="row">
+            <div class="col col-12 col-lg-4 col-md-4 mb-5">
+                <a class="logo" href="https://twelvedata.com">
+                    <span class="twelve">twelve</span>data
+                </a>
+                <p class="smooth small">Copyright © <span itemprop="copyrightYear">2026</span>
+                    Twelve Data Pte. Ltd. <br/>All rights reserved.</p>
+                <a class="contact" aria-label="Twelve Data on GitHub" href="https://github.com/twelvedata" target="_blank"><svg width="36" height="36" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M18 0C8.055 0 0 8.03518 0 17.9445C0 25.8746 5.157 32.5995 12.3075 34.969C13.2075 35.1379 13.5383 34.5832 13.5383 34.1061C13.5383 33.6793 13.5225 32.5516 13.5157 31.0564C8.5095 32.1384 7.452 28.6482 7.452 28.6482C6.633 26.5777 5.4495 26.023 5.4495 26.023C3.81825 24.9113 5.5755 24.9319 5.5755 24.9319C7.38225 25.0574 8.33175 26.7809 8.33175 26.7809C9.936 29.5247 12.546 28.7326 13.5742 28.2738C13.7362 27.1142 14.1997 26.3221 14.715 25.8746C10.7168 25.4249 6.516 23.8818 6.516 17.0063C6.516 15.0477 7.2135 13.4475 8.36775 12.192C8.16525 11.74 7.55775 9.91386 8.52525 7.44167C8.52525 7.44167 10.0328 6.96002 13.4753 9.28154C14.9153 8.88207 16.4453 8.68575 17.9753 8.67662C19.5053 8.68575 21.0353 8.88207 22.4753 9.28154C25.8953 6.96002 27.4028 7.44167 27.4028 7.44167C28.3703 9.91386 27.7628 11.7378 27.5828 12.192C28.7303 13.4475 29.4278 15.0477 29.4278 17.0063C29.4278 23.9001 25.2203 25.4181 21.2153 25.8587C21.8453 26.3974 22.4302 27.4977 22.4302 29.1777C22.4302 31.5792 22.4077 33.5081 22.4077 34.0924C22.4077 34.5627 22.7228 35.1242 23.6453 34.9439C30.8475 32.5927 36 25.8632 36 17.9468C36 8.03518 27.9405 0 18 0V0Z" fill="#626472"/>
+</svg></a>
+                <a class="contact" aria-label="Twelve Data on X (Twitter)" href="https://twitter.com/TwelveData" target="_blank"><svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M18 36C27.9411 36 36 27.9411 36 18C36 8.05887 27.9411 0 18 0C8.05887 0 0 8.05887 0 18C0 27.9411 8.05887 36 18 36ZM27.1421 8L19.8605 16.4686H19.8601L27.7796 28H21.9552L16.6222 20.2348L9.94533 28H8.21973L15.8561 19.1193L8.21973 8H14.0441L19.094 15.3532L25.4166 8H27.1421ZM16.7233 18.1101L17.4971 19.2173V19.2177L22.767 26.7594H25.4174L18.9594 17.5172L18.1857 16.4099L13.2175 9.29968H10.5671L16.7233 18.1101Z" fill="#626472"/>
+</svg></a>
+                <a class="contact" aria-label="Twelve Data on Telegram" href="https://t.me/twelvedata" target="_blank"><svg width="36" height="36" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M36 18C36 27.9411 27.9411 36 18 36C8.05887 36 0 27.9411 0 18C0 8.05887 8.05887 0 18 0C27.9411 0 36 8.05887 36 18ZM18.6438 13.2887C16.893 14.0169 13.3939 15.5241 8.14656 17.8103C7.29447 18.1491 6.8481 18.4806 6.80747 18.8048C6.7388 19.3526 7.42479 19.5683 8.35893 19.862C8.486 19.902 8.61765 19.9433 8.75262 19.9872C9.67167 20.286 10.908 20.6355 11.5507 20.6494C12.1336 20.662 12.7843 20.4216 13.5027 19.9283C18.4055 16.6188 20.9363 14.946 21.0952 14.91C21.2073 14.8845 21.3626 14.8525 21.4679 14.9461C21.5731 15.0396 21.5628 15.2168 21.5516 15.2643C21.4837 15.554 18.7909 18.0575 17.3974 19.353C16.963 19.7569 16.6548 20.0433 16.5918 20.1088C16.4507 20.2553 16.3069 20.394 16.1687 20.5272C15.3149 21.3503 14.6746 21.9675 16.2041 22.9755C16.9392 23.4599 17.5274 23.8604 18.1142 24.26C18.755 24.6964 19.3942 25.1317 20.2211 25.6738C20.4318 25.8119 20.6331 25.9554 20.8291 26.0951C21.5748 26.6268 22.2448 27.1044 23.0726 27.0283C23.5536 26.984 24.0504 26.5317 24.3027 25.1828C24.899 21.995 26.0712 15.088 26.3421 12.2418C26.3658 11.9924 26.3359 11.6733 26.312 11.5332C26.288 11.3931 26.2379 11.1935 26.0558 11.0457C25.8401 10.8707 25.5072 10.8338 25.3583 10.8363C24.6813 10.8484 23.6425 11.2095 18.6438 13.2887Z" fill="#626472"/>
+</svg></a>
+                <a class="contact" aria-label="Twelve Data on LinkedIn" href="https://www.linkedin.com/company/twelvedata" target="_blank"><svg width="36" height="36" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16 32C24.8366 32 32 24.8366 32 16C32 7.16344 24.8366 0 16 0C7.16344 0 0 7.16344 0 16C0 24.8366 7.16344 32 16 32ZM22.0961 25H26V16.9803C26 13.587 24.0765 11.9463 21.3898 11.9463C18.7018 11.9463 17.5706 14.0395 17.5706 14.0395V12.3333H13.8083V25H17.5706V18.3508C17.5706 16.5692 18.3907 15.509 19.9604 15.509C21.4034 15.509 22.0961 16.5277 22.0961 18.3508V25ZM7 8.33737C7 9.62814 8.03844 10.6747 9.31995 10.6747C10.6015 10.6747 11.6393 9.62814 11.6393 8.33737C11.6393 7.04659 10.6015 6 9.31995 6C8.03844 6 7 7.04659 7 8.33737ZM11.3004 25H7.37728V12.3333H11.3004V25Z" fill="#626472"/>
+</svg></a>
+            </div>
+
+            <div class="col col-6 col-lg-2 col-md-2 mb-5">
+                <h4>Products</h4>
+                <ul class="list-unstyled">
+                    <li><a href="https://twelvedata.com/stocks">Stocks</a></li>
+                    <li><a href="https://twelvedata.com/forex">Forex (FX)</a></li>
+                    <li><a href="https://twelvedata.com/cryptocurrency">Crypto</a></li>
+                    <li><a href="https://twelvedata.com/etf">ETFs</a></li>
+                    <li><a href="https://twelvedata.com/mutual-funds">Mutual funds</a></li>
+
+                    <li><a href="https://twelvedata.com/exchanges">Exchanges</a></li>
+                    <li><a href="https://twelvedata.com/markets">Search symbols</a></li>
+                    <li><a href="https://twelvedata.com/excel">Excel</a></li>
+                    <li><a href="https://twelvedata.com/google-sheets">Google Sheets</a></li>
+                    <li><a href="https://twelvedata.com/pricing">Pricing</a></li>
+                </ul>
+            </div>
+
+            <div class="col col-6 col-lg-2 col-md-2 mb-5">
+                <h4>Developers</h4>
+                <ul class="list-unstyled">
+                    <li><a href="https://twelvedata.com/docs">API documentation</a></li>
+                    <li><a href="https://twelvedata.com/docs#websocket">WebSocket documentation</a></li>
+                    <li><a href="https://twelvedata.com/request-builder">Request builder</a></li>
+                    <li><a href="https://twelvedata.isitup.cloud">System status</a></li>
+                    <li><a href="https://roadmap.twelvedata.com/?statuses=open,completed&amp;view=recent">Roadmap</a></li>
+
+                </ul>
+            </div>
+
+            <div class="col col-6 col-lg-2 col-md-2 mb-5">
+                <h4>Company</h4>
+                <ul class="list-unstyled">
+                    <li><a href="https://twelvedata.com/about">About</a></li>
+                    <li><a href="https://twelvedata.com/customers">Customers</a></li>
+                    <li><a href="https://twelvedata.com/education">Education</a></li>
+                    <li><a href="https://twelvedata.com/expertise">Expertise</a></li>
+                    <li><a href="https://twelvedata.com/careers">Careers</a></li>
+                    <li><a href="https://twelvedata.com/brand-assets">Brand assets</a></li>
+                    
+                    <li><a href="https://twelvedata.com/news">News</a></li>
+                </ul>
+            </div>
+
+            <div class="col col-6 col-lg-2 col-md-2 mb-5">
+                <h4>Resources</h4>
+                <ul class="list-unstyled">
+                    <li><a href="https://support.twelvedata.com/">Support</a></li>
+                    <li><a href="https://twelvedata.com/contact">Contact</a></li>
+                    <li><a href="https://twelvedata.com/privacy">Privacy policy</a></li>
+                    <li><a href="https://twelvedata.com/terms">Terms of use</a></li>
+                    <li><a target="_blank" href="https://security.twelvedata.com/">Security center</a></li>
+                    <li><a href="https://twelvedata.com/cookies">Cookie policy</a></li>
+                                        
+                                            <li><a rel="nofollow" href="https://twelvedata.com/cookie-preferences">Manage cookies</a></li>
+                                        <li><a href="https://twelvedata.com/sitemap">Sitemap</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</footer>
+        </div>
+            </div>
+
+        <link rel="preload" as="style" href="https://twelvedata.com/build/fonts/robotomono/robotomono.css" onload="this.onload=null;this.rel='stylesheet'">
+        <link rel="preload" as="style" href="https://twelvedata.com/build/fonts/fa/font-awesome.min.css" onload="this.onload=null;this.rel='stylesheet'">
+        <noscript>
+            <link rel="stylesheet" href="https://twelvedata.com/build/fonts/robotomono/robotomono.css">
+            <link rel="stylesheet" href="https://twelvedata.com/build/fonts/fa/font-awesome.min.css">
+        </noscript>
+
+    
+
+        <script src="/build/js/app.js?id=18254a5a056f75a3863361ca39ee151b" defer></script>
+    
+        <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        (function ($) {
+            const symbol   = $('.stats-tag-list__symbol');
+            const arrow = $('.stats-tag-list__symbol svg');
+            const menu  = $('#exchangesMenu');
+            let   items = menu.find('[role="menuitem"]');
+
+            function isOpen(){
+                return menu.attr('data-open') === 'true';
+            }
+            function setOpen(val){
+                if (val) {
+                    menu.attr('data-open', 'true');
+                    symbol.attr('aria-expanded', 'true');
+                    arrow.css("transform", "rotate(180deg)")
+                } else {
+                    menu.removeAttr('data-open');
+                    symbol.attr('aria-expanded', 'false');
+                    arrow.css("transform", "rotate(0deg)")
+                }
+            }
+
+            function openMenu(){
+                setOpen(true);
+                $(document).on('mousedown.menu', onDocClick);
+                $(document).on('keydown.menu', onGlobalKey);
+            }
+
+            function closeMenu(){
+                setOpen(false);
+                symbol.trigger('focus');
+                $(document).off('mousedown.menu', onDocClick);
+                $(document).off('keydown.menu', onGlobalKey);
+            }
+
+            symbol.on('click', function(){
+                isOpen() ? closeMenu() : openMenu();
+                if (isOpen() === true) {
+                    menu.data('perfectScrollbar').update();
+                }
+            });
+
+            function onDocClick(e){
+                const target = $(e.target);
+                if (!target.closest(menu).length && !target.closest(symbol).length){
+                    closeMenu();
+                }
+            }
+
+            function onGlobalKey(e){
+                if (e.key === 'Escape') {
+                    closeMenu();
+                    return;
+                }
+                if (!isOpen()) {
+                    return;
+                }
+
+                const active = document.activeElement;
+                const idx = items.index(active);
+
+                if (e.key === 'ArrowDown'){
+                    e.preventDefault();
+                    const next = (idx + 1) % items.length;
+                    items.eq(next).trigger('focus');
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault();
+                    const prev = (idx - 1 + items.length) % items.length;
+                    items.eq(prev).trigger('focus');
+                }
+            }
+
+            symbol.on('keydown', function(e){
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    isOpen() ? closeMenu() : openMenu();
+                } else if (e.key === 'ArrowDown') {
+                    e.preventDefault();
+                    if (!isOpen()) {
+                        openMenu();
+                    };
+                }
+            });
+        })(jQuery);
+    });
+</script>
+<template id="icon-misc-search-big">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M10.4615 15.9231C13.754 15.9231 16.4231 13.254 16.4231 9.96154C16.4231 6.66907 13.754 4 10.4615 4C7.16907 4 4.5 6.66907 4.5 9.96154C4.5 13.254 7.16907 15.9231 10.4615 15.9231Z" stroke="#919BAF" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M20.0001 19.5L15.2407 14.7391L14.6875 14.1859" stroke="#919BAF"/>
+</svg></template>
+<template id="icon-misc-search-clear">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M8 0C3.58172 0 0 3.58172 0 8C0 12.4183 3.58172 16 8 16C12.4183 16 16 12.4183 16 8C16 3.58172 12.4183 0 8 0ZM10.6445 11.3536L7.99809 8.70711L5.35164 11.3536L4.64453 10.6465L7.29098 8.00001L4.64453 5.35356L5.35164 4.64645L7.99809 7.2929L10.6445 4.64645L11.3516 5.35356L8.70519 8.00001L11.3516 10.6465L10.6445 11.3536Z" fill="#919BAF"/>
+</svg></template>
+<template id="icon-misc-search-cancel">
+    <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M4 4.5L20 20.5" stroke="currentColor"/>
+<path d="M20 4.5L4 20.5" stroke="currentColor"/>
+</svg></template>
+
+<script src="/build/js/portal.js?id=d7fbdf7cdbf812d6637fe2f942bb39ba" defer></script>
+    <script src="/build/js/symbol-widget.js?id=9878740707c33cb46c44a728a431958d" defer></script>
+    <script src="/build/js/custom-scroll.js?id=4a900a76abe6fde815ab483c0ae8ce9e" defer></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            window.symbolWidget.init('.stats-symbol');
+            window.customScroll.init();
+        });
+    </script>
+        
+        <aside id="cookies-policy" class="cookie-consent">
+    <noscript>
+        <style>#cookies-policy .cookie-consent__category-toggle { cursor: default; }
+        #cookies-policy .cookie-consent__category-toggle svg { display: none; }
+        #cookies-policy .cookie-consent__category-body { grid-template-rows: 1fr; }</style>
+    </noscript>
+
+    <div class="cookie-consent__banner" role="region" aria-labelledby="cookie-consent-title">
+        <button type="button" class="cookie-consent__close" aria-label="Close" data-cookie-close>
+    <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg></button>
+
+        <div class="cookie-consent__intro">
+            <h2 id="cookie-consent-title" class="cookie-consent__title">Cookies on this website</h2>
+            <p class="cookie-consent__text">
+                We use cookies for essential site functions, analytics and advertising. See                                    <a href="https://twelvedata.com/cookies">our Cookie Policy</a> for details.                            </p>
+        </div>
+
+        <div class="cookie-consent__actions">
+            <form action="https://twelvedata.com/cookie-consent/accept-essentials" method="post" data-cookie-action="accept.essentials" class="cookiesBtn cookiesBtn--essentials">
+    <input type="hidden" name="_token" value="fdDgwDwSNLFLRvJer33fNSUXDzKAcvIfroUZdjm5" autocomplete="off">    <button type="submit" class="cookiesBtn__link">
+        <span class="cookiesBtn__label">Reject all</span>
+    </button>
+</form>
+            <div class="cookiesBtn">
+                <a href="#cookie-consent-settings" class="cookiesBtn__link" data-cookie-customize>Customize</a>
+            </div>
+            <form action="https://twelvedata.com/cookie-consent/accept-all" method="post" data-cookie-action="accept.all" class="cookiesBtn">
+    <input type="hidden" name="_token" value="fdDgwDwSNLFLRvJer33fNSUXDzKAcvIfroUZdjm5" autocomplete="off">    <button type="submit" class="cookiesBtn__link">
+        <span class="cookiesBtn__label">Accept all</span>
+    </button>
+</form>
+        </div>
+    </div>
+
+    <div id="cookie-consent-settings" class="cookie-consent__modal" role="dialog" aria-modal="true" aria-labelledby="cookie-consent-settings-title" data-cookie-settings>
+        <div class="cookie-consent__modal-card">
+            <button type="button" class="cookie-consent__close" aria-label="Close" data-cookie-close>
+    <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg></button>
+
+            <h2 id="cookie-consent-settings-title" class="cookie-consent__title">Cookie Settings</h2>
+
+            <div class="cookie-consent__modal-body">
+                <p class="cookie-consent__text cookie-consent__text--lg">
+                    Click the headings below to learn more about each category of cookies and adjust your preferences. See                                            <a href="https://twelvedata.com/cookies">our Cookie Policy</a> for details.                                    </p>
+
+                <form id="cookie-consent-configure" action="https://twelvedata.com/cookie-consent/configure" method="post" data-cookie-action="accept.configuration">
+                    <input type="hidden" name="_token" value="fdDgwDwSNLFLRvJer33fNSUXDzKAcvIfroUZdjm5" autocomplete="off">                                                                    <div class="cookie-consent__category cookie-consent__category--collapsed" data-cookie-category>
+                            <div class="cookie-consent__category-head">
+                                <button type="button" class="cookie-consent__category-toggle" aria-expanded="false" aria-controls="cookie-consent-description-essentials" data-cookie-accordion>
+                                    <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M18 15L12 9L6 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>                                    <span>Strictly necessary</span>
+                                </button>
+
+                                                                    
+                                    <input type="hidden" name="categories[]" value="essentials">
+                                    <span class="cookie-consent__always-on">Always on</span>
+                                                            </div>
+
+                                                            <div id="cookie-consent-description-essentials" class="cookie-consent__category-body">
+                                    <div>
+                                        <p class="cookie-consent__category-text">These cookies are essential for the operation, security, and integrity of our website and services. They enable core functionality such as authentication, session management, and security protections.</p>
+                                    </div>
+                                </div>
+                                                    </div>
+                                                                    <div class="cookie-consent__category cookie-consent__category--collapsed" data-cookie-category>
+                            <div class="cookie-consent__category-head">
+                                <button type="button" class="cookie-consent__category-toggle" aria-expanded="false" aria-controls="cookie-consent-description-functional" data-cookie-accordion>
+                                    <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M18 15L12 9L6 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>                                    <span>Functional</span>
+                                </button>
+
+                                                                    <label class="cookie-consent__switch">
+                                        
+                                        <input type="checkbox" name="categories[]" value="functional"
+                                               class="cookie-consent__switch-input"
+                                               aria-label="Functional"
+                                               >
+                                        <span class="cookie-consent__switch-track">
+                                            <span class="cookie-consent__switch-knob"></span>
+                                        </span>
+                                    </label>
+                                                            </div>
+
+                                                            <div id="cookie-consent-description-functional" class="cookie-consent__category-body">
+                                    <div>
+                                        <p class="cookie-consent__category-text">These cookies enable enhanced functionality and personalization, such as remembering user preferences and consent choices.</p>
+                                    </div>
+                                </div>
+                                                    </div>
+                                                                    <div class="cookie-consent__category cookie-consent__category--collapsed" data-cookie-category>
+                            <div class="cookie-consent__category-head">
+                                <button type="button" class="cookie-consent__category-toggle" aria-expanded="false" aria-controls="cookie-consent-description-analytics" data-cookie-accordion>
+                                    <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M18 15L12 9L6 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>                                    <span>Analytics</span>
+                                </button>
+
+                                                                    <label class="cookie-consent__switch">
+                                        
+                                        <input type="checkbox" name="categories[]" value="analytics"
+                                               class="cookie-consent__switch-input"
+                                               aria-label="Analytics"
+                                               >
+                                        <span class="cookie-consent__switch-track">
+                                            <span class="cookie-consent__switch-knob"></span>
+                                        </span>
+                                    </label>
+                                                            </div>
+
+                                                            <div id="cookie-consent-description-analytics" class="cookie-consent__category-body">
+                                    <div>
+                                        <p class="cookie-consent__category-text">These cookies help us understand how visitors use our website, including pages viewed, traffic sources, actions taken and general location. This information is linked to a randomly generated identifier rather than to your name.</p>
+                                    </div>
+                                </div>
+                                                    </div>
+                                                                    <div class="cookie-consent__category cookie-consent__category--collapsed" data-cookie-category>
+                            <div class="cookie-consent__category-head">
+                                <button type="button" class="cookie-consent__category-toggle" aria-expanded="false" aria-controls="cookie-consent-description-advertising" data-cookie-accordion>
+                                    <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M18 15L12 9L6 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>                                    <span>Advertising</span>
+                                </button>
+
+                                                                    <label class="cookie-consent__switch">
+                                        
+                                        <input type="checkbox" name="categories[]" value="advertising"
+                                               class="cookie-consent__switch-input"
+                                               aria-label="Advertising"
+                                               >
+                                        <span class="cookie-consent__switch-track">
+                                            <span class="cookie-consent__switch-knob"></span>
+                                        </span>
+                                    </label>
+                                                            </div>
+
+                                                            <div id="cookie-consent-description-advertising" class="cookie-consent__category-body">
+                                    <div>
+                                        <p class="cookie-consent__category-text">These cookies are used to measure the performance of our advertising and to show you relevant advertising on other websites. Information collected through them is made available to advertising providers including Google and LinkedIn.</p>
+                                    </div>
+                                </div>
+                                                    </div>
+                                    </form>
+            </div>
+
+            
+            <div class="cookie-consent__actions">
+                <form action="https://twelvedata.com/cookie-consent/accept-essentials" method="post" data-cookie-action="accept.essentials" class="cookiesBtn cookiesBtn--essentials">
+    <input type="hidden" name="_token" value="fdDgwDwSNLFLRvJer33fNSUXDzKAcvIfroUZdjm5" autocomplete="off">    <button type="submit" class="cookiesBtn__link">
+        <span class="cookiesBtn__label">Reject all</span>
+    </button>
+</form>
+                                    <form action="https://twelvedata.com/cookie-consent/accept-all" method="post" data-cookie-action="accept.all" class="cookiesBtn">
+    <input type="hidden" name="_token" value="fdDgwDwSNLFLRvJer33fNSUXDzKAcvIfroUZdjm5" autocomplete="off">    <button type="submit" class="cookiesBtn__link">
+        <span class="cookiesBtn__label">Accept all</span>
+    </button>
+</form>
+                                <div class="cookiesBtn">
+                    <button type="submit" form="cookie-consent-configure" class="cookiesBtn__link">Save preferences</button>
+                </div>
+                            </div>
+        </div>
+    </div>
+</aside>
+
+
+<script src="/build/js/cookie-banner.js?id=6f07bf0eddc41c6c3850330dd1e639ea"></script>
+    </body>
+</html>

@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Share price history for Ishares Semicon (SOXX) including charting, last trade, news, history and share dealing online, buy and sell Ishares Semicon shares.">
+    
+    <title>Ishares Semicon Share Price History (SOXX) - Buy Ishares Semicon  Shares (SOXX.L, LON:SOXX) - SOXX Share Price Today - Buy SOXX Shares Now - Share Price History</title>
+
+    <link rel="stylesheet" href="https://shareprices.com/css/style.min.css?v=1.1.4" media="screen">
+    <link rel="stylesheet" href="https://use.typekit.net/edc3orj.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.min.css"> 
+    <link rel="icon" href="https://shareprices.com/images/favicon.png">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-1PELJZ31HR"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-1PELJZ31HR');
+    </script>
+
+    <script>"use strict";function _typeof(t){return(_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(t){return typeof t}:function(t){return t&&"function"==typeof Symbol&&t.constructor===Symbol&&t!==Symbol.prototype?"symbol":typeof t})(t)}!function(){var t=function(){var t,e,o=[],n=window,r=n;for(;r;){try{if(r.frames.__tcfapiLocator){t=r;break}}catch(t){}if(r===n.top)break;r=r.parent}t||(!function t(){var e=n.document,o=!!n.frames.__tcfapiLocator;if(!o)if(e.body){var r=e.createElement("iframe");r.style.cssText="display:none",r.name="__tcfapiLocator",e.body.appendChild(r)}else setTimeout(t,5);return!o}(),n.__tcfapi=function(){for(var t=arguments.length,n=new Array(t),r=0;r<t;r++)n[r]=arguments[r];if(!n.length)return o;"setGdprApplies"===n[0]?n.length>3&&2===parseInt(n[1],10)&&"boolean"==typeof n[3]&&(e=n[3],"function"==typeof n[2]&&n[2]("set",!0)):"ping"===n[0]?"function"==typeof n[2]&&n[2]({gdprApplies:e,cmpLoaded:!1,cmpStatus:"stub"}):o.push(n)},n.addEventListener("message",(function(t){var e="string"==typeof t.data,o={};if(e)try{o=JSON.parse(t.data)}catch(t){}else o=t.data;var n="object"===_typeof(o)&&null!==o?o.__tcfapiCall:null;n&&window.__tcfapi(n.command,n.version,(function(o,r){var a={__tcfapiReturn:{returnValue:o,success:r,callId:n.callId}};t&&t.source&&t.source.postMessage&&t.source.postMessage(e?JSON.stringify(a):a,"*")}),n.parameter)}),!1))};"undefined"!=typeof module?module.exports=t:t()}();</script>
+    <script>
+        window._sp_queue = [];
+        window._sp_ = {
+            config: {
+            accountId: 2028,
+                baseEndpoint: 'https://cdn.privacy-mgmt.com',
+                gdpr: { },
+                events: { 
+                    onMessageReady: function() {
+                        console.log('[event] onMessageReady', arguments);
+                    },
+                    onMessageReceiveData: function() {
+                        console.log('[event] onMessageReceiveData', arguments);
+                    },
+                    onSPReady: function() {
+                        console.log('[event] onSPReady', arguments);
+                    },
+                    onError: function() {
+                        console.log('[event] onError', arguments);
+                    },
+                    onMessageChoiceSelect: function() {
+                        console.log('[event] onMessageChoiceSelect', arguments);
+                    },
+                    onConsentReady: function(consentUUID, euconsent) {
+                        console.log('[event] onConsentReady', arguments);
+                    },
+                    onPrivacyManagerAction: function() {
+                        console.log('[event] onPrivacyManagerAction', arguments);
+                    },
+                    onPMCancel: function() {
+                        console.log('[event] onPMCancel', arguments);
+                    } 
+                }
+            }
+        }
+    </script>
+    <script src='https://cdn.privacy-mgmt.com/unified/wrapperMessagingWithoutDetection.js' async></script>
+
+    <!-- Matomo -->
+    <script>
+        var _paq = window._paq = window._paq || [];
+        /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+        _paq.push(['trackPageView']);
+        _paq.push(['enableLinkTracking']);
+        (function() {
+            var u="https://analytics.revive.digital/";
+            _paq.push(['setTrackerUrl', u+'matomo.php']);
+            _paq.push(['setSiteId', '19']);
+            var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];
+            g.async=true; g.src=u+'matomo.js'; s.parentNode.insertBefore(g,s);
+        })();
+    </script>
+    <!-- End Matomo Code -->
+</head>
+
+<script src="https://cdn.tagdeliver.com/cipt/18158.js" async="async"></script>
+
+<body><header class="header">
+	<div class="container">
+		<div class="row">
+			<div class="header__logo">
+				<a href="https://shareprices.com/" class="header__logo-link"><img src="https://shareprices.com/images/logo.svg" class="header__logo-image" alt="shareprices.com" /></a>
+			</div>
+			<div class="header__mobile-search">
+				<i class="fa fa-search" aria-hidden="true"></i>
+			</div>
+			<div class="header__mobile-nav">
+				<button class="hamburger hamburger--squeeze" type="button" aria-label="Expand Nav">
+					<span class="hamburger-box">
+						<span class="hamburger-inner"></span>
+					</span>
+				</button>
+			</div>
+			<div class="header__ad">
+
+			</div>
+		</div>
+	</div>
+</header>
+
+<nav class="top-nav">
+	<div class="container">
+		<div class="row">
+			<ul class="top-nav__nav">
+				<li class="top-nav__nav-item"><a href="https://shareprices.com/" class="top-nav__nav-link top-nav__nav-link--selected">Home</a></li>
+				<li class="top-nav__nav-item"><a href="https://shareprices.com/indices/" class="top-nav__nav-link ">Indices</a></li>
+				<li class="top-nav__nav-item"><a href="https://shareprices.com/ftse-100/" class="top-nav__nav-link ">FTSE 100</a></li>
+				<li class="top-nav__nav-item"><a href="https://shareprices.com/risers-and-fallers/" class="top-nav__nav-link ">Risers/Fallers</a></li>
+				<li class="top-nav__nav-item"><a href="https://shareprices.com/us/" class="top-nav__nav-link ">US Share Prices</a></li>
+				<li class="top-nav__nav-item"><a href="https://shareprices.com/sectors/" class="top-nav__nav-link ">Sectors</a></li>
+				<li class="top-nav__nav-item"><a href="https://shareprices.com/news/" class="top-nav__nav-link ">News</a></li>
+				<li class="top-nav__nav-item"><a href="https://shareprices.com/rns/" class="top-nav__nav-link ">RNS</a></li>
+				<li class="top-nav__nav-item"><a href="https://shareprices.com/watchlist/" class="top-nav__nav-link ">Watchlist</a></li>
+				<li class="top-nav__nav-item"><a href="https://shareprices.com/portfolio/" class="top-nav__nav-link ">Portfolio</a></li>
+
+									<li class="top-nav__nav-item top-nav__nav-item--right">
+						<a href="https://shareprices.com/login/" class="top-nav__nav-link ">Login / Register</a>
+					</li>
+							</ul>
+		</div>
+	</div>
+</nav>
+
+
+<script src="https://static.lse.co.uk/js/hitstats.js"></script>
+
+<script>
+    var hitstats = new HitStats('2d41133b-e4d2-4df5-afe8-30e42c2a2cf0');
+
+    hitstats.setIdentity({
+        'site_identifier' : 'shareprices.com',
+        'user_identifier' : 'c570802e2d5522f4425a952e6256b08e',
+        'user_id' : '-1',
+                'paid_member' : false,
+        'remote_addr' : '118.33.45.246',
+        'forwarded_addr' : '118.33.45.246',
+        'user_agent' : 'Mozilla/5.0',
+        'page_id' : 'Share History',
+        'ticker' : 'SOXX.US','exchange' : 'LSE','page_referrer' : '','page_url' : 'https://shareprices.com/us/soxx/history/',    });
+
+    hitstats.hit();
+</script>
+
+<div class="wrapper-3-col-wide">
+	<div class="container">
+		<div class="row">
+
+            <div class="wrapper-3-col-wide__left">
+                
+<div class="left-search-box">
+    <div class="left-search-box__close"><i class="fa fa-times" aria-hidden="true"></i> Close</div>
+    <div class="left-search-box__title">Company Search</div>
+    <form action="https://shareprices.com/search/" class="left-search-box__search-form" method="get">
+        <input id="sp-search" type="text" name="search" placeholder="Share Search" class="left-search-box__search-input" autocomplete="off" onfocus="showDropdown(this.value, 'shareDropdown')" onblur = "hideDropdown('shareDropdown')" onkeyup="keyTimer(this.value, 'shareDropdown', 'sp-search', true)"/>
+        <button type="submit" class="left-search-box__search-button" aria-label="Company Search Button"><i class="fa fa-search left-search-box__search-button-icon"></i></button>
+        
+        <div id="shareDropdown" class="sp-share-dropdown__search-results" style="display: none;">
+        </div> 
+    </form>
+</div>
+
+    <div class="left-upsell">
+        <div class="left-upsell__title">Become a Member</div>
+        <ul class="left-upsell__list">
+            <li class="left-upsell__list-item"><i class="fa fa-area-chart left-upsell__icon" aria-hidden="true"></i> Track your favourite stocks</li>
+            <li class="left-upsell__list-item"><i class="fa fa-briefcase left-upsell__icon" aria-hidden="true"></i> Create &amp; monitor portfolios</li>
+            <li class="left-upsell__list-item"><i class="fa fa-calendar-check-o left-upsell__icon left-upsell__icon--daily" aria-hidden="true"></i> Daily portfolio value</li>
+        </ul>
+        <a href="https://shareprices.com/register/" class="left-upsell__button">Sign Up</a>
+    </div>
+
+
+
+<!-- quickpicks -->
+<div>
+    <table id="quickpicks_table" data-active="PCT" class="indices__table" style="margin-bottom:15px;">
+        <thead>
+            <tr class="table-title">
+                <td>Quickpicks</td>
+                <td><a href="javascript:void(0);" rel="nofollow" style="cursor:pointer; color:white" onclick="qpToggleSettings()" aria-label="Edit Quickpicks"><i class="fa fa-cog"></i></td>
+            </tr>
+            <tr class="qp_table_tr"  style="display:none;">
+                <td data-background="VAL" style="cursor:pointer;text-align:center;" onclick="qpDisplay('VAL');"><strong>£</strong></td>
+                <td data-background="PCT" style="cursor:pointer;text-align:center;background:#f4f4f4;" onclick="qpDisplay('PCT');"><strong>%</strong></td>
+            </tr>
+            <tr class="qp_table_tr"  style="display:none;">
+                <th>Company</th>
+                <th class="right" data-display="VAL"  style="display:none;">Chg</th>
+                <th class="right" data-display="PCT" >Chg %</th>
+            </tr>
+        </thead>
+                
+        <tbody>
+            <tr id="qp_message_row">
+                <td class="center" id="qp_message" colspan="2">Add shares to your<br>quickpicks to<br>display them here!</td>
+            </tr>
+            
+                    </tbody>
+    </table>
+</div>
+
+            </div>
+        
+            <div class="wrapper-3-col-wide__center">
+
+                <ul class="breadcrumb">
+    <li class="breadcrumb__item">
+        <a href="https://shareprices.com/" class="breadcrumb__item-link"><i class="fa fa-home" aria-hidden="true"></i></a>
+        <i class="fa fa-angle-right" aria-hidden="true"></i>    </li>
+
+    <li class="breadcrumb__item"><a class="breadcrumb__item-link" href="https://shareprices.com/lse/">Share Prices</a><i class="fa fa-angle-right" aria-hidden="true"></i></li><li class="breadcrumb__item"><a class="breadcrumb__item-link" href="https://shareprices.com/lse/soxx/">Ishares Semicon Share Price</a><i class="fa fa-angle-right" aria-hidden="true"></i></li><li class="breadcrumb__item"><a class="breadcrumb__item-link" href="https://shareprices.com/lse/soxx/history/">Ishares Semicon Share Price History</a></li></ul>
+                <h1 class="title__title"><a style="color:#880063;" href="https://shareprices.com/lse/soxx/">Ishares Semicon (SOXX.US) Share Price History</a></h1>
+
+                <div id="share-history" class="sp-price-history">
+                    <div class="table__responsive">
+                        <table class="sp-price-history__table" style="font-size:11px;">
+                            <thead> 
+                                <tr>
+                                    <td colspan="6">
+                                        <form action="https://shareprices.com/lse/soxx/history/" method="get" class="sp-price-history__table-filter">
+                                            Time period:
+                                            <div class="sp-price-history__date">
+                                                <input maxlength="2" type="text" name="from-day" value="3" class="sp-price-history__day">
+                                                <select name="from-month" class="sp-price-history__select">
+                                                    <option value="1">Jan</option><option value="2">Feb</option><option value="3">Mar</option><option value="4">Apr</option><option value="5">May</option><option value="6">Jun</option><option value="7">Jul</option><option value="8" selected=""selected">Aug</option><option value="9">Sep</option><option value="10">Oct</option><option value="11">Nov</option><option value="12">Dec</option>                                                </select>
+                                                <input maxlength="4" type="text" name="from-year" value="2026" class="sp-price-history__year">
+                                            </div>
+                                            to
+                                            <div class="sp-price-history__date">
+                                                <input maxlength="2" type="text" name="to-day" value="3" class="sp-price-history__day">
+                                                <select name="to-month" class="sp-price-history__select">
+                                                    <option value="1">Jan</option><option value="2">Feb</option><option value="3">Mar</option><option value="4">Apr</option><option value="5">May</option><option value="6">Jun</option><option value="7">Jul</option><option value="8">Aug</option><option value="9">Sep</option><option value="10" selected=""selected">Oct</option><option value="11">Nov</option><option value="12">Dec</option>                                                </select>
+                                                <input maxlength="4" type="text" name="to-year" value="2026" class="sp-price-history__year">
+                                            </div>
+                                            <input type="submit" value="Go" class="sp-price-history__button">
+                                        </form>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>Date</td>
+                                    <td>Open</td>
+                                    <td>High</td>
+                                    <td>Low</td>
+                                    <td>Close</td>
+                                    <td>Volume</td>
+                                </tr>
+                            </thead>
+                            <tbody>  
+                                                                    
+                                    <tr class="">
+                                        <td>2nd Oct 2026 (Fri)</td>
+                                        <td>590.91</td>
+                                        <td>596.37</td>
+                                        <td>587.30</td>
+                                        <td>588.90</td>
+                                        <td>286,588</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>1st Oct 2026 (Thu)</td>
+                                        <td>569.29</td>
+                                        <td>579.86</td>
+                                        <td>564.18</td>
+                                        <td>576.33</td>
+                                        <td>123,995</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>30th Sep 2026 (Wed)</td>
+                                        <td>568.73</td>
+                                        <td>572.32</td>
+                                        <td>564.05</td>
+                                        <td>568.64</td>
+                                        <td>341,661</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>29th Sep 2026 (Tue)</td>
+                                        <td>569.79</td>
+                                        <td>574.34</td>
+                                        <td>565.44</td>
+                                        <td>567.44</td>
+                                        <td>170,385</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>28th Sep 2026 (Mon)</td>
+                                        <td>568.70</td>
+                                        <td>570.66</td>
+                                        <td>552.01</td>
+                                        <td>560.79</td>
+                                        <td>263,055</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>25th Sep 2026 (Fri)</td>
+                                        <td>569.48</td>
+                                        <td>575.50</td>
+                                        <td>567.56</td>
+                                        <td>572.68</td>
+                                        <td>201,627</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>24th Sep 2026 (Thu)</td>
+                                        <td>554.90</td>
+                                        <td>566.67</td>
+                                        <td>553.38</td>
+                                        <td>566.07</td>
+                                        <td>160,288</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>23rd Sep 2026 (Wed)</td>
+                                        <td>570.40</td>
+                                        <td>571.45</td>
+                                        <td>557.05</td>
+                                        <td>565.72</td>
+                                        <td>336,682</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>22nd Sep 2026 (Tue)</td>
+                                        <td>553.98</td>
+                                        <td>573.46</td>
+                                        <td>553.67</td>
+                                        <td>572.78</td>
+                                        <td>334,271</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>21st Sep 2026 (Mon)</td>
+                                        <td>545.08</td>
+                                        <td>562.18</td>
+                                        <td>541.50</td>
+                                        <td>559.34</td>
+                                        <td>146,247</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>18th Sep 2026 (Fri)</td>
+                                        <td>522.71</td>
+                                        <td>533.16</td>
+                                        <td>522.45</td>
+                                        <td>533.07</td>
+                                        <td>309,726</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>17th Sep 2026 (Thu)</td>
+                                        <td>517.09</td>
+                                        <td>520.37</td>
+                                        <td>514.96</td>
+                                        <td>519.10</td>
+                                        <td>725,843</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>16th Sep 2026 (Wed)</td>
+                                        <td>506.71</td>
+                                        <td>510.37</td>
+                                        <td>496.81</td>
+                                        <td>502.06</td>
+                                        <td>414,178</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>15th Sep 2026 (Tue)</td>
+                                        <td>502.78</td>
+                                        <td>504.67</td>
+                                        <td>496.63</td>
+                                        <td>498.85</td>
+                                        <td>407,358</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>14th Sep 2026 (Mon)</td>
+                                        <td>497.17</td>
+                                        <td>503.18</td>
+                                        <td>495.20</td>
+                                        <td>497.40</td>
+                                        <td>434,132</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>11th Sep 2026 (Fri)</td>
+                                        <td>525.00</td>
+                                        <td>531.03</td>
+                                        <td>521.13</td>
+                                        <td>527.07</td>
+                                        <td>573,705</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>10th Sep 2026 (Thu)</td>
+                                        <td>518.49</td>
+                                        <td>522.50</td>
+                                        <td>514.36</td>
+                                        <td>517.43</td>
+                                        <td>445,284</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>9th Sep 2026 (Wed)</td>
+                                        <td>524.85</td>
+                                        <td>535.36</td>
+                                        <td>524.85</td>
+                                        <td>532.00</td>
+                                        <td>335,283</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>8th Sep 2026 (Tue)</td>
+                                        <td>530.99</td>
+                                        <td>534.27</td>
+                                        <td>525.665</td>
+                                        <td>528.40</td>
+                                        <td>449,159</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>7th Sep 2026 (Mon)</td>
+                                        <td>509.31</td>
+                                        <td>520.56</td>
+                                        <td>507.49</td>
+                                        <td>519.86</td>
+                                        <td>500,069</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>4th Sep 2026 (Fri)</td>
+                                        <td>509.31</td>
+                                        <td>520.56</td>
+                                        <td>507.49</td>
+                                        <td>519.86</td>
+                                        <td>500,069</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>3rd Sep 2026 (Thu)</td>
+                                        <td>496.64</td>
+                                        <td>503.25</td>
+                                        <td>489.21</td>
+                                        <td>502.20</td>
+                                        <td>358,576</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>2nd Sep 2026 (Wed)</td>
+                                        <td>498.04</td>
+                                        <td>504.02</td>
+                                        <td>493.40</td>
+                                        <td>501.44</td>
+                                        <td>388,753</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>1st Sep 2026 (Tue)</td>
+                                        <td>501.43</td>
+                                        <td>504.59</td>
+                                        <td>495.10</td>
+                                        <td>500.31</td>
+                                        <td>545,817</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>31st Aug 2026 (Mon)</td>
+                                        <td>509.815</td>
+                                        <td>514.32</td>
+                                        <td>507.08</td>
+                                        <td>511.04</td>
+                                        <td>646,361</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>28th Aug 2026 (Fri)</td>
+                                        <td>521.31</td>
+                                        <td>522.49</td>
+                                        <td>506.86</td>
+                                        <td>508.62</td>
+                                        <td>299,784</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>27th Aug 2026 (Thu)</td>
+                                        <td>526.06</td>
+                                        <td>527.46</td>
+                                        <td>517.045</td>
+                                        <td>525.43</td>
+                                        <td>734,060</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>26th Aug 2026 (Wed)</td>
+                                        <td>512.09</td>
+                                        <td>516.27</td>
+                                        <td>509.36</td>
+                                        <td>515.40</td>
+                                        <td>311,464</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>25th Aug 2026 (Tue)</td>
+                                        <td>515.91</td>
+                                        <td>520.10</td>
+                                        <td>510.04</td>
+                                        <td>514.06</td>
+                                        <td>497,170</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>24th Aug 2026 (Mon)</td>
+                                        <td>512.105</td>
+                                        <td>512.105</td>
+                                        <td>498.93</td>
+                                        <td>506.18</td>
+                                        <td>340,034</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>21st Aug 2026 (Fri)</td>
+                                        <td>528.15</td>
+                                        <td>528.88</td>
+                                        <td>514.70</td>
+                                        <td>520.05</td>
+                                        <td>496,267</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>20th Aug 2026 (Thu)</td>
+                                        <td>518.375</td>
+                                        <td>525.38</td>
+                                        <td>515.35</td>
+                                        <td>522.35</td>
+                                        <td>287,271</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>19th Aug 2026 (Wed)</td>
+                                        <td>536.08</td>
+                                        <td>538.00</td>
+                                        <td>514.51</td>
+                                        <td>519.67</td>
+                                        <td>408,682</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>18th Aug 2026 (Tue)</td>
+                                        <td>537.475</td>
+                                        <td>541.64</td>
+                                        <td>523.07</td>
+                                        <td>531.39</td>
+                                        <td>721,432</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>17th Aug 2026 (Mon)</td>
+                                        <td>557.715</td>
+                                        <td>565.99</td>
+                                        <td>555.99</td>
+                                        <td>559.12</td>
+                                        <td>403,241</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>14th Aug 2026 (Fri)</td>
+                                        <td>549.58</td>
+                                        <td>552.86</td>
+                                        <td>542.93</td>
+                                        <td>550.42</td>
+                                        <td>227,897</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>13th Aug 2026 (Thu)</td>
+                                        <td>547.14</td>
+                                        <td>562.25</td>
+                                        <td>546.44</td>
+                                        <td>550.74</td>
+                                        <td>372,918</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>12th Aug 2026 (Wed)</td>
+                                        <td>553.40</td>
+                                        <td>553.91</td>
+                                        <td>546.51</td>
+                                        <td>546.61</td>
+                                        <td>421,949</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>11th Aug 2026 (Tue)</td>
+                                        <td>537.91</td>
+                                        <td>539.00</td>
+                                        <td>530.10</td>
+                                        <td>534.20</td>
+                                        <td>449,741</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>10th Aug 2026 (Mon)</td>
+                                        <td>545.85</td>
+                                        <td>547.17</td>
+                                        <td>529.42</td>
+                                        <td>529.39</td>
+                                        <td>565,663</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>7th Aug 2026 (Fri)</td>
+                                        <td>543.94</td>
+                                        <td>547.82</td>
+                                        <td>531.67</td>
+                                        <td>543.27</td>
+                                        <td>274,291</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>6th Aug 2026 (Thu)</td>
+                                        <td>522.66</td>
+                                        <td>542.55</td>
+                                        <td>516.62</td>
+                                        <td>532.52</td>
+                                        <td>441,769</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>5th Aug 2026 (Wed)</td>
+                                        <td>536.40</td>
+                                        <td>547.30</td>
+                                        <td>528.98</td>
+                                        <td>530.70</td>
+                                        <td>736,283</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>4th Aug 2026 (Tue)</td>
+                                        <td>529.31</td>
+                                        <td>545.37</td>
+                                        <td>526.82</td>
+                                        <td>542.21</td>
+                                        <td>460,039</td>
+                                    </tr>
+
+                                                                    
+                                    <tr class="">
+                                        <td>3rd Aug 2026 (Mon)</td>
+                                        <td>491.92</td>
+                                        <td>510.82</td>
+                                        <td>485.84</td>
+                                        <td>507.68</td>
+                                        <td>478,783</td>
+                                    </tr>
+
+                                               
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+                         
+            <div class="wrapper-3-col-wide__right">
+                
+<div class="ftse-update up">
+    <div class="ftse-update__title">FTSE 100 Latest</div>
+    <div class="row">
+        <div class="ftse-update__column">
+            <strong>Value</strong>10,461.95        </div>
+        <div class="ftse-update__column">
+            <strong>Change</strong>33.68            <i class="fa fa-caret-up" aria-hidden="true"></i>
+        </div>
+    </div>
+</div>
+    
+<div class="right-ad">
+    </div>            </div>
+
+       </div><!-- row -->
+    </div><!-- container -->
+</div><!-- wrapper-3-col-wide -->
+
+<footer class="footer">
+    <div class="container">
+        <ul class="footer__nav">
+            <li class="footer__nav-item"><a href="https://shareprices.com/" class="footer__nav-link">Home</a></li>
+            <li class="footer__nav-item"><a href="https://shareprices.com/search/" class="footer__nav-link">Search</a></li>
+            <li class="footer__nav-item"><a href="https://shareprices.com/privacy/" class="footer__nav-link">Privacy Policy</a></li>
+            <li class="footer__nav-item"><a href="https://shareprices.com/terms/" class="footer__nav-link">Terms &amp; Conditions</a></li>
+            <li class="footer__nav-item"><a href="https://shareprices.com/contact/" class="footer__nav-link">Contact Us</a></li>
+            <li class="footer__nav-item"><a href="https://shareprices.com/news" class="footer__nav-link">News</a></li>
+            <li class="footer__nav-item"><a href="https://shareprices.com/investments/isa/" class="footer__nav-link">ISA</a></li>
+            <li class="footer__nav-item"><a href="https://shareprices.com/investments/" class="footer__nav-link">Investments</a></li>
+            <li class="footer__nav-item"><a href="https://shareprices.com/online-share-dealing/" class="footer__nav-link">Online Share Dealing</a></li>
+        </ul>
+        <div class="footer__disclaimer">
+            <p class="footer__disclaimer-text">Copyright &copy; 2026 London South East Limited. All Rights Reserved. Share prices delayed by at least 15 minutes. While London South East do their best to maintain the high quality of the information displayed on this site, we cannot be held responsible for any loss due to incorrect information found here. This site does not provide investment advice, you should consult an Independent Financial Advisor that is authorised and regulated by the Financial Services Authority before making any investments.</p>
+        </div>
+    </div>
+</footer>
+
+ <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/10.3.2/highstock.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highcharts/10.3.2/modules/no-data-to-display.min.js"></script>
+<script src="https://cdn.datatables.net/2.2.2/js/dataTables.min.js" type="text/javascript" charset="utf8"></script>
+<script src="https://cdn.datatables.net/plug-ins/2.2.2/sorting/natural.js" type="text/javascript" charset="utf8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js" integrity="sha256-4iQZ6BVL4qNKlQ27TExEhBN1HFPvAvAMbFavKKosSWQ=" crossorigin="anonymous"></script>
+
+<script src="https://shareprices.com/js/charts.js?v=1.0.0"></script>
+<script src="https://shareprices.com/js/general.js?v=1.1.0"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.33/moment-timezone-with-data.min.js" integrity="sha512-rjmacQUGnwQ4OAAt3MoAmWDQIuswESNZwYcKC8nmdCIxAVkRC/Lk2ta2CWGgCZyS+FfBWPgaO01LvgwU/BX50Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.0.0/jquery.magnific-popup.min.js" integrity="sha512-+m6t3R87+6LdtYiCzRhC5+E0l4VQ9qIT1H9+t1wmHkMJvvUQNI5MKKb7b08WL4Kgp9K0IBgHDSLCRJk05cFUYg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script>
+    var SITE_URL = 'https://shareprices.com/';
+    var SITE_NAME = 'shareprices.com';
+
+    $('[data-chartType]').each(function() {
+        if ($(this).is(':visible')) {
+            initChart($(this));
+        }
+    });
+</script>
+
+<!-- Required for v2 recaptcha check -->
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<!-- Required for v2 recaptcha check -->
+<script src="https://www.google.com/recaptcha/api.js?render=6Leg0EseAAAAAMqkenq-QKSmI2MSP9XcA00q3fQL"></script>
+<script type="text/javascript">
+	$(function() {
+		$('form').on('submit', onFormSubmitV3);
+	});
+
+
+	/**
+	* Returns widgetId from a given element id
+	* @param {string} elementId 
+	* @return {number} i
+	*/
+	function getWidgetId(elementId) {
+		const recaptchaBoxes = document.querySelectorAll('.g-recaptcha');
+		const targetBox = document.querySelector('#' + elementId);
+		for (let i = 0; i < recaptchaBoxes.length; i++) {
+			if (recaptchaBoxes[i].id === targetBox.id) {
+			return i;
+			}
+		}
+	}
+
+	function onFormSubmitV2(token)
+	{	
+		$('.g-recaptcha-response').each(
+			function() {
+				if($(this).val() == token)
+				{
+					var $recapchaForm = $(this).parents('form:first');
+					
+					$recapchaForm.off('submit');
+					
+					$recapchaForm.submit();
+				}
+			}
+		);
+	}
+
+	function onFormSubmitV3(e)
+	{		
+		e.preventDefault();
+
+		var recapchaFormName = $(e.currentTarget).data('form-name');
+
+		if(recapchaFormName == undefined || recapchaFormName.length == 0)
+		{
+			recapchaFormName = 'Unnamed_Form';
+		}
+
+		grecaptcha.ready(function() {
+			grecaptcha.execute('6Leg0EseAAAAAMqkenq-QKSmI2MSP9XcA00q3fQL', {action: recapchaFormName}).then(function(token) {
+
+				if($(e.currentTarget).find('.recapchav2').length > 0)
+				{
+					var widgetID = $('.g-recaptcha').index($(e.currentTarget).find('.g-recaptcha'));
+
+					grecaptcha.execute(widgetID);
+				}
+				else
+				{
+					$(e.currentTarget).off('submit');
+					$(e.currentTarget).submit();
+				}
+			});
+		});
+	}
+</script>
+
+</body>
+
+</html>

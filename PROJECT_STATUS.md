@@ -1,3 +1,20 @@
+# Richping V2 - 2026-10-03 action/unit remediation
+
+**COMPLETE for the historical action/unit P0 and Daily/mixed-profile prerequisite. IMPLEMENTED / EXECUTED_ON_REAL_DATA / EVIDENCE_PRODUCED, not main integrated.**
+
+- Branch `v2-h0001-action-unit-remediation`, from Daily implementation `ce6497c`.
+- Frozen record does not require per-as_of negative receipts. Caller comment from8ad1297 and runtime gate fromce6497c overinterpreted completeness as causal input. Ex-post admission now remains separate.
+- Official prior3:1 split2024-03-07 precedes origin2024-10-04. Official future3:1 split2026-11-05 follows end2026-10-02; no future factor applied. Yahoo/Twelve Data histories cross-check no inside split.
+- All500 Yahoo quote OHLC directly match Nasdaq within USD0.02. Official NAV corroborates units. General Yahoo raw/as-traded status is not claimed.
+- New immutable `soxx-yahoo-rth-daily-pit-20261003-v2`, hash `50a359e25efe48100a5538e33554334d7bf0b7cffcdb3835f6571513e06fd068`. Parent v1 preserved.
+- Admitted SOXX Daily500 eligible; trend READY322/UNAVAILABLE178, exhaustion READY120/UNAVAILABLE380. Actual first READY N179 2025-06-24, N381 2026-04-14. All2624 mixed joins: {'DAILY_EXHAUSTION:READY': 2624, 'DAILY_TREND_PERMISSION:READY': 2624, 'H1_RELATIVE_SETUP_RAW:READY': 829, 'H1_RELATIVE_SETUP_RAW:UNAVAILABLE': 1795, 'M15_INITIAL_ENTRY_PRIMITIVE:READY': 2304, 'M15_INITIAL_ENTRY_PRIMITIVE:UNAVAILABLE': 320}; joint READY829. Two network-disabled proofs identical, stream hash6de4730cb3abfaaf701d9fda0a212d5df0ad5f16dcc0e0cf4714f844d0cac57a. ENTRY_CANDIDATE=null, profitability NOT_RUN, outcomes NOT_EVALUATED.
+- Full suite 1291 passed, no failures/errors/skips. Real proofs are separate from event fixtures.
+- Bar-end known_at remains an explicit historical research assumption, not live/shadow PIT.
+- Next PM action on main: `H0001_ENTRY_EXECUTION_AND_COMPOSITION`. Phase exits5/6 remain open; no full entry/efficacy result.
+- [Interpretation record](research/decision_records/H0001-action-unit-interpretation-audit-v1.yaml), [contract](docs/H0001_ACTION_UNIT_REMEDIATION.md), [real evidence](research/data_evidence/h0001-action-unit-20261003/smoke.json).
+
+The entries below are preserved historical status reports.
+
 # Richping V2 - 2026-10-03 Daily PIT / mixed-profile prerequisites
 
 **BLOCKED on real historical PIT evidence. IMPLEMENTED runtime and real Daily capture;

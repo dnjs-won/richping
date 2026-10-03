@@ -34,8 +34,8 @@ class DailyResolution:
 def prepare_daily(vintage: DailyVintage, as_of):
     """No raw/stale fallback. Only evidence available at this as_of enters hashes.
 
-    Negative action evidence is a required transform input too: a capture today
-    cannot attest to action-free status known during an earlier replay session.
+    Event transforms retain causal evidence clocks. An audited no-event interval
+    uses ex-post dataset certification separately, without backdating a receipt.
     """
     instant = timestamp(as_of)
     meta, actions = vintage.manifest.unpack(), vintage.actions.unpack()
@@ -60,6 +60,8 @@ def prepare_daily(vintage: DailyVintage, as_of):
         return unavailable("expected_Daily_not_yet_delivered")
     if any(s <= expected for s in meta["missing_sessions"]):
         return unavailable("missing_Daily_session_in_required_prefix")
+    if meta["raw_unit_status"] == "VERIFIED_IDENTITY_INTERVAL":
+        return _identity_resolution(vintage, selected, instant, expected)
     if actions["status"] == "CROSS_CHECK_ONLY":
         return unavailable("historical_action_availability_and_coverage_unverified")
     if meta["raw_unit_status"] == "UNVERIFIED":
@@ -120,3 +122,35 @@ def prepare_daily(vintage: DailyVintage, as_of):
         "action_evidence_ref": coverage["evidence_ref"], "action_source_vintage": actions["source_vintage"],
         "applied_actions": applied, "factors": factors, "raw_fallback": False,
         "result": "SPLITS_APPLIED" if applied else "NO_APPLIED_SPLIT_IN_CAUSAL_PREFIX"}))
+
+
+def _identity_resolution(vintage, selected, instant, expected):
+    from ..daily_identity import IDENTITY
+    meta = vintage.manifest.unpack()
+    cert = meta["identity_interval_certification"]  # validated on immutable load
+    # No action/absence/unit receipt is a strategy input. Only price inputs have
+    # a causal clock here; the current certification belongs to dataset admission.
+    known = max(b.known_at for b in selected)
+    input_hash = digest({"raw_prefix": payload(selected), "source_vintage": vintage.dataset_id,
+                         "applied_actions": [], "factor": 1.0, "transform_version": IDENTITY})
+    metadata = {"version": cert["version"], "interval_start": cert["interval_start"],
+                "interval_end": cert["interval_end"], "action_audit_ref": cert["action_audit_ref"],
+                "action_audit_hash": cert["action_audit_hash"], "unit_audit_ref": cert["unit_audit_ref"],
+                "unit_audit_hash": cert["unit_audit_hash"],
+                "completeness_version": cert["action_history_audit"]["schema_version"],
+                "previous_effective_split": cert["action_history_audit"]["previous_effective_split"],
+                "next_known_effective_split": cert["action_history_audit"]["next_effective_split"],
+                "scope": cert["scope"], "causal_feature": False}
+    transformed = tuple(replace(b, corporate_action="NONE_CONFIRMED", provenance=JsonObject.of({
+        **b.provenance.unpack(), "price_basis": "PIT_SPLIT_ADJUSTED_OHLC", "transform_version": IDENTITY,
+        "transform_input_hash": input_hash, "split_factor": 1.0,
+        "action_evidence_ref": cert["action_audit_ref"],
+        "corporate_actions": "CERTIFIED_IDENTITY_INTERVAL_NOT_RAW_FALLBACK"})) for b in selected)
+    return DailyResolution(PreparedDailyPrefix(vintage.bars[0].symbol, transformed, instant, expected,
+        vintage.dataset_id, known), JsonObject.of({"transform_version": IDENTITY, "as_of": instant.isoformat(),
+        "status": "READY", "source_vintage": vintage.dataset_id, "source_price_basis": meta["raw_price_basis"],
+        "price_basis": "PIT_SPLIT_ADJUSTED_OHLC", "input_hash": input_hash,
+        "transform_known_at": known.isoformat(), "transform_known_at_policy": "MAXIMUM_ACTUAL_PRICE_INPUT_CLOCK_NO_EVENT",
+        "dataset_admission_metadata": metadata, "action_evidence_ref": cert["action_audit_ref"],
+        "applied_actions": [], "factor": 1.0, "factors": [1.0] * len(selected), "raw_fallback": False,
+        "result": "NO_APPLIED_SPLIT_IN_CERTIFIED_IDENTITY_INTERVAL"}))

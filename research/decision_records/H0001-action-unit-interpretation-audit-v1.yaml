@@ -1,0 +1,60 @@
+schema_version: frozen_semantic_interpretation_audit_v1
+record_id: H0001-ACTION-UNIT-INTERPRETATION-AUDIT-v1
+decision_date: '2026-10-03'
+status: IMPLEMENTED_INTERPRETATION_REMEDIATION_NOT_STRATEGY_REOPEN
+basis_commit: ce6497cdc204fbe420c42c78cbbb6482432390d8
+author: AI_PM
+user_authorization: explicit_frozen_semantics_audit_and_interval_evidence_remediation
+frozen_decisions_changed: false
+negative_receipt_requirement:
+  explicitly_frozen: false
+  canonical_record: research/decision_records/H0001-daily-input-freeze-v1.yaml
+  actual_frozen_clauses:
+    eligible_action: effective_at_lte_as_of_AND_required_action_evidence_known_at_lte_as_of
+    announced_but_not_effective: forbidden_until_effective
+    effective_but_not_known: forbidden_until_required_evidence_is_known
+    future_known_factor_on_past_as_of: forbidden
+    state_input_known_at: maximum_bar_action_and_other_actual_transform_input_known_at
+    required_action_evidence_unavailable: Daily_input_and_state_UNAVAILABLE
+    raw_fallback: forbidden
+  coverage_clause: capability scope names action source factor units coverage vintages; it does not prescribe a historical absence receipt clock for every as_of.
+  trend_freeze_clauses: actual_atomic_bar_and_required_action_known_at; maximum_all_actual_bar_and_required_transform_evidence_known_at. No negative-receipt prescription.
+  interpretation_comment_origin:
+    commit: 8ad1297
+    path: richping/research_v2/strategy/daily_trend.py
+    added_text: including evidence of no relevant action
+    classification: classifier_caller_comment_not_frozen_strategy_clause
+  runtime_enforcement_origin:
+    commit: ce6497c
+    path: richping/research_v2/strategy/daily_input.py
+    behavior: requires coverage start<=origin and through>=as_of and known_at<=as_of even for no events
+  conclusion: The implementation promoted dataset completeness into a causal transform input clock. A current audit may admit a complete historical dataset without claiming the strategy knew the future action table or absence receipt.
+remediation:
+  capability: PIT_SPLIT_ADJUSTED_IDENTITY_INTERVAL_V1
+  scope: exact_SOXX_snapshot_2024-10-04_through_2026-10-02_historical_causal_research_only
+  no_event: complete_ex_post_action_audit_plus_exact_interval_market_OHLC_unit_audit; applied_actions_empty_factor_one
+  actual_event: existing_causal_split_engine_retained; effective_at_and_required_event_known_at_mandatory; unknown_effective_event_UNAVAILABLE
+  contradictory_inside_event: rejects_identity_certification_even_if_event_evidence_future_known
+  future_effective_event: never_applied_before_effective; future_announcement_does_not_rebase_prices
+  audit_clock: dataset_admission_metadata_only_not_state_known_at_or_causal_feature
+  identity_clock: maximum_price_input_known_at_only_no_fabricated_absence_timestamp
+  prepared_prefix_source_preservation: byte_unchanged_including_historical_comment; new_data_capability_and_this_audit_define_scoped_caller_evidence
+  legacy_path: unchanged_event_and_receipt_checks; uncertified_empty_table_remains_UNAVAILABLE
+  price_known_at: HISTORICAL_RESEARCH_BAR_END_AVAILABILITY_ASSUMPTION_V1
+  unit_basis: original_Yahoo_basis_retained; verified_identity_interval_is_not_all_history_raw_as_traded
+evidence:
+  action_history: research/data_evidence/h0001-action-unit-20261003/action-history-audit.json
+  units: research/data_evidence/h0001-action-unit-20261003/ohlc-unit-crosscheck.json
+  real_proof: research/data_evidence/h0001-action-unit-20261003/smoke.json
+  regression: tests/test_research_v2_action_unit_remediation.py
+  contract: docs/H0001_ACTION_UNIT_REMEDIATION.md
+frozen_file_sha256_LF_normalized:
+  research/decision_records/H0001-daily-input-freeze-v1.yaml: 03577342865ed585bffe07cc39a2feb5ab04aabe19c6a01b41413b26fcad1f2d
+  research/decision_records/H0001-daily-trend-freeze-v1.yaml: ba510bd257444dd61baa0be81072618742203955906cc178bd27a11d8dc2baae
+  research/decision_records/H0001-daily-trend-readiness-remediation-v1.yaml: 3f6345b9a6706e10bd74e2e78221630ed8ee124599dfc5c5b9759865972655f3
+  research/decision_records/H0001-daily-blocker-freeze-v1.yaml: 546174ded467c7e2d22ba44c93543861f82dd2ae5c7bca1782960761818eb98d
+  research/decision_records/H0001-1h-relative-setup-freeze-v1.yaml: f0866743c6e4d5f99924ed6a8a75e69d7e539ccc8912d977426db5b270ae024c
+  research/decision_records/H0001-15m-entry-freeze-v1.yaml: 147745ca450edd1318a90a496aa3c5e908c8b3981b9d7788df06d517097e0569
+  research/strategy_specs/H0001-r03-draft.yaml: fd5d063d2f560f07238ac20bd035696e09b6af15c00af67c1f3256eea06360b6
+profitability: NOT_RUN
+entry_outcome: NOT_EVALUATED

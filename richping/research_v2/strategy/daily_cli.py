@@ -23,6 +23,11 @@ def add_actions(actions):
     action_import.add_argument("evidence")
     action_import.add_argument("--new-dataset-id", required=True)
     action_import.add_argument("--unit-audit", help="Audited raw price basis/known_at evidence JSON; never inferred")
+    identity = actions.add_parser("daily-identity-import", help="New vintage from ex-post split-free interval and OHLC audits")
+    identity.add_argument("dataset_id")
+    identity.add_argument("action_audit")
+    identity.add_argument("unit_audit")
+    identity.add_argument("--new-dataset-id", required=True)
     for name in ("daily-inspect", "daily-proof", "mixed-proof"):
         inspect = actions.add_parser(name)
         inspect.add_argument("dataset_id")
@@ -52,7 +57,14 @@ def run(args):
         result = {**daily_coverage(vintage), "raw_capture": str(raw), "vintage_path": str(path)}
     else:
         vintage = load_daily(args.dataset_id, root)
-        if args.data_action == "daily-action-import":
+        if args.data_action == "daily-identity-import":
+            from ..daily_identity import admit_identity_interval
+            vintage = admit_identity_interval(vintage, args.new_dataset_id,
+                json.loads(Path(args.action_audit).read_text(encoding="utf-8")),
+                json.loads(Path(args.unit_audit).read_text(encoding="utf-8")))
+            save_daily(vintage, root)
+            result = daily_coverage(vintage)
+        elif args.data_action == "daily-action-import":
             if args.new_dataset_id == vintage.dataset_id:
                 raise ValueError("Action corrections require a new Daily vintage")
             actions = validate_actions(json.loads(Path(args.evidence).read_text(encoding="utf-8")))
