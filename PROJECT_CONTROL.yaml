@@ -16,7 +16,7 @@ source_of_truth:
     branch: main
     path: PROJECT_STATUS.md
   active_workstream_status:
-    branch: v2-real-intraday-data-foundation
+    branch: v2-h0001-15m-entry-freeze
     path: PROJECT_STATUS.md
   decision_index:
     branch: main
@@ -33,19 +33,16 @@ control_plane:
   rule: "PM state lives on main so new sessions can recover it from the default branch."
 
 active_workstream:
-  branch: v2-real-intraday-data-foundation
-  base_branch: v2-c0-extended-session-contract
-  base_commit: 7197fe3
-  implementation_commit: 8f0611f
+  branch: v2-h0001-15m-entry-freeze
+  base_branch: v2-real-intraday-data-foundation
+  base_commit: 8f0611f
+  implementation_commit: ffabeaf9faf872314336784b5c9c8c14522010c2
   status: DIVERGED_FROM_MAIN
   observed_relation_to_main:
-    ahead_by: 28
-    behind_by: 10
-  note: >
-    The data foundation continues the existing V2 head on an isolated task branch.
-    Original V2 branch/history is preserved. Implementation is executed on real data
-    but NOT integrated into main. Main's c48851d R1 paper fix remains on main;
-    deliberate integration stays P1. Relation includes this main PM update.
+    ahead_by: 29
+    behind_by: 11
+  note: Isolated 15m freeze follows 8f0611f. Original real-data/extended branches and main R1 c48851d
+    are unchanged. No integration or force push; relation includes this main PM update.
 
 current_phase:
   id: H0001_FIRST_REAL_EVIDENCE
@@ -55,20 +52,28 @@ current_phase:
   user_visible_outcome: >
     A reproducible report showing actual signal count, forward returns, MFE/MAE,
     matched benchmark comparison and uncertainty from a fixed real dataset.
-  status: IN_PROGRESS_ON_FIXED_REAL_INTRADAY_DATA
+  status: BLOCKED_ON_DAILY_PIT_AND_MIXED_PROFILE_PREREQUISITES
   progress:
-    satisfied_exit_criteria: [1, 2, 3]
-    remaining_exit_criteria: [4, 5, 6]
-    actual_evidence: >
-      SOXX Yahoo 15m 2026-08-05 through 2026-10-01, 2624 expected/observed bars,
-      902 premarket / 1066 RTH / 656 post, no gaps or unsupported sessions in this
-      range. Immutable v1/v2 persisted; repeated network-disabled reload and
-      completed aggregation/event iteration have identical identities.
-    limitations: >
-      Historical bar-end known_at is a research assumption, not live/shadow PIT.
-      Corporate actions remain UNKNOWN; extended volume zero is not no-trade proof.
-      Yahoo's 60-day 15m window does not provide frozen Daily 179-observation warmup
-      or RTH/PIT action input. Generic extended Daily aggregates do not replace it.
+    satisfied_exit_criteria:
+      - 1
+      - 2
+      - 3
+    remaining_exit_criteria:
+      - 4
+      - 5
+      - 6
+    actual_evidence: |-
+      SOXX Yahoo 15m 2026-08-05 through 2026-10-01, 2624 expected/observed bars, 902 premarket / 1066 RTH / 656 post, no gaps or unsupported sessions in this range. Immutable v1/v2 persisted; repeated network-disabled reload and completed aggregation/event iteration have identical identities.
+       Ex-ante v12 minimal15m tuple is frozen; offline SOXX MACD READY2495, relative READY2304/UNAVAILABLE320, extreme270, GC92, ungated15m triggers2. Repeated read-only exercise identical with network disabled; composed ENTRY_CANDIDATE=null/NOT_EVALUATED; profitability NOT_RUN.
+    limitations: |-
+      Historical bar-end known_at is a research assumption, not live/shadow PIT. Corporate actions remain UNKNOWN; extended volume zero is not no-trade proof. Yahoo's 60-day 15m window does not provide frozen Daily 179-observation warmup or RTH/PIT action input. Generic extended Daily aggregates do not replace it.
+       The separate frozen Daily exhaustion NORMAL classifier requires381 observations, beyond trend179. Current41 sessions, RTH/PIT action evidence/freshness/mixed-profile join cannot enable full Daily+1H+15m composition. Exit4 tuple semantics/pure primitives are satisfied but upstream executability is not; exits4/5/6 remain blocked.
+    blocked_exit_criteria:
+      - 4
+      - 5
+      - 6
+    frozen_15m_subtask: COMPLETE_NOT_FULL_PHASE_EXIT_4
+
   exit_criteria:
     - "A real 15m dataset is persisted locally with immutable dataset identity/provenance."
     - "The dataset covers the required 04:00-20:00 ET research session with explicit gap/availability diagnostics."
@@ -106,35 +111,76 @@ completed_actions:
     phase_complete: false
     strategy_profitability_tested: false
 
+  - id: H0001_MINIMAL_15M_ENTRY_FREEZE
+    status: COMPLETE
+    completed_at: '2026-10-03'
+    implementation_state: FROZEN_AND_PURE_PRIMITIVES_EXECUTED_OFFLINE_NOT_FULL_COMPOSITION_NOT_MAIN_INTEGRATED
+    branch: v2-h0001-15m-entry-freeze
+    commit: ffabeaf9faf872314336784b5c9c8c14522010c2
+    acceptance_criteria_satisfied: 5
+    acceptance_criteria_unmet: 0
+    acceptance_criteria:
+      - One minimal initial-entry tuple and at most one comparator are recorded as an immutable decision.
+      - Readiness, units, polarity, reversal, temporal composition and same-batch decision timing
+        are explicit.
+      - Real saved intraday data can exercise the selected primitives offline; no outcome-driven grid
+        search.
+      - Existing frozen Daily/1H decisions and hypothesis revision are preserved.
+      - Remaining Daily/PIT/mixed-profile prerequisites are explicit before executable composition/efficacy.
+    user_completion_criteria_satisfied: 15
+    user_completion_criteria_unmet: 0
+    evidence:
+      freeze: research/decision_records/H0001-15m-entry-freeze-v1.yaml
+      preregistration: research/decision_records/H0001-15m-entry-preregistration-v1.yaml
+      contract: docs/H0001_15M_ENTRY_FREEZE.md
+      offline: research/data_evidence/h0001-15m-freeze-20261003/mechanical-check.json
+    specification_version: h0001_r03_spec_v12
+    specification_hash: 5b20148fb77c6a7890a02219ece7348a997d731e5e9faa508c014243c72a4685
+    tests: 62 new tests; 1202 full-workstream tests passed; no failures/skips. Mocked provider unit
+      fixture, real saved dataset offline proof separately.
+    primary_tuples: 1
+    comparators: 0
+    phase_complete: false
+    strategy_profitability_tested: false
+
 next_action:
-  id: H0001_MINIMAL_15M_ENTRY_FREEZE
-  priority: P1
+  id: H0001_DAILY_PIT_AND_MIXED_PROFILE_PREREQUISITES
+  priority: P0
   status: READY
-  objective: >
-    Freeze one minimal 15m initial-entry tuple plus at most one comparator using
-    the fixed real SOXX intraday dataset, preserving the frozen Daily and 1H contracts.
-  why_now: >
-    A measured full-session real 15m vintage can now be reloaded offline. The 15m
-    proposal remains unresolved; select the smallest executable contract before
-    composition and efficacy. No Cartesian parameter search or profitability claim.
+  blocks_phase_exit_criteria:
+    - 4
+    - 5
+    - 6
+  objective: Supply verified frozen RTH_DAILY/PIT_SPLIT_ADJUSTED_OHLC Daily inputs, sufficient common
+    warmup, freshness and mixed-profile as-of join before composed H0001 entry events.
+  why_now: '15m freeze is complete. Full preserved Daily+1H+15m composition is impossible with the41-session
+    Yahoo snapshot: trend179 and exhaustion381 warmup plus RTH/PIT actions/freshness/join are missing.
+    This is a current phase P0 prerequisite rather than an optional provider expansion.'
   constraints:
-    - "Preserve existing synthetic V2 tests and causal contracts."
-    - "Use saved immutable data; network remains an explicit ingestion/update concern only."
-    - "Preserve frozen Daily/1H decisions; do not infer 15m values from 1H."
-    - "Do not lower warmup, invent PIT availability/actions, or fill gaps."
-    - "Research snapshot admission does not satisfy frozen RTH/PIT Daily input."
-    - "No exit/add/risk/portfolio/order implementation or Cartesian parameter search."
-    - "Do not claim provider/chart parity until measured."
+    - Preserve frozen Daily input/trend/exhaustion, 1H and new15m records; no outcome-driven changes.
+    - Trend requires179 and exhaustion NORMAL requires381 completed Daily observations; no warmup
+      reduction.
+    - No Extended Daily substitution, stale/raw fallback, inferred actions or fabricated historical
+      PIT known_at.
+    - Use immutable saved vintages; network only explicit ingestion/update.
+    - Demonstrate actual action evidence/effective_at/known_at and transformation basis or record
+      a concrete provider/PIT blocker.
+    - No profitability, exit/add/risk/portfolio/order work or main integration.
   acceptance_criteria:
-    - "One minimal initial-entry tuple and at most one comparator are recorded as an immutable decision."
-    - "Readiness, units, polarity, reversal, temporal composition and same-batch decision timing are explicit."
-    - "Real saved intraday data can exercise the selected primitives offline; no outcome-driven grid search."
-    - "Existing frozen Daily/1H decisions and hypothesis revision are preserved."
-    - "Remaining Daily/PIT/mixed-profile prerequisites are explicit before executable composition/efficacy."
+    - One immutable SOXX RTH_DAILY vintage with verified frozen PIT split/action evidence and consistent
+      OHLC units is saved and reloaded offline.
+    - Daily trend179 and exhaustion381 joint readiness are met on the chosen eligible history without
+      changing frozen numerical contracts.
+    - Latest-expected-completed Daily selector fails closed at official close/delayed delivery and
+      retains actual required evidence known_at.
+    - A minimal as-of join preserves separate RTH Daily and extended1H/15m identities and current
+      authoritative references; no concatenated candle stream or partial inputs.
+    - Offline mechanical readiness/join tests pass; no performance claims. If verified historical
+      PIT cannot be supplied, record the exact blocker and affected phase exits rather than manufacture
+      data.
   after_success:
-    - "Implement the executable 15m trigger/composer."
-    - "Satisfy separately tracked frozen Daily input/mixed-profile prerequisites before claiming composed events."
-    - "Run the first real-data H0001 entry efficacy experiment."
+    - H0001_ENTRY_EXECUTION_AND_COMPOSITION
+    - H0001_FIRST_ENTRY_EFFICACY
 
 pm_policy:
   single_next_action: true

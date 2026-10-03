@@ -24,30 +24,43 @@ items:
   - id: V2_MAIN_INTEGRATION_LANE
     priority: P1
     status: OPEN
-    summary: >
-      Active V2 workstream is ahead of and behind main. Establish a deliberate
-      integration path after the current real-data foundation is stable enough to
-      reconcile, rather than allowing V1 and V2 to become permanent parallel products.
-    guardrail: "Do not merge blindly; preserve the newer main R1 paper changes."
+    summary: |
+      Active V2 workstream is ahead of and behind main. Establish a deliberate integration path after the current real-data foundation is stable enough to reconcile, rather than allowing V1 and V2 to become permanent parallel products.
+    guardrail: Do not merge blindly; preserve the newer main R1 paper changes.
+    active_branch: v2-h0001-15m-entry-freeze
+    observed_relation_to_main:
+      ahead_by: 29
+      behind_by: 11
 
   - id: H0001_MINIMAL_15M_ENTRY_FREEZE
     priority: P1
-    status: ACTIVE_AS_NEXT_ACTION
+    status: COMPLETE_FROZEN_AND_OFFLINE_MECHANICALLY_EXERCISED
     depends_on:
       - V2_REAL_INTRADAY_DATA
-    summary: "Select one minimal 15m initial-entry tuple plus at most one comparator; prohibit Cartesian grid search."
+    summary: One MACD_LINE percentile192/P10-negative, first-extreme K4 GC cross plus same-bar higher
+      close tuple frozen ex ante. No comparator or outcomes. Exactly9 roots resolved; composed events
+      remain unavailable.
+    evidence_branch: v2-h0001-15m-entry-freeze
+    commit: ffabeaf9faf872314336784b5c9c8c14522010c2
+    evidence: research/decision_records/H0001-15m-entry-freeze-v1.yaml
 
   - id: H0001_DAILY_PIT_AND_MIXED_PROFILE_PREREQUISITES
-    priority: P1
-    status: REQUIRED_BEFORE_COMPOSED_EFFICACY
+    priority: P0
+    status: ACTIVE_AS_NEXT_ACTION
     blocks:
-      - "Daily + 1H + 15m deterministic H0001 entry events and efficacy report"
-    summary: >
-      Preserve frozen RTH Daily PIT_SPLIT_ADJUSTED_OHLC, freshness and 179-observation
-      Daily trend readiness. Current 41-session Yahoo intraday capture does not
-      supply these; reviewed action evidence/transform and mixed-profile as-of join
-      remain prerequisites already identified in the Daily freeze records.
-    reason_not_next_action: "15m tuple freeze can proceed; do not claim full composed events until these prerequisites exist."
+      - Daily + 1H + 15m deterministic H0001 entry events and efficacy report
+    summary: Verified RTH Daily PIT_SPLIT_ADJUSTED_OHLC action evidence/transform, expected-completion
+      freshness and mixed-profile as-of join are missing. Trend first READY179; frozen exhaustion
+      NORMAL first READY381; current41 sessions cannot supply either. Preserve all frozen decisions.
+    blocks_phase_exit_criteria:
+      - 4
+      - 5
+      - 6
+    promotion_reason: Now blocks current phase exit4 executable frozen tuple with upstream inputs,
+      exit5 deterministic composed events, exit6 efficacy. The15m freeze can no longer be the next
+      action because it is complete.
+    evidence_branch: v2-h0001-15m-entry-freeze
+    evidence: docs/H0001_15M_ENTRY_FREEZE.md
 
   - id: LONG_HISTORY_PROVIDER_AND_VOLUME_EVIDENCE
     priority: P1
@@ -72,10 +85,12 @@ items:
 
   - id: H0001_ENTRY_EXECUTION_AND_COMPOSITION
     priority: P1
-    status: QUEUED
+    status: QUEUED_BLOCKED_ON_DAILY_PREREQUISITES
     depends_on:
       - H0001_MINIMAL_15M_ENTRY_FREEZE
-    summary: "Compose frozen Daily permission/exhaustion + 1H active setup + executable 15m trigger into deterministic entry events."
+      - H0001_DAILY_PIT_AND_MIXED_PROFILE_PREREQUISITES
+    summary: Compose frozen Daily permission/exhaustion + 1H active setup + executable 15m trigger
+      into deterministic entry events.
 
   - id: H0001_FIRST_ENTRY_EFFICACY
     priority: P1
