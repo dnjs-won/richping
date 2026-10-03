@@ -1,3 +1,19 @@
+# Richping V2 - 2026-10-03 initial-entry efficacy preregistration
+
+**COMPLETE preregistration only: FROZEN / VERIFIED / EVIDENCE_PRODUCED. Efficacy and profitability NOT_RUN.**
+
+- Latest main had composition COMPLETE at bb72239 and NEXT_ACTION H0001_ENTRY_EFFICACY_PREREGISTRATION; this task follows that state.
+- Branch `v2-h0001-entry-efficacy-preregistration` from `v2-h0001-entry-composition`; no main code integration.
+- Immutable protocol `H0001-entry-efficacy-preregistration-v1.yaml`, hash `074255189630fa625c4d40eb2f344fb7767d2c8f305f22c9e4c2a608e93e944c`; 23 dependency hashes verified twice without market/DB/network/outcome reads.
+- SOXX signal events only; primary64 completed15m slots, same-local-slot SOXX control cohort, session-balanced excess, joint5-session bootstrap5000/seed7. Discovery is all current data; confirmation126 official sessions2026-10-12..2027-04-13 after five-session embargo.
+- ZERO_SIGNAL, missing/pending labels, uncertainty, one primary family test and prior discovery exposure fixed before outcomes. Gross mark diagnostics only; costs/fills/profitability remain unresolved.
+- Frozen Daily/1H/15m/composer and executable v13 hash unchanged; global lifecycle/general profitability roots still unresolved. Existing candidate count0/timestamps[] and 2624-batch evidence preserved.
+- Full1359 tests passed, new13, no failures/errors/skips. Existing real offline proof artifacts verified by the suite; no new full market replay or real entry outcome access.
+- Next PM action `H0001_FIRST_ENTRY_EFFICACY`, current empty stream must short-circuit to ZERO_SIGNAL without outcome reads. Phase exit6 remains incomplete; longer history remains a P1 blocker candidate.
+- See `docs/H0001_ENTRY_EFFICACY_PREREGISTRATION.md` and `research/data_evidence/h0001-entry-efficacy-preregistration-20261003/`.
+
+The entries below are preserved historical status reports.
+
 # Richping V2 - 2026-10-03 initial-entry composition
 
 **COMPLETE initial-entry composition: FROZEN / IMPLEMENTED / EXECUTED_ON_REAL_DATA / EVIDENCE_PRODUCED. No main code integration or outcomes.**

@@ -1,0 +1,318 @@
+schema_version: h0001_entry_efficacy_preregistration_v1
+record_id: H0001-ENTRY-EFFICACY-PREREGISTRATION-v1
+status: FROZEN_BEFORE_ANY_ENTRY_OUTCOME_ACCESS
+registered_at: '2026-10-03T11:19:01.952076+00:00'
+basis_commit: bb72239d580e4814b880c61ad3c591f5d989870e
+authority: AI_PM_under_user_delegated_current_PM_NEXT_ACTION
+protocol_version: H0001_INITIAL_ENTRY_OPPORTUNITY_EFFICACY_V1
+performance_information_used: NONE
+outcome_lookup: NONE
+profitability: NOT_RUN
+prior_exposure:
+  composition_counts_seen: true
+  candidates: 0
+  timestamps: []
+  atomic_batches: 2624
+  interpretation: Signal sparsity was exposed; no entry outcomes were exposed. This
+    is not outcome-blind signal selection.
+  discovery_cases:
+  - NOK examples; dates/provider conventions unverified
+  - SOXX September/October 2026 cases, including September 23-25
+  - Contemporary AI/semiconductor narrative
+  - All fixed historical SOXX data through 2026-10-02 and previous indicator/frequency
+    diagnostics
+scope:
+  sample_unit: IMMUTABLE_INITIAL_ENTRY_CANDIDATE_EVENT
+  uniqueness: One event_id and at most one initial event per symbol/H1 episode; collisions
+    fail closed.
+  universe: SOXX_ONLY_NO_RETROSPECTIVE_MEMBERSHIP_EXPANSION
+  purpose: Gross mark-to-mark entry opportunity and timing selection diagnostic.
+  position_evidence: CANDIDATE_ONLY_FLAT_RESEARCH_MODE_V1
+  candidate_is_trade_or_fill: false
+  capital_denominator: NONE_NO_CAPITAL_LEDGER
+  overlapping_events: Retain all distinct episodes; account for dependence by joint
+    session-block resampling.
+  resolved_scope: Initial-entry opportunity efficacy protocol only.
+  unresolved_scope:
+  - Full-strategy and filter-ablation evaluation
+  - Actual position open, order timing and fill
+  - Add, reentry, exit, stop, trailing, sizing, overnight and portfolio lifecycle
+  - Execution costs, slippage, after-cost profitability and production promotion
+  - Historical chart parity and live/shadow PIT delivery latency
+dependencies:
+  executable_spec:
+    path: research/strategy_specs/H0001-r03-draft.yaml
+    version: h0001_r03_spec_v13
+    canonical_hash: bf8134733bacee17542240e53a8ec30223c1550b5bedbaa6d3994ba1444acc19
+    mutation: FORBIDDEN_KEEP_SIGNAL_IDENTITY_AND_EXISTING_PROOFS
+  composition:
+    record: research/decision_records/H0001-entry-composition-freeze-v1.yaml
+    contract_hash: 7b15d414f023bde698fb89654623abaa24b40f8e6fd83a81e290e59bea9ffca8
+    stream_path: research/data_evidence/h0001-entry-composition-20261003/candidate-events.json
+    stream_hash: f794a31903da1a110497b4badd58ffdc4bf0e3ce6cf7ec089c68597e6e781d46
+  fixed_inputs:
+    daily_id: soxx-yahoo-rth-daily-pit-20261003-v2
+    daily_hash: 50a359e25efe48100a5538e33554334d7bf0b7cffcdb3835f6571513e06fd068
+    intraday_id: soxx-yahoo-15m-20261003-v1
+    intraday_hash: bb7ac246e4005d49d861301c4acc8261043bcd71818c3bcdbef5f73aa98c59b9
+    scope: Current certified historical interval only; never extend split-free/unit
+      admission to later data.
+chronology:
+  timezone: America/New_York
+  discovery:
+    anchor_sessions:
+    - '2026-08-05'
+    - '2026-10-01'
+    dataset_role: Entire existing intraday vintage is discovery; no retrospective
+      holdout.
+    warmup: Causal earlier admitted Daily and intraday prefixes are inputs only, not
+      labels or samples.
+    decision_authority: DESCRIPTIVE_ONLY_NO_CONFIRMATORY_PASS_OR_REJECT
+  embargo:
+    sessions:
+    - '2026-10-05'
+    - '2026-10-06'
+    - '2026-10-07'
+    - '2026-10-08'
+    - '2026-10-09'
+    bars: 320
+    entry_samples: EXCLUDED_BUT_SIGNAL_DENOMINATORS_RETAINED
+  confirmation:
+    start_session: '2026-10-12'
+    end_session: '2027-04-13'
+    official_XNYS_anchor_sessions: 126
+    selection: First 126 official XNYS sessions after five-session embargo; calendar
+      fixed before outcomes.
+    early_close: Unsupported extended sessions remain denominator UNAVAILABLE; no
+      calendar compression or RTH substitution.
+    warmup: Prior causal prefixes allowed; outcomes from discovery/embargo never train
+      or select parameters.
+    evidence_kind: Untouched future historical cohort, not live/shadow PIT unless
+      separately captured and certified.
+    stopping: One terminal analysis after fixed window and label maturation; no interim
+      significance checks or count-driven extension.
+    followup: Up to five further official sessions for final 320-slot labels; not
+      additional entry anchors.
+    admission: New immutable vintages and causal action/unit compatibility must be
+      checked separately; current interval certification cannot carry forward.
+  purge: No training or optimization. No label spanning the discovery/confirmation
+    boundary may enter confirmation; no cross-partition controls.
+label_contract:
+  version: H0001_ENTRY_MARK_PRICE_LABEL_V1
+  horizon_unit: EXPECTED_COMPLETED_EXTENDED_15M_GRID_SLOTS
+  forward_horizons:
+  - 4
+  - 16
+  - 64
+  - 192
+  - 320
+  primary_horizon: 64
+  rationale: One standard extended-session worth of slots is primary; one/four-hour
+    and three/five-session slot horizons are descriptive context, not searched.
+  anchor: Completed candidate 15m close at event.m15 end_at; must match immutable
+    causal input vintage and event price provenance.
+  signal_time: Candidate as_of publication time, not an assumed executable order time.
+  delayed_input: Signal mark is historical observation; never claim ability to fill
+    at that close. No backdated candidate or queued trigger.
+  target: Close at the h-th expected completed 15m slot strictly after anchor end_at.
+  clock: Official XNYS sessions, frozen 04:00-20:00 ET profile, 64 expected slots
+    per supported full session; carry across session boundaries/weekends without counting
+    closed time.
+  gaps: Count expected slots, never skip gaps to the h-th available bar; unsupported
+    sessions cause UNAVAILABLE labels spanning them.
+  return_definition: R_h = target_close / anchor_close - 1
+  mfe_definition: max(high_j / anchor_close - 1, 0) for j=1..h
+  mae_definition: min(low_j / anchor_close - 1, 0) for j=1..h
+  path: Strictly subsequent slots only; do not use the trigger bar high/low which
+    preceded emission.
+  units: Finite positive compatible OHLC with valid grid/identity/provenance. No future
+    restatement of anchor or silent vintage mix.
+  actions: Reuse existing v3_cash_action_guard eligibility principles. Unknown action
+    coverage or any dividend/capital gain/split/other unit-changing action in anchor-to-target
+    interval is UNRESOLVED. No reinvestment, dividend return or new action-adjustment
+    engine.
+  dividend_feature_vs_outcome: Feature normalization does not certify outcome action
+    accounting.
+  outcome_known_at: Every target/path/action evidence known_at <= separately frozen
+    evaluation_as_of; never feed future outcome evidence into signal inputs.
+  reference_price_is_fill: false
+comparison:
+  baseline: SOXX_SAME_LOCAL_15M_SLOT_OTHER_ELIGIBLE_SESSIONS
+  control_grid: Latest expected completed atomic 15m inputs with Daily READY/BULLISH,
+    exhaustion READY/NORMAL, H1 raw READY, M15 primitive READY and explicit research
+    FLAT.
+  omitted_control_gates: H1 ACTIVE, M15 extreme/arm/GC/price/trigger and episode consumption;
+    do not require them for controls.
+  control_scope: Same partition, same America/New_York completed end slot (including
+    previous-session date at 20:00), hence same premarket/RTH/postmarket segment.
+    Other anchor sessions only.
+  control_identity: Unique symbol/completed15m identity; no polling/correction duplicates.
+    Control vintage/labels obey identical action/unit/horizon rules.
+  control_weight: Equal weight per distinct eligible control session for that slot;
+    all eligible sessions, no outcome-based matching or selection.
+  minimum_control_sessions_per_event: 10
+  control_membership: Eligibility fixed from causal state before label access; candidate-bearing
+    other sessions remain eligible controls.
+  baseline_return: B_event_h = arithmetic mean of valid same-slot SOXX control R_h
+    on other sessions.
+  excess_definition: E_event_h = R_event_h - B_event_h
+  primary_metric: Equal-weight mean across candidate anchor sessions of each session's
+    arithmetic mean E_event_64.
+  secondary_metrics: Event-weighted mean R_h and E_h, fixed-horizon MFE/MAE and label
+    coverage; descriptive only.
+  interpretation: Timing selection relative to same-instrument eligible slot cohort,
+    not invested passive NAV, market-neutral alpha or incremental value of each filter.
+  SPY: NOT_REQUIRED_NOT_RUN; no compatible admitted SPY intraday/action vintage. Never
+    substitute Daily/RTH SPY for extended 15m controls. A later SPY study needs separate
+    preregistration.
+costs:
+  applied: false
+  basis: Gross observation marks; commission/spread/slippage cannot be assumed without
+    fills. Zero applied cost is not zero actual trading cost.
+  after_cost_claims: FORBIDDEN
+  execution_cost_decisions: REMAIN_UNRESOLVED
+uncertainty:
+  method: Joint circular moving-block bootstrap of the full chronological confirmation
+    anchor-session grid.
+  block_sessions: 5
+  samples: 5000
+  random_generator: numpy.random.default_rng
+  seed: 7
+  alpha: 0.05
+  interval: Two-sided percentile [0.025, 0.975] using numpy.quantile linear interpolation.
+  mechanics: For N anchor sessions, draw ceil(N/5) starts uniformly from 0..N-1 per
+    replicate, append five consecutive session indices modulo N, truncate to N. Retain
+    all candidate/control anchors and labels of each selected session including repeated
+    draws.
+  estimand: Recompute per-event other-original-session same-slot controls in every
+    draw using draw multiplicities, then event excess and equal-draw-session primary
+    mean. Exclude all copies of the event's original session from its controls.
+  duplicates: Resampled copies are statistical weights, never new event IDs. Required
+    distinct control support is based on original session identities.
+  empty_or_invalid_draw: Count and report; if any of 5000 draws has no candidate or
+    insufficient control support, inferential interval and PASS/REJECT are UNAVAILABLE.
+    Never redraw or silently drop replicates.
+  requirements: At least 30 primary-paired candidate events and 20 distinct candidate
+    anchor sessions; thresholds fixed as evidence floors, not power guarantees.
+  existing_engine_audit: richping.evaluation.block_ci supplies circular block RNG
+    mechanics but averages signal dates and treats comparison rows as fixed. It cannot
+    directly implement this joint calendar/control estimand; a narrowly scoped adapter
+    is required in the later execution action. No new generic evaluation framework.
+  limitations: Dependence beyond five anchor sessions and nonstationarity are not
+    eliminated; no IID or calibrated forecast claims.
+disposition:
+  null_hypothesis: Confirmation population timing excess at primary horizon <= 0.
+  alternative: Confirmation population timing excess at primary horizon > 0.
+  priority:
+  - INVALID_INPUT_OR_IDENTITY_COLLISION -> FAIL_CLOSED
+  - No candidate events -> ZERO_SIGNAL; metrics/CI null, not zero return and not strategy
+    rejection
+  - Immature required labels -> PENDING; retain events and evaluate later at recorded
+    as_of
+  - Any primary candidate/control label unresolved, missing control support, too few
+    events/dates or invalid bootstrap draw -> INSUFFICIENT_EVIDENCE
+  - Discovery partition -> DESCRIPTIVE_ONLY; never PASS/REJECT
+  - Fully mature/valid confirmation and lower95CI > 0 -> PASS_ENTRY_TIMING_EVIDENCE
+  - Fully mature/valid confirmation and upper95CI < 0 -> REJECT_POSITIVE_ENTRY_TIMING_HYPOTHESIS
+  - Otherwise -> INCONCLUSIVE; failure to reject null is not proof of no effect
+  pass_authority: Opportunity research only; no profitability/production promotion,
+    trade, risk increase or filter ablation claim.
+  minimum_label_coverage_for_inference: 1.0
+missing_outcomes:
+  states:
+  - COMPLETE
+  - PENDING
+  - UNRESOLVED
+  denominator: All immutable candidate events by partition and horizon; all causal
+    eligible controls by slot/session, plus excluded/unavailable-grid reasons.
+  pending: Expected target slot later than evaluation_as_of or fixed vintage endpoint;
+    no fabricated target.
+  unresolved: Past expected gap, unsupported session, unit/action uncertainty, future-known
+    label at evaluation_as_of, missing hash, incompatible vintage or insufficient
+    control support.
+  aggregate: COMPLETE descriptive paired subset must show total/complete/pending/unresolved
+    denominators and reasons. Never silently discard missing controls or candidates.
+    Any incomplete eligible primary control label blocks inferential primary result.
+  secondary: Missing secondary labels do not change primary sample; each horizon reports
+    its own denominator.
+  no_signals: Short-circuit before any market-price, action, benchmark or outcome-store
+    read; label counts zero, metrics null.
+multiple_testing:
+  family_id: H0001_INITIAL_ENTRY_TIMING_EFFICACY_R03_COMPOSER_V1
+  primary_tests: 1
+  strategy_variants: 1
+  primary_horizons:
+  - 64
+  comparator_variants: 1
+  alpha_family: 0.05
+  selection: NONE_NO_CHAMPION_SEARCH
+  secondaries: Four other horizons, MFE/MAE and event weighting are descriptive; no
+    secondary p-values or adoption claims.
+  prior_subfamilies: Frozen DLP-B vs DLP-A, blocker D0 vs D1, H1 S0 vs S1 and proposed
+    alternatives retain separate unexecuted subfamily records. This combined-strategy
+    study does not execute/resolve those comparisons or establish filter contributions.
+  historical_search: Prior chart/indicator/discovery exposure is retained; no correction
+    can make that cohort independent confirmation.
+  trials: Keep ZERO_SIGNAL, failed, rejected and inconclusive reports. A new horizon/baseline/variant/confirmation
+    span requires a new preregistered revision and expanded family accounting before
+    fresh outcomes.
+execution_admission:
+  current_action: PREREGISTRATION_ONLY_NO_LABEL_ENGINE_NO_OUTCOME_ACCESS
+  next_action: H0001_FIRST_ENTRY_EFFICACY
+  preconditions: Verify this committed protocol hash, all dependencies, immutable
+    candidate stream and evaluation manifest before accessing labels; record adapter/source
+    hash, fixed vintage hashes, evaluation_as_of and output identity.
+  empty_current_stream: Execute ZERO_SIGNAL disposition without market/benchmark/outcome
+    reads. No performance evidence or meaningful numeric CI can be produced.
+  nonempty_future_stream: Requires compatible immutable signal/control traces, outcome/action
+    inputs and exact frozen bootstrap adapter; no provider migration in this action.
+  sparse_evidence_routing: Preserve thresholds. After first ZERO_SIGNAL/INSUFFICIENT_EVIDENCE
+    disposition, PM may promote LONG_HISTORY_PROVIDER_AND_VOLUME_EVIDENCE as the blocker
+    to obtaining an informative cohort; no retroactive confirmation claim.
+  prohibited:
+  - strategy_tuning
+  - outcome_champion
+  - orders
+  - fills
+  - portfolio_simulation
+  - main_code_merge
+  - network_market_fetch_in_preregistration
+decision_scopes:
+  H0001_RESEARCH_EVALUATION: PARTIALLY_RESOLVED_INITIAL_ENTRY_OPPORTUNITY_PROTOCOL_ONLY
+  resolved_for_this_protocol:
+  - H1-UNIVERSE
+  - H1-DISCOVERY
+  - H1-CONFIRMATORY
+  - H1-BASELINE
+  - H1-PRIMARY-METRIC
+  - H1-DECISION-RULE
+  - H1-SAMPLE-UNIT
+  - H1-MULTIPLE-TESTING
+  general_spec_roots: Unchanged UNRESOLVED for full strategy/execution profitability;
+    scoped record does not confer require_profitability_ready.
+  H1-STATE-TRANSITIONS: PARTIALLY_RESOLVED_INITIAL_CANDIDATE_ONLY_UNCHANGED
+source_LF_sha256:
+  research/data_evidence/h0001-entry-composition-20261003/candidate-events.json: f794a31903da1a110497b4badd58ffdc4bf0e3ce6cf7ec089c68597e6e781d46
+  research/data_evidence/h0001-entry-composition-20261003/composition-contract.json: d91cb24d0f47ecb474beebacd43011e4a381a3af2dfd2da0a49ee909f600f1e9
+  research/data_evidence/h0001-entry-composition-20261003/denominator-report.json: 5922eef43a9f18e2c23001c24cf87a1149ef5db3ba6c766f8eb10bb719d03ad0
+  research/data_evidence/h0001-entry-composition-20261003/offline-proof.json: 180229314c1704ac5392e3457df8ee1a062cb09e209fc8ea5f81941a0c8904e0
+  research/data_evidence/h0001-entry-composition-20261003/smoke.json: ecc4f7aed8ae09a411c2a4e64791082830665ff9f3f40cb88eaf3d0021a80a16
+  research/data_evidence/h0001-entry-composition-20261003/zero-signal-diagnostic.json: a6e0068bcc49799fa3fc80d875cbd58028ee295bbcc7f6ba4311703c30a539b8
+  research/decision_records/H0001-15m-entry-freeze-v1.yaml: 147745ca450edd1318a90a496aa3c5e908c8b3981b9d7788df06d517097e0569
+  research/decision_records/H0001-1h-relative-setup-freeze-v1.yaml: f0866743c6e4d5f99924ed6a8a75e69d7e539ccc8912d977426db5b270ae024c
+  research/decision_records/H0001-action-unit-interpretation-audit-v1.yaml: bede2224e3c17c9e9d2bf6be7f7ee4aae2da58cd2288f8828fbbb79a6e7b39e4
+  research/decision_records/H0001-daily-blocker-freeze-v1.yaml: 546174ded467c7e2d22ba44c93543861f82dd2ae5c7bca1782960761818eb98d
+  research/decision_records/H0001-daily-input-freeze-v1.yaml: 03577342865ed585bffe07cc39a2feb5ab04aabe19c6a01b41413b26fcad1f2d
+  research/decision_records/H0001-daily-trend-freeze-v1.yaml: ba510bd257444dd61baa0be81072618742203955906cc178bd27a11d8dc2baae
+  research/decision_records/H0001-daily-trend-readiness-remediation-v1.yaml: 3f6345b9a6706e10bd74e2e78221630ed8ee124599dfc5c5b9759865972655f3
+  research/decision_records/H0001-entry-composition-freeze-v1.yaml: e1f4dac84950e4a57fa512e0c2ebd91d1764fc4cd4183244ad8477bfd0f889cf
+  research/hypotheses/H0001-r03.yaml: 35e13276056a36d6a06de04611720fd286113f0e5db1e4255af6ceeb6a0f0bc2
+  research/strategy_specs/H0001-r03-draft.yaml: ecda2ad23dc52377d2a39da1d9f20818d4546bd19557107e5d8ac9859c776051
+  richping/evaluation.py: 61b383b0ee91bc5a0956e10e5d13efd76cf2599debc2946a896a30e7a508a73a
+  richping/research_v2/strategy/daily_exhaustion.py: e3ed6b5e28a5697c62aa91722b9ccb2f6289d956f78c6b827cd625db8ed49b5a
+  richping/research_v2/strategy/daily_trend.py: ef197f50a4adb0f06563dc8279b0a19e0187bfb9dd1c20f9ca68fa22e22747e5
+  richping/research_v2/strategy/entry_15m.py: 2eebd923127e18f60ef59bf098bd2e2244d1b72ab2cf8a901d417c14292212bd
+  richping/research_v2/strategy/entry_composition.py: d1f65e4ca10879858f2351f444468237aefb744da457a35d83ec1061e3208212
+  richping/research_v2/strategy/h0001_spec.py: bb50820e5e4da19fd2d8683cf23f045c19b47e8b5d2d319f0a64aa06cc2e1a5c
+  richping/research_v2/strategy/h1_setup.py: 0a2eac470746042e7956056a4d215c3ae89fa9c5ec5fa6bdc8e87932efde382d
+contract_hash: 074255189630fa625c4d40eb2f344fb7767d2c8f305f22c9e4c2a608e93e944c
