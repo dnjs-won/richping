@@ -15,7 +15,7 @@ source_of_truth:
     branch: main
     path: PROJECT_STATUS.md
   active_workstream_status:
-    branch: v2-h0001-entry-efficacy-preregistration
+    branch: v2-h0001-first-entry-efficacy
     path: PROJECT_STATUS.md
   decision_index:
     branch: main
@@ -30,17 +30,17 @@ control_plane:
   branch: main
   rule: PM state lives on main so new sessions can recover it from the default branch.
 active_workstream:
-  branch: v2-h0001-entry-efficacy-preregistration
-  base_branch: v2-h0001-entry-composition
-  base_commit: bb72239d580e4814b880c61ad3c591f5d989870e
-  implementation_commit: 13f719b56980a43fbace2a003b8c78331fa0c210
+  branch: v2-h0001-first-entry-efficacy
+  base_branch: v2-h0001-entry-efficacy-preregistration
+  base_commit: 13f719b56980a43fbace2a003b8c78331fa0c210
+  implementation_commit: fbef043bbbcded3fe3e80c0fa47fa7ff4c103d68
   status: DIVERGED_FROM_MAIN
   observed_relation_to_main:
-    ahead_by: 33
-    behind_by: 14
-    main_commit: 547ebea194a8a709bb85e8224b5126a27a1a6617
-  note: Scoped efficacy protocol frozen and verified; no outcome access/evaluator or code integration. Main receives
-    PM documents only.
+    ahead_by: 34
+    behind_by: 15
+    main_commit: a04cf3575bb518751005345da96a610c1e649bf3
+  note: Current fixed discovery stream disposition executed ZERO_SIGNAL without outcomes. Main receives PM documents
+    only; no signal code integration or informative efficacy claim.
 current_phase:
   id: H0001_FIRST_REAL_EVIDENCE
   objective: 'Produce the first reproducible H0001 entry-efficacy evidence from real intraday market data without
@@ -51,7 +51,7 @@ current_phase:
     comparison and uncertainty from a fixed real dataset.
 
     '
-  status: IN_PROGRESS_FIRST_EFFICACY_DISPOSITION
+  status: BLOCKED_ON_INFORMATIVE_COHORT_ADMISSION
   progress:
     satisfied_exit_criteria:
     - 1
@@ -65,12 +65,15 @@ current_phase:
       BULLISH721, exhaustion NORMAL2624, H1 raw READY829, H1 ACTIVE0, frozen15m trigger0, initial candidates0/timestamps[].
       Independent completed-H1 diagnostic:656 publications,208 READY, downside extremes0. ZERO_SIGNAL due to no
       frozen1H activation, not consumption or threshold changes. Event stream hash f794a31903da1a110497b4badd58ffdc4bf0e3ce6cf7ec089c68597e6e781d46;
-      all1346 tests passed/new55/no skips. Outcomes and profitability NOT_RUN.
+      all1346 tests passed/new55/no skips. Outcomes and profitability NOT_RUN. Executed frozen-protocol ZERO_SIGNAL
+      disposition twice identically; all metrics/CI null, no market/action/benchmark/outcome reads or returns. Full1379
+      tests passed/new20.
     limitations: Initial-entry opportunities only, actual candidate count0. No position/order/fill/ADD/exit/reentry/portfolio
       or efficacy. Bar-end availability is a historical research assumption; actual delivery/revision latency and
       live/shadow PIT are not reconstructed. Same interval-scoped OHLC/action admission as before. Initial-opportunity
-      protocol is now frozen; efficacy has not been executed and current ZERO_SIGNAL cannot establish an economic
-      effect.
+      protocol is frozen and its empty-stream disposition has been executed; informative efficacy remains unavailable
+      and current ZERO_SIGNAL cannot establish an economic effect. Empty-stream runner only; nonempty label/control/bootstrap adapter remains unimplemented. Expanded
+      historical vintages are discovery and cannot replace fixed future confirmation.
     blocked_exit_criteria:
     - 6
     frozen_15m_subtask: COMPLETE_EXECUTABLE_WITH_ACTUALLY_USABLE_UPSTREAM_INPUTS
@@ -78,6 +81,9 @@ current_phase:
     initial_entry_composition_subtask: COMPLETE_REAL_DETERMINISTIC_EMPTY_CANDIDATE_STREAM
     efficacy_preregistration_subtask: COMPLETE_FROZEN_NO_OUTCOMES
     evaluation_protocol_hash: 074255189630fa625c4d40eb2f344fb7767d2c8f305f22c9e4c2a608e93e944c
+    first_entry_efficacy_disposition_subtask: COMPLETE_FIXED_STREAM_ZERO_SIGNAL_NO_OUTCOME_ACCESS
+    informative_entry_efficacy: UNAVAILABLE_EMPTY_COHORT_PHASE_EXIT_6_INCOMPLETE
+    disposition_report_hash: 17f961b6b6f8950399c0f37ff5be69f2a241f09afa021b2264b2d901ef7b168f
   exit_criteria:
   - A real 15m dataset is persisted locally with immutable dataset identity/provenance.
   - The dataset covers the required 04:00-20:00 ET research session with explicit gap/availability diagnostics.
@@ -300,35 +306,77 @@ completed_actions:
     passed: 1359
     preregistration_real_outcome_queries: 0
   phase_complete: false
+- id: H0001_FIRST_ENTRY_EFFICACY
+  status: COMPLETE_FIXED_STREAM_DISPOSITION
+  completed_at: '2026-10-03'
+  branch: v2-h0001-first-entry-efficacy
+  commit: fbef043bbbcded3fe3e80c0fa47fa7ff4c103d68
+  implementation_state: IMPLEMENTED_EXECUTED_ZERO_SIGNAL_EVIDENCE_PRODUCED_NOT_MAIN_INTEGRATED
+  evidence: research/data_evidence/h0001-first-entry-efficacy-20261003/
+  protocol_hash: 074255189630fa625c4d40eb2f344fb7767d2c8f305f22c9e4c2a608e93e944c
+  manifest_hash: e7643b9efdbafe93bb13d0d0dbaf14b6c6acb5335704e9421467b259ccadacd9
+  report_id: 833369c84e614985986c866fb2a8280574681c31f769ca2fee09d253d63a085b
+  report_hash: 17f961b6b6f8950399c0f37ff5be69f2a241f09afa021b2264b2d901ef7b168f
+  stream_hash: f794a31903da1a110497b4badd58ffdc4bf0e3ce6cf7ec089c68597e6e781d46
+  disposition: ZERO_SIGNAL
+  candidate_count: 0
+  candidate_timestamps: []
+  metrics: NULL_NO_ECONOMIC_EFFECT_ESTIMATE
+  offline_repeat_equal: true
+  market_action_benchmark_outcome_reads: 0
+  returns_calculated: 0
+  acceptance_criteria_satisfied: 4
+  acceptance_criteria_unmet: 0
+  tests:
+    command: .venv/Scripts/python -m pytest -q -o cache_dir=var/pytest-first-efficacy-cache --junitxml=var/h0001-first-entry-efficacy-suite.xml
+    counts:
+      errors: 0
+      failures: 0
+      skipped: 0
+      tests: 1379
+    coverage: FULL_SUITE_NO_SKIPS_INCLUDING_SAVED_REAL_COMPOSITION_PROOF
+    elapsed_seconds: 465.704
+    junit_path: suite.xml
+    junit_sha256: cc9fe253e67308d3d1f954eaa7f6566b4add2b5f9f696651600bbd165ecf6521
+    new_tests: 20
+    passed: 1379
+    profitability: NOT_RUN
+    real_disposition_outcome_queries: 0
+    real_disposition_returns_calculated: 0
+  phase_exit_6: INCOMPLETE_NO_INFORMATIVE_EFFICACY
+  phase_complete: false
+  strategy_profitability_tested: false
+  nonempty_protocol_adapter: NOT_IMPLEMENTED_FAIL_CLOSED
 next_action:
-  id: H0001_FIRST_ENTRY_EFFICACY
+  id: LONG_HISTORY_PROVIDER_AND_VOLUME_EVIDENCE
   priority: P0
   status: READY
   blocks_phase_exit_criteria:
   - 6
-  objective: Execute frozen initial-opportunity protocol disposition on the existing immutable SOXX candidate stream;
-    preserve empty-stream outcome-free short circuit.
-  why_now: Preregistration is frozen. Current ZERO_SIGNAL prevents meaningful numeric efficacy; execute and preserve
-    this disposition before routing the informative-cohort blocker.
-  evidence_branch: v2-h0001-entry-efficacy-preregistration
-  protocol_record: research/decision_records/H0001-entry-efficacy-preregistration-v1.yaml
-  protocol_hash: 074255189630fa625c4d40eb2f344fb7767d2c8f305f22c9e4c2a608e93e944c
+  objective: Audit actual longer-history provider access and extended-session/action/OHLC-unit/volume admission
+    before a new immutable discovery vintage is captured.
+  why_now: Frozen fixed stream has zero initial candidates because completed H1 has no downside extremes. Executed
+    ZERO_SIGNAL cannot satisfy informative efficacy exit6; coverage admission is now the immediate blocker. More
+    history does not guarantee signals or inference.
+  evidence_branch: v2-h0001-first-entry-efficacy
+  basis_evidence: research/data_evidence/h0001-first-entry-efficacy-20261003/disposition-report.json
   constraints:
-  - No threshold/frozen signal changes or main code integration.
-  - If candidate count is zero, no market/action/benchmark/outcome read or return calculation; metrics null.
-  - Any nonempty cohort must use exact frozen labels, matching, action/unit and joint-bootstrap semantics; no generic
-    framework.
-  - Existing data is discovery only; no retroactive confirmation or costs/portfolio/production claims.
-  - No provider migration in first fixed-vintage disposition; route separately after evidence.
+  - Preserve all frozen Daily/1H/15m/composer parameters; no count-driven threshold changes.
+  - No outcomes, provider migration, order/fill/portfolio or paid subscription in the admission audit.
+  - Require full extended 04:00-20:00 ET coverage; no IEX/RTH-only fallback or zero-volume-as-no-trading inference.
+  - Historical expansion is discovery only; fixed future126-session confirmation/stopping rule unchanged.
+  - New interval requires its own corporate-action and OHLC unit admission; existing split-free certificate cannot
+    carry forward.
+  - Audit actual available access without credential changes; unavailable authorization is a recorded blocker, never
+    assumed.
   acceptance_criteria:
-  - Validate committed protocol/spec/composer/stream hashes before any outcome access.
-  - Produce immutable twice-identical disposition report with candidate/label denominators and missing/pending/zero-signal
-    reasons.
-  - For the current zero candidates, record ZERO_SIGNAL with null metrics and zero outcome/market reads.
-  - Keep phase exit6 incomplete for informative efficacy when zero signal; determine whether longer-history/action
-    coverage is now P0 and update PM state.
+  - Record actual authorized provider/feed access and available SOXX historical interval with source provenance.
+  - Audit supported extended-session/expected-grid/early-close coverage and positive/missing/zero volume semantics.
+  - Audit Daily/intraday raw-unit, split/action availability and compatibility requirements for the proposed interval.
+  - Produce a concrete admission PASS/BLOCKED disposition and route immutable capture only if supported; no performance
+    lookup or confirmation relabeling.
   after_success:
-  - PM_ROUTE_INFORMATIVE_COHORT_BLOCKER_IF_ZERO_SIGNAL_OR_INSUFFICIENT_EVIDENCE
+  - PM_ROUTE_LONGER_IMMUTABLE_DISCOVERY_CAPTURE_IF_ADMITTED
 pm_policy:
   single_next_action: true
   discovered_non_blockers_go_to_backlog: true

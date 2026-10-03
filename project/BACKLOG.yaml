@@ -27,10 +27,11 @@ items:
 
     '
   guardrail: Do not merge blindly; preserve the newer main R1 paper changes.
-  active_branch: v2-h0001-entry-efficacy-preregistration
+  active_branch: v2-h0001-first-entry-efficacy
   observed_relation_to_main:
-    ahead_by: 33
-    behind_by: 14
+    ahead_by: 34
+    behind_by: 15
+    main_commit: a04cf3575bb518751005345da96a610c1e649bf3
 - id: H0001_MINIMAL_15M_ENTRY_FREEZE
   priority: P1
   status: COMPLETE_FROZEN_AND_OFFLINE_MECHANICALLY_EXERCISED
@@ -87,20 +88,27 @@ items:
   resolution: Frozen semantic interpretation remediation; dataset completeness separate from causal event clocks.
     Exact500-session Nasdaq OHLC certification; new identity vintage.
 - id: LONG_HISTORY_PROVIDER_AND_VOLUME_EVIDENCE
-  priority: P1
-  status: OPEN
+  priority: P0
+  status: ACTIVE_AS_NEXT_ACTION_ADMISSION_AUDIT
   summary: 'Yahoo 15m only retains 60 calendar days and observed pre/post volume is zero. Alpaca historical SIP
     is the most realistic reviewed longer-history candidate; account access and SOXX/session/action coverage smoke
     remain unverified. Never fall back to IEX/RTH-only or interpret zero volume as no trading.
 
     '
-  evidence_branch: v2-real-intraday-data-foundation
+  evidence_branch: v2-h0001-first-entry-efficacy
   evidence: docs/V2_REAL_INTRADAY_DATA_FOUNDATION.md
-  efficacy_blocker_candidate: true
+  efficacy_blocker_candidate: false
+  efficacy_blocker_confirmed: true
   entry_composition_evidence: research/data_evidence/h0001-entry-composition-20261003/zero-signal-diagnostic.json
-  note: Preregistration complete; fixed current stream0 candidates. Remains P1 blocker candidate until separately
-    executed ZERO_SIGNAL disposition; no migration or threshold changes. Any new history is discovery unless it
-    satisfies fixed future confirmation admission.
+  note: Admission audit only next; no provider migration in completed disposition. Frozen thresholds and future
+    confirmation boundaries preserved; expanded historical data stays discovery. Never extend current interval action/unit
+    certification.
+  blocks_phase_exit_criteria:
+  - 6
+  disposition_evidence: research/data_evidence/h0001-first-entry-efficacy-20261003/disposition-report.json
+  promotion_reason: 'Blocks exit6: current completed-H1 extremes0 and initial candidates0; executed ZERO_SIGNAL
+    cannot yield informative entry efficacy. Need separately admitted longer discovery coverage; signal availability
+    is not guaranteed.'
 - id: YAHOO_LATEST_SESSION_OFFGRID_QUOTE
   priority: P2
   status: OPEN_FAIL_CLOSED
@@ -158,19 +166,23 @@ items:
   contract_hash: 074255189630fa625c4d40eb2f344fb7767d2c8f305f22c9e4c2a608e93e944c
 - id: H0001_FIRST_ENTRY_EFFICACY
   priority: P0
-  status: ACTIVE_AS_NEXT_ACTION_READY
+  status: COMPLETE_FIXED_STREAM_ZERO_SIGNAL_NO_INFORMATIVE_EFFICACY
   depends_on:
   - H0001_ENTRY_EXECUTION_AND_COMPOSITION
   - H0001_ENTRY_EFFICACY_PREREGISTRATION
-  summary: Execute registered fixed-stream opportunity disposition. Current0 candidates must short-circuit ZERO_SIGNAL/null
-    metrics without outcome reads; informative efficacy remains unavailable.
+  summary: 'Frozen fixed current candidate stream0: executed twice-identical ZERO_SIGNAL with null metrics and zero
+    market/action/benchmark/outcome reads. Full1379 tests/new20 passed. Informative efficacy and nonempty adapter
+    remain unavailable.'
   guardrail: Follow scoped protocol exactly; no retroactive holdout/confirmation, threshold tuning, fills/cost/portfolio
     claim or provider migration.
-  blocks_phase_exit_criteria:
-  - 6
-  evidence_branch: v2-h0001-entry-efficacy-preregistration
+  blocks_phase_exit_criteria: []
+  evidence_branch: v2-h0001-first-entry-efficacy
   protocol_record: research/decision_records/H0001-entry-efficacy-preregistration-v1.yaml
   protocol_hash: 074255189630fa625c4d40eb2f344fb7767d2c8f305f22c9e4c2a608e93e944c
+  commit: fbef043bbbcded3fe3e80c0fa47fa7ff4c103d68
+  evidence: research/data_evidence/h0001-first-entry-efficacy-20261003/disposition-report.json
+  formerly_blocked_phase_exit_criteria:
+  - 6
 - id: MINIMAL_CI
   priority: P2
   status: OPEN

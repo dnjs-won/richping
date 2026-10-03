@@ -5,7 +5,7 @@ purpose: 'Lightweight routing index for AI PM sessions. This file does not repla
   evidence.
 
   '
-default_research_branch: v2-h0001-entry-efficacy-preregistration
+default_research_branch: v2-h0001-first-entry-efficacy
 data_foundation:
   branch: v2-real-intraday-data-foundation
   contract: docs/V2_REAL_INTRADAY_DATA_FOUNDATION.md
@@ -24,7 +24,7 @@ canonical_sources:
     specification_version: h0001_r03_spec_v13
     sha256: bf8134733bacee17542240e53a8ec30223c1550b5bedbaa6d3994ba1444acc19
   current_status:
-    branch: v2-h0001-entry-efficacy-preregistration
+    branch: v2-h0001-first-entry-efficacy
     path: PROJECT_STATUS.md
   entry_efficacy_protocol:
     branch: v2-h0001-entry-efficacy-preregistration
@@ -34,6 +34,13 @@ canonical_sources:
     canonical_hash: 074255189630fa625c4d40eb2f344fb7767d2c8f305f22c9e4c2a608e93e944c
     status: FROZEN_BEFORE_ENTRY_OUTCOMES
     scope: INITIAL_ENTRY_OPPORTUNITY_ONLY_NO_GENERAL_PROFITABILITY_ADMISSION
+  initial_entry_efficacy_disposition:
+    branch: v2-h0001-first-entry-efficacy
+    commit: fbef043bbbcded3fe3e80c0fa47fa7ff4c103d68
+    path: research/data_evidence/h0001-first-entry-efficacy-20261003/disposition-report.json
+    status: EXECUTED_ZERO_SIGNAL_NO_INFORMATIVE_EFFICACY
+    report_hash: 17f961b6b6f8950399c0f37ff5be69f2a241f09afa021b2264b2d901ef7b168f
+    protocol_hash: 074255189630fa625c4d40eb2f344fb7767d2c8f305f22c9e4c2a608e93e944c
 frozen_major_decisions:
   daily_input:
     status: FROZEN
@@ -125,11 +132,13 @@ current_open_decision_groups:
 - id: H0001_RESEARCH_EVALUATION
   status: PARTIALLY_RESOLVED_INITIAL_ENTRY_PROTOCOL_FROZEN
   priority: REQUIRED_FOR_FIRST_EFFICACY_EXPERIMENT
-  next_action: H0001_FIRST_ENTRY_EFFICACY
+  next_action: LONG_HISTORY_PROVIDER_AND_VOLUME_EVIDENCE
   remaining_required_fields: []
   outcome_access: ONLY_SEPARATE_EXECUTION_UNDER_FROZEN_PROTOCOL_ZERO_SIGNAL_REQUIRES_NO_READS
   note: Initial opportunity sample/horizons/metric/baseline/cost scope/uncertainty/splits/trials/missingness resolved.
-    General full-strategy executable research and profitability roots remain unresolved. No outcomes accessed.
+    General full-strategy executable research and profitability roots remain unresolved. No outcomes accessed. Current
+    discovery empty-stream disposition now executed; no economic estimate or future confirmation disposition. Informative
+    cohort admission blocks exit6.
   remaining_scope:
   - Full-strategy and filter-ablation evaluation
   - Actual position open, order timing and fill
@@ -139,6 +148,10 @@ current_open_decision_groups:
   record: research/decision_records/H0001-entry-efficacy-preregistration-v1.yaml
   evidence_branch: v2-h0001-entry-efficacy-preregistration
   contract_hash: 074255189630fa625c4d40eb2f344fb7767d2c8f305f22c9e4c2a608e93e944c
+  fixed_stream_execution: COMPLETE_ZERO_SIGNAL_NULL_METRICS_NO_OUTCOMES
+  disposition_branch: v2-h0001-first-entry-efficacy
+  disposition_evidence: research/data_evidence/h0001-first-entry-efficacy-20261003/disposition-report.json
+  nonempty_label_control_bootstrap_adapter: NOT_IMPLEMENTED_NOT_REQUIRED_FOR_EMPTY_STREAM
 reopen_policy:
   frozen_decision_may_reopen_only_if:
   - A causal/data-integrity defect invalidates it.
@@ -188,4 +201,5 @@ frozen_semantic_interpretation_audit:
   strategy_decisions_changed: false
   completeness_capture_is_causal_feature: false
 schema_revision: Scoped initial-opportunity preregistration v1; executable signal v13/84 unresolved paths unchanged
-  to preserve event identity. General lifecycle/profitability admission still blocked.
+  to preserve event identity. General lifecycle/profitability admission still blocked. Fixed-stream ZERO_SIGNAL
+  executed; informative cohort admission is P0. Frozen signal/protocol and unresolved lifecycle unchanged.
