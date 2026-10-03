@@ -1,6 +1,6 @@
 schema_version: 1
 project: richping
-updated_at: "2026-10-02"
+updated_at: "2026-10-03"
 
 source_of_truth:
   project_goal:
@@ -16,7 +16,7 @@ source_of_truth:
     branch: main
     path: PROJECT_STATUS.md
   active_workstream_status:
-    branch: v2-c0-extended-session-contract
+    branch: v2-real-intraday-data-foundation
     path: PROJECT_STATUS.md
   decision_index:
     branch: main
@@ -33,15 +33,19 @@ control_plane:
   rule: "PM state lives on main so new sessions can recover it from the default branch."
 
 active_workstream:
-  branch: v2-c0-extended-session-contract
+  branch: v2-real-intraday-data-foundation
+  base_branch: v2-c0-extended-session-contract
+  base_commit: 7197fe3
+  implementation_commit: 8f0611f
   status: DIVERGED_FROM_MAIN
   observed_relation_to_main:
-    ahead_by: 27
-    behind_by: 1
+    ahead_by: 28
+    behind_by: 10
   note: >
-    V2/H0001 research implementation remains on the active workstream. Do not discard
-    or restart it. Integration sequencing is PM-managed and is not allowed to hide the
-    need for first real-data evidence.
+    The data foundation continues the existing V2 head on an isolated task branch.
+    Original V2 branch/history is preserved. Implementation is executed on real data
+    but NOT integrated into main. Main's c48851d R1 paper fix remains on main;
+    deliberate integration stays P1. Relation includes this main PM update.
 
 current_phase:
   id: H0001_FIRST_REAL_EVIDENCE
@@ -51,7 +55,20 @@ current_phase:
   user_visible_outcome: >
     A reproducible report showing actual signal count, forward returns, MFE/MAE,
     matched benchmark comparison and uncertainty from a fixed real dataset.
-  status: BLOCKED_ON_REAL_INTRADAY_DATA
+  status: IN_PROGRESS_ON_FIXED_REAL_INTRADAY_DATA
+  progress:
+    satisfied_exit_criteria: [1, 2, 3]
+    remaining_exit_criteria: [4, 5, 6]
+    actual_evidence: >
+      SOXX Yahoo 15m 2026-08-05 through 2026-10-01, 2624 expected/observed bars,
+      902 premarket / 1066 RTH / 656 post, no gaps or unsupported sessions in this
+      range. Immutable v1/v2 persisted; repeated network-disabled reload and
+      completed aggregation/event iteration have identical identities.
+    limitations: >
+      Historical bar-end known_at is a research assumption, not live/shadow PIT.
+      Corporate actions remain UNKNOWN; extended volume zero is not no-trade proof.
+      Yahoo's 60-day 15m window does not provide frozen Daily 179-observation warmup
+      or RTH/PIT action input. Generic extended Daily aggregates do not replace it.
   exit_criteria:
     - "A real 15m dataset is persisted locally with immutable dataset identity/provenance."
     - "The dataset covers the required 04:00-20:00 ET research session with explicit gap/availability diagnostics."
@@ -68,36 +85,55 @@ current_phase:
     - "Full exit/add/portfolio optimization before entry efficacy is known"
     - "New architecture taxonomy not required by the exit criteria"
 
+completed_actions:
+  - id: V2_REAL_INTRADAY_DATA_FOUNDATION
+    status: COMPLETE
+    implementation_state: EXECUTED_ON_REAL_DATA_AND_EVIDENCE_PRODUCED_NOT_MAIN_INTEGRATED
+    completed_at: "2026-10-03"
+    branch: v2-real-intraday-data-foundation
+    commit: 8f0611f
+    acceptance_criteria_satisfied: 8
+    acceptance_criteria_unmet: 0
+    evidence:
+      contract: docs/V2_REAL_INTRADAY_DATA_FOUNDATION.md
+      coverage: research/data_evidence/v2-real-20261003/coverage-v1.json
+      offline: research/data_evidence/v2-real-20261003/offline-proof-v1.json
+      smoke: research/data_evidence/v2-real-20261003/smoke.json
+    local_store: C:/richping/var/research/v2-real/market.sqlite
+    dataset_id: soxx-yahoo-15m-20261003-v1
+    content_hash: bb7ac246e4005d49d861301c4acc8261043bcd71818c3bcdbef5f73aa98c59b9
+    tests: "41 new tests and 1140 full-workstream tests passed; no skips; no external API in unit tests."
+    phase_complete: false
+    strategy_profitability_tested: false
+
 next_action:
-  id: V2_REAL_INTRADAY_DATA_FOUNDATION
-  priority: P0
+  id: H0001_MINIMAL_15M_ENTRY_FREEZE
+  priority: P1
   status: READY
   objective: >
-    Implement and prove a real 15m market-data ingestion/persistence path for V2 so
-    H0001 experiments reuse a fixed local immutable dataset instead of fetching data
-    again for each test.
+    Freeze one minimal 15m initial-entry tuple plus at most one comparator using
+    the fixed real SOXX intraday dataset, preserving the frozen Daily and 1H contracts.
   why_now: >
-    Current V2 MarketDataset explicitly accepts synthetic input only. Therefore the
-    project cannot produce real H0001 efficacy evidence yet.
+    A measured full-session real 15m vintage can now be reloaded offline. The 15m
+    proposal remains unresolved; select the smallest executable contract before
+    composition and efficacy. No Cartesian parameter search or profitability claim.
   constraints:
     - "Preserve existing synthetic V2 tests and causal contracts."
-    - "Do not redesign the replay/feature engine."
-    - "Do not call the provider for every experiment; network is an ingestion/update concern only."
-    - "Keep raw/provider provenance and derived/aggregated data semantics explicit."
-    - "Do not silently substitute RTH-only data for the selected extended intraday research session."
+    - "Use saved immutable data; network remains an explicit ingestion/update concern only."
+    - "Preserve frozen Daily/1H decisions; do not infer 15m values from 1H."
+    - "Do not lower warmup, invent PIT availability/actions, or fill gaps."
+    - "Research snapshot admission does not satisfy frozen RTH/PIT Daily input."
+    - "No exit/add/risk/portfolio/order implementation or Cartesian parameter search."
     - "Do not claim provider/chart parity until measured."
   acceptance_criteria:
-    - "A reviewed provider/adapter contract exists for real 15m input."
-    - "Historical real bars can be ingested into V2-compatible immutable storage."
-    - "Incremental refresh/update behavior is explicit and does not mutate old dataset vintages."
-    - "Gap, duplicate, ordering, session-boundary and timestamp validation fail closed."
-    - "At least SOXX can be materialized as a real historical research dataset suitable for the H0001 session contract, or provider limitations are demonstrated with an explicit blocker and replacement plan."
-    - "The saved dataset can be reloaded and replayed offline with identical content identity."
-    - "A coverage artifact reports date range, bar counts, missing/unsupported sessions and known limitations."
-    - "Tests cover persistence/reload and failure paths without using synthetic performance as market evidence."
+    - "One minimal initial-entry tuple and at most one comparator are recorded as an immutable decision."
+    - "Readiness, units, polarity, reversal, temporal composition and same-batch decision timing are explicit."
+    - "Real saved intraday data can exercise the selected primitives offline; no outcome-driven grid search."
+    - "Existing frozen Daily/1H decisions and hypothesis revision are preserved."
+    - "Remaining Daily/PIT/mixed-profile prerequisites are explicit before executable composition/efficacy."
   after_success:
-    - "Freeze one minimal 15m initial-entry tuple; no Cartesian parameter search."
     - "Implement the executable 15m trigger/composer."
+    - "Satisfy separately tracked frozen Daily input/mixed-profile prerequisites before claiming composed events."
     - "Run the first real-data H0001 entry efficacy experiment."
 
 pm_policy:

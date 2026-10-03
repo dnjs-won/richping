@@ -1,5 +1,5 @@
 schema_version: 1
-updated_at: "2026-10-02"
+updated_at: "2026-10-03"
 
 rules:
   - "A discovery is not automatically a task."
@@ -11,10 +11,14 @@ rules:
 items:
   - id: V2_REAL_INTRADAY_DATA
     priority: P0
-    status: ACTIVE_AS_NEXT_ACTION
+    status: COMPLETE_DATA_FOUNDATION
     blocks:
       - "First reproducible H0001 real-data entry efficacy evidence"
-    summary: "V2 MarketDataset currently accepts synthetic-only input; real 15m ingestion/persistence is missing."
+    summary: "Real SOXX 15m Yahoo snapshot captured, validated, stored as immutable v1/v2 and reused offline."
+    evidence_branch: v2-real-intraday-data-foundation
+    evidence: research/data_evidence/v2-real-20261003/smoke.json
+    integration: NOT_MAIN_INTEGRATED
+    limitation: "Historical research snapshot only; not strategy efficacy or frozen Daily PIT evidence."
     owner: AI_PM
 
   - id: V2_MAIN_INTEGRATION_LANE
@@ -28,10 +32,43 @@ items:
 
   - id: H0001_MINIMAL_15M_ENTRY_FREEZE
     priority: P1
-    status: QUEUED
+    status: ACTIVE_AS_NEXT_ACTION
     depends_on:
       - V2_REAL_INTRADAY_DATA
     summary: "Select one minimal 15m initial-entry tuple plus at most one comparator; prohibit Cartesian grid search."
+
+  - id: H0001_DAILY_PIT_AND_MIXED_PROFILE_PREREQUISITES
+    priority: P1
+    status: REQUIRED_BEFORE_COMPOSED_EFFICACY
+    blocks:
+      - "Daily + 1H + 15m deterministic H0001 entry events and efficacy report"
+    summary: >
+      Preserve frozen RTH Daily PIT_SPLIT_ADJUSTED_OHLC, freshness and 179-observation
+      Daily trend readiness. Current 41-session Yahoo intraday capture does not
+      supply these; reviewed action evidence/transform and mixed-profile as-of join
+      remain prerequisites already identified in the Daily freeze records.
+    reason_not_next_action: "15m tuple freeze can proceed; do not claim full composed events until these prerequisites exist."
+
+  - id: LONG_HISTORY_PROVIDER_AND_VOLUME_EVIDENCE
+    priority: P1
+    status: OPEN
+    summary: >
+      Yahoo 15m only retains 60 calendar days and observed pre/post volume is zero.
+      Alpaca historical SIP is the most realistic reviewed longer-history candidate;
+      account access and SOXX/session/action coverage smoke remain unverified.
+      Never fall back to IEX/RTH-only or interpret zero volume as no trading.
+    evidence_branch: v2-real-intraday-data-foundation
+    evidence: docs/V2_REAL_INTRADAY_DATA_FOUNDATION.md
+
+  - id: YAHOO_LATEST_SESSION_OFFGRID_QUOTE
+    priority: P2
+    status: OPEN_FAIL_CLOSED
+    summary: >
+      Actual latest-session chart response appended a 19:59:54 point after its
+      19:45 bar. Rejected without rounding/dropping/merging; accepted fixed range
+      ends on the previous provider session. Review any future exception explicitly.
+    evidence_branch: v2-real-intraday-data-foundation
+    evidence: research/data_evidence/v2-real-20261003/rejected-latest-session.json
 
   - id: H0001_ENTRY_EXECUTION_AND_COMPOSITION
     priority: P1
@@ -60,6 +97,7 @@ items:
     status: OPEN
     summary: "Resolve the known extended-session early-close coverage blocker with a reviewed provider/session contract."
     note: "May become P0 if the selected real-data range cannot satisfy H0001 history/coverage without it."
+    actual_evidence: "First 2026-08-05 through 2026-10-01 range contains no unsupported sessions; limitation remains unchanged."
 
   - id: OPTIONAL_4H_CONFIRMATION
     priority: DEFERRED

@@ -1,12 +1,19 @@
 schema_version: 1
-updated_at: "2026-10-02"
+updated_at: "2026-10-03"
 
 purpose: >
   Lightweight routing index for AI PM sessions. This file does not replace canonical
   strategy specs or immutable decision records. It tells a new session what is already
   frozen, what remains open, and where to read the authoritative evidence.
 
-default_research_branch: v2-c0-extended-session-contract
+default_research_branch: v2-real-intraday-data-foundation
+
+data_foundation:
+  branch: v2-real-intraday-data-foundation
+  contract: docs/V2_REAL_INTRADAY_DATA_FOUNDATION.md
+  evidence: research/data_evidence/v2-real-20261003/smoke.json
+  status: EXECUTED_ON_REAL_DATA_NOT_MAIN_INTEGRATED
+  note: "Frozen strategy sources below remain on their declared canonical branch; no strategy decision was changed."
 
 canonical_sources:
   hypothesis:
