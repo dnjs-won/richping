@@ -1,30 +1,30 @@
-schema_version: 1
+schema_version: 2
 updated_at: '2026-10-03'
 purpose: 'Lightweight routing index for AI PM sessions. This file does not replace canonical strategy specs or immutable
   decision records. It tells a new session what is already frozen, what remains open, and where to read the authoritative
   evidence.
 
   '
-default_research_branch: v2-h0001-action-unit-remediation
+default_research_branch: v2-h0001-entry-composition
 data_foundation:
   branch: v2-real-intraday-data-foundation
   contract: docs/V2_REAL_INTRADAY_DATA_FOUNDATION.md
   evidence: research/data_evidence/v2-real-20261003/smoke.json
   status: EXECUTED_ON_REAL_DATA_NOT_MAIN_INTEGRATED
-  note: Real-data8f0611f is unchanged. Frozen Daily/1H/r03 remain on their declared branch; current executable v12
-    now routes to the isolated15m freeze branch.
+  note: Real-data8f0611f and frozen Daily/1H/r03/15m contracts unchanged. Executable v13 routes to isolated initial-entry
+    composition.
 canonical_sources:
   hypothesis:
     branch: v2-c0-extended-session-contract
     path: research/hypotheses/H0001-r03.yaml
   executable_spec:
-    branch: v2-h0001-15m-entry-freeze
+    branch: v2-h0001-entry-composition
     path: research/strategy_specs/H0001-r03-draft.yaml
-    commit: ffabeaf9faf872314336784b5c9c8c14522010c2
-    specification_version: h0001_r03_spec_v12
-    sha256: 5b20148fb77c6a7890a02219ece7348a997d731e5e9faa508c014243c72a4685
+    commit: bb72239d580e4814b880c61ad3c591f5d989870e
+    specification_version: h0001_r03_spec_v13
+    sha256: bf8134733bacee17542240e53a8ec30223c1550b5bedbaa6d3994ba1444acc19
   current_status:
-    branch: v2-h0001-action-unit-remediation
+    branch: v2-h0001-entry-composition
     path: PROJECT_STATUS.md
 frozen_major_decisions:
   daily_input:
@@ -71,15 +71,40 @@ frozen_major_decisions:
     - H1-M15-REVERSAL
     - H1-M15-CONJUNCTION
     - H1-DECISION-TIMING
-    full_composition: NOT_IMPLEMENTED_PREREQUISITES_COMPLETE_NEXT_ACTION
+    full_composition: COMPLETE_REAL_DETERMINISTIC_ZERO_SIGNAL_STREAM
     profitability: NOT_RUN
+  initial_entry_composition:
+    status: FROZEN_IMPLEMENTED_EXECUTED_REAL_OFFLINE_NOT_MAIN_INTEGRATED
+    branch: v2-h0001-entry-composition
+    commit: bb72239d580e4814b880c61ad3c591f5d989870e
+    record: research/decision_records/H0001-entry-composition-freeze-v1.yaml
+    contract: docs/H0001_ENTRY_COMPOSITION.md
+    contract_hash: 7b15d414f023bde698fb89654623abaa24b40f8e6fd83a81e290e59bea9ffca8
+    evidence: research/data_evidence/h0001-entry-composition-20261003/smoke.json
+    candidate_count: 0
+    position_evidence: RESEARCH_ENTRY_POSITION_EVIDENCE_V1
+    position_mode: CANDIDATE_ONLY_FLAT_RESEARCH_MODE_V1
+    profitability: NOT_RUN
+    outcomes: NOT_RUN
 current_open_decision_groups:
 - id: H0001_GLOBAL_STATE_TRANSITIONS
   decision_id: H1-STATE-TRANSITIONS
-  status: UNRESOLVED
-  priority: AFTER_DAILY_PREREQUISITES_FOR_COMPOSITION
-  note: Trigger-local freeze does not resolve full signal/position lifecycle, setup consumption, add/reentry or
-    execution.
+  status: PARTIALLY_RESOLVED
+  priority: INITIAL_CANDIDATE_RESOLVED_REMAINDER_OPEN
+  note: Only initial-entry candidate and per-episode right consumption resolved. Candidate never opens a position.
+    All actual position/add/exit/reentry/execution ownership remains UNRESOLVED; H1-STATE-TRANSITIONS remains a
+    C1 blocker.
+  scope_revision: H0001_STATE_TRANSITIONS_SCOPE_SPLIT_V1
+  record: research/decision_records/H0001-entry-composition-freeze-v1.yaml
+  evidence_branch: v2-h0001-entry-composition
+  scopes:
+    overall: PARTIALLY_RESOLVED
+    initial_entry_candidate: RESOLVED
+    actual_position_open: UNRESOLVED
+    add: UNRESOLVED
+    exit: UNRESOLVED
+    reentry: UNRESOLVED
+    execution: UNRESOLVED
 - id: H0001_EXIT_AND_PRICE_STRUCTURE
   status: UNRESOLVED
   priority: AFTER_FIRST_ENTRY_EVIDENCE
@@ -92,6 +117,22 @@ current_open_decision_groups:
 - id: H0001_RESEARCH_EVALUATION
   status: PARTIALLY_UNRESOLVED
   priority: REQUIRED_FOR_FIRST_EFFICACY_EXPERIMENT
+  next_action: H0001_ENTRY_EFFICACY_PREREGISTRATION
+  remaining_required_fields:
+  - evaluation sample unit
+  - forward horizons
+  - primary metric
+  - baseline
+  - comparison definition
+  - cost application/scope
+  - null/pass/reject including ZERO_SIGNAL/INSUFFICIENT_EVIDENCE
+  - chronological split
+  - confirmation/discovery boundary
+  - uncertainty method
+  - multiple-testing accounting
+  outcome_access: FORBIDDEN_UNTIL_PREREGISTRATION
+  note: Existing Daily/setup/blocker subfamilies do not resolve the full minimum efficacy protocol. Current zero
+    candidates must not induce strategy threshold tuning.
 reopen_policy:
   frozen_decision_may_reopen_only_if:
   - A causal/data-integrity defect invalidates it.
@@ -140,3 +181,5 @@ frozen_semantic_interpretation_audit:
   negative_receipt_explicitly_frozen: false
   strategy_decisions_changed: false
   completeness_capture_is_causal_feature: false
+schema_revision: Explicit per-scope partial resolution; executable v13 adds initial-entry contract while retaining
+  global unresolved guards.

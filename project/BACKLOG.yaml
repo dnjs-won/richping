@@ -27,10 +27,10 @@ items:
 
     '
   guardrail: Do not merge blindly; preserve the newer main R1 paper changes.
-  active_branch: v2-h0001-action-unit-remediation
+  active_branch: v2-h0001-entry-composition
   observed_relation_to_main:
-    ahead_by: 31
-    behind_by: 13
+    ahead_by: 32
+    behind_by: 14
 - id: H0001_MINIMAL_15M_ENTRY_FREEZE
   priority: P1
   status: COMPLETE_FROZEN_AND_OFFLINE_MECHANICALLY_EXERCISED
@@ -96,6 +96,11 @@ items:
     '
   evidence_branch: v2-real-intraday-data-foundation
   evidence: docs/V2_REAL_INTRADAY_DATA_FOUNDATION.md
+  efficacy_blocker_candidate: true
+  entry_composition_evidence: research/data_evidence/h0001-entry-composition-20261003/zero-signal-diagnostic.json
+  note: 41 intraday sessions leave208 READY completed1H observations and zero downside extremes. Potential future
+    efficacy evidence blocker; remain P1 until protocol/zero-signal disposition. No migration or threshold change
+    performed.
 - id: YAHOO_LATEST_SESSION_OFFGRID_QUOTE
   priority: P2
   status: OPEN_FAIL_CLOSED
@@ -108,25 +113,60 @@ items:
   evidence: research/data_evidence/v2-real-20261003/rejected-latest-session.json
 - id: H0001_ENTRY_EXECUTION_AND_COMPOSITION
   priority: P0
-  status: ACTIVE_AS_NEXT_ACTION_READY
+  status: COMPLETE_REAL_DETERMINISTIC_ZERO_SIGNAL_STREAM
   depends_on:
   - H0001_MINIMAL_15M_ENTRY_FREEZE
   - H0001_DAILY_PIT_AND_MIXED_PROFILE_PREREQUISITES
   - H0001_HISTORICAL_ACTION_AVAILABILITY_AND_RAW_UNIT_EVIDENCE
-  summary: Compose frozen Daily permission/exhaustion + 1H active setup + executable 15m trigger into deterministic
-    entry events.
-  blocks_phase_exit_criteria:
+  summary: Two network-disabled fixed SOXX replays identical:2624 atomic batches, joint READY829, Daily BULLISH721,
+    exhaustion NORMAL2624, H1 raw READY829, H1 ACTIVE0, frozen15m trigger0, initial candidates0/timestamps[]. Independent
+    completed-H1 diagnostic:656 publications,208 READY, downside extremes0. ZERO_SIGNAL due to no frozen1H activation,
+    not consumption or threshold changes. Event stream hash f794a31903da1a110497b4badd58ffdc4bf0e3ce6cf7ec089c68597e6e781d46;
+    all1346 tests passed/new55/no skips. Outcomes and profitability NOT_RUN.
+  blocks_phase_exit_criteria: []
+  evidence_branch: v2-h0001-entry-composition
+  commit: bb72239d580e4814b880c61ad3c591f5d989870e
+  evidence: research/decision_records/H0001-entry-composition-freeze-v1.yaml
+  formerly_blocked_phase_exit_criteria:
   - 5
   - 6
-- id: H0001_FIRST_ENTRY_EFFICACY
-  priority: P1
-  status: QUEUED
+  integration: NOT_MAIN_INTEGRATED
+- id: H0001_ENTRY_EFFICACY_PREREGISTRATION
+  priority: P0
+  status: ACTIVE_AS_NEXT_ACTION_READY
+  blocks_phase_exit_criteria:
+  - 6
   depends_on:
   - H0001_ENTRY_EXECUTION_AND_COMPOSITION
+  summary: Preregister all minimal initial-entry evaluation fields before outcome queries; H0001_RESEARCH_EVALUATION
+    is still partially unresolved.
+  required_fields:
+  - evaluation sample unit
+  - forward horizons
+  - primary metric
+  - baseline
+  - comparison definition
+  - cost application/scope
+  - null/pass/reject including ZERO_SIGNAL/INSUFFICIENT_EVIDENCE
+  - chronological split
+  - confirmation/discovery boundary
+  - uncertainty method
+  - multiple-testing accounting
+  evidence_branch: v2-h0001-entry-composition
+  evidence: research/data_evidence/h0001-entry-composition-20261003/smoke.json
+  owner: AI_PM
+- id: H0001_FIRST_ENTRY_EFFICACY
+  priority: P1
+  status: BLOCKED_EVALUATION_PREREGISTRATION
+  depends_on:
+  - H0001_ENTRY_EXECUTION_AND_COMPOSITION
+  - H0001_ENTRY_EFFICACY_PREREGISTRATION
   summary: 'Generate real-data signal counts, fixed forward returns, MFE/MAE, matched benchmark/excess and uncertainty
     before finishing the full exit/add/risk lifecycle.
 
     '
+  guardrail: Do not inspect outcomes before full minimal efficacy protocol; current ZERO_SIGNAL is not profitability
+    evidence.
 - id: MINIMAL_CI
   priority: P2
   status: OPEN

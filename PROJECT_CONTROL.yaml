@@ -15,7 +15,7 @@ source_of_truth:
     branch: main
     path: PROJECT_STATUS.md
   active_workstream_status:
-    branch: v2-h0001-action-unit-remediation
+    branch: v2-h0001-entry-composition
     path: PROJECT_STATUS.md
   decision_index:
     branch: main
@@ -30,16 +30,16 @@ control_plane:
   branch: main
   rule: PM state lives on main so new sessions can recover it from the default branch.
 active_workstream:
-  branch: v2-h0001-action-unit-remediation
-  base_branch: v2-h0001-daily-pit-join
-  base_commit: ce6497cdc204fbe420c42c78cbbb6482432390d8
-  implementation_commit: 1c661d85f4da869c34945da203f29143c2556428
+  branch: v2-h0001-entry-composition
+  base_branch: v2-h0001-action-unit-remediation
+  base_commit: 1c661d85f4da869c34945da203f29143c2556428
+  implementation_commit: bb72239d580e4814b880c61ad3c591f5d989870e
   status: DIVERGED_FROM_MAIN
   observed_relation_to_main:
-    ahead_by: 31
-    behind_by: 13
-  note: Action/unit interpretation remediation and real offline evidence isolated from main. PM documents only on
-    main; no code integration or force push.
+    ahead_by: 32
+    behind_by: 14
+  note: Initial candidate composition and immutable real ZERO_SIGNAL evidence isolated from main. Only PM documents
+    updated on main; no code integration or force push.
 current_phase:
   id: H0001_FIRST_REAL_EVIDENCE
   objective: 'Produce the first reproducible H0001 entry-efficacy evidence from real intraday market data without
@@ -50,30 +50,30 @@ current_phase:
     comparison and uncertainty from a fixed real dataset.
 
     '
-  status: IN_PROGRESS_ENTRY_EXECUTION_AND_COMPOSITION
+  status: IN_PROGRESS_EFFICACY_PREREGISTRATION
   progress:
     satisfied_exit_criteria:
     - 1
     - 2
     - 3
     - 4
+    - 5
     remaining_exit_criteria:
-    - 5
     - 6
-    actual_evidence: 'Admitted SOXX Daily500 eligible; trend READY322/UNAVAILABLE178, exhaustion READY120/UNAVAILABLE380.
-      Actual first READY N179 2025-06-24, N381 2026-04-14. All2624 mixed joins: {''DAILY_EXHAUSTION:READY'': 2624,
-      ''DAILY_TREND_PERMISSION:READY'': 2624, ''H1_RELATIVE_SETUP_RAW:READY'': 829, ''H1_RELATIVE_SETUP_RAW:UNAVAILABLE'':
-      1795, ''M15_INITIAL_ENTRY_PRIMITIVE:READY'': 2304, ''M15_INITIAL_ENTRY_PRIMITIVE:UNAVAILABLE'': 320}; joint
-      READY829. Two network-disabled proofs identical, stream hash6de4730cb3abfaaf701d9fda0a212d5df0ad5f16dcc0e0cf4714f844d0cac57a.
-      ENTRY_CANDIDATE=null, profitability NOT_RUN, outcomes NOT_EVALUATED.'
-    limitations: Historical causal research input only. Bar-end availability is assumed, actual delivery/revision
-      latency not reconstructed. Interval/snapshot scoped OHLC/action certification; no general raw Yahoo or live/shadow
-      claim. Full entry composition and efficacy have not run.
+    actual_evidence: Two network-disabled fixed SOXX replays identical:2624 atomic batches, joint READY829, Daily
+      BULLISH721, exhaustion NORMAL2624, H1 raw READY829, H1 ACTIVE0, frozen15m trigger0, initial candidates0/timestamps[].
+      Independent completed-H1 diagnostic:656 publications,208 READY, downside extremes0. ZERO_SIGNAL due to no
+      frozen1H activation, not consumption or threshold changes. Event stream hash f794a31903da1a110497b4badd58ffdc4bf0e3ce6cf7ec089c68597e6e781d46;
+      all1346 tests passed/new55/no skips. Outcomes and profitability NOT_RUN.
+    limitations: Initial-entry opportunities only, actual candidate count0. No position/order/fill/ADD/exit/reentry/portfolio
+      or efficacy. Bar-end availability is a historical research assumption; actual delivery/revision latency and
+      live/shadow PIT are not reconstructed. Same interval-scoped OHLC/action admission as before. Efficacy protocol
+      must be preregistered before outcomes.
     blocked_exit_criteria:
-    - 5
     - 6
     frozen_15m_subtask: COMPLETE_EXECUTABLE_WITH_ACTUALLY_USABLE_UPSTREAM_INPUTS
     daily_prerequisite_subtask: COMPLETE_REAL_HISTORICAL_CAUSAL_RESEARCH_ADMISSION
+    initial_entry_composition_subtask: COMPLETE_REAL_DETERMINISTIC_EMPTY_CANDIDATE_STREAM
   exit_criteria:
   - A real 15m dataset is persisted locally with immutable dataset identity/provenance.
   - The dataset covers the required 04:00-20:00 ET research session with explicit gap/availability diagnostics.
@@ -204,28 +204,89 @@ completed_actions:
   frozen_strategy_decisions_changed: false
   phase_complete: false
   strategy_profitability_tested: false
+- id: H0001_ENTRY_EXECUTION_AND_COMPOSITION
+  status: COMPLETE
+  completed_at: '2026-10-03'
+  implementation_state: FROZEN_IMPLEMENTED_EXECUTED_ON_REAL_DATA_EVIDENCE_PRODUCED_NOT_MAIN_INTEGRATED
+  branch: v2-h0001-entry-composition
+  commit: bb72239d580e4814b880c61ad3c591f5d989870e
+  record: research/decision_records/H0001-entry-composition-freeze-v1.yaml
+  evidence: research/data_evidence/h0001-entry-composition-20261003/
+  acceptance_criteria_satisfied: 16
+  acceptance_criteria_unmet: 0
+  total_atomic_batches: 2624
+  joint_READY: 829
+  candidate_count: 0
+  candidate_timestamps: []
+  signal_generation_result: ZERO_SIGNAL
+  zero_signal_reason: No downside extreme among208 READY completed1H publications; no eligible setup episode.
+  composer_contract_hash: 7b15d414f023bde698fb89654623abaa24b40f8e6fd83a81e290e59bea9ffca8
+  specification_version: h0001_r03_spec_v13
+  specification_hash: bf8134733bacee17542240e53a8ec30223c1550b5bedbaa6d3994ba1444acc19
+  event_stream_hash: f794a31903da1a110497b4badd58ffdc4bf0e3ce6cf7ec089c68597e6e781d46
+  offline_repeat_equal: true
+  network_calls: 0
+  outcome_queries: 0
+  frozen_primitives_changed: false
+  position_evidence_mode: CANDIDATE_ONLY_FLAT_RESEARCH_MODE_V1
+  global_state_transitions: PARTIALLY_RESOLVED_INITIAL_CANDIDATE_ONLY
+  tests:
+    JUnit_sha256:
+      suite-core.xml: 3e61cbf08cf69e4edad58a6d82c488537d6517629f92fbca0618de58561ae847
+      suite-real-proof.xml: e728e3c735300943faeb0721e49d66830116b4342935a5618e741d785f22ea19
+    commands:
+    - python -m pytest -q -o cache_dir=var/pytest-entry-composition-cache -k not_real_saved_two_network_disabled_replays_and_no_outcome_reads
+    - python -m pytest tests/test_research_v2_entry_composition.py::test_real_saved_two_network_disabled_replays_and_no_outcome_reads
+      -q -o cache_dir=var/pytest-entry-composition-cache
+    counts:
+      errors: 0
+      failures: 0
+      skipped: 0
+      tests: 1346
+    coverage: ALL1346_IN_TWO_DISJOINT_PARTITIONS_NO_SKIPS
+    elapsed_seconds: 506.442
+    new_tests: 55
+    passed: 1346
+  phase_exit_5: COMPLETE_VALID_EMPTY_STREAM
+  phase_complete: false
+  strategy_profitability_tested: false
 next_action:
-  id: H0001_ENTRY_EXECUTION_AND_COMPOSITION
+  id: H0001_ENTRY_EFFICACY_PREREGISTRATION
   priority: P0
   status: READY
   blocks_phase_exit_criteria:
-  - 5
   - 6
-  objective: Resolve the minimal entry execution/lifecycle contract and compose frozen Daily permission/exhaustion,
-    1H setup and 15m tuple into deterministic entry events from the admitted immutable vintages.
-  why_now: Historical Daily admission and all upstream mixed-profile role readiness are now proven on real saved
-    data; entry composition remains unimplemented.
-  evidence_branch: v2-h0001-action-unit-remediation
-  evidence: research/data_evidence/h0001-action-unit-20261003/smoke.json
+  objective: Freeze the minimal initial-entry opportunity efficacy evaluation protocol before any outcome access.
+  why_now: Composition is complete, but H0001_RESEARCH_EVALUATION remains partially unresolved. Existing subfamilies
+    do not define a full efficacy experiment. Current stream is ZERO_SIGNAL; sparse-evidence disposition must also
+    be explicit before outcomes.
+  evidence_branch: v2-h0001-entry-composition
+  evidence: research/data_evidence/h0001-entry-composition-20261003/smoke.json
+  evaluation_protocol_required: true
+  required_protocol_fields:
+  - evaluation sample unit
+  - forward horizons
+  - primary metric
+  - baseline
+  - comparison definition
+  - cost application/scope
+  - null/pass/reject including ZERO_SIGNAL/INSUFFICIENT_EVIDENCE
+  - chronological split
+  - confirmation/discovery boundary
+  - uncertainty method
+  - multiple-testing accounting
   constraints:
-  - Preserve frozen Daily/1H/15m decisions, N179/N381 and research availability limitations.
-  - No profitability/outcome query until entry execution/composition is frozen and validated.
-  - No automatic orders, main code integration, longer-intraday migration or generic provider framework.
+  - No profitability/outcome lookup before protocol preregistration; no post-outcome metric or threshold selection.
+  - Preserve frozen Daily/1H/15m/composer/position evidence and current ZERO_SIGNAL record.
+  - Candidate-only research admission cannot be reused as execution or portfolio position evidence.
+  - No automatic orders, main code integration, exit/add/reentry or longer-provider migration in this action.
   acceptance_criteria:
-  - One versioned minimal entry execution/temporal/lifecycle contract is explicit without reopening frozen primitives.
-  - Daily + 1H + 15m produce deterministic causal entry event identities on fixed real saved datasets.
-  - Input absence, future-known inputs and duplicate/poll publication fail closed; all tests pass.
-  - Offline repeat results preserve denominators, immutable input hashes and no outcome lookup.
+  - One immutable version/hash preregistration resolves all required minimum evaluation fields before outcomes.
+  - Signal-event research scope, existing exposed discovery cases, chronological confirmation boundary and multiple-testing
+    families are explicit.
+  - ZERO_SIGNAL/INSUFFICIENT_EVIDENCE, missing labels, uncertainty and comparison denominator rules are explicit
+    without tuning frozen strategy.
+  - First efficacy execution is separately admitted after protocol freeze; PM state is updated.
   after_success:
   - H0001_FIRST_ENTRY_EFFICACY
 pm_policy:
@@ -235,4 +296,8 @@ pm_policy:
   strategy_quality_may_not_be_relaxed_for_demo_speed: true
   user_visible_progress_may_not_be_faked: true
   preserve_existing_work_by_default: true
-blocked_actions: []
+blocked_actions:
+- id: H0001_FIRST_ENTRY_EFFICACY
+  reason: H0001_RESEARCH_EVALUATION minimum protocol remains partially unresolved; preregistration must precede
+    every outcome query.
+  unblocks_after: H0001_ENTRY_EFFICACY_PREREGISTRATION
