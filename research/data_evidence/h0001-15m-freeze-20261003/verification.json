@@ -1,0 +1,22 @@
+{
+  "schema_version": "h0001_15m_freeze_verification_v1",
+  "basis_commit": "8f0611fff17704a0cc37214bf065c2834a521342",
+  "full_command": "C:/richping/.venv/Scripts/python -m pytest -q",
+  "new_tests": 62,
+  "full_tests_passed": 1202,
+  "failed": 0,
+  "skipped": 0,
+  "warnings": 0,
+  "elapsed_seconds": 288.18,
+  "offline_command": "C:/richping/.venv/Scripts/python scripts/h0001_15m_mechanical_check.py --store C:/richping/var/research/v2-real/market.sqlite --dataset-id soxx-yahoo-15m-20261003-v1 --output research/data_evidence/h0001-15m-freeze-20261003/mechanical-check.json",
+  "offline_network_disabled": true,
+  "provider_client_imported": false,
+  "preregistration_numeric_changes_after_counts": false,
+  "profitability": "NOT_RUN",
+  "forward_returns": "NOT_RUN",
+  "win_rate": "NOT_RUN",
+  "MFE_MAE": "NOT_RUN",
+  "parameter_grid": "NOT_RUN",
+  "unchanged_git_diff_check": "PASS: r03, existing Daily/1H records and classifier code, feature engine, replay and store unchanged versus8f0611f",
+  "integration": "NOT_MAIN_INTEGRATED"
+}

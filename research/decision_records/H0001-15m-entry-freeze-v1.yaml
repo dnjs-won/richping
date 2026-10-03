@@ -1,0 +1,351 @@
+# Immutable semantic freeze; append a new record for future changes.
+schema_version: h0001_15m_entry_freeze_record_v1
+record_id: H0001-15M-ENTRY-FREEZE-v1
+status: FROZEN_EX_ANTE_INITIAL_RESEARCH_TUPLE
+decision_date: '2026-10-03'
+basis_branch: v2-real-intraday-data-foundation
+basis_commit: 8f0611fff17704a0cc37214bf065c2834a521342
+decision_author: AI_PM_under_explicit_user_delegation
+decision_source: user_observation_minimal_causal_operationalization_before_outcomes
+performance_information_used: NONE
+profitability: NOT_RUN
+forward_returns: NOT_RUN
+win_rate: NOT_RUN
+MFE_MAE: NOT_RUN
+parameter_grid: NOT_RUN
+chart_parity: UNVERIFIED
+preregistration:
+  path: research/decision_records/H0001-15m-entry-preregistration-v1.yaml
+  normalized_sha256: d7c3f8adb480d858c717c92d4d4c762eeae389ff12fd31fc0c4d38b60c754361
+  fixed_before_mechanical_counts: true
+  numeric_values_changed_after_counts: false
+proposal_provenance:
+  path: research/decision_proposals/H0001-15m-entry-trigger-v1.yaml
+  status_at_proposal: PROPOSED_NOT_FROZEN
+  preservation: BYTE_IDENTICAL
+  transition: proposal_to_single_frozen_tuple_not_rewrite
+source_hypothesis_statements:
+- ref: rules.trigger[1]
+  text: 그 setup 안에서 15분봉 MACD도 상대적으로 깊은 하방 영역에 있고 골든크로스 또는 확인된 가격 반전이 발생하면 최초 롱 진입 후보가 된다.
+- ref: observations[0]
+  text: 0선 아래 MACD 골든크로스 뒤 단기 상승이 자주 보였다는 경험적 관찰이 있었으나 빈도와 통계적 유의성은 측정하지 않았다.
+- ref: observations[2]
+  text: 가격 저점, MACD 최저점, MACD 골든크로스는 동일 시각일 필요가 없으며 MACD의 EMA 평활 특성 때문에 시차가 발생할 수 있다고 논의했다.
+- ref: unknowns[6]
+  text: 1시간봉과 15분봉의 하방 extreme threshold
+- ref: unknowns[9]
+  text: 15분봉 골든크로스만으로 trigger를 확정할지 가격 반전 조건도 필수로 할지
+source_boundary:
+  hypothesis: research/hypotheses/H0001-r03.yaml
+  sha256: 35e13276056a36d6a06de04611720fd286113f0e5db1e4255af6ceeb6a0f0bc2
+  r03_unchanged: true
+  PR1_T4_selection: new_explicit_research_choice_stricter_than_literal_OR
+  price_confirmation_authority: current_user_requires_minimal_price_direction_confirmation
+  price_bottom_claim: false
+  RESEARCH_CAPTURE_revision_needed: false
+selected_primary:
+  family: R1_POL1_G2_Z0_PR1_T4_C1
+  field: MACD_LINE
+  macd:
+    fast: 12
+    slow: 26
+    signal: 9
+    min_history: 130
+  transform: rolling_empirical_midrank_v1
+  W: 192
+  min_reference_count: 192
+  reference: CURRENT_INCLUSIVE
+  ties: (less + 0.5 * equal) / count; includes self
+  threshold: 0.1
+  comparator: LE
+  polarity: MACD_LINE_LT_ZERO_at_extreme_only
+  first_READY_N: 321
+  first_READY_zero_based_index: 320
+  GC: previous_completed_macd_LE_signal_AND_current_completed_macd_GT_signal
+  GC_zero_line_restriction: NONE
+  price_confirmation: current_close_GT_previous_completed_close_on_GC_bar
+  price_confirmation_is_proven_price_bottom: false
+  temporal: FIRST_EXTREME_FIXED_GRACE_NO_REFRESH
+  K: 4
+  clock: completed_selected_extended_15m_observations
+  eligible_ages:
+  - 0
+  - 1
+  - 2
+  - 3
+  - 4
+  expiry: age_GT_4_before_testing_reversal
+  consumption: first_GC_consumes_arm_even_if_price_confirmation_false
+  rearm: require_READY_INACTIVE_after_consumption_or_expiry_then_new_extreme
+  armed_extreme_ownership: only_inside_current_eligible_1H_episode_no_outside_carry
+  cancellation: unavailable_continuity_provenance_upstream_loss_or_episode_change_clears_arm
+  recovery: new_completed_extreme_only_never_same_identity
+  timing: SAME_ATOMIC_BATCH_after_complete_publication_upstream_update_then_15m
+  delayed_batch: each_new_completed_identity_end_order_but_only_latest_expected_completed_15m_can_emit_no_backdated_queue
+  corrections: same_completed_identity_never_new_clock_step_or_new_trigger
+  candidate_scope: current_READY_Daily_BULLISH_NORMAL_1H_ACTIVE_position_FLAT_and_trigger
+comparator: NONE
+definition:
+  version: M15_INITIAL_EXTREME_GC_PRICE_V1
+  hash: 8c7c99035683423f62213e98d029af55ef31a76737b31902147a249407691c98
+  GC:
+    event: CROSS_EVENT
+    previous: macd_LE_signal
+    current: macd_GT_signal
+    zero_line: UNRESTRICTED_at_GC
+    operands: consecutive_completed_READY_15m
+    persistent_relation: NOT_A_CROSS_EVENT
+    event_reuse: FORBIDDEN
+  price_confirmation:
+    family: COMPLETED_PRICE_RECLAIM
+    predicate: close_GT_previous_completed_close
+    same_bar_as_GC: true
+    equality: 'FALSE'
+    future_or_swing_reference: NONE
+    meaning: minimum_price_direction_confirmation_not_proven_bottom
+  temporal:
+    family: D_AND_G_AND_P
+    temporal: FIRST_EXTREME_FIXED_GRACE_NO_REFRESH
+    K: 4
+    unit: completed_selected_extended_15m_observations
+    age: current_index_minus_first_extreme_index
+    eligible: 0_LE_age_LE_4
+    expiry: age_GT_4_before_reversal
+    refresh: NONE
+    consume: first_GC_even_when_price_FALSE
+    rearm: READY_INACTIVE_then_new_extreme
+    scope: current_eligible_1H_episode_only_no_outside_arm_carry
+    cancellation: UNAVAILABLE_or_upstream_loss_or_episode_or_identity_origin_change
+    recovery: new_completed_extreme_only_no_same_identity_restore
+    candidate: READY_Daily_BULLISH_NORMAL_AND_1H_ACTIVE_AND_position_FLAT_AND_trigger
+    position_flat: explicit_current_evidence_required_UNAVAILABLE_if_absent
+    duplicates: one_trigger_identity_per_completed_end_per_scope_no_poll_or_correction_retrigger
+    candidate_is_order_fill_position: false
+    comparator: NONE
+    global_position_transitions_add_reentry: UNRESOLVED_separate_owner
+  timing:
+    same_batch: SAME_ATOMIC_BATCH
+    publication: complete_atomic_batch_before_decision
+    evaluation_order: authoritative_Daily_then_frozen_1H_lifetime_then_15m
+    cadence: new_completed_15m_identity_not_poll_or_correction
+    delayed_batch: end_order_advance_memory_only_latest_expected_15m_may_emit
+    stale_higher_frame: latest_expected_completed_inputs_required_no_fallback
+    known_at: maximum_actual_required_dependency_arrivals_lte_as_of
+    unavailable: cancel_arm_suppress_candidate_no_deferred_execution
+    global_execution_add_exit_cadence: UNRESOLVED_separate_contract_owners
+readiness:
+  count_unit: completed_extended_15m_observations
+  MACD_first_READY_N: 130
+  relative_first_READY_N: 321
+  relative_first_READY_zero_based_index: 320
+  previous_N_320_READY_reference_count: 191
+  current_N_321_READY_reference_count: 192
+  actual_feature_status_required: true
+  partial_window: false
+  UNAVAILABLE:
+  - insufficient_history
+  - broken_continuity
+  - missing_required_slot
+  - unavailable_operand
+  - future_or_stale_completion
+  - nonfinite_calculation
+  - provider_session_price_basis_mismatch
+  - absent_required_position_or_upstream_evidence
+  not_INACTIVE: true
+  incomplete_aggregate: FORBIDDEN
+  missing_extreme_GC_inference: FORBIDDEN
+entry_candidate_boundary:
+  requirements:
+  - current_READY_Daily_BULLISH
+  - current_READY_exhaustion_NORMAL
+  - current_1H_setup_ACTIVE
+  - same_episode_bound_selected_15m_trigger
+  - current_explicit_position_FLAT
+  identity: symbol_completed_15m_end_scope_episode_ref_trigger_contract_hash_causal_input_hash
+  candidate_is_order_fill_or_position: false
+  full_composer_implemented: false
+  unimplemented_global_position_lifecycle: H1-STATE-TRANSITIONS_not_resolved
+resolved_decision_ids:
+- H1-DECISION-TIMING
+- H1-M15-COMPARATOR
+- H1-M15-CONJUNCTION
+- H1-M15-DOWNSIDE
+- H1-M15-GC
+- H1-M15-LOOKBACK
+- H1-M15-RELATIVE-CONVENTIONS
+- H1-M15-RELATIVE-METHOD
+- H1-M15-REVERSAL
+remaining_unresolved_decision_ids:
+  C1_IMPLEMENTATION_BLOCKER:
+  - H1-ADD-POLICY
+  - H1-DEAD-CROSS
+  - H1-DEEPER-EXTREME
+  - H1-EXIT-CONVENTIONS
+  - H1-EXIT-LOOKBACK
+  - H1-EXIT-RELATIVE
+  - H1-FAILED-REVERSAL
+  - H1-GC-ROLE
+  - H1-HISTOGRAM
+  - H1-HL-BREAK
+  - H1-LH
+  - H1-MACD-SLOPE
+  - H1-MAX-ADDS
+  - H1-MAX-HOLDING
+  - H1-NEW-HH-RESET
+  - H1-OVERNIGHT
+  - H1-REFERENCE-HH
+  - H1-SIGNAL-SLOPE
+  - H1-STATE-TRANSITIONS
+  - H1-STOP-LOSS
+  - H1-STRONG-WATCH
+  - H1-SWING-DETECTOR
+  - H1-SWING-PARAMETERS
+  - H1-TRAILING
+  - H1-UPPER-COMPARATOR
+  - H1-UPPER-EXTREME
+  - H1-VALID-HL
+  - H1-WATCH-CONFIRMATION
+  - H1-WEAK-WATCH
+  PERFORMANCE_EXPERIMENT_BLOCKER:
+  - H1-BASELINE
+  - H1-CHART-1H
+  - H1-CHART-EMA
+  - H1-CHART-PROVIDER
+  - H1-CHART-VERIFICATION
+  - H1-CONFIRMATORY
+  - H1-COSTS
+  - H1-DECISION-RULE
+  - H1-DISCOVERY
+  - H1-EXPOSURE
+  - H1-FILL
+  - H1-MULTIPLE-TESTING
+  - H1-ORDER-TIMING
+  - H1-PRIMARY-METRIC
+  - H1-SAMPLE-UNIT
+  - H1-SIZING
+  - H1-UNIVERSE
+  OPTIONAL_FUTURE_EXTENSION:
+  - H1-4H
+  - H1-FINE-EXECUTION
+  - H1-LAG-STUDY
+  - H1-OPTIONS
+  - H1-SHORT
+  - H1-VOLUME-PA
+  - H1-WEEKLY-MONTHLY
+executable_spec:
+  path: research/strategy_specs/H0001-r03-draft.yaml
+  version_before: h0001_r03_spec_v11
+  version: h0001_r03_spec_v12
+  canonical_sha256_before: 63dccca8a6c00c41b1643e3710fe48261ec8736f005076d4405d231048fe139a
+  canonical_sha256: 5b20148fb77c6a7890a02219ece7348a997d731e5e9faa508c014243c72a4685
+  status: DRAFT_BLOCKED_ON_REMAINING_DECISIONS
+inventory:
+  decisions: 78
+  resolved_before: 16
+  resolved_after: 25
+  unresolved_ids_before: 62
+  unresolved_ids_after: 53
+  C1_before: 38
+  C1_after: 29
+  performance: 17
+  optional: 7
+  unresolved_paths_before: 89
+  unresolved_paths_after: 80
+  removed_roots:
+  - feature_contracts.entry_15m_relative_conventions
+  - rule_parameters.entry_15m_downside_comparator
+  - rule_parameters.entry_15m_downside_threshold
+  - rule_parameters.entry_15m_gc
+  - rule_parameters.entry_15m_price_reversal
+  - rule_parameters.entry_15m_relative_transform
+  - rule_parameters.entry_15m_rolling_lookback
+  - rule_parameters.entry_15m_trigger_conjunction
+  - state_machine_parameters.decision_timing
+  new_strategy_decision_ids: []
+  unrelated_payloads_changed: false
+rationale:
+  percentile: interpretable_own_history_rank_existing_primitive_no_variance_or_ATR_parameter
+  W_192: three_standard_extended_sessions_at_64_per_session_short_local_timing_context_not_1H_320_copy
+  threshold_010: simple_lower_decile_initial_family_not_optimal_tail_or_frequency_target
+  polarity: negative_EMA_spread_represents_downside_pressure_not_merely_low_positive_spread
+  K_4: one_completed_1H_slice_of_nearby_15m_recovery_no_empirical_latency_fit
+  price: user_requires_price_confirmation_minimum_prior_close_recovery_no_structure_framework
+  first_GC: reject_shopping_multiple_crosses_after_failed_first_confirmation
+  same_batch: all_completed_operands_are_available_after_atomic_publication_no_artificial_extra_delay
+mechanical_evidence:
+  path: research/data_evidence/h0001-15m-freeze-20261003/mechanical-check.json
+  dataset_id: soxx-yahoo-15m-20261003-v1
+  content_hash: bb7ac246e4005d49d861301c4acc8261043bcd71818c3bcdbef5f73aa98c59b9
+  network_disabled: true
+  repeated_results_identical: true
+  MACD_READY: 2495
+  MACD_UNAVAILABLE: 129
+  relative_READY: 2304
+  relative_UNAVAILABLE: 320
+  extreme_count: 270
+  GC_count: 92
+  ungated_15m_trigger_count: 2
+  ENTRY_CANDIDATE_count: null
+  ENTRY_CANDIDATE_status: NOT_EVALUATED_DAILY_PIT_AND_COMPOSER_UNAVAILABLE
+  numbers_are_market_performance: false
+  revision_after_mechanical_exercise: NONE
+preserved_normalized_blob_hashes:
+  research/decision_records/H0001-daily-input-freeze-v1.yaml: 03577342865ed585bffe07cc39a2feb5ab04aabe19c6a01b41413b26fcad1f2d
+  research/decision_records/H0001-daily-trend-freeze-v1.yaml: ba510bd257444dd61baa0be81072618742203955906cc178bd27a11d8dc2baae
+  research/decision_records/H0001-daily-trend-readiness-remediation-v1.yaml: 3f6345b9a6706e10bd74e2e78221630ed8ee124599dfc5c5b9759865972655f3
+  research/decision_records/H0001-daily-blocker-freeze-v1.yaml: 546174ded467c7e2d22ba44c93543861f82dd2ae5c7bca1782960761818eb98d
+  research/decision_records/H0001-1h-relative-setup-freeze-v1.yaml: f0866743c6e4d5f99924ed6a8a75e69d7e539ccc8912d977426db5b270ae024c
+  research/hypotheses/H0001-r03.yaml: 35e13276056a36d6a06de04611720fd286113f0e5db1e4255af6ceeb6a0f0bc2
+  research/decision_proposals/H0001-15m-entry-trigger-v1.yaml: 28f62a4c74433b93a784f3d5320911805e1dd9b6ecc9a40289d6a9af480ef02a
+implementation:
+  module: richping.research_v2.strategy.entry_15m
+  scope: pure_classifier_GC_price_and_trigger_local_memory_only
+  reused:
+  - MACDSpec
+  - macd_series
+  - PercentileSpec
+  - rolling_percentile
+  - extended_continuity
+  - ReplayContext
+  - ResearchStore
+  provider_or_replay_or_feature_architecture_change: false
+  production_paper_order_connection: NONE
+remaining_prerequisite:
+  id: H0001_DAILY_PIT_AND_MIXED_PROFILE_PREREQUISITES
+  priority: P0
+  blocks_phase_exit_criteria:
+  - 4
+  - 5
+  - 6
+  current_daily_count: 41
+  trend_minimum_joint_count: 179
+  exhaustion_minimum_joint_count: 381
+  missing:
+  - RTH_DAILY_PIT_input_and_actual_action_evidence
+  - PIT_split_transform
+  - expected_completed_Daily_freshness_selector
+  - mixed_profile_as_of_join
+  - 381_completed_Daily_MACD_percentile_warmup
+  extended_Daily_substitution: FORBIDDEN
+  implemented_here: false
+explicit_non_claims:
+- profitable_or_optimal_tuple
+- GC_predicts_reversal
+- higher_close_proves_bottom
+- two_raw_triggers_are_H0001_candidates_or_trades
+- historical_snapshot_is_live_shadow_PIT
+- chart_parity
+- full_H0001_C1_admission
+- full_performance_registration
+- main_integration
+prohibited_future_reinterpretations:
+- tune_W_cutoff_K_after_seen_counts_or_outcomes_without_new_registered_revision
+- reinterpret_GC_relation_as_cross
+- refresh_fixed_first_extreme_arm
+- reuse_rejected_or_corrected_same_identity_events
+- move_price_confirmation_to_later_bar
+- allow_outside_episode_arm
+- fill_gaps_or_lower_readiness
+- substitute_extended_Daily_for_RTH_PIT
+- multiply_with_Daily_H1_subfamilies
+- invent_orders_fills_add_reentry_exit

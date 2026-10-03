@@ -1,3 +1,35 @@
+# Richping V2 — 2026-10-03 H0001 minimal 15m entry freeze
+
+**COMPLETE for H0001_MINIMAL_15M_ENTRY_FREEZE; FROZEN / IMPLEMENTED pure
+primitives / EXECUTED_ON_REAL_DATA offline / EVIDENCE_PRODUCED.**
+
+- Branch `v2-h0001-15m-entry-freeze` from real-data `8f0611f`; no main integration.
+- One ex-ante primary, no comparator: MACD_LINE current-inclusive percentile
+  W=m192, ≤.10 and negative; first extreme fixed K4 completed15m grace;
+  first GC(prev≤signal/current>signal) AND same-bar close>previous close.
+  No refresh; age0–4 inclusive; first GC consumes even if price fails;
+  READY INACTIVE then new extreme re-arms. Same complete atomic batch permitted.
+- Exactly nine roots resolved in v12; other payloads/r03/frozen Daily/1H unchanged.
+  78 decisions / 25 resolved / 53 unresolved (29 C1,17 performance,7 optional),
+  80 unresolved paths. Full H0001 still DRAFT/BLOCKED_ON_REMAINING_DECISIONS.
+- Offline SOXX `soxx-yahoo-15m-20261003-v1`: MACD READY2495/UNAVAILABLE129;
+  relative READY2304/UNAVAILABLE320; extreme270; GC92; ungated15m triggers2.
+  Repeated results and read-only DB hash identical, no network/provider client.
+  Full ENTRY_CANDIDATE=null/NOT_EVALUATED; returns/win rate/MFE/MAE NOT_RUN.
+- New62 tests; full1202 passed in288.18s, no failures/skips/warnings.
+- [Freeze record](research/decision_records/H0001-15m-entry-freeze-v1.yaml),
+  [preregistration](research/decision_records/H0001-15m-entry-preregistration-v1.yaml),
+  [contract](docs/H0001_15M_ENTRY_FREEZE.md),
+  [mechanical evidence](research/data_evidence/h0001-15m-freeze-20261003/mechanical-check.json).
+- NEXT_ACTION on main: `H0001_DAILY_PIT_AND_MIXED_PROFILE_PREREQUISITES` P0.
+  Phase `H0001_FIRST_REAL_EVIDENCE` exits1/2/3 remain satisfied;4/5/6 remain open.
+  Missing RTH/PIT action/freshness/mixed-profile inputs plus trend179 and
+  exhaustion381 warmup block full preserved Daily+1H+15m composition.
+  Current41 sessions and generic extended Daily aggregates cannot substitute.
+  Composition queued after this prerequisite; main integration separate P1.
+
+The entries below are preserved historical status reports.
+
 # Richping V2 — 2026-10-03 real intraday foundation
 
 **COMPLETE for the data-foundation action: IMPLEMENTED / EXECUTED_ON_REAL_DATA /

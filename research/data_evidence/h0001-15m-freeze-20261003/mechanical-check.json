@@ -1,0 +1,40 @@
+{
+  "dataset_id": "soxx-yahoo-15m-20261003-v1",
+  "content_hash": "bb7ac246e4005d49d861301c4acc8261043bcd71818c3bcdbef5f73aa98c59b9",
+  "counts": {
+    "bars": 2624,
+    "MACD_READY": 2495,
+    "MACD_UNAVAILABLE": 129,
+    "relative_READY": 2304,
+    "relative_UNAVAILABLE": 320,
+    "first_relative_READY_N": 321,
+    "extreme_count": 270,
+    "GC_count": 92,
+    "GC_UNAVAILABLE": 130,
+    "GC_AND_price_count": 80,
+    "ungated_15m_trigger_count": 2,
+    "temporal_events": {
+      "UNAVAILABLE_CANCEL": 320,
+      "INACTIVE": 2266,
+      "ARMED": 19,
+      "EXPIRED": 17,
+      "TRIGGER": 2
+    },
+    "ENTRY_CANDIDATE_count": null,
+    "ENTRY_CANDIDATE_status": "NOT_EVALUATED_DAILY_PIT_AND_COMPOSER_UNAVAILABLE",
+    "trace_hash": "817801fe8695448ad78011b2b6088274b051f9b3311396685e2c76f733fd9f3e",
+    "contract_hash": "8c7c99035683423f62213e98d029af55ef31a76737b31902147a249407691c98",
+    "profitability": "NOT_RUN",
+    "forward_returns": "NOT_RUN",
+    "MFE_MAE": "NOT_RUN"
+  },
+  "store_path": "C:\\richping\\var\\research\\v2-real\\market.sqlite",
+  "network_disabled": true,
+  "network_calls": 0,
+  "provider_client_imported": false,
+  "read_only_store": true,
+  "store_sha256_before_after": "aa4fefc942142841ecc5880a3fabec20181acfb315282bf1ec1cc0e5c258a663",
+  "deterministic_repeated_exercise": true,
+  "scope": "REAL_SAVED_DATA_PRIMITIVE_MECHANICS_NOT_COMPOSED_H0001_OR_PIT",
+  "preregistration_sha256": "d7c3f8adb480d858c717c92d4d4c762eeae389ff12fd31fc0c4d38b60c754361"
+}

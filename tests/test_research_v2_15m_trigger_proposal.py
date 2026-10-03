@@ -49,7 +49,9 @@ def test_frozen_upstream_and_r03_preserved(path):
 def test_canonical_v11_payload_hash_inventory_and_admission_preserved():
     p = proposal()
     before = H0001Specification.loads(basis(SPEC_PATH).decode())
-    after = H0001Specification.load(ROOT / SPEC_PATH)
+    # Immutable proposal v11 evidence; v12 has its own exact nine-root delta test.
+    after = H0001Specification.loads(subprocess.check_output(
+        ["git", "show", "8f0611f:" + SPEC_PATH], cwd=ROOT).decode())
     assert before.unpack() == after.unpack()
     assert after.specification_hash == p["executable_spec"]["canonical_sha256"]
     assert after.unpack()["specification_version"] == p["executable_spec"]["version"]
@@ -214,4 +216,4 @@ def test_no_strategy_implementation_outcome_search_or_execution_changes():
     # Subsequent authorized data work is tested separately, not retroactively
     # attributed to the proposal.
     assert subprocess.check_output(["git", "diff", BASE, "7197fe3", "--name-only", "--", "richping", "research/hypotheses", "research/experiments", "research/decision_records"], cwd=ROOT) == b""
-    assert subprocess.check_output(["git", "diff", "7197fe3", "--name-only", "--", "richping/research_v2/strategy", "research/hypotheses", "research/experiments", "research/decision_records"], cwd=ROOT) == b""
+    assert subprocess.check_output(["git", "diff", "7197fe3", "8f0611f", "--name-only", "--", "richping/research_v2/strategy", "research/hypotheses", "research/experiments", "research/decision_records"], cwd=ROOT) == b""

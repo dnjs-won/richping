@@ -37,7 +37,10 @@ def basis():
 
 
 def test_six_root_delta_only_with_Daily_payload_and_ownership_preserved():
-    before, after = basis(), load_h0001(ROOT / DRAFT)
+    # Freeze v11 historical delta; current upstream immutability is checked in v12.
+    before = basis()
+    after = H0001Specification.loads(subprocess.check_output(
+        ['git', 'show', '8f0611f:'+DRAFT], cwd=ROOT).decode())
     old, new = before.unpack(), after.unpack()
     frozen = record()
     assert new['specification_version'] == 'h0001_r03_spec_v11'
@@ -444,7 +447,8 @@ def test_v11_c1_admission_preserves_setup_while_future_fixture_resolves_other_ow
     from richping.research_v2.strategy.capabilities import current_engine
     from richping.research_v2.strategy.h0001_spec import ENGINE_BOUNDARIES
     from richping.research_v2.features import PercentileSpec, FractalSpec
-    current = load_h0001(ROOT / DRAFT).unpack()
+    current = H0001Specification.loads(subprocess.check_output(
+        ['git', 'show', '8f0611f:'+DRAFT], cwd=ROOT).decode()).unpack()
     fake = resolve_fixture(basis(), {C1})
     fake['specification_version'] = current['specification_version']
     for path in record()['inventory']['removed_roots']:

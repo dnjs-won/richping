@@ -1,0 +1,51 @@
+schema_version: h0001_15m_entry_preregistration_v1
+record_id: H0001-15M-ENTRY-PREREGISTRATION-v1
+status: FIXED_BEFORE_MECHANICAL_EXERCISE
+basis_commit: 8f0611fff17704a0cc37214bf065c2834a521342
+decision_date: '2026-10-03'
+authority: user_delegated_ex_ante_minimal_freeze
+performance_information_used: NONE
+mechanical_counts_seen_before_selection: false
+primary:
+  family: R1_POL1_G2_Z0_PR1_T4_C1
+  field: MACD_LINE
+  macd: {fast: 12, slow: 26, signal: 9, min_history: 130}
+  transform: rolling_empirical_midrank_v1
+  W: 192
+  min_reference_count: 192
+  reference: CURRENT_INCLUSIVE
+  ties: '(less + 0.5 * equal) / count; includes self'
+  threshold: 0.10
+  comparator: LE
+  polarity: MACD_LINE_LT_ZERO_at_extreme_only
+  first_READY_N: 321
+  first_READY_zero_based_index: 320
+  GC: previous_completed_macd_LE_signal_AND_current_completed_macd_GT_signal
+  GC_zero_line_restriction: NONE
+  price_confirmation: current_close_GT_previous_completed_close_on_GC_bar
+  price_confirmation_is_proven_price_bottom: false
+  temporal: FIRST_EXTREME_FIXED_GRACE_NO_REFRESH
+  K: 4
+  clock: completed_selected_extended_15m_observations
+  eligible_ages: [0, 1, 2, 3, 4]
+  expiry: age_GT_4_before_testing_reversal
+  consumption: first_GC_consumes_arm_even_if_price_confirmation_false
+  rearm: require_READY_INACTIVE_after_consumption_or_expiry_then_new_extreme
+  armed_extreme_ownership: only_inside_current_eligible_1H_episode_no_outside_carry
+  cancellation: unavailable_continuity_provenance_upstream_loss_or_episode_change_clears_arm
+  recovery: new_completed_extreme_only_never_same_identity
+  timing: SAME_ATOMIC_BATCH_after_complete_publication_upstream_update_then_15m
+  delayed_batch: each_new_completed_identity_end_order_but_only_latest_expected_completed_15m_can_emit_no_backdated_queue
+  corrections: same_completed_identity_never_new_clock_step_or_new_trigger
+  candidate_scope: current_READY_Daily_BULLISH_NORMAL_1H_ACTIVE_position_FLAT_and_trigger
+comparator: NONE
+rationale:
+  percentile: interpretable_own_history_rank_existing_primitive_no_variance_or_ATR_parameter
+  W_192: three_standard_extended_sessions_at_64_per_session_short_local_timing_context_not_1H_320_copy
+  threshold_010: simple_lower_decile_initial_family_not_optimal_tail_or_frequency_target
+  polarity: negative_EMA_spread_represents_downside_pressure_not_merely_low_positive_spread
+  K_4: one_completed_1H_slice_of_nearby_15m_recovery_no_empirical_latency_fit
+  price: user_requires_price_confirmation_minimum_prior_close_recovery_no_structure_framework
+  first_GC: reject_shopping_multiple_crosses_after_failed_first_confirmation
+  same_batch: all_completed_operands_are_available_after_atomic_publication_no_artificial_extra_delay
+prohibited: [returns, win_rate, MFE, MAE, parameter_grid, outcome_champion, automatic_1H_parameter_inheritance]

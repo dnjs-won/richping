@@ -264,17 +264,17 @@ class H0001Specification(StrategySpecification):
         if (value["strategy_id"], value["hypothesis_id"], value["hypothesis_revision"], value["direction"]) != (
                 "H0001", "H0001", 3, "LONG_ONLY"):
             raise ValueError("Unsupported H0001-r03 identity")
-        if value["specification_version"] not in {"h0001_r03_spec_v3", "h0001_r03_spec_v4", "h0001_r03_spec_v5", "h0001_r03_spec_v6", "h0001_r03_spec_v7", "h0001_r03_spec_v8", "h0001_r03_spec_v9", "h0001_r03_spec_v10", "h0001_r03_spec_v11"}:
+        if value["specification_version"] not in {"h0001_r03_spec_v3", "h0001_r03_spec_v4", "h0001_r03_spec_v5", "h0001_r03_spec_v6", "h0001_r03_spec_v7", "h0001_r03_spec_v8", "h0001_r03_spec_v9", "h0001_r03_spec_v10", "h0001_r03_spec_v11", "h0001_r03_spec_v12"}:
             raise ValueError("Unsupported H0001 specification version")
         if value["source"] != {"path": "research/hypotheses/H0001-r03.yaml", "sha256": SOURCE_SHA256}:
             raise ValueError("H0001 source provenance mismatch")
         # Historical profiles remain readable, without imputing new input
         # choices. Their omitted contracts still prevent current C1 admission.
         required = {key: record for key, record in REQUIRED.items()
-                    if (value["specification_version"] in {"h0001_r03_spec_v6", "h0001_r03_spec_v7", "h0001_r03_spec_v8", "h0001_r03_spec_v9", "h0001_r03_spec_v10", "h0001_r03_spec_v11"}
+                    if (value["specification_version"] in {"h0001_r03_spec_v6", "h0001_r03_spec_v7", "h0001_r03_spec_v8", "h0001_r03_spec_v9", "h0001_r03_spec_v10", "h0001_r03_spec_v11", "h0001_r03_spec_v12"}
                         or key not in {('timeframe_contracts', 'daily_freshness'),
                                        ('feature_contracts', 'daily_price_basis')})
-                    and (value["specification_version"] in {"h0001_r03_spec_v5", "h0001_r03_spec_v6", "h0001_r03_spec_v7", "h0001_r03_spec_v8", "h0001_r03_spec_v9", "h0001_r03_spec_v10", "h0001_r03_spec_v11"}
+                    and (value["specification_version"] in {"h0001_r03_spec_v5", "h0001_r03_spec_v6", "h0001_r03_spec_v7", "h0001_r03_spec_v8", "h0001_r03_spec_v9", "h0001_r03_spec_v10", "h0001_r03_spec_v11", "h0001_r03_spec_v12"}
                          or key != ('timeframe_contracts', 'daily_session_policy'))}
         expected = {section: set() for section, _ in required}
         for section, field in (*required, *FIXED):
@@ -320,18 +320,18 @@ class H0001Specification(StrategySpecification):
             rule = value["rule_parameters"]["daily_long_permission"]["value"]
             if rule != UNRESOLVED and digest(rule) != "3b45e4afc710ccc7d9e9be56f39a81233707bdcf1f308411193c6962111b42a6":
                 raise ValueError("Frozen Daily trend v8 contract changed; register a new revision")
-        if value["specification_version"] in {"h0001_r03_spec_v9", "h0001_r03_spec_v10", "h0001_r03_spec_v11"}:
+        if value["specification_version"] in {"h0001_r03_spec_v9", "h0001_r03_spec_v10", "h0001_r03_spec_v11", "h0001_r03_spec_v12"}:
             from .daily_trend import CANONICAL
             rule = value["rule_parameters"]["daily_long_permission"]["value"]
             if rule != UNRESOLVED and rule != CANONICAL.contract:
                 raise ValueError("Frozen Daily trend v9 contract changed; register a new revision")
-        if value["specification_version"] in {"h0001_r03_spec_v10", "h0001_r03_spec_v11"}:
+        if value["specification_version"] in {"h0001_r03_spec_v10", "h0001_r03_spec_v11", "h0001_r03_spec_v12"}:
             from .daily_exhaustion import blocker_contract
             if value["rule_parameters"]["daily_exhaustion_blocker"]["value"] != blocker_contract():
                 raise ValueError("Frozen Daily blocker v10 contract changed; register a new revision")
             if value["rule_parameters"]["daily_long_permission"]["value"] != CANONICAL.contract:
                 raise ValueError("Frozen Daily trend v9 contract must remain resolved in v10")
-        if value["specification_version"] == "h0001_r03_spec_v11":
+        if value["specification_version"] in {"h0001_r03_spec_v11", "h0001_r03_spec_v12"}:
             from .h1_setup import CANONICAL as SETUP, LIFETIME
             frozen = {
                 ("rule_parameters", "setup_1h_relative_transform"): "ROLLING_PERCENTILE",
@@ -344,6 +344,13 @@ class H0001Specification(StrategySpecification):
             for (section, field), contract in frozen.items():
                 if value[section][field]["value"] != contract:
                     raise ValueError("Frozen 1H setup v11 contract changed; register a new revision")
+        if value["specification_version"] == "h0001_r03_spec_v12":
+            from .entry_15m import frozen_values
+            for (section, field), contract in frozen_values().items():
+                if value[section][field]["value"] != contract:
+                    raise ValueError("Frozen 15m entry v12 contract changed; register a new revision")
+            if value["feature_contracts"]["macd_min_history_15m"]["value"] != 130:
+                raise ValueError("Frozen 15m MACD readiness changed")
         machine = value["state_machine"]
         if set(machine["states"]) != set(STATES):
             raise ValueError("H0001 state inventory mismatch")

@@ -111,7 +111,10 @@ def require_current_engine(value):
         if method in {"ROLLING_PERCENTILE", "ROLLING_ZSCORE"}:
             cls = PercentileSpec if method == "ROLLING_PERCENTILE" else ZScoreSpec
             extra = ("field", "macd_line_lt_zero") if (
-                value["specification_version"] == "h0001_r03_spec_v11" and prefix == "setup_1h") else ("field",)
+                value["specification_version"] in {"h0001_r03_spec_v11", "h0001_r03_spec_v12"} and prefix == "setup_1h") else ("field",)
+            if value["specification_version"] == "h0001_r03_spec_v12" and prefix == "entry_15m":
+                extra = ("field", "macd_line_lt_zero", "first_READY_N", "session_profile",
+                         "history_origin", "unavailable", "known_at")
             params = _primitive(convention, cls, where, extra=extra)
             if "macd_line_lt_zero" in params and params["macd_line_lt_zero"] is not True:
                 raise ValueError("C1 frozen 1H negative polarity required")

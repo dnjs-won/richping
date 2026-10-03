@@ -1,5 +1,5 @@
-# 15m DESIGN only: research/decision_proposals/H0001-15m-entry-trigger-v1.yaml.
-# Eight 15m decisions remain UNRESOLVED; v11 selected values are unchanged.
+# 15m FREEZE: research/decision_records/H0001-15m-entry-freeze-v1.yaml.
+# Only nine entry/timing roots resolved; unrelated decisions remain UNRESOLVED.
 # 1H setup provenance: research/decision_records/H0001-1h-relative-setup-freeze-v1.yaml.
 # Blocker provenance: research/decision_records/H0001-daily-blocker-freeze-v1.yaml.
 # Executable-spec draft, NOT a strategy implementation or complete strategy freeze.
@@ -10,12 +10,12 @@
 # Readiness remediation: research/decision_records/H0001-daily-trend-readiness-remediation-v1.yaml.
 schema_version: strategy_specification_v1
 strategy_id: H0001
-specification_version: h0001_r03_spec_v11
+specification_version: h0001_r03_spec_v12
 hypothesis_id: H0001
 hypothesis_revision: 3
 status: DRAFT
 created_at: '2026-09-27T00:00:00Z'
-updated_at: '2026-10-02T01:00:00Z'
+updated_at: '2026-10-03T04:00:00Z'
 source:
   path: research/hypotheses/H0001-r03.yaml
   sha256: 35e13276056a36d6a06de04611720fd286113f0e5db1e4255af6ceeb6a0f0bc2
@@ -169,7 +169,70 @@ feature_contracts:
     decision_id: H1-RELATIVE-CONVENTIONS
   entry_15m_relative_conventions:
     kind: contract
-    value: UNRESOLVED
+    value:
+      name: rolling_empirical_midrank
+      version: v1
+      parameters:
+        window:
+          kind: integer
+          value: 192
+          choices: []
+          decision_id: null
+        min_history:
+          kind: integer
+          value: 192
+          choices: []
+          decision_id: null
+        include_current:
+          kind: boolean
+          value: true
+          choices: []
+          decision_id: null
+        ties:
+          kind: text
+          value: midrank
+          choices: []
+          decision_id: null
+        continuity:
+          kind: text
+          value: us_equity_extended_04_20_completed_grid_v1
+          choices: []
+          decision_id: null
+        field:
+          kind: text
+          value: macd_line
+          choices: []
+          decision_id: null
+        macd_line_lt_zero:
+          kind: boolean
+          value: true
+          choices: []
+          decision_id: null
+        first_READY_N:
+          kind: integer
+          value: 321
+          choices: []
+          decision_id: null
+        session_profile:
+          kind: text
+          value: US_EQUITY_EXTENDED_04_20
+          choices: []
+          decision_id: null
+        history_origin:
+          kind: text
+          value: full_available_completed_causal_prefix_no_session_reset
+          choices: []
+          decision_id: null
+        unavailable:
+          kind: text
+          value: retain_missing_warmup_nonfinite_and_provenance_failures
+          choices: []
+          decision_id: null
+        known_at:
+          kind: text
+          value: maximum_actual_MACD_prefix_dependency_arrivals
+          choices: []
+          decision_id: null
     choices: []
     decision_id: H1-M15-RELATIVE-CONVENTIONS
   exit_1h_relative_conventions:
@@ -766,7 +829,7 @@ rule_parameters:
     decision_id: H1-COMPARATOR
   entry_15m_relative_transform:
     kind: enum
-    value: UNRESOLVED
+    value: ROLLING_PERCENTILE
     choices:
     - ROLLING_PERCENTILE
     - ROLLING_ZSCORE
@@ -774,34 +837,203 @@ rule_parameters:
     decision_id: H1-M15-RELATIVE-METHOD
   entry_15m_rolling_lookback:
     kind: integer
-    value: UNRESOLVED
+    value: 192
     choices: []
     decision_id: H1-M15-LOOKBACK
   entry_15m_downside_threshold:
     kind: number
-    value: UNRESOLVED
+    value: 0.1
     choices: []
     decision_id: H1-M15-DOWNSIDE
   entry_15m_downside_comparator:
     kind: enum
-    value: UNRESOLVED
+    value: LE
     choices:
     - LT
     - LE
     decision_id: H1-M15-COMPARATOR
   entry_15m_gc:
     kind: contract
-    value: UNRESOLVED
+    value:
+      name: m15_gc_cross
+      version: v1
+      parameters:
+        event:
+          kind: text
+          value: CROSS_EVENT
+          choices: []
+          decision_id: null
+        previous:
+          kind: text
+          value: macd_LE_signal
+          choices: []
+          decision_id: null
+        current:
+          kind: text
+          value: macd_GT_signal
+          choices: []
+          decision_id: null
+        zero_line:
+          kind: text
+          value: UNRESTRICTED_at_GC
+          choices: []
+          decision_id: null
+        operands:
+          kind: text
+          value: consecutive_completed_READY_15m
+          choices: []
+          decision_id: null
+        persistent_relation:
+          kind: text
+          value: NOT_A_CROSS_EVENT
+          choices: []
+          decision_id: null
+        event_reuse:
+          kind: text
+          value: FORBIDDEN
+          choices: []
+          decision_id: null
     choices: []
     decision_id: H1-M15-GC
   entry_15m_price_reversal:
     kind: contract
-    value: UNRESOLVED
+    value:
+      name: m15_price_close_recovery
+      version: v1
+      parameters:
+        family:
+          kind: text
+          value: COMPLETED_PRICE_RECLAIM
+          choices: []
+          decision_id: null
+        predicate:
+          kind: text
+          value: close_GT_previous_completed_close
+          choices: []
+          decision_id: null
+        same_bar_as_GC:
+          kind: boolean
+          value: true
+          choices: []
+          decision_id: null
+        equality:
+          kind: text
+          value: 'FALSE'
+          choices: []
+          decision_id: null
+        future_or_swing_reference:
+          kind: text
+          value: NONE
+          choices: []
+          decision_id: null
+        meaning:
+          kind: text
+          value: minimum_price_direction_confirmation_not_proven_bottom
+          choices: []
+          decision_id: null
     choices: []
     decision_id: H1-M15-REVERSAL
   entry_15m_trigger_conjunction:
     kind: contract
-    value: UNRESOLVED
+    value:
+      name: m15_initial_extreme_gc_price
+      version: v1
+      parameters:
+        family:
+          kind: text
+          value: D_AND_G_AND_P
+          choices: []
+          decision_id: null
+        temporal:
+          kind: text
+          value: FIRST_EXTREME_FIXED_GRACE_NO_REFRESH
+          choices: []
+          decision_id: null
+        K:
+          kind: integer
+          value: 4
+          choices: []
+          decision_id: null
+        unit:
+          kind: text
+          value: completed_selected_extended_15m_observations
+          choices: []
+          decision_id: null
+        age:
+          kind: text
+          value: current_index_minus_first_extreme_index
+          choices: []
+          decision_id: null
+        eligible:
+          kind: text
+          value: 0_LE_age_LE_4
+          choices: []
+          decision_id: null
+        expiry:
+          kind: text
+          value: age_GT_4_before_reversal
+          choices: []
+          decision_id: null
+        refresh:
+          kind: text
+          value: NONE
+          choices: []
+          decision_id: null
+        consume:
+          kind: text
+          value: first_GC_even_when_price_FALSE
+          choices: []
+          decision_id: null
+        rearm:
+          kind: text
+          value: READY_INACTIVE_then_new_extreme
+          choices: []
+          decision_id: null
+        scope:
+          kind: text
+          value: current_eligible_1H_episode_only_no_outside_arm_carry
+          choices: []
+          decision_id: null
+        cancellation:
+          kind: text
+          value: UNAVAILABLE_or_upstream_loss_or_episode_or_identity_origin_change
+          choices: []
+          decision_id: null
+        recovery:
+          kind: text
+          value: new_completed_extreme_only_no_same_identity_restore
+          choices: []
+          decision_id: null
+        candidate:
+          kind: text
+          value: READY_Daily_BULLISH_NORMAL_AND_1H_ACTIVE_AND_position_FLAT_AND_trigger
+          choices: []
+          decision_id: null
+        position_flat:
+          kind: text
+          value: explicit_current_evidence_required_UNAVAILABLE_if_absent
+          choices: []
+          decision_id: null
+        duplicates:
+          kind: text
+          value: one_trigger_identity_per_completed_end_per_scope_no_poll_or_correction_retrigger
+          choices: []
+          decision_id: null
+        candidate_is_order_fill_position:
+          kind: boolean
+          value: false
+          choices: []
+          decision_id: null
+        comparator:
+          kind: text
+          value: NONE
+          choices: []
+          decision_id: null
+        global_position_transitions_add_reentry:
+          kind: text
+          value: UNRESOLVED_separate_owner
+          choices: []
+          decision_id: null
     choices: []
     decision_id: H1-M15-CONJUNCTION
   failed_first_reversal:
@@ -1108,7 +1340,55 @@ state_machine_parameters:
     decision_id: H1-OVERNIGHT
   decision_timing:
     kind: contract
-    value: UNRESOLVED
+    value:
+      name: h0001_initial_entry_timing
+      version: v1
+      parameters:
+        same_batch:
+          kind: text
+          value: SAME_ATOMIC_BATCH
+          choices: []
+          decision_id: null
+        publication:
+          kind: text
+          value: complete_atomic_batch_before_decision
+          choices: []
+          decision_id: null
+        evaluation_order:
+          kind: text
+          value: authoritative_Daily_then_frozen_1H_lifetime_then_15m
+          choices: []
+          decision_id: null
+        cadence:
+          kind: text
+          value: new_completed_15m_identity_not_poll_or_correction
+          choices: []
+          decision_id: null
+        delayed_batch:
+          kind: text
+          value: end_order_advance_memory_only_latest_expected_15m_may_emit
+          choices: []
+          decision_id: null
+        stale_higher_frame:
+          kind: text
+          value: latest_expected_completed_inputs_required_no_fallback
+          choices: []
+          decision_id: null
+        known_at:
+          kind: text
+          value: maximum_actual_required_dependency_arrivals_lte_as_of
+          choices: []
+          decision_id: null
+        unavailable:
+          kind: text
+          value: cancel_arm_suppress_candidate_no_deferred_execution
+          choices: []
+          decision_id: null
+        global_execution_add_exit_cadence:
+          kind: text
+          value: UNRESOLVED_separate_contract_owners
+          choices: []
+          decision_id: null
     choices: []
     decision_id: H1-DECISION-TIMING
   transition_priority_and_resets:
