@@ -5,7 +5,7 @@ purpose: 'Lightweight routing index for AI PM sessions. This file does not repla
   evidence.
 
   '
-default_research_branch: v2-h0001-first-entry-efficacy
+default_research_branch: v2-h0001-efficacy-disposition-audit
 data_foundation:
   branch: v2-real-intraday-data-foundation
   contract: docs/V2_REAL_INTRADAY_DATA_FOUNDATION.md
@@ -24,7 +24,7 @@ canonical_sources:
     specification_version: h0001_r03_spec_v13
     sha256: bf8134733bacee17542240e53a8ec30223c1550b5bedbaa6d3994ba1444acc19
   current_status:
-    branch: v2-h0001-first-entry-efficacy
+    branch: v2-h0001-efficacy-disposition-audit
     path: PROJECT_STATUS.md
   entry_efficacy_protocol:
     branch: v2-h0001-entry-efficacy-preregistration
@@ -41,6 +41,13 @@ canonical_sources:
     status: EXECUTED_ZERO_SIGNAL_NO_INFORMATIVE_EFFICACY
     report_hash: 17f961b6b6f8950399c0f37ff5be69f2a241f09afa021b2264b2d901ef7b168f
     protocol_hash: 074255189630fa625c4d40eb2f344fb7767d2c8f305f22c9e4c2a608e93e944c
+  initial_entry_efficacy_disposition_audit:
+    branch: v2-h0001-efficacy-disposition-audit
+    commit: 58a237c45feef7f64a9c3c18c59d17575401d8d3
+    path: research/data_evidence/h0001-entry-efficacy-audit-20261003/execution-audit.json
+    status: COMPLETE_INDEPENDENT_ZERO_SIGNAL_REVALIDATION
+    proof_hash: 1236e6aef6ee0a522705d2526e35d0e58405130cdc7d35b73e22a81de182dc52
+    original_report_hash: 17f961b6b6f8950399c0f37ff5be69f2a241f09afa021b2264b2d901ef7b168f
 frozen_major_decisions:
   daily_input:
     status: FROZEN
@@ -152,6 +159,8 @@ current_open_decision_groups:
   disposition_branch: v2-h0001-first-entry-efficacy
   disposition_evidence: research/data_evidence/h0001-first-entry-efficacy-20261003/disposition-report.json
   nonempty_label_control_bootstrap_adapter: NOT_IMPLEMENTED_NOT_REQUIRED_FOR_EMPTY_STREAM
+  independent_disposition_audit: research/data_evidence/h0001-entry-efficacy-audit-20261003/execution-audit.json
+  independent_audit_branch: v2-h0001-efficacy-disposition-audit
 reopen_policy:
   frozen_decision_may_reopen_only_if:
   - A causal/data-integrity defect invalidates it.

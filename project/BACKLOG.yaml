@@ -27,11 +27,11 @@ items:
 
     '
   guardrail: Do not merge blindly; preserve the newer main R1 paper changes.
-  active_branch: v2-h0001-first-entry-efficacy
+  active_branch: v2-h0001-efficacy-disposition-audit
   observed_relation_to_main:
-    ahead_by: 34
-    behind_by: 15
-    main_commit: a04cf3575bb518751005345da96a610c1e649bf3
+    ahead_by: 35
+    behind_by: 16
+    main_commit: bea46d679364be33bb67bdf094a01db2aa41444f
 - id: H0001_MINIMAL_15M_ENTRY_FREEZE
   priority: P1
   status: COMPLETE_FROZEN_AND_OFFLINE_MECHANICALLY_EXERCISED
@@ -183,6 +183,40 @@ items:
   evidence: research/data_evidence/h0001-first-entry-efficacy-20261003/disposition-report.json
   formerly_blocked_phase_exit_criteria:
   - 6
+  independent_revalidation:
+    status: COMPLETE_INDEPENDENT_ZERO_SIGNAL_REVALIDATION
+    branch: v2-h0001-efficacy-disposition-audit
+    commit: 58a237c45feef7f64a9c3c18c59d17575401d8d3
+    evidence: research/data_evidence/h0001-entry-efficacy-audit-20261003/execution-audit.json
+    proof_hash: 1236e6aef6ee0a522705d2526e35d0e58405130cdc7d35b73e22a81de182dc52
+    report_hash: 17f961b6b6f8950399c0f37ff5be69f2a241f09afa021b2264b2d901ef7b168f
+    candidate_count: 0
+    candidate_timestamps: []
+    offline_repeat_equal: true
+    evaluated_outcomes: 0
+    outcome_queries: 0
+    benchmark_queries: 0
+    return_mfe_mae_calculations: 0
+    profitability: NOT_RUN
+    original_evidence_rewritten: false
+    tests:
+      benchmark_queries: 0
+      command: .venv/Scripts/python -m pytest -q -o cache_dir=var/pytest-efficacy-audit-cache --junitxml=var/h0001-efficacy-audit-suite.xml
+      counts:
+        errors: 0
+        failures: 0
+        skipped: 0
+        tests: 1388
+      coverage: FULL_SUITE_NO_SKIPS_WITH_REAL_ZERO_SIGNAL_REVALIDATION
+      elapsed_seconds: 463.343
+      junit_path: suite.xml
+      junit_sha256: 4dfcb05125fda9d95557bc31aa6a027231b49f97daa1dacd2874bea053338fb1
+      new_tests: 9
+      outcome_queries: 0
+      passed: 1388
+      profitability: NOT_RUN
+      return_mfe_mae_calculations: 0
+    phase_exit_6: INCOMPLETE_NO_INFORMATIVE_EFFICACY
 - id: MINIMAL_CI
   priority: P2
   status: OPEN
