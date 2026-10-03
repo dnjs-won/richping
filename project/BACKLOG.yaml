@@ -27,9 +27,9 @@ items:
 
     '
   guardrail: Do not merge blindly; preserve the newer main R1 paper changes.
-  active_branch: v2-h0001-entry-composition
+  active_branch: v2-h0001-entry-efficacy-preregistration
   observed_relation_to_main:
-    ahead_by: 32
+    ahead_by: 33
     behind_by: 14
 - id: H0001_MINIMAL_15M_ENTRY_FREEZE
   priority: P1
@@ -98,9 +98,9 @@ items:
   evidence: docs/V2_REAL_INTRADAY_DATA_FOUNDATION.md
   efficacy_blocker_candidate: true
   entry_composition_evidence: research/data_evidence/h0001-entry-composition-20261003/zero-signal-diagnostic.json
-  note: 41 intraday sessions leave208 READY completed1H observations and zero downside extremes. Potential future
-    efficacy evidence blocker; remain P1 until protocol/zero-signal disposition. No migration or threshold change
-    performed.
+  note: Preregistration complete; fixed current stream0 candidates. Remains P1 blocker candidate until separately
+    executed ZERO_SIGNAL disposition; no migration or threshold changes. Any new history is discovery unless it
+    satisfies fixed future confirmation admission.
 - id: YAHOO_LATEST_SESSION_OFFGRID_QUOTE
   priority: P2
   status: OPEN_FAIL_CLOSED
@@ -133,13 +133,12 @@ items:
   integration: NOT_MAIN_INTEGRATED
 - id: H0001_ENTRY_EFFICACY_PREREGISTRATION
   priority: P0
-  status: ACTIVE_AS_NEXT_ACTION_READY
-  blocks_phase_exit_criteria:
-  - 6
+  status: COMPLETE_FROZEN_VERIFIED_NO_OUTCOMES
+  blocks_phase_exit_criteria: []
   depends_on:
   - H0001_ENTRY_EXECUTION_AND_COMPOSITION
-  summary: Preregister all minimal initial-entry evaluation fields before outcome queries; H0001_RESEARCH_EVALUATION
-    is still partially unresolved.
+  summary: All minimum initial-opportunity evaluation fields frozen ex ante;23 source dependencies verified, full1359
+    tests/new13 passed. Outcome access0, profitability NOT_RUN; general strategy lifecycle/costs remain unresolved.
   required_fields:
   - evaluation sample unit
   - forward horizons
@@ -152,21 +151,26 @@ items:
   - confirmation/discovery boundary
   - uncertainty method
   - multiple-testing accounting
-  evidence_branch: v2-h0001-entry-composition
-  evidence: research/data_evidence/h0001-entry-composition-20261003/smoke.json
+  evidence_branch: v2-h0001-entry-efficacy-preregistration
+  evidence: research/decision_records/H0001-entry-efficacy-preregistration-v1.yaml
   owner: AI_PM
+  commit: 13f719b56980a43fbace2a003b8c78331fa0c210
+  contract_hash: 074255189630fa625c4d40eb2f344fb7767d2c8f305f22c9e4c2a608e93e944c
 - id: H0001_FIRST_ENTRY_EFFICACY
-  priority: P1
-  status: BLOCKED_EVALUATION_PREREGISTRATION
+  priority: P0
+  status: ACTIVE_AS_NEXT_ACTION_READY
   depends_on:
   - H0001_ENTRY_EXECUTION_AND_COMPOSITION
   - H0001_ENTRY_EFFICACY_PREREGISTRATION
-  summary: 'Generate real-data signal counts, fixed forward returns, MFE/MAE, matched benchmark/excess and uncertainty
-    before finishing the full exit/add/risk lifecycle.
-
-    '
-  guardrail: Do not inspect outcomes before full minimal efficacy protocol; current ZERO_SIGNAL is not profitability
-    evidence.
+  summary: Execute registered fixed-stream opportunity disposition. Current0 candidates must short-circuit ZERO_SIGNAL/null
+    metrics without outcome reads; informative efficacy remains unavailable.
+  guardrail: Follow scoped protocol exactly; no retroactive holdout/confirmation, threshold tuning, fills/cost/portfolio
+    claim or provider migration.
+  blocks_phase_exit_criteria:
+  - 6
+  evidence_branch: v2-h0001-entry-efficacy-preregistration
+  protocol_record: research/decision_records/H0001-entry-efficacy-preregistration-v1.yaml
+  protocol_hash: 074255189630fa625c4d40eb2f344fb7767d2c8f305f22c9e4c2a608e93e944c
 - id: MINIMAL_CI
   priority: P2
   status: OPEN

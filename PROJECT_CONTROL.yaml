@@ -15,7 +15,7 @@ source_of_truth:
     branch: main
     path: PROJECT_STATUS.md
   active_workstream_status:
-    branch: v2-h0001-entry-composition
+    branch: v2-h0001-entry-efficacy-preregistration
     path: PROJECT_STATUS.md
   decision_index:
     branch: main
@@ -30,16 +30,17 @@ control_plane:
   branch: main
   rule: PM state lives on main so new sessions can recover it from the default branch.
 active_workstream:
-  branch: v2-h0001-entry-composition
-  base_branch: v2-h0001-action-unit-remediation
-  base_commit: 1c661d85f4da869c34945da203f29143c2556428
-  implementation_commit: bb72239d580e4814b880c61ad3c591f5d989870e
+  branch: v2-h0001-entry-efficacy-preregistration
+  base_branch: v2-h0001-entry-composition
+  base_commit: bb72239d580e4814b880c61ad3c591f5d989870e
+  implementation_commit: 13f719b56980a43fbace2a003b8c78331fa0c210
   status: DIVERGED_FROM_MAIN
   observed_relation_to_main:
-    ahead_by: 32
+    ahead_by: 33
     behind_by: 14
-  note: Initial candidate composition and immutable real ZERO_SIGNAL evidence isolated from main. Only PM documents
-    updated on main; no code integration or force push.
+    main_commit: 547ebea194a8a709bb85e8224b5126a27a1a6617
+  note: Scoped efficacy protocol frozen and verified; no outcome access/evaluator or code integration. Main receives
+    PM documents only.
 current_phase:
   id: H0001_FIRST_REAL_EVIDENCE
   objective: 'Produce the first reproducible H0001 entry-efficacy evidence from real intraday market data without
@@ -50,7 +51,7 @@ current_phase:
     comparison and uncertainty from a fixed real dataset.
 
     '
-  status: IN_PROGRESS_EFFICACY_PREREGISTRATION
+  status: IN_PROGRESS_FIRST_EFFICACY_DISPOSITION
   progress:
     satisfied_exit_criteria:
     - 1
@@ -67,13 +68,16 @@ current_phase:
       all1346 tests passed/new55/no skips. Outcomes and profitability NOT_RUN.
     limitations: Initial-entry opportunities only, actual candidate count0. No position/order/fill/ADD/exit/reentry/portfolio
       or efficacy. Bar-end availability is a historical research assumption; actual delivery/revision latency and
-      live/shadow PIT are not reconstructed. Same interval-scoped OHLC/action admission as before. Efficacy protocol
-      must be preregistered before outcomes.
+      live/shadow PIT are not reconstructed. Same interval-scoped OHLC/action admission as before. Initial-opportunity
+      protocol is now frozen; efficacy has not been executed and current ZERO_SIGNAL cannot establish an economic
+      effect.
     blocked_exit_criteria:
     - 6
     frozen_15m_subtask: COMPLETE_EXECUTABLE_WITH_ACTUALLY_USABLE_UPSTREAM_INPUTS
     daily_prerequisite_subtask: COMPLETE_REAL_HISTORICAL_CAUSAL_RESEARCH_ADMISSION
     initial_entry_composition_subtask: COMPLETE_REAL_DETERMINISTIC_EMPTY_CANDIDATE_STREAM
+    efficacy_preregistration_subtask: COMPLETE_FROZEN_NO_OUTCOMES
+    evaluation_protocol_hash: 074255189630fa625c4d40eb2f344fb7767d2c8f305f22c9e4c2a608e93e944c
   exit_criteria:
   - A real 15m dataset is persisted locally with immutable dataset identity/provenance.
   - The dataset covers the required 04:00-20:00 ET research session with explicit gap/availability diagnostics.
@@ -250,45 +254,81 @@ completed_actions:
   phase_exit_5: COMPLETE_VALID_EMPTY_STREAM
   phase_complete: false
   strategy_profitability_tested: false
+- id: H0001_ENTRY_EFFICACY_PREREGISTRATION
+  status: COMPLETE
+  completed_at: '2026-10-03'
+  implementation_state: FROZEN_VERIFIED_EVIDENCE_PRODUCED_NO_EFFICACY_EXECUTION_NOT_MAIN_INTEGRATED
+  branch: v2-h0001-entry-efficacy-preregistration
+  commit: 13f719b56980a43fbace2a003b8c78331fa0c210
+  record: research/decision_records/H0001-entry-efficacy-preregistration-v1.yaml
+  evidence: research/data_evidence/h0001-entry-efficacy-preregistration-20261003/
+  contract_hash: 074255189630fa625c4d40eb2f344fb7767d2c8f305f22c9e4c2a608e93e944c
+  acceptance_criteria_satisfied: 4
+  acceptance_criteria_unmet: 0
+  scope: INITIAL_ENTRY_OPPORTUNITY_PROTOCOL_ONLY
+  confirmation:
+    start_session: '2026-10-12'
+    end_session: '2027-04-13'
+    official_XNYS_anchor_sessions: 126
+    selection: First 126 official XNYS sessions after five-session embargo; calendar fixed before outcomes.
+    early_close: Unsupported extended sessions remain denominator UNAVAILABLE; no calendar compression or RTH substitution.
+    warmup: Prior causal prefixes allowed; outcomes from discovery/embargo never train or select parameters.
+    evidence_kind: Untouched future historical cohort, not live/shadow PIT unless separately captured and certified.
+    stopping: One terminal analysis after fixed window and label maturation; no interim significance checks or count-driven
+      extension.
+    followup: Up to five further official sessions for final 320-slot labels; not additional entry anchors.
+    admission: New immutable vintages and causal action/unit compatibility must be checked separately; current interval
+      certification cannot carry forward.
+  specification_changed: false
+  source_dependencies_verified: 23
+  outcome_queries: 0
+  returns_calculated: 0
+  profitability: NOT_RUN
+  tests:
+    command: .venv/Scripts/python -m pytest -q -o cache_dir=var/pytest-efficacy-prereg-cache --junitxml=var/h0001-entry-efficacy-preregistration-suite.xml
+    counts:
+      errors: 0
+      failures: 0
+      skipped: 0
+      tests: 1359
+    coverage: FULL_SUITE_NO_SKIPS_INCLUDING_SAVED_REAL_OFFLINE_EVIDENCE_VERIFICATION
+    elapsed_seconds: 435.089
+    entry_efficacy: NOT_RUN
+    junit_path: suite.xml
+    junit_sha256: 63666d7b2bfc9854fa463df113773dcc75b68363f5ab0b372e256fffd2e528a0
+    new_tests: 13
+    passed: 1359
+    preregistration_real_outcome_queries: 0
+  phase_complete: false
 next_action:
-  id: H0001_ENTRY_EFFICACY_PREREGISTRATION
+  id: H0001_FIRST_ENTRY_EFFICACY
   priority: P0
   status: READY
   blocks_phase_exit_criteria:
   - 6
-  objective: Freeze the minimal initial-entry opportunity efficacy evaluation protocol before any outcome access.
-  why_now: Composition is complete, but H0001_RESEARCH_EVALUATION remains partially unresolved. Existing subfamilies
-    do not define a full efficacy experiment. Current stream is ZERO_SIGNAL; sparse-evidence disposition must also
-    be explicit before outcomes.
-  evidence_branch: v2-h0001-entry-composition
-  evidence: research/data_evidence/h0001-entry-composition-20261003/smoke.json
-  evaluation_protocol_required: true
-  required_protocol_fields:
-  - evaluation sample unit
-  - forward horizons
-  - primary metric
-  - baseline
-  - comparison definition
-  - cost application/scope
-  - null/pass/reject including ZERO_SIGNAL/INSUFFICIENT_EVIDENCE
-  - chronological split
-  - confirmation/discovery boundary
-  - uncertainty method
-  - multiple-testing accounting
+  objective: Execute frozen initial-opportunity protocol disposition on the existing immutable SOXX candidate stream;
+    preserve empty-stream outcome-free short circuit.
+  why_now: Preregistration is frozen. Current ZERO_SIGNAL prevents meaningful numeric efficacy; execute and preserve
+    this disposition before routing the informative-cohort blocker.
+  evidence_branch: v2-h0001-entry-efficacy-preregistration
+  protocol_record: research/decision_records/H0001-entry-efficacy-preregistration-v1.yaml
+  protocol_hash: 074255189630fa625c4d40eb2f344fb7767d2c8f305f22c9e4c2a608e93e944c
   constraints:
-  - No profitability/outcome lookup before protocol preregistration; no post-outcome metric or threshold selection.
-  - Preserve frozen Daily/1H/15m/composer/position evidence and current ZERO_SIGNAL record.
-  - Candidate-only research admission cannot be reused as execution or portfolio position evidence.
-  - No automatic orders, main code integration, exit/add/reentry or longer-provider migration in this action.
+  - No threshold/frozen signal changes or main code integration.
+  - If candidate count is zero, no market/action/benchmark/outcome read or return calculation; metrics null.
+  - Any nonempty cohort must use exact frozen labels, matching, action/unit and joint-bootstrap semantics; no generic
+    framework.
+  - Existing data is discovery only; no retroactive confirmation or costs/portfolio/production claims.
+  - No provider migration in first fixed-vintage disposition; route separately after evidence.
   acceptance_criteria:
-  - One immutable version/hash preregistration resolves all required minimum evaluation fields before outcomes.
-  - Signal-event research scope, existing exposed discovery cases, chronological confirmation boundary and multiple-testing
-    families are explicit.
-  - ZERO_SIGNAL/INSUFFICIENT_EVIDENCE, missing labels, uncertainty and comparison denominator rules are explicit
-    without tuning frozen strategy.
-  - First efficacy execution is separately admitted after protocol freeze; PM state is updated.
+  - Validate committed protocol/spec/composer/stream hashes before any outcome access.
+  - Produce immutable twice-identical disposition report with candidate/label denominators and missing/pending/zero-signal
+    reasons.
+  - For the current zero candidates, record ZERO_SIGNAL with null metrics and zero outcome/market reads.
+  - Keep phase exit6 incomplete for informative efficacy when zero signal; determine whether longer-history/action
+    coverage is now P0 and update PM state.
   after_success:
-  - H0001_FIRST_ENTRY_EFFICACY
+  - PM_ROUTE_INFORMATIVE_COHORT_BLOCKER_IF_ZERO_SIGNAL_OR_INSUFFICIENT_EVIDENCE
 pm_policy:
   single_next_action: true
   discovered_non_blockers_go_to_backlog: true
@@ -296,8 +336,4 @@ pm_policy:
   strategy_quality_may_not_be_relaxed_for_demo_speed: true
   user_visible_progress_may_not_be_faked: true
   preserve_existing_work_by_default: true
-blocked_actions:
-- id: H0001_FIRST_ENTRY_EFFICACY
-  reason: H0001_RESEARCH_EVALUATION minimum protocol remains partially unresolved; preregistration must precede
-    every outcome query.
-  unblocks_after: H0001_ENTRY_EFFICACY_PREREGISTRATION
+blocked_actions: []
