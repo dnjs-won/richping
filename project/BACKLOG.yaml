@@ -1,5 +1,5 @@
 schema_version: 1
-updated_at: '2026-10-04'
+updated_at: '2026-10-05'
 rules:
 - A discovery is not automatically a task.
 - P0 must block a current PROJECT_CONTROL exit criterion.
@@ -29,11 +29,11 @@ items:
 
     '
   guardrail: Do not merge blindly; preserve the newer main R1 paper changes.
-  active_branch: v2-h0002-first-efficacy
+  active_branch: v2-h0003-relative-strength-frequency
   observed_relation_to_main:
-    ahead_by: 46
-    behind_by: 23
-    main_commit: 534d92f4c4447ab56f96f5149880c3a309ff291d
+    ahead_by: 47
+    behind_by: 24
+    main_commit: fc28ebe2d6fbf92a4ac86455f55e84b0cc628468
 - id: H0001_MINIMAL_15M_ENTRY_FREEZE
   priority: P1
   status: COMPLETE_FROZEN_AND_OFFLINE_MECHANICALLY_EXERCISED
@@ -382,12 +382,29 @@ items:
   preregistration: research/decision_records/H0002-efficacy-preregistration-v1.yaml
   evidence_branch: v2-h0002-signal-freeze-preregistration
 - id: H0003_INDEPENDENT_HYPOTHESIS_INTAKE
+  priority: COMPLETE
+  status: COMPLETE_OWNER_THESIS_AND_CAUSAL_FREQUENCY
+  summary: SOXX/QQQ independent leadership thesis selected; causal frequency35/29
+    sessions, outcomes0.
+  strategy_meaning: OWNER_THESIS_SELECTED_SIGNAL_FREEZE_PENDING
+  future_confirmation_dependency: false
+  blocks_phase_exit_criteria: []
+  routing: COMPLETE_NEXT_H0003_SIGNAL_FREEZE_PREREGISTRATION
+  evidence_branch: v2-h0003-relative-strength-frequency
+  record: research/decision_records/H0003-hypothesis-frequency-v1.yaml
+- id: H0003_SIGNAL_FREEZE_PREREGISTRATION
   priority: P0
   status: USER_DECISION_REQUIRED
-  summary: Select the next independent owner market thesis and causal observation
-    family for H0003.
-  strategy_meaning: USER_DECISION_REQUIRED_WHEN_ROUTED
-  future_confirmation_dependency: false
   blocks_phase_exit_criteria:
-  - 1
-  routing: CURRENT_NEXT_ACTION
+  - 2
+  summary: Approve provisional signal semantics/final freeze, then preregister before
+    any outcomes.
+  evidence_branch: v2-h0003-relative-strength-frequency
+  record: research/decision_records/H0003-hypothesis-frequency-v1.yaml
+- id: H0003_OPTIONAL_COMPARATORS
+  priority: DEFERRED
+  status: NOT_AUTHORIZED_NOT_RUN
+  summary: 192-slot/percentile/SPY/RTH-only/context alternatives change meaning; no
+    immediate grid or performance ranking.
+  evidence_branch: v2-h0003-relative-strength-frequency
+  record: research/decision_records/H0003-hypothesis-frequency-v1.yaml

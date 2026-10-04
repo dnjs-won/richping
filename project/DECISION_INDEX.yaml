@@ -1,11 +1,11 @@
 schema_version: 2
-updated_at: '2026-10-04'
+updated_at: '2026-10-05'
 purpose: 'Lightweight routing index for AI PM sessions. This file does not replace
   canonical strategy specs or immutable decision records. It tells a new session what
   is already frozen, what remains open, and where to read the authoritative evidence.
 
   '
-default_research_branch: v2-h0002-first-efficacy
+default_research_branch: v2-h0003-relative-strength-frequency
 data_foundation:
   branch: v2-real-intraday-data-foundation
   contract: docs/V2_REAL_INTRADAY_DATA_FOUNDATION.md
@@ -24,7 +24,7 @@ canonical_sources:
     specification_version: h0001_r03_spec_v13
     sha256: bf8134733bacee17542240e53a8ec30223c1550b5bedbaa6d3994ba1444acc19
   current_status:
-    branch: v2-h0002-first-efficacy
+    branch: v2-h0003-relative-strength-frequency
     path: PROJECT_STATUS.md
   entry_efficacy_protocol:
     branch: v2-h0001-entry-efficacy-preregistration
@@ -99,6 +99,24 @@ canonical_sources:
     path: research/strategy_specs/H0002-r01-frozen-v1.yaml
     status: FROZEN
     sha256: 815566b715c682f81d82bcd6db5c96367ec10b932ff253d0255b4710581cfb91
+  H0003:
+    status:
+    - THESIS_SELECTED
+    - CAUSAL_FREQUENCY_COMPLETE
+    - SIGNAL_PROVISIONAL
+    family: RELATIVE_STRENGTH_LEADERSHIP_CONTINUATION
+    hypothesis: research/hypotheses/H0003-r01.yaml
+    branch: v2-h0003-relative-strength-frequency
+    commit: 57d839707e2cf8f9c46f68c670859ed1b403f9ea
+    spec: research/strategy_specs/H0003-r01-candidate.yaml
+    record: research/decision_records/H0003-hypothesis-frequency-v1.yaml
+    frequency_evidence: research/data_evidence/h0003-frequency-20261004/frequency-audit.json
+    benchmark: QQQ
+    candidate_events: 35
+    candidate_sessions: 29
+    outcome_access: 0
+    confirmation: NOT_PREREGISTERED
+    signal_freeze: USER_DECISION_REQUIRED
 frozen_major_decisions:
   daily_input:
     status: FROZEN
@@ -229,13 +247,22 @@ current_open_decision_groups:
     action.
   preregistration: research/decision_records/H0002-efficacy-preregistration-v1.yaml
 - id: H0003_INDEPENDENT_HYPOTHESIS_SELECTION
+  status: RESOLVED_OWNER_THESIS_SELECTED
+  priority: COMPLETE
+  blocks_phase_exit_criteria: []
+  evidence_branch: v2-h0003-relative-strength-frequency
+  note: Owner selected SOXX/QQQ relative leadership continuation; signal freeze separate.
+  record: research/decision_records/H0003-hypothesis-frequency-v1.yaml
+- id: H0003_SIGNAL_FREEZE_PREREGISTRATION
   status: USER_DECISION_REQUIRED
   priority: P0
   blocks_phase_exit_criteria:
-  - 1
-  evidence_branch: v2-h0002-first-efficacy
-  note: Describe the next independent market phenomenon; no performance-driven H0002
-    threshold/reclaim/baseline change.
+  - 2
+  evidence_branch: v2-h0003-relative-strength-frequency
+  record: research/decision_records/H0003-hypothesis-frequency-v1.yaml
+  evidence: research/data_evidence/h0003-frequency-20261004/frequency-audit.json
+  note: Concrete causal proposal/frequency complete; owner final signal meaning and
+    freeze precede efficacy preregistration.
 reopen_policy:
   frozen_decision_may_reopen_only_if:
   - A causal/data-integrity defect invalidates it.
@@ -287,9 +314,9 @@ frozen_semantic_interpretation_audit:
   negative_receipt_explicitly_frozen: false
   strategy_decisions_changed: false
   completeness_capture_is_causal_feature: false
-schema_revision: H0001/H0002 frozen records preserved. H0002 discovery evaluated with
-  explicit unresolved controls; confirmation async. Active P0 H0003 independent thesis
-  selection.
+schema_revision: H0001/H0002 frozen tracks preserved. H0003 owner thesis and causal
+  frequency complete; next P0 H0003 final signal freeze/preregistration. Registry
+  next unused ID H0004 is not active P0.
 long_history_access_routing:
   status: SELECTED70_DISCOVERY_PASS_ZERO_SIGNAL_H0001_ASYNC
   evidence_branch: v2-h0001-alpaca-70-session-discovery
@@ -320,10 +347,10 @@ long_history_access_routing:
     alternative not selected/admitted.
   selected_independent_hypothesis: H0002
 next_independent_hypothesis:
-  id: H0003
-  meaning: NOT_SELECTED_USER_DECISION_REQUIRED
+  id: H0004
+  meaning: NOT_SELECTED
   infrastructure: IMPLEMENTED_TESTED
   H0001_future_confirmation_dependency: false
-  routing: CURRENT_NEXT_ACTION_OWNER_MEANING_SELECTION
+  routing: FUTURE_INTAKE_AFTER_H0003_DISPOSITION_NOT_CURRENT_P0
   H0002_future_confirmation_dependency: false
 active_research_track: H0003

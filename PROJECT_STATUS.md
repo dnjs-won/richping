@@ -1,3 +1,11 @@
+# Richping PM - H0003 causal relative leadership frequency
+
+Implementation `v2-h0003-relative-strength-frequency` / `57d839707e2cf8f9c46f68c670859ed1b403f9ea`; code not merged to main. SOXX versus QQQ, 64-slot trailing price-return difference, four positive observations, own nonnegative direction, one candidate per episode. QQQ SIP admission PASS 4480 exact slots/70 sessions; RS READY4416, leadership37, candidates35/29 sessions, mismatches0. Outcome access0; no efficacy, profitability or promotion. Final targeted/full regression passed; see branch verification evidence. H0001 frozen/sparse126-session and H0002 frozen252-session confirmations remain asynchronous and unchanged.
+
+NEXT_ACTION **H0003_SIGNAL_FREEZE_PREREGISTRATION / USER_DECISION_REQUIRED**. Approve concrete signal proposal, then preregister evaluation before outcomes. H0004 is merely the next unused registry ID.
+
+The entries below are preserved historical status reports.
+
 # Richping PM - H0002 exploratory efficacy / H0003 routing
 
 Frozen H0002 evaluator executed twice deterministically on admitted discovery70 only. All14 primary R4 labels complete;12 matched pairs complete,2 controls insufficient retained. Session-balanced R4 +0.071984%,median+0.043293%,8/14 positive; resolved12-pair excess+0.611223%,full cohort excess null. Volume11 labels/9 complete pairs; no superiority claim. Discovery uncertainty not preregistered; no CI adaptation. Disposition DISCOVERY_INSUFFICIENT_RESOLVED_LABELS, not confirmation PASS/REJECT or profitability. Confirmation outcomes0; H0001 frozen/sparse126 and H0002 frozen252-session confirmation asynchronous. Next independent H0003 thesis selection; no outcome-selected H0002 revision.

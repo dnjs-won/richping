@@ -1,6 +1,6 @@
 schema_version: 1
 project: richping
-updated_at: '2026-10-04'
+updated_at: '2026-10-05'
 source_of_truth:
   project_goal:
     branch: main
@@ -15,7 +15,7 @@ source_of_truth:
     branch: main
     path: PROJECT_STATUS.md
   active_workstream_status:
-    branch: v2-h0002-first-efficacy
+    branch: v2-h0003-relative-strength-frequency
     path: PROJECT_STATUS.md
   decision_index:
     branch: main
@@ -30,27 +30,22 @@ control_plane:
   branch: main
   rule: PM state lives on main so new sessions can recover it from the default branch.
 active_workstream:
-  branch: v2-h0002-first-efficacy
-  base_branch: v2-h0002-signal-freeze-preregistration
-  base_commit: d76124409130b7e39a252c84079f0a8ba61a49ca
-  implementation_commit: 62992b202e37856a112ee45cc178a15dfd0c8899
+  branch: v2-h0003-relative-strength-frequency
+  base_branch: v2-h0002-first-efficacy
+  base_commit: 62992b202e37856a112ee45cc178a15dfd0c8899
+  implementation_commit: 57d839707e2cf8f9c46f68c670859ed1b403f9ea
   status: DIVERGED_FROM_MAIN
   observed_relation_to_main:
-    ahead_by: 46
-    behind_by: 23
-    main_commit: 534d92f4c4447ab56f96f5149880c3a309ff291d
-  note: Frozen H0002 evaluator executed twice deterministically on admitted discovery70
-    only. All14 primary R4 labels complete;12 matched pairs complete,2 controls insufficient
-    retained. Session-balanced R4 +0.071984%,median+0.043293%,8/14 positive; resolved12-pair
-    excess+0.611223%,full cohort excess null. Volume11 labels/9 complete pairs; no
-    superiority claim. Discovery uncertainty not preregistered; no CI adaptation.
-    Disposition DISCOVERY_INSUFFICIENT_RESOLVED_LABELS, not confirmation PASS/REJECT
-    or profitability. Confirmation outcomes0; H0001 frozen/sparse126 and H0002 frozen252-session
-    confirmation asynchronous. Next independent H0003 thesis selection; no outcome-selected
-    H0002 revision.
+    ahead_by: 48
+    behind_by: 24
+    main_commit: fc28ebe2d6fbf92a4ac86455f55e84b0cc628468
+  note: 'H0003 independent relative leadership causal frequency complete: 35 candidates/29
+    sessions; outcomes0. Signal provisional, final owner freeze pending; H0001/H0002
+    frozen async tracks unchanged.'
+  verification_commit: 934f8f8036dcf7bc073e779d33827154428b08b4
 current_phase:
   id: INDEPENDENT_STRATEGY_RESEARCH_CYCLE
-  status: AWAITING_H0003_OWNER_HYPOTHESIS_MEANING
+  status: AWAITING_H0003_SIGNAL_FREEZE
   objective: Repeat independent hypothesis generation, causal discovery, preregistration,
     confirmation and evidence disposition.
   exit_criteria:
@@ -61,16 +56,16 @@ current_phase:
     promotion.
   progress:
     intake_infrastructure: IMPLEMENTED_TESTED
-    next_available_hypothesis: H0003
-    strategy_meaning: USER_DECISION_REQUIRED_H0003
+    next_available_hypothesis: H0004
+    strategy_meaning: COMPLETE_OWNER_THESIS_SELECTION
     H0001_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
     active_hypothesis: H0003
-    causal_frequency: NOT_STARTED_H0003
-    signal_freeze: NOT_STARTED_H0003
-    outcome_evaluation: NOT_STARTED_H0003
-    satisfied_exit_criteria: []
-    remaining_exit_criteria:
+    causal_frequency: IMPLEMENTED_EXECUTED_REAL_DATA_EVIDENCE_PRODUCED
+    signal_freeze: USER_DECISION_REQUIRED
+    outcome_evaluation: NOT_RUN_H0003
+    satisfied_exit_criteria:
     - 1
+    remaining_exit_criteria:
     - 2
     - 3
     efficacy_preregistration: NOT_STARTED_H0003
@@ -597,26 +592,54 @@ completed_actions:
       sha256: 0d564324646e5618da076e579743cfdccc3ceba9bdbb7b5f775c52ca1b21c509
       skipped: 0
       tests: 97
+- id: INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION
+  hypothesis: H0003-r01
+  status: COMPLETE_CAUSAL_FREQUENCY_ONLY
+  completed_at: '2026-10-05'
+  branch: v2-h0003-relative-strength-frequency
+  commit: 57d839707e2cf8f9c46f68c670859ed1b403f9ea
+  record: research/decision_records/H0003-hypothesis-frequency-v1.yaml
+  evidence: research/data_evidence/h0003-frequency-20261004/frequency-audit.json
+  benchmark_admission: research/data_evidence/h0003-qqq-admission-20261004/admission.json
+  verification: research/data_evidence/h0003-frequency-20261004/verification.json
+  candidate_events: 35
+  candidate_sessions: 29
+  outcome_access: 0
+  signal_frozen: false
+  tests:
+  - errors: 0
+    failures: 0
+    path: research/data_evidence/h0003-frequency-20261004/tests-targeted-v3.xml
+    sha256: b0ca4acb489a7ea065954c87671d5f0231d9b0cab2e5ff6981dc763aab49376e
+    skipped: 0
+    tests: 113
+  - errors: 0
+    failures: 0
+    path: research/data_evidence/h0003-frequency-20261004/tests-full-v3.xml
+    sha256: ba9717306a3db6f0394e49c4654958cb0db6cf7db0021867e505178399da7de1
+    skipped: 0
+    tests: 1594
+  verification_commit: 934f8f8036dcf7bc073e779d33827154428b08b4
+  clean_checkout_proof: research/data_evidence/h0003-frequency-20261004/clean-checkout-proof.json
 next_action:
-  id: INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION
+  id: H0003_SIGNAL_FREEZE_PREREGISTRATION
   priority: P0
   status: USER_DECISION_REQUIRED
   blocks_phase_exit_criteria:
-  - 1
+  - 2
   hypothesis_id: H0003
-  objective: Select the next independent owner market thesis and causal observation
-    family for H0003.
-  why_now: Valid H0002 exploratory disposition produced; future H0001/H0002 confirmation
-    waits do not block independent research.
-  evidence_branch: v2-h0002-first-efficacy
-  basis_evidence: research/data_evidence/h0002-first-efficacy-20261004/verification-v2/discovery-report.json
-  owner_decision: Describe the next independent market phenomenon; no performance-driven
-    H0002 threshold/reclaim/baseline change.
+  objective: Approve final recent-session positive-persistent leadership/own-nonnegative
+    guard/extended episode semantics, then preregister efficacy before outcomes.
+  why_now: QQQ admission and causal paired mechanics pass; 35 events/29 sessions without
+    outcomes or tuning.
+  evidence_branch: v2-h0003-relative-strength-frequency
+  basis_evidence: research/data_evidence/h0003-frequency-20261004/frequency-audit.json
+  owner_decision: Approve the concrete provisional definition; owner changes create
+    a new sealed revision.
   constraints:
-  - Preserve H0001/H0002 frozen semantics and separate confirmation windows
-  - Confirmation performance remains hidden until each registered terminal gate
-  - Discovery observations can inform a distinct thesis, never retroactive H0002 modification
-  - No project wait until2027; new causal thesis before outcomes
+  - No H0003 outcomes before freeze and efficacy preregistration.
+  - Preserve H0001/H0002 frozen evidence and asynchronous confirmation windows.
+  - No automatic numeric threshold/window/benchmark/session relaxation.
 pm_policy:
   single_next_action: true
   discovered_non_blockers_go_to_backlog: true
@@ -942,6 +965,25 @@ hypothesis_tracks:
     discovery_uncertainty: DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED
     confirmation_outcome_access: 0
     profitability_calculations: 0
+  H0003:
+    status:
+    - THESIS_SELECTED
+    - CAUSAL_FREQUENCY_COMPLETE
+    - SIGNAL_PROVISIONAL
+    family: RELATIVE_STRENGTH_LEADERSHIP_CONTINUATION
+    hypothesis: research/hypotheses/H0003-r01.yaml
+    branch: v2-h0003-relative-strength-frequency
+    commit: 57d839707e2cf8f9c46f68c670859ed1b403f9ea
+    spec: research/strategy_specs/H0003-r01-candidate.yaml
+    record: research/decision_records/H0003-hypothesis-frequency-v1.yaml
+    frequency_evidence: research/data_evidence/h0003-frequency-20261004/frequency-audit.json
+    benchmark: QQQ
+    candidate_events: 35
+    candidate_sessions: 29
+    outcome_access: 0
+    confirmation: NOT_PREREGISTERED
+    signal_freeze: USER_DECISION_REQUIRED
+    verification_commit: 934f8f8036dcf7bc073e779d33827154428b08b4
 active_research_track: H0003
 research_cycle_history:
 - hypothesis: H0002
