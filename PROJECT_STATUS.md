@@ -1,3 +1,11 @@
+# Richping PM - 2026-10-04 independent H0002 frequency evidence
+
+Independent H0002 owner thesis selected; causal SOXX15m low-pair zone/revisit/same-bar reclaim implemented. Admitted Alpaca70 sessions/4480 bars; zone READY4353,92 zones,148 reentries,price14/12 sessions,volume11/10 sessions; twice equal original and portability replays; no outcomes/returns/profitability. One primary plus nested optional comparator; final signal freeze awaits owner choice. H0001 frozen/sparse asynchronous126-session confirmation unchanged.
+
+Implementation `v2-h0002-price-defense-frequency` / `a02d67ce1f6b3a49e28c9a022ebfd40047f17f9f`. Targeted 52, full 1481 passed; no failures/errors/skips. NEXT_ACTION **H0002_SIGNAL_FREEZE_PREREGISTRATION / USER_DECISION_REQUIRED**. Main PM control-plane update only; no code merge or outcomes. Evidence `research/decision_records/H0002-hypothesis-frequency-v1.yaml`.
+
+The entries below are preserved historical status reports.
+
 # Richping PM - 2026-10-04 selected70 discovery and independent research routing
 
 Admission PASS70 sessions/4480 exact slots, Daily465 native raw OHLC Nasdaq exact. Frozen replay twice equal:4480 batches, Daily READY4480/BULLISH3264, H1 atomic READY2685/ACTIVE96; H1 completed READY672/1120, downside extremes27;15m triggers0;candidates0/timestamps[]. ZERO_SIGNAL discovery, outcomes0, no efficacy/profitability. Preserve frozen126-session confirmation; H0001 asynchronous FROZEN/AWAITING_FUTURE_CONFIRMATION/HISTORICALLY_SPARSE. Next independent hypothesis intake H0002; owner strategy meaning required.

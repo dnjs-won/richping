@@ -1,32 +1,44 @@
 schema_version: 1
-updated_at: "2026-10-02"
+updated_at: '2026-10-04'
+purpose: 'Preserve user-originated strategy/product ideas without forcing immediate
+  scope changes. Canonical strategy decisions still live in research hypothesis/spec/decision
+  records.
 
-purpose: >
-  Preserve user-originated strategy/product ideas without forcing immediate scope
-  changes. Canonical strategy decisions still live in research hypothesis/spec/decision records.
-
+  '
 items:
-  - id: USER-H0001-EXIT-001
-    status: CAPTURED
-    priority: P1_AFTER_FIRST_ENTRY_EVIDENCE
-    idea: "Take roughly half near a MACD upper extreme and manage the remaining runner with price structure."
-    note: "Candidate exit family, not a frozen rule."
+- id: USER-H0001-EXIT-001
+  status: CAPTURED
+  priority: P1_AFTER_FIRST_ENTRY_EVIDENCE
+  idea: Take roughly half near a MACD upper extreme and manage the remaining runner
+    with price structure.
+  note: Candidate exit family, not a frozen rule.
+- id: USER-H0001-ADD-001
+  status: CAPTURED
+  priority: P1_AFTER_FIRST_ENTRY_EVIDENCE
+  idea: After the first entry, add only if a later downside separation is deeper and
+    a new GC/reversal occurs.
+  note: Needs executable definition and risk/sizing contract before use.
+- id: USER-H0001-4H-001
+  status: CAPTURED
+  priority: DEFERRED
+  idea: Use 4H mainly for higher-level direction/context rather than precise entry
+    timing.
+- id: USER-PRODUCT-001
+  status: ACTIVE_PRODUCT_PRINCIPLE
+  priority: CONTINUOUS
+  idea: 'The user should mainly state desired behavior and strategy observations.
+    AI PM should manage sequencing, prerequisites, implementation, validation and
+    backlog, while surfacing requested results when asked without lowering strategy
+    quality.
 
-  - id: USER-H0001-ADD-001
-    status: CAPTURED
-    priority: P1_AFTER_FIRST_ENTRY_EVIDENCE
-    idea: "After the first entry, add only if a later downside separation is deeper and a new GC/reversal occurs."
-    note: "Needs executable definition and risk/sizing contract before use."
-
-  - id: USER-H0001-4H-001
-    status: CAPTURED
-    priority: DEFERRED
-    idea: "Use 4H mainly for higher-level direction/context rather than precise entry timing."
-
-  - id: USER-PRODUCT-001
-    status: ACTIVE_PRODUCT_PRINCIPLE
-    priority: CONTINUOUS
-    idea: >
-      The user should mainly state desired behavior and strategy observations. AI PM
-      should manage sequencing, prerequisites, implementation, validation and backlog,
-      while surfacing requested results when asked without lowering strategy quality.
+    '
+- id: USER-H0002-DEFENSE-001
+  status: ACTIVE_RESEARCH_HYPOTHESIS
+  priority: CURRENT_H0002
+  idea: Repeated price defense, failed downside breaks and price reclaim, with optional
+    volume activity.
+  family: PRICE_STRUCTURE_VOLUME_DEFENSE_REVERSAL
+  hypothesis_branch: v2-h0002-price-defense-frequency
+  hypothesis: research/hypotheses/H0002-r01.yaml
+  note: Observable price/OHLC/volume/time only; no actor/order-block fact, MACD or
+    H0001 modification.

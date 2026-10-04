@@ -15,7 +15,7 @@ source_of_truth:
     branch: main
     path: PROJECT_STATUS.md
   active_workstream_status:
-    branch: v2-h0001-alpaca-70-session-discovery
+    branch: v2-h0002-price-defense-frequency
     path: PROJECT_STATUS.md
   decision_index:
     branch: main
@@ -30,24 +30,24 @@ control_plane:
   branch: main
   rule: PM state lives on main so new sessions can recover it from the default branch.
 active_workstream:
-  branch: v2-h0001-alpaca-70-session-discovery
-  base_branch: v2-h0001-alpaca-basic-admission
-  base_commit: 6a0f82a
-  implementation_commit: a014d4704b551ed80b9eb38fb57bac0308bb1e7c
+  branch: v2-h0002-price-defense-frequency
+  base_branch: v2-h0001-alpaca-70-session-discovery
+  base_commit: a014d4704b551ed80b9eb38fb57bac0308bb1e7c
+  implementation_commit: a02d67ce1f6b3a49e28c9a022ebfd40047f17f9f
   status: DIVERGED_FROM_MAIN
   observed_relation_to_main:
-    ahead_by: 39
-    behind_by: 20
-    main_commit: 50b479b
-  note: Admission PASS70 sessions/4480 exact slots, Daily465 native raw OHLC Nasdaq
-    exact. Frozen replay twice equal:4480 batches, Daily READY4480/BULLISH3264, H1
-    atomic READY2685/ACTIVE96; H1 completed READY672/1120, downside extremes27;15m
-    triggers0;candidates0/timestamps[]. ZERO_SIGNAL discovery, outcomes0, no efficacy/profitability.
-    Preserve frozen126-session confirmation; H0001 asynchronous FROZEN/AWAITING_FUTURE_CONFIRMATION/HISTORICALLY_SPARSE.
-    Next independent hypothesis intake H0002; owner strategy meaning required.
+    ahead_by: 42
+    behind_by: 21
+    main_commit: c20788ea48d21ba001c9c009a5db6965bea08645
+  note: Independent H0002 owner thesis selected; causal SOXX15m low-pair zone/revisit/same-bar
+    reclaim implemented. Admitted Alpaca70 sessions/4480 bars; zone READY4353,92 zones,148
+    reentries,price14/12 sessions,volume11/10 sessions; twice equal original and portability
+    replays; no outcomes/returns/profitability. One primary plus nested optional comparator;
+    final signal freeze awaits owner choice. H0001 frozen/sparse asynchronous126-session
+    confirmation unchanged.
 current_phase:
   id: INDEPENDENT_STRATEGY_RESEARCH_CYCLE
-  status: READY_FOR_HYPOTHESIS_SELECTION
+  status: AWAITING_H0002_OWNER_SIGNAL_FREEZE
   objective: Repeat independent hypothesis generation, causal discovery, preregistration,
     confirmation and evidence disposition.
   exit_criteria:
@@ -58,9 +58,18 @@ current_phase:
     promotion.
   progress:
     intake_infrastructure: IMPLEMENTED_TESTED
-    next_available_hypothesis: H0002
-    strategy_meaning: NOT_SELECTED
+    next_available_hypothesis: H0003
+    strategy_meaning: SELECTED_BY_OWNER_H0002
     H0001_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
+    active_hypothesis: H0002
+    causal_frequency: IMPLEMENTED_EXECUTED_ON_REAL_DATA_EVIDENCE_PRODUCED
+    signal_freeze: USER_DECISION_REQUIRED
+    outcome_evaluation: NOT_RUN
+    satisfied_exit_criteria:
+    - 1
+    remaining_exit_criteria:
+    - 2
+    - 3
 completed_actions:
 - id: V2_REAL_INTRADAY_DATA_FOUNDATION
   status: COMPLETE
@@ -447,22 +456,87 @@ completed_actions:
       sha256: 804fab909c002c4f3566f40ce30dc4598ef481b17f7a7b22c85ba7d07204f317
       passed: 1451
   profitability: NOT_RUN
+- id: INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION
+  status: COMPLETE_HYPOTHESIS_AND_BOUNDED_FREQUENCY
+  completed_at: '2026-10-04'
+  branch: v2-h0002-price-defense-frequency
+  commit: a02d67ce1f6b3a49e28c9a022ebfd40047f17f9f
+  record: research/decision_records/H0002-hypothesis-frequency-v1.yaml
+  implementation_state: IMPLEMENTED_EXECUTED_ON_REAL_DATA_EVIDENCE_PRODUCED_NOT_MAIN_INTEGRATED
+  acceptance_criteria_satisfied: 6
+  acceptance_criteria_unmet: 0
+  evidence: research/data_evidence/h0002-frequency-20261004/verification-v3/frequency-audit.json
+  denominators:
+    active_zone_bar_count: 3816
+    active_zone_count: 92
+    distinct_sessions_with_candidates: 12
+    distinct_sessions_with_volume_candidates: 10
+    final_candidate_count: 14
+    penetration_reentry_count: 148
+    rejection_primitive_count: 14
+    retired_close_below_lower: 76
+    retired_expired: 15
+    total_eligible_15m_bars: 4480
+    touch_only_reentry_count: 0
+    volume_READY_count: 4460
+    volume_confirmed_count: 11
+    volume_final_candidate_count: 11
+    zone_READY_count: 4353
+    zone_reentry_count: 148
+  primary: PRICE_DEFENSE_REVERSAL_V1
+  comparator: PRICE_DEFENSE_REVERSAL_VOLUME_CONFIRM_V1
+  parameter_trials: 1
+  outcome_access: 0
+  profitability: NOT_RUN
+  final_signal_freeze: USER_DECISION_REQUIRED
+  tests:
+    targeted:
+      errors: 0
+      failures: 0
+      passed: 52
+      path: targeted-suite.xml
+      seconds: 33.083
+      sha256: 2545693ecdc167636565f98f38fc302a894dc72331282780c0ed82191edcf222
+      skipped: 0
+      tests: 52
+    full:
+      errors: 0
+      failures: 0
+      passed: 1481
+      path: full-suite.xml
+      seconds: 487.754
+      sha256: 753651702fe6a1b91a3d058eca54f271e0adcc6cd5a32c526c71553a98430c47
+      skipped: 0
+      tests: 1481
 next_action:
-  id: INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION
+  id: H0002_SIGNAL_FREEZE_PREREGISTRATION
   priority: P0
   status: USER_DECISION_REQUIRED
   blocks_phase_exit_criteria:
-  - 1
-  objective: Select the next independent thesis/market observation for H0002 intake.
-  why_now: Bounded frozen H0001 discovery complete with ZERO_SIGNAL; no immediate
-    informative H0001 action remains. Future126-session confirmation continues asynchronously.
-  autonomous_infrastructure: IMPLEMENTED_TESTED; scripts.prepare_independent_research
-  evidence_branch: v2-h0001-alpaca-70-session-discovery
-  basis_evidence: research/data_evidence/h0001-alpaca-70-20261004/independent-research-intake.json
+  - 2
+  objective: Resolve final owner signal choice, freeze H0002 semantics/identities,
+    then preregister evaluation before outcomes.
+  why_now: Frequency-only nonzero executable evidence exists; exit2 requires a frozen/preregistered
+    contract before outcomes.
+  evidence_branch: v2-h0002-price-defense-frequency
+  basis_evidence: research/data_evidence/h0002-frequency-20261004/verification-v3/frequency-audit.json
+  owner_decision: Accept provisional repeated-low/same-bar reclaim/full admitted-session
+    proposal, price primary and optional volume comparator, or specify a different
+    market phenomenon.
+  market_meaning: Repeated historical lows followed by a failed downside break and
+    immediate completed price reclaim.
+  mechanical_frequency:
+    primary: 14
+    primary_sessions: 12
+    comparator: 11
+    comparator_sessions: 10
+  complexity: One price condition plus optional recent-volume comparator; no new context.
+  reversibility: New revision may change meaning; preserve current evidence and count
+    additional trials.
   constraints:
-  - No H0001 tuning disguised as H0002
-  - No outcome-driven selection
-  - No deadline dependency on2027-04-13
+  - No outcome access before final owner freeze plus preregistration
+  - No count-driven relaxation or performance-selected thresholds
+  - Keep H0001 independent/asynchronous
 pm_policy:
   single_next_action: true
   discovered_non_blockers_go_to_backlog: true
@@ -612,3 +686,22 @@ hypothesis_tracks:
       - New architecture taxonomy not required by the exit criteria
     confirmation_is_project_blocker: false
     short_window_search: STOPPED
+  H0002:
+    status:
+    - DRAFT
+    - FREQUENCY_AUDITED
+    - AWAITING_SIGNAL_FREEZE
+    family: PRICE_STRUCTURE_VOLUME_DEFENSE_REVERSAL
+    track: ACTIVE_RESEARCH
+    hypothesis: research/hypotheses/H0002-r01.yaml
+    branch: v2-h0002-price-defense-frequency
+    commit: a02d67ce1f6b3a49e28c9a022ebfd40047f17f9f
+    spec: research/strategy_specs/H0002-r01-candidate.yaml
+    record: research/decision_records/H0002-hypothesis-frequency-v1.yaml
+    frequency_evidence: research/data_evidence/h0002-frequency-20261004/verification-v3/frequency-audit.json
+    primary_candidates: 14
+    volume_comparator_candidates: 11
+    outcome_access: FORBIDDEN_PENDING_OWNER_FREEZE_AND_PREREGISTRATION
+    confirmation: NOT_YET_PREREGISTERED
+    H0001_signal_state_dependency: false
+active_research_track: H0002

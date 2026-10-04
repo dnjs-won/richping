@@ -29,11 +29,11 @@ items:
 
     '
   guardrail: Do not merge blindly; preserve the newer main R1 paper changes.
-  active_branch: v2-h0001-alpaca-70-session-discovery
+  active_branch: v2-h0002-price-defense-frequency
   observed_relation_to_main:
-    ahead_by: 38
-    behind_by: 20
-    main_commit: 5e6a025
+    ahead_by: 42
+    behind_by: 21
+    main_commit: c20788ea48d21ba001c9c009a5db6965bea08645
 - id: H0001_MINIMAL_15M_ENTRY_FREEZE
   priority: P1
   status: COMPLETE_FROZEN_AND_OFFLINE_MECHANICALLY_EXERCISED
@@ -296,8 +296,7 @@ items:
 - id: LONG_HISTORY_EXTENDED_COVERAGE_SCOPE_DECISION
   priority: P0
   status: COMPLETE_SELECTED70_DISCOVERY_ZERO_SIGNAL
-  blocks_phase_exit_criteria:
-  - 6
+  blocks_phase_exit_criteria: []
   summary: Choose whether to retain broad multi-year complete-grid discovery target
     or authorize a narrower fixed recent discovery scope.
   promotion_reason: Actual Basic SIP works, but broad history has missing extended
@@ -307,6 +306,8 @@ items:
   evidence: research/decision_records/H0001-alpaca-70-discovery-v1.yaml
   guardrail: Preserve frozen semantics; no payment, gap repair, unadmitted capture
     or outcome lookup.
+  formerly_blocked_phase_exit_criteria:
+  - 6
 - id: H0001_FUTURE_CONFIRMATION
   priority: P1
   status: AWAITING_FUTURE_CONFIRMATION
@@ -318,9 +319,32 @@ items:
   blocks_project: false
 - id: INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION
   priority: P0
+  status: COMPLETE_OWNER_THESIS_AND_BOUNDED_FREQUENCY
+  blocks_phase_exit_criteria: []
+  summary: Independent H0002 owner thesis selected; causal SOXX15m low-pair zone/revisit/same-bar
+    reclaim implemented. Admitted Alpaca70 sessions/4480 bars; zone READY4353,92 zones,148
+    reentries,price14/12 sessions,volume11/10 sessions; twice equal original and portability
+    replays; no outcomes/returns/profitability. One primary plus nested optional comparator;
+    final signal freeze awaits owner choice. H0001 frozen/sparse asynchronous126-session
+    confirmation unchanged.
+  evidence_branch: v2-h0002-price-defense-frequency
+  evidence: research/decision_records/H0002-hypothesis-frequency-v1.yaml
+  commit: a02d67ce1f6b3a49e28c9a022ebfd40047f17f9f
+- id: H0002_SIGNAL_FREEZE_PREREGISTRATION
+  priority: P0
   status: USER_DECISION_REQUIRED
   blocks_phase_exit_criteria:
-  - 1
-  summary: Choose independent H0002 thesis; intake pipeline implemented/tested.
-  evidence_branch: v2-h0001-alpaca-70-session-discovery
-  evidence: research/data_evidence/h0001-alpaca-70-20261004/independent-research-intake.json
+  - 2
+  summary: Resolve final owner signal choice, freeze H0002 semantics/identities, then
+    preregister evaluation before outcomes.
+  promotion_reason: Frequency-only nonzero executable evidence exists; exit2 requires
+    a frozen/preregistered contract before outcomes.
+  evidence_branch: v2-h0002-price-defense-frequency
+  evidence: research/decision_records/H0002-hypothesis-frequency-v1.yaml
+- id: H0002_VOLUME_SESSION_NORMALIZATION
+  priority: DEFERRED
+  status: OPEN
+  summary: Adjacent extended/RTH slots have different activity; same-local-slot normalization
+    would change comparator semantics.
+  reason_not_now: Not required for causal mechanical frequency or owner review; requires
+    new explicit hypothesis revision, not count-driven tuning.
