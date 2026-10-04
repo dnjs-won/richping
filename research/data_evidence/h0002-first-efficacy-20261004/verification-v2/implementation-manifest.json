@@ -1,0 +1,11 @@
+{
+  "files": {
+    "docs/H0002_FIRST_EFFICACY.md": "0a88c4fd2b84806c9e3f3a6e331c3f7d6506bdd5740b284d29733d0e0f0e140c",
+    "richping/research_v2/strategy/h0002_efficacy.py": "bb3039898c5ccf83856d495b11c66b8a2a3df83bd7142ec4e141049e4f0140eb",
+    "scripts/h0002_first_efficacy.py": "03f2250bfae51efc1f4819fd4a20b370382d18680f26d3fff5824a696277a63a",
+    "tests/test_h0002_efficacy.py": "76a7658d24f953bfdacb5092a2cbdefdb236979b9d74b02beb77d04900753353"
+  },
+  "protocol_hash": "a6e16e57bee2e26860f6989c88fdaeac707ecfc91a6326f54a8d754cfe327e8d",
+  "signal_freeze_hash": "d6c9c80834eebbc5a06c157e4289c59d50e5b887e6ba540e9a8ad467dcae97ea",
+  "uncertainty_audit": "Discovery70 grid is not registered by fixed252/randrange252 rule; no discovery CI."
+}

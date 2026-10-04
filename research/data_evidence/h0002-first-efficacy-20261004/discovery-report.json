@@ -1,0 +1,233 @@
+{
+  "candidate_stream_hash": "65174fa89f16e69f373bef0a4ea655f42b19594389d6bb9e1c472c9d47a6ae45",
+  "comparator": "PRICE_DEFENSE_REVERSAL_VOLUME_CONFIRM_V1",
+  "comparator_disposition": "DISCOVERY_INSUFFICIENT_RESOLVED_LABELS",
+  "comparator_metrics": {
+    "192": {
+      "bootstrap_interval": null,
+      "complete_label_sessions": 0,
+      "complete_pair_sessions": 0,
+      "distinct_sessions": 10,
+      "events": 11,
+      "full_cohort_mean_excess": null,
+      "full_cohort_mean_return": null,
+      "label_status": {
+        "UNRESOLVED": 11
+      },
+      "median_return_resolved": null,
+      "paired_status": {
+        "UNRESOLVED": 11
+      },
+      "positive_events": 0,
+      "positive_rate_resolved": null,
+      "resolved_pair_denominator": 0,
+      "session_balanced_mean_excess_resolved_subset": null,
+      "session_balanced_mean_return_resolved": null,
+      "uncertainty_status": "DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED",
+      "unresolved_reasons": {
+        "fewer_than_five_causal_controls": 2,
+        "unresolved_event_or_control_label": 9
+      }
+    },
+    "4": {
+      "bootstrap_interval": null,
+      "complete_label_sessions": 0,
+      "complete_pair_sessions": 0,
+      "distinct_sessions": 10,
+      "events": 11,
+      "full_cohort_mean_excess": null,
+      "full_cohort_mean_return": null,
+      "label_status": {
+        "UNRESOLVED": 11
+      },
+      "median_return_resolved": null,
+      "paired_status": {
+        "UNRESOLVED": 11
+      },
+      "positive_events": 0,
+      "positive_rate_resolved": null,
+      "resolved_pair_denominator": 0,
+      "session_balanced_mean_excess_resolved_subset": null,
+      "session_balanced_mean_return_resolved": null,
+      "uncertainty_status": "DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED",
+      "unresolved_reasons": {
+        "fewer_than_five_causal_controls": 2,
+        "unresolved_event_or_control_label": 9
+      }
+    },
+    "64": {
+      "bootstrap_interval": null,
+      "complete_label_sessions": 0,
+      "complete_pair_sessions": 0,
+      "distinct_sessions": 10,
+      "events": 11,
+      "full_cohort_mean_excess": null,
+      "full_cohort_mean_return": null,
+      "label_status": {
+        "UNRESOLVED": 11
+      },
+      "median_return_resolved": null,
+      "paired_status": {
+        "UNRESOLVED": 11
+      },
+      "positive_events": 0,
+      "positive_rate_resolved": null,
+      "resolved_pair_denominator": 0,
+      "session_balanced_mean_excess_resolved_subset": null,
+      "session_balanced_mean_return_resolved": null,
+      "uncertainty_status": "DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED",
+      "unresolved_reasons": {
+        "fewer_than_five_causal_controls": 2,
+        "unresolved_event_or_control_label": 9
+      }
+    }
+  },
+  "confirmation_outcome_access": 0,
+  "confirmation_status": "PENDING",
+  "confirmation_terminal_deadline": "2027-10-23T20:00:00-04:00",
+  "control_membership_hash": "49467c69b960f66480b0b96962f3313b0736b19bc01012f806456e8bad422594",
+  "controls_complete": 12,
+  "controls_unresolved": 2,
+  "dataset_hash": "4b39f109e8cffce8a7e680e773b560b307e21dd5a92dcad6d06fcd47bb0aa8bd",
+  "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+  "disposition": "DISCOVERY_INSUFFICIENT_RESOLVED_LABELS",
+  "forbidden_calls": {
+    "confirmation_inference": 0,
+    "database": 0,
+    "forward_or_benchmark_window": 0,
+    "market_query": 0,
+    "network": 0,
+    "operational_store": 0,
+    "outcome_accessor": 0,
+    "profitability_calculation": 0,
+    "return_calculation": 0,
+    "store_accessor": 0,
+    "uncertainty_calculation": 0
+  },
+  "label_source_manifest_hash": "eca7e2294998f820c42f57fbb992af888c376e255ad7e305e4c715afed84754b",
+  "not_a_confirmation_or_profitability_result": true,
+  "outcome_accessor_audit": {
+    "confirmation_outcome_access": 0,
+    "discovery_forward_close_reads": 0,
+    "discovery_label_requests": 222,
+    "profitability_calculations": 0
+  },
+  "overlap_policy": "All distinct visits retained; overlapping forward windows/control reuse allowed.",
+  "preparation_forbidden_calls": {
+    "confirmation_inference": 0,
+    "database": 0,
+    "forward_or_benchmark_window": 0,
+    "label_access_before_control_seal": 0,
+    "market_query": 0,
+    "network": 0,
+    "operational_store": 0,
+    "outcome_accessor": 0,
+    "profitability_calculation": 0,
+    "return_calculation": 0,
+    "store_accessor": 0,
+    "uncertainty_calculation": 0
+  },
+  "primary": "PRICE_DEFENSE_REVERSAL_V1",
+  "primary_metrics": {
+    "192": {
+      "bootstrap_interval": null,
+      "complete_label_sessions": 0,
+      "complete_pair_sessions": 0,
+      "distinct_sessions": 12,
+      "events": 14,
+      "full_cohort_mean_excess": null,
+      "full_cohort_mean_return": null,
+      "label_status": {
+        "UNRESOLVED": 14
+      },
+      "median_return_resolved": null,
+      "paired_status": {
+        "UNRESOLVED": 14
+      },
+      "positive_events": 0,
+      "positive_rate_resolved": null,
+      "resolved_pair_denominator": 0,
+      "session_balanced_mean_excess_resolved_subset": null,
+      "session_balanced_mean_return_resolved": null,
+      "uncertainty_status": "DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED",
+      "unresolved_reasons": {
+        "fewer_than_five_causal_controls": 2,
+        "unresolved_event_or_control_label": 12
+      }
+    },
+    "4": {
+      "bootstrap_interval": null,
+      "complete_label_sessions": 0,
+      "complete_pair_sessions": 0,
+      "distinct_sessions": 12,
+      "events": 14,
+      "full_cohort_mean_excess": null,
+      "full_cohort_mean_return": null,
+      "label_status": {
+        "UNRESOLVED": 14
+      },
+      "median_return_resolved": null,
+      "paired_status": {
+        "UNRESOLVED": 14
+      },
+      "positive_events": 0,
+      "positive_rate_resolved": null,
+      "resolved_pair_denominator": 0,
+      "session_balanced_mean_excess_resolved_subset": null,
+      "session_balanced_mean_return_resolved": null,
+      "uncertainty_status": "DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED",
+      "unresolved_reasons": {
+        "fewer_than_five_causal_controls": 2,
+        "unresolved_event_or_control_label": 12
+      }
+    },
+    "64": {
+      "bootstrap_interval": null,
+      "complete_label_sessions": 0,
+      "complete_pair_sessions": 0,
+      "distinct_sessions": 12,
+      "events": 14,
+      "full_cohort_mean_excess": null,
+      "full_cohort_mean_return": null,
+      "label_status": {
+        "UNRESOLVED": 14
+      },
+      "median_return_resolved": null,
+      "paired_status": {
+        "UNRESOLVED": 14
+      },
+      "positive_events": 0,
+      "positive_rate_resolved": null,
+      "resolved_pair_denominator": 0,
+      "session_balanced_mean_excess_resolved_subset": null,
+      "session_balanced_mean_return_resolved": null,
+      "uncertainty_status": "DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED",
+      "unresolved_reasons": {
+        "fewer_than_five_causal_controls": 2,
+        "unresolved_event_or_control_label": 12
+      }
+    }
+  },
+  "profitability_calculations": 0,
+  "protocol_hash": "a6e16e57bee2e26860f6989c88fdaeac707ecfc91a6326f54a8d754cfe327e8d",
+  "retained_primary_event_ids": [
+    "f41002b3c7ffaccbba3289b2542f39314a5af23bf410520641b7917c7e15240e",
+    "4857da4b609a7130f8ad482962a8267379686008aa4a92c4f7170d62f2d51ffd",
+    "c91bce818ddf1fe056d0d5ee3c3fbcf1ec66d91f61a682fb2ba47547a159a947",
+    "712fa6ffa930446703d22e7d2b50b6fe6edaedc476e98e630e9a3c6d76adb906",
+    "6bd4da5cad7fcffe5777c097608449b561892fab3f0111a2d023d39b2408a1e8",
+    "b7047e982e706ba7cde168d6330f941ccb1dd3b1809c98f9344eca074ed3756e",
+    "ed482fab48bf9935b83411e68070e30a0d243a9210239692f614b72af3f7c387",
+    "e83e37a893e6d1ef9001247310da9db44945cf7b72cc809499951b4182751418",
+    "8e827568b5f73f680a16e8a099422a5f64db647e33a1a7e7e560162d3a53af01",
+    "89bb4fc207026976d24e8ce1e2bb45f3362e1c7734de470f26545a661aa7efe5",
+    "35ab009e2b111b8af716f44d61da42d352008adadc8a1d54a88a394fe542f231",
+    "79af9a670dc5298dba837287088c287864d4f0f863627770e1996c51f3909d4c",
+    "c3dc3a53a1a1694edbd704485b439ede3d3065cd6c7f825132c507ef3ecaf565",
+    "705af3660822fbacaa7a643e7588aceac310d20054d1ee3fa6048ca97099c2bf"
+  ],
+  "schema": "h0002_first_discovery_efficacy_v1",
+  "scope": "EXPLORATORY_DISCOVERY_ONLY",
+  "signal_freeze_hash": "d6c9c80834eebbc5a06c157e4289c59d50e5b887e6ba540e9a8ad467dcae97ea",
+  "uncertainty_status": "DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED"
+}

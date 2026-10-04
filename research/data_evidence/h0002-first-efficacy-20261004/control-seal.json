@@ -1,0 +1,20 @@
+{
+  "membership_hash": "49467c69b960f66480b0b96962f3313b0736b19bc01012f806456e8bad422594",
+  "membership_raw_sha256": "13cbc603e7444a8a5ac6a644b9687c5c32cbfdc8dcbf369bbfac2e0c73916eb5",
+  "outcome_access_before_control_seal": 0,
+  "preflight_sha256": "e491c10b68161cc953dd3bd229f3e40262e8a11997ba2489ae636ee90a4f84ee",
+  "preparation_forbidden_calls": {
+    "confirmation_inference": 0,
+    "database": 0,
+    "forward_or_benchmark_window": 0,
+    "label_access_before_control_seal": 0,
+    "market_query": 0,
+    "network": 0,
+    "operational_store": 0,
+    "outcome_accessor": 0,
+    "profitability_calculation": 0,
+    "return_calculation": 0,
+    "store_accessor": 0,
+    "uncertainty_calculation": 0
+  }
+}

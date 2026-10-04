@@ -1,0 +1,25 @@
+{
+  "all_endpoints_and_returns_exact": true,
+  "confirmation_outcome_access": 0,
+  "control_membership_hash": "49467c69b960f66480b0b96962f3313b0736b19bc01012f806456e8bad422594",
+  "forbidden_calls": {
+    "confirmation_inference": 0,
+    "database": 0,
+    "forward_or_benchmark_window": 0,
+    "market_query": 0,
+    "network": 0,
+    "operational_store": 0,
+    "outcome_accessor": 0,
+    "profitability_calculation": 0,
+    "return_calculation": 0,
+    "store_accessor": 0,
+    "uncertainty_calculation": 0
+  },
+  "independent_grid": "Existing session_bounds:70 official days times64 scheduled slots; no observed-row compression.",
+  "initial_attempt_forward_close_reads": 0,
+  "membership_unchanged_by_unit_adapter_fix": true,
+  "profitability_calculations": 0,
+  "protocol_hash": "a6e16e57bee2e26860f6989c88fdaeac707ecfc91a6326f54a8d754cfe327e8d",
+  "signal_freeze_hash": "d6c9c80834eebbc5a06c157e4289c59d50e5b887e6ba540e9a8ad467dcae97ea",
+  "verified_label_requests": 222
+}

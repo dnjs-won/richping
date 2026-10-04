@@ -1,0 +1,259 @@
+from copy import deepcopy
+from dataclasses import replace
+from datetime import timedelta
+import json
+from pathlib import Path
+from types import SimpleNamespace
+from unittest.mock import Mock, patch
+
+import pytest
+
+from richping.core import digest, sessions
+from richping.research_v2.contracts import JsonObject
+from richping.research_v2.sessions import EXTENDED, session_bounds
+from richping.research_v2.strategy.h0002_defense import PRIMARY, COMPARATOR, Specification
+from richping.research_v2.strategy.h0002_experiment import ControlAnchor, select_controls
+from richping.research_v2.strategy import h0002_efficacy as efficacy
+from scripts import h0002_first_efficacy as runner
+
+
+def fixture(days=('2026-05-05', '2026-05-06', '2026-05-07', '2026-05-08')):
+    bars = []
+    for day in days:
+        start, _ = session_bounds(day, EXTENDED)
+        for i in range(64):
+            end = start+timedelta(minutes=15*(i+1))
+            bars.append(SimpleNamespace(end_at=end, known_at=end, session=day,
+                symbol='SOXX', close=100+len(bars)/100, corporate_action='NONE_CONFIRMED'))
+    return bars
+
+
+def membership(bar, controls=()):
+    return {'protocol_hash': efficacy.PROTOCOL_HASH, 'events': [{'event_id': 'synthetic',
+        'session': bar.session, 'anchor_end_at': bar.end_at.isoformat(), 'reference_mark': bar.close,
+        'controls': [{'anchor_end_at': c.end_at.isoformat(), 'reference_mark': c.close} for c in controls]}]}
+
+
+def reader(bars, anchor, *, certified=None, as_of='2026-10-04T00:00:00Z', controls=()):
+    manifest = membership(anchor, controls)
+    return efficacy.DiscoveryLabels(bars, manifest, digest(manifest),
+        certified if certified is not None else {b.session for b in bars}, as_of)
+
+
+@pytest.mark.parametrize('horizon', [4, 64, 192])
+def test_exact_scheduled_endpoint_and_gross_close_label(horizon):
+    bars = fixture()
+    anchor = bars[0]
+    source = reader(bars, anchor)
+    result = source.label(anchor.end_at, anchor.close, horizon, 'event')
+    assert result['status'] == 'COMPLETE'
+    assert result['target_end_at'] == bars[horizon].end_at.isoformat()
+    assert result['return'] == bars[horizon].close/anchor.close-1
+    assert source.audit['confirmation_outcome_access'] == 0
+
+
+def test_overnight_weekend_and_holiday_closures_do_not_consume_slots():
+    bars = fixture(('2026-05-22', '2026-05-26'))  # Memorial Day holiday/weekend
+    anchor = bars[63]
+    window, _ = efficacy.scheduled_window(anchor.end_at, 4)
+    assert window[-1] == bars[67].end_at
+    assert window[-1].astimezone(efficacy.NY).strftime('%H:%M') == '05:00'
+
+
+def test_missing_scheduled_slot_cannot_compress_even_when_target_present():
+    bars = fixture()
+    anchor = bars[10]
+    source = reader(bars[:12]+bars[13:], anchor)
+    result = source.label(anchor.end_at, anchor.close, 4, 'event')
+    assert result['status'] == 'UNRESOLVED' and 'no_compression' in result['reason']
+    assert result['target_end_at'] == bars[14].end_at.isoformat() and result['return'] is None
+    assert source.audit['discovery_forward_close_reads'] == 0
+
+
+@pytest.mark.parametrize('mutation', ['unknown', 'split', 'uncertified'])
+def test_action_or_unit_ambiguity_unresolved(mutation):
+    bars = fixture()
+    certified = {b.session for b in bars}
+    if mutation == 'uncertified':
+        certified.remove(bars[0].session)
+    else:
+        bars[2].corporate_action = 'UNKNOWN' if mutation == 'unknown' else 'PRESENT'
+    result = reader(bars, bars[0], certified=certified).label(bars[0].end_at, bars[0].close, 4, 'event')
+    assert result['status'] == 'UNRESOLVED' and result['reason'] == 'action_unit_ambiguity_or_split'
+
+
+def test_immature_label_pending_and_reference_mismatch_fail_closed():
+    bars = fixture()
+    source = reader(bars, bars[0], as_of=bars[0].end_at.isoformat())
+    assert source.label(bars[0].end_at, bars[0].close, 4, 'event')['status'] == 'PENDING'
+    with pytest.raises(ValueError, match='reference'):
+        source.label(bars[0].end_at, bars[0].close+1, 4, 'event')
+
+
+def test_ex_post_interval_units_separate_from_immutable_unknown_pit_state():
+    bars = fixture()
+    for bar in bars:
+        bar.corporate_action = 'UNKNOWN'
+        bar.dataset_id = 'synthetic-unit-fixture'
+        bar.provenance = JsonObject.of({'corporate_actions': 'INTERVAL_CERTIFIED_SPLIT_IDENTITY_DIVIDENDS_NOT_REINVESTED',
+            'price_basis': 'ALPACA_SIP_RAW_USD_PER_AS_TRADED_SHARE'})
+    body = {**membership(bars[0]), 'dataset_hash': 'synthetic-hash'}
+    certificate = {'dataset_id': 'synthetic-unit-fixture', 'dataset_hash': 'synthetic-hash',
+        'interval_start': bars[0].session, 'interval_end': bars[-1].session, 'splits_inside_interval': []}
+    source = efficacy.DiscoveryLabels(bars, body, digest(body), {b.session for b in bars},
+        '2026-10-04T00:00:00Z', interval_certificate=certificate)
+    assert source.label(bars[0].end_at, bars[0].close, 4, 'event')['status'] == 'COMPLETE'
+    assert all(b.corporate_action == 'UNKNOWN' for b in bars)
+    source.interval_certificate = {**certificate, 'dataset_hash': 'wrong-vintage'}
+    assert source.label(bars[0].end_at, bars[0].close, 4, 'event')['status'] == 'UNRESOLVED'
+
+
+def test_unsupported_day_not_skipped_from_grid():
+    bars = fixture(('2026-07-02',))
+    window, unsupported = efficacy.scheduled_window(bars[-1].end_at, 4)
+    assert window[-1].astimezone(efficacy.NY).date().isoformat() == '2026-07-06'
+    # July3 holiday consumes no slot; early-close day Nov27 is not a holiday.
+    bars = fixture(('2026-11-25',))  # source construction would reject non-discovery scope
+    window, unsupported = efficacy.scheduled_window(bars[-1].end_at, 4)
+    assert window[-1].astimezone(efficacy.NY).date().isoformat() == '2026-11-27'
+    assert unsupported == ('2026-11-27',)
+
+
+def test_membership_hash_and_allowed_anchor_are_enforced():
+    bars = fixture()
+    body = membership(bars[0])
+    with pytest.raises(ValueError, match='hash'):
+        efficacy.DiscoveryLabels(bars, body, 'bad', {b.session for b in bars}, '2026-10-04T00:00:00Z')
+    source = reader(bars, bars[0])
+    with pytest.raises(PermissionError, match='sealed'):
+        source.label(bars[1].end_at, bars[1].close, 4, 'event')
+
+
+def test_confirmation_anchor_and_source_never_accessed():
+    bars = fixture()
+    source = reader(bars, bars[0])
+    future = fixture(('2026-10-19',))[0]
+    with pytest.raises(PermissionError, match='Confirmation'):
+        source.label(future.end_at, future.close, 4, 'event')
+    body = membership(future)
+    with pytest.raises(PermissionError):
+        efficacy.DiscoveryLabels([future], body, digest(body), {future.session}, '2026-10-20T00:00:00Z')
+    assert source.audit['discovery_label_requests'] == source.audit['confirmation_outcome_access'] == 0
+
+
+@pytest.mark.parametrize('field', ['protocol_hash', 'signal_freeze_sha256'])
+def test_frozen_identity_mismatch_fails_before_market_load(field):
+    proof = {'protocol_hash': efficacy.PROTOCOL_HASH, 'signal_freeze_sha256': efficacy.FREEZE_HASH}
+    proof[field] = 'bad'
+    with patch.object(runner.frozen, 'verify', return_value=proof), patch.object(runner, 'load_admitted') as load:
+        with pytest.raises(ValueError, match='hash mismatch'):
+            runner.verify_contract()
+    load.assert_not_called()
+
+
+def original_events():
+    return json.loads((runner.FREQUENCY/'candidate-events.json').read_bytes())['events']
+
+
+def validate(events):
+    return efficacy.validate_events(events, runner.DATASET_ID, Specification().price_hash, digest(events))
+
+
+def test_candidate_collision_same_visit_and_body_mutation_fail_closed():
+    events = original_events()
+    with pytest.raises(ValueError, match='collision'):
+        validate(events+[events[0]])
+    duplicate = deepcopy(events[0])
+    end = efficacy.timestamp(duplicate['at'])+timedelta(minutes=15)
+    duplicate['at'] = end.isoformat()
+    duplicate['snapshot']['bar'].update(end_at=end.isoformat(), known_at=end.isoformat())
+    duplicate['id'] = digest({'price_spec': Specification().price_hash, **{k:v for k,v in duplicate.items() if k != 'id'}})
+    with pytest.raises(ValueError, match='same visit'):
+        validate(events+[duplicate])
+    changed = deepcopy(events)
+    changed[0]['snapshot']['bar']['close'] += 1
+    with pytest.raises(ValueError, match='body hash'):
+        validate(changed)
+
+
+def test_comparator_only_duplicate_parent_and_stream_hash_fail_closed():
+    events = original_events()
+    primary, comparator = validate(events)
+    assert len(primary) == 14 and len(comparator) == 11
+    with pytest.raises(ValueError, match='Unmatched'):
+        validate([e for e in events if e['family'] == COMPARATOR])
+    with pytest.raises(ValueError, match='stream hash'):
+        efficacy.validate_events(events, runner.DATASET_ID, Specification().price_hash, 'bad')
+
+
+def test_controls_exact_prior_slot_sign_ready_non_event_and_most_recent_five():
+    days = sessions('2026-05-05', '2026-06-04')
+    event = ControlAnchor(days[-1], '10:00', -1, True, True)
+    eligible = [ControlAnchor(d, '10:00', -1, True, False) for d in days[:-1]]
+    wrong = [replace(eligible[-1], local_slot='10:15'), replace(eligible[-1], prior_four_sign=1),
+             replace(eligible[-1], ready=False), replace(eligible[-1], primary_event=True),
+             event, replace(event, session='2026-06-05', primary_event=False)]
+    assert select_controls(event, eligible+wrong) == tuple(reversed(eligible[-5:]))
+    assert select_controls(event, eligible[:4]) is None
+    # Control selection objects expose no forward-return field or accessor.
+    assert set(ControlAnchor.__dataclass_fields__) == {'session', 'local_slot', 'prior_four_sign', 'ready', 'primary_event'}
+
+
+def test_incomplete_controls_preserve_event_and_full_cohort_excess_is_null():
+    bars = fixture()
+    manifest = membership(bars[0])
+    result = efficacy.evaluate_membership(manifest, reader(bars, bars[0]))
+    assert len(result) == 1 and result[0]['labels']['4']['status'] == 'COMPLETE'
+    assert result[0]['excess']['4']['status'] == 'UNRESOLVED'
+    metrics = efficacy.family_metrics(result)
+    assert metrics['4']['full_cohort_mean_excess'] is None
+    assert metrics['4']['events'] == 1 and metrics['4']['resolved_pair_denominator'] == 0
+    assert efficacy.exploratory_disposition(metrics) == 'DISCOVERY_INSUFFICIENT_RESOLVED_LABELS'
+    assert metrics['4']['bootstrap_interval'] is None
+
+
+def test_confirmation_deadline_gate_precedes_any_loader_or_partial_performance():
+    loader = Mock(side_effect=AssertionError('Must not access outcomes'))
+    for instant in ('2026-10-04T00:00:00Z', '2027-10-23T20:00:00-04:00'):
+        with patch.object(efficacy, 'utcnow', return_value=instant):
+            assert efficacy.terminal_inference(loader, identity_verified=True, coverage_complete=True,
+                                               denominators={}) == {'status': 'PENDING', 'confirmation_outcome_access': 0}
+    loader.assert_not_called()
+
+
+def test_terminal_invalid_incomplete_or_floor_cases_no_loader():
+    loader = Mock(side_effect=AssertionError('No loader below floor'))
+    floors = {f: {'events': 14, 'event_sessions': 12, 'occupied_blocks': 3} for f in (PRIMARY, COMPARATOR)}
+    with patch.object(efficacy, 'utcnow', return_value='2027-10-24T00:01:00Z'):
+        assert efficacy.terminal_inference(loader, identity_verified=False, coverage_complete=True, denominators=floors)['status'] == 'INVALID_FAIL_CLOSED'
+        assert efficacy.terminal_inference(loader, identity_verified=True, coverage_complete=False, denominators=floors)['status'] == 'UNRESOLVED'
+        assert efficacy.terminal_inference(loader, identity_verified=True, coverage_complete=True, denominators=floors)['status'] == 'INSUFFICIENT_EVIDENCE'
+    loader.assert_not_called()
+
+
+def test_exact_confirmation_block_bootstrap_on_synthetic_aggregates_only():
+    grid = {PRIMARY: [(0.01, 0.002)]*252, COMPARATOR: [None]*252}
+    output = efficacy._registered_bootstrap(grid)
+    assert output[PRIMARY]['intervals'] == [[0.01, 0.01], [0.002, 0.002]]
+    assert output[COMPARATOR]['status'] == 'UNRESOLVED'
+    assert output[COMPARATOR]['empty_resamples'] == 10000
+    assert output[PRIMARY]['block_sessions'] == 25 and output[PRIMARY]['grid_sessions'] == 252
+    with pytest.raises(ValueError):
+        efficacy._registered_bootstrap({f: [None]*70 for f in (PRIMARY, COMPARATOR)})
+
+
+def test_real_discovery_report_deterministic_preserves_frozen_records_and_no_confirmation_access():
+    before = runner.frozen.FREEZE.read_bytes(), runner.frozen.PROTOCOL.read_bytes()
+    saved = (runner.ROOT/'discovery-report.json').read_bytes()
+    first, second = runner.execute(), runner.execute()
+    assert first == second == json.loads(saved)
+    assert before == (runner.frozen.FREEZE.read_bytes(), runner.frozen.PROTOCOL.read_bytes())
+    assert first['primary_metrics']['4']['events'] == 14
+    assert first['comparator_metrics']['4']['events'] == 11
+    assert len(first['retained_primary_event_ids']) == 14
+    assert first['confirmation_outcome_access'] == first['profitability_calculations'] == 0
+    assert first['scope'] == 'EXPLORATORY_DISCOVERY_ONLY' and first['disposition'] not in ('PASS','REJECT')
+    assert not any(first['forbidden_calls'].values())
+    assert not any(first['preparation_forbidden_calls'].values())
+    assert first['primary_metrics']['4']['bootstrap_interval'] is None
+    assert runner.verify_contract()['preserved_files'] == 452

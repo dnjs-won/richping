@@ -1,0 +1,140 @@
+schema: h0002_first_exploratory_efficacy_v1
+status: COMPLETE_VALID_EXPLORATORY_DISCOVERY_DISPOSITION
+scope: EXPLORATORY_DISCOVERY_ONLY
+branch: v2-h0002-first-efficacy
+completed_on: '2026-10-04'
+frozen_signal: research/decision_records/H0002-signal-freeze-v1.json
+frozen_preregistration: research/decision_records/H0002-efficacy-preregistration-v1.yaml
+protocol_hash: a6e16e57bee2e26860f6989c88fdaeac707ecfc91a6326f54a8d754cfe327e8d
+signal_freeze_hash: d6c9c80834eebbc5a06c157e4289c59d50e5b887e6ba540e9a8ad467dcae97ea
+dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+dataset_hash: 4b39f109e8cffce8a7e680e773b560b307e21dd5a92dcad6d06fcd47bb0aa8bd
+candidate_stream_hash: 65174fa89f16e69f373bef0a4ea655f42b19594389d6bb9e1c472c9d47a6ae45
+control_membership_hash: 49467c69b960f66480b0b96962f3313b0736b19bc01012f806456e8bad422594
+report_hash: 220d4f1f4fcb1b63cff2a4b45b45a6b365e7dc56ebeacce9a16741fdc6c5193e
+report: research/data_evidence/h0002-first-efficacy-20261004/verification-v2/discovery-report.json
+individual_results: research/data_evidence/h0002-first-efficacy-20261004/verification-v2/event-results.json
+denominators:
+  primary:
+    '192':
+      events: 14
+      distinct_sessions: 12
+      label_counts:
+        COMPLETE: 14
+        PENDING: 0
+        UNRESOLVED: 0
+      paired_counts:
+        COMPLETE: 12
+        PENDING: 0
+        UNRESOLVED: 2
+      resolved_pair_sessions: 10
+    '4':
+      events: 14
+      distinct_sessions: 12
+      label_counts:
+        COMPLETE: 14
+        PENDING: 0
+        UNRESOLVED: 0
+      paired_counts:
+        COMPLETE: 12
+        PENDING: 0
+        UNRESOLVED: 2
+      resolved_pair_sessions: 10
+    '64':
+      events: 14
+      distinct_sessions: 12
+      label_counts:
+        COMPLETE: 14
+        PENDING: 0
+        UNRESOLVED: 0
+      paired_counts:
+        COMPLETE: 12
+        PENDING: 0
+        UNRESOLVED: 2
+      resolved_pair_sessions: 10
+  comparator:
+    '192':
+      events: 11
+      distinct_sessions: 10
+      label_counts:
+        COMPLETE: 11
+        PENDING: 0
+        UNRESOLVED: 0
+      paired_counts:
+        COMPLETE: 9
+        PENDING: 0
+        UNRESOLVED: 2
+      resolved_pair_sessions: 8
+    '4':
+      events: 11
+      distinct_sessions: 10
+      label_counts:
+        COMPLETE: 11
+        PENDING: 0
+        UNRESOLVED: 0
+      paired_counts:
+        COMPLETE: 9
+        PENDING: 0
+        UNRESOLVED: 2
+      resolved_pair_sessions: 8
+    '64':
+      events: 11
+      distinct_sessions: 10
+      label_counts:
+        COMPLETE: 11
+        PENDING: 0
+        UNRESOLVED: 0
+      paired_counts:
+        COMPLETE: 9
+        PENDING: 0
+        UNRESOLVED: 2
+      resolved_pair_sessions: 8
+disposition: DISCOVERY_INSUFFICIENT_RESOLVED_LABELS
+uncertainty: DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED
+primary_R4_session_mean: 0.0007198399893334917
+primary_R4_median: 0.0004329315680435819
+primary_R4_positive_count: 8
+primary_R4_positive_rate: 0.5714285714285714
+primary_E4_full_cohort_mean: null
+primary_E4_resolved12_pair_session_mean: 0.006112234169222512
+price_pair_unresolved: May7 has0 eligible controls,May12 has2; required5. Both retained,
+  no fallback.
+initial_attempt:
+  evidence: research/data_evidence/h0002-first-efficacy-20261004
+  status: SUPERSEDED_IMPLEMENTATION_UNIT_STATE_CONFUSION
+  forward_close_reads: 0
+  membership_changed: false
+  all_evidence_preserved: true
+confirmation:
+  status: PENDING
+  start: '2026-10-19'
+  end: '2027-10-19'
+  sessions: 252
+  receipt_deadline: '2027-10-23T20:00:00-04:00'
+  outcome_access: 0
+  project_blocker: false
+profitability_calculations: 0
+signal_or_protocol_changes: 0
+comparator_primary_promotion: false
+H0001_track: FROZEN/AWAITING_FUTURE_CONFIRMATION/HISTORICALLY_SPARSE_UNCHANGED
+tests:
+  targeted:
+    tests: 97
+    errors: 0
+    failures: 0
+    skipped: 0
+    passed: 97
+    seconds: 29.409
+    sha256: 0d564324646e5618da076e579743cfdccc3ceba9bdbb7b5f775c52ca1b21c509
+    path: targeted-suite.xml
+  full:
+    tests: 1543
+    errors: 0
+    failures: 0
+    skipped: 0
+    passed: 1543
+    seconds: 487.017
+    sha256: 5979063864ce9caa3e320c46602a2ba769f256b5fb7bbc6e04bcf658e97572b5
+    path: full-suite.xml
+next_P0: INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION
+next_hypothesis: H0003

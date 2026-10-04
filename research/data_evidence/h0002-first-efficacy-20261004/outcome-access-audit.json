@@ -1,0 +1,2231 @@
+{
+  "counts": {
+    "confirmation_outcome_access": 0,
+    "discovery_forward_close_reads": 0,
+    "discovery_label_requests": 222,
+    "profitability_calculations": 0
+  },
+  "scope": "EXPLORATORY_DISCOVERY_ONLY",
+  "trace": [
+    {
+      "anchor_end_at": "2026-05-07T16:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 493.95,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-07T17:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-07T16:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 493.95,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-08T16:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-07T16:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 493.95,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-12T16:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-12T13:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 523.89,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-12T14:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-12T13:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 523.89,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-13T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-12T13:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 523.89,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-15T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-15T13:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 512.0,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-15T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-14T13:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 525.81,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-14T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-13T13:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 522.1,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-13T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-12T13:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 521.0,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-12T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-11T13:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 522.79,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-11T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-07T13:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 501.3,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-07T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-15T13:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 512.0,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-18T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-14T13:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 525.81,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-15T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-13T13:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 522.1,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-14T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-12T13:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 521.0,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-13T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-11T13:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 522.79,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-12T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-07T13:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 501.3,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-08T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-15T13:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 512.0,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-20T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-14T13:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 525.81,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-19T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-13T13:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 522.1,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-18T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-12T13:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 521.0,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-15T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-11T13:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 522.79,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-14T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-07T13:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 501.3,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-12T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-19T10:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 490.0,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-19T11:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-18T10:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 511.44,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-18T11:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-15T10:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 512.0,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-15T11:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-14T10:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 525.3,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-14T11:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-12T10:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 524.52,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-12T11:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-08T10:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 500.37,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-08T11:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-19T10:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 490.0,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-20T10:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-18T10:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 511.44,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-19T10:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-15T10:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 512.0,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-18T10:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-14T10:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 525.3,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-15T10:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-12T10:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 524.52,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-13T10:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-08T10:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 500.37,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-11T10:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-19T10:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 490.0,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-22T10:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-18T10:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 511.44,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-21T10:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-15T10:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 512.0,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-20T10:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-14T10:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 525.3,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-19T10:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-12T10:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 524.52,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-15T10:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-08T10:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 500.37,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-13T10:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-28T21:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 571.0,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-28T22:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-22T21:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 536.976,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-22T22:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-20T21:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 519.37,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-20T22:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-19T21:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 497.5,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-19T22:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-18T21:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 497.0,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-18T22:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-14T21:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 531.2066,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-14T22:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-28T21:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 571.0,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-29T21:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-22T21:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 536.976,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-26T21:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-20T21:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 519.37,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-21T21:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-19T21:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 497.5,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-20T21:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-18T21:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 497.0,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-19T21:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-14T21:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 531.2066,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-15T21:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-28T21:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 571.0,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-02T21:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-22T21:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 536.976,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-28T21:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-20T21:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 519.37,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-26T21:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-19T21:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 497.5,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-22T21:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-18T21:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 497.0,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-21T21:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-14T21:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 531.2066,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-19T21:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-04T12:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 588.6735,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-04T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-02T12:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 585.5,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-02T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-01T12:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 564.7,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-01T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-29T12:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 574.1793,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-29T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-20T12:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 507.4,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-20T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-19T12:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 486.4,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-19T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-04T12:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 588.6735,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-05T12:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-02T12:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 585.5,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-03T12:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-01T12:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 564.7,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-02T12:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-29T12:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 574.1793,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-01T12:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-20T12:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 507.4,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-21T12:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-19T12:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 486.4,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-20T12:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-04T12:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 588.6735,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-09T12:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-02T12:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 585.5,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-05T12:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-01T12:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 564.7,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-04T12:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-29T12:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 574.1793,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-03T12:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-20T12:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 507.4,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-26T12:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-19T12:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 486.4,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-05-22T12:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-22T08:15:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 642.49,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-22T09:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-18T08:15:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 621.5,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-18T09:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-17T08:15:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 608.4,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-17T09:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-16T08:15:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 627.41,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-16T09:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-15T08:15:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 621.94,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-15T09:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-11T08:15:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 558.53,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-11T09:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-22T08:15:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 642.49,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-23T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-18T08:15:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 621.5,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-22T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-17T08:15:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 608.4,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-18T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-16T08:15:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 627.41,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-17T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-15T08:15:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 621.94,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-16T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-11T08:15:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 558.53,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-12T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-22T08:15:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 642.49,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-25T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-18T08:15:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 621.5,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-24T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-17T08:15:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 608.4,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-23T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-16T08:15:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 627.41,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-22T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-15T08:15:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 621.94,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-18T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-11T08:15:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 558.53,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-16T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-24T14:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 601.33,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-24T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-22T14:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 651.78,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-22T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-17T14:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 611.59,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-17T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-16T14:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 618.3,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-16T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-09T14:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 572.15,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-09T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-08T14:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 569.16,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-08T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-24T14:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 601.33,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-25T14:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-22T14:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 651.78,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-23T14:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-17T14:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 611.59,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-18T14:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-16T14:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 618.3,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-17T14:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-09T14:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 572.15,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-10T14:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-08T14:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 569.16,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-09T14:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-24T14:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 601.33,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-29T14:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-22T14:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 651.78,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-25T14:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-17T14:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 611.59,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-23T14:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-16T14:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 618.3,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-22T14:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-09T14:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 572.15,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-12T14:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-08T14:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 569.16,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-11T14:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-10T13:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 571.82,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-10T14:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-07T13:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 555.57,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-07T14:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-02T13:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 598.9525,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-02T14:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-01T13:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 614.08,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-01T14:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-26T13:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 596.0,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-26T14:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-25T13:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 620.54,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-25T14:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-10T13:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 571.82,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-13T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-07T13:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 555.57,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-08T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-02T13:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 598.9525,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-06T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-01T13:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 614.08,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-02T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-26T13:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 596.0,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-29T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-25T13:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 620.54,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-26T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-10T13:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 571.82,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-15T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-07T13:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 555.57,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-10T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-02T13:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 598.9525,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-08T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-01T13:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 614.08,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-07T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-26T13:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 596.0,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-01T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-25T13:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 620.54,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-06-30T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-15T15:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 552.67,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-15T16:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-14T15:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 567.9,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-14T16:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-10T15:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 573.56,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-10T16:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-09T15:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 588.3099,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-09T16:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-08T15:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 555.31,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-08T16:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-07T15:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 542.13,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-07T16:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-15T15:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 552.67,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-16T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-14T15:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 567.9,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-15T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-10T15:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 573.56,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-13T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-09T15:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 588.3099,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-10T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-08T15:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 555.31,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-09T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-07T15:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 542.13,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-08T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-15T15:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 552.67,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-20T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-14T15:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 567.9,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-17T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-10T15:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 573.56,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-15T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-09T15:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 588.3099,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-14T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-08T15:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 555.31,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-13T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-07T15:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 542.13,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-10T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-15T15:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 550.94,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-15T16:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-13T15:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 563.44,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-13T16:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-08T15:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 547.57,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-08T16:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-07T15:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 540.95,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-07T16:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-06T15:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 591.66,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-06T16:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-02T15:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 574.45,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-02T16:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-15T15:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 550.94,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-16T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-13T15:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 563.44,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-14T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-08T15:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 547.57,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-09T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-07T15:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 540.95,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-08T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-06T15:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 591.66,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-07T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-02T15:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 574.45,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-06T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-15T15:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 550.94,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-20T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-13T15:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 563.44,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-16T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-08T15:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 547.57,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-13T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-07T15:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 540.95,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-10T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-06T15:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 591.66,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-09T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-02T15:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 574.45,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-08T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-15T19:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 553.25,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-15T20:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-14T19:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 567.09,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-14T20:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-13T19:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 551.65,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-13T20:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-10T19:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 580.94,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-10T20:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-09T19:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 583.41,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-09T20:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-07T19:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 544.965,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-07T20:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-15T19:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 553.25,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-16T19:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-14T19:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 567.09,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-15T19:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-13T19:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 551.65,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-14T19:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-10T19:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 580.94,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-13T19:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-09T19:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 583.41,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-10T19:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-07T19:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 544.965,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-08T19:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-15T19:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 553.25,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-20T19:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-14T19:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 567.09,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-17T19:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-13T19:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 551.65,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-16T19:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-10T19:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 580.94,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-15T19:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-09T19:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 583.41,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-14T19:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-07T19:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 544.965,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-10T19:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-29T08:15:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 482.99,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-29T09:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-28T08:15:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 497.6,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-28T09:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-24T08:15:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 546.0,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-24T09:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-23T08:15:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 553.6,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-23T09:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-22T08:15:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 538.98,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-22T09:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-17T08:15:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 509.99,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-17T09:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-29T08:15:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 482.99,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-30T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-28T08:15:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 497.6,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-29T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-24T08:15:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 546.0,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-27T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-23T08:15:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 553.6,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-24T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-22T08:15:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 538.98,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-23T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-17T08:15:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 509.99,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-20T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-29T08:15:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 482.99,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-08-03T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-28T08:15:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 497.6,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-31T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-24T08:15:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 546.0,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-29T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-23T08:15:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 553.6,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-28T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-22T08:15:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 538.98,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-27T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-17T08:15:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 509.99,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-22T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-08-03T14:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 494.0381,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-08-03T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-30T14:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 502.68,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-30T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-23T14:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 552.58,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-23T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-22T14:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 554.5475,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-22T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-17T14:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 512.555,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-17T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-16T14:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 536.955,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-16T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-08-03T14:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 494.0381,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-08-04T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-30T14:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 502.68,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-31T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-23T14:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 552.58,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-24T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-22T14:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 554.5475,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-23T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-17T14:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 512.555,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-20T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-16T14:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 536.955,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-17T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-08-03T14:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 494.0381,
+      "return": null,
+      "role": "event",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-08-06T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-30T14:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 502.68,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-08-04T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-23T14:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 552.58,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-28T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-22T14:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 554.5475,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-27T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-17T14:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 512.555,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-22T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-16T14:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "action_unit_ambiguity_or_split",
+      "reference_mark": 536.955,
+      "return": null,
+      "role": "control",
+      "status": "UNRESOLVED",
+      "target_end_at": "2026-07-21T14:00:00+00:00"
+    }
+  ]
+}

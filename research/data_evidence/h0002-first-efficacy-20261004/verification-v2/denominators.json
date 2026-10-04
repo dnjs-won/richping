@@ -1,0 +1,96 @@
+{
+  "comparator": {
+    "192": {
+      "distinct_sessions": 10,
+      "events": 11,
+      "label_counts": {
+        "COMPLETE": 11,
+        "PENDING": 0,
+        "UNRESOLVED": 0
+      },
+      "paired_counts": {
+        "COMPLETE": 9,
+        "PENDING": 0,
+        "UNRESOLVED": 2
+      },
+      "resolved_pair_sessions": 8
+    },
+    "4": {
+      "distinct_sessions": 10,
+      "events": 11,
+      "label_counts": {
+        "COMPLETE": 11,
+        "PENDING": 0,
+        "UNRESOLVED": 0
+      },
+      "paired_counts": {
+        "COMPLETE": 9,
+        "PENDING": 0,
+        "UNRESOLVED": 2
+      },
+      "resolved_pair_sessions": 8
+    },
+    "64": {
+      "distinct_sessions": 10,
+      "events": 11,
+      "label_counts": {
+        "COMPLETE": 11,
+        "PENDING": 0,
+        "UNRESOLVED": 0
+      },
+      "paired_counts": {
+        "COMPLETE": 9,
+        "PENDING": 0,
+        "UNRESOLVED": 2
+      },
+      "resolved_pair_sessions": 8
+    }
+  },
+  "primary": {
+    "192": {
+      "distinct_sessions": 12,
+      "events": 14,
+      "label_counts": {
+        "COMPLETE": 14,
+        "PENDING": 0,
+        "UNRESOLVED": 0
+      },
+      "paired_counts": {
+        "COMPLETE": 12,
+        "PENDING": 0,
+        "UNRESOLVED": 2
+      },
+      "resolved_pair_sessions": 10
+    },
+    "4": {
+      "distinct_sessions": 12,
+      "events": 14,
+      "label_counts": {
+        "COMPLETE": 14,
+        "PENDING": 0,
+        "UNRESOLVED": 0
+      },
+      "paired_counts": {
+        "COMPLETE": 12,
+        "PENDING": 0,
+        "UNRESOLVED": 2
+      },
+      "resolved_pair_sessions": 10
+    },
+    "64": {
+      "distinct_sessions": 12,
+      "events": 14,
+      "label_counts": {
+        "COMPLETE": 14,
+        "PENDING": 0,
+        "UNRESOLVED": 0
+      },
+      "paired_counts": {
+        "COMPLETE": 12,
+        "PENDING": 0,
+        "UNRESOLVED": 2
+      },
+      "resolved_pair_sessions": 10
+    }
+  }
+}

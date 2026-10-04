@@ -1,3 +1,17 @@
+# Richping V2 - H0002 first exploratory efficacy / H0003 routing
+
+**IMPLEMENTED / EXECUTED_REAL_DISCOVERY / EVIDENCE_PRODUCED. No confirmation inference or profitability.**
+
+Primary14/14 R4 labels complete,12/14 matched pairs complete (10 sessions);2 early insufficient-control events retained. Session-balanced mean R4+0.071984%,median+0.043293%,8/14 positive. Resolved12-pair excess+0.611223%;full cohort excess null. 64/192-slot means+0.309723%/+1.286293%,medians negative; secondary descriptive only. Nested volume11 labels/9 complete pairs,R4 mean+0.126729%;no superiority/promotion claim.
+
+Disposition DISCOVERY_INSUFFICIENT_RESOLVED_LABELS; no PASS/REJECT confirmation. DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED: no252-to70 adaptation or CI. Each run222 scoped discovery labels/forward close reads; confirmation outcomes0,profitability0,MFE/MAE not calculated. First unit-state adapter attempt read0 forward closes; archived/superseded without changing frozen semantics,data,events or control membership.
+
+Targeted97/full1543 passed,no failures/errors/skips. 473 prior tracked files preserved against committed base; frozen protocol a6e16e57bee2e26860f6989c88fdaeac707ecfc91a6326f54a8d754cfe327e8d unchanged. Evidence research/data_evidence/h0002-first-efficacy-20261004/verification-v2/discovery-report.json; results docs/H0002_DISCOVERY_EFFICACY_RESULTS.md.
+
+H0001 frozen/sparse126-session and H0002 frozen252-session confirmation remain asynchronous; H0002 terminal deadline2027-10-23 20ET unchanged. NEXT_ACTION **INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION / H0003 / USER_DECISION_REQUIRED**. No outcome-driven H0002 revision; no main code merge.
+
+The entries below are preserved historical status reports.
+
 # Richping V2 - 2026-10-04 H0002 signal freeze / efficacy preregistration
 
 **COMPLETE owner signal freeze and preregistration. H0002 outcomes NOT_RUN; confirmation PENDING/asynchronous.**

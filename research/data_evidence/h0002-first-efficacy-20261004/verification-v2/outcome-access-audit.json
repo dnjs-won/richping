@@ -1,0 +1,2231 @@
+{
+  "counts": {
+    "confirmation_outcome_access": 0,
+    "discovery_forward_close_reads": 222,
+    "discovery_label_requests": 222,
+    "profitability_calculations": 0
+  },
+  "scope": "EXPLORATORY_DISCOVERY_ONLY",
+  "trace": [
+    {
+      "anchor_end_at": "2026-05-07T16:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 493.95,
+      "return": -0.00797651584168435,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-07T17:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-07T16:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 493.95,
+      "return": 0.041097277052333236,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-08T16:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-07T16:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 493.95,
+      "return": 0.010709585990484882,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-12T16:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-12T13:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 523.89,
+      "return": -0.02279104392143394,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-12T14:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-12T13:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 523.89,
+      "return": -0.0018324457424269136,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-13T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-12T13:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 523.89,
+      "return": -0.026589551241672837,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-15T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-15T13:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 512.0,
+      "return": -0.010703125000000036,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-15T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-14T13:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 525.81,
+      "return": 0.004621441204998078,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-14T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-13T13:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 522.1,
+      "return": -0.0042233288642022915,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-13T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-12T13:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 521.0,
+      "return": -0.01062763915547027,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-12T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-11T13:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 522.79,
+      "return": -0.0012704910193384045,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-11T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-07T13:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 501.3,
+      "return": -0.007799720726112125,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-07T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-15T13:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 512.0,
+      "return": 0.014140625000000018,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-18T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-14T13:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 525.81,
+      "return": -0.02626423993457705,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-15T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-13T13:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 522.1,
+      "return": 0.007105918406435485,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-14T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-12T13:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 521.0,
+      "return": 0.0021113243761996525,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-13T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-11T13:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 522.79,
+      "return": -0.0034239369536523956,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-12T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-07T13:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 501.3,
+      "return": 0.003391182924396441,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-08T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-15T13:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 512.0,
+      "return": -0.006640624999999956,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-20T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-14T13:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 525.81,
+      "return": -0.07209828645328153,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-19T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-13T13:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 522.1,
+      "return": -0.005477877801187581,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-18T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-12T13:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 521.0,
+      "return": -0.017274472168905985,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-15T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-11T13:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 522.79,
+      "return": 0.0057766981005757945,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-14T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-07T13:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 501.3,
+      "return": 0.03929782565330142,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-12T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-19T10:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 490.0,
+      "return": -0.0007346938775510958,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-19T11:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-18T10:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 511.44,
+      "return": -0.004770843109651146,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-18T11:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-15T10:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 512.0,
+      "return": 0.010839843749999911,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-15T11:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-14T10:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 525.3,
+      "return": 0.0030268418046830448,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-14T11:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-12T10:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 524.52,
+      "return": -0.0011629680469763537,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-12T11:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-08T10:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 500.37,
+      "return": 0.0005196154845414913,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-08T11:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-19T10:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 490.0,
+      "return": 0.03724489795918373,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-20T10:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-18T10:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 511.44,
+      "return": -0.04192085093070541,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-19T10:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-15T10:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 512.0,
+      "return": -0.0010937500000000044,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-18T10:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-14T10:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 525.3,
+      "return": -0.025318865410241642,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-15T10:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-12T10:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 524.52,
+      "return": 0.00949439487531456,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-13T10:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-08T10:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 500.37,
+      "return": 0.04166916481803473,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-11T10:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-19T10:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 490.0,
+      "return": 0.07757142857142862,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-22T10:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-18T10:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 511.44,
+      "return": 0.01914203034569062,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-21T10:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-15T10:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 512.0,
+      "return": -0.00732421875,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-20T10:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-14T10:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 525.3,
+      "return": -0.06719969541214532,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-19T10:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-12T10:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 524.52,
+      "return": -0.023869442537939434,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-15T10:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-08T10:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 500.37,
+      "return": 0.05821691947958518,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-13T10:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-28T21:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 571.0,
+      "return": 0.0005078809106828786,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-28T22:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-22T21:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 536.976,
+      "return": -0.0014451297637136928,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-22T22:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-20T21:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 519.37,
+      "return": -0.006103548529949654,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-20T22:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-19T21:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 497.5,
+      "return": -0.0009849246231156128,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-19T22:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-18T21:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 497.0,
+      "return": 0.005271629778672127,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-18T22:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-14T21:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 531.2066,
+      "return": -0.0007654272367851878,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-14T22:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-28T21:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 571.0,
+      "return": -0.003134851138353656,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-29T21:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-22T21:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 536.976,
+      "return": 0.06424290843538638,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-26T21:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-20T21:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 519.37,
+      "return": 0.009203458035696999,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-21T21:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-19T21:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 497.5,
+      "return": 0.04395979899497493,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-20T21:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-18T21:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 497.0,
+      "return": 0.001006036217303885,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-19T21:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-14T21:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 531.2066,
+      "return": -0.04519258608609156,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-15T21:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-28T21:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 571.0,
+      "return": 0.06535901926444843,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-02T21:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-22T21:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 536.976,
+      "return": 0.06336223592860768,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-28T21:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-20T21:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 519.37,
+      "return": 0.10031942545776618,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-26T21:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-19T21:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 497.5,
+      "return": 0.0793487437185929,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-22T21:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-18T21:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 497.0,
+      "return": 0.05462776659959756,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-21T21:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-14T21:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 531.2066,
+      "return": -0.0634529013758488,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-19T21:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-04T12:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 588.6735,
+      "return": 0.004971346595353809,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-04T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-02T12:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 585.5,
+      "return": -0.00010247651579842199,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-02T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-01T12:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 564.7,
+      "return": 0.0006729236762883506,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-01T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-29T12:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 574.1793,
+      "return": 0.00014054843147426332,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-29T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-20T12:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 507.4,
+      "return": 0.0023649980291684525,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-20T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-19T12:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 486.4,
+      "return": 0.003083881578947345,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-19T13:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-04T12:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 588.6735,
+      "return": -0.009128149984668932,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-05T12:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-02T12:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 585.5,
+      "return": 0.05380017079419308,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-03T12:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-01T12:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 564.7,
+      "return": 0.036833717017885625,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-02T12:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-29T12:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 574.1793,
+      "return": -0.01650930293028674,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-01T12:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-20T12:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 507.4,
+      "return": 0.01852581789515173,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-21T12:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-19T12:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 486.4,
+      "return": 0.04317434210526305,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-20T12:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-04T12:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 588.6735,
+      "return": -0.006240301287555816,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-09T12:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-02T12:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 585.5,
+      "return": -0.0037574722459436938,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-05T12:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-01T12:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 564.7,
+      "return": 0.04245351514078255,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-04T12:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-29T12:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 574.1793,
+      "return": 0.07457722700905456,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-03T12:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-20T12:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 507.4,
+      "return": 0.09124950729207737,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-26T12:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-05-19T12:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 486.4,
+      "return": 0.08552631578947367,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-05-22T12:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-22T08:15:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 642.49,
+      "return": 0.00035798222540428526,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-22T09:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-18T08:15:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 621.5,
+      "return": -0.0027353177795655936,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-18T09:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-17T08:15:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 608.4,
+      "return": -0.002662721893491149,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-17T09:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-16T08:15:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 627.41,
+      "return": 0.007384166653384705,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-16T09:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-15T08:15:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 621.94,
+      "return": -0.001318455156446019,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-15T09:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-11T08:15:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 558.53,
+      "return": -0.0035450199631175128,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-11T09:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-22T08:15:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 642.49,
+      "return": -0.036218462544164054,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-23T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-18T08:15:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 621.5,
+      "return": 0.03377312952534184,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-22T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-17T08:15:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 608.4,
+      "return": 0.02153188691650243,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-18T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-16T08:15:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 627.41,
+      "return": -0.03029916641430641,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-17T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-15T08:15:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 621.94,
+      "return": 0.008795060616779704,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-16T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-11T08:15:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 558.53,
+      "return": 0.046192684367894365,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-12T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-22T08:15:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 642.49,
+      "return": -0.012280346775825235,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-25T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-18T08:15:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 621.5,
+      "return": -0.010201126307321062,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-24T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-17T08:15:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 608.4,
+      "return": 0.01778435239973719,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-23T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-16T08:15:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 627.41,
+      "return": 0.02403531980682505,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-22T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-15T08:15:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 621.94,
+      "return": -0.0007074637424833163,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-18T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-11T08:15:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 558.53,
+      "return": 0.12332372477754094,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-16T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-24T14:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 601.33,
+      "return": 0.002810436864949306,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-24T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-22T14:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 651.78,
+      "return": -0.0034520850593758867,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-22T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-17T14:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 611.59,
+      "return": -0.001062803512156818,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-17T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-16T14:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 618.3,
+      "return": -0.018971373119844537,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-16T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-09T14:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 572.15,
+      "return": -0.04044393952634795,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-09T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-08T14:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 569.16,
+      "return": 0.013019186169091368,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-08T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-24T14:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 601.33,
+      "return": 0.01566527530640416,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-25T14:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-22T14:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 651.78,
+      "return": -0.0571588572831323,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-23T14:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-17T14:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 611.59,
+      "return": 0.03559574224562212,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-18T14:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-16T14:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 618.3,
+      "return": -0.010852337053210315,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-17T14:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-09T14:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 572.15,
+      "return": -0.007218386786681852,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-10T14:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-08T14:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 569.16,
+      "return": 0.005253355822615768,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-09T14:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-24T14:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 601.33,
+      "return": -0.026557796883574736,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-29T14:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-22T14:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 651.78,
+      "return": -0.06295068888275179,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-25T14:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-17T14:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 611.59,
+      "return": 0.004798966627969525,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-23T14:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-16T14:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 618.3,
+      "return": 0.05414847161572056,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-22T14:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-09T14:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 572.15,
+      "return": 0.03434414052259016,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-12T14:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-08T14:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 569.16,
+      "return": -0.004041042940473583,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-11T14:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-10T13:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 571.82,
+      "return": 0.007607289007030005,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-10T14:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-07T13:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 555.57,
+      "return": -0.03382112065086318,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-07T14:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-02T13:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 598.9525,
+      "return": -0.03130882665987689,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-02T14:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-01T13:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 614.08,
+      "return": -0.00990099009901002,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-01T14:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-26T13:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 596.0,
+      "return": -0.000738255033557178,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-26T14:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-25T13:45:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 620.54,
+      "return": -0.01327875721146099,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-25T14:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-10T13:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 571.82,
+      "return": -0.027421216466720355,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-13T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-07T13:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 555.57,
+      "return": 0.004157891894810639,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-08T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-02T13:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 598.9525,
+      "return": -0.013911787662627684,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-06T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-01T13:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 614.08,
+      "return": -0.024634412454403454,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-02T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-26T13:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 596.0,
+      "return": 0.0011241610738255137,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-29T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-25T13:45:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 620.54,
+      "return": -0.039546201695297545,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-26T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-10T13:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 571.82,
+      "return": -0.009408555139729269,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-15T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-07T13:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 555.57,
+      "return": 0.02924923951977254,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-10T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-02T13:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 598.9525,
+      "return": -0.06857388524131713,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-08T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-01T13:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 614.08,
+      "return": -0.09528074517978113,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-07T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-26T13:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 596.0,
+      "return": 0.030335570469798734,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-01T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-06-25T13:45:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 620.54,
+      "return": 0.008669868179327578,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-06-30T13:45:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-15T15:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 552.67,
+      "return": -0.010277380715435935,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-15T16:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-14T15:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 567.9,
+      "return": 0.005898925867230176,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-14T16:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-10T15:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 573.56,
+      "return": 0.008752353720622219,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-10T16:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-09T15:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 588.3099,
+      "return": 0.004861553409181152,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-09T16:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-08T15:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 555.31,
+      "return": -0.011921269200986684,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-08T16:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-07T15:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 542.13,
+      "return": 0.008236031948056777,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-07T16:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-15T15:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 552.67,
+      "return": -0.027122876219081937,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-16T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-14T15:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 567.9,
+      "return": -0.026818101778482206,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-15T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-10T15:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 573.56,
+      "return": -0.017818536857521328,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-13T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-09T15:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 588.3099,
+      "return": -0.025071650162609926,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-10T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-08T15:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 555.31,
+      "return": 0.05942608633015789,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-09T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-07T15:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 542.13,
+      "return": 0.024311511998966973,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-08T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-15T15:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 552.67,
+      "return": -0.04583205167640714,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-20T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-14T15:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 567.9,
+      "return": -0.0920408522627223,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-17T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-10T15:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 573.56,
+      "return": -0.036421647255736045,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-15T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-09T15:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 588.3099,
+      "return": -0.03469242995910826,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-14T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-08T15:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 555.31,
+      "return": 0.014460391493040126,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-13T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-07T15:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 542.13,
+      "return": 0.057975024440632295,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-10T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-15T15:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 550.94,
+      "return": -0.01880422550549976,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-15T16:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-13T15:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 563.44,
+      "return": -0.013293340905863982,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-13T16:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-08T15:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 547.57,
+      "return": 0.016454517230673593,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-08T16:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-07T15:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 540.95,
+      "return": 0.02427211387374073,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-07T16:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-06T15:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 591.66,
+      "return": -0.0024845350370144015,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-06T16:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-02T15:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 574.45,
+      "return": -0.013787100705022315,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-02T16:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-15T15:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 550.94,
+      "return": -0.028097433477329736,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-16T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-13T15:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 563.44,
+      "return": 0.019842396705949117,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-14T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-08T15:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 547.57,
+      "return": 0.07805394744050975,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-09T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-07T15:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 540.95,
+      "return": 0.012237729919585938,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-08T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-06T15:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 591.66,
+      "return": -0.08570800797755451,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-07T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-02T15:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 574.45,
+      "return": 0.02995909130472607,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-06T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-15T15:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 550.94,
+      "return": -0.033470069336043906,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-20T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-13T15:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 563.44,
+      "return": -0.04965923612097123,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-16T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-08T15:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 547.57,
+      "return": 0.028982595832496294,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-13T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-07T15:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 540.95,
+      "return": 0.07253535446898973,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-10T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-06T15:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 591.66,
+      "return": -0.0022817158503194435,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-09T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-02T15:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 574.45,
+      "return": -0.04679258421098442,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-08T15:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-15T19:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 553.25,
+      "return": 0.003940352462720176,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-15T20:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-14T19:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 567.09,
+      "return": 0.0008136274665395682,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-14T20:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-13T19:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 551.65,
+      "return": 0.002084655125532464,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-13T20:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-10T19:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 580.94,
+      "return": 0.001824629049471449,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-10T20:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-09T19:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 583.41,
+      "return": -0.00227970038223535,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-09T20:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-07T19:30:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 544.965,
+      "return": 0.013138458433110234,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-07T20:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-15T19:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 553.25,
+      "return": -0.04502485314053317,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-16T19:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-14T19:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 567.09,
+      "return": -0.024405297219136313,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-15T19:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-13T19:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 551.65,
+      "return": 0.027988760989758,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-14T19:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-10T19:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 580.94,
+      "return": -0.05041828760285072,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-13T19:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-09T19:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 583.41,
+      "return": -0.004233729281294285,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-10T19:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-07T19:30:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 544.965,
+      "return": 0.03513069646674549,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-08T19:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-15T19:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 553.25,
+      "return": -0.049218255761409924,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-20T19:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-14T19:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 567.09,
+      "return": -0.07899980602726209,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-17T19:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-13T19:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 551.65,
+      "return": -0.04225505302274979,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-16T19:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-10T19:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 580.94,
+      "return": -0.04766413054704455,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-15T19:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-09T19:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 583.41,
+      "return": -0.027973466344423215,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-14T19:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-07T19:30:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 544.965,
+      "return": 0.06601341370546732,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-10T19:30:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-29T08:15:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 482.99,
+      "return": 0.01641855939046355,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-29T09:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-28T08:15:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 497.6,
+      "return": 0.007556270096463091,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-28T09:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-24T08:15:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 546.0,
+      "return": 0.0073260073260073,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-24T09:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-23T08:15:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 553.6,
+      "return": 0.006557080924855407,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-23T09:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-22T08:15:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 538.98,
+      "return": 0.005603176370180707,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-22T09:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-17T08:15:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 509.99,
+      "return": 0.0013725759328613307,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-17T09:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-29T08:15:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 482.99,
+      "return": -0.036833060725894984,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-30T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-28T08:15:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 497.6,
+      "return": -0.029360932475884227,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-29T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-24T08:15:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 546.0,
+      "return": -0.009157509157509125,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-27T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-23T08:15:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 553.6,
+      "return": -0.013728323699422007,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-24T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-22T08:15:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 538.98,
+      "return": 0.027125310772199374,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-23T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-17T08:15:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 509.99,
+      "return": 0.033628110355105045,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-20T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-29T08:15:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 482.99,
+      "return": 0.05265119360649284,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-08-03T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-28T08:15:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 497.6,
+      "return": 0.04734726688102886,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-31T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-24T08:15:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 546.0,
+      "return": -0.11540293040293037,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-29T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-23T08:15:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 553.6,
+      "return": -0.10115606936416188,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-28T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-22T08:15:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 538.98,
+      "return": 0.0037478199562135384,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-27T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-17T08:15:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 509.99,
+      "return": 0.0568442518480754,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-22T08:15:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-08-03T14:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 494.0381,
+      "return": 0.02655038143819266,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-08-03T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-30T14:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 502.68,
+      "return": -0.002287737725789829,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-30T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-23T14:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 552.58,
+      "return": -0.004415650222592271,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-23T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-22T14:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 554.5475,
+      "return": -0.00028401534584510113,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-22T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-17T14:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 512.555,
+      "return": 0.005999356166655367,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-17T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-16T14:00:00+00:00",
+      "horizon_slots": 4,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 536.955,
+      "return": 0.0013502062556451921,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-16T15:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-08-03T14:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 494.0381,
+      "return": 0.07700195592202319,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-08-04T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-30T14:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 502.68,
+      "return": 0.02212142913981041,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-31T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-23T14:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 552.58,
+      "return": -0.03585001266784915,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-24T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-22T14:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 554.5475,
+      "return": -0.0035479377330165374,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-23T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-17T14:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 512.555,
+      "return": 0.03990791232160462,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-20T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-16T14:00:00+00:00",
+      "horizon_slots": 64,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 536.955,
+      "return": -0.04544142432792331,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-17T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-08-03T14:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 494.0381,
+      "return": 0.07862126423043092,
+      "role": "event",
+      "status": "COMPLETE",
+      "target_end_at": "2026-08-06T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-30T14:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 502.68,
+      "return": 0.05848651229410362,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-08-04T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-23T14:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 552.58,
+      "return": -0.1211136848963047,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-28T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-22T14:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 554.5475,
+      "return": -0.05948543632421044,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-27T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-17T14:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 512.555,
+      "return": 0.0819277931148854,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-22T14:00:00+00:00"
+    },
+    {
+      "anchor_end_at": "2026-07-16T14:00:00+00:00",
+      "horizon_slots": 192,
+      "reason": "exact_scheduled_endpoint",
+      "reference_mark": 536.955,
+      "return": 0.014815021742976553,
+      "role": "control",
+      "status": "COMPLETE",
+      "target_end_at": "2026-07-21T14:00:00+00:00"
+    }
+  ]
+}

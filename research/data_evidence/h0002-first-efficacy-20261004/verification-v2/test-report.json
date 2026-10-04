@@ -1,0 +1,22 @@
+{
+  "full": {
+    "errors": 0,
+    "failures": 0,
+    "passed": 1543,
+    "path": "full-suite.xml",
+    "seconds": 487.017,
+    "sha256": "5979063864ce9caa3e320c46602a2ba769f256b5fb7bbc6e04bcf658e97572b5",
+    "skipped": 0,
+    "tests": 1543
+  },
+  "targeted": {
+    "errors": 0,
+    "failures": 0,
+    "passed": 97,
+    "path": "targeted-suite.xml",
+    "seconds": 29.409,
+    "sha256": "0d564324646e5618da076e579743cfdccc3ceba9bdbb7b5f775c52ca1b21c509",
+    "skipped": 0,
+    "tests": 97
+  }
+}
