@@ -34,9 +34,9 @@ dataset:
 evidence:
   initial_manifest: research/data_evidence/h0002-frequency-20261004/preexecution-manifest.json
   initial_report: research/data_evidence/h0002-frequency-20261004/frequency-audit.json
-  canonical_verification: research/data_evidence/h0002-frequency-20261004/verification-v2/frequency-audit.json
-  events: research/data_evidence/h0002-frequency-20261004/verification-v2/candidate-events.json
-  tests: research/data_evidence/h0002-frequency-20261004/verification-v2/test-report.json
+  canonical_verification: research/data_evidence/h0002-frequency-20261004/verification-v3/frequency-audit.json
+  events: research/data_evidence/h0002-frequency-20261004/verification-v3/candidate-events.json
+  tests: research/data_evidence/h0002-frequency-20261004/verification-v3/test-report.json
 frequency:
   eligible_bars: 4480
   zone_READY: 4353

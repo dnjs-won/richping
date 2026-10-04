@@ -18,15 +18,7 @@ from richping.research_v2.strategy.h0002_defense import (
 from scripts.h0001_long_history_audit import write_new
 
 ORIGINAL = Path('research/data_evidence/h0002-frequency-20261004')
-ROOT = ORIGINAL/'verification-v3'
-LEGACY_GIT_TEXT_EVIDENCE = {
-    'research/data_evidence/h0001-15m-freeze-20261003/mechanical-check.json',
-    'research/data_evidence/h0001-15m-freeze-20261003/verification.json',
-    'research/data_evidence/h0001-daily-pit-20261003/tests.json',
-    'research/data_evidence/v2-real-20261003/offline-proof-v1.json',
-    'research/data_evidence/v2-real-20261003/offline-proof-v2.json',
-    'research/data_evidence/v2-real-20261003/smoke.json',
-}
+ROOT = ORIGINAL/'verification-v2'
 SOURCE = Path('research/data_evidence/h0001-alpaca-70-20261004')
 SPEC = Path('research/strategy_specs/H0002-r01-candidate.yaml')
 HYPOTHESIS = Path('research/hypotheses/H0002-r01.yaml')
@@ -63,11 +55,9 @@ def fingerprint(path):
 
 
 def preservation_fingerprint(path):
-    # Six legacy generated JSON reports were Git text with CRLF working copies.
-    # Their LF content is pinned; raw receipts and all other evidence stay exact.
+    # Source text is Git newline portable; archived evidence remains byte exact.
     raw = Path(path).read_bytes()
-    name = str(path).replace('\\', '/')
-    if not name.startswith('research/data_evidence/') or name in LEGACY_GIT_TEXT_EVIDENCE:
+    if not str(path).replace('\\', '/').startswith('research/data_evidence/'):
         raw = raw.replace(b'\r\n', b'\n')
     return sha256(raw).hexdigest()
 
@@ -91,11 +81,6 @@ def seal(root=ROOT):
                 'execution_files': {p.as_posix(): fingerprint(p) for p in EXECUTION_FILES},
                 'preserved_files': {p: preservation_fingerprint(p) for p in protected_paths()},
                 'dataset_id': DATASET_ID, 'dataset_hash': DATASET_HASH,
-                'legacy_Git_text_evidence': sorted(LEGACY_GIT_TEXT_EVIDENCE),
-                'host_verification_predecessor': {
-                    'report_sha256': fingerprint(ORIGINAL/'verification-v2/frequency-audit.json'),
-                    'source_sha256': fingerprint(ORIGINAL/'verification-v2/frequency-audit-source-v2.py.bin'),
-                    'reason': 'Fresh archive identified six legacy generated Git-text JSON reports needing LF canonical checks; no signal change.'},
                 'predecessor': {'manifest': (ORIGINAL/'preexecution-manifest.json').as_posix(),
                     'report_sha256': fingerprint(ORIGINAL/'frequency-audit.json'),
                     'original_runner_sha256': fingerprint(ORIGINAL/'frequency-audit-source-v1.py.bin'),
@@ -233,7 +218,7 @@ def audit(root=ROOT):
               'outcome_access': 0, 'profitability_calculations': 0, 'outcomes': 'NOT_RUN',
               'H0001_preserved_files': len(manifest['preserved_files']),
               'H0001_frozen_hashes_unchanged': True,
-              'preservation_policy': 'Raw receipts/evidence byte exact except six explicit legacy generated Git-text reports; those and source use LF hashes. All actual bytes identical before/after replay.',
+              'preservation_policy': 'Archived evidence byte exact; source LF canonical for Git portability; all actual bytes identical before/after replay.',
               'H0001_status': ['FROZEN', 'AWAITING_FUTURE_CONFIRMATION', 'HISTORICALLY_SPARSE'],
               'volume_integrity': {'missing': sum(b.volume is None for b in first_dataset.bars),
                                    'zero': sum(b.volume == 0 for b in first_dataset.bars),

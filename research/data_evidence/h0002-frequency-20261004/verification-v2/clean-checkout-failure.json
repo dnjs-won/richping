@@ -1,0 +1,7 @@
+{
+  "cause": "Six historical generated Git-text JSON reports had CRLF working copies and LF Git blobs; raw provider inputs and H0002 signal semantics unchanged",
+  "failed": 1,
+  "next": "verification-v3",
+  "passed": 51,
+  "status": "HOST_PORTABILITY_FAILURE_SUPERSEDED_BY_V3"
+}

@@ -21,14 +21,15 @@ evidence, not efficacy, profitability, Alpha, paper or live execution evidence.
 | Outcome access / return or profitability calculations | 0 / 0 |
 
 The initial preexecution manifest fixed one parameter tuple before frequency access.
-Two chronological replays matched exactly. A subsequent host portability verification
-canonicalized Git source line endings while preserving archived evidence bytes; its
-two further replays retained exactly the same zone, event and trace hashes. The first
+Two chronological replays matched exactly. Subsequent host portability verifications
+canonicalized Git source line endings and six legacy generated Git-text JSON reports,
+while preserving raw receipts and all other archived evidence bytes. Their replays
+retained exactly the same zone, event and trace hashes. The first
 manifest, report and original runner source remain preserved. There was one parameter
 trial, no new signal definition and no count-driven relaxation.
 
 The portable canonical evidence is
-`research/data_evidence/h0002-frequency-20261004/verification-v2/frequency-audit.json`.
+`research/data_evidence/h0002-frequency-20261004/verification-v3/frequency-audit.json`.
 Dataset `soxx-alpaca-sip-15m-discovery-20260505-20260813-v1` has content hash
 `4b39f109e8cffce8a7e680e773b560b307e21dd5a92dcad6d06fcd47bb0aa8bd`.
 Candidate event stream hash is

@@ -14,7 +14,7 @@ def publish():
               'H0002_real_outcome_access': 0, 'H0002_profitability_calculations': 0,
               'note': 'Existing synthetic outcome arithmetic regression is not H0002 real outcome evaluation.'}
     for kind in ('targeted', 'full'):
-        path = Path('var')/('h0002-'+kind+'.xml')
+        path = Path('var')/('h0002-'+kind+'-v3.xml')
         raw = path.read_bytes()
         suites = list(ET.fromstring(raw).iter('testsuite'))
         counts = {key: sum(int(s.get(key, '0')) for s in suites)
