@@ -1,0 +1,53 @@
+schema_version: richping_research_hypothesis_v1
+hypothesis_id: H0002
+revision: 1
+status: DRAFT
+created_at: '2026-10-04T00:00:00Z'
+updated_at: '2026-10-04T00:00:00Z'
+supersedes: null
+title: Historical price defense and failed downside breakdown
+family: PRICE_STRUCTURE_VOLUME_DEFENSE_REVERSAL
+thesis: >-
+  When SOXX revisits a price zone mechanically identified from previously confirmed
+  repeated lows, a failed downside break and completed price reclaim may precede
+  positive directional movement over a subsequently preregistered horizon.
+source:
+  type: chat
+  discussion_date: '2026-10-04'
+  reference: Owner explicitly selected an independent price/OHLC/volume/time thesis.
+  issue: null
+observations:
+  - Repeated buying reactions and failed downside breaks near recurring prices.
+  - Lower wicks or rapid recovery, sometimes with greater trading activity.
+  - Anecdotal subsequent rebounds; neither causation nor profitability established.
+rules:
+  regime: [No Daily or 1H context; no MACD.]
+  setup: [Previously confirmed low pair defines an immutable bounded defense zone.]
+  trigger: [Revisit then same-bar low below lower boundary and close above upper boundary.]
+  exit: [UNKNOWN_NOT_SELECTED_NO_POSITION_OR_OUTCOME_IN_THIS_ACTION]
+  invalidation: [First completed close below lower boundary; fixed bar-count expiration.]
+timeframes:
+  regime: []
+  signal: [15m]
+  confirmation: []
+  execution: []
+required_data: [SOXX immutable admitted Alpaca SIP raw 15m OHLC, timestamps, optional bar volume]
+unknowns:
+  - Final owner signal freeze, horizon, label, null/control, costs, evidence floor and future confirmation.
+  - No order-block, institution, actor identity or buying-intent inference is possible from OHLCV.
+test:
+  null_hypothesis: UNKNOWN_PENDING_PREREGISTRATION
+  primary_metric: UNKNOWN_PENDING_PREREGISTRATION
+  decision_rule: UNKNOWN_PENDING_PREREGISTRATION
+  cost_assumption: UNKNOWN_PENDING_PREREGISTRATION
+  sample_unit: Candidate visit event; clustering/session dependence to preregister.
+  discovery_period: '2026-05-05..2026-08-13; 70 admitted sessions, frequency only'
+  confirmatory_period: null
+  leakage_risks:
+    - Owner anecdotal exposure is discovery exposure, not untouched confirmation.
+    - Entire admitted interval previously used for H0001 signal diagnostics; no outcomes in this action.
+    - Bar-end availability assumed for immutable historical snapshots; no live PIT claim.
+  multiple_testing_family: One provisional price primary plus one nested volume comparator; no grid.
+experiment_refs: []
+evidence_refs: [research/data_evidence/h0002-frequency-20261004/frequency-audit.json]
+notes: Independent of every H0001 feature/state/threshold. Positive direction is a research question, not a result.

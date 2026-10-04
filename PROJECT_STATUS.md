@@ -1,3 +1,13 @@
+# Richping V2 - 2026-10-04 independent H0002 frequency research
+
+**COMPLETE hypothesis / causal implementation / real frequency evidence. Final signal freeze USER_DECISION_REQUIRED; outcomes NOT_RUN.**
+
+H0002 PRICE_STRUCTURE_VOLUME_DEFENSE_REVERSAL: causal repeated-low defense zone, revisit and same-bar failed breakdown/reclaim. SOXX15m admitted Alpaca70 sessions/4480 bars; zone READY4353,92 zones,3816 active-zone bars,148 reentries,14 price candidates/12 sessions,11 optional volume candidates/10 sessions. Twice-identical replay and host portability verification; parameter trials1, no relaxation. Outcome/forward-window/return/profitability/network calls0. Existing337 H0001/common files preserved; H0001 FROZEN/AWAITING_FUTURE_CONFIRMATION/HISTORICALLY_SPARSE and126-session track unchanged.
+
+Targeted52/full1481 passed; failures/errors/skips0. Branch 2-h0002-price-defense-frequency; no main code merge. Next single P0 H0002_SIGNAL_FREEZE_PREREGISTRATION: final owner signal/session/primary-comparator choice, then preregister evaluation before outcomes. Contract docs/H0002_PRICE_DEFENSE_RESEARCH.md; results docs/H0002_FREQUENCY_RESULTS.md; canonical evidence research/data_evidence/h0002-frequency-20261004/verification-v2/frequency-audit.json.
+
+The entries below are preserved historical status reports.
+
 # Richping V2 - 2026-10-04 independent Alpaca70 discovery
 
 **COMPLETE bounded discovery / ZERO_SIGNAL; informative efficacy remains unavailable. H0001 future track preserved; new independent research P0.**

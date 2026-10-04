@@ -12,7 +12,8 @@ def test_real_intake_is_deterministic_and_not_gated_by_h0001_confirmation():
     with patch('socket.socket.connect', side_effect=AssertionError('network')):
         first = prepare()
         assert first == prepare()
-    assert first['next_hypothesis_id'] == 'H0002'
+    assert first['next_hypothesis_id'] == 'H0003'
+    assert any(e['id'] == 'H0002' and e['revision'] == 1 for e in first['registered_hypotheses'])
     assert first['next_action_status'] == 'USER_DECISION_REQUIRED'
     assert first['candidate_outcome_access'] is False
     assert first['future_confirmation_dependency'] is False

@@ -1,0 +1,551 @@
+{
+  "H0001_frozen_hashes_unchanged": true,
+  "H0001_preserved_files": 337,
+  "H0001_status": [
+    "FROZEN",
+    "AWAITING_FUTURE_CONFIRMATION",
+    "HISTORICALLY_SPARSE"
+  ],
+  "candidate_timestamps": {
+    "PRICE_DEFENSE_REVERSAL_V1": [
+      "2026-05-07T16:30:00+00:00",
+      "2026-05-12T13:45:00+00:00",
+      "2026-05-15T13:00:00+00:00",
+      "2026-05-19T10:00:00+00:00",
+      "2026-05-28T21:45:00+00:00",
+      "2026-06-04T12:00:00+00:00",
+      "2026-06-22T08:15:00+00:00",
+      "2026-06-24T14:30:00+00:00",
+      "2026-07-10T13:45:00+00:00",
+      "2026-07-15T15:00:00+00:00",
+      "2026-07-15T15:30:00+00:00",
+      "2026-07-15T19:30:00+00:00",
+      "2026-07-29T08:15:00+00:00",
+      "2026-08-03T14:00:00+00:00"
+    ],
+    "PRICE_DEFENSE_REVERSAL_VOLUME_CONFIRM_V1": [
+      "2026-05-07T16:30:00+00:00",
+      "2026-05-12T13:45:00+00:00",
+      "2026-05-19T10:00:00+00:00",
+      "2026-06-04T12:00:00+00:00",
+      "2026-06-22T08:15:00+00:00",
+      "2026-06-24T14:30:00+00:00",
+      "2026-07-10T13:45:00+00:00",
+      "2026-07-15T15:00:00+00:00",
+      "2026-07-15T15:30:00+00:00",
+      "2026-07-29T08:15:00+00:00",
+      "2026-08-03T14:00:00+00:00"
+    ]
+  },
+  "comparator": "PRICE_DEFENSE_REVERSAL_VOLUME_CONFIRM_V1",
+  "dataset_hash": "4b39f109e8cffce8a7e680e773b560b307e21dd5a92dcad6d06fcd47bb0aa8bd",
+  "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+  "denominators": {
+    "active_zone_bar_count": 3816,
+    "active_zone_count": 92,
+    "distinct_sessions_with_candidates": 12,
+    "distinct_sessions_with_volume_candidates": 10,
+    "final_candidate_count": 14,
+    "penetration_reentry_count": 148,
+    "rejection_primitive_count": 14,
+    "retired_close_below_lower": 76,
+    "retired_expired": 15,
+    "total_eligible_15m_bars": 4480,
+    "touch_only_reentry_count": 0,
+    "volume_READY_count": 4460,
+    "volume_confirmed_count": 11,
+    "volume_final_candidate_count": 11,
+    "zone_READY_count": 4353,
+    "zone_reentry_count": 148
+  },
+  "economic_effect": null,
+  "event_stream_hash": "65174fa89f16e69f373bef0a4ea655f42b19594389d6bb9e1c472c9d47a6ae45",
+  "final_signal_freeze": "USER_DECISION_REQUIRED",
+  "forbidden_call_counts": {
+    "forward_or_benchmark_window": 0,
+    "market_query": 0,
+    "network": 0,
+    "operational_store": 0,
+    "outcome_accessor": 0,
+    "profitability_calculation": 0,
+    "return_calculation": 0,
+    "store_accessor": 0,
+    "uncertainty_calculation": 0
+  },
+  "frequency_disposition": "NONZERO_MECHANICALLY_EXECUTABLE",
+  "hypothesis_id": "H0002",
+  "interval": [
+    "2026-05-05",
+    "2026-08-13"
+  ],
+  "limitations": [
+    "Discovery, not efficacy/alpha or independent event sample-size certification.",
+    "Immutable historical bar-end assumed availability, not live/shadow PIT.",
+    "No event-conditioned future price, label, return, MFE or MAE query.",
+    "Full admitted intraday vintage read twice only as chronological causal input.",
+    "Extended/RTH volume seasonality not normalized; no count-based relaxation."
+  ],
+  "next_P0": "H0002_SIGNAL_FREEZE_PREREGISTRATION",
+  "outcome_access": 0,
+  "outcomes": "NOT_RUN",
+  "overlap": {
+    "both": 11,
+    "comparator_only": 0,
+    "price_only": 3
+  },
+  "parameter_trials": 1,
+  "preexecution_manifest_sha256": "7e3106459e350298d5e337db6b22e84e0d81e1432d9a1051f97b413084543e1c",
+  "preservation_policy": "Archived evidence byte exact; source LF canonical for Git portability; all actual bytes identical before/after replay.",
+  "primary": "PRICE_DEFENSE_REVERSAL_V1",
+  "profitability_calculations": 0,
+  "repeat_equal": true,
+  "runs": 2,
+  "schema": "h0002_frequency_audit_v1",
+  "session_denominators": {
+    "2026-05-05": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-05-06": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-05-07": {
+      "comparator": 1,
+      "eligible_bars": 64,
+      "primary": 1,
+      "reentries": 5
+    },
+    "2026-05-08": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-05-11": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-05-12": {
+      "comparator": 1,
+      "eligible_bars": 64,
+      "primary": 1,
+      "reentries": 4
+    },
+    "2026-05-13": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-05-14": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 2
+    },
+    "2026-05-15": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 1,
+      "reentries": 9
+    },
+    "2026-05-18": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 4
+    },
+    "2026-05-19": {
+      "comparator": 1,
+      "eligible_bars": 64,
+      "primary": 1,
+      "reentries": 4
+    },
+    "2026-05-20": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 1
+    },
+    "2026-05-21": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-05-22": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-05-26": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-05-27": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-05-28": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 1,
+      "reentries": 2
+    },
+    "2026-05-29": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 2
+    },
+    "2026-06-01": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-06-02": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-06-03": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-06-04": {
+      "comparator": 1,
+      "eligible_bars": 64,
+      "primary": 1,
+      "reentries": 5
+    },
+    "2026-06-05": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 7
+    },
+    "2026-06-08": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-06-09": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 1
+    },
+    "2026-06-10": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 1
+    },
+    "2026-06-11": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-06-12": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-06-15": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-06-16": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 3
+    },
+    "2026-06-17": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-06-18": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-06-22": {
+      "comparator": 1,
+      "eligible_bars": 64,
+      "primary": 1,
+      "reentries": 1
+    },
+    "2026-06-23": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 8
+    },
+    "2026-06-24": {
+      "comparator": 1,
+      "eligible_bars": 64,
+      "primary": 1,
+      "reentries": 6
+    },
+    "2026-06-25": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 1
+    },
+    "2026-06-26": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 5
+    },
+    "2026-06-29": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 1
+    },
+    "2026-06-30": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-07-01": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 3
+    },
+    "2026-07-02": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 2
+    },
+    "2026-07-06": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-07-07": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 6
+    },
+    "2026-07-08": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 1
+    },
+    "2026-07-09": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-07-10": {
+      "comparator": 1,
+      "eligible_bars": 64,
+      "primary": 1,
+      "reentries": 4
+    },
+    "2026-07-13": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 9
+    },
+    "2026-07-14": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-07-15": {
+      "comparator": 2,
+      "eligible_bars": 64,
+      "primary": 3,
+      "reentries": 3
+    },
+    "2026-07-16": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 4
+    },
+    "2026-07-17": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 2
+    },
+    "2026-07-20": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-07-21": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-07-22": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 5
+    },
+    "2026-07-23": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 2
+    },
+    "2026-07-24": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 4
+    },
+    "2026-07-27": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 1
+    },
+    "2026-07-28": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 5
+    },
+    "2026-07-29": {
+      "comparator": 1,
+      "eligible_bars": 64,
+      "primary": 1,
+      "reentries": 4
+    },
+    "2026-07-30": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 1
+    },
+    "2026-07-31": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 1
+    },
+    "2026-08-03": {
+      "comparator": 1,
+      "eligible_bars": 64,
+      "primary": 1,
+      "reentries": 3
+    },
+    "2026-08-04": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-08-05": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 4
+    },
+    "2026-08-06": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 4
+    },
+    "2026-08-07": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-08-10": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 6
+    },
+    "2026-08-11": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 2
+    },
+    "2026-08-12": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    },
+    "2026-08-13": {
+      "comparator": 0,
+      "eligible_bars": 64,
+      "primary": 0,
+      "reentries": 0
+    }
+  },
+  "sessions": 70,
+  "specification_sha256": "d01b31292f1b14cc2625cf9426f81d829fe448f57155dabe8b34b4f23101b73c",
+  "stage_reasons": {
+    "construction:READY:immutable_active_zone": 3740,
+    "construction:READY:no_compatible_new_pair": 521,
+    "construction:READY:zone_published": 92,
+    "construction:UNAVAILABLE:price_warmup": 127,
+    "input:READY:valid_completed_price": 4480,
+    "interaction:READY:active_zone": 3668,
+    "interaction:READY:reentry": 148,
+    "interaction:UNAVAILABLE:no_active_zone": 664,
+    "rejection:READY:failed_breakdown_reclaim": 14,
+    "rejection:READY:no_rejection": 3802,
+    "rejection:UNAVAILABLE:no_active_zone": 664,
+    "volume:READY:relative_volume": 4460,
+    "volume:UNAVAILABLE:volume_warmup": 20
+  },
+  "status": "COMPLETE_FREQUENCY_ONLY",
+  "trace_chain_hash": "c68ac876629c46775ee594531a3e76d68999b0c4e3a96c84aecc885a416592f4",
+  "volume_integrity": {
+    "meaning": "Admitted condition-eligible SIP bar shares; no buying-intent inference.",
+    "missing": 0,
+    "zero": 0
+  },
+  "zones_hash": "9e8bd26b4237214f15d3e30ca3b4110af7adb218ae3a9142d2411f6127440a97"
+}

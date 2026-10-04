@@ -1,0 +1,1173 @@
+{
+  "events": [
+    {
+      "at": "2026-05-07T16:30:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_V1",
+      "id": "f41002b3c7ffaccbba3289b2542f39314a5af23bf410520641b7917c7e15240e",
+      "session": "2026-05-07",
+      "snapshot": {
+        "bar": {
+          "close": 493.95,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-07T16:30:00+00:00",
+          "high": 494.73,
+          "known_at": "2026-05-07T16:30:00+00:00",
+          "low": 490.57,
+          "open": 493.1,
+          "session": "2026-05-07",
+          "symbol": "SOXX"
+        },
+        "close_recovery": true,
+        "wick_fraction": 0.6081730769230804,
+        "zone": {
+          "center": 492.63,
+          "created_at": "2026-05-07T14:15:00+00:00",
+          "created_index": 152,
+          "expires_index": 280,
+          "id": "03ef24a79c7ba569928558cf2d3e066d723f885cc1cf99b8ad9b1a6bb3f21827",
+          "lower": 491.8125,
+          "prefix_hash": "0fcd6757692c1cedf27448072578d28009004470317c28ae77995c3b8cfd0fab",
+          "source_pair": [
+            [
+              64,
+              "2026-05-06T08:15:00+00:00",
+              492.09
+            ],
+            [
+              151,
+              "2026-05-07T14:00:00+00:00",
+              493.17
+            ]
+          ],
+          "upper": 493.4475
+        }
+      },
+      "visit_id": "59aa3776eec4b31ec20d30a6a1935b0ba0af124299f661a329d4d910516297b0",
+      "zone_id": "03ef24a79c7ba569928558cf2d3e066d723f885cc1cf99b8ad9b1a6bb3f21827"
+    },
+    {
+      "at": "2026-05-07T16:30:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_VOLUME_CONFIRM_V1",
+      "id": "8466fb29939979d5b715ce2cfad0c1bfbdab766d3210f91740efb62ca646743b",
+      "session": "2026-05-07",
+      "snapshot": {
+        "bar": {
+          "close": 493.95,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-07T16:30:00+00:00",
+          "high": 494.73,
+          "known_at": "2026-05-07T16:30:00+00:00",
+          "low": 490.57,
+          "open": 493.1,
+          "session": "2026-05-07",
+          "symbol": "SOXX"
+        },
+        "close_recovery": true,
+        "price_event_id": "f41002b3c7ffaccbba3289b2542f39314a5af23bf410520641b7917c7e15240e",
+        "volume_lookback_bars": 20,
+        "volume_ratio": 2.853151524770864,
+        "volume_ratio_threshold": 1.0,
+        "wick_fraction": 0.6081730769230804,
+        "zone": {
+          "center": 492.63,
+          "created_at": "2026-05-07T14:15:00+00:00",
+          "created_index": 152,
+          "expires_index": 280,
+          "id": "03ef24a79c7ba569928558cf2d3e066d723f885cc1cf99b8ad9b1a6bb3f21827",
+          "lower": 491.8125,
+          "prefix_hash": "0fcd6757692c1cedf27448072578d28009004470317c28ae77995c3b8cfd0fab",
+          "source_pair": [
+            [
+              64,
+              "2026-05-06T08:15:00+00:00",
+              492.09
+            ],
+            [
+              151,
+              "2026-05-07T14:00:00+00:00",
+              493.17
+            ]
+          ],
+          "upper": 493.4475
+        }
+      },
+      "visit_id": "59aa3776eec4b31ec20d30a6a1935b0ba0af124299f661a329d4d910516297b0",
+      "zone_id": "03ef24a79c7ba569928558cf2d3e066d723f885cc1cf99b8ad9b1a6bb3f21827"
+    },
+    {
+      "at": "2026-05-12T13:45:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_V1",
+      "id": "4857da4b609a7130f8ad482962a8267379686008aa4a92c4f7170d62f2d51ffd",
+      "session": "2026-05-12",
+      "snapshot": {
+        "bar": {
+          "close": 523.89,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-12T13:45:00+00:00",
+          "high": 525.15,
+          "known_at": "2026-05-12T13:45:00+00:00",
+          "low": 516.34,
+          "open": 520.85,
+          "session": "2026-05-12",
+          "symbol": "SOXX"
+        },
+        "close_recovery": true,
+        "wick_fraction": 0.5119182746878569,
+        "zone": {
+          "center": 518.5350000000001,
+          "created_at": "2026-05-12T13:15:00+00:00",
+          "created_index": 340,
+          "expires_index": 468,
+          "id": "f94cf22ce6dd7a6857e2284999836acaf73bb08586136a7ced23324c017e5cd1",
+          "lower": 517.6775,
+          "prefix_hash": "65997f6d9732e5aa5cc3b735c1b914bc13d0d5d86ee225409059313488bd0996",
+          "source_pair": [
+            [
+              267,
+              "2026-05-11T11:00:00+00:00",
+              519.0
+            ],
+            [
+              338,
+              "2026-05-12T12:45:00+00:00",
+              518.07
+            ]
+          ],
+          "upper": 519.3925000000002
+        }
+      },
+      "visit_id": "26b2b8edf53c98e93c82a0b1d53f9b9e843cabb4daf4afe8c4e837cf2d5da35d",
+      "zone_id": "f94cf22ce6dd7a6857e2284999836acaf73bb08586136a7ced23324c017e5cd1"
+    },
+    {
+      "at": "2026-05-12T13:45:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_VOLUME_CONFIRM_V1",
+      "id": "56c401975681afc29cc8d09b5dd4889f327a665ea6aacfd786df6d62ef818722",
+      "session": "2026-05-12",
+      "snapshot": {
+        "bar": {
+          "close": 523.89,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-12T13:45:00+00:00",
+          "high": 525.15,
+          "known_at": "2026-05-12T13:45:00+00:00",
+          "low": 516.34,
+          "open": 520.85,
+          "session": "2026-05-12",
+          "symbol": "SOXX"
+        },
+        "close_recovery": true,
+        "price_event_id": "4857da4b609a7130f8ad482962a8267379686008aa4a92c4f7170d62f2d51ffd",
+        "volume_lookback_bars": 20,
+        "volume_ratio": 108.54437316225608,
+        "volume_ratio_threshold": 1.0,
+        "wick_fraction": 0.5119182746878569,
+        "zone": {
+          "center": 518.5350000000001,
+          "created_at": "2026-05-12T13:15:00+00:00",
+          "created_index": 340,
+          "expires_index": 468,
+          "id": "f94cf22ce6dd7a6857e2284999836acaf73bb08586136a7ced23324c017e5cd1",
+          "lower": 517.6775,
+          "prefix_hash": "65997f6d9732e5aa5cc3b735c1b914bc13d0d5d86ee225409059313488bd0996",
+          "source_pair": [
+            [
+              267,
+              "2026-05-11T11:00:00+00:00",
+              519.0
+            ],
+            [
+              338,
+              "2026-05-12T12:45:00+00:00",
+              518.07
+            ]
+          ],
+          "upper": 519.3925000000002
+        }
+      },
+      "visit_id": "26b2b8edf53c98e93c82a0b1d53f9b9e843cabb4daf4afe8c4e837cf2d5da35d",
+      "zone_id": "f94cf22ce6dd7a6857e2284999836acaf73bb08586136a7ced23324c017e5cd1"
+    },
+    {
+      "at": "2026-05-15T13:00:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_V1",
+      "id": "c91bce818ddf1fe056d0d5ee3c3fbcf1ec66d91f61a682fb2ba47547a159a947",
+      "session": "2026-05-15",
+      "snapshot": {
+        "bar": {
+          "close": 512.0,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-15T13:00:00+00:00",
+          "high": 512.32,
+          "known_at": "2026-05-15T13:00:00+00:00",
+          "low": 509.9181,
+          "open": 510.41,
+          "session": "2026-05-15",
+          "symbol": "SOXX"
+        },
+        "close_recovery": true,
+        "wick_fraction": 0.20479620300596596,
+        "zone": {
+          "center": 511.155,
+          "created_at": "2026-05-15T09:45:00+00:00",
+          "created_index": 518,
+          "expires_index": 646,
+          "id": "e032b9f4e3e8dadfe4fedf2d484c5f61a8e79c4bc52ae5e1a0f91b6302cbcf49",
+          "lower": 510.3375,
+          "prefix_hash": "e8cc87e8a74512ac001066d10c23550d715a8df83195b64651194bc814cacc9f",
+          "source_pair": [
+            [
+              512,
+              "2026-05-15T08:15:00+00:00",
+              510.66
+            ],
+            [
+              517,
+              "2026-05-15T09:30:00+00:00",
+              511.65
+            ]
+          ],
+          "upper": 511.97249999999997
+        }
+      },
+      "visit_id": "9cfbac44e035f2aa234e3dbb0b886383b3ddf2b1c98d93762230cf5b0ab85b8c",
+      "zone_id": "e032b9f4e3e8dadfe4fedf2d484c5f61a8e79c4bc52ae5e1a0f91b6302cbcf49"
+    },
+    {
+      "at": "2026-05-19T10:00:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_V1",
+      "id": "712fa6ffa930446703d22e7d2b50b6fe6edaedc476e98e630e9a3c6d76adb906",
+      "session": "2026-05-19",
+      "snapshot": {
+        "bar": {
+          "close": 490.0,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-19T10:00:00+00:00",
+          "high": 490.25,
+          "known_at": "2026-05-19T10:00:00+00:00",
+          "low": 487.0,
+          "open": 487.48,
+          "session": "2026-05-19",
+          "symbol": "SOXX"
+        },
+        "close_recovery": true,
+        "wick_fraction": 0.14769230769231328,
+        "zone": {
+          "center": 488.155,
+          "created_at": "2026-05-18T19:45:00+00:00",
+          "created_index": 622,
+          "expires_index": 750,
+          "id": "ee30e9a5b7f036fa6b66d19389fd18112ea763c8a319683dc54a2ba6d88069a4",
+          "lower": 487.0925,
+          "prefix_hash": "ecb043dfbacdb6707695290320cc9b6a2d569009025ea7e914b1160fa6e256dd",
+          "source_pair": [
+            [
+              617,
+              "2026-05-18T18:30:00+00:00",
+              487.36
+            ],
+            [
+              621,
+              "2026-05-18T19:30:00+00:00",
+              488.95
+            ]
+          ],
+          "upper": 489.2175
+        }
+      },
+      "visit_id": "7a9bb5680cd1cdb2e5583a165add1e62221d00f4f45da347b5af5d7d33534197",
+      "zone_id": "ee30e9a5b7f036fa6b66d19389fd18112ea763c8a319683dc54a2ba6d88069a4"
+    },
+    {
+      "at": "2026-05-19T10:00:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_VOLUME_CONFIRM_V1",
+      "id": "675d7ab07460c66052d0fb48e6d368c58219dec6990b1a3aeebc286eedfcf15a",
+      "session": "2026-05-19",
+      "snapshot": {
+        "bar": {
+          "close": 490.0,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-19T10:00:00+00:00",
+          "high": 490.25,
+          "known_at": "2026-05-19T10:00:00+00:00",
+          "low": 487.0,
+          "open": 487.48,
+          "session": "2026-05-19",
+          "symbol": "SOXX"
+        },
+        "close_recovery": true,
+        "price_event_id": "712fa6ffa930446703d22e7d2b50b6fe6edaedc476e98e630e9a3c6d76adb906",
+        "volume_lookback_bars": 20,
+        "volume_ratio": 3.9303857008466605,
+        "volume_ratio_threshold": 1.0,
+        "wick_fraction": 0.14769230769231328,
+        "zone": {
+          "center": 488.155,
+          "created_at": "2026-05-18T19:45:00+00:00",
+          "created_index": 622,
+          "expires_index": 750,
+          "id": "ee30e9a5b7f036fa6b66d19389fd18112ea763c8a319683dc54a2ba6d88069a4",
+          "lower": 487.0925,
+          "prefix_hash": "ecb043dfbacdb6707695290320cc9b6a2d569009025ea7e914b1160fa6e256dd",
+          "source_pair": [
+            [
+              617,
+              "2026-05-18T18:30:00+00:00",
+              487.36
+            ],
+            [
+              621,
+              "2026-05-18T19:30:00+00:00",
+              488.95
+            ]
+          ],
+          "upper": 489.2175
+        }
+      },
+      "visit_id": "7a9bb5680cd1cdb2e5583a165add1e62221d00f4f45da347b5af5d7d33534197",
+      "zone_id": "ee30e9a5b7f036fa6b66d19389fd18112ea763c8a319683dc54a2ba6d88069a4"
+    },
+    {
+      "at": "2026-05-28T21:45:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_V1",
+      "id": "6bd4da5cad7fcffe5777c097608449b561892fab3f0111a2d023d39b2408a1e8",
+      "session": "2026-05-28",
+      "snapshot": {
+        "bar": {
+          "close": 571.0,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-28T21:45:00+00:00",
+          "high": 571.831,
+          "known_at": "2026-05-28T21:45:00+00:00",
+          "low": 554.32,
+          "open": 571.347,
+          "session": "2026-05-28",
+          "symbol": "SOXX"
+        },
+        "close_recovery": false,
+        "wick_fraction": 0.9525441151276329,
+        "zone": {
+          "center": 569.9875,
+          "created_at": "2026-05-28T20:15:00+00:00",
+          "created_index": 1072,
+          "expires_index": 1200,
+          "id": "54d5808f8b67d84b8967a4c7896b71c97c86d9c6430a921db8bbe1d6673939a2",
+          "lower": 568.9875,
+          "prefix_hash": "0a149994a891d6344efa0384518a8313c3577382b4aa25afcf72bb3477827b2c",
+          "source_pair": [
+            [
+              1062,
+              "2026-05-28T17:45:00+00:00",
+              570.825
+            ],
+            [
+              1069,
+              "2026-05-28T19:30:00+00:00",
+              569.15
+            ]
+          ],
+          "upper": 570.9875
+        }
+      },
+      "visit_id": "3d65c9e95b112d5a1f015a594927c980b01285a0e96e9fa9fa6b550bf3208912",
+      "zone_id": "54d5808f8b67d84b8967a4c7896b71c97c86d9c6430a921db8bbe1d6673939a2"
+    },
+    {
+      "at": "2026-06-04T12:00:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_V1",
+      "id": "b7047e982e706ba7cde168d6330f941ccb1dd3b1809c98f9344eca074ed3756e",
+      "session": "2026-06-04",
+      "snapshot": {
+        "bar": {
+          "close": 588.6735,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-04T12:00:00+00:00",
+          "high": 589.41,
+          "known_at": "2026-06-04T12:00:00+00:00",
+          "low": 586.0,
+          "open": 586.74,
+          "session": "2026-06-04",
+          "symbol": "SOXX"
+        },
+        "close_recovery": true,
+        "wick_fraction": 0.21700879765396364,
+        "zone": {
+          "center": 587.35375,
+          "created_at": "2026-06-02T14:45:00+00:00",
+          "created_index": 1242,
+          "expires_index": 1370,
+          "id": "7768315540bbabea1bbed073de39c71be404435b1e78da4cc37ac9638e002c56",
+          "lower": 586.4327499999999,
+          "prefix_hash": "e8f91f05dfb84880e0e7d1a24ad2a5a6b888219b5c0165b1048fb6d333551af1",
+          "source_pair": [
+            [
+              1224,
+              "2026-06-02T10:15:00+00:00",
+              586.5
+            ],
+            [
+              1241,
+              "2026-06-02T14:30:00+00:00",
+              588.2075
+            ]
+          ],
+          "upper": 588.27475
+        }
+      },
+      "visit_id": "6212819a02c26d056a0fda18780bd345b76f88a3e83e3f2e4d78fb8a4eef76f9",
+      "zone_id": "7768315540bbabea1bbed073de39c71be404435b1e78da4cc37ac9638e002c56"
+    },
+    {
+      "at": "2026-06-04T12:00:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_VOLUME_CONFIRM_V1",
+      "id": "87049aa3d7d16c9b406f408673e738e750a0d54ac138e6b05b6dc7217f8ffc7d",
+      "session": "2026-06-04",
+      "snapshot": {
+        "bar": {
+          "close": 588.6735,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-04T12:00:00+00:00",
+          "high": 589.41,
+          "known_at": "2026-06-04T12:00:00+00:00",
+          "low": 586.0,
+          "open": 586.74,
+          "session": "2026-06-04",
+          "symbol": "SOXX"
+        },
+        "close_recovery": true,
+        "price_event_id": "b7047e982e706ba7cde168d6330f941ccb1dd3b1809c98f9344eca074ed3756e",
+        "volume_lookback_bars": 20,
+        "volume_ratio": 1.682335887347277,
+        "volume_ratio_threshold": 1.0,
+        "wick_fraction": 0.21700879765396364,
+        "zone": {
+          "center": 587.35375,
+          "created_at": "2026-06-02T14:45:00+00:00",
+          "created_index": 1242,
+          "expires_index": 1370,
+          "id": "7768315540bbabea1bbed073de39c71be404435b1e78da4cc37ac9638e002c56",
+          "lower": 586.4327499999999,
+          "prefix_hash": "e8f91f05dfb84880e0e7d1a24ad2a5a6b888219b5c0165b1048fb6d333551af1",
+          "source_pair": [
+            [
+              1224,
+              "2026-06-02T10:15:00+00:00",
+              586.5
+            ],
+            [
+              1241,
+              "2026-06-02T14:30:00+00:00",
+              588.2075
+            ]
+          ],
+          "upper": 588.27475
+        }
+      },
+      "visit_id": "6212819a02c26d056a0fda18780bd345b76f88a3e83e3f2e4d78fb8a4eef76f9",
+      "zone_id": "7768315540bbabea1bbed073de39c71be404435b1e78da4cc37ac9638e002c56"
+    },
+    {
+      "at": "2026-06-22T08:15:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_V1",
+      "id": "ed482fab48bf9935b83411e68070e30a0d243a9210239692f614b72af3f7c387",
+      "session": "2026-06-22",
+      "snapshot": {
+        "bar": {
+          "close": 642.49,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-22T08:15:00+00:00",
+          "high": 644.597,
+          "known_at": "2026-06-22T08:15:00+00:00",
+          "low": 633.91,
+          "open": 643.33,
+          "session": "2026-06-22",
+          "symbol": "SOXX"
+        },
+        "close_recovery": true,
+        "wick_fraction": 0.8028445775240977,
+        "zone": {
+          "center": 637.85,
+          "created_at": "2026-06-18T23:45:00+00:00",
+          "created_index": 2046,
+          "expires_index": 2174,
+          "id": "f7594f5909302daf47b79238987958ed9a8ece0907fece698e6d2e0ea1a65e04",
+          "lower": 636.7850000000001,
+          "prefix_hash": "734273e8094515498970a98c42eaa826b17ecd0d07112467dca1683e4d7bfda0",
+          "source_pair": [
+            [
+              2032,
+              "2026-06-18T20:15:00+00:00",
+              637.1
+            ],
+            [
+              2044,
+              "2026-06-18T23:15:00+00:00",
+              638.6
+            ]
+          ],
+          "upper": 638.915
+        }
+      },
+      "visit_id": "741c21f635046f8267ef457c79d1e72852f848a63f81022ca3e84811fa71462e",
+      "zone_id": "f7594f5909302daf47b79238987958ed9a8ece0907fece698e6d2e0ea1a65e04"
+    },
+    {
+      "at": "2026-06-22T08:15:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_VOLUME_CONFIRM_V1",
+      "id": "3ca50afb058b8c4e93997967eb6bc9e6773a10c285bf335c8c25f5f2b5b377e8",
+      "session": "2026-06-22",
+      "snapshot": {
+        "bar": {
+          "close": 642.49,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-22T08:15:00+00:00",
+          "high": 644.597,
+          "known_at": "2026-06-22T08:15:00+00:00",
+          "low": 633.91,
+          "open": 643.33,
+          "session": "2026-06-22",
+          "symbol": "SOXX"
+        },
+        "close_recovery": true,
+        "price_event_id": "ed482fab48bf9935b83411e68070e30a0d243a9210239692f614b72af3f7c387",
+        "volume_lookback_bars": 20,
+        "volume_ratio": 4.6042684494728725,
+        "volume_ratio_threshold": 1.0,
+        "wick_fraction": 0.8028445775240977,
+        "zone": {
+          "center": 637.85,
+          "created_at": "2026-06-18T23:45:00+00:00",
+          "created_index": 2046,
+          "expires_index": 2174,
+          "id": "f7594f5909302daf47b79238987958ed9a8ece0907fece698e6d2e0ea1a65e04",
+          "lower": 636.7850000000001,
+          "prefix_hash": "734273e8094515498970a98c42eaa826b17ecd0d07112467dca1683e4d7bfda0",
+          "source_pair": [
+            [
+              2032,
+              "2026-06-18T20:15:00+00:00",
+              637.1
+            ],
+            [
+              2044,
+              "2026-06-18T23:15:00+00:00",
+              638.6
+            ]
+          ],
+          "upper": 638.915
+        }
+      },
+      "visit_id": "741c21f635046f8267ef457c79d1e72852f848a63f81022ca3e84811fa71462e",
+      "zone_id": "f7594f5909302daf47b79238987958ed9a8ece0907fece698e6d2e0ea1a65e04"
+    },
+    {
+      "at": "2026-06-24T14:30:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_V1",
+      "id": "e83e37a893e6d1ef9001247310da9db44945cf7b72cc809499951b4182751418",
+      "session": "2026-06-24",
+      "snapshot": {
+        "bar": {
+          "close": 601.33,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-24T14:30:00+00:00",
+          "high": 602.5,
+          "known_at": "2026-06-24T14:30:00+00:00",
+          "low": 594.81,
+          "open": 601.0,
+          "session": "2026-06-24",
+          "symbol": "SOXX"
+        },
+        "close_recovery": true,
+        "wick_fraction": 0.8049414824447348,
+        "zone": {
+          "center": 599.425,
+          "created_at": "2026-06-24T14:15:00+00:00",
+          "created_index": 2200,
+          "expires_index": 2328,
+          "id": "cfb8bb354d842d2b3925f9b8d6d252965640a1daa8ebc656ea9161e08e0aa38a",
+          "lower": 597.994025,
+          "prefix_hash": "1c4253aaf216daa02534158fb0395b7a37def6daae7a52e736053a87bf3c129f",
+          "source_pair": [
+            [
+              2155,
+              "2026-06-23T19:00:00+00:00",
+              598.19
+            ],
+            [
+              2159,
+              "2026-06-23T20:00:00+00:00",
+              600.66
+            ]
+          ],
+          "upper": 600.855975
+        }
+      },
+      "visit_id": "1d837ea67514d78724502ec7c18a45b633725b2c42b35959dafcdfa4bf698c3e",
+      "zone_id": "cfb8bb354d842d2b3925f9b8d6d252965640a1daa8ebc656ea9161e08e0aa38a"
+    },
+    {
+      "at": "2026-06-24T14:30:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_VOLUME_CONFIRM_V1",
+      "id": "02fc92e4e108f4a1224d39fb28ced2de2140d71f1fc2870461790783bfef1696",
+      "session": "2026-06-24",
+      "snapshot": {
+        "bar": {
+          "close": 601.33,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-24T14:30:00+00:00",
+          "high": 602.5,
+          "known_at": "2026-06-24T14:30:00+00:00",
+          "low": 594.81,
+          "open": 601.0,
+          "session": "2026-06-24",
+          "symbol": "SOXX"
+        },
+        "close_recovery": true,
+        "price_event_id": "e83e37a893e6d1ef9001247310da9db44945cf7b72cc809499951b4182751418",
+        "volume_lookback_bars": 20,
+        "volume_ratio": 32.50442233278054,
+        "volume_ratio_threshold": 1.0,
+        "wick_fraction": 0.8049414824447348,
+        "zone": {
+          "center": 599.425,
+          "created_at": "2026-06-24T14:15:00+00:00",
+          "created_index": 2200,
+          "expires_index": 2328,
+          "id": "cfb8bb354d842d2b3925f9b8d6d252965640a1daa8ebc656ea9161e08e0aa38a",
+          "lower": 597.994025,
+          "prefix_hash": "1c4253aaf216daa02534158fb0395b7a37def6daae7a52e736053a87bf3c129f",
+          "source_pair": [
+            [
+              2155,
+              "2026-06-23T19:00:00+00:00",
+              598.19
+            ],
+            [
+              2159,
+              "2026-06-23T20:00:00+00:00",
+              600.66
+            ]
+          ],
+          "upper": 600.855975
+        }
+      },
+      "visit_id": "1d837ea67514d78724502ec7c18a45b633725b2c42b35959dafcdfa4bf698c3e",
+      "zone_id": "cfb8bb354d842d2b3925f9b8d6d252965640a1daa8ebc656ea9161e08e0aa38a"
+    },
+    {
+      "at": "2026-07-10T13:45:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_V1",
+      "id": "8e827568b5f73f680a16e8a099422a5f64db647e33a1a7e7e560162d3a53af01",
+      "session": "2026-07-10",
+      "snapshot": {
+        "bar": {
+          "close": 571.82,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-10T13:45:00+00:00",
+          "high": 576.06,
+          "known_at": "2026-07-10T13:45:00+00:00",
+          "low": 566.67,
+          "open": 571.99,
+          "session": "2026-07-10",
+          "symbol": "SOXX"
+        },
+        "close_recovery": true,
+        "wick_fraction": 0.5484558040468689,
+        "zone": {
+          "center": 570.25,
+          "created_at": "2026-07-10T13:30:00+00:00",
+          "created_index": 2901,
+          "expires_index": 3029,
+          "id": "9b757a958ce0f5f9226a180cdff1b099d48120a873838b9cdc6248a005b4c3ca",
+          "lower": 569.1575,
+          "prefix_hash": "b155c5d3ece52cd97476247c69a069880cb820a46496af1eecc89b90b9c21ea2",
+          "source_pair": [
+            [
+              2884,
+              "2026-07-10T09:15:00+00:00",
+              570.5
+            ],
+            [
+              2900,
+              "2026-07-10T13:15:00+00:00",
+              570.0
+            ]
+          ],
+          "upper": 571.3425
+        }
+      },
+      "visit_id": "a2b119fcff356e894faba93f420a79c0d8e7089f32488bdaabce89ac51185526",
+      "zone_id": "9b757a958ce0f5f9226a180cdff1b099d48120a873838b9cdc6248a005b4c3ca"
+    },
+    {
+      "at": "2026-07-10T13:45:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_VOLUME_CONFIRM_V1",
+      "id": "626ed0bbcd7db05435f93418082891114119f38adb97e090e6de3891f9398ee3",
+      "session": "2026-07-10",
+      "snapshot": {
+        "bar": {
+          "close": 571.82,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-10T13:45:00+00:00",
+          "high": 576.06,
+          "known_at": "2026-07-10T13:45:00+00:00",
+          "low": 566.67,
+          "open": 571.99,
+          "session": "2026-07-10",
+          "symbol": "SOXX"
+        },
+        "close_recovery": true,
+        "price_event_id": "8e827568b5f73f680a16e8a099422a5f64db647e33a1a7e7e560162d3a53af01",
+        "volume_lookback_bars": 20,
+        "volume_ratio": 117.3328792780521,
+        "volume_ratio_threshold": 1.0,
+        "wick_fraction": 0.5484558040468689,
+        "zone": {
+          "center": 570.25,
+          "created_at": "2026-07-10T13:30:00+00:00",
+          "created_index": 2901,
+          "expires_index": 3029,
+          "id": "9b757a958ce0f5f9226a180cdff1b099d48120a873838b9cdc6248a005b4c3ca",
+          "lower": 569.1575,
+          "prefix_hash": "b155c5d3ece52cd97476247c69a069880cb820a46496af1eecc89b90b9c21ea2",
+          "source_pair": [
+            [
+              2884,
+              "2026-07-10T09:15:00+00:00",
+              570.5
+            ],
+            [
+              2900,
+              "2026-07-10T13:15:00+00:00",
+              570.0
+            ]
+          ],
+          "upper": 571.3425
+        }
+      },
+      "visit_id": "a2b119fcff356e894faba93f420a79c0d8e7089f32488bdaabce89ac51185526",
+      "zone_id": "9b757a958ce0f5f9226a180cdff1b099d48120a873838b9cdc6248a005b4c3ca"
+    },
+    {
+      "at": "2026-07-15T15:00:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_V1",
+      "id": "89bb4fc207026976d24e8ce1e2bb45f3362e1c7734de470f26545a661aa7efe5",
+      "session": "2026-07-15",
+      "snapshot": {
+        "bar": {
+          "close": 552.67,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-15T15:00:00+00:00",
+          "high": 553.53,
+          "known_at": "2026-07-15T15:00:00+00:00",
+          "low": 548.54,
+          "open": 550.2,
+          "session": "2026-07-15",
+          "symbol": "SOXX"
+        },
+        "close_recovery": true,
+        "wick_fraction": 0.33266533066133847,
+        "zone": {
+          "center": 550.13,
+          "created_at": "2026-07-14T00:00:00+00:00",
+          "created_index": 3007,
+          "expires_index": 3135,
+          "id": "4939f25fbd250488ef4d88c72e7751608ddcd84ea53745429c7a6b25c9335bf0",
+          "lower": 549.1625,
+          "prefix_hash": "5b497223cd6fccc293f3e466ec826726e20de7dbb04abbc718040a32de07bd5d",
+          "source_pair": [
+            [
+              2989,
+              "2026-07-13T19:30:00+00:00",
+              550.26
+            ],
+            [
+              3004,
+              "2026-07-13T23:15:00+00:00",
+              550.0
+            ]
+          ],
+          "upper": 551.0975
+        }
+      },
+      "visit_id": "a832544b217c764c94b0eedfa5da3dbaaf8dd3d5320ca09d9c7c550f3628cc1d",
+      "zone_id": "4939f25fbd250488ef4d88c72e7751608ddcd84ea53745429c7a6b25c9335bf0"
+    },
+    {
+      "at": "2026-07-15T15:00:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_VOLUME_CONFIRM_V1",
+      "id": "4b602e393592f68b06e711fe897355776e2274f89cbcc79601c5aa7d1817173c",
+      "session": "2026-07-15",
+      "snapshot": {
+        "bar": {
+          "close": 552.67,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-15T15:00:00+00:00",
+          "high": 553.53,
+          "known_at": "2026-07-15T15:00:00+00:00",
+          "low": 548.54,
+          "open": 550.2,
+          "session": "2026-07-15",
+          "symbol": "SOXX"
+        },
+        "close_recovery": true,
+        "price_event_id": "89bb4fc207026976d24e8ce1e2bb45f3362e1c7734de470f26545a661aa7efe5",
+        "volume_lookback_bars": 20,
+        "volume_ratio": 44.77796231601855,
+        "volume_ratio_threshold": 1.0,
+        "wick_fraction": 0.33266533066133847,
+        "zone": {
+          "center": 550.13,
+          "created_at": "2026-07-14T00:00:00+00:00",
+          "created_index": 3007,
+          "expires_index": 3135,
+          "id": "4939f25fbd250488ef4d88c72e7751608ddcd84ea53745429c7a6b25c9335bf0",
+          "lower": 549.1625,
+          "prefix_hash": "5b497223cd6fccc293f3e466ec826726e20de7dbb04abbc718040a32de07bd5d",
+          "source_pair": [
+            [
+              2989,
+              "2026-07-13T19:30:00+00:00",
+              550.26
+            ],
+            [
+              3004,
+              "2026-07-13T23:15:00+00:00",
+              550.0
+            ]
+          ],
+          "upper": 551.0975
+        }
+      },
+      "visit_id": "a832544b217c764c94b0eedfa5da3dbaaf8dd3d5320ca09d9c7c550f3628cc1d",
+      "zone_id": "4939f25fbd250488ef4d88c72e7751608ddcd84ea53745429c7a6b25c9335bf0"
+    },
+    {
+      "at": "2026-07-15T15:30:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_V1",
+      "id": "35ab009e2b111b8af716f44d61da42d352008adadc8a1d54a88a394fe542f231",
+      "session": "2026-07-15",
+      "snapshot": {
+        "bar": {
+          "close": 550.94,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-15T15:30:00+00:00",
+          "high": 551.09,
+          "known_at": "2026-07-15T15:30:00+00:00",
+          "low": 546.06,
+          "open": 549.01,
+          "session": "2026-07-15",
+          "symbol": "SOXX"
+        },
+        "close_recovery": true,
+        "wick_fraction": 0.5864811133200785,
+        "zone": {
+          "center": 547.44,
+          "created_at": "2026-07-15T15:15:00+00:00",
+          "created_index": 3100,
+          "expires_index": 3228,
+          "id": "1f1b89d019e66da55821b9d0b23425f1e405f8d52033c3d9badf898602545257",
+          "lower": 546.4380500000001,
+          "prefix_hash": "4c8b56bb71b55d027c6f95499ecc1bb09a92b7b6ea00ee18817ccb1e997a0e5b",
+          "source_pair": [
+            [
+              3007,
+              "2026-07-14T00:00:00+00:00",
+              548.28
+            ],
+            [
+              3098,
+              "2026-07-15T14:45:00+00:00",
+              546.6
+            ]
+          ],
+          "upper": 548.44195
+        }
+      },
+      "visit_id": "80927326eb1c9432291d2e14382f879f7548676fd779af30795b850cc08410d9",
+      "zone_id": "1f1b89d019e66da55821b9d0b23425f1e405f8d52033c3d9badf898602545257"
+    },
+    {
+      "at": "2026-07-15T15:30:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_VOLUME_CONFIRM_V1",
+      "id": "9e54ba9449be922382205de9c88a1f7b802aba702ffa5000d44ae6b290e2930b",
+      "session": "2026-07-15",
+      "snapshot": {
+        "bar": {
+          "close": 550.94,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-15T15:30:00+00:00",
+          "high": 551.09,
+          "known_at": "2026-07-15T15:30:00+00:00",
+          "low": 546.06,
+          "open": 549.01,
+          "session": "2026-07-15",
+          "symbol": "SOXX"
+        },
+        "close_recovery": true,
+        "price_event_id": "35ab009e2b111b8af716f44d61da42d352008adadc8a1d54a88a394fe542f231",
+        "volume_lookback_bars": 20,
+        "volume_ratio": 30.820222707579934,
+        "volume_ratio_threshold": 1.0,
+        "wick_fraction": 0.5864811133200785,
+        "zone": {
+          "center": 547.44,
+          "created_at": "2026-07-15T15:15:00+00:00",
+          "created_index": 3100,
+          "expires_index": 3228,
+          "id": "1f1b89d019e66da55821b9d0b23425f1e405f8d52033c3d9badf898602545257",
+          "lower": 546.4380500000001,
+          "prefix_hash": "4c8b56bb71b55d027c6f95499ecc1bb09a92b7b6ea00ee18817ccb1e997a0e5b",
+          "source_pair": [
+            [
+              3007,
+              "2026-07-14T00:00:00+00:00",
+              548.28
+            ],
+            [
+              3098,
+              "2026-07-15T14:45:00+00:00",
+              546.6
+            ]
+          ],
+          "upper": 548.44195
+        }
+      },
+      "visit_id": "80927326eb1c9432291d2e14382f879f7548676fd779af30795b850cc08410d9",
+      "zone_id": "1f1b89d019e66da55821b9d0b23425f1e405f8d52033c3d9badf898602545257"
+    },
+    {
+      "at": "2026-07-15T19:30:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_V1",
+      "id": "79af9a670dc5298dba837287088c287864d4f0f863627770e1996c51f3909d4c",
+      "session": "2026-07-15",
+      "snapshot": {
+        "bar": {
+          "close": 553.25,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-15T19:30:00+00:00",
+          "high": 553.3,
+          "known_at": "2026-07-15T19:30:00+00:00",
+          "low": 549.22,
+          "open": 552.53,
+          "session": "2026-07-15",
+          "symbol": "SOXX"
+        },
+        "close_recovery": true,
+        "wick_fraction": 0.8112745098039227,
+        "zone": {
+          "center": 550.685,
+          "created_at": "2026-07-15T18:45:00+00:00",
+          "created_index": 3114,
+          "expires_index": 3242,
+          "id": "3ab783e232ce452241c45cdb022190e8ab32bc97a663962da0d77804bd8306c8",
+          "lower": 549.68305,
+          "prefix_hash": "e23960c5de8b3e59c5530225ed0c9fa5c6ed471734369497caa34273d666f6c4",
+          "source_pair": [
+            [
+              3004,
+              "2026-07-13T23:15:00+00:00",
+              550.0
+            ],
+            [
+              3113,
+              "2026-07-15T18:30:00+00:00",
+              551.37
+            ]
+          ],
+          "upper": 551.6869499999999
+        }
+      },
+      "visit_id": "343b32aab524380a4230c2d63a040b2475e45de9db7bf6cc02944162206924aa",
+      "zone_id": "3ab783e232ce452241c45cdb022190e8ab32bc97a663962da0d77804bd8306c8"
+    },
+    {
+      "at": "2026-07-29T08:15:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_V1",
+      "id": "c3dc3a53a1a1694edbd704485b439ede3d3065cd6c7f825132c507ef3ecaf565",
+      "session": "2026-07-29",
+      "snapshot": {
+        "bar": {
+          "close": 482.99,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-29T08:15:00+00:00",
+          "high": 486.5,
+          "known_at": "2026-07-29T08:15:00+00:00",
+          "low": 472.0,
+          "open": 484.2,
+          "session": "2026-07-29",
+          "symbol": "SOXX"
+        },
+        "close_recovery": false,
+        "wick_fraction": 0.7579310344827592,
+        "zone": {
+          "center": 480.305,
+          "created_at": "2026-07-28T23:30:00+00:00",
+          "created_index": 3709,
+          "expires_index": 3837,
+          "id": "7a98fc0da330672b06054a92bc19980580ea3912cafa50e83b3e6e4f46d0c239",
+          "lower": 478.9825,
+          "prefix_hash": "4d86965661f0bf7d17bb04ad407573cdbfe03e6f6bb11207cfb70063d4c465bf",
+          "source_pair": [
+            [
+              3673,
+              "2026-07-28T14:30:00+00:00",
+              480.5
+            ],
+            [
+              3708,
+              "2026-07-28T23:15:00+00:00",
+              480.11
+            ]
+          ],
+          "upper": 481.6275
+        }
+      },
+      "visit_id": "26213075956c324c3ce44139fa37c23e6df9ab19ee053b8ef9a96964cc2724f4",
+      "zone_id": "7a98fc0da330672b06054a92bc19980580ea3912cafa50e83b3e6e4f46d0c239"
+    },
+    {
+      "at": "2026-07-29T08:15:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_VOLUME_CONFIRM_V1",
+      "id": "fdd0d0b15cb014a316778a573f575eeb44fca00b2da7b06cc0f7c97ce8955101",
+      "session": "2026-07-29",
+      "snapshot": {
+        "bar": {
+          "close": 482.99,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-29T08:15:00+00:00",
+          "high": 486.5,
+          "known_at": "2026-07-29T08:15:00+00:00",
+          "low": 472.0,
+          "open": 484.2,
+          "session": "2026-07-29",
+          "symbol": "SOXX"
+        },
+        "close_recovery": false,
+        "price_event_id": "c3dc3a53a1a1694edbd704485b439ede3d3065cd6c7f825132c507ef3ecaf565",
+        "volume_lookback_bars": 20,
+        "volume_ratio": 2.7645690159943297,
+        "volume_ratio_threshold": 1.0,
+        "wick_fraction": 0.7579310344827592,
+        "zone": {
+          "center": 480.305,
+          "created_at": "2026-07-28T23:30:00+00:00",
+          "created_index": 3709,
+          "expires_index": 3837,
+          "id": "7a98fc0da330672b06054a92bc19980580ea3912cafa50e83b3e6e4f46d0c239",
+          "lower": 478.9825,
+          "prefix_hash": "4d86965661f0bf7d17bb04ad407573cdbfe03e6f6bb11207cfb70063d4c465bf",
+          "source_pair": [
+            [
+              3673,
+              "2026-07-28T14:30:00+00:00",
+              480.5
+            ],
+            [
+              3708,
+              "2026-07-28T23:15:00+00:00",
+              480.11
+            ]
+          ],
+          "upper": 481.6275
+        }
+      },
+      "visit_id": "26213075956c324c3ce44139fa37c23e6df9ab19ee053b8ef9a96964cc2724f4",
+      "zone_id": "7a98fc0da330672b06054a92bc19980580ea3912cafa50e83b3e6e4f46d0c239"
+    },
+    {
+      "at": "2026-08-03T14:00:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_V1",
+      "id": "705af3660822fbacaa7a643e7588aceac310d20054d1ee3fa6048ca97099c2bf",
+      "session": "2026-08-03",
+      "snapshot": {
+        "bar": {
+          "close": 494.0381,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-08-03T14:00:00+00:00",
+          "high": 494.16,
+          "known_at": "2026-08-03T14:00:00+00:00",
+          "low": 486.03,
+          "open": 489.89,
+          "session": "2026-08-03",
+          "symbol": "SOXX"
+        },
+        "close_recovery": true,
+        "wick_fraction": 0.4747847478474771,
+        "zone": {
+          "center": 489.71,
+          "created_at": "2026-08-03T13:30:00+00:00",
+          "created_index": 3925,
+          "expires_index": 4053,
+          "id": "f5743b74f4d004278e9c3c87de37e274bcd782dd5fdbdf7ca606cbdf1e110869",
+          "lower": 488.34999999999997,
+          "prefix_hash": "c1e9b0c1d793908db6c9dfedc843fb20bd875c111ad753d4b591f0c433a93375",
+          "source_pair": [
+            [
+              3920,
+              "2026-08-03T12:15:00+00:00",
+              488.83
+            ],
+            [
+              3924,
+              "2026-08-03T13:15:00+00:00",
+              490.59
+            ]
+          ],
+          "upper": 491.07
+        }
+      },
+      "visit_id": "620b5e724619e42fc62305ce264b8a541b229863a052eeb10f33ea514a4d1803",
+      "zone_id": "f5743b74f4d004278e9c3c87de37e274bcd782dd5fdbdf7ca606cbdf1e110869"
+    },
+    {
+      "at": "2026-08-03T14:00:00+00:00",
+      "family": "PRICE_DEFENSE_REVERSAL_VOLUME_CONFIRM_V1",
+      "id": "06b2187dfec30f402c8981751c36955d026b83d092fc56598288dd56d9f45fbd",
+      "session": "2026-08-03",
+      "snapshot": {
+        "bar": {
+          "close": 494.0381,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-08-03T14:00:00+00:00",
+          "high": 494.16,
+          "known_at": "2026-08-03T14:00:00+00:00",
+          "low": 486.03,
+          "open": 489.89,
+          "session": "2026-08-03",
+          "symbol": "SOXX"
+        },
+        "close_recovery": true,
+        "price_event_id": "705af3660822fbacaa7a643e7588aceac310d20054d1ee3fa6048ca97099c2bf",
+        "volume_lookback_bars": 20,
+        "volume_ratio": 41.93726778310268,
+        "volume_ratio_threshold": 1.0,
+        "wick_fraction": 0.4747847478474771,
+        "zone": {
+          "center": 489.71,
+          "created_at": "2026-08-03T13:30:00+00:00",
+          "created_index": 3925,
+          "expires_index": 4053,
+          "id": "f5743b74f4d004278e9c3c87de37e274bcd782dd5fdbdf7ca606cbdf1e110869",
+          "lower": 488.34999999999997,
+          "prefix_hash": "c1e9b0c1d793908db6c9dfedc843fb20bd875c111ad753d4b591f0c433a93375",
+          "source_pair": [
+            [
+              3920,
+              "2026-08-03T12:15:00+00:00",
+              488.83
+            ],
+            [
+              3924,
+              "2026-08-03T13:15:00+00:00",
+              490.59
+            ]
+          ],
+          "upper": 491.07
+        }
+      },
+      "visit_id": "620b5e724619e42fc62305ce264b8a541b229863a052eeb10f33ea514a4d1803",
+      "zone_id": "f5743b74f4d004278e9c3c87de37e274bcd782dd5fdbdf7ca606cbdf1e110869"
+    }
+  ]
+}

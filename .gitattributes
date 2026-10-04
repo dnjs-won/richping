@@ -2,3 +2,11 @@
 research/data_evidence/h0001-action-unit-20261003/sources/*.bin binary
 # Selected discovery hashes bind archived bytes, including JSON/XML line endings.
 research/data_evidence/h0001-alpaca-70-20261004/** -text
+# All archived research evidence binds captured bytes, including earlier vintages.
+research/data_evidence/** -text
+# H0002 preexecution source hashes are byte-exact across fresh checkouts.
+richping/research_v2/strategy/h0002_defense.py -text
+scripts/h0002_frequency_audit.py -text
+research/hypotheses/H0002-r01.yaml -text
+research/strategy_specs/H0002-r01-candidate.yaml -text
+docs/H0002_PRICE_DEFENSE_RESEARCH.md -text

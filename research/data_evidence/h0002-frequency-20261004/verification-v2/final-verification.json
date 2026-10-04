@@ -1,0 +1,34 @@
+{
+  "actual_original_file_bytes_identical": true,
+  "artifacts": {
+    "candidate-events.json": "a89cf3f211f1c67f4d1146014e6d3f8cfabde8933458f0f2fc4a99934dff750e",
+    "frequency-audit-source-v1.py.bin": "858dc2a6b75b0b5483a2bdd0a9dec7b919d293438350dac8dd4aa183916b71dc",
+    "frequency-audit.json": "27ce80bac80adc585ed2f4a6990bbd3f91b1fcf099b522b28ffc3ec3582bf209",
+    "preexecution-manifest.json": "e0ad15f629a05aa4d9a4b1bea600a9b624bae112f8359705ce6e2f5a0c2d0ca2",
+    "published-zones.json": "56f5ec0681e2218294afa66db33c5cb71c13b288de1f1451956a09705abb15b9",
+    "verification-v2/candidate-events.json": "a89cf3f211f1c67f4d1146014e6d3f8cfabde8933458f0f2fc4a99934dff750e",
+    "verification-v2/frequency-audit.json": "af2969cbd6c66df3748ad1ca6865f3fb9a33d1a9f145e33cc71abb0cbd1981e9",
+    "verification-v2/full-suite.xml": "29d37f8801d1b62eb0266b53380e74513eb42214a0f019a8b57aa29d66b6536d",
+    "verification-v2/preexecution-manifest.json": "7e3106459e350298d5e337db6b22e84e0d81e1432d9a1051f97b413084543e1c",
+    "verification-v2/published-zones.json": "56f5ec0681e2218294afa66db33c5cb71c13b288de1f1451956a09705abb15b9",
+    "verification-v2/targeted-suite.xml": "6147856fc7a5531b91b0f39f3211d2fe591f87dfac74a4b42fbfa671451611c1",
+    "verification-v2/test-report.json": "727a87eeb6e618189d68dfb7421a0aeeac5e437245effff72733fce4b244eb0c"
+  },
+  "canonical_manifest_sha256": "7e3106459e350298d5e337db6b22e84e0d81e1432d9a1051f97b413084543e1c",
+  "canonical_report_sha256": "af2969cbd6c66df3748ad1ca6865f3fb9a33d1a9f145e33cc71abb0cbd1981e9",
+  "final_source_LF_sha256": {
+    "docs/H0002_FREQUENCY_RESULTS.md": "20ebf1dfec7d94f8942facca313e156cda6830525a53fdc4213204649fc0191a",
+    "research/decision_records/H0002-hypothesis-frequency-v1.yaml": "076b8e117e09eb1c72bab96c0b1d4c9266ad9d7fc568532990db01d81e651cdc",
+    "scripts/h0002_publish.py": "f81100b5f3b2dce96dc261faaa48e1bde76636e5a5a633b67aac6e9516cc5bd4",
+    "tests/test_h0002_defense.py": "e1e29410ac3e9c49ba8e113ea63962d976fcc7208d39b65eb744c15f5d51b62a",
+    "tests/test_independent_research_intake.py": "14456b6d50a2b8630cbf921a5c9934227b612b21bff901e45539036d56457d9b"
+  },
+  "outcome_access": 0,
+  "parameter_trials": 1,
+  "preexecution_source_verified": true,
+  "preserved_files": 337,
+  "profitability": "NOT_RUN",
+  "schema": "h0002_final_verification_v1",
+  "signal_spec_or_module_changed_after_frequency": false,
+  "test_report_sha256": "727a87eeb6e618189d68dfb7421a0aeeac5e437245effff72733fce4b244eb0c"
+}

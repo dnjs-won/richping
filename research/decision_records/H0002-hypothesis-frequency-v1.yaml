@@ -1,0 +1,70 @@
+schema: h0002_hypothesis_frequency_decision_v1
+decision_id: H0002-HYPOTHESIS-FREQUENCY-V1
+date: '2026-10-04'
+status: COMPLETE_FREQUENCY_ONLY_NOT_FINAL_SIGNAL_FREEZE
+owner_strategy_decision: COMPLETE_PRICE_STRUCTURE_VOLUME_DEFENSE_REVERSAL
+hypothesis: research/hypotheses/H0002-r01.yaml
+candidate_spec: research/strategy_specs/H0002-r01-candidate.yaml
+contract: docs/H0002_PRICE_DEFENSE_RESEARCH.md
+result: docs/H0002_FREQUENCY_RESULTS.md
+branch: v2-h0002-price-defense-frequency
+implementation_state: IMPLEMENTED_EXECUTED_ON_REAL_DATA_EVIDENCE_PRODUCED_NOT_MAIN_INTEGRATED
+source_of_truth_bootstrap:
+  main_commit: c20788ea48d21ba001c9c009a5db6965bea08645
+  implementation_base: a014d4704b551ed80b9eb38fb57bac0308bb1e7c
+  canonical_next_action: INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION
+scope:
+  universe: [SOXX]
+  timeframe: 15m
+  session_proposal: Full admitted 04:00-20:00 ET stream; independently defined, final freeze pending.
+  direction: Long directional research question only.
+  outcome_authority: NONE
+primary: PRICE_DEFENSE_REVERSAL_V1
+comparator: PRICE_DEFENSE_REVERSAL_VOLUME_CONFIRM_V1
+selection_basis: Owner observation, simplicity, causal implementability, admitted data integrity; no outcome selection.
+parameter_trials: 1
+definitions_relaxed_after_frequency: false
+dataset:
+  id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+  hash: 4b39f109e8cffce8a7e680e773b560b307e21dd5a92dcad6d06fcd47bb0aa8bd
+  role: DISCOVERY_ONLY
+  interval: ['2026-05-05', '2026-08-13']
+  sessions: 70
+  new_provider_or_dataset: false
+evidence:
+  initial_manifest: research/data_evidence/h0002-frequency-20261004/preexecution-manifest.json
+  initial_report: research/data_evidence/h0002-frequency-20261004/frequency-audit.json
+  canonical_verification: research/data_evidence/h0002-frequency-20261004/verification-v2/frequency-audit.json
+  events: research/data_evidence/h0002-frequency-20261004/verification-v2/candidate-events.json
+  tests: research/data_evidence/h0002-frequency-20261004/verification-v2/test-report.json
+frequency:
+  eligible_bars: 4480
+  zone_READY: 4353
+  zones: 92
+  active_zone_bars: 3816
+  reentries: 148
+  rejection_occurrences: 14
+  primary_candidates: 14
+  comparator_candidates: 11
+  primary_sessions: 12
+  comparator_sessions: 10
+  overlap: 11
+  comparator_only: 0
+  outcome_accessor_calls: 0
+  profitability_calculations: 0
+disposition: Mechanically executable and nonzero; no statistical power, efficacy or profitability conclusion.
+strategy_independence:
+  H0001: MACD extreme, GC/reversal, Daily/H1/15m composed momentum.
+  H0002: Historical low-pair zone, revisit, failed downside break/reclaim, optional volume.
+  H0001_state_dependency: false
+  H0001_preserved_files: 337
+  H0001_status: [FROZEN, AWAITING_FUTURE_CONFIRMATION, HISTORICALLY_SPARSE]
+  H0001_confirmation_changed: false
+freeze_readiness: READY_FOR_OWNER_FINAL_SIGNAL_CHOICE_NOT_ALREADY_FROZEN
+next_action:
+  id: H0002_SIGNAL_FREEZE_PREREGISTRATION
+  priority: P0
+  status: USER_DECISION_REQUIRED
+  blocks_phase_exit_criteria: [2]
+  owner_choice: Accept provisional low-pair/same-bar reclaim/session proposal and primary/comparator roles before outcomes.
+  after_choice: Freeze all signal semantics/identities, then preregister evaluation and untouched future confirmation.

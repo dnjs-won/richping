@@ -1,0 +1,30 @@
+{
+  "H0002_profitability_calculations": 0,
+  "H0002_real_outcome_access": 0,
+  "cli_help": "PASS",
+  "diff_check": "PASS",
+  "full": {
+    "errors": 0,
+    "failures": 0,
+    "passed": 1481,
+    "path": "full-suite.xml",
+    "seconds": 468.139,
+    "sha256": "29d37f8801d1b62eb0266b53380e74513eb42214a0f019a8b57aa29d66b6536d",
+    "skipped": 0,
+    "tests": 1481
+  },
+  "note": "Existing synthetic outcome arithmetic regression is not H0002 real outcome evaluation.",
+  "original_files_byte_identical_after_full_regression": 337,
+  "outcomes": "NOT_RUN",
+  "schema": "h0002_regression_tests_v1",
+  "targeted": {
+    "errors": 0,
+    "failures": 0,
+    "passed": 52,
+    "path": "targeted-suite.xml",
+    "seconds": 32.418,
+    "sha256": "6147856fc7a5531b91b0f39f3211d2fe591f87dfac74a4b42fbfa671451611c1",
+    "skipped": 0,
+    "tests": 52
+  }
+}
