@@ -29,11 +29,11 @@ items:
 
     '
   guardrail: Do not merge blindly; preserve the newer main R1 paper changes.
-  active_branch: v2-h0002-price-defense-frequency
+  active_branch: v2-h0002-signal-freeze-preregistration
   observed_relation_to_main:
-    ahead_by: 42
-    behind_by: 21
-    main_commit: c20788ea48d21ba001c9c009a5db6965bea08645
+    ahead_by: 44
+    behind_by: 22
+    main_commit: 5ac21ad4b4d7a365ab5fb56351d6a8746419a7de
 - id: H0001_MINIMAL_15M_ENTRY_FREEZE
   priority: P1
   status: COMPLETE_FROZEN_AND_OFFLINE_MECHANICALLY_EXERCISED
@@ -332,15 +332,22 @@ items:
   commit: a02d67ce1f6b3a49e28c9a022ebfd40047f17f9f
 - id: H0002_SIGNAL_FREEZE_PREREGISTRATION
   priority: P0
-  status: USER_DECISION_REQUIRED
-  blocks_phase_exit_criteria:
-  - 2
-  summary: Resolve final owner signal choice, freeze H0002 semantics/identities, then
-    preregister evaluation before outcomes.
+  status: COMPLETE_OWNER_APPROVED_AND_PREREGISTERED
+  blocks_phase_exit_criteria: []
+  summary: Owner-approved independent H0002 price-zone/same-bar failed-breakdown signal
+    FROZEN; optional nested volume comparator, SOXX15m full04-20ET, no H0001/MACD/Daily/H1
+    dependency. Discovery14/12sessions and volume11/10sessions unchanged; no H0002
+    outcomes or profitability. Preregistered4-slot primary,64/192 descriptive, prior
+    same-slot/state non-event baseline, fixed252-session confirmation2026-10-19..2027-10-19
+    and40event/20session/8block floor. Next first-efficacy adapter/discovery action;
+    future confirmation asynchronous, not project blocking. H0001 frozen/sparse126-session
+    confirmation unchanged.
   promotion_reason: Frequency-only nonzero executable evidence exists; exit2 requires
     a frozen/preregistered contract before outcomes.
-  evidence_branch: v2-h0002-price-defense-frequency
-  evidence: research/decision_records/H0002-hypothesis-frequency-v1.yaml
+  evidence_branch: v2-h0002-signal-freeze-preregistration
+  evidence: research/decision_records/H0002-signal-freeze-v1.json
+  preregistration: research/decision_records/H0002-efficacy-preregistration-v1.yaml
+  commit: d76124409130b7e39a252c84079f0a8ba61a49ca
 - id: H0002_VOLUME_SESSION_NORMALIZATION
   priority: DEFERRED
   status: OPEN
@@ -348,3 +355,28 @@ items:
     would change comparator semantics.
   reason_not_now: Not required for causal mechanical frequency or owner review; requires
     new explicit hypothesis revision, not count-driven tuning.
+- id: H0002_FIRST_EFFICACY
+  priority: P0
+  status: READY
+  blocks_phase_exit_criteria:
+  - 3
+  summary: Implement frozen nonempty evaluator and bounded exploratory discovery efficacy;
+    record disposition then route independent research.
+  evidence_branch: v2-h0002-signal-freeze-preregistration
+  preregistration: research/decision_records/H0002-efficacy-preregistration-v1.yaml
+- id: H0002_FUTURE_CONFIRMATION
+  priority: P1
+  status: PENDING_FUTURE_WINDOW
+  track: ASYNCHRONOUS
+  blocks_project: false
+  summary: 252 anchors2026-10-19..2027-10-19; fixed deadline2027-10-23 20ET; no peeking/count
+    extension.
+  preregistration: research/decision_records/H0002-efficacy-preregistration-v1.yaml
+  evidence_branch: v2-h0002-signal-freeze-preregistration
+- id: H0003_INDEPENDENT_HYPOTHESIS_INTAKE
+  priority: P1
+  status: AFTER_FIRST_EFFICACY_DISPOSITION
+  summary: Continue independent owner thesis intake without waiting for H0001/H0002
+    confirmation windows.
+  strategy_meaning: USER_DECISION_REQUIRED_WHEN_ROUTED
+  future_confirmation_dependency: false

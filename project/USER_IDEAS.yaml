@@ -33,12 +33,15 @@ items:
 
     '
 - id: USER-H0002-DEFENSE-001
-  status: ACTIVE_RESEARCH_HYPOTHESIS
+  status: ACTIVE_FROZEN_RESEARCH_HYPOTHESIS
   priority: CURRENT_H0002
   idea: Repeated price defense, failed downside breaks and price reclaim, with optional
     volume activity.
   family: PRICE_STRUCTURE_VOLUME_DEFENSE_REVERSAL
-  hypothesis_branch: v2-h0002-price-defense-frequency
+  hypothesis_branch: v2-h0002-signal-freeze-preregistration
   hypothesis: research/hypotheses/H0002-r01.yaml
   note: Observable price/OHLC/volume/time only; no actor/order-block fact, MACD or
     H0001 modification.
+  owner_signal_decision: FINAL_APPROVED
+  signal_freeze: research/decision_records/H0002-signal-freeze-v1.json
+  preregistration: research/decision_records/H0002-efficacy-preregistration-v1.yaml

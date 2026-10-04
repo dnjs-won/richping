@@ -1,3 +1,11 @@
+# Richping PM - 2026-10-04 H0002 freeze / preregistration
+
+Owner-approved independent H0002 price-zone/same-bar failed-breakdown signal FROZEN; optional nested volume comparator, SOXX15m full04-20ET, no H0001/MACD/Daily/H1 dependency. Discovery14/12sessions and volume11/10sessions unchanged; no H0002 outcomes or profitability. Preregistered4-slot primary,64/192 descriptive, prior same-slot/state non-event baseline, fixed252-session confirmation2026-10-19..2027-10-19 and40event/20session/8block floor. Next first-efficacy adapter/discovery action; future confirmation asynchronous, not project blocking. H0001 frozen/sparse126-session confirmation unchanged.
+
+Implementation v2-h0002-signal-freeze-preregistration / d76124409130b7e39a252c84079f0a8ba61a49ca. Targeted 69, full 1515 passed; no failures/errors/skips. NEXT_ACTION **H0002_FIRST_EFFICACY / READY**. Main PM update only; no code merge or outcome execution. Contract research/decision_records/H0002-efficacy-preregistration-v1.yaml.
+
+The entries below are preserved historical status reports.
+
 # Richping PM - 2026-10-04 independent H0002 frequency evidence
 
 Independent H0002 owner thesis selected; causal SOXX15m low-pair zone/revisit/same-bar reclaim implemented. Admitted Alpaca70 sessions/4480 bars; zone READY4353,92 zones,148 reentries,price14/12 sessions,volume11/10 sessions; twice equal original and portability replays; no outcomes/returns/profitability. One primary plus nested optional comparator; final signal freeze awaits owner choice. H0001 frozen/sparse asynchronous126-session confirmation unchanged.

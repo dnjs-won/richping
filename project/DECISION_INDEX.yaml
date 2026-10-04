@@ -5,7 +5,7 @@ purpose: 'Lightweight routing index for AI PM sessions. This file does not repla
   is already frozen, what remains open, and where to read the authoritative evidence.
 
   '
-default_research_branch: v2-h0002-price-defense-frequency
+default_research_branch: v2-h0002-signal-freeze-preregistration
 data_foundation:
   branch: v2-real-intraday-data-foundation
   contract: docs/V2_REAL_INTRADAY_DATA_FOUNDATION.md
@@ -24,7 +24,7 @@ canonical_sources:
     specification_version: h0001_r03_spec_v13
     sha256: bf8134733bacee17542240e53a8ec30223c1550b5bedbaa6d3994ba1444acc19
   current_status:
-    branch: v2-h0002-price-defense-frequency
+    branch: v2-h0002-signal-freeze-preregistration
     path: PROJECT_STATUS.md
   entry_efficacy_protocol:
     branch: v2-h0001-entry-efficacy-preregistration
@@ -66,26 +66,32 @@ canonical_sources:
     evidence: research/data_evidence/h0001-alpaca-70-20261004/offline-reload-proof.json
     status: COMPLETE_ZERO_SIGNAL_DISCOVERY_NO_OUTCOMES
   H0002:
-    branch: v2-h0002-price-defense-frequency
-    commit: a02d67ce1f6b3a49e28c9a022ebfd40047f17f9f
+    branch: v2-h0002-signal-freeze-preregistration
+    commit: d76124409130b7e39a252c84079f0a8ba61a49ca
     hypothesis: research/hypotheses/H0002-r01.yaml
     candidate_spec: research/strategy_specs/H0002-r01-candidate.yaml
-    record: research/decision_records/H0002-hypothesis-frequency-v1.yaml
-    evidence: research/data_evidence/h0002-frequency-20261004/verification-v3/frequency-audit.json
-    status: FREQUENCY_AUDITED_NOT_SIGNAL_FROZEN
+    record: research/decision_records/H0002-signal-freeze-v1.json
+    evidence: research/data_evidence/h0002-freeze-preregistration-20261004/verification-v2/verification.json
+    status: FROZEN_PREREGISTERED_OUTCOMES_NOT_RUN
     primary: PRICE_DEFENSE_REVERSAL_V1
     comparator: PRICE_DEFENSE_REVERSAL_VOLUME_CONFIRM_V1
     event_stream_hash: 65174fa89f16e69f373bef0a4ea655f42b19594389d6bb9e1c472c9d47a6ae45
     outcome_access: 0
+    frozen_spec: research/strategy_specs/H0002-r01-frozen-v1.yaml
+    preregistration: research/decision_records/H0002-efficacy-preregistration-v1.yaml
+    protocol_hash: a6e16e57bee2e26860f6989c88fdaeac707ecfc91a6326f54a8d754cfe327e8d
+    spec_sha256: 815566b715c682f81d82bcd6db5c96367ec10b932ff253d0255b4710581cfb91
+    confirmation: ASYNC_PENDING
   active_hypothesis:
-    branch: v2-h0002-price-defense-frequency
+    branch: v2-h0002-signal-freeze-preregistration
     path: research/hypotheses/H0002-r01.yaml
-    status: DRAFT_FREQUENCY_AUDITED
+    status: R01_THESIS_FROZEN_BY_NEW_DECISION_RECORD
+    freeze_record: research/decision_records/H0002-signal-freeze-v1.json
   active_candidate_spec:
-    branch: v2-h0002-price-defense-frequency
-    path: research/strategy_specs/H0002-r01-candidate.yaml
-    status: PROVISIONAL_NOT_SIGNAL_FROZEN
-    sha256: d01b31292f1b14cc2625cf9426f81d829fe448f57155dabe8b34b4f23101b73c
+    branch: v2-h0002-signal-freeze-preregistration
+    path: research/strategy_specs/H0002-r01-frozen-v1.yaml
+    status: FROZEN
+    sha256: 815566b715c682f81d82bcd6db5c96367ec10b932ff253d0255b4710581cfb91
 frozen_major_decisions:
   daily_input:
     status: FROZEN
@@ -146,6 +152,14 @@ frozen_major_decisions:
     position_mode: CANDIDATE_ONLY_FLAT_RESEARCH_MODE_V1
     profitability: NOT_RUN
     outcomes: NOT_RUN
+  H0002_signal_and_efficacy:
+    status: FROZEN_BEFORE_OUTCOMES
+    branch: v2-h0002-signal-freeze-preregistration
+    commit: d76124409130b7e39a252c84079f0a8ba61a49ca
+    record: research/decision_records/H0002-signal-freeze-v1.json
+    preregistration: research/decision_records/H0002-efficacy-preregistration-v1.yaml
+    protocol_hash: a6e16e57bee2e26860f6989c88fdaeac707ecfc91a6326f54a8d754cfe327e8d
+    signal_freeze_sha256: d6c9c80834eebbc5a06c157e4289c59d50e5b887e6ba540e9a8ad467dcae97ea
 current_open_decision_groups:
 - id: H0001_GLOBAL_STATE_TRANSITIONS
   decision_id: H1-STATE-TRANSITIONS
@@ -199,14 +213,14 @@ current_open_decision_groups:
   independent_disposition_audit: research/data_evidence/h0001-entry-efficacy-audit-20261003/execution-audit.json
   independent_audit_branch: v2-h0001-efficacy-disposition-audit
 - id: H0002_SIGNAL_FREEZE_PREREGISTRATION
-  status: USER_DECISION_REQUIRED
-  priority: P0
-  blocks_phase_exit_criteria:
-  - 2
-  evidence_branch: v2-h0002-price-defense-frequency
-  record: research/decision_records/H0002-hypothesis-frequency-v1.yaml
-  note: Accept provisional repeated-low/same-bar reclaim/full admitted-session proposal,
-    price primary and optional volume comparator, or specify a different market phenomenon.
+  status: RESOLVED_OWNER_APPROVED_AND_PREREGISTERED
+  priority: COMPLETE
+  blocks_phase_exit_criteria: []
+  evidence_branch: v2-h0002-signal-freeze-preregistration
+  record: research/decision_records/H0002-signal-freeze-v1.json
+  note: Final user signal meaning approved; no further decision required for this
+    action.
+  preregistration: research/decision_records/H0002-efficacy-preregistration-v1.yaml
 reopen_policy:
   frozen_decision_may_reopen_only_if:
   - A causal/data-integrity defect invalidates it.
@@ -258,9 +272,8 @@ frozen_semantic_interpretation_audit:
   negative_receipt_explicitly_frozen: false
   strategy_decisions_changed: false
   completeness_capture_is_causal_feature: false
-schema_revision: H0001 signal/protocol preserved. Independent H0002 owner thesis selected
-  and causal frequency audited; active P0 is owner signal freeze then preregistration
-  before outcomes.
+schema_revision: H0001 decisions preserved; H0002 signal and efficacy contract frozen;
+  next P0 first efficacy, future confirmation async.
 long_history_access_routing:
   status: SELECTED70_DISCOVERY_PASS_ZERO_SIGNAL_H0001_ASYNC
   evidence_branch: v2-h0001-alpaca-70-session-discovery
@@ -277,7 +290,7 @@ long_history_access_routing:
   new_interval_certificate_reused: false
   capture_route_only_after_PASS: LONGER_IMMUTABLE_DISCOVERY_CAPTURE
   owner_route_decision: COMPLETE_ALPACA_BASIC_FREE
-  next_action: H0002_SIGNAL_FREEZE_PREREGISTRATION
+  next_action: H0002_FIRST_EFFICACY
   narrowed70_session_alternative: ADMITTED_DATASET_REPLAYED_ZERO_SIGNAL
   historical_broad_history_blocker: Basic credential actual SOXX SIP access200, earliest2016-01-04
     through2026-10-02 endpoints (~10years9months), not continuous10year capture. Raw/split3:1
@@ -295,5 +308,7 @@ next_independent_hypothesis:
   meaning: NOT_SELECTED_USER_DECISION_REQUIRED
   infrastructure: IMPLEMENTED_TESTED
   H0001_future_confirmation_dependency: false
-  routing: Only after the active H0002 research cycle disposition; not current NEXT_ACTION.
+  routing: After H0002 first-efficacy disposition; H0001/H0002 future confirmation
+    waits do not block independent intake.
+  H0002_future_confirmation_dependency: false
 active_research_track: H0002
