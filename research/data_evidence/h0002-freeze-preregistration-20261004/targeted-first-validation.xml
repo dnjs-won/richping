@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="69" time="13.840" timestamp="2026-10-04T19:26:15.599889+09:00" hostname="Wonjun"><testcase classname="tests.test_h0002_preregistration" name="test_actual_128_slot_expiration_publication_and_immutable_boundaries" time="0.496" /><testcase classname="tests.test_h0002_preregistration" name="test_multibar_recovery_is_not_same_bar_reclaim" time="0.070" /><testcase classname="tests.test_h0002_preregistration" name="test_exact_full_extended_session_edges[0-False]" time="0.003" /><testcase classname="tests.test_h0002_preregistration" name="test_exact_full_extended_session_edges[1-True]" time="0.003" /><testcase classname="tests.test_h0002_preregistration" name="test_exact_full_extended_session_edges[22-True]" time="0.003" /><testcase classname="tests.test_h0002_preregistration" name="test_exact_full_extended_session_edges[48-True]" time="0.003" /><testcase classname="tests.test_h0002_preregistration" name="test_exact_full_extended_session_edges[64-True]" time="0.003" /><testcase classname="tests.test_h0002_preregistration" name="test_exact_full_extended_session_edges[65-False]" time="0.003" /><testcase classname="tests.test_h0002_preregistration" name="test_production_volume_baseline_excludes_current_and_zero_is_not_missing" time="0.002" /><testcase classname="tests.test_h0002_preregistration" name="test_default_price_event_hash_independent_of_all_volume" time="0.267" /><testcase classname="tests.test_h0002_preregistration" name="test_baseline_selection_is_prior_only_exact_slot_state_and_non_event" time="0.001"><failure message="exchange_calendars.errors.DateOutOfBounds: Parameter `start` receieved as '1990-01-01 00:00:00' although cannot be earlier than the first session of calendar 'XNYS' ('1990-01-02 00:00:00').">def test_baseline_selection_is_prior_only_exact_slot_state_and_non_event():
+        event, inputs = anchors()
+&gt;       selected = select_controls(event, inputs)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_h0002_preregistration.py:95: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+richping\research_v2\strategy\h0002_experiment.py:22: in select_controls
+    prior = sessions('1990-01-01', event.session)[:-1][-20:]
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+richping\core.py:57: in sessions
+    return [str(d.date()) for d in calendar().sessions_in_range(start, end)]
+                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\exchange_calendars\exchange_calendar.py:2218: in sessions_in_range
+    slc = self._get_sessions_slice(start, end, _parse)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\exchange_calendars\exchange_calendar.py:2195: in _get_sessions_slice
+    start, end = self._parse_start_end_dates(start, end, _parse)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.venv\Lib\site-packages\exchange_calendars\exchange_calendar.py:2191: in _parse_start_end_dates
+    return parse_date(start, "start", self), parse_date(end, "end", self)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+date = '1990-01-01', param_name = 'start'
+calendar = &lt;exchange_calendars.exchange_calendar_xnys.XNYSExchangeCalendar object at 0x000001FBD11B6900&gt;
+raise_oob = True
+
+    def parse_date(
+        date: Date,
+        param_name: str = "date",
+        calendar: ExchangeCalendar | None = None,
+        raise_oob: bool = True,
+    ) -&gt; pd.Timestamp:
+        """Parse input intended to represent a date.
+    
+         Parameters
+         ----------
+         date
+             Input to be parsed as date. Must be valid input to pd.Timestamp
+             and have a time component of 00:00.
+    
+         param_name
+             Name of a parameter that was to receive a date.
+    
+        calendar
+            ExchangeCalendar against which to evalute out-of-bounds dates.
+            Only requried if `raise_oob` True.
+    
+        raise_oob : default: True
+            True to raise DateOutOfBounds if `date` is earlier than the
+            first session or later than the last session of `calendar`. NB if
+            True (default) then `calendar` must be passed.
+    
+        Returns
+         -------
+         pd.Timestamp
+             pd.Timestamp (timezone naive with time component of 00:00).
+    
+         Raises
+         ------
+         Errors as `parse_timestamp` and additionally:
+    
+         ValueError
+             If `date` time component is not 00:00.
+             If `date` is timezone aware.
+    
+        exchange_calendars.errors.DateOutOfBounds
+            If `raise_oob` True and `date` parses to a valid timestamp although
+            timestamp is before `calendar`'s first session or after
+            `calendar`'s last session.
+        """
+        # side "left" to get it through 'second' handling. Has undesirable effect of
+        # allowing `date` to be defined with a second (or more accurate) compoment
+        # if it falls within the minute that follows midnight.
+        ts = parse_timestamp(date, param_name, raise_oob=False, side="left", utc=False)
+    
+        if ts.tz is not None:
+            raise ValueError(
+                f"Parameter `{param_name}` received with timezone defined as '{ts.tz.key}'"
+                f" although a Date must be timezone naive."
+            )
+    
+        if not ts == ts.normalize():
+            raise ValueError(
+                f"Parameter `{param_name}` parsed as '{ts}' although a Date must have"
+                f" a time component of 00:00."
+            )
+    
+        if raise_oob:
+            if calendar is None:
+                raise ValueError("`calendar` must be passed if `raise_oob` is True.")
+            if calendar._date_oob(ts):  # noqa: SLF001
+&gt;               raise errors.DateOutOfBounds(calendar, ts, param_name)
+E               exchange_calendars.errors.DateOutOfBounds: Parameter `start` receieved as '1990-01-01 00:00:00' although cannot be earlier than the first session of calendar 'XNYS' ('1990-01-02 00:00:00').
+
+.venv\Lib\site-packages\exchange_calendars\calendar_helpers.py:389: DateOutOfBounds</failure></testcase><testcase classname="tests.test_h0002_preregistration" name="test_invalid_causal_sign_rejected" time="0.000" /><testcase classname="tests.test_h0002_preregistration" name="test_calendar_and_confirmation_are_fixed_independent_of_h0001" time="0.015" /><testcase classname="tests.test_h0002_preregistration" name="test_disposition_metadata_only_gates[kwargs0-INVALID_FAIL_CLOSED]" time="0.001" /><testcase classname="tests.test_h0002_preregistration" name="test_disposition_metadata_only_gates[kwargs1-PENDING]" time="0.001" /><testcase classname="tests.test_h0002_preregistration" name="test_disposition_metadata_only_gates[kwargs2-UNRESOLVED]" time="0.001" /><testcase classname="tests.test_h0002_preregistration" name="test_disposition_metadata_only_gates[kwargs3-ZERO_SIGNAL]" time="0.001" /><testcase classname="tests.test_h0002_preregistration" name="test_disposition_metadata_only_gates[kwargs4-INSUFFICIENT_EVIDENCE]" time="0.001" /><testcase classname="tests.test_h0002_preregistration" name="test_disposition_metadata_only_gates[kwargs5-INSUFFICIENT_EVIDENCE]" time="0.001" /><testcase classname="tests.test_h0002_preregistration" name="test_disposition_metadata_only_gates[kwargs6-INCONCLUSIVE]" time="0.001" /><testcase classname="tests.test_h0002_preregistration" name="test_disposition_metadata_only_gates[kwargs7-PASS]" time="0.001" /><testcase classname="tests.test_h0002_preregistration" name="test_disposition_metadata_only_gates[kwargs8-REJECT]" time="0.001" /><testcase classname="tests.test_h0002_preregistration" name="test_invalid_disposition_inputs_fail_closed" time="0.000" /><testcase classname="tests.test_h0002_preregistration" name="test_incomplete_or_changed_protocol_is_rejected[missing]" time="0.013" /><testcase classname="tests.test_h0002_preregistration" name="test_incomplete_or_changed_protocol_is_rejected[horizon]" time="0.013" /><testcase classname="tests.test_h0002_preregistration" name="test_incomplete_or_changed_protocol_is_rejected[baseline]" time="0.013" /><testcase classname="tests.test_h0002_preregistration" name="test_incomplete_or_changed_protocol_is_rejected[costs]" time="0.013" /><testcase classname="tests.test_h0002_preregistration" name="test_incomplete_or_changed_protocol_is_rejected[calendar]" time="0.014" /><testcase classname="tests.test_h0002_preregistration" name="test_incomplete_or_changed_protocol_is_rejected[async]" time="0.014" /><testcase classname="tests.test_h0002_preregistration" name="test_incomplete_or_changed_protocol_is_rejected[family]" time="0.014" /><testcase classname="tests.test_h0002_preregistration" name="test_incomplete_or_changed_protocol_is_rejected[access]" time="0.013" /><testcase classname="tests.test_h0002_preregistration" name="test_preregistration_is_metadata_only_repeatable_and_preserves_all_original_sources" time="0.728" /><testcase classname="tests.test_h0002_preregistration" name="test_frozen_file_mutation_is_detected_without_market_access" time="0.005" /><testcase classname="tests.test_h0002_preregistration" name="test_outcome_and_market_access_guard_fail_closed_and_count_attempt" time="0.006" /><testcase classname="tests.test_h0002_defense" name="test_prefix_equivalence_and_future_suffix_cannot_change_published_zone" time="0.018" /><testcase classname="tests.test_h0002_defense" name="test_right_confirmation_is_required_and_tied_lows_are_not_strict_pivots" time="0.005" /><testcase classname="tests.test_h0002_defense" name="test_past_revision_and_duplicate_cannot_mutate_active_zone_or_future_decision" time="0.010" /><testcase classname="tests.test_h0002_defense" name="test_one_candidate_per_visit_and_rearm_after_whole_bar_above" time="0.008" /><testcase classname="tests.test_h0002_defense" name="test_exact_reentry_and_reclaim_boundaries[touch]" time="0.006" /><testcase classname="tests.test_h0002_defense" name="test_exact_reentry_and_reclaim_boundaries[lower_equality]" time="0.005" /><testcase classname="tests.test_h0002_defense" name="test_exact_reentry_and_reclaim_boundaries[close_equality]" time="0.005" /><testcase classname="tests.test_h0002_defense" name="test_exact_reentry_and_reclaim_boundaries[strict_reclaim]" time="0.006" /><testcase classname="tests.test_h0002_defense" name="test_flat_bar_wick_and_reclaim_math" time="0.006" /><testcase classname="tests.test_h0002_defense" name="test_volume_zero_missing_invalid_distinct[0-10-READY-relative_volume-0]" time="0.001" /><testcase classname="tests.test_h0002_defense" name="test_volume_zero_missing_invalid_distinct[None-10-UNAVAILABLE-missing_volume-None]" time="0.001" /><testcase classname="tests.test_h0002_defense" name="test_volume_zero_missing_invalid_distinct[10-None-UNAVAILABLE-missing_volume-None]" time="0.001" /><testcase classname="tests.test_h0002_defense" name="test_volume_zero_missing_invalid_distinct[10-0-UNAVAILABLE-zero_volume_baseline-None]" time="0.001" /><testcase classname="tests.test_h0002_defense" name="test_volume_zero_missing_invalid_distinct[-1-10-INVALID-invalid_volume-None]" time="0.001" /><testcase classname="tests.test_h0002_defense" name="test_volume_zero_missing_invalid_distinct[nan-10-INVALID-invalid_volume-None]" time="0.001" /><testcase classname="tests.test_h0002_defense" name="test_volume_zero_missing_invalid_distinct[10-10-READY-relative_volume-1]" time="0.001" /><testcase classname="tests.test_h0002_defense" name="test_volume_baseline_excludes_current_and_comparator_is_nested" time="0.007" /><testcase classname="tests.test_h0002_defense" name="test_price_only_has_identical_events_without_volume_and_invalid_volume_only_blocks_comparator" time="0.020" /><testcase classname="tests.test_h0002_defense" name="test_close_below_invalidates_and_used_seed_cannot_republish" time="0.006" /><testcase classname="tests.test_h0002_defense" name="test_exact_expiration_and_gap_reset_warmup" time="0.011" /><testcase classname="tests.test_h0002_defense" name="test_invalid_input_fail_closed[future]" time="0.005" /><testcase classname="tests.test_h0002_defense" name="test_invalid_input_fail_closed[bad_price]" time="0.005" /><testcase classname="tests.test_h0002_defense" name="test_invalid_input_fail_closed[mixed_vintage]" time="0.005" /><testcase classname="tests.test_h0002_defense" name="test_invalid_input_fail_closed[wrong_symbol]" time="0.005" /><testcase classname="tests.test_h0002_defense" name="test_invalid_input_fail_closed[off_grid]" time="0.005" /><testcase classname="tests.test_h0002_defense" name="test_zero_range_is_unavailable_and_same_input_deterministic" time="0.012" /><testcase classname="tests.test_h0002_defense" name="test_production_window_not_fixture_tuning" time="0.069" /><testcase classname="tests.test_h0002_defense" name="test_signal_module_does_not_import_h0001_macd_or_outcome_modules" time="0.005" /><testcase classname="tests.test_h0002_defense" name="test_guard_attempt_is_counted_and_fails_closed" time="0.002" /><testcase classname="tests.test_h0002_defense" name="test_real_sealed_frequency_evidence_outcome_access_zero_and_preservation" time="10.543" /><testcase classname="tests.test_independent_research_intake" name="test_real_intake_is_deterministic_and_not_gated_by_h0001_confirmation" time="0.065" /><testcase classname="tests.test_independent_research_intake" name="test_new_draft_preserves_originals_and_does_not_invent_rules" time="0.058" /><testcase classname="tests.test_independent_research_intake" name="test_no_strategy_meaning_is_fabricated[-thesis]" time="0.003" /><testcase classname="tests.test_independent_research_intake" name="test_no_strategy_meaning_is_fabricated[observation-]" time="0.002" /><testcase classname="tests.test_independent_research_intake" name="test_filename_identity_mismatch_fails_closed" time="0.005" /></testsuite></testsuites>

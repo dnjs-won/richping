@@ -12,3 +12,6 @@ research/strategy_specs/H0002-r01-candidate.yaml -text
 docs/H0002_PRICE_DEFENSE_RESEARCH.md -text
 # JUnit captures include original failure trace whitespace; retain raw bytes.
 research/data_evidence/h0002-frequency-20261004/**/*.xml binary
+research/strategy_specs/H0002-r01-frozen-v1.yaml -text
+research/decision_records/H0002-signal-freeze-v1.json -text
+research/data_evidence/h0002-freeze-preregistration-20261004/**/*.xml binary

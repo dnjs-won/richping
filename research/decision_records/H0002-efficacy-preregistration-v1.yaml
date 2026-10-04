@@ -1,0 +1,169 @@
+schema: h0002_opportunity_efficacy_preregistration_v1
+version: H0002_DIRECTIONAL_OPPORTUNITY_EFFICACY_V1
+status: FROZEN_BEFORE_ANY_H0002_OUTCOME_ACCESS
+registered_on: '2026-10-04'
+hypothesis_id: H0002
+hypothesis_revision: 1
+signal_freeze: research/decision_records/H0002-signal-freeze-v1.json
+signal_spec: research/strategy_specs/H0002-r01-frozen-v1.yaml
+contract_scope: GROSS_DIRECTIONAL_ENTRY_OPPORTUNITY_NOT_EXECUTION_PROFITABILITY
+primary: PRICE_DEFENSE_REVERSAL_V1
+comparator: PRICE_DEFENSE_REVERSAL_VOLUME_CONFIRM_V1
+sample:
+  unit: Immutable candidate event id, zone id and visit id from the frozen append-only stream.
+  duplicate: Reject duplicate ids or multiple primary ids in one visit; never average duplicates.
+  comparator: Exactly one linked comparator per qualifying primary; no unmatched or later comparator.
+  overlap: Keep all distinct visits, even with overlapping forward windows; no thinning or portfolio interpretation.
+  weights: Equal events within a session, then equal occupied sessions within each family.
+  same_zone: Different rearmed visits may contribute; dependence handled by calendar blocks.
+  identity: Use historical bar-end assumed known_at, not a reconstructed live delivery/fill clock.
+horizons:
+  primary_slots: 4
+  secondary_slots: [64, 192]
+  unit: Scheduled completed 15m slots on official XNYS sessions, anchored 04:00-20:00 America/New_York.
+  rationale: >-
+    Four slots test the immediate direction after a same-bar failed break (one observed
+    trading hour); 64 and 192 slots describe persistence over one and three full
+    extended-session equivalents. They are not calendar-hour or session-close labels.
+  closure: Overnight/weekend/holiday closures consume no slot; never compress missing scheduled slots.
+  secondary_role: Descriptive only; no primary replacement or separate PASS claims.
+label:
+  name: GROSS_FORWARD_CLOSE_PRICE_RETURN
+  formula: close_at_exact_scheduled_slot_t_plus_h / signal_bar_close - 1
+  reference: Signal completed close is an opportunity mark, not an attainable fill.
+  future_range: Only subsequent bars t+1 through t+h; no signal-bar future high/low backfill.
+  MFE_MAE: NOT_PART_OF_V1_EXPERIMENT
+  accounting: Raw admitted share-unit price direction; no dividend reinvestment or account return.
+  action_boundary: >-
+    An action/unit ambiguity or split within an anchor-to-endpoint window is UNRESOLVED;
+    no unregistered price conversion, retrospective feature adjustment or event deletion.
+  missing: All intervening scheduled bars and the exact endpoint must be admitted; otherwise PENDING or UNRESOLVED.
+baseline:
+  name: PRIOR_SESSION_SAME_SLOT_PRIOR_MOMENTUM_NON_EVENT_V1
+  selection_clock: Candidate known_at; selection uses anchor metadata only, never forward labels.
+  search_sessions: 20
+  controls_per_event: 5
+  matching:
+    symbol: SOXX
+    local_slot: Exact same 15m bar-end slot on each earlier official session (hence same session segment).
+    market_state: >-
+      Exact sign (-1,0,+1) of close_t - close_t_minus_4, using four prior contiguous
+      completed price slots only. The sign is an evaluation covariate, never a signal filter.
+    readiness: Valid admitted price input and construction READY at control anchor; active zone is not required.
+    non_event: No PRIMARY event at control anchor. Volume absence does not alter control eligibility.
+  order: Most recent five eligible anchors within the preceding twenty official sessions, descending date.
+  insufficient_matches: UNRESOLVED for that event; no fallback, wider search, changed sign or silent omission.
+  labels: Same fixed horizons and price-return rule; selection cannot require favorable or already-known labels.
+  reuse: Control reuse and control/event forward-window overlap allowed and reported, not treated as IID.
+  estimand: >-
+    For each event, return minus arithmetic mean of its five selected control returns.
+    Report session-balanced absolute event return and paired timing excess separately.
+  'null': Mean event price direction <= 0 OR mean matched timing excess <= 0.
+  alternative: Both session-balanced means > 0 under the registered uncertainty rule.
+  interpretation: Conditional observational timing association, not causal identification of buying actors.
+costs:
+  costs_bps: null
+  net_return: null
+  profitability: NOT_ESTIMATED
+  reason: No fill/order/spread/slippage model exists; gross direction is not a zero-cost profitability claim.
+discovery:
+  interval: ['2026-05-05', '2026-08-13']
+  sessions: 70
+  eligible_bars: 4480
+  primary_events: 14
+  primary_sessions: 12
+  comparator_events: 11
+  comparator_sessions: 10
+  exposure: Frequency and causal structure only; outcomes never inspected before registration.
+  role: Any later discovery outcome report is exploratory only, cannot PASS confirmation or select conditions.
+confirmation:
+  selection_basis: Fixed annual chronological window, independent of discovery count and H0001's 126-session track.
+  embargo_sessions: ['2026-10-05', '2026-10-06', '2026-10-07', '2026-10-08', '2026-10-09', '2026-10-12', '2026-10-13', '2026-10-14', '2026-10-15', '2026-10-16']
+  anchor_start: '2026-10-19'
+  anchor_end: '2027-10-19'
+  official_sessions: 252
+  followup_end: '2027-10-22'
+  terminal_receipt_deadline: '2027-10-23T20:00:00-04:00'
+  warmup_controls_start: '2026-09-21'
+  warmup_role: Prior price/context/control anchors only; no pre-window event enters confirmation.
+  stopping: >-
+    One terminal inference after the fixed receipt deadline. No outcome peeking,
+    event-count stopping, success/failure stopping or result-driven extension.
+    Before then publish readiness/frequency only and PENDING status.
+  calendar: >-
+    Bind the current local XNYS calendar snapshot. Unexpected calendar changes require
+    an explicit operational amendment before outcomes; no silent date extension.
+  session_scope: Exactly 04:00-20:00 ET full extended session; no RTH-only restriction or segment selection.
+  unsupported: >-
+    Existing adapter cannot certify nonstandard/early-close sessions. Record each as
+    UNAVAILABLE, reset causal history across unsupported/gap/action-unit boundaries,
+    and warm up again; never shorten the session, carry a zone across a reset or
+    fabricate/compress slots. These days remain in the calendar/block denominator.
+  admission: >-
+    New immutable Alpaca SIP interval and interval-specific action/unit/coverage admission
+    required before evaluation. Historical discovery admission cannot certify future data.
+    A known deterministic unsupported session is reported separately from a missing expected
+    supported-session capture. Supported-session capture failure prevents complete inference.
+  no_event_day: Preserve all official sessions including zero events and unsupported days in uncertainty grid.
+  independence: Separate hypothesis identities, selection, stopping and evidence; shared SOXX dates do not imply independent market returns.
+  asynchronous: true
+  project_blocker: false
+evidence_floor:
+  primary_complete_events: 40
+  primary_distinct_sessions: 20
+  occupied_fixed_25_session_blocks: 8
+  comparator_complete_events: 40
+  comparator_distinct_sessions: 20
+  completeness: >-
+    Every emitted primary needs a resolved primary-horizon label and five resolved controls;
+    no complete-case removal. Secondary unresolved labels block only their descriptive
+    horizon. Comparator volume-UNAVAILABLE cases are disclosed, never zero-filled.
+  rationale: Minimal breadth guard, not a powered sample-size claim; 14 discovery events are insufficient.
+uncertainty:
+  method: Circular moving calendar-session block percentile bootstrap of session-balanced means.
+  grid: Entire fixed 252-session chronological anchor grid, including zero-event/unsupported sessions.
+  block_sessions: 25
+  replicates: 10000
+  seed: 20261004
+  generator: random.Random from bound Python runtime; randrange(252) for each block start.
+  resampling: >-
+    Draw ceil(252/25) start indices with replacement, append 25 circular consecutive
+    session indices for each, truncate to 252. Use the same indices for absolute,
+    paired excess and both families. For each statistic average nonempty per-session
+    means across sampled occurrences; do not compress the calendar before sampling.
+  interval: Two-sided 97.5 percent percentile interval, linear interpolation at 0.0125 and 0.9875.
+  empty_resample: >-
+    Retry neither sample nor seed. If more than 1 percent of resamples have no occupied
+    sessions for a family, its inference is UNRESOLVED; otherwise report empty count and
+    use valid resamples. No IID standard error or event-wise bootstrap.
+  rationale: 25 slots of sessions exceed the 20-session control search plus three-session descriptive label dependence.
+  limitations: Finite sparse blocks and reused controls limit precision; bootstrap does not guarantee coverage or establish power.
+multiple_testing:
+  family: [PRICE_DEFENSE_REVERSAL_V1, PRICE_DEFENSE_REVERSAL_VOLUME_CONFIRM_V1]
+  overall_alpha: 0.05
+  allocation: Bonferroni 0.025 per signal family; direction and excess are intersection-union requirements within each family.
+  primary_rule: Only price-only confirmation can establish H0002 PASS; both primary-horizon lower bounds strictly > 0.
+  comparator_rule: >-
+    Secondary nested inference under its own floor and adjusted intervals; cannot replace,
+    rescue, outperform-claim against price, or promote itself to primary. No paired
+    volume-superiority test is registered. It may equal the primary set on a future vintage.
+  secondary_horizons: Descriptive only; no multiplicity-unadjusted confirmatory claims.
+disposition:
+  precedence: [INVALID_FAIL_CLOSED, PENDING, UNRESOLVED, ZERO_SIGNAL, INSUFFICIENT_EVIDENCE, PASS, REJECT, INCONCLUSIVE]
+  INVALID_FAIL_CLOSED: Identity/semantics/hash/duplicate/session/admission/causality defect; no inference or promotion.
+  PENDING: Fixed terminal deadline not reached or still-immature labels before deadline; no inference.
+  UNRESOLVED: Supported capture failure, ambiguous units/actions, missing labels/controls or invalid uncertainty after deadline.
+  ZERO_SIGNAL: Complete valid finished confirmation with no primary events; no numeric economic estimate.
+  INSUFFICIENT_EVIDENCE: Complete valid finished confirmation below any registered event/session/block floor; no PASS/REJECT inference.
+  PASS: Both adjusted primary-horizon lower bounds strictly positive, with all preceding gates satisfied.
+  REJECT: At least one adjusted primary-horizon upper bound strictly negative; evidence against the joint positive-direction/timing thesis, not a proof of no effect.
+  INCONCLUSIVE: Floors/gates satisfied but neither PASS nor REJECT; failure to reject does not prove absence of effect.
+  equality: A bound equal to zero cannot PASS or REJECT.
+  promotion: PASS permits further independent/execution research only; never automatic production or profitability admission.
+outcome_access_this_action: FORBIDDEN
+next_P0: H0002_FIRST_EFFICACY
+next_action_scope: >-
+  Implement and verify the frozen nonempty label/control/bootstrap adapter; only then
+  run bounded exploratory discovery efficacy under this preregistration. Confirmation
+  remains PENDING/asynchronous until the fixed window/deadline. Route H0003 independent
+  hypothesis intake after first-efficacy disposition rather than blocking the project.

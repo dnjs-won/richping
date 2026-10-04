@@ -1,3 +1,17 @@
+# Richping V2 - 2026-10-04 H0002 signal freeze / efficacy preregistration
+
+**COMPLETE owner signal freeze and preregistration. H0002 outcomes NOT_RUN; confirmation PENDING/asynchronous.**
+
+Independent SOXX15m price-zone/same-bar failed downside breakdown, full04-20ET; no MACD/Daily/H1/H0001 state. Original128-slot low-pair/median-range immutable zone and visit semantics unchanged. Price primary with optional nested20-bar median-volume comparator. Discovery4480 bars/70 sessions remains14 primary/12 sessions and11 comparator/10 sessions, not performance or confirmation.
+
+Frozen primary horizon4 scheduled15m slots, secondary64/192 descriptive. Gross directional mark only; no fill/net profitability. Prior20-session same-local-slot/prior4-slot sign baseline, five non-event controls, no fallback. Session-balanced calendar25-session block bootstrap,10000 replicates, two-family adjusted97.5% intervals; volume cannot replace primary. Fixed252-session confirmation2026-10-19..2027-10-19, followup2027-10-22, receipt deadline2027-10-23 20ET; 40 events/20 sessions/8 occupied blocks required; no peeking or count-driven extension.
+
+Targeted69/full1515 passed, no failures/errors/skips. Metadata revalidation twice equal,452 prior tracked files preserved, outcome/return/profitability/market/database/network calls0. Initial targeted calendar-start helper failure retained; fixed without changing signal or protocol. Contract research/decision_records/H0002-efficacy-preregistration-v1.yaml; freeze research/decision_records/H0002-signal-freeze-v1.json; evidence research/data_evidence/h0002-freeze-preregistration-20261004/verification-v2/verification.json.
+
+NEXT_ACTION **H0002_FIRST_EFFICACY / READY**: implement nonempty label/control/bootstrap adapter, then bounded exploratory discovery disposition. Adapter is an executable contract, not yet implemented/run. Future confirmation waits do not block H0003 independent intake after first efficacy. H0001 FROZEN/AWAITING_FUTURE_CONFIRMATION/HISTORICALLY_SPARSE and126-session track unchanged. Branch v2-h0002-signal-freeze-preregistration; no main code merge.
+
+The entries below are preserved historical status reports.
+
 # Richping V2 - 2026-10-04 independent H0002 frequency research
 
 **COMPLETE hypothesis / causal implementation / real frequency evidence. Final signal freeze USER_DECISION_REQUIRED; outcomes NOT_RUN.**

@@ -1,0 +1,68 @@
+schema: h0002_frozen_signal_v1
+version: H0002_PRICE_DEFENSE_SIGNAL_V1
+status: FROZEN_OWNER_SELECTED_BEFORE_OUTCOMES
+hypothesis_id: H0002
+family: PRICE_STRUCTURE_VOLUME_DEFENSE_REVERSAL
+universe:
+- SOXX
+timeframe: 15m
+direction: LONG_DIRECTIONAL_HYPOTHESIS_NO_ORDERS
+session_scope: SOXX 15m; full admitted 04:00-20:00 America/New_York; LONG direction;
+  no Daily/H1/MACD/H0001 state.
+parameters:
+  lookback_bars: 128
+  minimum_pivot_separation: 4
+  expiration_bars: 128
+  volume_lookback_bars: 20
+  volume_ratio_threshold: 1.0
+zone:
+  pivots: Strict three-bar local lows, only available when right neighbor completes.
+  interactions: Two lows separated by at least four completed slots inside trailing
+    128 bars.
+  selection: Most recent compatible confirmed pair; newer pivot then older pivot descending.
+  center: Arithmetic midpoint of pair lows.
+  half_width: Half the median high-minus-low of trailing 128 completed bars; positive
+    required.
+  compatibility: Absolute low difference no greater than two half_widths.
+  publication: After current-bar processing; usable starting the next completed bar.
+  creation_gate: Current close strictly above proposed upper boundary.
+  immutable: Center, boundaries, source pair and creation prefix never recomputed.
+  replacement: Only after invalidation/expiry; never reuse a seed at/before last published
+    seed.
+  expiry: Not active at created_index plus expiration_bars; session closures consume
+    no slots.
+  invalidation: First completed close strictly below lower boundary.
+interaction:
+  armed: Zone publication starts away; thereafter a whole bar low above upper boundary
+    rearms.
+  reentry: Armed and low at/below upper boundary; touch inclusive, penetration strict.
+  visit: Remains open until a whole bar is above zone; one candidate per visit.
+rejection:
+  primary: During an open visit, low strictly below lower and close strictly above
+    upper in same bar.
+  other_filters: None; wick fraction and close recovery are diagnostics, not conjunctive
+    filters.
+  multi_bar_reclaim: EXCLUDED_FROM_V1_REQUIRES_SEPARATE_HYPOTHESIS_OR_REVISION
+volume:
+  mandatory_for_price_only: false
+  comparator: Current bar shares divided by median of previous 20 bars; ratio at least
+    1.0.
+  missing: UNAVAILABLE; never substitute zero.
+  zero_current: READY ratio zero with positive denominator; not a confirmed event.
+  zero_baseline: UNAVAILABLE; no divide-by-zero or synthetic fill.
+  caveat: Adjacent extended/RTH slots have different activity; no same-slot normalization
+    or intent inference.
+primary: PRICE_DEFENSE_REVERSAL_V1
+comparator: PRICE_DEFENSE_REVERSAL_VOLUME_CONFIRM_V1
+choice_basis:
+- Repeated local lows represent the owner's recurring-price observation with no manual
+  line.
+- Two interactions are the minimal repeated structure; one strict reclaim price condition.
+- 128 slots span two full admitted sessions; median bar range is a local price-scale
+  width.
+- Four-slot spacing avoids counting immediately neighboring lows as separate interactions.
+- One-times recent median tests ordinary relative activity, with no performance-selected
+  threshold.
+selection_policy: Final owner selection 2026-10-04; frequency is not performance evidence;
+  no parameter change.
+outcomes: FORBIDDEN

@@ -1,0 +1,8 @@
+{
+  "close_equal_lower_does_not_invalidate": "PASS",
+  "current_excluded": "PASS",
+  "fixture": "SYNTHETIC_ONLY_NO_REAL_OUTCOMES",
+  "outcome_access": 0,
+  "profitability_calculations": 0,
+  "volume_previous20": "ten bars volume2 and ten volume20: median11; current1000 gives1000/11, not50"
+}

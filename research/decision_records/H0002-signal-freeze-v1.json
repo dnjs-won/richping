@@ -1,0 +1,79 @@
+{
+  "H0001_state_dependency": false,
+  "H0001_track_modified": false,
+  "base_commit": "a02d67ce1f6b3a49e28c9a022ebfd40047f17f9f",
+  "comparator": "PRICE_DEFENSE_REVERSAL_VOLUME_CONFIRM_V1",
+  "comparator_role": "OPTIONAL_NESTED_NOT_PRIMARY_OR_SUPERIORITY_CLAIM",
+  "dataset_hash": "4b39f109e8cffce8a7e680e773b560b307e21dd5a92dcad6d06fcd47bb0aa8bd",
+  "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+  "dataset_receipt_sha256": "34e9e2a646ffe28405f0fffc1e0ceee06c6ce5c7c1cbf081abced3d92231cd03",
+  "discovery_event_stream_hash": "65174fa89f16e69f373bef0a4ea655f42b19594389d6bb9e1c472c9d47a6ae45",
+  "discovery_events_path": "research/data_evidence/h0002-frequency-20261004/verification-v3/candidate-events.json",
+  "discovery_events_sha256": "a89cf3f211f1c67f4d1146014e6d3f8cfabde8933458f0f2fc4a99934dff750e",
+  "discovery_frequency_sha256": "a5323c8d8a680d2b542127ba39df7d06160e0b5e391a730e974312d3c397e10f",
+  "frequency_does_not_establish_efficacy": true,
+  "historical_hypothesis_status": "Historical DRAFT file retained; this decision freezes its price-defense thesis and supersedes open signal semantics only.",
+  "hypothesis_id": "H0002",
+  "hypothesis_path": "research/hypotheses/H0002-r01.yaml",
+  "hypothesis_revision": 1,
+  "hypothesis_sha256": "c07eb8a246b9102908e2b55d9ad2e07067ce76e7d363a54e2f98f42f8748a3c6",
+  "implementation": "richping/research_v2/strategy/h0002_defense.py",
+  "implementation_sha256": "00d0ffd1e6f8b8cb6c483289bbd47095081f1776e157af9fc770b2ed0fd8a963",
+  "outcome_access": 0,
+  "parameters": {
+    "expiration_bars": 128,
+    "lookback_bars": 128,
+    "minimum_pivot_separation": 4,
+    "volume_lookback_bars": 20,
+    "volume_ratio_threshold": 1.0
+  },
+  "price_spec_hash": "94531cc5a021175ad1bc6f73faf277d35b243864841b17eda20baf717fdddf4f",
+  "primary": "PRICE_DEFENSE_REVERSAL_V1",
+  "profitability_calculations": 0,
+  "provisional_spec_sha256": "d01b31292f1b14cc2625cf9426f81d829fe448f57155dabe8b34b4f23101b73c",
+  "registered_on": "2026-10-04",
+  "schema": "h0002_signal_freeze_v1",
+  "semantic_sections": {
+    "interaction": {
+      "armed": "Zone publication starts away; thereafter a whole bar low above upper boundary rearms.",
+      "reentry": "Armed and low at/below upper boundary; touch inclusive, penetration strict.",
+      "visit": "Remains open until a whole bar is above zone; one candidate per visit."
+    },
+    "rejection": {
+      "multi_bar_reclaim": "EXCLUDED_FROM_V1_REQUIRES_SEPARATE_HYPOTHESIS_OR_REVISION",
+      "other_filters": "None; wick fraction and close recovery are diagnostics, not conjunctive filters.",
+      "primary": "During an open visit, low strictly below lower and close strictly above upper in same bar."
+    },
+    "session_scope": "SOXX 15m; full admitted 04:00-20:00 America/New_York; LONG direction; no Daily/H1/MACD/H0001 state.",
+    "volume": {
+      "caveat": "Adjacent extended/RTH slots have different activity; no same-slot normalization or intent inference.",
+      "comparator": "Current bar shares divided by median of previous 20 bars; ratio at least 1.0.",
+      "mandatory_for_price_only": false,
+      "missing": "UNAVAILABLE; never substitute zero.",
+      "zero_baseline": "UNAVAILABLE; no divide-by-zero or synthetic fill.",
+      "zero_current": "READY ratio zero with positive denominator; not a confirmed event."
+    },
+    "zone": {
+      "center": "Arithmetic midpoint of pair lows.",
+      "compatibility": "Absolute low difference no greater than two half_widths.",
+      "creation_gate": "Current close strictly above proposed upper boundary.",
+      "expiry": "Not active at created_index plus expiration_bars; session closures consume no slots.",
+      "half_width": "Half the median high-minus-low of trailing 128 completed bars; positive required.",
+      "immutable": "Center, boundaries, source pair and creation prefix never recomputed.",
+      "interactions": "Two lows separated by at least four completed slots inside trailing 128 bars.",
+      "invalidation": "First completed close strictly below lower boundary.",
+      "pivots": "Strict three-bar local lows, only available when right neighbor completes.",
+      "publication": "After current-bar processing; usable starting the next completed bar.",
+      "replacement": "Only after invalidation/expiry; never reuse a seed at/before last published seed.",
+      "selection": "Most recent compatible confirmed pair; newer pivot then older pivot descending."
+    }
+  },
+  "spec_canonical_hash": "506675e460995b7ff5152c11f8c08abc9b709ac2a58771b3ccb864ff222cd5c1",
+  "spec_path": "research/strategy_specs/H0002-r01-frozen-v1.yaml",
+  "spec_sha256": "815566b715c682f81d82bcd6db5c96367ec10b932ff253d0255b4710581cfb91",
+  "status": "IMMUTABLE_OWNER_APPROVED",
+  "strategy_independence": {
+    "H0001": "MACD extreme, GC/reversal and Daily/H1/15m composed momentum.",
+    "H0002": "Historical confirmed low-pair zone, visit, strict same-bar failed breakdown, optional volume."
+  }
+}

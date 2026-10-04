@@ -1,0 +1,53 @@
+{
+  "all_H0001_and_original_H0002_files_unchanged": true,
+  "artifacts": {
+    "research/data_evidence/h0002-freeze-preregistration-20261004/experiment-source-v1.py.bin": "61276e623d3d03f936ba89f85cd80b4496a379e625fe88192353aaa044c31e38",
+    "research/data_evidence/h0002-freeze-preregistration-20261004/manifest.json": "3c7deff54b3b47e621113da36b923ac3a02fdc73f1d6c8023dfcdd94e935837e",
+    "research/data_evidence/h0002-freeze-preregistration-20261004/preregister-source-v1.py.bin": "3a445100e7691623c1213953c993f65e6639d04708e69b9aacc6f7ce0142b3e6",
+    "research/data_evidence/h0002-freeze-preregistration-20261004/targeted-first-validation.xml": "2e2e53c6c83ce8b81e731507d025da1c8e779c0ed91bbe6ef85d426ae8758b66",
+    "research/data_evidence/h0002-freeze-preregistration-20261004/verification-v2/additional-invariants.json": "22c1f66c5d300d4492296046ef3842a41f2cff3e6715b499d5c1438d4768a7b8",
+    "research/data_evidence/h0002-freeze-preregistration-20261004/verification-v2/full-suite.xml": "c3b1048701fc6b98bd5d4d03f2d30ba2ff11513a01d1fdc7d7a4c0ed8f60de4d",
+    "research/data_evidence/h0002-freeze-preregistration-20261004/verification-v2/manifest.json": "0ed6e3451f40a1bd552b75a704c77d9c4c3649c8f56725e35b6af1caa44ba0f1",
+    "research/data_evidence/h0002-freeze-preregistration-20261004/verification-v2/targeted-suite.xml": "8985b8a431b89c9a902c9f1dcf591da880e2ffc84d3c8bef5bd173daa665b19e",
+    "research/data_evidence/h0002-freeze-preregistration-20261004/verification-v2/test-report.json": "5600c61cc9083fd7821a128addbe3606de9ae21d5a027f8a1801ae5872f696b2",
+    "research/data_evidence/h0002-freeze-preregistration-20261004/verification-v2/verification.json": "dc5bace8f407bb024b6dbc58d9171efc1c8c75a94f0bd48bbcfdc433f6002bd0",
+    "research/data_evidence/h0002-freeze-preregistration-20261004/verification.json": "dc5bace8f407bb024b6dbc58d9171efc1c8c75a94f0bd48bbcfdc433f6002bd0",
+    "research/decision_records/H0002-efficacy-preregistration-v1.yaml": "ab58bf68c890cfdaaec97bacd030b268ed166c51958edc4ab0d4cf6a3c115365",
+    "research/decision_records/H0002-signal-freeze-v1.json": "d6c9c80834eebbc5a06c157e4289c59d50e5b887e6ba540e9a8ad467dcae97ea",
+    "research/strategy_specs/H0002-r01-frozen-v1.yaml": "815566b715c682f81d82bcd6db5c96367ec10b932ff253d0255b4710581cfb91"
+  },
+  "first_targeted_failure_preserved_and_superseded": true,
+  "next_P0": "H0002_FIRST_EFFICACY",
+  "outcome_access": 0,
+  "preserved_files": 452,
+  "profitability_calculations": 0,
+  "protocol_hash": "a6e16e57bee2e26860f6989c88fdaeac707ecfc91a6326f54a8d754cfe327e8d",
+  "status": "FROZEN_PREREGISTERED_OUTCOMES_NOT_RUN",
+  "tests": {
+    "full": {
+      "errors": 0,
+      "failures": 0,
+      "passed": 1515,
+      "path": "full-suite.xml",
+      "seconds": 471.455,
+      "sha256": "c3b1048701fc6b98bd5d4d03f2d30ba2ff11513a01d1fdc7d7a4c0ed8f60de4d",
+      "skipped": 0,
+      "tests": 1515
+    },
+    "full_command": ".venv/Scripts/python -m pytest -q",
+    "initial_targeted_attempt": "Archived predecessor:68 passed/1 calendar-start helper failure; fixed using calendar first_session; no semantic or outcome change.",
+    "profitability_calculations": 0,
+    "real_H0002_outcome_access": 0,
+    "targeted": {
+      "errors": 0,
+      "failures": 0,
+      "passed": 69,
+      "path": "targeted-suite.xml",
+      "seconds": 13.721,
+      "sha256": "8985b8a431b89c9a902c9f1dcf591da880e2ffc84d3c8bef5bd173daa665b19e",
+      "skipped": 0,
+      "tests": 69
+    },
+    "targeted_command": ".venv/Scripts/python -m pytest -q tests/test_h0002_preregistration.py tests/test_h0002_defense.py tests/test_independent_research_intake.py"
+  }
+}

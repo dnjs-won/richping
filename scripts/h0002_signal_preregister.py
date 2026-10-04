@@ -1,0 +1,204 @@
+"""Immutable H0002 signal freeze/preregistration. Metadata only; no price replay."""
+from argparse import ArgumentParser
+from contextlib import ExitStack, contextmanager
+from hashlib import sha256
+from importlib.metadata import version
+import json
+from pathlib import Path
+import subprocess
+import sys
+from unittest.mock import patch
+
+import yaml
+
+from richping.core import digest
+from richping.research_v2.strategy.h0002_defense import Specification, PRIMARY, COMPARATOR
+from richping.research_v2.strategy.h0002_experiment import calendar_contract
+from scripts.h0002_frequency_audit import (
+    ROOT as DISCOVERY, DATASET_ID, DATASET_HASH, FORBIDDEN, encode,
+    fingerprint, preservation_fingerprint, verify_manifest)
+
+BASE = 'a02d67ce1f6b3a49e28c9a022ebfd40047f17f9f'
+ROOT = Path('research/data_evidence/h0002-freeze-preregistration-20261004/verification-v2')
+PROVISIONAL = Path('research/strategy_specs/H0002-r01-candidate.yaml')
+SPEC = Path('research/strategy_specs/H0002-r01-frozen-v1.yaml')
+HYPOTHESIS = Path('research/hypotheses/H0002-r01.yaml')
+FREEZE = Path('research/decision_records/H0002-signal-freeze-v1.json')
+PROTOCOL = Path('research/decision_records/H0002-efficacy-preregistration-v1.yaml')
+BOUND = (SPEC, FREEZE, PROTOCOL, Path(__file__).relative_to(Path.cwd()),
+         Path('richping/research_v2/strategy/h0002_experiment.py'),
+         Path('tests/test_h0002_preregistration.py'), Path('docs/H0002_SIGNAL_FREEZE_PREREGISTRATION.md'))
+
+
+def immutable(path, raw):
+    if path.exists():
+        if path.read_bytes() != raw:
+            raise ValueError('Immutable record already exists with different content: ' + str(path))
+    else:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(raw)
+
+
+def runtime_identity():
+    return {'python': sys.version.split()[0], 'exchange_calendars': version('exchange_calendars'),
+            'PyYAML': version('PyYAML')}
+
+
+@contextmanager
+def metadata_only():
+    forbidden = {**FORBIDDEN, 'sqlite3.connect': 'database',
+                 'scripts.h0002_frequency_audit.load_admitted': 'market_load',
+                 'richping.research_v2.market_data.MarketDataset.from_records': 'market_load',
+                 'richping.research_v2.strategy.h0002_defense.DefenseStream.accept': 'signal_replay'}
+    counts = {category: 0 for category in forbidden.values()}
+    def reject(category):
+        def denied(*args, **kwargs):
+            counts[category] += 1
+            raise AssertionError('Preregistration forbids ' + category)
+        return denied
+    with ExitStack() as stack:
+        for target, category in forbidden.items():
+            stack.enter_context(patch(target, side_effect=reject(category)))
+        yield counts
+
+
+def validate_protocol(body):
+    required = {'sample', 'horizons', 'label', 'baseline', 'costs', 'discovery', 'confirmation',
+                'evidence_floor', 'uncertainty', 'multiple_testing', 'disposition'}
+    if not required <= body.keys():
+        raise ValueError('Incomplete preregistration')
+    if (body['primary'], body['comparator'], body['outcome_access_this_action']) != (PRIMARY, COMPARATOR, 'FORBIDDEN'):
+        raise ValueError('Family/access identity changed')
+    if body['horizons']['primary_slots'] != 4 or body['horizons']['secondary_slots'] != [64, 192]:
+        raise ValueError('Horizon contract changed')
+    if (body['baseline']['search_sessions'], body['baseline']['controls_per_event']) != (20, 5):
+        raise ValueError('Baseline contract changed')
+    if body['costs']['costs_bps'] is not None or body['costs']['profitability'] != 'NOT_ESTIMATED':
+        raise ValueError('Gross opportunity scope required')
+    grid = calendar_contract()
+    confirmation = body['confirmation']
+    if (confirmation['anchor_start'], confirmation['anchor_end'], confirmation['official_sessions'],
+            confirmation['followup_end'], confirmation['embargo_sessions']) != (
+            grid['anchors'][0], grid['anchors'][-1], len(grid['anchors']), grid['followup'][-1], grid['embargo']):
+        raise ValueError('Confirmation calendar mismatch')
+    if not confirmation['asynchronous'] or confirmation['project_blocker']:
+        raise ValueError('Future confirmation must be asynchronous')
+    if body['multiple_testing']['family'] != [PRIMARY, COMPARATOR]:
+        raise ValueError('Multiplicity family mismatch')
+    return grid
+
+
+def freeze():
+    """Bind the owner-selected old stream unchanged; no market object constructed."""
+    verify_manifest()
+    body = yaml.safe_load(PROVISIONAL.read_bytes())
+    Specification(**body['parameters'])
+    body.update(schema='h0002_frozen_signal_v1', version='H0002_PRICE_DEFENSE_SIGNAL_V1',
+                status='FROZEN_OWNER_SELECTED_BEFORE_OUTCOMES',
+                session_scope='SOXX 15m; full admitted 04:00-20:00 America/New_York; LONG direction; no Daily/H1/MACD/H0001 state.',
+                selection_policy='Final owner selection 2026-10-04; frequency is not performance evidence; no parameter change.')
+    body['rejection']['multi_bar_reclaim'] = 'EXCLUDED_FROM_V1_REQUIRES_SEPARATE_HYPOTHESIS_OR_REVISION'
+    immutable(SPEC, yaml.safe_dump(body, sort_keys=False, allow_unicode=True).encode())
+    report = json.loads((DISCOVERY/'frequency-audit.json').read_bytes())
+    record = {'schema': 'h0002_signal_freeze_v1', 'status': 'IMMUTABLE_OWNER_APPROVED',
+              'registered_on': '2026-10-04', 'base_commit': BASE,
+              'hypothesis_id': 'H0002', 'hypothesis_revision': 1,
+              'hypothesis_path': HYPOTHESIS.as_posix(), 'hypothesis_sha256': fingerprint(HYPOTHESIS),
+              'historical_hypothesis_status': 'Historical DRAFT file retained; this decision freezes its price-defense thesis and supersedes open signal semantics only.',
+              'spec_path': SPEC.as_posix(), 'spec_sha256': fingerprint(SPEC), 'spec_canonical_hash': digest(body),
+              'parameters': body['parameters'], 'price_spec_hash': Specification().price_hash,
+              'implementation': 'richping/research_v2/strategy/h0002_defense.py',
+              'implementation_sha256': fingerprint('richping/research_v2/strategy/h0002_defense.py'),
+              'provisional_spec_sha256': fingerprint(PROVISIONAL),
+              'semantic_sections': {k: body[k] for k in ('zone', 'interaction', 'rejection', 'volume', 'session_scope')},
+              'dataset_id': DATASET_ID, 'dataset_hash': DATASET_HASH,
+              'dataset_receipt_sha256': fingerprint('research/data_evidence/h0001-alpaca-70-20261004/intraday-vintage.json'),
+              'discovery_events_path': (DISCOVERY/'candidate-events.json').as_posix(),
+              'discovery_events_sha256': fingerprint(DISCOVERY/'candidate-events.json'),
+              'discovery_event_stream_hash': report['event_stream_hash'],
+              'discovery_frequency_sha256': fingerprint(DISCOVERY/'frequency-audit.json'),
+              'primary': PRIMARY, 'comparator': COMPARATOR,
+              'comparator_role': 'OPTIONAL_NESTED_NOT_PRIMARY_OR_SUPERIORITY_CLAIM',
+              'H0001_state_dependency': False, 'H0001_track_modified': False,
+              'outcome_access': 0, 'profitability_calculations': 0,
+              'frequency_does_not_establish_efficacy': True,
+              'strategy_independence': {'H0001': 'MACD extreme, GC/reversal and Daily/H1/15m composed momentum.',
+                                        'H0002': 'Historical confirmed low-pair zone, visit, strict same-bar failed breakdown, optional volume.'}}
+    immutable(FREEZE, encode(record))
+    protocol = yaml.safe_load(PROTOCOL.read_bytes())
+    grid = validate_protocol(protocol)
+    # All base tracked files are pinned, except Git policy/status history that this action updates.
+    paths = subprocess.run(['git', 'ls-tree', '-r', '--name-only', BASE], check=True,
+                           capture_output=True, text=True).stdout.splitlines()
+    preserved = {p: preservation_fingerprint(p) for p in paths if p not in ('.gitattributes', 'PROJECT_STATUS.md')}
+    manifest = {'schema': 'h0002_preregistration_manifest_v1', 'base_commit': BASE,
+                'bound_files': {p.as_posix(): preservation_fingerprint(p) for p in BOUND},
+                'preserved_files': preserved, 'runtime': runtime_identity(),
+                'calendar': grid, 'calendar_hash': digest(grid), 'protocol_hash': digest(protocol),
+                'freeze_sha256': fingerprint(FREEZE), 'outcome_access': 0, 'profitability_calculations': 0,
+                'predecessor': {'manifest_sha256': fingerprint(ROOT.parent/'manifest.json'),
+                    'verification_sha256': fingerprint(ROOT.parent/'verification.json'),
+                    'failed_targeted_sha256': fingerprint(ROOT.parent/'targeted-first-validation.xml'),
+                    'original_helper_sha256': fingerprint(ROOT.parent/'experiment-source-v1.py.bin'),
+                    'original_runner_sha256': fingerprint(ROOT.parent/'preregister-source-v1.py.bin'),
+                    'reason': 'Targeted test found calendar starts on 1990-01-02, not holiday 1990-01-01. Use first_session for metadata search; no signal/protocol/dataset/event change.'}}
+    immutable(ROOT/'manifest.json', encode(manifest))
+    return manifest
+
+
+def verify():
+    manifest = json.loads((ROOT/'manifest.json').read_bytes())
+    if manifest['base_commit'] != BASE or manifest['runtime'] != runtime_identity():
+        raise ValueError('Base/runtime mismatch')
+    for group in ('bound_files', 'preserved_files'):
+        for name, expected in manifest[group].items():
+            if preservation_fingerprint(name) != expected:
+                raise ValueError('Frozen/preserved file changed: ' + name)
+    verify_manifest()
+    protocol = yaml.safe_load(PROTOCOL.read_bytes())
+    grid = validate_protocol(protocol)
+    if grid != manifest['calendar'] or digest(protocol) != manifest['protocol_hash']:
+        raise ValueError('Protocol/calendar changed')
+    frozen = json.loads(FREEZE.read_bytes())
+    if fingerprint(SPEC) != frozen['spec_sha256'] or fingerprint(HYPOTHESIS) != frozen['hypothesis_sha256']:
+        raise ValueError('Frozen spec/hypothesis mismatch')
+    if fingerprint(frozen['implementation']) != frozen['implementation_sha256']:
+        raise ValueError('Frozen implementation mismatch')
+    if (frozen['dataset_id'], frozen['dataset_hash']) != (DATASET_ID, DATASET_HASH):
+        raise ValueError('Dataset identity mismatch')
+    events = json.loads((DISCOVERY/'candidate-events.json').read_bytes())['events']
+    if digest(events) != frozen['discovery_event_stream_hash']:
+        raise ValueError('Discovery event stream mismatch')
+    primary = [e for e in events if e['family'] == PRIMARY]
+    comparator = [e for e in events if e['family'] == COMPARATOR]
+    ids = {e['id'] for e in primary}
+    if len({e['id'] for e in events}) != len(events) or not all(e['snapshot']['price_event_id'] in ids for e in comparator):
+        raise ValueError('Duplicate/unmatched discovery events')
+    return {'status': 'FROZEN_PREREGISTERED_OUTCOMES_NOT_RUN', 'protocol_hash': manifest['protocol_hash'],
+            'signal_freeze_sha256': fingerprint(FREEZE), 'spec_sha256': fingerprint(SPEC),
+            'implementation_sha256': frozen['implementation_sha256'], 'dataset_hash': DATASET_HASH,
+            'event_stream_hash': digest(events), 'primary_events': len(primary), 'comparator_events': len(comparator),
+            'primary_sessions': len({e['session'] for e in primary}),
+            'comparator_sessions': len({e['session'] for e in comparator}),
+            'preserved_files': len(manifest['preserved_files']), 'calendar_hash': digest(grid),
+            'confirmation_sessions': len(grid['anchors']), 'confirmation_disposition': 'PENDING',
+            'outcome_access': 0, 'profitability_calculations': 0, 'next_P0': 'H0002_FIRST_EFFICACY',
+            'evaluation_adapter': 'CONTRACT_AND_METADATA_GATES_ONLY_NOT_IMPLEMENTED_OR_EXECUTED'}
+
+
+def run(seal=False):
+    with metadata_only() as counts:
+        if seal:
+            freeze()
+        first, second = verify(), verify()
+        if first != second or any(counts.values()):
+            raise ValueError('Metadata revalidation mismatch/forbidden access')
+    report = {**first, 'repeat_equal': True, 'runs': 2, 'forbidden_call_counts': counts}
+    immutable(ROOT/'verification.json', encode(report))
+    return report
+
+
+if __name__ == '__main__':
+    parser = ArgumentParser(description=__doc__)
+    parser.add_argument('--seal', action='store_true')
+    print(json.dumps(run(parser.parse_args().seal), indent=2))
