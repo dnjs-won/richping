@@ -1,3 +1,11 @@
+# Richping PM - H0002 exploratory efficacy / H0003 routing
+
+Frozen H0002 evaluator executed twice deterministically on admitted discovery70 only. All14 primary R4 labels complete;12 matched pairs complete,2 controls insufficient retained. Session-balanced R4 +0.071984%,median+0.043293%,8/14 positive; resolved12-pair excess+0.611223%,full cohort excess null. Volume11 labels/9 complete pairs; no superiority claim. Discovery uncertainty not preregistered; no CI adaptation. Disposition DISCOVERY_INSUFFICIENT_RESOLVED_LABELS, not confirmation PASS/REJECT or profitability. Confirmation outcomes0; H0001 frozen/sparse126 and H0002 frozen252-session confirmation asynchronous. Next independent H0003 thesis selection; no outcome-selected H0002 revision.
+
+Implementation v2-h0002-first-efficacy / 62992b202e37856a112ee45cc178a15dfd0c8899. Targeted97/full1543 passed. NEXT_ACTION **INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION / H0003 / USER_DECISION_REQUIRED**. Main PM update only; no code merge. H0001/H0002 confirmation dates/hashes preserved.
+
+The entries below are preserved historical status reports.
+
 # Richping PM - 2026-10-04 H0002 freeze / preregistration
 
 Owner-approved independent H0002 price-zone/same-bar failed-breakdown signal FROZEN; optional nested volume comparator, SOXX15m full04-20ET, no H0001/MACD/Daily/H1 dependency. Discovery14/12sessions and volume11/10sessions unchanged; no H0002 outcomes or profitability. Preregistered4-slot primary,64/192 descriptive, prior same-slot/state non-event baseline, fixed252-session confirmation2026-10-19..2027-10-19 and40event/20session/8block floor. Next first-efficacy adapter/discovery action; future confirmation asynchronous, not project blocking. H0001 frozen/sparse126-session confirmation unchanged.

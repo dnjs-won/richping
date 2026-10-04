@@ -15,7 +15,7 @@ source_of_truth:
     branch: main
     path: PROJECT_STATUS.md
   active_workstream_status:
-    branch: v2-h0002-signal-freeze-preregistration
+    branch: v2-h0002-first-efficacy
     path: PROJECT_STATUS.md
   decision_index:
     branch: main
@@ -30,26 +30,27 @@ control_plane:
   branch: main
   rule: PM state lives on main so new sessions can recover it from the default branch.
 active_workstream:
-  branch: v2-h0002-signal-freeze-preregistration
-  base_branch: v2-h0002-price-defense-frequency
-  base_commit: a02d67ce1f6b3a49e28c9a022ebfd40047f17f9f
-  implementation_commit: d76124409130b7e39a252c84079f0a8ba61a49ca
+  branch: v2-h0002-first-efficacy
+  base_branch: v2-h0002-signal-freeze-preregistration
+  base_commit: d76124409130b7e39a252c84079f0a8ba61a49ca
+  implementation_commit: 62992b202e37856a112ee45cc178a15dfd0c8899
   status: DIVERGED_FROM_MAIN
   observed_relation_to_main:
-    ahead_by: 44
-    behind_by: 22
-    main_commit: 5ac21ad4b4d7a365ab5fb56351d6a8746419a7de
-  note: Owner-approved independent H0002 price-zone/same-bar failed-breakdown signal
-    FROZEN; optional nested volume comparator, SOXX15m full04-20ET, no H0001/MACD/Daily/H1
-    dependency. Discovery14/12sessions and volume11/10sessions unchanged; no H0002
-    outcomes or profitability. Preregistered4-slot primary,64/192 descriptive, prior
-    same-slot/state non-event baseline, fixed252-session confirmation2026-10-19..2027-10-19
-    and40event/20session/8block floor. Next first-efficacy adapter/discovery action;
-    future confirmation asynchronous, not project blocking. H0001 frozen/sparse126-session
-    confirmation unchanged.
+    ahead_by: 46
+    behind_by: 23
+    main_commit: 534d92f4c4447ab56f96f5149880c3a309ff291d
+  note: Frozen H0002 evaluator executed twice deterministically on admitted discovery70
+    only. All14 primary R4 labels complete;12 matched pairs complete,2 controls insufficient
+    retained. Session-balanced R4 +0.071984%,median+0.043293%,8/14 positive; resolved12-pair
+    excess+0.611223%,full cohort excess null. Volume11 labels/9 complete pairs; no
+    superiority claim. Discovery uncertainty not preregistered; no CI adaptation.
+    Disposition DISCOVERY_INSUFFICIENT_RESOLVED_LABELS, not confirmation PASS/REJECT
+    or profitability. Confirmation outcomes0; H0001 frozen/sparse126 and H0002 frozen252-session
+    confirmation asynchronous. Next independent H0003 thesis selection; no outcome-selected
+    H0002 revision.
 current_phase:
   id: INDEPENDENT_STRATEGY_RESEARCH_CYCLE
-  status: READY_H0002_FIRST_EFFICACY
+  status: AWAITING_H0003_OWNER_HYPOTHESIS_MEANING
   objective: Repeat independent hypothesis generation, causal discovery, preregistration,
     confirmation and evidence disposition.
   exit_criteria:
@@ -61,20 +62,20 @@ current_phase:
   progress:
     intake_infrastructure: IMPLEMENTED_TESTED
     next_available_hypothesis: H0003
-    strategy_meaning: SELECTED_BY_OWNER_H0002
+    strategy_meaning: USER_DECISION_REQUIRED_H0003
     H0001_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
-    active_hypothesis: H0002
-    causal_frequency: IMPLEMENTED_EXECUTED_ON_REAL_DATA_EVIDENCE_PRODUCED
-    signal_freeze: COMPLETE_OWNER_APPROVED_IMMUTABLE
-    outcome_evaluation: NOT_RUN
-    satisfied_exit_criteria:
+    active_hypothesis: H0003
+    causal_frequency: NOT_STARTED_H0003
+    signal_freeze: NOT_STARTED_H0003
+    outcome_evaluation: NOT_STARTED_H0003
+    satisfied_exit_criteria: []
+    remaining_exit_criteria:
     - 1
     - 2
-    remaining_exit_criteria:
     - 3
-    efficacy_preregistration: COMPLETE_FROZEN_BEFORE_OUTCOMES
+    efficacy_preregistration: NOT_STARTED_H0003
     H0002_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
-    protocol_hash: a6e16e57bee2e26860f6989c88fdaeac707ecfc91a6326f54a8d754cfe327e8d
+    H0002_discovery_disposition: DISCOVERY_INSUFFICIENT_RESOLVED_LABELS
 completed_actions:
 - id: V2_REAL_INTRADAY_DATA_FOUNDATION
   status: COMPLETE
@@ -556,30 +557,66 @@ completed_actions:
       tests: 69
     targeted_command: .venv/Scripts/python -m pytest -q tests/test_h0002_preregistration.py
       tests/test_h0002_defense.py tests/test_independent_research_intake.py
-next_action:
-  id: H0002_FIRST_EFFICACY
-  priority: P0
-  status: READY
-  blocks_phase_exit_criteria:
-  - 3
-  objective: Implement frozen nonempty evaluator and bounded exploratory discovery
-    efficacy; record disposition then route independent research.
-  why_now: Owner signal freeze and complete preregistration identities verified; actual
-    efficacy remains NOT_RUN.
-  evidence_branch: v2-h0002-signal-freeze-preregistration
-  preregistration: research/decision_records/H0002-efficacy-preregistration-v1.yaml
+- id: H0002_FIRST_EFFICACY
+  status: COMPLETE_VALID_EXPLORATORY_DISCOVERY_DISPOSITION
+  completed_at: '2026-10-04'
+  branch: v2-h0002-first-efficacy
+  commit: 62992b202e37856a112ee45cc178a15dfd0c8899
+  record: research/decision_records/H0002-first-efficacy-v1.yaml
+  evidence: research/data_evidence/h0002-first-efficacy-20261004/verification-v2/discovery-report.json
+  implementation_state: IMPLEMENTED_EXECUTED_REAL_DISCOVERY_EVIDENCE_PRODUCED_NOT_MAIN_INTEGRATED
+  acceptance_criteria_satisfied: 12
+  acceptance_criteria_unmet: 0
   protocol_hash: a6e16e57bee2e26860f6989c88fdaeac707ecfc91a6326f54a8d754cfe327e8d
-  basis_evidence: research/data_evidence/h0002-freeze-preregistration-20261004/verification-v2/verification.json
+  signal_freeze_hash: d6c9c80834eebbc5a06c157e4289c59d50e5b887e6ba540e9a8ad467dcae97ea
+  candidate_stream_hash: 65174fa89f16e69f373bef0a4ea655f42b19594389d6bb9e1c472c9d47a6ae45
+  control_membership_hash: 49467c69b960f66480b0b96962f3313b0736b19bc01012f806456e8bad422594
+  disposition: DISCOVERY_INSUFFICIENT_RESOLVED_LABELS
+  scope: EXPLORATORY_DISCOVERY_ONLY
+  primary_complete_labels: 14
+  primary_complete_pairs: 12
+  primary_unresolved_pairs: 2
+  confirmation_outcome_access: 0
+  profitability_calculations: 0
+  tests:
+    full:
+      errors: 0
+      failures: 0
+      passed: 1543
+      path: full-suite.xml
+      seconds: 487.017
+      sha256: 5979063864ce9caa3e320c46602a2ba769f256b5fb7bbc6e04bcf658e97572b5
+      skipped: 0
+      tests: 1543
+    targeted:
+      errors: 0
+      failures: 0
+      passed: 97
+      path: targeted-suite.xml
+      seconds: 29.409
+      sha256: 0d564324646e5618da076e579743cfdccc3ceba9bdbb7b5f775c52ca1b21c509
+      skipped: 0
+      tests: 97
+next_action:
+  id: INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION
+  priority: P0
+  status: USER_DECISION_REQUIRED
+  blocks_phase_exit_criteria:
+  - 1
+  hypothesis_id: H0003
+  objective: Select the next independent owner market thesis and causal observation
+    family for H0003.
+  why_now: Valid H0002 exploratory disposition produced; future H0001/H0002 confirmation
+    waits do not block independent research.
+  evidence_branch: v2-h0002-first-efficacy
+  basis_evidence: research/data_evidence/h0002-first-efficacy-20261004/verification-v2/discovery-report.json
+  owner_decision: Describe the next independent market phenomenon; no performance-driven
+    H0002 threshold/reclaim/baseline change.
   constraints:
-  - Verify bindings before separate outcome execution
-  - Discovery cannot PASS confirmation or tune conditions
-  - Missing discovery controls/labels remain explicit UNRESOLVED; no cohort deletion
-    or relaxation
-  - Confirmation outcome inference forbidden until fixed terminal deadline; no extension
-    or peeking
-  - Future confirmation is asynchronous; route H0003 intake after first-efficacy disposition
-  - Preserve H0001 frozen source/evidence/126-session track
-  confirmation_wait_blocks_project: false
+  - Preserve H0001/H0002 frozen semantics and separate confirmation windows
+  - Confirmation performance remains hidden until each registered terminal gate
+  - Discovery observations can inform a distinct thesis, never retroactive H0002 modification
+  - No project wait until2027; new causal thesis before outcomes
 pm_policy:
   single_next_action: true
   discovered_non_blockers_go_to_backlog: true
@@ -733,18 +770,19 @@ hypothesis_tracks:
     status:
     - FROZEN
     - PREREGISTERED
+    - EXPLORATORY_DISCOVERY_EVALUATED
     - AWAITING_FUTURE_CONFIRMATION
     family: PRICE_STRUCTURE_VOLUME_DEFENSE_REVERSAL
-    track: ACTIVE_RESEARCH
+    track: ASYNCHRONOUS_CONFIRMATION
     hypothesis: research/hypotheses/H0002-r01.yaml
-    branch: v2-h0002-signal-freeze-preregistration
-    commit: d76124409130b7e39a252c84079f0a8ba61a49ca
+    branch: v2-h0002-first-efficacy
+    commit: 62992b202e37856a112ee45cc178a15dfd0c8899
     spec: research/strategy_specs/H0002-r01-frozen-v1.yaml
     record: research/decision_records/H0002-signal-freeze-v1.json
     frequency_evidence: research/data_evidence/h0002-frequency-20261004/verification-v3/frequency-audit.json
     primary_candidates: 14
     volume_comparator_candidates: 11
-    outcome_access: ONLY_SEPARATE_EXECUTION_UNDER_FROZEN_PREREGISTRATION_NOT_RUN_THIS_ACTION
+    outcome_access: DISCOVERY_ONLY_AUTHORIZED_EXECUTED; CONFIRMATION_FORBIDDEN_UNTIL_REGISTERED_TERMINAL_DEADLINE
     confirmation:
       status: PENDING
       start: '2026-10-19'
@@ -761,6 +799,159 @@ hypothesis_tracks:
       sessions: 20
       occupied_25_session_blocks: 8
     confirmation_is_project_blocker: false
-    evaluation_adapter: EXECUTABLE_DESIGN_METADATA_GATES_ONLY_NOT_IMPLEMENTED
+    evaluation_adapter: DISCOVERY_COMPLETE_WITH_EXPLICIT_UNRESOLVED_PAIRS
     owner_signal_semantics: FINAL_APPROVED_2026_10_04
-active_research_track: H0002
+    efficacy_record: research/decision_records/H0002-first-efficacy-v1.yaml
+    efficacy_evidence: research/data_evidence/h0002-first-efficacy-20261004/verification-v2/discovery-report.json
+    evaluator: IMPLEMENTED_EXECUTED_DISCOVERY; TERMINAL_STATISTICS_GATED; FUTURE_INTERVAL_ADMISSION_ADAPTER_STILL_REQUIRED
+    discovery_disposition: DISCOVERY_INSUFFICIENT_RESOLVED_LABELS
+    discovery_primary_metrics:
+      '192':
+        bootstrap_interval: null
+        complete_label_sessions: 12
+        complete_pair_sessions: 10
+        distinct_sessions: 12
+        events: 14
+        full_cohort_mean_excess: null
+        full_cohort_mean_return: 0.012862932478636738
+        label_status:
+          COMPLETE: 14
+        median_return_resolved: -0.008024590069864612
+        paired_status:
+          COMPLETE: 12
+          UNRESOLVED: 2
+        positive_events: 5
+        positive_rate_resolved: 0.35714285714285715
+        resolved_pair_denominator: 12
+        session_balanced_mean_excess_resolved_subset: 0.01039449463899385
+        session_balanced_mean_return_resolved: 0.012862932478636738
+        uncertainty_status: DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED
+        unresolved_reasons:
+          fewer_than_five_causal_controls: 2
+      '4':
+        bootstrap_interval: null
+        complete_label_sessions: 12
+        complete_pair_sessions: 10
+        distinct_sessions: 12
+        events: 14
+        full_cohort_mean_excess: null
+        full_cohort_mean_return: 0.0007198399893334917
+        label_status:
+          COMPLETE: 14
+        median_return_resolved: 0.0004329315680435819
+        paired_status:
+          COMPLETE: 12
+          UNRESOLVED: 2
+        positive_events: 8
+        positive_rate_resolved: 0.5714285714285714
+        resolved_pair_denominator: 12
+        session_balanced_mean_excess_resolved_subset: 0.006112234169222512
+        session_balanced_mean_return_resolved: 0.0007198399893334917
+        uncertainty_status: DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED
+        unresolved_reasons:
+          fewer_than_five_causal_controls: 2
+      '64':
+        bootstrap_interval: null
+        complete_label_sessions: 12
+        complete_pair_sessions: 10
+        distinct_sessions: 12
+        events: 14
+        full_cohort_mean_excess: null
+        full_cohort_mean_return: 0.0030972325298944856
+        label_status:
+          COMPLETE: 14
+        median_return_resolved: -0.006131500561511294
+        paired_status:
+          COMPLETE: 12
+          UNRESOLVED: 2
+        positive_events: 5
+        positive_rate_resolved: 0.35714285714285715
+        resolved_pair_denominator: 12
+        session_balanced_mean_excess_resolved_subset: -0.003225529929460843
+        session_balanced_mean_return_resolved: 0.0030972325298944856
+        uncertainty_status: DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED
+        unresolved_reasons:
+          fewer_than_five_causal_controls: 2
+    discovery_comparator_metrics:
+      '192':
+        bootstrap_interval: null
+        complete_label_sessions: 10
+        complete_pair_sessions: 8
+        distinct_sessions: 10
+        events: 11
+        full_cohort_mean_excess: null
+        full_cohort_mean_return: 0.009882586056425386
+        label_status:
+          COMPLETE: 11
+        median_return_resolved: -0.009408555139729269
+        paired_status:
+          COMPLETE: 9
+          UNRESOLVED: 2
+        positive_events: 4
+        positive_rate_resolved: 0.36363636363636365
+        resolved_pair_denominator: 9
+        session_balanced_mean_excess_resolved_subset: 0.009938418655102123
+        session_balanced_mean_return_resolved: 0.009882586056425386
+        uncertainty_status: DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED
+        unresolved_reasons:
+          fewer_than_five_causal_controls: 2
+      '4':
+        bootstrap_interval: null
+        complete_label_sessions: 10
+        complete_pair_sessions: 8
+        distinct_sessions: 10
+        events: 11
+        full_cohort_mean_excess: null
+        full_cohort_mean_return: 0.0012672938770256382
+        label_status:
+          COMPLETE: 11
+        median_return_resolved: 0.00035798222540428526
+        paired_status:
+          COMPLETE: 9
+          UNRESOLVED: 2
+        positive_events: 6
+        positive_rate_resolved: 0.5454545454545454
+        resolved_pair_denominator: 9
+        session_balanced_mean_excess_resolved_subset: 0.007578863638702106
+        session_balanced_mean_return_resolved: 0.0012672938770256382
+        uncertainty_status: DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED
+        unresolved_reasons:
+          fewer_than_five_causal_controls: 2
+      '64':
+        bootstrap_interval: null
+        complete_label_sessions: 10
+        complete_pair_sessions: 8
+        distinct_sessions: 10
+        events: 11
+        full_cohort_mean_excess: null
+        full_cohort_mean_return: 0.0031965915927863243
+        label_status:
+          COMPLETE: 11
+        median_return_resolved: -0.009128149984668932
+        paired_status:
+          COMPLETE: 9
+          UNRESOLVED: 2
+        positive_events: 4
+        positive_rate_resolved: 0.36363636363636365
+        resolved_pair_denominator: 9
+        session_balanced_mean_excess_resolved_subset: -0.0036964008561884048
+        session_balanced_mean_return_resolved: 0.0031965915927863243
+        uncertainty_status: DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED
+        unresolved_reasons:
+          fewer_than_five_causal_controls: 2
+    discovery_uncertainty: DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED
+    confirmation_outcome_access: 0
+    profitability_calculations: 0
+active_research_track: H0003
+research_cycle_history:
+- hypothesis: H0002
+  status: COMPLETE_VALID_DISCOVERY_DISPOSITION_CONFIRMATION_ASYNC_PENDING
+  satisfied_exit_criteria:
+  - 1
+  - 2
+  - 3
+  record: research/decision_records/H0002-first-efficacy-v1.yaml
+  branch: v2-h0002-first-efficacy
+  commit: 62992b202e37856a112ee45cc178a15dfd0c8899
+  disposition: DISCOVERY_INSUFFICIENT_RESOLVED_LABELS
+  confirmation_is_project_blocker: false
