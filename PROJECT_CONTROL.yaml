@@ -1,6 +1,6 @@
 schema_version: 1
 project: richping
-updated_at: '2026-10-03'
+updated_at: '2026-10-04'
 source_of_truth:
   project_goal:
     branch: main
@@ -15,7 +15,7 @@ source_of_truth:
     branch: main
     path: PROJECT_STATUS.md
   active_workstream_status:
-    branch: v2-h0001-efficacy-disposition-audit
+    branch: v2-h0001-long-history-provider-audit
     path: PROJECT_STATUS.md
   decision_index:
     branch: main
@@ -30,17 +30,17 @@ control_plane:
   branch: main
   rule: PM state lives on main so new sessions can recover it from the default branch.
 active_workstream:
-  branch: v2-h0001-efficacy-disposition-audit
-  base_branch: v2-h0001-first-entry-efficacy
-  base_commit: fbef043bbbcded3fe3e80c0fa47fa7ff4c103d68
-  implementation_commit: 58a237c45feef7f64a9c3c18c59d17575401d8d3
+  branch: v2-h0001-long-history-provider-audit
+  base_branch: v2-h0001-efficacy-disposition-audit
+  base_commit: 58a237c45feef7f64a9c3c18c59d17575401d8d3
+  implementation_commit: 15eb6f0653c081e4d03a58932c68de8a3e8a85b6
   status: DIVERGED_FROM_MAIN
   observed_relation_to_main:
-    ahead_by: 35
-    behind_by: 16
-    main_commit: bea46d679364be33bb67bdf094a01db2aa41444f
-  note: Independent ZERO_SIGNAL revalidation and explicit forbidden-access evidence; original disposition and all
-    frozen sources unchanged. Main receives PM documents only.
+    ahead_by: 36
+    behind_by: 17
+    main_commit: e7082fa
+  note: Bounded actual-access provider audit and admission evidence. No provider selection, migration or expanded
+    dataset. Main receives PM documents only.
 current_phase:
   id: H0001_FIRST_REAL_EVIDENCE
   objective: 'Produce the first reproducible H0001 entry-efficacy evidence from real intraday market data without
@@ -120,6 +120,51 @@ current_phase:
         profitability: NOT_RUN
         return_mfe_mae_calculations: 0
       phase_exit_6: INCOMPLETE_NO_INFORMATIVE_EFFICACY
+    long_history_admission_audit:
+      status: COMPLETE_AUDIT_BLOCKED_EXPANDED_HISTORY_ADMISSION
+      branch: v2-h0001-long-history-provider-audit
+      commit: 15eb6f0653c081e4d03a58932c68de8a3e8a85b6
+      evidence: research/data_evidence/h0001-long-history-20261004/admission.json
+      record: research/decision_records/H0001-long-history-provider-audit-v1.yaml
+      disposition: BLOCKED
+      longer_history_admitted: false
+      provider_selected: null
+      smallest_blocker: Existing Yahoo15m last60-day retention; all reviewed longer feeds unauthenticated HTTP401.
+      actual_usable_history: Preserved 41-session extended15m2026-08-05..10-01; current two64-slot samples confirm
+        grid only, not new interval admission.
+      native1h: One2025-03-10 sample accessible but cannot reconstruct frozen15m-derived input.
+      volume: All38 extended sample bars report0; actual trading/venue interpretation UNKNOWN.
+      latest_session: 10-02 has extra19:59:54 point; UNAVAILABLE, not repaired.
+      credentials: No recognized credentials in documented runtime/User/Machine/config scope.
+      paid_access_required: NOT_ESTABLISHED_FREE_HISTORICAL_ACCOUNT_ROUTES_DOCUMENTED
+      new_interval_action_unit_certification: ABSENT_EXISTING_CERTIFICATE_NOT_REUSED
+      tests: &id003
+        full:
+          command: .venv/Scripts/python -m pytest -q -o cache_dir=var/pytest-long-history-cache --junitxml=var/h0001-long-history-suite.xml
+          errors: 0
+          failures: 0
+          junit_path: full-suite.xml
+          passed: 1401
+          seconds: 426.151
+          sha256: b09b31b5bd396421bf0fe8e9d41d8ac6614aeea63adc2ca201f9e4b046c12d48
+          skipped: 0
+          tests: 1401
+        network_tests: NOT_IN_UNIT_SUITE
+        new_tests: 13
+        profitability: NOT_RUN
+        targeted:
+          command: .venv/Scripts/python -m pytest tests/test_h0001_long_history_audit.py -q -o cache_dir=var/pytest-long-history-cache
+            --junitxml=var/h0001-long-history-targeted.xml
+          errors: 0
+          failures: 0
+          junit_path: targeted-suite.xml
+          passed: 13
+          seconds: 1.361
+          sha256: a9755dc2f9d33df41b1337df2a7703251a418201166975b22a1d8e9a9d01256d
+          skipped: 0
+          tests: 13
+      profitability: NOT_RUN
+      phase_exit_6: INCOMPLETE
   exit_criteria:
   - A real 15m dataset is persisted locally with immutable dataset identity/provenance.
   - The dataset covers the required 04:00-20:00 ET research session with explicit gap/availability diagnostics.
@@ -384,36 +429,76 @@ completed_actions:
   strategy_profitability_tested: false
   nonempty_protocol_adapter: NOT_IMPLEMENTED_FAIL_CLOSED
   independent_revalidation: *id002
+- id: LONG_HISTORY_PROVIDER_AND_VOLUME_EVIDENCE
+  status: COMPLETE_AUDIT_WITH_BLOCKED_ADMISSION
+  completed_at: '2026-10-04'
+  branch: v2-h0001-long-history-provider-audit
+  commit: 15eb6f0653c081e4d03a58932c68de8a3e8a85b6
+  implementation_state: HELPER_IMPLEMENTED_BOUNDED_REAL_NETWORK_AUDIT_EXECUTED_EVIDENCE_PRODUCED_NOT_MAIN_INTEGRATED
+  acceptance_criteria_satisfied: 4
+  acceptance_criteria_unmet: 0
+  evidence: research/data_evidence/h0001-long-history-20261004/admission.json
+  record: research/decision_records/H0001-long-history-provider-audit-v1.yaml
+  contract: docs/H0001_LONG_HISTORY_PROVIDER_AUDIT.md
+  admission_disposition: BLOCKED
+  provider_selected: null
+  new_history_captured: false
+  strategy_replay_outcomes_profitability: NOT_RUN
+  frozen_semantics_changed: false
+  phase_complete: false
+  credential_creation_payment: false
+  tests: *id003
 next_action:
-  id: LONG_HISTORY_PROVIDER_AND_VOLUME_EVIDENCE
+  id: LONG_HISTORY_ACCESS_PATH_DECISION
   priority: P0
-  status: READY
+  status: USER_DECISION_REQUIRED
   blocks_phase_exit_criteria:
   - 6
-  objective: Audit actual longer-history provider access and extended-session/action/OHLC-unit/volume admission
-    before a new immutable discovery vintage is captured.
-  why_now: Frozen fixed stream has zero initial candidates because completed H1 has no downside extremes. Executed
-    ZERO_SIGNAL cannot satisfy informative efficacy exit6; coverage admission is now the immediate blocker. More
-    history does not guarantee signals or inference.
-  evidence_branch: v2-h0001-first-entry-efficacy
-  basis_evidence: research/data_evidence/h0001-first-entry-efficacy-20261003/disposition-report.json
+  objective: Choose an owner-approved read-only historical account/access route for a bounded actual SOXX admission
+    probe; no provider migration or large capture.
+  why_now: Existing 41-session stream0 cannot supply informative efficacy; Yahoo15m cannot reach beyond60 calendar
+    days. Other realistic longer feeds require unavailable credentials. No paid plan is proven necessary.
+  evidence_branch: v2-h0001-long-history-provider-audit
+  basis_evidence: research/data_evidence/h0001-long-history-20261004/admission.json
+  provider_selected: null
+  decision_needed: Existing account availability or owner choice of read-only access route; no implementation question,
+    account signup, secret creation or payment by AI.
+  realistic_options:
+  - route: Alpaca historical SIP Basic
+    documented_capability: US ETF history since2016; end older than15 minutes.
+    documented_cost: Free account; actual SOXX authorization/grid/actions/units unverified.
+  - route: Massive Basic
+    documented_capability: 2-year history and minute aggregates;5 calls/min.
+    documented_cost: $0 account; actual SOXX aggregate entitlement/admission unverified. Optional5/10year plans29/79
+      USD monthly require separate decision.
+  - route: Existing Twelve Data account
+    documented_capability: Historical04:00-20:00 records older than1day; exact SOXX depth and15m extended-volume
+      realization unknown.
+    documented_cost: Basic historical described; actual endpoint/action credits/plan unknown.
+  - route: Databento account if needed
+    documented_capability: Dataset-specific trade/1m and record-time reference evidence; MINI/direct-venue volume
+      differs.
+    documented_cost: Usage/license estimate UNKNOWN until an exact selected range/feed is quoted; no spend authorized.
+  reversibility: Small isolated account probe is reversible. Freeze/vintages/confirmation unchanged if it fails.
+    Purchased access is not assumed refundable; feed blending is not authorized.
   constraints:
-  - Preserve all frozen Daily/1H/15m/composer parameters; no count-driven threshold changes.
-  - No outcomes, provider migration, order/fill/portfolio or paid subscription in the admission audit.
-  - Require full extended 04:00-20:00 ET coverage; no IEX/RTH-only fallback or zero-volume-as-no-trading inference.
-  - Historical expansion is discovery only; fixed future126-session confirmation/stopping rule unchanged.
-  - New interval requires its own corporate-action and OHLC unit admission; existing split-free certificate cannot
-    carry forward.
-  - Audit actual available access without credential changes; unavailable authorization is a recorded blocker, never
-    assumed.
+  - Preserve all frozen Daily/1H/15m/composer thresholds, confirmation126 sessions and stopping/evaluation protocol.
+  - Never select a provider silently on cost or signal/outcome results; no IEX/RTH-only substitute.
+  - Credentials unblock probing only, not research admission. Provider-specific volume/session/action/unit meaning
+    must pass.
+  - No credential generation, signup, paid subscription, mass capture, outcome/performance lookup or new strategy
+    replay.
+  - Every new interval requires its own action/unit evidence; existing identity/no-event interpretation remains
+    controlling.
+  - Expanded history remains DISCOVERY only; missing/zero/feed unavailable are distinct and unfilled.
   acceptance_criteria:
-  - Record actual authorized provider/feed access and available SOXX historical interval with source provenance.
-  - Audit supported extended-session/expected-grid/early-close coverage and positive/missing/zero volume semantics.
-  - Audit Daily/intraday raw-unit, split/action availability and compatibility requirements for the proposed interval.
-  - Produce a concrete admission PASS/BLOCKED disposition and route immutable capture only if supported; no performance
-    lookup or confirmation relabeling.
+  - Owner chooses/authorizes a read-only access route or supplies availability of an existing account without secrets
+    in evidence.
+  - Perform only bounded authorized historical feed/grid/volume/action/unit admission checks after access becomes
+    available.
+  - Record actual entitlement and PASS/BLOCKED; do not assume documented date range or paid plan suffices.
   after_success:
-  - PM_ROUTE_LONGER_IMMUTABLE_DISCOVERY_CAPTURE_IF_ADMITTED
+  - LONGER_IMMUTABLE_DISCOVERY_CAPTURE_IF_ACTUAL_ADMISSION_PASS
 pm_policy:
   single_next_action: true
   discovered_non_blockers_go_to_backlog: true

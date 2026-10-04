@@ -1,11 +1,11 @@
 schema_version: 2
-updated_at: '2026-10-03'
+updated_at: '2026-10-04'
 purpose: 'Lightweight routing index for AI PM sessions. This file does not replace canonical strategy specs or immutable
   decision records. It tells a new session what is already frozen, what remains open, and where to read the authoritative
   evidence.
 
   '
-default_research_branch: v2-h0001-efficacy-disposition-audit
+default_research_branch: v2-h0001-long-history-provider-audit
 data_foundation:
   branch: v2-real-intraday-data-foundation
   contract: docs/V2_REAL_INTRADAY_DATA_FOUNDATION.md
@@ -24,7 +24,7 @@ canonical_sources:
     specification_version: h0001_r03_spec_v13
     sha256: bf8134733bacee17542240e53a8ec30223c1550b5bedbaa6d3994ba1444acc19
   current_status:
-    branch: v2-h0001-efficacy-disposition-audit
+    branch: v2-h0001-long-history-provider-audit
     path: PROJECT_STATUS.md
   entry_efficacy_protocol:
     branch: v2-h0001-entry-efficacy-preregistration
@@ -48,6 +48,17 @@ canonical_sources:
     status: COMPLETE_INDEPENDENT_ZERO_SIGNAL_REVALIDATION
     proof_hash: 1236e6aef6ee0a522705d2526e35d0e58405130cdc7d35b73e22a81de182dc52
     original_report_hash: 17f961b6b6f8950399c0f37ff5be69f2a241f09afa021b2264b2d901ef7b168f
+  long_history_provider_admission:
+    branch: v2-h0001-long-history-provider-audit
+    commit: 15eb6f0653c081e4d03a58932c68de8a3e8a85b6
+    path: research/data_evidence/h0001-long-history-20261004/admission.json
+    record: research/decision_records/H0001-long-history-provider-audit-v1.yaml
+    status: COMPLETE_AUDIT_BLOCKED_EXPANDED_DISCOVERY_ADMISSION
+    provider_selected: null
+    next_action: LONG_HISTORY_ACCESS_PATH_DECISION
+    next_action_status: USER_DECISION_REQUIRED
+    frozen_semantics_changed: false
+    outcomes_profitability: NOT_RUN
 frozen_major_decisions:
   daily_input:
     status: FROZEN
@@ -139,7 +150,7 @@ current_open_decision_groups:
 - id: H0001_RESEARCH_EVALUATION
   status: PARTIALLY_RESOLVED_INITIAL_ENTRY_PROTOCOL_FROZEN
   priority: REQUIRED_FOR_FIRST_EFFICACY_EXPERIMENT
-  next_action: LONG_HISTORY_PROVIDER_AND_VOLUME_EVIDENCE
+  next_action: LONG_HISTORY_ACCESS_PATH_DECISION
   remaining_required_fields: []
   outcome_access: ONLY_SEPARATE_EXECUTION_UNDER_FROZEN_PROTOCOL_ZERO_SIGNAL_REQUIRES_NO_READS
   note: Initial opportunity sample/horizons/metric/baseline/cost scope/uncertainty/splits/trials/missingness resolved.
@@ -212,3 +223,17 @@ frozen_semantic_interpretation_audit:
 schema_revision: Scoped initial-opportunity preregistration v1; executable signal v13/84 unresolved paths unchanged
   to preserve event identity. General lifecycle/profitability admission still blocked. Fixed-stream ZERO_SIGNAL
   executed; informative cohort admission is P0. Frozen signal/protocol and unresolved lifecycle unchanged.
+long_history_access_routing:
+  status: USER_DECISION_REQUIRED_READ_ONLY_ACCESS_ROUTE
+  evidence_branch: v2-h0001-long-history-provider-audit
+  evidence: research/data_evidence/h0001-long-history-20261004/admission.json
+  blocks_phase_exit_criteria:
+  - 6
+  current_actual_history: Existing41 sessions2026-08-05..10-01 extended15m
+  blocker: Yahoo15m retention; reviewed longer endpoints401 without credentials. New grid/volume/action/unit admission
+    not performed.
+  paid_access_required_now: false
+  paid_access_required_now_interpretation: Not established; free documented historical account routes remain unprobed.
+  provider_selected: null
+  new_interval_certificate_reused: false
+  capture_route_only_after_PASS: LONGER_IMMUTABLE_DISCOVERY_CAPTURE
