@@ -1,0 +1,12 @@
+{
+  "all_bound_and_preserved_hashes_verified": true,
+  "commit": "47a7a5a1199b34a98c9be00bcd79a4e47e5cd8de",
+  "errors": 0,
+  "failures": 0,
+  "junit_sha256": "fffd328ac6145ec84b419680ba577b263f8a5b6dfebc99fe3aff83ca1d144ec3",
+  "metadata_outcome_access": 0,
+  "signal_or_protocol_changes": 0,
+  "skipped": 0,
+  "source": "git archive HEAD extracted without .git or var inputs",
+  "targeted_tests": 34
+}
