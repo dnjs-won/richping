@@ -1,18 +1,18 @@
 schema_version: 2
 updated_at: '2026-10-04'
-purpose: 'Lightweight routing index for AI PM sessions. This file does not replace canonical strategy specs or immutable
-  decision records. It tells a new session what is already frozen, what remains open, and where to read the authoritative
-  evidence.
+purpose: 'Lightweight routing index for AI PM sessions. This file does not replace
+  canonical strategy specs or immutable decision records. It tells a new session what
+  is already frozen, what remains open, and where to read the authoritative evidence.
 
   '
-default_research_branch: v2-h0001-alpaca-basic-admission
+default_research_branch: v2-h0001-alpaca-70-session-discovery
 data_foundation:
   branch: v2-real-intraday-data-foundation
   contract: docs/V2_REAL_INTRADAY_DATA_FOUNDATION.md
   evidence: research/data_evidence/v2-real-20261003/smoke.json
   status: EXECUTED_ON_REAL_DATA_NOT_MAIN_INTEGRATED
-  note: Real-data8f0611f and frozen Daily/1H/r03/15m contracts unchanged. Executable v13 routes to isolated initial-entry
-    composition.
+  note: Real-data8f0611f and frozen Daily/1H/r03/15m contracts unchanged. Executable
+    v13 routes to isolated initial-entry composition.
 canonical_sources:
   hypothesis:
     branch: v2-c0-extended-session-contract
@@ -24,7 +24,7 @@ canonical_sources:
     specification_version: h0001_r03_spec_v13
     sha256: bf8134733bacee17542240e53a8ec30223c1550b5bedbaa6d3994ba1444acc19
   current_status:
-    branch: v2-h0001-alpaca-basic-admission
+    branch: v2-h0001-alpaca-70-session-discovery
     path: PROJECT_STATUS.md
   entry_efficacy_protocol:
     branch: v2-h0001-entry-efficacy-preregistration
@@ -59,6 +59,12 @@ canonical_sources:
     next_action_status: USER_DECISION_REQUIRED
     frozen_semantics_changed: false
     outcomes_profitability: NOT_RUN
+  selected70_discovery:
+    branch: v2-h0001-alpaca-70-session-discovery
+    commit: a014d4704b551ed80b9eb38fb57bac0308bb1e7c
+    record: research/decision_records/H0001-alpaca-70-discovery-v1.yaml
+    evidence: research/data_evidence/h0001-alpaca-70-20261004/offline-reload-proof.json
+    status: COMPLETE_ZERO_SIGNAL_DISCOVERY_NO_OUTCOMES
 frozen_major_decisions:
   daily_input:
     status: FROZEN
@@ -124,9 +130,9 @@ current_open_decision_groups:
   decision_id: H1-STATE-TRANSITIONS
   status: PARTIALLY_RESOLVED
   priority: INITIAL_CANDIDATE_RESOLVED_REMAINDER_OPEN
-  note: Only initial-entry candidate and per-episode right consumption resolved. Candidate never opens a position.
-    All actual position/add/exit/reentry/execution ownership remains UNRESOLVED; H1-STATE-TRANSITIONS remains a
-    C1 blocker.
+  note: Only initial-entry candidate and per-episode right consumption resolved. Candidate
+    never opens a position. All actual position/add/exit/reentry/execution ownership
+    remains UNRESOLVED; H1-STATE-TRANSITIONS remains a C1 blocker.
   scope_revision: H0001_STATE_TRANSITIONS_SCOPE_SPLIT_V1
   record: research/decision_records/H0001-entry-composition-freeze-v1.yaml
   evidence_branch: v2-h0001-entry-composition
@@ -149,14 +155,13 @@ current_open_decision_groups:
   priority: AFTER_SIGNAL_EVIDENCE_OR_WHEN_REQUIRED_FOR_NEXT_EXPERIMENT
 - id: H0001_RESEARCH_EVALUATION
   status: PARTIALLY_RESOLVED_INITIAL_ENTRY_PROTOCOL_FROZEN
-  priority: REQUIRED_FOR_FIRST_EFFICACY_EXPERIMENT
-  next_action: LONG_HISTORY_EXTENDED_COVERAGE_SCOPE_DECISION
+  priority: ASYNCHRONOUS_NOT_PROJECT_BLOCKING
+  next_action: H0001_FUTURE_CONFIRMATION
   remaining_required_fields: []
   outcome_access: ONLY_SEPARATE_EXECUTION_UNDER_FROZEN_PROTOCOL_ZERO_SIGNAL_REQUIRES_NO_READS
-  note: Initial opportunity sample/horizons/metric/baseline/cost scope/uncertainty/splits/trials/missingness resolved.
-    General full-strategy executable research and profitability roots remain unresolved. No outcomes accessed. Current
-    discovery empty-stream disposition now executed; no economic estimate or future confirmation disposition. Informative
-    cohort admission blocks exit6.
+  note: Frozen opportunity protocol preserved. Original41 and selected70 discovery
+    ZERO_SIGNAL; no economic estimate. Informative efficacy remains unavailable. Next
+    project P0 is independent hypothesis selection.
   remaining_scope:
   - Full-strategy and filter-ablation evaluation
   - Actual position open, order timing and fill
@@ -175,15 +180,18 @@ current_open_decision_groups:
 reopen_policy:
   frozen_decision_may_reopen_only_if:
   - A causal/data-integrity defect invalidates it.
-  - The selected real provider cannot support the contract and the incompatibility is demonstrated.
+  - The selected real provider cannot support the contract and the incompatibility
+    is demonstrated.
   - The user explicitly revises the strategy intent.
-  - New evidence is registered under a new research revision rather than silently rewriting history.
+  - New evidence is registered under a new research revision rather than silently
+    rewriting history.
   forbidden:
   - Re-researching a frozen decision merely because a new AI session starts.
   - Copying values from another timeframe without an explicit decision.
   - Treating proposal/design completion as economic validation.
-pm_routing_rule: 'Read the canonical source from its declared branch only when the current NEXT_ACTION touches that
-  decision. Do not load all research documents into context by default.
+pm_routing_rule: 'Read the canonical source from its declared branch only when the
+  current NEXT_ACTION touches that decision. Do not load all research documents into
+  context by default.
 
   '
 composition_prerequisite:
@@ -206,8 +214,8 @@ daily_input_implementation:
   record: research/decision_records/H0001-action-unit-interpretation-audit-v1.yaml
   contract: docs/H0001_ACTION_UNIT_REMEDIATION.md
   implementation_status: COMPLETE_EXECUTED_ON_REAL_DATA_AND_EVIDENCE_PRODUCED_NOT_MAIN_INTEGRATED
-  actual_source_smoke: Official iShares/SEC + Yahoo full split history + Twelve Data split history + all500 Nasdaq
-    OHLC + issuer NAV
+  actual_source_smoke: Official iShares/SEC + Yahoo full split history + Twelve Data
+    split history + all500 Nasdaq OHLC + issuer NAV
   split_free_identity_transform_real_certification: true
   no_frozen_decisions_changed: true
   profitability: NOT_RUN
@@ -220,28 +228,40 @@ frozen_semantic_interpretation_audit:
   negative_receipt_explicitly_frozen: false
   strategy_decisions_changed: false
   completeness_capture_is_causal_feature: false
-schema_revision: Scoped initial-opportunity preregistration v1; executable signal v13/84 unresolved paths unchanged
-  to preserve event identity. General lifecycle/profitability admission still blocked. Fixed-stream ZERO_SIGNAL
-  executed; informative cohort admission is P0. Frozen signal/protocol and unresolved lifecycle unchanged.
+schema_revision: Scoped initial-opportunity preregistration v1; executable signal
+  v13/84 unresolved paths unchanged to preserve event identity. General lifecycle/profitability
+  admission still blocked. Fixed-stream ZERO_SIGNAL executed; informative cohort admission
+  is P0. Frozen signal/protocol and unresolved lifecycle unchanged.
 long_history_access_routing:
-  status: ALPACA_BASIC_ACTUAL_ACCESS_PASS_LONGER_ADMISSION_BLOCKED
-  evidence_branch: v2-h0001-alpaca-basic-admission
-  evidence: research/data_evidence/h0001-alpaca-basic-20261004/admission.json
-  blocks_phase_exit_criteria:
-  - 6
-  current_actual_history: Existing41 sessions2026-08-05..10-01 extended15m
-  blocker: Basic credential actual SOXX SIP access200, earliest2016-01-04 through2026-10-02 endpoints (~10years9months),
-    not continuous10year capture. Raw/split3:1 price/inverse-volume and deterministic bars/actions pagination PASS.
-    Broad2026-04-01..10-02 grid8192 expected/8174 observed/18 missing; older extended samples much sparser. Missing19:45
-    ET slot has45 odd-lot trades/658 shares, never volume0. Volume usable as qualified bar shares; nativeDaily differs.
-    Historical action known_at remains unproven; separate no-event identity path preserved. Longer admission BLOCKED_EXTENDED_OBSERVATIONS,
-    not Basic paywall. No dataset/candidate replay/outcomes; old ZERO_SIGNAL0, frozen source and126-session confirmation
-    preserved. Coverage-only70-session2026-05-05..08-13 alternative not selected/admitted.
+  status: SELECTED70_DISCOVERY_PASS_ZERO_SIGNAL_H0001_ASYNC
+  evidence_branch: v2-h0001-alpaca-70-session-discovery
+  evidence: research/decision_records/H0001-alpaca-70-discovery-v1.yaml
+  blocks_phase_exit_criteria: []
+  current_actual_history: Original Yahoo41 preserved; independent Alpaca70 admitted/replayed.
+    Seven overlapping sessions; not111 independent observations.
+  blocker: No immediate informative H0001 discovery action remains; fixed future confirmation
+    is asynchronous, not a project blocker.
   paid_access_required_now: false
-  paid_access_required_now_interpretation: Not established; upgrade not demonstrated to repair eligible price omissions.
+  paid_access_required_now_interpretation: Not established; upgrade not demonstrated
+    to repair eligible price omissions.
   provider_selected: alpaca_basic_free
   new_interval_certificate_reused: false
   capture_route_only_after_PASS: LONGER_IMMUTABLE_DISCOVERY_CAPTURE
   owner_route_decision: COMPLETE_ALPACA_BASIC_FREE
-  next_action: LONG_HISTORY_EXTENDED_COVERAGE_SCOPE_DECISION
-  narrowed70_session_alternative: COVERAGE_ONLY_NOT_ADMITTED
+  next_action: INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION
+  narrowed70_session_alternative: ADMITTED_DATASET_REPLAYED_ZERO_SIGNAL
+  historical_broad_history_blocker: Basic credential actual SOXX SIP access200, earliest2016-01-04
+    through2026-10-02 endpoints (~10years9months), not continuous10year capture. Raw/split3:1
+    price/inverse-volume and deterministic bars/actions pagination PASS. Broad2026-04-01..10-02
+    grid8192 expected/8174 observed/18 missing; older extended samples much sparser.
+    Missing19:45 ET slot has45 odd-lot trades/658 shares, never volume0. Volume usable
+    as qualified bar shares; nativeDaily differs. Historical action known_at remains
+    unproven; separate no-event identity path preserved. Longer admission BLOCKED_EXTENDED_OBSERVATIONS,
+    not Basic paywall. No dataset/candidate replay/outcomes; old ZERO_SIGNAL0, frozen
+    source and126-session confirmation preserved. Coverage-only70-session2026-05-05..08-13
+    alternative not selected/admitted.
+next_independent_hypothesis:
+  id: H0002
+  meaning: NOT_SELECTED_USER_DECISION_REQUIRED
+  infrastructure: IMPLEMENTED_TESTED
+  H0001_future_confirmation_dependency: false

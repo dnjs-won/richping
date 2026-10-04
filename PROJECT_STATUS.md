@@ -1,3 +1,11 @@
+# Richping PM - 2026-10-04 selected70 discovery and independent research routing
+
+Admission PASS70 sessions/4480 exact slots, Daily465 native raw OHLC Nasdaq exact. Frozen replay twice equal:4480 batches, Daily READY4480/BULLISH3264, H1 atomic READY2685/ACTIVE96; H1 completed READY672/1120, downside extremes27;15m triggers0;candidates0/timestamps[]. ZERO_SIGNAL discovery, outcomes0, no efficacy/profitability. Preserve frozen126-session confirmation; H0001 asynchronous FROZEN/AWAITING_FUTURE_CONFIRMATION/HISTORICALLY_SPARSE. Next independent hypothesis intake H0002; owner strategy meaning required.
+
+Implementation `v2-h0001-alpaca-70-session-discovery` / `a014d4704b551ed80b9eb38fb57bac0308bb1e7c`. Main PM documents only; no code merge. Evidence `research/decision_records/H0001-alpaca-70-discovery-v1.yaml`.
+
+The entries below are preserved historical status reports.
+
 # Richping 현재 상태 · 2026-09-21 R1-B
 
 **R1-B 최소 paper 원장·maturity follow-up 구현 및 격리 연구 replay 완료. 실제 미래 paper 수익성은 증거 대기.**
