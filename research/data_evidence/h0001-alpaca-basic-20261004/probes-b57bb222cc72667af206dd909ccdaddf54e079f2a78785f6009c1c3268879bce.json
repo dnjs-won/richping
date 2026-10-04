@@ -1,0 +1,51 @@
+{
+  "cases": {},
+  "failure": "Transport failure; capability unknown",
+  "feed": "sip",
+  "outcomes": "NOT_RUN",
+  "predeclared_windows": [
+    [
+      "2024-01",
+      "2024-01-02",
+      "2024-02-03"
+    ],
+    [
+      "2025-07",
+      "2025-07-01",
+      "2025-08-02"
+    ],
+    [
+      "2026-01",
+      "2026-01-02",
+      "2026-02-03"
+    ],
+    [
+      "2026-07",
+      "2026-07-01",
+      "2026-08-02"
+    ]
+  ],
+  "requests": [
+    {
+      "endpoint": "/v2/stocks/SOXX/bars",
+      "exception_type": "ConnectionError",
+      "http_status": null,
+      "id": "2024-01",
+      "params": {
+        "adjustment": "raw",
+        "asof": "-",
+        "currency": "USD",
+        "end": "2024-02-03T04:00:00Z",
+        "feed": "sip",
+        "limit": 10000,
+        "sort": "asc",
+        "start": "2024-01-02T05:00:00Z",
+        "timeframe": "15Min"
+      },
+      "requested_at": "2026-10-04T03:28:08.024522+00:00",
+      "transport": "TRANSPORT_FAILURE_CAPABILITY_UNKNOWN"
+    }
+  ],
+  "schema": "alpaca_basic_actual_admission_probes_v1",
+  "scope": "BOUNDED_PROVIDER_ADMISSION_NOT_DATASET"
+}

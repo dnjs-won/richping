@@ -1,0 +1,77 @@
+schema_version: h0001_alpaca_basic_admission_v1
+record_id: H0001-ALPACA-BASIC-ADMISSION-v1
+decision_date: '2026-10-04'
+author: AI_PM
+basis_implementation_commit: 30d1cca
+basis_pm_main_commit: 5e6a025
+owner_decision: ALPACA_TRADING_API_BASIC_FREE_FIRST
+completed_action: LONG_HISTORY_ACCESS_PATH_DECISION
+scope: Actual read-only historical SOXX SIP admission; capture authorized only after PASS.
+status: COMPLETE_ACTUAL_PROVIDER_AUDIT_BLOCKED_LONGER_DISCOVERY_ADMISSION
+disposition: BLOCKED
+provider_selected: alpaca
+feed: sip
+credentials_source: Named runtime variables or ignored .env.local; values and value hashes never archived.
+paid_upgrade_or_other_provider_payment: NOT_AUTHORIZED_NOT_PERFORMED
+actual_access:
+  earliest_observed_15m: '2016-01-04T13:45:00Z'
+  latest_observed_15m: '2026-10-02T23:45:00Z'
+  depth: About 10 years9 months between actual endpoints; continuous full history NOT_CAPTURED.
+  sip_and_actions_http: 200
+  bars_pagination_repeat: PASS_60_ROWS_9_SMALL_PAGES_EQUAL_LARGER_PAGE
+  actions_pagination_repeat: PASS_45_EVENTS_7_SMALL_PAGES_EQUAL_LARGER_PAGE
+  volume: Interpretable SIP condition-eligible bar share volume; not all prints.
+  missing_slot_trade_evidence: 45 odd-lot trades/658 shares in missing19:45 ET15m slot; never infer volume0.
+  raw_split_units: PASS_INTRADAY_AND_DAILY_3_TO_1_OHLC_INVERSE_VOLUME
+  DST: ACTUAL_04_ET_ANCHOR_09_UTC_WINTER_08_UTC_SUMMER
+  early_close: Actual44 bars; frozen extended-v1 remains UNSUPPORTED_FAIL_CLOSED.
+blocker:
+  category: EXTENDED_SESSION_HISTORY_INCOMPLETE
+  details: Broad2026-04-01..10-02 probe has18 missing required15m observations; older samples have many more. Frozen composer requires COMPLETE_GRID and full causal prefix, no silent restart or gap compression.
+  not_claimed: SIP unavailable, credential failure, Basic subscription failure, no older history, or uninterpretable volume.
+action_unit_boundary:
+  historical_known_at: UNPROVEN_NO_BACKDATED_PROCESS_OR_EX_DATES
+  actual_event_transform: FAIL_CLOSED_WHEN_CAUSAL_EVIDENCE_ABSENT
+  no_event_identity: Existing ex-post separate admission interpretation preserved; can be assessed for a new exact interval. Not automatically blocked by API known_at absence.
+  new_interval_certificate: NOT_CREATED_NOT_REUSED
+  Daily_intraday: Raw USD share-unit spot compatibility verified; nativeDaily versus intraday aggregation domains differ. Full new RTH/auction/unit certificate absent.
+capture:
+  dataset_created: false
+  dataset_id: null
+  content_hash: null
+  immutable_probe_receipts: true
+  offline_receipt_reload_repeat: true
+  strategy_replay: NOT_RUN_ADMISSION_BLOCKED
+  new_candidate_count: null
+alternative_coverage_only:
+  first: '2026-05-05'
+  last: '2026-08-13'
+  sessions: 70
+  status: NOT_SELECTED_NOT_ADMITTED_NOT_REPLAYED
+next_action:
+  id: LONG_HISTORY_EXTENDED_COVERAGE_SCOPE_DECISION
+  priority: P0
+  status: USER_DECISION_REQUIRED
+  blocks_phase_exit_criteria: [6]
+  choices:
+    - Keep broad multi-year frozen full-grid target; audit owner-approved read-only provider observations before any cost decision.
+    - Authorize narrower fixed recent DISCOVERY scope;70 complete sessions are a coverage-only alternative requiring its own Alpaca Daily/action/unit admission.
+guards:
+  frozen_semantics_changed: false
+  original_ZERO_SIGNAL_preserved: true
+  existing_candidate_count: 0
+  outcome_performance_lookup: false
+  profitability: NOT_RUN
+  confirmation_contract_changed: false
+  confirmation_sessions: 126
+  confirmation_start: '2026-10-12'
+  confirmation_end: '2027-04-13'
+  phase_exit_6: INCOMPLETE
+  Yahoo_Alpaca_blending: false
+payment_needed: NOT_ESTABLISHED_PAID_ALPACA_NOT_SHOWN_TO_REPAIR_PRICE_OMISSIONS
+evidence:
+  admission: research/data_evidence/h0001-alpaca-basic-20261004/admission.json
+  offline: research/data_evidence/h0001-alpaca-basic-20261004/offline-reload-proof.json
+  tests: research/data_evidence/h0001-alpaca-basic-20261004/test-report.json
+  preservation: research/data_evidence/h0001-alpaca-basic-20261004/preservation.json
+  contract: docs/H0001_ALPACA_BASIC_ADMISSION.md

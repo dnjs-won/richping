@@ -1,0 +1,31 @@
+{
+  "CLI_help": "PASS",
+  "diff_check": "PASS",
+  "first_full": {
+    "passed": 1427,
+    "seconds": 431.68
+  },
+  "full": {
+    "errors": 0,
+    "failures": 0,
+    "passed": 1429,
+    "seconds": 436.91,
+    "sha256": "6362f47979291962391e0d6f4b7d32dd328bc24f4219f8cc887c2a8dca4b2ff4",
+    "skipped": 0,
+    "tests": 1429
+  },
+  "intermediate_targeted": "39 passed with pytest cache permission warning; corrected using a new writable cache; final targeted41/full1429 no warnings.",
+  "network_test_separate": true,
+  "outcomes": "NOT_RUN",
+  "pytest_network_calls": 0,
+  "strategy_replay": "NOT_RUN",
+  "targeted": {
+    "errors": 0,
+    "failures": 0,
+    "passed": 41,
+    "seconds": 8.757,
+    "sha256": "68ec35c6656f7fc13a1226cb42a12c05065963d847ef275d39a6b9feb4a3672b",
+    "skipped": 0,
+    "tests": 41
+  }
+}

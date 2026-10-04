@@ -1,3 +1,15 @@
+# Richping V2 - 2026-10-04 Alpaca Basic actual SIP admission
+
+**COMPLETE actual-access audit; longer DISCOVERY admission BLOCKED on extended price observations. Phase exit6 INCOMPLETE, profitability NOT_RUN.**
+
+- Basic credential actual SOXX SIP access200, earliest2016-01-04 through2026-10-02 endpoints (~10years9months), not continuous10year capture. Raw/split3:1 price/inverse-volume and deterministic bars/actions pagination PASS. Broad2026-04-01..10-02 grid8192 expected/8174 observed/18 missing; older extended samples much sparser. Missing19:45 ET slot has45 odd-lot trades/658 shares, never volume0. Volume usable as qualified bar shares; nativeDaily differs. Historical action known_at remains unproven; separate no-event identity path preserved. Longer admission BLOCKED_EXTENDED_OBSERVATIONS, not Basic paywall. No dataset/candidate replay/outcomes; old ZERO_SIGNAL0, frozen source and126-session confirmation preserved. Coverage-only70-session2026-05-05..08-13 alternative not selected/admitted.
+- User free Alpaca Basic route decision COMPLETE. No credential values/hashes in logs/evidence/Git; ignored .env.local used only for named credentials. No IEX, account creation, upgrade, other provider signup or payment.
+- Sole next P0 `LONG_HISTORY_EXTENDED_COVERAGE_SCOPE_DECISION` / USER_DECISION_REQUIRED: retain broad multi-year frozen full-grid target with actual provider observations, or authorize narrower fixed recent DISCOVERY scope with independent Alpaca Daily/action/unit admission. No paid upgrade is established as necessary or a cure for eligible-price omissions.
+- Final targeted41/full1429 passed, no failures/errors/skips/warnings. Every archived bar page reconstructed and all original raw hashes checked twice offline; errors never empty market data. Frozen primitives/composer/evaluator/spec and prior evidence bytes preserved. No new dataset identity/hash exists because admission failed; receipt proof is not dataset replay.
+- Branch `v2-h0001-alpaca-basic-admission`, base30d1cca; canonical main bootstrap5e6a025. Evidence `research/data_evidence/h0001-alpaca-basic-20261004/admission.json`; contract `docs/H0001_ALPACA_BASIC_ADMISSION.md`; decision `research/decision_records/H0001-alpaca-basic-admission-v1.yaml`. No main code integration.
+
+The entries below are preserved historical status reports.
+
 # Richping V2 - 2026-10-04 longer-history provider and volume audit
 
 **COMPLETE bounded actual-access audit; longer discovery admission BLOCKED. Phase exit6 INCOMPLETE, profitability NOT_RUN.**

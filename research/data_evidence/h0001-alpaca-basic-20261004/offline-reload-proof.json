@@ -1,0 +1,10 @@
+{
+  "admission_sha256": "72f33b39969334e82a4eb59729fbfa34eee14d0565f86b82776eb26fceb42c0f",
+  "dataset_identity": null,
+  "network_calls": 0,
+  "network_disabled": true,
+  "outcome_reads": 0,
+  "raw_response_hashes_verified": true,
+  "repeat_equal": true,
+  "strategy_replay": "NOT_RUN"
+}

@@ -1,0 +1,29 @@
+{
+  "cases": {},
+  "failure": "Transport failure; capability unknown",
+  "feed": "sip",
+  "outcomes": "NOT_RUN",
+  "requests": [
+    {
+      "endpoint": "/v2/stocks/SOXX/bars",
+      "exception_type": "ConnectionError",
+      "http_status": null,
+      "id": "earliest",
+      "params": {
+        "adjustment": "raw",
+        "asof": "-",
+        "currency": "USD",
+        "end": "2016-01-06T01:00:00Z",
+        "feed": "sip",
+        "limit": 10000,
+        "sort": "asc",
+        "start": "2010-01-01T00:00:00Z",
+        "timeframe": "15Min"
+      },
+      "requested_at": "2026-10-04T03:25:46.449060+00:00",
+      "transport": "TRANSPORT_FAILURE_CAPABILITY_UNKNOWN"
+    }
+  ],
+  "schema": "alpaca_basic_actual_admission_probes_v1",
+  "scope": "BOUNDED_PROVIDER_ADMISSION_NOT_DATASET"
+}
