@@ -10,3 +10,5 @@ scripts/h0002_frequency_audit.py -text
 research/hypotheses/H0002-r01.yaml -text
 research/strategy_specs/H0002-r01-candidate.yaml -text
 docs/H0002_PRICE_DEFENSE_RESEARCH.md -text
+# JUnit captures include original failure trace whitespace; retain raw bytes.
+research/data_evidence/h0002-frequency-20261004/**/*.xml binary

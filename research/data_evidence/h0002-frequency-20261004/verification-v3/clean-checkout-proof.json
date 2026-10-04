@@ -1,0 +1,16 @@
+{
+  "commit": "d47304dd3460b38b5531dd3efbbc66c1d1297e91",
+  "counts": {
+    "errors": 0,
+    "failures": 0,
+    "skipped": 0,
+    "tests": 52
+  },
+  "execution_source_changed": false,
+  "isolated_package_import": true,
+  "junit_sha256": "e88d6a35aa3a02a89e7ebf58859a134c84786942474c30dc32e4fbdaafe8ddab",
+  "outcome_access": 0,
+  "portable_archived_evidence_verified": true,
+  "profitability_calculations": 0,
+  "schema": "h0002_clean_checkout_proof_v1"
+}
