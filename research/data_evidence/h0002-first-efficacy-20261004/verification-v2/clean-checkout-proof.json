@@ -1,0 +1,12 @@
+{
+  "code_commit": "cb9e8973acf50a60838a4a9c0285a64d009ae439",
+  "confirmation_outcome_access": 0,
+  "deterministic_discovery_replay": true,
+  "errors": 0,
+  "failures": 0,
+  "junit_sha256": "755ab0298b7bef50868e10fa32ecdb17f7a8885ac8c0409b509d7954ac2c6161",
+  "report_hash": "220d4f1f4fcb1b63cff2a4b45b45a6b365e7dc56ebeacce9a16741fdc6c5193e",
+  "skipped": 0,
+  "source": "git archive without untracked/var/.git inputs",
+  "tests": 28
+}
