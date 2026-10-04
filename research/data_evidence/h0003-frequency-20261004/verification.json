@@ -1,0 +1,104 @@
+{
+  "H0001_H0002_frozen_sources_and_evidence_unchanged": true,
+  "all_original_signal_denominators_equal": true,
+  "forbidden_call_counts": {
+    "confirmation_outcomes": 0,
+    "efficacy_statistics": 0,
+    "forward_or_benchmark_window": 0,
+    "forward_window": 0,
+    "market_query": 0,
+    "network": 0,
+    "operational_store": 0,
+    "outcome_accessor": 0,
+    "profitability_calculation": 0,
+    "return_calculation": 0,
+    "store_accessor": 0,
+    "uncertainty_calculation": 0
+  },
+  "guard_diagnostics": {
+    "delayed": 4,
+    "emitted": 35,
+    "episodes": 37,
+    "un_emitted": {
+      "238c0605ba4789db6c4397573af497b413192c7e59c7cc9d9649a0e5e2aca360": {
+        "emitted_at": null,
+        "first_guard": false,
+        "guard_pass_bars": 0,
+        "leadership_bars": 4,
+        "started_at": "2026-08-06T12:30:00+00:00"
+      },
+      "b4a8560dfb3f32c15eac5ee6ef20fe944ee15cb7e5fcf52d888f8e80efeae674": {
+        "emitted_at": null,
+        "first_guard": false,
+        "guard_pass_bars": 0,
+        "leadership_bars": 1,
+        "started_at": "2026-08-11T15:45:00+00:00"
+      }
+    }
+  },
+  "historical_test_fixture": {
+    "path": "conftest.py",
+    "reason": "Original sealed intake test keeps its H0001/H0002 registry case; a new test validates current H0003 registry and next H0004.",
+    "sha256": "67a85a984014555d854f4cd4f8abd25eea573a1f05eeab9d00d764c4399065f6"
+  },
+  "initial_full_attempt": {
+    "errors": 0,
+    "failures": 1,
+    "path": "research/data_evidence/h0003-frequency-20261004/tests-full-v1.xml",
+    "sha256": "43e13ac7a225f772818f409bffb1305ee5cd3bf583f33a979f4139360a38e533",
+    "skipped": 0,
+    "tests": 1593
+  },
+  "initial_intake_diagnostic": {
+    "errors": 0,
+    "failures": 1,
+    "path": "research/data_evidence/h0003-frequency-20261004/tests-intake-diagnostic-v1.xml",
+    "sha256": "77a8090ee9e656e3087747c6aa345440b30d7d468ff892e672bf1c7406d9a532",
+    "skipped": 0,
+    "tests": 5
+  },
+  "initial_targeted": {
+    "errors": 0,
+    "failures": 0,
+    "path": "research/data_evidence/h0003-frequency-20261004/tests-targeted-v1.xml",
+    "sha256": "8aff4dbb8e5633e06902305a313e80e2235c7c5e6f0cacabb83195e53bc7aa73",
+    "skipped": 0,
+    "tests": 50
+  },
+  "original_event_stream_hash": "e08d529b7d6aa32eacc6091d131a789ecef37312418f7423c79da9f55742f0c5",
+  "original_frequency_sha256": "abd47116022fb24fc1896d8ce3528088fe33021024f91f2649c5b733752d8820",
+  "original_manifest_sha256": "47caefbdb7d918f76ca520ce8322514cba252261099d20cf60d1bfb16da25959",
+  "original_protected_files": 502,
+  "outcome_access": 0,
+  "prior_tracked_tests_unchanged": true,
+  "repeat_equal": true,
+  "schema": "h0003_supplemental_verification_v1",
+  "second_full_attempt": {
+    "errors": 0,
+    "failures": 2,
+    "path": "research/data_evidence/h0003-frequency-20261004/tests-full-v2.xml",
+    "sha256": "45d66331acd326803e24581ac39bc90c8e3276092adae725d8625715a975246a",
+    "skipped": 0,
+    "tests": 1593
+  },
+  "tests": [
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "research/data_evidence/h0003-frequency-20261004/tests-targeted-v3.xml",
+      "sha256": "b0ca4acb489a7ea065954c87671d5f0231d9b0cab2e5ff6981dc763aab49376e",
+      "skipped": 0,
+      "tests": 113
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "research/data_evidence/h0003-frequency-20261004/tests-full-v3.xml",
+      "sha256": "ba9717306a3db6f0394e49c4654958cb0db6cf7db0021867e505178399da7de1",
+      "skipped": 0,
+      "tests": 1594
+    }
+  ],
+  "verification_source_sha256": "8f290d093f0231714e4dc812cc73150ae298adeddff19d71877905ac582f6d58",
+  "verified_at": "2026-10-04T14:03:19.541924+00:00"
+}

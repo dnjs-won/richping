@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="1" skipped="0" tests="5" time="1.165" timestamp="2026-10-04T22:40:11.906725+09:00" hostname="Wonjun"><testcase classname="tests.test_independent_research_intake" name="test_real_intake_is_deterministic_and_not_gated_by_h0001_confirmation" time="0.075"><failure message="AssertionError: assert 'H0004' == 'H0003'&#10;  &#10;  - H0003&#10;  ?     ^&#10;  + H0004&#10;  ?     ^">def test_real_intake_is_deterministic_and_not_gated_by_h0001_confirmation():
+        with patch('socket.socket.connect', side_effect=AssertionError('network')):
+            first = prepare()
+            assert first == prepare()
+&gt;       assert first['next_hypothesis_id'] == 'H0003'
+E       AssertionError: assert 'H0004' == 'H0003'
+E         
+E         - H0003
+E         ?     ^
+E         + H0004
+E         ?     ^
+
+tests\test_independent_research_intake.py:15: AssertionError</failure></testcase><testcase classname="tests.test_independent_research_intake" name="test_new_draft_preserves_originals_and_does_not_invent_rules" time="0.059" /><testcase classname="tests.test_independent_research_intake" name="test_no_strategy_meaning_is_fabricated[-thesis]" time="0.003" /><testcase classname="tests.test_independent_research_intake" name="test_no_strategy_meaning_is_fabricated[observation-]" time="0.002" /><testcase classname="tests.test_independent_research_intake" name="test_filename_identity_mismatch_fails_closed" time="0.005" /></testsuite></testsuites>

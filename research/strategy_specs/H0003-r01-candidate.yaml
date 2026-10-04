@@ -1,0 +1,21 @@
+schema_version: h0003_candidate_v1
+hypothesis_id: H0003
+revision: 1
+status: PROVISIONAL_FREQUENCY_ONLY_NOT_SIGNAL_FREEZE
+family: RELATIVE_STRENGTH_LEADERSHIP_CONTINUATION
+primary: RELATIVE_RETURN_POSITIVE_PERSISTENT
+comparator: null
+instrument: SOXX
+benchmark: QQQ
+timeframe: 15m
+session: 04:00-20:00 America/New_York
+parameters:
+  window_slots: 64
+  persistence_slots: 4
+absolute_guard: SOXX_trailing_return_nonnegative
+episode: Four consecutive READY RS>0 observations activate; first READY own-return>=0 emits once. RS<=0 ends and rearms. Guard failure alone never rearms.
+outcomes: FORBIDDEN
+alternatives_not_executed:
+  - 192 slots means three-session leadership rather than recent-session leadership.
+  - Percentile means unusually strong leadership rather than sustained outperformance.
+  - Benchmark crash guard means a regime-filtered thesis rather than own positive direction.

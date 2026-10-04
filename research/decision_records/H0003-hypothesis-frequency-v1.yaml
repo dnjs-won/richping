@@ -1,0 +1,59 @@
+schema_version: h0003_hypothesis_frequency_decision_v1
+hypothesis: H0003-r01
+owner_thesis_selection: COMPLETE
+family: RELATIVE_STRENGTH_LEADERSHIP_CONTINUATION
+owner_direction: LONG_ONLY_DIRECTIONAL_RESEARCH
+owner_primary_pair: SOXX_vs_QQQ
+implementation_state: IMPLEMENTED_EXECUTED_ON_REAL_DATA_EVIDENCE_PRODUCED_NOT_MAIN_INTEGRATED
+signal_semantics: PROVISIONAL_PENDING_FINAL_OWNER_FREEZE
+proposal:
+  window: 64 completed aligned extended 15m slots
+  return: close_t / close_t_minus_64 - 1, independently for each asset
+  relative_return: SOXX_return_minus_QQQ_return
+  leadership: RS_strictly_positive_for_four_consecutive_READY_observations
+  guard: current_SOXX_trailing_return_greater_than_or_equal_to_zero
+  episode: first_positive_run_identity;one_guard_eligible_emission;only_READY_RS_nonpositive_rearms
+  missing: no_fill;clear_numeric_warmup;retain_consumed_episode_lock_until_observed_rearm
+comparators: []
+parameter_trials: 1
+benchmark_admission:
+  status: PASS
+  evidence: research/data_evidence/h0003-qqq-admission-20261004/admission.json
+  provider: alpaca_sip
+  feed: sip
+  adjustment: raw
+  currency: USD
+  interval: '2026-05-05..2026-08-13'
+  quality_limit: Ex-post raw/split/action contract checks, not live PIT or independent exchange-price certification.
+frequency:
+  evidence: research/data_evidence/h0003-frequency-20261004/frequency-audit.json
+  both_series_READY_bars: 4480
+  relative_strength_READY_bars: 4416
+  leadership_state_count: 2188
+  leadership_episode_count: 37
+  candidate_events: 35
+  candidate_sessions: 29
+  all_sessions: 70
+  data_session_mismatches: 0
+  outcome_access: 0
+  repeat_equal: true
+  prefix_equal: true
+  efficacy: NOT_RUN
+independence:
+  H0001: No MACD/extreme/GC/reversal/multi-timeframe state dependency.
+  H0002: No defense-zone/support/resistance/failed-breakdown/reclaim/volume state dependency.
+  mechanism: Cross-asset technology-benchmark-relative leadership persistence and continuation.
+preservation:
+  H0001: [FROZEN, AWAITING_FUTURE_CONFIRMATION, HISTORICALLY_SPARSE]
+  H0002: [FROZEN, AWAITING_FUTURE_CONFIRMATION]
+  old_discovery_evidence: UNCHANGED
+freeze_readiness: MECHANICALLY_READY_OWNER_APPROVAL_PENDING
+next_P0: H0003_SIGNAL_FREEZE_PREREGISTRATION
+next_status: USER_DECISION_REQUIRED
+owner_decision_required:
+  - Approve recent-session versus multi-session window meaning (proposed 64).
+  - Approve positive persistent leadership instead of unusually high percentile leadership.
+  - Approve SOXX nonnegative absolute direction guard.
+  - Approve full extended scope and one-event episode/rearm proposal.
+  - Final signal freeze; then evaluation preregistration before any outcomes.
+revisions: Owner semantic changes require a new proposal/evidence revision; preserve this trial.

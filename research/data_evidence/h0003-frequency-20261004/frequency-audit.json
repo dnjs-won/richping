@@ -1,0 +1,490 @@
+{
+  "benchmark_admission_hash": "04704a732d3a4c89c376dfa1bf34dd91cdbb42feaf116a147efb2bd8b6b898d8",
+  "benchmark_capture_hash": "f062f8d13424c36e84a65993d75748874a0b41962850cf370324b918a56fedd9",
+  "benchmark_dataset_id": "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e",
+  "benchmark_vintage_hash": "f1491386dc854500e99664a0dfe64bbb4509e00be7ee1c61bf7ef1996607ddd8",
+  "candidate_timestamps": [
+    "2026-05-06T09:00:00+00:00",
+    "2026-05-08T14:30:00+00:00",
+    "2026-05-13T09:00:00+00:00",
+    "2026-05-13T11:15:00+00:00",
+    "2026-05-18T09:45:00+00:00",
+    "2026-05-18T13:15:00+00:00",
+    "2026-05-19T17:00:00+00:00",
+    "2026-05-28T15:00:00+00:00",
+    "2026-05-28T22:00:00+00:00",
+    "2026-06-01T17:15:00+00:00",
+    "2026-06-01T21:30:00+00:00",
+    "2026-06-02T09:00:00+00:00",
+    "2026-06-08T15:00:00+00:00",
+    "2026-06-10T16:45:00+00:00",
+    "2026-06-11T09:00:00+00:00",
+    "2026-06-16T09:15:00+00:00",
+    "2026-06-17T15:45:00+00:00",
+    "2026-06-24T20:45:00+00:00",
+    "2026-06-29T16:45:00+00:00",
+    "2026-07-06T15:15:00+00:00",
+    "2026-07-08T14:15:00+00:00",
+    "2026-07-14T09:15:00+00:00",
+    "2026-07-17T17:15:00+00:00",
+    "2026-07-20T08:15:00+00:00",
+    "2026-07-20T18:30:00+00:00",
+    "2026-07-22T14:30:00+00:00",
+    "2026-07-24T12:15:00+00:00",
+    "2026-07-30T13:45:00+00:00",
+    "2026-07-31T17:15:00+00:00",
+    "2026-08-04T09:00:00+00:00",
+    "2026-08-06T15:00:00+00:00",
+    "2026-08-07T18:15:00+00:00",
+    "2026-08-07T20:45:00+00:00",
+    "2026-08-11T20:30:00+00:00",
+    "2026-08-13T14:45:00+00:00"
+  ],
+  "comparators": 0,
+  "denominators": {
+    "absolute_guard_pass_bars": 2360,
+    "both_series_READY_bars": 4480,
+    "candidate_event_count": 35,
+    "candidate_sessions": 29,
+    "data_session_mismatch_count": 0,
+    "distinct_sessions": 70,
+    "leadership_episode_count": 37,
+    "leadership_state_count": 2188,
+    "positive_RS_guard_fail_bars": 144,
+    "positive_relative_return_bars": 2345,
+    "relative_strength_READY_bars": 4416,
+    "scheduled_pair_slots": 4480
+  },
+  "economic_effect": null,
+  "efficacy": "NOT_RUN",
+  "event_stream_hash": "e08d529b7d6aa32eacc6091d131a789ecef37312418f7423c79da9f55742f0c5",
+  "final_signal_freeze": "USER_DECISION_REQUIRED",
+  "forbidden_call_counts": {
+    "confirmation_outcomes": 0,
+    "efficacy_statistics": 0,
+    "forward_or_benchmark_window": 0,
+    "forward_window": 0,
+    "market_query": 0,
+    "network": 0,
+    "operational_store": 0,
+    "outcome_accessor": 0,
+    "profitability_calculation": 0,
+    "return_calculation": 0,
+    "store_accessor": 0,
+    "uncertainty_calculation": 0
+  },
+  "frequency_disposition": "NONZERO_MECHANICALLY_EXECUTABLE",
+  "frozen_evidence_unchanged": true,
+  "hypothesis": "H0003-r01",
+  "interval": [
+    "2026-05-05",
+    "2026-08-13"
+  ],
+  "limitations": [
+    "Frequency is not performance or independent sample-size evidence.",
+    "QQQ technology/growth comparator; no broad-market generalization.",
+    "Historical assumed availability; not fresh shadow/live PIT.",
+    "Trailing price return only; dividend outcome accounting separate.",
+    "Complete extended grid does not prove extended liquidity equivalence."
+  ],
+  "manifest_sha256": "47caefbdb7d918f76ca520ce8322514cba252261099d20cf60d1bfb16da25959",
+  "next_P0": "H0003_SIGNAL_FREEZE_PREREGISTRATION",
+  "outcome_access": 0,
+  "own_dataset_hash": "4b39f109e8cffce8a7e680e773b560b307e21dd5a92dcad6d06fcd47bb0aa8bd",
+  "own_dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+  "paired_contract": [
+    "alpaca_sip",
+    "sip",
+    "raw",
+    "USD",
+    "ALPACA_SIP_RAW_USD_PER_AS_TRADED_SHARE",
+    "INTERVAL_CERTIFIED_SPLIT_IDENTITY_DIVIDENDS_NOT_REINVESTED",
+    "historical_snapshot_bar_end_assumed_v1",
+    "15m",
+    "04:00-20:00 America/New_York"
+  ],
+  "parameter_trials": 1,
+  "prefix_equal": true,
+  "preserved_files": 502,
+  "profitability": "NOT_RUN",
+  "reasons": {
+    "lookback_warmup": 64,
+    "ready": 4416
+  },
+  "repeat_equal": true,
+  "runs": 2,
+  "schema": "h0003_frequency_audit_v1",
+  "segment_denominators": {
+    "AFTER_HOURS": {
+      "candidates": 5,
+      "pairs": 1120,
+      "rs_ready": 1104
+    },
+    "PREMARKET": {
+      "candidates": 12,
+      "pairs": 1540,
+      "rs_ready": 1518
+    },
+    "RTH": {
+      "candidates": 18,
+      "pairs": 1820,
+      "rs_ready": 1794
+    }
+  },
+  "session_denominators": {
+    "2026-05-05": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 0
+    },
+    "2026-05-06": {
+      "candidates": 1,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-05-07": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-05-08": {
+      "candidates": 1,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-05-11": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-05-12": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-05-13": {
+      "candidates": 2,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-05-14": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-05-15": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-05-18": {
+      "candidates": 2,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-05-19": {
+      "candidates": 1,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-05-20": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-05-21": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-05-22": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-05-26": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-05-27": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-05-28": {
+      "candidates": 2,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-05-29": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-06-01": {
+      "candidates": 2,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-06-02": {
+      "candidates": 1,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-06-03": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-06-04": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-06-05": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-06-08": {
+      "candidates": 1,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-06-09": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-06-10": {
+      "candidates": 1,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-06-11": {
+      "candidates": 1,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-06-12": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-06-15": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-06-16": {
+      "candidates": 1,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-06-17": {
+      "candidates": 1,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-06-18": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-06-22": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-06-23": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-06-24": {
+      "candidates": 1,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-06-25": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-06-26": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-06-29": {
+      "candidates": 1,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-06-30": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-07-01": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-07-02": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-07-06": {
+      "candidates": 1,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-07-07": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-07-08": {
+      "candidates": 1,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-07-09": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-07-10": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-07-13": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-07-14": {
+      "candidates": 1,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-07-15": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-07-16": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-07-17": {
+      "candidates": 1,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-07-20": {
+      "candidates": 2,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-07-21": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-07-22": {
+      "candidates": 1,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-07-23": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-07-24": {
+      "candidates": 1,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-07-27": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-07-28": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-07-29": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-07-30": {
+      "candidates": 1,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-07-31": {
+      "candidates": 1,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-08-03": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-08-04": {
+      "candidates": 1,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-08-05": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-08-06": {
+      "candidates": 1,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-08-07": {
+      "candidates": 2,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-08-10": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-08-11": {
+      "candidates": 1,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-08-12": {
+      "candidates": 0,
+      "pairs": 64,
+      "rs_ready": 64
+    },
+    "2026-08-13": {
+      "candidates": 1,
+      "pairs": 64,
+      "rs_ready": 64
+    }
+  },
+  "specification_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5",
+  "specification_sha256": "4fd92cbaa29dd85ac70f39bdc25d0b0fa981e7b00a62ba84f437ab3bdfbdee77",
+  "status": "COMPLETE_FREQUENCY_ONLY",
+  "trace_chain_hash": "33021be775493f0ee365169200f0395eba461a8184b4d6723b5eb71d81ce3f73"
+}

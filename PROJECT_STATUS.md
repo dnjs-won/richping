@@ -1,3 +1,19 @@
+# Richping V2 - H0003 relative leadership causal frequency
+
+**IMPLEMENTED / EXECUTED_ON_REAL_DATA / EVIDENCE_PRODUCED. Signal provisional; outcomes NOT_RUN.**
+
+H0003-r01 independently studies SOXX leadership continuation versus QQQ technology/growth benchmark. Trailing64 completed aligned extended15m close returns, SOXX minus QQQ; four consecutive positive RS observations activate an episode. Current SOXX own return>=0 enables one candidate; READY RS<=0 rearms; gaps do not unlock consumed episodes. No MACD/H0001/H0002 state, zones, volume, Daily/H1, SPY or regime grid.
+
+QQQ separate immutable Alpaca SIP raw USD/share admission PASS:4480 exact slots/70 sessions, repeats/raw-split/action chains equal, missing/offgrid0. Paired READY4480; RS READY4416, warmup64; leadership2188 bars/37 episodes; candidates35/29 sessions; mismatches0. Twice equal replay and causal prefix proof; H0003 outcome/forward-window/efficacy/profitability/network calls0. Frequency is not efficacy or independent sample certification. Historical bar-end assumed availability, not fresh shadow/live PIT.
+
+Final targeted113/full1594 passed, failures/errors/skips0. All502 prior protected files (including original tests) preserved; H0001 frozen/sparse126-session and H0002 frozen252-session confirmation unchanged. Initial stale intake-ID failure and attempted test-update preservation failures archived; restored sealed test and isolated its historical registry fixture, with a new actual-current-registry test for H0004. No frozen verifier change or skipped test.
+
+Branch `v2-h0003-relative-strength-frequency`; no main code merge. Contract docs/H0003_RELATIVE_STRENGTH_RESEARCH.md; results docs/H0003_FREQUENCY_RESULTS.md; decision research/decision_records/H0003-hypothesis-frequency-v1.yaml; evidence research/data_evidence/h0003-frequency-20261004/frequency-audit.json and verification.json.
+
+NEXT_ACTION **H0003_SIGNAL_FREEZE_PREREGISTRATION / USER_DECISION_REQUIRED**. Mechanical definition is ready; owner approval of recent-session window, positive persistence, own nonnegative direction, extended scope and one-event/rearm meaning remains required before final freeze, then efficacy preregistration before outcomes. H0004 is the next unused registry ID, not current P0.
+
+The entries below are preserved historical status reports.
+
 # Richping V2 - H0002 first exploratory efficacy / H0003 routing
 
 **IMPLEMENTED / EXECUTED_REAL_DISCOVERY / EVIDENCE_PRODUCED. No confirmation inference or profitability.**

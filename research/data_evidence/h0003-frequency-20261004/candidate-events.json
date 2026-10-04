@@ -1,0 +1,529 @@
+{
+  "events": [
+    {
+      "anchor_at": "2026-05-05T09:00:00+00:00",
+      "at": "2026-05-06T09:00:00+00:00",
+      "benchmark_return": 0.019925501093833065,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "edaf78402a894f7d633cf9307cb5d2dc1fff91990e0c79f9978e9cc736b6efcd",
+      "id": "be0a0b34bff127da25458f09b4c2898261f0919011aa3f25743f216203af4795",
+      "own_return": 0.06990868971278519,
+      "relative_return": 0.049983188618952124,
+      "session": "2026-05-06",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-05-07T14:30:00+00:00",
+      "at": "2026-05-08T14:30:00+00:00",
+      "benchmark_return": 0.00849153705397998,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "3f48226e0bfe19dcd18478830384dc29a9729e012a2ce187b493a30450ed5325",
+      "id": "253645431809c993d596a3e9a00ea038abcc34bdcb1b9b067ac256e86f0ea578",
+      "own_return": 0.013864541832669275,
+      "relative_return": 0.005373004778689294,
+      "session": "2026-05-08",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-05-12T09:00:00+00:00",
+      "at": "2026-05-13T09:00:00+00:00",
+      "benchmark_return": 0.006805987009319336,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "76033fda634689d23c84e4316ed92d51db23a654abd6ac4366e90a01685ba817",
+      "id": "8cfe6dae4701eee33dc5df77256d871d8f134c8d92f1d31a33e4dda4df686fcd",
+      "own_return": 0.009015018678051323,
+      "relative_return": 0.0022090316687319866,
+      "session": "2026-05-13",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-05-12T11:15:00+00:00",
+      "at": "2026-05-13T11:15:00+00:00",
+      "benchmark_return": 0.007314864597187443,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "f4c87630d5d24542e504bdc16766bc22365ed48343d3c290d421c44bdc9f10f4",
+      "id": "114c82732609f864c392fa5265e2dd8db39d7d10c09be2eeb286f6248f13a0f2",
+      "own_return": 0.00883310979114782,
+      "relative_return": 0.001518245193960377,
+      "session": "2026-05-13",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-05-15T09:45:00+00:00",
+      "at": "2026-05-18T09:45:00+00:00",
+      "benchmark_return": -0.00031055900621124177,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "3025ee3d481ebaa36b9204256fac62c6dd74deb122cb0189e38eb7f6509e886a",
+      "id": "8cd2f25c649eaa60dcd84171b128dbb35cebc108dcbe8a3e2f113e0f577fdb99",
+      "own_return": 0.0016990860089056703,
+      "relative_return": 0.002009645015116912,
+      "session": "2026-05-18",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-05-15T13:15:00+00:00",
+      "at": "2026-05-18T13:15:00+00:00",
+      "benchmark_return": 0.0069415445385274666,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "d98b19cc6713a8b524b860ac00a2cab31c5fac2c34cd8f735939151a9b6f43c1",
+      "id": "417962047e3cd6882c4eb153c5db046de6349524cac4993015316dd655d21e0a",
+      "own_return": 0.017259957290911565,
+      "relative_return": 0.010318412752384098,
+      "session": "2026-05-18",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-05-18T17:00:00+00:00",
+      "at": "2026-05-19T17:00:00+00:00",
+      "benchmark_return": 0.0007107623637112592,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "05e38a7dd1bdd219bce1b46c91edee24567683fcac49bf1f329145c34cbd7f8f",
+      "id": "032eb208600e4da44acb067bd15b555254864e9551765ff6d5479760afad46f7",
+      "own_return": 0.010705989294010676,
+      "relative_return": 0.009995226930299417,
+      "session": "2026-05-19",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-05-27T15:00:00+00:00",
+      "at": "2026-05-28T15:00:00+00:00",
+      "benchmark_return": 0.008167336158036775,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "bd7bf5c99f5f4a6ecfe85a1c23080bd9c42ea52f47318d3e518f37143b72d48a",
+      "id": "a755ea50c44c7da42866494f7e2869cb1e00eab2df6ba48f70a3884aeb2b3e36",
+      "own_return": 0.018772712553520643,
+      "relative_return": 0.010605376395483868,
+      "session": "2026-05-28",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-05-27T22:00:00+00:00",
+      "at": "2026-05-28T22:00:00+00:00",
+      "benchmark_return": 0.0075052347780864,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "22dd9831cf15a447788ef0de7e562573949575f5a80279ec7d890eaa071a96a1",
+      "id": "6bade2025d0189e94596c3ec2600af5105b65d1714067e0cbc5346d902f01513",
+      "own_return": 0.012335846518707339,
+      "relative_return": 0.004830611740620938,
+      "session": "2026-05-28",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-05-29T17:15:00+00:00",
+      "at": "2026-06-01T17:15:00+00:00",
+      "benchmark_return": 0.005472784415725407,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "7d0d96eef18757012a3256ecbbd771f36b6e234f27e23c038b548d9e44e48758",
+      "id": "ec779eb10fbe872ae7926f3fabc9fb25f26c629c8a1309120d19aeba22df3268",
+      "own_return": 0.008887287047943948,
+      "relative_return": 0.0034145026322185412,
+      "session": "2026-06-01",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-05-29T21:30:00+00:00",
+      "at": "2026-06-01T21:30:00+00:00",
+      "benchmark_return": 0.0053520859585654,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "04cba55ae24148b3329e81557f08caa364dfa907a521d9f108d4ac5845737b62",
+      "id": "295e294ea857c7eef11480b47189174e04e894cc7fcf9c3df7dd1031995b6a59",
+      "own_return": 0.007415998875298868,
+      "relative_return": 0.002063912916733468,
+      "session": "2026-06-01",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-06-01T09:00:00+00:00",
+      "at": "2026-06-02T09:00:00+00:00",
+      "benchmark_return": 0.0018355557954974344,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "f9a447061dc04456614740111dc87f3428cb8ea40fafd6bc91db30272b8efa8d",
+      "id": "eb14dabdad86548493190e99b37854fa4f955924eb591bfbc482a87d52878e45",
+      "own_return": 0.018479630407391756,
+      "relative_return": 0.01664407461189432,
+      "session": "2026-06-02",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-06-05T15:00:00+00:00",
+      "at": "2026-06-08T15:00:00+00:00",
+      "benchmark_return": -0.00582945020272585,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "4d4809619acc603a6910fdb7e046430d794feb32b50d41566f87deea38da7d30",
+      "id": "7614498b36801f6b128362417d3d659c283556ae8c9cda60674f2b02381fd8b1",
+      "own_return": 0.0026976630709443228,
+      "relative_return": 0.008527113273670173,
+      "session": "2026-06-08",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-06-09T16:45:00+00:00",
+      "at": "2026-06-10T16:45:00+00:00",
+      "benchmark_return": 0.013363287194724238,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "ec28e6830d9c4f9e90cdb0abd5ee5cf96b06dd1d1b4fadc1a6bfe7773325fe0b",
+      "id": "689dab24598291ff2111aeb96d9327a44419c5c934c2a424807957fc7ce25b51",
+      "own_return": 0.036030066077210154,
+      "relative_return": 0.022666778882485916,
+      "session": "2026-06-10",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-06-10T09:00:00+00:00",
+      "at": "2026-06-11T09:00:00+00:00",
+      "benchmark_return": 0.005634527929525568,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "429583dab2f9d0763c6e0199636a2d3c2bb32a27a365806f96aa780b14912ce1",
+      "id": "2067c2197290b626adced557daaa56a3532770cc152a36d34b7c3523bfa11be2",
+      "own_return": 0.024431574352898888,
+      "relative_return": 0.01879704642337332,
+      "session": "2026-06-11",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-06-15T09:15:00+00:00",
+      "at": "2026-06-16T09:15:00+00:00",
+      "benchmark_return": 0.011415773041943744,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "a9077b88206ba6f214ece67c5c9324dc8895e2773e00ac356bea49f9d124986a",
+      "id": "0defe0000b368ab97a8000d6c2b651db898123b61254d197e92b01659e6dbe9b",
+      "own_return": 0.017585812725399386,
+      "relative_return": 0.0061700396834556415,
+      "session": "2026-06-16",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-06-16T15:45:00+00:00",
+      "at": "2026-06-17T15:45:00+00:00",
+      "benchmark_return": -0.002152060802527944,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "7588f9cb106bb205fd27a06da7e86ea203479b74259d990d97624d535f4db136",
+      "id": "262f8e85de482cf2422476dbaff913e99bec6a55c556d58a9bd9c03c04cf50b7",
+      "own_return": 0.012616631851188886,
+      "relative_return": 0.01476869265371683,
+      "session": "2026-06-17",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-06-23T20:45:00+00:00",
+      "at": "2026-06-24T20:45:00+00:00",
+      "benchmark_return": 0.012227501397428675,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "12b7c017c74db567d1f092fdbe5e70d7c1f047753ba8bbb8d214ea3188c03f71",
+      "id": "004f617fde339efa7f8688a5ffbeb9d0b8e7880545473430be75705c8d0d9501",
+      "own_return": 0.03924507172148006,
+      "relative_return": 0.027017570324051388,
+      "session": "2026-06-24",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-06-26T16:45:00+00:00",
+      "at": "2026-06-29T16:45:00+00:00",
+      "benchmark_return": 0.010944142778970267,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "259fed122448f70775a3f767fd231ee4e47c68a4c6ffba98ac3ef82a05c8eff4",
+      "id": "83f3f72fe92aa802dcfb802c7cc1c1b6c1c3421cfc1dbce6ab3bdf2c7bd49483",
+      "own_return": 0.019156063859115724,
+      "relative_return": 0.008211921080145457,
+      "session": "2026-06-29",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-07-02T15:15:00+00:00",
+      "at": "2026-07-06T15:15:00+00:00",
+      "benchmark_return": 0.009179186719676435,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "b3464f19130cc33d23268b3a7026043e26634f969f9c7fb8b394131e9d673a86",
+      "id": "5002d8fdaa9c3d6a2e074a726506da1ac4701ed66df6a68d606bab61ec2eaaa3",
+      "own_return": 0.025410463336579925,
+      "relative_return": 0.01623127661690349,
+      "session": "2026-07-06",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-07-07T14:15:00+00:00",
+      "at": "2026-07-08T14:15:00+00:00",
+      "benchmark_return": -0.001991131352106601,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "5a6e3398694bd276d99e21ec35dae69d6f3ba41ad8f5ddb2829a763d4d114b7b",
+      "id": "e85e29e39220e32794db1cfa7d15ac36c40c87ccc0dd7b643e6c6f850a62fd57",
+      "own_return": 0.024142347705094824,
+      "relative_return": 0.026133479057201425,
+      "session": "2026-07-08",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-07-13T09:15:00+00:00",
+      "at": "2026-07-14T09:15:00+00:00",
+      "benchmark_return": -0.0035087719298246833,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "d64108aca5e86efa9117e97b3cc44c3d959dcc6a226a437f921717705282678b",
+      "id": "8118a6fb605e9c7790c962649f5ea9b04778ff42e4efa61dab76bd94a30e02e5",
+      "own_return": 0.0004770318021201092,
+      "relative_return": 0.0039858037319447925,
+      "session": "2026-07-14",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-07-16T17:15:00+00:00",
+      "at": "2026-07-17T17:15:00+00:00",
+      "benchmark_return": -0.009425230508354754,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "9418cdf07c0f758d0679c12677d664ad6c11a441d88fe79575c90e47d11a6f8b",
+      "id": "62bb9bacb6b8b6c60f23df4cae4bf7dbe04a7d8d7aaffb303bfd0743d1ca4ab6",
+      "own_return": 0.003212821045867731,
+      "relative_return": 0.012638051554222485,
+      "session": "2026-07-17",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-07-17T08:15:00+00:00",
+      "at": "2026-07-20T08:15:00+00:00",
+      "benchmark_return": 0.008842281395147644,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "d96e2aa6d90c479401b2f44e91c2b50a928d47c34558432be739a8c300b9fe81",
+      "id": "51acb76be7eba08967a553479fdc882385ed64e91a387a67cc5a3189feecff20",
+      "own_return": 0.033628110355105045,
+      "relative_return": 0.0247858289599574,
+      "session": "2026-07-20",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-07-17T18:30:00+00:00",
+      "at": "2026-07-20T18:30:00+00:00",
+      "benchmark_return": 0.0034906093189963627,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "9dc1ddf5200820a9417a306a2c0335a37a8ceb397dd5d1911c9792a660b08b20",
+      "id": "98c1162d7c39203a5e24522698a649bdc95285942ff7521fb2f1df01e47ade40",
+      "own_return": 0.011472996964663862,
+      "relative_return": 0.0079823876456675,
+      "session": "2026-07-20",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-07-21T14:30:00+00:00",
+      "at": "2026-07-22T14:30:00+00:00",
+      "benchmark_return": 0.0006231680897159642,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "992129a49354a13433ffe9d69c942cafc296a0bcd65db6da7c2907c9905e1bd7",
+      "id": "9102b069b984c94c133cbadaf0e5d06decffaf55134987ff8188d842509e0939",
+      "own_return": 0.013734805213825307,
+      "relative_return": 0.013111637124109343,
+      "session": "2026-07-22",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-07-23T12:15:00+00:00",
+      "at": "2026-07-24T12:15:00+00:00",
+      "benchmark_return": -0.00769120800571832,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "670c384b5758052da31ee9698a66b60eaad4835e0e3526b33b424f2905c6c7c1",
+      "id": "affc1732cac6e1f5990ce15d26f994f3932ea1a8a0806e4bf48712077b433e5f",
+      "own_return": 0.0036364297532682777,
+      "relative_return": 0.011327637758986597,
+      "session": "2026-07-24",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-07-29T13:45:00+00:00",
+      "at": "2026-07-30T13:45:00+00:00",
+      "benchmark_return": 0.0025016282787613253,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "1bdde55088878709dc58ab41ebd8c8c7ab2e81a7fec2cda9d4dd501dda7f8525",
+      "id": "70e2bbc750be503747ac21d61797924f54e7a31016bba5ba0e963bfcaa676d3a",
+      "own_return": 0.005213891514467717,
+      "relative_return": 0.0027122632357063914,
+      "session": "2026-07-30",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-07-30T17:15:00+00:00",
+      "at": "2026-07-31T17:15:00+00:00",
+      "benchmark_return": 0.009065039457857749,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "3cf4c0d3861d96409b738e809518fa1d8b8db70eacabe2c0ca2389deaccd3526",
+      "id": "a7e2d8019843fdc9187e35b1bc4583ffbfeae66388c014e2ad883c0ed8b67b81",
+      "own_return": 0.014179896278520898,
+      "relative_return": 0.0051148568206631495,
+      "session": "2026-07-31",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-08-03T09:00:00+00:00",
+      "at": "2026-08-04T09:00:00+00:00",
+      "benchmark_return": 0.016749451311077745,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "523e3589b7cbcb9938989731455b329d8f5a35208fd5e0d5ae772ae22309e853",
+      "id": "591adca9813d7f0ed1648c63afb63378d5fcabb8dd694427b4a4343b6c671285",
+      "own_return": 0.0237635467980295,
+      "relative_return": 0.007014095486951755,
+      "session": "2026-08-04",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-08-05T15:00:00+00:00",
+      "at": "2026-08-06T15:00:00+00:00",
+      "benchmark_return": -0.006151803496348696,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "ae14118ef8743000adad7f89714fecbad683f9890f4b5149934b71d546468041",
+      "id": "086005ee3b2327dc9d8bbb59362cfffb2c44e2c5ba5b17f715f208bde965abaa",
+      "own_return": 0.015684502860649374,
+      "relative_return": 0.02183630635699807,
+      "session": "2026-08-06",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-08-06T18:15:00+00:00",
+      "at": "2026-08-07T18:15:00+00:00",
+      "benchmark_return": 0.00627305241980558,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "905ea4e2ce643b46caf902067f762675cce6c3991c9e593e41bbfef3d36bec48",
+      "id": "4b7e5df520251514e6168d9ba8515af32a9b50b19b62886f09053ea1c122c88a",
+      "own_return": 0.00664754953076141,
+      "relative_return": 0.00037449711095582927,
+      "session": "2026-08-07",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-08-06T20:45:00+00:00",
+      "at": "2026-08-07T20:45:00+00:00",
+      "benchmark_return": 0.011096651414018277,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "cfd22f0a79504d3e3170bbf07bdc72c8fcab5a59596eca24b44d3225f4ca78ac",
+      "id": "c07d8464a340dca7d0d35522f815fb1af3f18b027aadcdfdeb8a2086144be44b",
+      "own_return": 0.01727837007650379,
+      "relative_return": 0.006181718662485514,
+      "session": "2026-08-07",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-08-10T20:30:00+00:00",
+      "at": "2026-08-11T20:30:00+00:00",
+      "benchmark_return": -0.0024823531043283165,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "5ec0e76498c91f0512834cac830f40ef8353899a657e7978986993d3bf912f62",
+      "id": "07cb9834c79e7b85ccf7405b36dbfe7135591388d730e98249c753d9b3d34026",
+      "own_return": 0.00972648960434297,
+      "relative_return": 0.012208842708671286,
+      "session": "2026-08-11",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    },
+    {
+      "anchor_at": "2026-08-12T14:45:00+00:00",
+      "at": "2026-08-13T14:45:00+00:00",
+      "benchmark_return": 0.010428010200565163,
+      "datasets": [
+        "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+        "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e"
+      ],
+      "episode_id": "ce8cc5eb2a35dcb16d7ba2b54dd06f16419e5973820750705c2a25c56985fd5b",
+      "id": "cb689419d518c606752bda68ae96d620e63f520da3a6d9804c9ca482cb91903e",
+      "own_return": 0.012588020989097615,
+      "relative_return": 0.0021600107885324515,
+      "session": "2026-08-13",
+      "spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5"
+    }
+  ]
+}

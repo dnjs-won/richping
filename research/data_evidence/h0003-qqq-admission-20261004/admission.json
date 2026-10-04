@@ -1,0 +1,48 @@
+{
+  "action_repeat_equal": true,
+  "adjustment": "raw",
+  "capture_hash": "f062f8d13424c36e84a65993d75748874a0b41962850cf370324b918a56fedd9",
+  "currency": "USD",
+  "end_exclusive": "2026-08-14",
+  "exact_grid": true,
+  "feed": "sip",
+  "grid": {
+    "expected_supported_slots": 4480,
+    "first": "2026-05-05T08:00:00Z",
+    "last": "2026-08-13T23:45:00Z",
+    "missing_count": 0,
+    "missing_semantics": "UNKNOWN_UNAVAILABLE_NEVER_FILLED",
+    "missing_slots": [],
+    "observed": 4480,
+    "offgrid": [],
+    "segments": {
+      "AFTER_HOURS": 1120,
+      "PREMARKET": 1540,
+      "RTH": 1820
+    },
+    "unsupported_sessions": [],
+    "zero_semantics": "PRESENT_REPORTED_ZERO_NOT_MISSING_OR_NO_TRADE_PROOF",
+    "zero_volume_by_segment": {
+      "AFTER_HOURS": 0,
+      "PREMARKET": 0,
+      "RTH": 0
+    }
+  },
+  "known_at_policy": "historical_snapshot_bar_end_assumed_v1",
+  "limitations": [
+    "Ex-post no-unit-action admission; no historical event known_at backdating.",
+    "Same-provider raw/split/action checks; no independent exchange price certificate.",
+    "Raw cash dividends not normalized/reinvested; outcome accounting separate.",
+    "Complete slot observations do not certify extended liquidity or live availability."
+  ],
+  "outcome_access": 0,
+  "pagination_repeat_equal": true,
+  "provider": "alpaca_sip",
+  "raw_split_equal": true,
+  "role": "DISCOVERY_ONLY",
+  "schema": "h0003_qqq_admission_v1",
+  "signal_replay": "NOT_RUN_BEFORE_ADMISSION",
+  "split_identity": true,
+  "start": "2026-05-05",
+  "status": "PASS"
+}

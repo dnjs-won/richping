@@ -1,0 +1,30 @@
+{
+  "captured_at": "2026-10-04T13:25:59.820388+00:00",
+  "cases": {},
+  "end_exclusive": "2026-08-14",
+  "failure": "Transport failure; capability unknown",
+  "outcome_access": 0,
+  "requests": [
+    {
+      "endpoint": "/v2/stocks/QQQ/bars",
+      "exception_type": "ConnectionError",
+      "http_status": null,
+      "id": "raw",
+      "params": {
+        "adjustment": "raw",
+        "asof": "-",
+        "currency": "USD",
+        "end": "2026-08-14T03:59:59Z",
+        "feed": "sip",
+        "limit": 10000,
+        "sort": "asc",
+        "start": "2026-05-05T04:00:00Z",
+        "timeframe": "15Min"
+      },
+      "requested_at": "2026-10-04T13:25:59.799981+00:00"
+    }
+  ],
+  "role": "DISCOVERY_ONLY",
+  "schema": "h0003_qqq_capture_v1",
+  "start": "2026-05-05"
+}

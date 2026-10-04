@@ -1,0 +1,261 @@
+{
+  "04cba55ae24148b3329e81557f08caa364dfa907a521d9f108d4ac5845737b62": {
+    "emitted_at": "2026-06-01T21:30:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 10,
+    "leadership_bars": 10,
+    "started_at": "2026-06-01T21:30:00+00:00"
+  },
+  "05e38a7dd1bdd219bce1b46c91edee24567683fcac49bf1f329145c34cbd7f8f": {
+    "emitted_at": "2026-05-19T17:00:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 301,
+    "leadership_bars": 307,
+    "started_at": "2026-05-19T17:00:00+00:00"
+  },
+  "12b7c017c74db567d1f092fdbe5e70d7c1f047753ba8bbb8d214ea3188c03f71": {
+    "emitted_at": "2026-06-24T20:45:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 63,
+    "leadership_bars": 64,
+    "started_at": "2026-06-24T20:45:00+00:00"
+  },
+  "1bdde55088878709dc58ab41ebd8c8c7ab2e81a7fec2cda9d4dd501dda7f8525": {
+    "emitted_at": "2026-07-30T13:45:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 74,
+    "leadership_bars": 74,
+    "started_at": "2026-07-30T13:45:00+00:00"
+  },
+  "22dd9831cf15a447788ef0de7e562573949575f5a80279ec7d890eaa071a96a1": {
+    "emitted_at": "2026-05-28T22:00:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 35,
+    "leadership_bars": 35,
+    "started_at": "2026-05-28T22:00:00+00:00"
+  },
+  "238c0605ba4789db6c4397573af497b413192c7e59c7cc9d9649a0e5e2aca360": {
+    "emitted_at": null,
+    "first_guard": false,
+    "guard_pass_bars": 0,
+    "leadership_bars": 4,
+    "started_at": "2026-08-06T12:30:00+00:00"
+  },
+  "259fed122448f70775a3f767fd231ee4e47c68a4c6ffba98ac3ef82a05c8eff4": {
+    "emitted_at": "2026-06-29T16:45:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 114,
+    "leadership_bars": 114,
+    "started_at": "2026-06-29T16:45:00+00:00"
+  },
+  "3025ee3d481ebaa36b9204256fac62c6dd74deb122cb0189e38eb7f6509e886a": {
+    "emitted_at": "2026-05-18T09:45:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 1,
+    "leadership_bars": 1,
+    "started_at": "2026-05-18T09:45:00+00:00"
+  },
+  "3cf4c0d3861d96409b738e809518fa1d8b8db70eacabe2c0ca2389deaccd3526": {
+    "emitted_at": "2026-07-31T17:15:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 10,
+    "leadership_bars": 10,
+    "started_at": "2026-07-31T17:15:00+00:00"
+  },
+  "3f48226e0bfe19dcd18478830384dc29a9729e012a2ce187b493a30450ed5325": {
+    "emitted_at": "2026-05-08T14:30:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 115,
+    "leadership_bars": 118,
+    "started_at": "2026-05-08T14:30:00+00:00"
+  },
+  "429583dab2f9d0763c6e0199636a2d3c2bb32a27a365806f96aa780b14912ce1": {
+    "emitted_at": "2026-06-11T09:00:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 185,
+    "leadership_bars": 189,
+    "started_at": "2026-06-11T09:00:00+00:00"
+  },
+  "4d4809619acc603a6910fdb7e046430d794feb32b50d41566f87deea38da7d30": {
+    "emitted_at": "2026-06-08T15:00:00+00:00",
+    "first_guard": false,
+    "guard_pass_bars": 63,
+    "leadership_bars": 66,
+    "started_at": "2026-06-08T14:15:00+00:00"
+  },
+  "523e3589b7cbcb9938989731455b329d8f5a35208fd5e0d5ae772ae22309e853": {
+    "emitted_at": "2026-08-04T09:00:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 70,
+    "leadership_bars": 70,
+    "started_at": "2026-08-04T09:00:00+00:00"
+  },
+  "5a6e3398694bd276d99e21ec35dae69d6f3ba41ad8f5ddb2829a763d4d114b7b": {
+    "emitted_at": "2026-07-08T14:15:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 104,
+    "leadership_bars": 104,
+    "started_at": "2026-07-08T14:15:00+00:00"
+  },
+  "5ec0e76498c91f0512834cac830f40ef8353899a657e7978986993d3bf912f62": {
+    "emitted_at": "2026-08-11T20:30:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 95,
+    "leadership_bars": 95,
+    "started_at": "2026-08-11T20:30:00+00:00"
+  },
+  "670c384b5758052da31ee9698a66b60eaad4835e0e3526b33b424f2905c6c7c1": {
+    "emitted_at": "2026-07-24T12:15:00+00:00",
+    "first_guard": false,
+    "guard_pass_bars": 5,
+    "leadership_bars": 15,
+    "started_at": "2026-07-24T10:00:00+00:00"
+  },
+  "7588f9cb106bb205fd27a06da7e86ea203479b74259d990d97624d535f4db136": {
+    "emitted_at": "2026-06-17T15:45:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 162,
+    "leadership_bars": 162,
+    "started_at": "2026-06-17T15:45:00+00:00"
+  },
+  "76033fda634689d23c84e4316ed92d51db23a654abd6ac4366e90a01685ba817": {
+    "emitted_at": "2026-05-13T09:00:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 1,
+    "leadership_bars": 1,
+    "started_at": "2026-05-13T09:00:00+00:00"
+  },
+  "7d0d96eef18757012a3256ecbbd771f36b6e234f27e23c038b548d9e44e48758": {
+    "emitted_at": "2026-06-01T17:15:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 10,
+    "leadership_bars": 10,
+    "started_at": "2026-06-01T17:15:00+00:00"
+  },
+  "905ea4e2ce643b46caf902067f762675cce6c3991c9e593e41bbfef3d36bec48": {
+    "emitted_at": "2026-08-07T18:15:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 1,
+    "leadership_bars": 1,
+    "started_at": "2026-08-07T18:15:00+00:00"
+  },
+  "9418cdf07c0f758d0679c12677d664ad6c11a441d88fe79575c90e47d11a6f8b": {
+    "emitted_at": "2026-07-17T17:15:00+00:00",
+    "first_guard": false,
+    "guard_pass_bars": 3,
+    "leadership_bars": 10,
+    "started_at": "2026-07-17T16:45:00+00:00"
+  },
+  "992129a49354a13433ffe9d69c942cafc296a0bcd65db6da7c2907c9905e1bd7": {
+    "emitted_at": "2026-07-22T14:30:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 68,
+    "leadership_bars": 106,
+    "started_at": "2026-07-22T14:30:00+00:00"
+  },
+  "9dc1ddf5200820a9417a306a2c0335a37a8ceb397dd5d1911c9792a660b08b20": {
+    "emitted_at": "2026-07-20T18:30:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 87,
+    "leadership_bars": 87,
+    "started_at": "2026-07-20T18:30:00+00:00"
+  },
+  "a9077b88206ba6f214ece67c5c9324dc8895e2773e00ac356bea49f9d124986a": {
+    "emitted_at": "2026-06-16T09:15:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 13,
+    "leadership_bars": 13,
+    "started_at": "2026-06-16T09:15:00+00:00"
+  },
+  "ae14118ef8743000adad7f89714fecbad683f9890f4b5149934b71d546468041": {
+    "emitted_at": "2026-08-06T15:00:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 55,
+    "leadership_bars": 61,
+    "started_at": "2026-08-06T15:00:00+00:00"
+  },
+  "b3464f19130cc33d23268b3a7026043e26634f969f9c7fb8b394131e9d673a86": {
+    "emitted_at": "2026-07-06T15:15:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 36,
+    "leadership_bars": 36,
+    "started_at": "2026-07-06T15:15:00+00:00"
+  },
+  "b4a8560dfb3f32c15eac5ee6ef20fe944ee15cb7e5fcf52d888f8e80efeae674": {
+    "emitted_at": null,
+    "first_guard": false,
+    "guard_pass_bars": 0,
+    "leadership_bars": 1,
+    "started_at": "2026-08-11T15:45:00+00:00"
+  },
+  "bd7bf5c99f5f4a6ecfe85a1c23080bd9c42ea52f47318d3e518f37143b72d48a": {
+    "emitted_at": "2026-05-28T15:00:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 22,
+    "leadership_bars": 22,
+    "started_at": "2026-05-28T15:00:00+00:00"
+  },
+  "ce8cc5eb2a35dcb16d7ba2b54dd06f16419e5973820750705c2a25c56985fd5b": {
+    "emitted_at": "2026-08-13T14:45:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 16,
+    "leadership_bars": 16,
+    "started_at": "2026-08-13T14:45:00+00:00"
+  },
+  "cfd22f0a79504d3e3170bbf07bdc72c8fcab5a59596eca24b44d3225f4ca78ac": {
+    "emitted_at": "2026-08-07T20:45:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 32,
+    "leadership_bars": 32,
+    "started_at": "2026-08-07T20:45:00+00:00"
+  },
+  "d64108aca5e86efa9117e97b3cc44c3d959dcc6a226a437f921717705282678b": {
+    "emitted_at": "2026-07-14T09:15:00+00:00",
+    "first_guard": false,
+    "guard_pass_bars": 64,
+    "leadership_bars": 74,
+    "started_at": "2026-07-14T09:00:00+00:00"
+  },
+  "d96e2aa6d90c479401b2f44e91c2b50a928d47c34558432be739a8c300b9fe81": {
+    "emitted_at": "2026-07-20T08:15:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 36,
+    "leadership_bars": 36,
+    "started_at": "2026-07-20T08:15:00+00:00"
+  },
+  "d98b19cc6713a8b524b860ac00a2cab31c5fac2c34cd8f735939151a9b6f43c1": {
+    "emitted_at": "2026-05-18T13:15:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 2,
+    "leadership_bars": 2,
+    "started_at": "2026-05-18T13:15:00+00:00"
+  },
+  "ec28e6830d9c4f9e90cdb0abd5ee5cf96b06dd1d1b4fadc1a6bfe7773325fe0b": {
+    "emitted_at": "2026-06-10T16:45:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 4,
+    "leadership_bars": 4,
+    "started_at": "2026-06-10T16:45:00+00:00"
+  },
+  "edaf78402a894f7d633cf9307cb5d2dc1fff91990e0c79f9978e9cc736b6efcd": {
+    "emitted_at": "2026-05-06T09:00:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 68,
+    "leadership_bars": 68,
+    "started_at": "2026-05-06T09:00:00+00:00"
+  },
+  "f4c87630d5d24542e504bdc16766bc22365ed48343d3c290d421c44bdc9f10f4": {
+    "emitted_at": "2026-05-13T11:15:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 50,
+    "leadership_bars": 52,
+    "started_at": "2026-05-13T11:15:00+00:00"
+  },
+  "f9a447061dc04456614740111dc87f3428cb8ea40fafd6bc91db30272b8efa8d": {
+    "emitted_at": "2026-06-02T09:00:00+00:00",
+    "first_guard": true,
+    "guard_pass_bars": 113,
+    "leadership_bars": 118,
+    "started_at": "2026-06-02T09:00:00+00:00"
+  }
+}

@@ -16,3 +16,12 @@ research/strategy_specs/H0002-r01-frozen-v1.yaml -text
 research/decision_records/H0002-signal-freeze-v1.json -text
 research/data_evidence/h0002-freeze-preregistration-20261004/**/*.xml binary
 research/data_evidence/h0002-first-efficacy-20261004/**/*.xml binary
+# H0003 sealed source contracts and test receipts are byte exact.
+conftest.py -text
+tests/test_h0003_*.py -text
+richping/research_v2/strategy/h0003_leadership.py -text
+scripts/h0003_*.py -text
+research/hypotheses/H0003-r01.yaml -text
+research/strategy_specs/H0003-r01-candidate.yaml -text
+docs/H0003_RELATIVE_STRENGTH_RESEARCH.md -text
+research/data_evidence/h0003-*/**/*.xml binary
