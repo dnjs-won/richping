@@ -1,0 +1,52 @@
+{
+  "candidate_outcome_access": false,
+  "execution_authority": "Intake only; no experiment, production write, risk reset or promotion.",
+  "future_confirmation_dependency": false,
+  "independence_requirement": "Different testable thesis; changing H0001 thresholds/window/provider is not a new independent hypothesis.",
+  "next_action": "INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION",
+  "next_action_status": "USER_DECISION_REQUIRED",
+  "next_hypothesis_id": "H0002",
+  "next_revision": 1,
+  "prior_trials_preserved": true,
+  "registered_hypotheses": [
+    {
+      "content_hash": "359bd83f8b6d320655ff4bd88f37d0c24913f9530b66aab226655edf306d1510",
+      "id": "H0001",
+      "path": "research/hypotheses/H0001-r01.yaml",
+      "revision": 1,
+      "status": "DRAFT"
+    },
+    {
+      "content_hash": "4a45223534da32940501517c7f51334c8a7d6198ecf2cd3c232c0f6c3c96a7af",
+      "id": "H0001",
+      "path": "research/hypotheses/H0001-r02.yaml",
+      "revision": 2,
+      "status": "DRAFT"
+    },
+    {
+      "content_hash": "902c77bbb196488759ae3e61ebf93c1eb05fc34abd5edf821abb8e9a4c30f6b7",
+      "id": "H0001",
+      "path": "research/hypotheses/H0001-r03.yaml",
+      "revision": 3,
+      "status": "DRAFT"
+    }
+  ],
+  "schema": "independent_research_intake_v1",
+  "selection_basis": [
+    "User market observation or explicitly selected independent thesis",
+    "Causal observable feature/data feasibility",
+    "One bounded preregistered primary comparison"
+  ],
+  "stages": [
+    "HYPOTHESIS_GENERATION_SELECTION",
+    "CAUSAL_DISCOVERY",
+    "PREREGISTRATION",
+    "FUTURE_CONFIRMATION",
+    "FAIL_PRESERVE_OR_PROMOTE",
+    "NEXT_INDEPENDENT_HYPOTHESIS"
+  ],
+  "status": "READY_FOR_OWNER_STRATEGY_MEANING",
+  "unknowns": [
+    "Independent thesis/observation not yet selected; preserve as unknown rather than inventing one."
+  ]
+}

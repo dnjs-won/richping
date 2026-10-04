@@ -1,0 +1,22 @@
+{
+  "H0001_routing": [
+    "FROZEN",
+    "AWAITING_FUTURE_CONFIRMATION",
+    "HISTORICALLY_SPARSE"
+  ],
+  "another_short_window_search": false,
+  "candidate_count": 0,
+  "candidate_timestamps": [],
+  "evidence_level": "DISCOVERY_SIGNAL_COMPOSITION_ONLY",
+  "future_confirmation": "2026-10-12..2027-04-13;126sessions unchanged",
+  "labels": null,
+  "metrics": null,
+  "new_information_vs41": "H1 extremes27/READY672 and ACTIVE96 now occur, unlike prior0 extremes/ACTIVE0; frozen15m trigger remains0. Sparsity is now located at temporal trigger composition, not solely absence of H1 activation.",
+  "next_active_P0": "INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION",
+  "outcome_queries": 0,
+  "profitability": "NOT_RUN",
+  "return_MFE_MAE_calculations": 0,
+  "status": "ZERO_SIGNAL",
+  "stream_hash": "f794a31903da1a110497b4badd58ffdc4bf0e3ce6cf7ec089c68597e6e781d46",
+  "trace_hash": "7074831083528272f30970429f740bcf1614a6835b04b4e2cabad334c24504d9"
+}

@@ -1,0 +1,32 @@
+{
+  "anchor_end_inclusive": "2026-08-13",
+  "anchor_start": "2026-05-05",
+  "captured_at": "2026-10-04T04:11:59.197752+00:00",
+  "cases": {},
+  "daily_origin": "2024-10-04",
+  "failure": "Transport failure; capability unknown",
+  "outcome_queries": 0,
+  "requests": [
+    {
+      "endpoint": "/v2/stocks/SOXX/bars",
+      "exception_type": "ConnectionError",
+      "http_status": null,
+      "id": "m15-raw",
+      "params": {
+        "adjustment": "raw",
+        "asof": "-",
+        "currency": "USD",
+        "end": "2026-08-14T03:59:59Z",
+        "feed": "sip",
+        "limit": 10000,
+        "sort": "asc",
+        "start": "2026-05-05T04:00:00Z",
+        "timeframe": "15Min"
+      },
+      "requested_at": "2026-10-04T04:11:59.155204+00:00",
+      "transport": "TRANSPORT_FAILURE_CAPABILITY_UNKNOWN"
+    }
+  ],
+  "role": "DISCOVERY_ONLY",
+  "schema": "alpaca_70_selected_capture_v1"
+}

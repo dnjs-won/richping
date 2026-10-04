@@ -1,0 +1,24 @@
+{
+  "CLI_help": "PASS",
+  "credential_scan": "PASS_NO_VALUES_OR_CREDENTIAL_HASHES",
+  "final_adapter_fix_in_full_suite": true,
+  "full": {
+    "errors": 0,
+    "failures": 0,
+    "passed": 1451,
+    "seconds": 488.414,
+    "sha256": "804fab909c002c4f3566f40ce30dc4598ef481b17f7a7b22c85ba7d07204f317",
+    "skipped": 0,
+    "tests": 1451
+  },
+  "original_evidence_unchanged": true,
+  "targeted": {
+    "errors": 0,
+    "failures": 0,
+    "passed": 50,
+    "seconds": 30.444,
+    "sha256": "0092a58a399832fdc1017f527dd4dc978693b5df67df182b8250bf8e889847d2",
+    "skipped": 0,
+    "tests": 50
+  }
+}

@@ -1,3 +1,13 @@
+# Richping V2 - 2026-10-04 independent Alpaca70 discovery
+
+**COMPLETE bounded discovery / ZERO_SIGNAL; informative efficacy remains unavailable. H0001 future track preserved; new independent research P0.**
+
+Admission PASS70 sessions/4480 exact slots, Daily465 native raw OHLC Nasdaq exact. Frozen replay twice equal:4480 batches, Daily READY4480/BULLISH3264, H1 atomic READY2685/ACTIVE96; H1 completed READY672/1120, downside extremes27;15m triggers0;candidates0/timestamps[]. ZERO_SIGNAL discovery, outcomes0, no efficacy/profitability. Preserve frozen126-session confirmation; H0001 asynchronous FROZEN/AWAITING_FUTURE_CONFIRMATION/HISTORICALLY_SPARSE. Next independent hypothesis intake H0002; owner strategy meaning required.
+
+Final targeted50/full1451 passed, zero failures/errors/skips; no outcomes/costs. Branch `v2-h0001-alpaca-70-session-discovery`; [contract](docs/H0001_ALPACA_70_DISCOVERY.md); [immutable evidence](research/data_evidence/h0001-alpaca-70-20261004/offline-reload-proof.json). No main code integration.
+
+The entries below are preserved historical status reports.
+
 # Richping V2 - 2026-10-04 Alpaca Basic actual SIP admission
 
 **COMPLETE actual-access audit; longer DISCOVERY admission BLOCKED on extended price observations. Phase exit6 INCOMPLETE, profitability NOT_RUN.**

@@ -96,9 +96,10 @@ def validate_identity(meta, actions, bars):
             raise ValueError("Unit audit duplicate/out-of-range session")
         seen.add(row["session"])
         bar = indexed[row["session"]]
-        if row["yahoo_quote"] != {k: getattr(bar, k) for k in FIELDS}:
+        quote_key = 'source_quote' if meta['provider'] == 'alpaca_sip' else 'yahoo_quote'
+        if row[quote_key] != {k: getattr(bar, k) for k in FIELDS}:
             raise ValueError("Unit audit quote mismatch")
-        result = unit_comparison(row["yahoo_quote"], row["market_ohlc"],
+        result = unit_comparison(row[quote_key], row["market_ohlc"],
                                  future_ratio=following["new_shares"] / following["old_shares"])
         if result != row["comparison"] or result["unit_certification_result"] != "PASS":
             raise ValueError("Market OHLC share-unit cross-check failed")

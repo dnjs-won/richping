@@ -1,0 +1,31 @@
+{
+  "all_bytes_equal": true,
+  "files_sha256": {
+    "research/data_evidence/h0001-entry-composition-20261003/candidate-events.json": "f794a31903da1a110497b4badd58ffdc4bf0e3ce6cf7ec089c68597e6e781d46",
+    "research/data_evidence/h0001-entry-composition-20261003/composition-contract.json": "d91cb24d0f47ecb474beebacd43011e4a381a3af2dfd2da0a49ee909f600f1e9",
+    "research/data_evidence/h0001-entry-composition-20261003/denominator-report.json": "5922eef43a9f18e2c23001c24cf87a1149ef5db3ba6c766f8eb10bb719d03ad0",
+    "research/data_evidence/h0001-entry-composition-20261003/offline-proof.json": "180229314c1704ac5392e3457df8ee1a062cb09e209fc8ea5f81941a0c8904e0",
+    "research/data_evidence/h0001-entry-composition-20261003/smoke.json": "ecc4f7aed8ae09a411c2a4e64791082830665ff9f3f40cb88eaf3d0021a80a16",
+    "research/data_evidence/h0001-entry-composition-20261003/zero-signal-diagnostic.json": "a6e0068bcc49799fa3fc80d875cbd58028ee295bbcc7f6ba4311703c30a539b8",
+    "research/decision_records/H0001-15m-entry-freeze-v1.yaml": "731de444f728ab4ece8412820b836c79f14ad1d03bfef02624b0df3005f32abc",
+    "research/decision_records/H0001-1h-relative-setup-freeze-v1.yaml": "57ca8932589350d08fd4c4f0f80b6050f191e4ff3dfd7e51092f06b3122fda97",
+    "research/decision_records/H0001-action-unit-interpretation-audit-v1.yaml": "bede2224e3c17c9e9d2bf6be7f7ee4aae2da58cd2288f8828fbbb79a6e7b39e4",
+    "research/decision_records/H0001-daily-blocker-freeze-v1.yaml": "bebbef8573f0479ec3e86d090bebcc517b22105af68c3edbc3c672f85bdf5c30",
+    "research/decision_records/H0001-daily-input-freeze-v1.yaml": "94c6cf37999d50b7544aad5201124d108f65a3f7584447a4aa7e05e0279ff073",
+    "research/decision_records/H0001-daily-trend-freeze-v1.yaml": "a7342156d9efa6c966380317973fd1f911159bbb6768ec039b799321821a6698",
+    "research/decision_records/H0001-daily-trend-readiness-remediation-v1.yaml": "4c0b270a392e827db89ad626289156c9e39851c1b749b2b2713565780d059a1e",
+    "research/decision_records/H0001-entry-composition-freeze-v1.yaml": "c909d98f80ec45ac0a4997f5ef13694da63110d4265a915a52be21135153f141",
+    "research/decision_records/H0001-entry-efficacy-preregistration-v1.yaml": "b97b6af434fb9ff5779d6686d0bfc964913090b91fc8a4d5553f343c01237e4e",
+    "research/hypotheses/H0001-r03.yaml": "abdd4f10d127ee7614a4eead734d1bfbf7dc1897ec368f8a3b70a1645e2552fc",
+    "research/strategy_specs/H0001-r03-draft.yaml": "470081364f55c3bf0afd9282602e71b2c6e2564ca1804e7d9a01312df2248827",
+    "richping/evaluation.py": "5878789f06db1546616ca926d043bd86917149f2c41c9dcaa0892f0697588690",
+    "richping/research_v2/strategy/daily_exhaustion.py": "45526057e5b01bc9b96d5244f14574ecd26a6e15f153ea69b84a5ca35a6f4127",
+    "richping/research_v2/strategy/daily_trend.py": "269c8370c563d197621ba34476bc3e8c00fe115d5c315ab560e49e5826f53f1c",
+    "richping/research_v2/strategy/entry_15m.py": "2fb7a75d6d0b72f07fae19b1730586d526aaa4fc7033fdd88a52b6efe559e7e5",
+    "richping/research_v2/strategy/entry_composition.py": "d1f65e4ca10879858f2351f444468237aefb744da457a35d83ec1061e3208212",
+    "richping/research_v2/strategy/h0001_spec.py": "833970c5d71975bb31836fefecc69525f2ac19bf7f6b55bf4aea4c1fb4e62435",
+    "richping/research_v2/strategy/h1_setup.py": "33a2c1c8ebba126bc373a17d9260b7b77512c66c566389a51889e97722054bb9",
+    "scripts/h0001_first_entry_efficacy.py": "7d1c59c7f7103faf0bd4c4bcd79d325b4b746246f3a0d4eb71700ec52da6cc0e"
+  },
+  "frozen_source_protocol_and_original_ZERO_SIGNAL_preserved": true
+}

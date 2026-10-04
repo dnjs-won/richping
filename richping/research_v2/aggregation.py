@@ -72,6 +72,8 @@ class CompletedAggregator:
                                    "quality", "provider", "adapter_version", "provider_version",
                                    "captured_at", "timezone", "price_basis", "corporate_actions",
                                    "known_at_policy", "raw_capture_hash")} if research_snapshot else {}),
+                               **({"feed": bar.provenance.unpack()["feed"]}
+                                  if research_snapshot and bar.provenance.unpack().get("provider") == "alpaca_sip" else {}),
                                **(extended_bar_metadata(start, end) if self.profile.name == EXTENDED else {})}),
                 "UNKNOWN" if research_snapshot else "NONE_CONFIRMED")
             completed.append(derived)

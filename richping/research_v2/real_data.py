@@ -165,6 +165,9 @@ def normalize_capture(capture, dataset_id):
 
 def validate_real_manifest(meta):
     """Called by MarketDataset on every construction, including SQLite reload."""
+    if meta.get('provider') == 'alpaca_sip':
+        from .alpaca_data import validate_manifest
+        return validate_manifest(meta)
     required = {"provider_version", "requested_range", "raw_capture_hash", "known_limitations",
                 "corporate_action_events", "coverage_status", "missing_slots", "unsupported_sessions"}
     if not required <= meta.keys():
@@ -182,6 +185,9 @@ def validate_real_manifest(meta):
 
 
 def validate_real_bar(bar, meta):
+    if meta.get('provider') == 'alpaca_sip':
+        from .alpaca_data import validate_bar
+        return validate_bar(bar, meta)
     provenance = bar.provenance.unpack()
     keys = ("quality", "provider", "adapter_version", "provider_version", "timezone",
             "price_basis", "corporate_actions", "known_at_policy")
@@ -200,6 +206,8 @@ def validate_real_bar(bar, meta):
 
 def validate_real_coverage(bars, meta):
     expected, unsupported = expected_slots(meta["requested_range"])
+    if meta.get('provider') == 'alpaca_sip' and ({b.start_at for b in bars} != set(expected) or unsupported):
+        raise ValueError('Exact Alpaca expected-grid equality required')
     missing = sorted(set(expected) - {b.start_at for b in bars})
     status = "UNAVAILABLE" if missing or unsupported else "COMPLETE_GRID"
     if (meta["missing_slots"] != [s.isoformat() for s in missing]
@@ -214,6 +222,9 @@ def is_research_snapshot(bar):
     Derived bars must carry the policy and retain UNKNOWN action state.
     """
     meta = bar.provenance.unpack()
+    if meta.get('provider') == 'alpaca_sip':
+        from .alpaca_data import is_snapshot
+        return is_snapshot(bar)
     return (bar.corporate_action == "UNKNOWN"
             and meta.get("quality") == "REAL_HISTORICAL_RESEARCH"
             and meta.get("provider") == PROVIDER and meta.get("adapter_version") == ADAPTER

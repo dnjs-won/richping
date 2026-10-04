@@ -1,2 +1,4 @@
 # Audit source hashes bind the exact captured bytes on every platform.
 research/data_evidence/h0001-action-unit-20261003/sources/*.bin binary
+# Selected discovery hashes bind archived bytes, including JSON/XML line endings.
+research/data_evidence/h0001-alpaca-70-20261004/** -text

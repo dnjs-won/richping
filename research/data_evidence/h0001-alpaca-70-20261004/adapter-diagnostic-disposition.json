@@ -1,0 +1,8 @@
+{
+  "corrected_proof": "h1-diagnostic-v2.json",
+  "frozen_strategy_changed": false,
+  "reason": "Initial derived H1 adapter omitted feed=sip and returned UNAVAILABLE. No official stream was frozen; initial composition run interrupted.",
+  "status": "INVALIDATED_ADAPTER_DIAGNOSTIC_NOT_SIGNAL_EVIDENCE",
+  "superseded_path": "h1-diagnostic.json",
+  "superseded_sha256": "c0bf84ff45bfc28d90733d6d462cc1128144b32d198f9e49280c3073f141c08f"
+}

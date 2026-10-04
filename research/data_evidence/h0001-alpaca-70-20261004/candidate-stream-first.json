@@ -1,0 +1,43 @@
+{
+  "cancellation_counts_by_reason": {
+    "EXPIRE_GRACE": 3,
+    "M15:EXPIRED": 1
+  },
+  "candidate_reasons": {
+    "DAILY_NOT_BULLISH": 1216,
+    "H1_NOT_ACTIVE": 1373,
+    "M15_TRIGGER_FALSE": 96,
+    "REQUIRED_ROLE_UNAVAILABLE_OR_FUTURE": 1795
+  },
+  "denominators": {
+    "Daily_BULLISH": 3264,
+    "Daily_READY": 4480,
+    "GC_events": 175,
+    "H1_ACTIVE": 96,
+    "H1_raw_READY": 2685,
+    "M15_armed": 5,
+    "M15_primitive_READY": 4160,
+    "candidate_emitted": 0,
+    "candidate_ineligible": 2685,
+    "candidate_unavailable": 1795,
+    "exhaustion_NORMAL": 2961,
+    "exhaustion_READY": 4480,
+    "frozen_M15_trigger_TRUE": 0,
+    "joint_READY": 2685,
+    "position_FLAT": 4480,
+    "price_confirmation_fail": 26,
+    "price_confirmation_pass": 149,
+    "setup_episode_already_consumed": 0,
+    "total_atomic_batches": 4480
+  },
+  "event_payload_hashes": [],
+  "event_stream_hash": "f794a31903da1a110497b4badd58ffdc4bf0e3ce6cf7ec089c68597e6e781d46",
+  "events": [],
+  "join_stream_hash": "463dc0020ba2b2871ab6397908e7de5dc2f4df90681f4d14bb65e343d607d85f",
+  "trace_stream_hash": "7074831083528272f30970429f740bcf1614a6835b04b4e2cabad334c24504d9",
+  "trigger_cancel_evaluation_counts": {
+    "M15:EXPIRED": 1,
+    "M15:UNAVAILABLE_CANCEL": 320,
+    "M15:UPSTREAM_CANCEL": 4064
+  }
+}

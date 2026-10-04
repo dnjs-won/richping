@@ -1,0 +1,136 @@
+schema_version: 1
+decision_id: H0001-alpaca-70-discovery-v1
+date: '2026-10-04'
+authority: EXPLICIT_OWNER_SELECTED_BOUNDED_DISCOVERY
+scope_decision: LONG_HISTORY_EXTENDED_COVERAGE_SCOPE_DECISION_COMPLETE_NARROW_COMPLETE_INTERVAL
+branch: v2-h0001-alpaca-70-session-discovery
+base_commit: 6a0f82a
+canonical_bootstrap_main: 50b479b
+admission: PASS
+dataset:
+  id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+  hash: 4b39f109e8cffce8a7e680e773b560b307e21dd5a92dcad6d06fcd47bb0aa8bd
+  daily_id: soxx-alpaca-sip-rth-daily-discovery-20261004-v1
+  daily_hash: faa659e9f57103dfd069ca59cf744e9c6832e1d08533f9b77c81ef6ce80b8324
+proof:
+  admission_hash: d33ee493cc699d4861b483d5e5ac5c3450ef439e4a1af35f900dedccc63c074e
+  all_replay_result_hash: 4900d83efdf40f1a0fec8bb51fa2bf74b3aefd39e985fd38e4cfb23947a9e1f0
+  candidate_count: 0
+  candidate_timestamps: []
+  capture_hash: 54904c041425ac2be01523a6a9d3a70d903f7dd812a819ff21d6068b55fee8c0
+  confirmation: 126_sessions_20261012_20270413_UNCHANGED
+  daily_hash: faa659e9f57103dfd069ca59cf744e9c6832e1d08533f9b77c81ef6ce80b8324
+  daily_id: soxx-alpaca-sip-rth-daily-discovery-20261004-v1
+  denominators:
+    Daily_BULLISH: 3264
+    Daily_READY: 4480
+    GC_events: 175
+    H1_ACTIVE: 96
+    H1_raw_READY: 2685
+    M15_armed: 5
+    M15_primitive_READY: 4160
+    candidate_emitted: 0
+    candidate_ineligible: 2685
+    candidate_unavailable: 1795
+    exhaustion_NORMAL: 2961
+    exhaustion_READY: 4480
+    frozen_M15_trigger_TRUE: 0
+    joint_READY: 2685
+    position_FLAT: 4480
+    price_confirmation_fail: 26
+    price_confirmation_pass: 149
+    setup_episode_already_consumed: 0
+    total_atomic_batches: 4480
+  event_stream_hash: f794a31903da1a110497b4badd58ffdc4bf0e3ce6cf7ec089c68597e6e781d46
+  frozen_dependencies:
+    confirmation_sessions: 126
+    dependencies_verified: 23
+    prior_candidate_count: 0
+    protocol_hash: 074255189630fa625c4d40eb2f344fb7767d2c8f305f22c9e4c2a608e93e944c
+    signal_stream_hash: f794a31903da1a110497b4badd58ffdc4bf0e3ce6cf7ec089c68597e6e781d46
+    specification_hash: bf8134733bacee17542240e53a8ec30223c1550b5bedbaa6d3994ba1444acc19
+    unresolved_paths: 84
+  frozen_strategy_bytes_preserved: true
+  intraday_hash: 4b39f109e8cffce8a7e680e773b560b307e21dd5a92dcad6d06fcd47bb0aa8bd
+  intraday_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+  network_calls: 0
+  network_disabled: true
+  original_ZERO_SIGNAL_preserved: true
+  outcome_queries: 0
+  outcomes: NOT_RUN
+  repeat_equal: true
+  role: DISCOVERY_ONLY
+  runs: 2
+  sessions: 70
+  status: ZERO_SIGNAL
+completed_H1_diagnostic:
+  count_unit: COMPLETED_H1_PUBLICATIONS
+  counts:
+    H1_READY: 672
+    H1_downside_extreme: 27
+    completed_H1: 1120
+  extreme_timestamps:
+  - '2026-06-23T16:00:00+00:00'
+  - '2026-06-23T17:00:00+00:00'
+  - '2026-06-23T18:00:00+00:00'
+  - '2026-06-23T19:00:00+00:00'
+  - '2026-06-23T20:00:00+00:00'
+  - '2026-06-23T21:00:00+00:00'
+  - '2026-06-23T22:00:00+00:00'
+  - '2026-06-23T23:00:00+00:00'
+  - '2026-07-02T17:00:00+00:00'
+  - '2026-07-02T18:00:00+00:00'
+  - '2026-07-02T19:00:00+00:00'
+  - '2026-07-02T20:00:00+00:00'
+  - '2026-07-02T21:00:00+00:00'
+  - '2026-07-02T22:00:00+00:00'
+  - '2026-07-02T23:00:00+00:00'
+  - '2026-07-03T00:00:00+00:00'
+  - '2026-07-08T10:00:00+00:00'
+  - '2026-07-08T11:00:00+00:00'
+  - '2026-07-17T10:00:00+00:00'
+  - '2026-07-17T11:00:00+00:00'
+  - '2026-07-17T12:00:00+00:00'
+  - '2026-07-17T13:00:00+00:00'
+  - '2026-07-17T14:00:00+00:00'
+  - '2026-07-28T14:00:00+00:00'
+  - '2026-07-28T15:00:00+00:00'
+  - '2026-07-28T16:00:00+00:00'
+  - '2026-07-28T17:00:00+00:00'
+  intraday_hash: 4b39f109e8cffce8a7e680e773b560b307e21dd5a92dcad6d06fcd47bb0aa8bd
+  network_calls: 0
+  outcome_queries: 0
+  schema: H0001_SELECTED_DISCOVERY_H1_DIAGNOSTIC_V1
+  thresholds_changed: false
+summary: Admission PASS70 sessions/4480 exact slots, Daily465 native raw OHLC Nasdaq
+  exact. Frozen replay twice equal:4480 batches, Daily READY4480/BULLISH3264, H1 atomic
+  READY2685/ACTIVE96; H1 completed READY672/1120, downside extremes27;15m triggers0;candidates0/timestamps[].
+  ZERO_SIGNAL discovery, outcomes0, no efficacy/profitability. Preserve frozen126-session
+  confirmation; H0001 asynchronous FROZEN/AWAITING_FUTURE_CONFIRMATION/HISTORICALLY_SPARSE.
+  Next independent hypothesis intake H0002; owner strategy meaning required.
+tests:
+  targeted:
+    tests: 50
+    failures: 0
+    errors: 0
+    skipped: 0
+    seconds: 30.444
+    sha256: 0092a58a399832fdc1017f527dd4dc978693b5df67df182b8250bf8e889847d2
+    passed: 50
+  full:
+    tests: 1451
+    failures: 0
+    errors: 0
+    skipped: 0
+    seconds: 488.414
+    sha256: 804fab909c002c4f3566f40ce30dc4598ef481b17f7a7b22c85ba7d07204f317
+    passed: 1451
+routing: H0001_FUTURE_CONFIRMATION_ASYNCHRONOUS_NEW_INDEPENDENT_RESEARCH_ACTIVE
+next_active_P0: INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION
+next_hypothesis: H0002
+next_action_status: USER_DECISION_REQUIRED
+paid_cost: 0
+multi_year_target_abandoned: false
+H0001_discarded: false
+frozen_strategy_modified: false
+original_evidence_rewritten: false

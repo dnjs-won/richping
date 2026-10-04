@@ -1,0 +1,59 @@
+{
+  "DST": {
+    "actual_scope": "All70 dates EDT;04:00ET=08:00UTC,20:00ET=00:00UTC next day",
+    "winter_summer_engine": "Frozen America/New_York calendar; separate prior actual probes retained, not interval certificate."
+  },
+  "action_audit_hash": "b60d9f42c210fa3df4f1a57c63c98398cff3adad105d969f0aedb1f195dae71d",
+  "action_known_at": "UNPROVEN_NO_BACKDATE; no-event identity audit is ex-post admission, not causal absence receipt",
+  "anchor_end_exclusive": "2026-08-14",
+  "anchor_start": "2026-05-05",
+  "candidate_replay": "NOT_RUN_BEFORE_ADMISSION",
+  "capture_hash": "54904c041425ac2be01523a6a9d3a70d903f7dd812a819ff21d6068b55fee8c0",
+  "capture_repeat_equal": true,
+  "daily_origin": "2024-10-04",
+  "daily_sessions": 465,
+  "daily_unit_audit_hash": "aad13112cfcad66f0bf66d116bfc1ea5d34a4a028769df9260efce44118b3fad",
+  "exact_expected_grid_equality": true,
+  "feed": "sip",
+  "grid": {
+    "expected_supported_slots": 4480,
+    "first": "2026-05-05T08:00:00Z",
+    "last": "2026-08-13T23:45:00Z",
+    "missing_count": 0,
+    "missing_semantics": "UNKNOWN_UNAVAILABLE_NEVER_FILLED",
+    "missing_slots": [],
+    "observed": 4480,
+    "offgrid": [],
+    "segments": {
+      "AFTER_HOURS": 1120,
+      "PREMARKET": 1540,
+      "RTH": 1820
+    },
+    "unsupported_sessions": [],
+    "zero_semantics": "PRESENT_REPORTED_ZERO_NOT_MISSING_OR_NO_TRADE_PROOF",
+    "zero_volume_by_segment": {
+      "AFTER_HOURS": 0,
+      "PREMARKET": 0,
+      "RTH": 0
+    }
+  },
+  "limitations": [
+    "Historical bar-end availability assumption; not fresh shadow/live PIT.",
+    "Selected bounded discovery only; multi-year target remains pending without further immediate provider hunting.",
+    "Price features use frozen split-only identity, no dividend reinvestment; outcome accounting separate.",
+    "No RTH fallback, synthetic filling or provider bar mixing. NativeDaily independent RTH price reference audited."
+  ],
+  "old_certificate_inherited": false,
+  "outcome_queries": 0,
+  "provider": "alpaca_basic",
+  "raw_split_identical_selected_intraday_and_daily": true,
+  "role": "DISCOVERY_ONLY",
+  "schema": "alpaca_70_independent_admission_v1",
+  "sessions": 70,
+  "status": "PASS",
+  "volume": {
+    "first_session_all64_m15_equals_published_minute_sum": true,
+    "meaning": "Condition-eligible SIP shares; present0 differs from missing; nativeDaily volume not substituted.",
+    "zero_volume_bars": 0
+  }
+}

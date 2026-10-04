@@ -1,0 +1,26 @@
+{
+  "admission_recomputed_in_clean_checkout": "PASS70_Daily465",
+  "byte_preserving_git_attributes": true,
+  "candidate_count": 0,
+  "clean_Windows_checkout": {
+    "errors": 0,
+    "failures": 0,
+    "passed": 22,
+    "seconds": 23.528,
+    "sha256": "965f9bf1709b218a9faa219c347fc19a744bda1a5e3b7cbf1f34988613475a56",
+    "skipped": 0,
+    "tests": 22
+  },
+  "final_full": {
+    "errors": 0,
+    "failures": 0,
+    "passed": 1451,
+    "seconds": 459.378,
+    "sha256": "8e9397872ee4920eb72bedcf35a8e81135ed0e3b104bb1cb8d9143cb81316a98",
+    "skipped": 0,
+    "tests": 1451
+  },
+  "frozen_strategy_changed": false,
+  "outcome_queries": 0,
+  "signal_replay_repeat_equal": true
+}
