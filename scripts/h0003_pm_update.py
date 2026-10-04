@@ -1,9 +1,11 @@
 """Update canonical main control only after successful H0003 evidence verification."""
 from copy import deepcopy
+from datetime import datetime
 import json
 from pathlib import Path
 import subprocess
 import yaml
+from zoneinfo import ZoneInfo
 
 from scripts.h0003_verify import verify_state
 from scripts.h0003_frequency_audit import ROOT
@@ -27,6 +29,8 @@ def update():
     control_path,index_path = MAIN/'PROJECT_CONTROL.yaml',MAIN/'project/DECISION_INDEX.yaml'
     control = yaml.safe_load(control_path.read_text(encoding='utf-8'))
     index = yaml.safe_load(index_path.read_text(encoding='utf-8'))
+    update_day = datetime.now(ZoneInfo('Asia/Seoul')).date().isoformat()
+    control['updated_at'] = index['updated_at'] = update_day
     if control['next_action']['id'] != 'INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION':
         raise ValueError('Canonical action changed; reread bootstrap')
     frozen_tracks = deepcopy({k:control['hypothesis_tracks'][k] for k in ('H0001','H0002')})
@@ -48,7 +52,7 @@ def update():
         signal_freeze='USER_DECISION_REQUIRED',outcome_evaluation='NOT_RUN_H0003',
         efficacy_preregistration='NOT_STARTED_H0003',satisfied_exit_criteria=[1],remaining_exit_criteria=[2,3])
     control['completed_actions'].append(dict(id='INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION',
-        hypothesis='H0003-r01',status='COMPLETE_CAUSAL_FREQUENCY_ONLY',completed_at='2026-10-04',
+        hypothesis='H0003-r01',status='COMPLETE_CAUSAL_FREQUENCY_ONLY',completed_at=update_day,
         branch=BRANCH,commit=commit,record=RECORD,evidence=EVIDENCE,
         benchmark_admission='research/data_evidence/h0003-qqq-admission-20261004/admission.json',
         verification=(ROOT/'verification.json').as_posix(),candidate_events=35,candidate_sessions=29,
@@ -91,6 +95,7 @@ def update():
         p.write_text(yaml.safe_dump(body,allow_unicode=True,sort_keys=False),encoding='utf-8')
     backlog_path = MAIN/'project/BACKLOG.yaml'
     backlog = yaml.safe_load(backlog_path.read_text(encoding='utf-8'))
+    backlog['updated_at'] = update_day
     for item in backlog['items']:
         if item['id'] == 'V2_MAIN_INTEGRATION_LANE':
             item['active_branch'] = BRANCH
@@ -109,6 +114,7 @@ def update():
     backlog_path.write_text(yaml.safe_dump(backlog,allow_unicode=True,sort_keys=False),encoding='utf-8')
     ideas_path = MAIN/'project/USER_IDEAS.yaml'
     ideas = yaml.safe_load(ideas_path.read_text(encoding='utf-8'))
+    ideas['updated_at'] = update_day
     ideas['items'].append(dict(id='USER-H0003-LEADERSHIP-001',status='THESIS_SELECTED_CAUSAL_FREQUENCY_COMPLETE',priority='CURRENT_H0003',
         idea='SOXX leadership versus QQQ may continue over a later short horizon; LONG-only independent continuation research.',
         family='RELATIVE_STRENGTH_LEADERSHIP_CONTINUATION',evidence_branch=BRANCH,record=RECORD))
