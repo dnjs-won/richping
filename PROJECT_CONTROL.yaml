@@ -15,8 +15,8 @@ source_of_truth:
     branch: main
     path: PROJECT_STATUS.md
   active_workstream_status:
-    branch: v2-h0004-segment-freeze-preregistration
-    path: docs/H0004_SEGMENT_FREQUENCY_RESULTS.md
+    branch: v2-h0004-preaccess-evaluator
+    path: docs/H0004_PREACCESS_RESULTS.md
   decision_index:
     branch: main
     path: project/DECISION_INDEX.yaml
@@ -30,21 +30,21 @@ control_plane:
   branch: main
   rule: PM state lives on main so new sessions can recover it from the default branch.
 active_workstream:
-  branch: v2-h0004-segment-freeze-preregistration
-  base_branch: v2-h0004-compression-frequency
-  base_commit: 9560d57d4c049324727cdd9dde5c124d05b7c2d6
-  implementation_commit: f967fd38da00294342119142b7c6c764a583b20c
+  branch: v2-h0004-preaccess-evaluator
+  base_branch: v2-h0004-segment-freeze-preregistration
+  base_commit: 292dd6767b8da950eb8b15ee4e413f0e5ba32e6a
+  implementation_commit: 31d6e97d3c8a5550badaecd379916d0168688560
   status: DIVERGED_FROM_MAIN
   observed_relation_to_main:
-    ahead_by: 57
-    behind_by: 28
-    main_commit: 9682087a1da78d6130aeebcf9dd24e4490a9e662
-  note: Owner corrected time-of-day reference; trial2 final signal frozen/preregistered,48/29,
-    trials2/outcomes0. Prior tracks and trial1 immutable; next H0004 pre-access directional
-    adapter.
+    ahead_by: 60
+    behind_by: 29
+    main_commit: b8d64d60da58f486b19ca171f4cd7c41b663844c
+  note: Registered exact16-slot directional adapter implemented/tested/sealed with
+    SYNTHETIC fixtures; real H0004 outcomes/endpoint probes0. Next separate bounded
+    discovery execution. Prior tracks/trials/freeze/protocol unchanged.
 current_phase:
   id: INDEPENDENT_STRATEGY_RESEARCH_CYCLE
-  status: H0004_FINAL_SIGNAL_FROZEN_PREREGISTERED_FIRST_EFFICACY_PENDING
+  status: H0004_PREACCESS_ADAPTER_COMPLETE_DISCOVERY_EXECUTION_PENDING
   objective: Repeat independent hypothesis generation, causal discovery, preregistration,
     confirmation and evidence disposition.
   exit_criteria:
@@ -71,6 +71,7 @@ current_phase:
     - 2
     remaining_exit_criteria:
     - 3
+    evaluation_adapter: IMPLEMENTED_SYNTHETIC_TESTED_SEALED_INDEPENDENT_PASS
 completed_actions:
 - id: V2_REAL_INTRADAY_DATA_FOUNDATION
   status: COMPLETE
@@ -754,24 +755,62 @@ completed_actions:
   outcome_access: 0
   prior_tracks_and_trial1_preserved: true
   implementation_state: FINAL_SIGNAL_FROZEN_PROTOCOL_REGISTERED_EVIDENCE_PRODUCED_NOT_MAIN_CODE_INTEGRATED
+- id: H0004_FIRST_EFFICACY
+  status: COMPLETE_PREACCESS_ONLY
+  completed_at: '2026-10-05'
+  branch: v2-h0004-preaccess-evaluator
+  commit: 31d6e97d3c8a5550badaecd379916d0168688560
+  record: research/decision_records/H0004-preaccess-evaluator-v1.yaml
+  implementation_state: IMPLEMENTED_SYNTHETIC_TESTED_SEALED_EVIDENCE_PRODUCED_NOT_MAIN_CODE_INTEGRATED
+  manifest: research/data_evidence/h0004-preaccess-20261005/manifest.json
+  verification: research/data_evidence/h0004-preaccess-20261005/verification.json
+  outcome_audit: research/data_evidence/h0004-preaccess-20261005/outcome-access-audit.json
+  tests:
+  - path: tests-targeted.xml
+    sha256: d5a86c812a9f6568a20cd3b354621ffb8df3623ba34a63fecae565e30b5b3145
+    tests: 73
+    failures: 0
+    errors: 0
+    skipped: 0
+  - path: tests-full.xml
+    sha256: 397ab7cbd4c294632c60ffc4bf46469cfafcdf2ab2b156a7af6f2ef1724573ae
+    tests: 1816
+    failures: 0
+    errors: 0
+    skipped: 0
+  candidate_denominator: 48
+  candidate_sessions: 29
+  signal_trials: 2
+  outcome_access: 0
+  future_price_queries: 0
+  efficacy_calculations: 0
+  profitability_calculations: 0
+  confirmation_outcome_access: 0
+  actual_endpoint_readiness_probes: 0
+  protected_files: 678
 next_action:
-  id: H0004_FIRST_EFFICACY
+  id: H0004_DISCOVERY_EFFICACY_EXECUTION
   priority: P0
-  status: READY_FOR_PREACCESS_ADAPTER_IMPLEMENTATION_AND_SEAL
+  status: READY_FOR_BOUNDED_DISCOVERY_EXPLORATORY_EXECUTION
   hypothesis_id: H0004
   blocks_phase_exit_criteria:
   - 3
-  evidence_branch: v2-h0004-segment-freeze-preregistration
-  record: research/decision_records/H0004-segment-remediation-v2.yaml
-  objective: Implement, test and seal registered16-slot directional outcome adapter;
-    only a later bounded exploratory action may execute discovery outcomes.
-  why_now: Owner semantic decision complete; causal trial2 nonzero and final signal/protocol
-    frozen without outcomes.
+  evidence_branch: v2-h0004-preaccess-evaluator
+  record: research/decision_records/H0004-preaccess-evaluator-v1.yaml
+  preaccess_manifest: research/data_evidence/h0004-preaccess-20261005/manifest.json
+  preaccess_verification_sha256: 763a4abfb9178fd728d4cb18021d1a29d3360e54a6ac1cb3f1e252e45c8181da
+  objective: In a separate bounded action, first execute exact16-slot labels for all48
+    frozen discovery candidates and session-balanced directional summary; retain unresolved
+    full denominator.
   constraints:
-  - No third pre-outcome signal variant or post-outcome definition/threshold/window
-    tuning.
-  - Adapter binding/source/tests must be sealed before first outcome access.
-  - Preserve trial1/H0001~3 and all immutable evidence; confirmations asynchronous.
+  - Verify immutable pre-access PASS/source/bindings before first price access; no
+    signal regeneration or extra capture.
+  - 'Discovery only: sealed70 sessions, no confirmation values, benchmark, controls,
+    CI/PASS/REJECT, MFE/MAE or profitability.'
+  - No tuning or third signal variant. Preserve all48 candidates; unsupported/missing/unit-ambiguous
+    labels remain unresolved.
+  - All earlier frozen hypotheses/trials/evidence/preregistrations unchanged; confirmation
+    PENDING/ASYNCHRONOUS.
 pm_policy:
   single_next_action: true
   discovered_non_blockers_go_to_backlog: true
@@ -1256,8 +1295,8 @@ hypothesis_tracks:
     - AWAITING_FUTURE_CONFIRMATION
     family: VOLATILITY_COMPRESSION_BREAKOUT_CONTINUATION
     direction: LONG
-    branch: v2-h0004-segment-freeze-preregistration
-    commit: f967fd38da00294342119142b7c6c764a583b20c
+    branch: v2-h0004-preaccess-evaluator
+    commit: 31d6e97d3c8a5550badaecd379916d0168688560
     hypothesis: research/hypotheses/H0004-r01.yaml
     spec: research/strategy_specs/H0004-r01-frozen-v1.yaml
     record: research/decision_records/H0004-signal-freeze-v1.json
@@ -1296,7 +1335,7 @@ hypothesis_tracks:
       followup_end: '2027-10-20'
       receipt_deadline: '2027-10-21T20:00:00-04:00'
       asynchronous: true
-    evaluation_adapter: METADATA_GATES_ONLY; NONEMPTY_LABEL_AND_TERMINAL_ADAPTER_NOT_IMPLEMENTED_NOT_EXECUTED
+    evaluation_adapter: EXACT16_SLOT_DIRECTIONAL_IMPLEMENTED_TESTED_SEALED; REAL_OUTCOMES_NOT_RUN
     trial1:
       identity: TRIAL_1_POOLED_SEGMENT_REFERENCE
       immutable_prior_track:
@@ -1328,6 +1367,15 @@ hypothesis_tracks:
       candidate_events: 39
       candidate_sessions: 26
       outcome_access: 0
+    evaluator: richping/research_v2/strategy/h0004_directional_evaluator.py
+    preaccess_manifest: research/data_evidence/h0004-preaccess-20261005/manifest.json
+    preaccess_verification: research/data_evidence/h0004-preaccess-20261005/verification.json
+    preaccess_record: research/decision_records/H0004-preaccess-evaluator-v1.yaml
+    preaccess_manifest_sha256: c2fc3c168be2a9aae24b05e4186a894de11735f2b4c23556a43fb92bbbb1682b
+    preaccess_verification_sha256: 763a4abfb9178fd728d4cb18021d1a29d3360e54a6ac1cb3f1e252e45c8181da
+    preaccess_outcome_access: 0
+    real_endpoint_readiness_probes: 0
+    confirmation_terminal_adapter: FUTURE_ADMISSION_AND_TERMINAL_SEAL_REQUIRED
 active_research_track: H0004
 research_cycle_history:
 - hypothesis: H0002

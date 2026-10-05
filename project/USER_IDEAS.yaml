@@ -67,3 +67,5 @@ items:
   record: research/decision_records/H0004-segment-remediation-v2.yaml
   semantic_correction: Compare current segment against prior10 official completed
     sessions of same segment; current session excluded.
+  preaccess_evaluator: SEALED_VERIFIED_REAL_OUTCOMES_NOT_RUN
+  preaccess_record: research/decision_records/H0004-preaccess-evaluator-v1.yaml

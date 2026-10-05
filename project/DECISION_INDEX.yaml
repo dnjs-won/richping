@@ -5,7 +5,7 @@ purpose: 'Lightweight routing index for AI PM sessions. This file does not repla
   is already frozen, what remains open, and where to read the authoritative evidence.
 
   '
-default_research_branch: v2-h0004-segment-freeze-preregistration
+default_research_branch: v2-h0004-preaccess-evaluator
 data_foundation:
   branch: v2-real-intraday-data-foundation
   contract: docs/V2_REAL_INTRADAY_DATA_FOUNDATION.md
@@ -24,8 +24,8 @@ canonical_sources:
     specification_version: h0001_r03_spec_v13
     sha256: bf8134733bacee17542240e53a8ec30223c1550b5bedbaa6d3994ba1444acc19
   current_status:
-    branch: v2-h0004-segment-freeze-preregistration
-    path: docs/H0004_SEGMENT_FREQUENCY_RESULTS.md
+    branch: v2-h0004-preaccess-evaluator
+    path: docs/H0004_PREACCESS_RESULTS.md
   entry_efficacy_protocol:
     branch: v2-h0001-entry-efficacy-preregistration
     commit: 13f719b56980a43fbace2a003b8c78331fa0c210
@@ -91,8 +91,8 @@ canonical_sources:
     discovery_disposition: DISCOVERY_INSUFFICIENT_RESOLVED_LABELS
   active_hypothesis:
     id: H0004
-    status: FROZEN_PREREGISTERED_OUTCOMES_NOT_RUN
-    branch: v2-h0004-segment-freeze-preregistration
+    status: FROZEN_PREREGISTERED_PREACCESS_SEALED_OUTCOMES_NOT_RUN
+    branch: v2-h0004-preaccess-evaluator
     path: research/hypotheses/H0004-r01.yaml
   last_frozen_candidate_spec:
     branch: v2-h0004-segment-freeze-preregistration
@@ -258,8 +258,8 @@ canonical_sources:
     - AWAITING_FUTURE_CONFIRMATION
     family: VOLATILITY_COMPRESSION_BREAKOUT_CONTINUATION
     direction: LONG
-    branch: v2-h0004-segment-freeze-preregistration
-    commit: f967fd38da00294342119142b7c6c764a583b20c
+    branch: v2-h0004-preaccess-evaluator
+    commit: 31d6e97d3c8a5550badaecd379916d0168688560
     hypothesis: research/hypotheses/H0004-r01.yaml
     spec: research/strategy_specs/H0004-r01-frozen-v1.yaml
     record: research/decision_records/H0004-signal-freeze-v1.json
@@ -298,7 +298,7 @@ canonical_sources:
       followup_end: '2027-10-20'
       receipt_deadline: '2027-10-21T20:00:00-04:00'
       asynchronous: true
-    evaluation_adapter: METADATA_GATES_ONLY; NONEMPTY_LABEL_AND_TERMINAL_ADAPTER_NOT_IMPLEMENTED_NOT_EXECUTED
+    evaluation_adapter: EXACT16_SLOT_DIRECTIONAL_IMPLEMENTED_TESTED_SEALED; REAL_OUTCOMES_NOT_RUN
     trial1:
       identity: TRIAL_1_POOLED_SEGMENT_REFERENCE
       immutable_prior_track:
@@ -330,6 +330,15 @@ canonical_sources:
       candidate_events: 39
       candidate_sessions: 26
       outcome_access: 0
+    evaluator: richping/research_v2/strategy/h0004_directional_evaluator.py
+    preaccess_manifest: research/data_evidence/h0004-preaccess-20261005/manifest.json
+    preaccess_verification: research/data_evidence/h0004-preaccess-20261005/verification.json
+    preaccess_record: research/decision_records/H0004-preaccess-evaluator-v1.yaml
+    preaccess_manifest_sha256: c2fc3c168be2a9aae24b05e4186a894de11735f2b4c23556a43fb92bbbb1682b
+    preaccess_verification_sha256: 763a4abfb9178fd728d4cb18021d1a29d3360e54a6ac1cb3f1e252e45c8181da
+    preaccess_outcome_access: 0
+    real_endpoint_readiness_probes: 0
+    confirmation_terminal_adapter: FUTURE_ADMISSION_AND_TERMINAL_SEAL_REQUIRED
 frozen_major_decisions:
   daily_input:
     status: FROZEN
@@ -513,14 +522,22 @@ current_open_decision_groups:
   note: Same-segment prior10 completed sessions selected; final owner conditions passed;
     no further approval pending/outcomes0.
 - id: H0004_FIRST_EFFICACY
+  priority: COMPLETE
+  status: RESOLVED_PREACCESS_ADAPTER_SEALED_VERIFIED_NO_OUTCOMES
+  blocks_phase_exit_criteria: []
+  evidence_branch: v2-h0004-preaccess-evaluator
+  record: research/decision_records/H0004-preaccess-evaluator-v1.yaml
+  note: Exact16-slot adapter, synthetic tests and independent pre-access PASS complete;
+    real outcomes/endpoint probes0.
+- id: H0004_DISCOVERY_EFFICACY_EXECUTION
   priority: P0
-  status: READY_FOR_PREACCESS_ADAPTER_IMPLEMENTATION_AND_SEAL
+  status: READY_FOR_BOUNDED_DISCOVERY_EXPLORATORY_EXECUTION
   blocks_phase_exit_criteria:
   - 3
-  evidence_branch: v2-h0004-segment-freeze-preregistration
-  record: research/decision_records/H0004-segment-remediation-v2.yaml
-  note: Registered directional16-slot adapter must be tested/sealed before later exploratory
-    outcomes.
+  evidence_branch: v2-h0004-preaccess-evaluator
+  record: research/decision_records/H0004-preaccess-evaluator-v1.yaml
+  note: Separate first discovery outcome action only;48 frozen candidates, exact16-slot
+    labels, equal sessions; no confirmation access or CI.
 reopen_policy:
   frozen_decision_may_reopen_only_if:
   - A causal/data-integrity defect invalidates it.
@@ -572,9 +589,9 @@ frozen_semantic_interpretation_audit:
   negative_receipt_explicitly_frozen: false
   strategy_decisions_changed: false
   completeness_capture_is_causal_feature: false
-schema_revision: H0004 final same-segment trial2 frozen/preregistered48/29; trials1+2
-  preserved/outcomes0. Owner decision complete; one P0 H0004_FIRST_EFFICACY pre-access
-  adapter. Prior H0001~3 unchanged.
+schema_revision: H0004 pre-access exact16-slot adapter sealed/independent PASS, outcomes0;48/29
+  denominator and trials2 preserved. Single next P0 bounded discovery execution; confirmations
+  asynchronous.
 long_history_access_routing:
   status: SELECTED70_DISCOVERY_PASS_ZERO_SIGNAL_H0001_ASYNC
   evidence_branch: v2-h0001-alpaca-70-session-discovery

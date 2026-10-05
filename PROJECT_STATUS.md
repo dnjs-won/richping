@@ -1,3 +1,11 @@
+# Richping PM - H0004 pre-access evaluator complete
+
+Workstream `v2-h0004-preaccess-evaluator` / `31d6e97d3c8a5550badaecd379916d0168688560`, code not merged into main. Exact scheduled16-slot directional labels and session-balanced full-denominator aggregation implemented, synthetic-tested, source/binding-sealed and independently verified. Real H0004 forward-price/discovery/confirmation/return/efficacy/profitability access0; real candidate endpoint readiness NOT_PROBED. Frozen48 candidates/29 sessions and trials2 unchanged. Prior H0001~3 and H0004 pooled/segment/freeze/protocol evidence protected. Missing/unsupported/outside-scope/unit ambiguity retained, no adjusted fallback/extra capture. Confirmation PENDING/ASYNCHRONOUS; future interval admission and terminal seal still required.
+
+NEXT_ACTION **H0004_DISCOVERY_EFFICACY_EXECUTION / READY_FOR_BOUNDED_DISCOVERY_EXPLORATORY_EXECUTION**. This is a separate future action for first discovery labels; none executed here.
+
+Entries below are historical reports.
+
 # Richping PM - H0004 final segment signal frozen/preregistered
 
 Workstream `v2-h0004-segment-freeze-preregistration` / `f967fd38da00294342119142b7c6c764a583b20c`, code not merged into main. Owner replaced pooled reference with exactly prior10 completed official sessions of current bar segment, current session excluded. SOXX normalized16-bar range,20%, strict completed close, frozen boundaries, one candidate, inclusive16-slot validity unchanged; cross-closure scheduled slots explicit. Trial2 READY3840, compressed925,101 ranges,48 candidates/29 sessions; segment rates24.62%/24.42%/22.81%, candidates19/20/9. Trial1 immutable39/26. Totaltrials2; no third variant. Final signal owner-approved/frozen; primary16-slot gross directional protocol registered, outcomes0/profitability NOT_ESTIMATED. 252-session future confirmation2026-10-19..2027-10-19 remains async PENDING, no access. H0001~3 unchanged. Targeted/full pass; all646 prior files protected.
