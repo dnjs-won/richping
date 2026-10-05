@@ -1,0 +1,14 @@
+{
+  "confirmation_outcome_access": 0,
+  "failure": {
+    "mode": "verify",
+    "reason": "Execution gate changed",
+    "status": "INVALID_FAIL_CLOSED"
+  },
+  "original_frozen_files_changed": false,
+  "real_discovery_price_reads": 0,
+  "reason": "Two legacy Git text YAML records archived LF while pre-outcome raw hashes bind existing CRLF; all other gate fields equal.",
+  "research_commit": "011917b500fa",
+  "schema": "h0004_clean_archive_attempt_v1",
+  "status": "INVALID_FAIL_CLOSED_ARCHIVE_TRANSPORT_ONLY"
+}

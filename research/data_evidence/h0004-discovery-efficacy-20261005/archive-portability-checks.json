@@ -1,0 +1,10 @@
+{
+  "LF_to_sealed_CRLF_exact_hash": true,
+  "already_sealed_bytes_unchanged": true,
+  "content_mismatch_rejected": true,
+  "helper_sha256": "5d5289fd942e5cd4e55bda53ae6a9ae5ef60a39eb7c5d153236e2fb58c856f66",
+  "original_frozen_files_changed": false,
+  "regression_receipt": "Full1839/targeted152 tests already passing on identical evaluator/execution/test sources; only isolated archive transport helper changed.",
+  "runtime_evaluator_and_test_sources_unchanged": true,
+  "schema": "h0004_archive_transport_checks_v1"
+}
