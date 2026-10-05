@@ -15,8 +15,8 @@ source_of_truth:
     branch: main
     path: PROJECT_STATUS.md
   active_workstream_status:
-    branch: v2-h0004-compression-frequency
-    path: docs/H0004_FREQUENCY_RESULTS.md
+    branch: v2-h0004-segment-freeze-preregistration
+    path: docs/H0004_SEGMENT_FREQUENCY_RESULTS.md
   decision_index:
     branch: main
     path: project/DECISION_INDEX.yaml
@@ -30,20 +30,21 @@ control_plane:
   branch: main
   rule: PM state lives on main so new sessions can recover it from the default branch.
 active_workstream:
-  branch: v2-h0004-compression-frequency
-  base_branch: v2-h0003-first-efficacy
-  base_commit: 74b67518f544bfdcfd2b45c07198f605291992a5
-  implementation_commit: 7488fa0941b9ec68c96a163a7694b31d5ab718d3
+  branch: v2-h0004-segment-freeze-preregistration
+  base_branch: v2-h0004-compression-frequency
+  base_commit: 9560d57d4c049324727cdd9dde5c124d05b7c2d6
+  implementation_commit: f967fd38da00294342119142b7c6c764a583b20c
   status: DIVERGED_FROM_MAIN
   observed_relation_to_main:
-    ahead_by: 54
-    behind_by: 27
-    main_commit: f56d941e5215e480d72ce9ca005346898050db30
-  note: H0004 pure compression frequency39/26, outcome0. Owner final freeze/preregistration
-    pending; prior frozen tracks unchanged.
+    ahead_by: 57
+    behind_by: 28
+    main_commit: 9682087a1da78d6130aeebcf9dd24e4490a9e662
+  note: Owner corrected time-of-day reference; trial2 final signal frozen/preregistered,48/29,
+    trials2/outcomes0. Prior tracks and trial1 immutable; next H0004 pre-access directional
+    adapter.
 current_phase:
   id: INDEPENDENT_STRATEGY_RESEARCH_CYCLE
-  status: H0004_CAUSAL_FREQUENCY_COMPLETE_OWNER_FREEZE_REQUIRED
+  status: H0004_FINAL_SIGNAL_FROZEN_PREREGISTERED_FIRST_EFFICACY_PENDING
   objective: Repeat independent hypothesis generation, causal discovery, preregistration,
     confirmation and evidence disposition.
   exit_criteria:
@@ -57,9 +58,9 @@ current_phase:
     next_available_hypothesis: H0005
     active_hypothesis: H0004
     strategy_meaning: COMPLETE_OWNER_THESIS_SELECTION
-    causal_frequency: IMPLEMENTED_EXECUTED_REAL_DATA_EVIDENCE_PRODUCED
-    signal_freeze: USER_DECISION_REQUIRED
-    efficacy_preregistration: NOT_STARTED
+    causal_frequency: TRIAL2_IMPLEMENTED_EXECUTED_REAL_EVIDENCE
+    signal_freeze: FROZEN_OWNER_APPROVED_SEGMENT_CONDITIONED
+    efficacy_preregistration: FROZEN_BEFORE_OUTCOMES
     outcome_evaluation: NOT_RUN_H0004
     H0001_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
     H0002_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
@@ -67,8 +68,8 @@ current_phase:
     H0003_discovery_disposition: DISCOVERY_POSITIVE_RELATIVE_DIRECTION
     satisfied_exit_criteria:
     - 1
-    remaining_exit_criteria:
     - 2
+    remaining_exit_criteria:
     - 3
 completed_actions:
 - id: V2_REAL_INTRADAY_DATA_FOUNDATION
@@ -725,24 +726,52 @@ completed_actions:
     outcomes_zero: true
     prior_evidence_unchanged: true
     targeted_full_pass: true
+- id: H0004_SEGMENT_REMEDIATION_SIGNAL_FREEZE_PREREGISTRATION
+  status: COMPLETE
+  completed_at: '2026-10-05'
+  branch: v2-h0004-segment-freeze-preregistration
+  commit: f967fd38da00294342119142b7c6c764a583b20c
+  record: research/decision_records/H0004-segment-remediation-v2.yaml
+  freeze: research/decision_records/H0004-signal-freeze-v1.json
+  preregistration: research/decision_records/H0004-efficacy-preregistration-v1.yaml
+  frequency: research/data_evidence/h0004-segment-frequency-20261005/frequency-audit.json
+  tests:
+  - path: tests-targeted.xml
+    sha256: b99777f5d6fedd18bb1f35bad007186285ec587f1c1b4255ce829137f0da114d
+    tests: 80
+    failures: 0
+    errors: 0
+    skipped: 0
+  - path: tests-full.xml
+    sha256: 031b42bfc308f40979a5a50abc9e7bdb2d320d3ce9ae84d2a326f945d71ad2e4
+    tests: 1767
+    failures: 0
+    errors: 0
+    skipped: 0
+  signal_trials: 2
+  candidate_events: 48
+  candidate_sessions: 29
+  outcome_access: 0
+  prior_tracks_and_trial1_preserved: true
+  implementation_state: FINAL_SIGNAL_FROZEN_PROTOCOL_REGISTERED_EVIDENCE_PRODUCED_NOT_MAIN_CODE_INTEGRATED
 next_action:
-  id: H0004_SIGNAL_FREEZE_PREREGISTRATION
+  id: H0004_FIRST_EFFICACY
   priority: P0
-  status: USER_DECISION_REQUIRED
+  status: READY_FOR_PREACCESS_ADAPTER_IMPLEMENTATION_AND_SEAL
   hypothesis_id: H0004
   blocks_phase_exit_criteria:
-  - 2
-  evidence_branch: v2-h0004-compression-frequency
-  record: research/decision_records/H0004-hypothesis-frequency-v1.yaml
-  evidence: research/data_evidence/h0004-frequency-20261005/verification-v2/frequency-audit.json
-  objective: Owner approves final compression/breakout/episode/session semantics;
-    then preregister evaluation before outcomes.
-  owner_decision: Approve range/own-history percentile16/640/20%, window-only persistence,
-    frozen boundaries, strict close, rearm, inclusive16-slot expiry, downside cancellation
-    and pooled extended cross-session semantics.
+  - 3
+  evidence_branch: v2-h0004-segment-freeze-preregistration
+  record: research/decision_records/H0004-segment-remediation-v2.yaml
+  objective: Implement, test and seal registered16-slot directional outcome adapter;
+    only a later bounded exploratory action may execute discovery outcomes.
+  why_now: Owner semantic decision complete; causal trial2 nonzero and final signal/protocol
+    frozen without outcomes.
   constraints:
-  - No H0004 outcomes before final freeze and efficacy preregistration.
-  - No changes to prior frozen tracks/evidence or outcome-based threshold tuning.
+  - No third pre-outcome signal variant or post-outcome definition/threshold/window
+    tuning.
+  - Adapter binding/source/tests must be sealed before first outcome access.
+  - Preserve trial1/H0001~3 and all immutable evidence; confirmations asynchronous.
 pm_policy:
   single_next_action: true
   discovered_non_blockers_go_to_backlog: true
@@ -1221,30 +1250,84 @@ hypothesis_tracks:
     report_hash: ff12bd9d80ee4f0744dea3c4e94cacc726d2b65b03d0970aab76680aa3c7003e
   H0004:
     status:
-    - THESIS_SELECTED
-    - PROVISIONAL_SIGNAL
-    - FREQUENCY_EXECUTED
-    - OWNER_FREEZE_PENDING
+    - FROZEN
+    - PREREGISTERED
+    - AWAITING_FIRST_DISCOVERY
+    - AWAITING_FUTURE_CONFIRMATION
     family: VOLATILITY_COMPRESSION_BREAKOUT_CONTINUATION
     direction: LONG
-    branch: v2-h0004-compression-frequency
-    commit: 7488fa0941b9ec68c96a163a7694b31d5ab718d3
+    branch: v2-h0004-segment-freeze-preregistration
+    commit: f967fd38da00294342119142b7c6c764a583b20c
     hypothesis: research/hypotheses/H0004-r01.yaml
-    spec: research/strategy_specs/H0004-r01-candidate.yaml
-    record: research/decision_records/H0004-hypothesis-frequency-v1.yaml
-    frequency_evidence: research/data_evidence/h0004-frequency-20261005/verification-v2/frequency-audit.json
-    verification: research/data_evidence/h0004-frequency-20261005/verification-v2/verification.json
-    candidate_events: 39
-    candidate_sessions: 26
-    parameter_trials: 1
+    spec: research/strategy_specs/H0004-r01-frozen-v1.yaml
+    record: research/decision_records/H0004-signal-freeze-v1.json
+    frequency_evidence: research/data_evidence/h0004-segment-frequency-20261005/frequency-audit.json
+    verification: research/data_evidence/h0004-freeze-preregistration-20261005/verification.json
+    candidate_events: 48
+    candidate_sessions: 29
+    parameter_trials: 2
     comparators: 0
     outcome_access: 0
-    spec_hash: c8497d0220220a1308407cdf6cbef800da47975aca20d5cf587d5005c853b1b7
-    candidate_stream_hash: a376f4d037988d01a031ee37364169170bc58800f31281756ccccf6893329bd9
-    signal_freeze: USER_DECISION_REQUIRED
-    efficacy_preregistration: NOT_STARTED
+    spec_hash: 0a4ebc7f1b793380cea11df0604e7faeee06679b2c56d3024b886aab56ef82e2
+    candidate_stream_hash: 8e64aecd6fa26261bf5735126f3615427427bbe5ae34b0d242b8d14dd513d14d
+    signal_freeze: FROZEN_OWNER_APPROVED
+    efficacy_preregistration: FROZEN_BEFORE_OUTCOMES
     outcome_evaluation: NOT_RUN
     confirmation_is_project_blocker: false
+    candidate_spec: research/strategy_specs/H0004-r01-candidate-segment-v2.yaml
+    remediation_record: research/decision_records/H0004-segment-remediation-v2.yaml
+    preregistration: research/decision_records/H0004-efficacy-preregistration-v1.yaml
+    selected_trial: TRIAL_2_SEGMENT_CONDITIONED_REFERENCE
+    signal_trials: 2
+    protocol_hash: 09e8202e4edd3a06c3b7907d7aafa70c93c05155d5f1d902c5d07798540d8d1f
+    signal_freeze_sha256: f4226caf0d6a0bd825347a06ee4be26307e7eda551ed560e9538cc38dd932de8
+    spec_sha256: 97cd08b88c2ef82224d3b353ada2b364d36981b47917f7f7ca8b81e0d4ec44b8
+    primary_horizon_slots: 16
+    primary_estimand: Session-balanced SOXX gross16-slot directional price return;
+      not timing Alpha/profitability
+    efficacy_calculations: 0
+    profitability: NOT_ESTIMATED
+    confirmation_outcome_access: 0
+    confirmation:
+      status: PENDING
+      start: '2026-10-19'
+      end: '2027-10-19'
+      sessions: 252
+      followup_end: '2027-10-20'
+      receipt_deadline: '2027-10-21T20:00:00-04:00'
+      asynchronous: true
+    evaluation_adapter: METADATA_GATES_ONLY; NONEMPTY_LABEL_AND_TERMINAL_ADAPTER_NOT_IMPLEMENTED_NOT_EXECUTED
+    trial1:
+      identity: TRIAL_1_POOLED_SEGMENT_REFERENCE
+      immutable_prior_track:
+        status:
+        - THESIS_SELECTED
+        - PROVISIONAL_SIGNAL
+        - FREQUENCY_EXECUTED
+        - OWNER_FREEZE_PENDING
+        family: VOLATILITY_COMPRESSION_BREAKOUT_CONTINUATION
+        direction: LONG
+        branch: v2-h0004-compression-frequency
+        commit: 7488fa0941b9ec68c96a163a7694b31d5ab718d3
+        hypothesis: research/hypotheses/H0004-r01.yaml
+        spec: research/strategy_specs/H0004-r01-candidate.yaml
+        record: research/decision_records/H0004-hypothesis-frequency-v1.yaml
+        frequency_evidence: research/data_evidence/h0004-frequency-20261005/verification-v2/frequency-audit.json
+        verification: research/data_evidence/h0004-frequency-20261005/verification-v2/verification.json
+        candidate_events: 39
+        candidate_sessions: 26
+        parameter_trials: 1
+        comparators: 0
+        outcome_access: 0
+        spec_hash: c8497d0220220a1308407cdf6cbef800da47975aca20d5cf587d5005c853b1b7
+        candidate_stream_hash: a376f4d037988d01a031ee37364169170bc58800f31281756ccccf6893329bd9
+        signal_freeze: USER_DECISION_REQUIRED
+        efficacy_preregistration: NOT_STARTED
+        outcome_evaluation: NOT_RUN
+        confirmation_is_project_blocker: false
+      candidate_events: 39
+      candidate_sessions: 26
+      outcome_access: 0
 active_research_track: H0004
 research_cycle_history:
 - hypothesis: H0002

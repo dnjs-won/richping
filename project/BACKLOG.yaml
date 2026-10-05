@@ -29,11 +29,11 @@ items:
 
     '
   guardrail: Do not merge blindly; preserve the newer main R1 paper changes.
-  active_branch: v2-h0004-compression-frequency
+  active_branch: v2-h0004-segment-freeze-preregistration
   observed_relation_to_main:
-    ahead_by: 54
-    behind_by: 27
-    main_commit: f56d941e5215e480d72ce9ca005346898050db30
+    ahead_by: 57
+    behind_by: 28
+    main_commit: 9682087a1da78d6130aeebcf9dd24e4490a9e662
 - id: H0001_MINIMAL_15M_ENTRY_FREEZE
   priority: P1
   status: COMPLETE_FROZEN_AND_OFFLINE_MECHANICALLY_EXERCISED
@@ -436,16 +436,33 @@ items:
   summary: Pure compression/breakout,39 candidates/26 sessions, outcomes0.
   record: research/decision_records/H0004-hypothesis-frequency-v1.yaml
 - id: H0004_SIGNAL_FREEZE_PREREGISTRATION
-  priority: P0
-  status: USER_DECISION_REQUIRED
-  blocks_phase_exit_criteria:
-  - 2
-  evidence_branch: v2-h0004-compression-frequency
-  record: research/decision_records/H0004-hypothesis-frequency-v1.yaml
-  summary: Approve complete provisional tuple and episode/session semantics; then
-    preregister without outcomes.
+  priority: COMPLETE
+  status: COMPLETE_OWNER_SEGMENT_CORRECTION_FROZEN_PREREGISTERED
+  blocks_phase_exit_criteria: []
+  evidence_branch: v2-h0004-segment-freeze-preregistration
+  record: research/decision_records/H0004-segment-remediation-v2.yaml
+  summary: Trial2 same-segment prior10 sessions48/29; final signal/protocol frozen,
+    outcome0.
 - id: H0004_OPTIONAL_VARIANTS
   priority: DEFERRED
-  status: NOT_AUTHORIZED_NOT_RUN
-  summary: ATR, segment conditioning, buffer/retest, RTH, extra persistence or thresholds
-    require separate semantic revision; no grid.
+  status: DEFERRED_NO_THIRD_PRE_OUTCOME_VARIANT
+  summary: Segment reference resolved by owner trial2. No further threshold/window/ATR/buffer/retest/RTH
+    variant absent genuine blocker.
+- id: H0004_FIRST_EFFICACY
+  priority: P0
+  status: READY_FOR_PREACCESS_ADAPTER_IMPLEMENTATION_AND_SEAL
+  blocks_phase_exit_criteria:
+  - 3
+  evidence_branch: v2-h0004-segment-freeze-preregistration
+  record: research/decision_records/H0004-segment-remediation-v2.yaml
+  summary: Implement/test/seal absolute directional16-slot outcome adapter before
+    later discovery execution; confirmation remains PENDING.
+- id: H0004_FUTURE_CONFIRMATION
+  priority: P1
+  status: ASYNC_PENDING_FIXED252_WINDOW
+  evidence_branch: v2-h0004-segment-freeze-preregistration
+  record: research/decision_records/H0004-efficacy-preregistration-v1.yaml
+  outcome_access: 0
+  project_blocker: false
+  summary: New interval-specific admission and eventual terminal adapter required;
+    no interim outcomes/count extension.

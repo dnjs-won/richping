@@ -1,3 +1,11 @@
+# Richping PM - H0004 final segment signal frozen/preregistered
+
+Workstream `v2-h0004-segment-freeze-preregistration` / `f967fd38da00294342119142b7c6c764a583b20c`, code not merged into main. Owner replaced pooled reference with exactly prior10 completed official sessions of current bar segment, current session excluded. SOXX normalized16-bar range,20%, strict completed close, frozen boundaries, one candidate, inclusive16-slot validity unchanged; cross-closure scheduled slots explicit. Trial2 READY3840, compressed925,101 ranges,48 candidates/29 sessions; segment rates24.62%/24.42%/22.81%, candidates19/20/9. Trial1 immutable39/26. Totaltrials2; no third variant. Final signal owner-approved/frozen; primary16-slot gross directional protocol registered, outcomes0/profitability NOT_ESTIMATED. 252-session future confirmation2026-10-19..2027-10-19 remains async PENDING, no access. H0001~3 unchanged. Targeted/full pass; all646 prior files protected.
+
+NEXT_ACTION **H0004_FIRST_EFFICACY / READY_FOR_PREACCESS_ADAPTER_IMPLEMENTATION_AND_SEAL**. Test and seal directional adapter before later exploratory outcome action. Owner freeze decision complete.
+
+Entries below are historical reports.
+
 # Richping PM - H0004 compression frequency; owner freeze pending
 
 Workstream `v2-h0004-compression-frequency` / `7488fa0941b9ec68c96a163a7694b31d5ab718d3`, not code-merged into main. OHLC/time-only SOXX16-bar normalized range, previous640 bottom20%, frozen range, strict upside close, next16 slots inclusive. Admitted sealed70 reused:4480 eligible,3825 READY,875 compressed,83 ranges,39 candidates/26 sessions. 39 consumed+33 downside-cancelled+10 expired+1 pending. Trials1/comparators0/outcomes0. Targeted/full regression passed; initial preservation fixture overwrite restored and corrected Git-BASE seal supersedes initial audit claim; all prior598 files preserved. H0001~3 frozen and asynchronous confirmations unchanged.
