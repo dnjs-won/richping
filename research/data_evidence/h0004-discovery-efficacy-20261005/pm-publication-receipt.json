@@ -1,0 +1,66 @@
+{
+  "H0004_status": [
+    "FROZEN",
+    "PREREGISTERED",
+    "EXPLORATORY_DISCOVERY_EVALUATED",
+    "AWAITING_FUTURE_CONFIRMATION"
+  ],
+  "active_P0": {
+    "blocks_phase_exit_criteria": [
+      1
+    ],
+    "constraints": [
+      "Preserve H0001~H0004 frozen hypotheses and asynchronous confirmation; no interim outcomes.",
+      "No H0004 parameter/session/horizon or segment tuning; discovery direction does not control routing.",
+      "H0005 selection is not completed by this routing action.",
+      "Cross-instrument validation policy remains a separate future project action; no external capture here."
+    ],
+    "hypothesis_id": "H0005",
+    "id": "INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION",
+    "objective": "Select one independent H0005 falsifiable market mechanism and causal inputs; record prior exposure before implementation.",
+    "priority": "P0",
+    "status": "USER_DECISION_REQUIRED"
+  },
+  "canonical_main_commit": "1789f7be7e3bbea298fb8984d2a9d5a072e14000",
+  "confirmation_outcome_access": 0,
+  "implementation_commit": "9ad3546d6d0d273fa916d63da43d00a6a33131ad",
+  "post_routing_discovery_permit": "BLOCKED_WITH_ZERO_PRICE_READS",
+  "post_routing_metadata_audit": {
+    "real_H0004": {
+      "confirmation_label_reads": 0,
+      "discovery_label_reads": 0,
+      "efficacy_aggregations": 0,
+      "forward_price_queries": 0,
+      "profitability_calculations": 0,
+      "real_dataset_loads": 0,
+      "real_endpoint_readiness_probes": 0,
+      "return_calculations": 0
+    },
+    "shared_forbidden": {
+      "metadata": {
+        "database": 0,
+        "price_load": 0,
+        "signal_replay": 0
+      },
+      "outcomes": {
+        "MFE_MAE": 0,
+        "confirmation_outcomes": 0,
+        "efficacy_statistics": 0,
+        "forward_module_imports": 0,
+        "forward_window_queries": 0,
+        "future_return_queries": 0,
+        "market_queries": 0,
+        "network_calls": 0,
+        "outcome_accessors": 0,
+        "profitability_calculations": 0,
+        "return_calculations": 0,
+        "store_access": 0
+      }
+    }
+  },
+  "prior_frozen_manifest_reverified": true,
+  "profitability": "NOT_ESTIMATED",
+  "published_research_commit": "07df11de2f9241ed94a461c853b278ebbdc0738f",
+  "push": "ATOMIC_SUCCESS_RESEARCH_AND_MAIN",
+  "schema": "h0004_discovery_pm_publication_receipt_v1"
+}
