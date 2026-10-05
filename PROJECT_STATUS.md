@@ -1,3 +1,11 @@
+# Richping PM - H0004 first discovery execution complete
+
+Workstream `v2-h0004-discovery-efficacy` / `9ad3546d6d0d273fa916d63da43d00a6a33131ad`, code not merged into main. Frozen48 candidates/29 sessions, trials2. Complete48/unresolved0. Disposition DISCOVERY_POSITIVE_DIRECTION; exploratory descriptive only, uncertainty NOT_CONFIRMATORY; profitability NOT_ESTIMATED. Two independent processes produce identical labels/paths/reports. All prior frozen sources/evidence and H0001~3 tracks preserved; H0004 signal/protocol unchanged. Confirmation outcome access0; fixed252 sessions2026-10-19..2027-10-19, terminal after2027-10-21 20:00ET remains PENDING/ASYNCHRONOUS.
+
+NEXT_ACTION **INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION / H0005 / USER_DECISION_REQUIRED**. Owner independent thesis selection is next; H0005 not implemented. Cross-instrument policy P2 backlog only; no external instrument or tuning in this action.
+
+Entries below are historical reports.
+
 # Richping PM - H0004 pre-access evaluator complete
 
 Workstream `v2-h0004-preaccess-evaluator` / `31d6e97d3c8a5550badaecd379916d0168688560`, code not merged into main. Exact scheduled16-slot directional labels and session-balanced full-denominator aggregation implemented, synthetic-tested, source/binding-sealed and independently verified. Real H0004 forward-price/discovery/confirmation/return/efficacy/profitability access0; real candidate endpoint readiness NOT_PROBED. Frozen48 candidates/29 sessions and trials2 unchanged. Prior H0001~3 and H0004 pooled/segment/freeze/protocol evidence protected. Missing/unsupported/outside-scope/unit ambiguity retained, no adjusted fallback/extra capture. Confirmation PENDING/ASYNCHRONOUS; future interval admission and terminal seal still required.

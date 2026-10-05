@@ -29,11 +29,11 @@ items:
 
     '
   guardrail: Do not merge blindly; preserve the newer main R1 paper changes.
-  active_branch: v2-h0004-preaccess-evaluator
+  active_branch: v2-h0004-discovery-efficacy
   observed_relation_to_main:
-    ahead_by: 60
-    behind_by: 29
-    main_commit: b8d64d60da58f486b19ca171f4cd7c41b663844c
+    ahead_by: 64
+    behind_by: 30
+    main_commit: e13977a26a636af1c31e63c142c00c59ae65d719
 - id: H0001_MINIMAL_15M_ENTRY_FREEZE
   priority: P1
   status: COMPLETE_FROZEN_AND_OFFLINE_MECHANICALLY_EXERCISED
@@ -466,11 +466,28 @@ items:
   summary: New interval-specific admission and eventual terminal adapter required;
     no interim outcomes/count extension.
 - id: H0004_DISCOVERY_EFFICACY_EXECUTION
+  priority: COMPLETE
+  status: COMPLETE_VALID_EXPLORATORY_DISCOVERY
+  blocks_phase_exit_criteria: []
+  evidence_branch: v2-h0004-discovery-efficacy
+  record: research/decision_records/H0004-discovery-efficacy-v1.yaml
+  summary: Frozen exact16-slot discovery executed twice; full48 denominator preserved,
+    no CI/tuning/confirmation/profitability.
+- id: H0005_INDEPENDENT_HYPOTHESIS_SELECTION
+  action_id: INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION
   priority: P0
-  status: READY_FOR_BOUNDED_DISCOVERY_EXPLORATORY_EXECUTION
+  status: USER_DECISION_REQUIRED
   blocks_phase_exit_criteria:
-  - 3
-  evidence_branch: v2-h0004-preaccess-evaluator
-  record: research/decision_records/H0004-preaccess-evaluator-v1.yaml
-  summary: First sealed70 discovery labels and session-balanced directional summary;48
-    full denominator, no extra capture or confirmation values.
+  - 1
+  summary: Choose independent H0005 thesis; no signal or implementation yet.
+- id: CROSS_INSTRUMENT_VALIDATION_POLICY
+  priority: P2
+  status: OPEN_FUTURE_PROJECT_ACTION
+  blocks_phase_exit_criteria: []
+  after: H0005 independent thesis selection or separate project-level research action
+  summary: Define untouched external-instrument validation of frozen signals on SMH/QQQ/SPY
+    without condition changes; record prior exposure and multiplicity.
+  constraints: No external instrument added/captured/evaluated in H0004 discovery;
+    no outcome-driven external parameters. QQQ already exposed in H0003 is not certified
+    untouched by naming it.
+  implementation: NOT_IMPLEMENTED_NOT_EXECUTED
