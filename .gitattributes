@@ -31,3 +31,7 @@ research/decision_records/H0003-signal-freeze-v1.json -text
 research/decision_records/H0003-efficacy-preregistration-v1.yaml -text
 richping/research_v2/strategy/h0003_experiment.py -text
 docs/H0003_SIGNAL_FREEZE_PREREGISTRATION.md -text
+richping/research_v2/strategy/h0003_efficacy.py -text
+docs/H0003_FIRST_EFFICACY.md -text
+research/decision_records/H0003-first-efficacy-v1.yaml -text
+docs/H0003_DISCOVERY_RESULTS.md -text

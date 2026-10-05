@@ -1,0 +1,137 @@
+schema: h0003_first_exploratory_disposition_v1
+hypothesis: H0003-r01
+status: FROZEN_EXPLORATORY_DISCOVERY_EVALUATED_AWAITING_FUTURE_CONFIRMATION
+disposition: DISCOVERY_POSITIVE_RELATIVE_DIRECTION
+evidence: research/data_evidence/h0003-first-efficacy-20261005/discovery-report.json
+report_hash: ff12bd9d80ee4f0744dea3c4e94cacc726d2b65b03d0970aab76680aa3c7003e
+protocol_hash: b221efe766c4536717fde663fdc32e22fac136660fdb0278000e3d44c9d91f46
+signal_freeze_hash: e08f98578ecbb3742ccd02bc2a09df205d9b2a45146082051a68955b5262e39e
+event_stream_hash: e08d529b7d6aa32eacc6091d131a789ecef37312418f7423c79da9f55742f0c5
+candidate_events: 35
+candidate_sessions: 29
+primary_horizon: 16
+primary_estimand: Session-balanced SOXX forward raw price return minus paired QQQ
+  return
+metrics:
+  '16':
+    QQQ:
+      event_median_resolved: -0.0004848967266979365
+      full_cohort_session_balanced_mean: -0.0010799295897814714
+      positive_count: 15
+      positive_rate_resolved: 0.42857142857142855
+      resolved_denominator: 35
+      session_balanced_mean_resolved: -0.0010799295897814714
+    SOXX:
+      event_median_resolved: -0.0009000000000000119
+      full_cohort_session_balanced_mean: -0.0009616903235941244
+      positive_count: 16
+      positive_rate_resolved: 0.45714285714285713
+      resolved_denominator: 35
+      session_balanced_mean_resolved: -0.0009616903235941244
+    bootstrap_interval: null
+    candidate_sessions: 29
+    complete: 35
+    complete_sessions: 29
+    estimate_scope: FULL_COHORT
+    events: 35
+    excess:
+      event_median_resolved: -5.942028985506109e-05
+      full_cohort_session_balanced_mean: 0.00011823926618734694
+      positive_count: 17
+      positive_rate_resolved: 0.4857142857142857
+      resolved_denominator: 35
+      session_balanced_mean_resolved: 0.00011823926618734694
+    p_value: null
+    uncertainty_status: DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED
+    unresolved: 0
+    unresolved_reasons: {}
+  '4':
+    QQQ:
+      event_median_resolved: -0.0006427453610551304
+      full_cohort_session_balanced_mean: -0.00040104197092940435
+      positive_count: 17
+      positive_rate_resolved: 0.4857142857142857
+      resolved_denominator: 35
+      session_balanced_mean_resolved: -0.00040104197092940435
+    SOXX:
+      event_median_resolved: -0.0006443990978413083
+      full_cohort_session_balanced_mean: -0.000278596850230538
+      positive_count: 15
+      positive_rate_resolved: 0.42857142857142855
+      resolved_denominator: 35
+      session_balanced_mean_resolved: -0.000278596850230538
+    bootstrap_interval: null
+    candidate_sessions: 29
+    complete: 35
+    complete_sessions: 29
+    estimate_scope: FULL_COHORT
+    events: 35
+    excess:
+      event_median_resolved: -0.00029478829361595515
+      full_cohort_session_balanced_mean: 0.00012244512069886637
+      positive_count: 15
+      positive_rate_resolved: 0.42857142857142855
+      resolved_denominator: 35
+      session_balanced_mean_resolved: 0.00012244512069886637
+    p_value: null
+    uncertainty_status: DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED
+    unresolved: 0
+    unresolved_reasons: {}
+  '64':
+    QQQ:
+      event_median_resolved: 0.0052361739712080135
+      full_cohort_session_balanced_mean: null
+      positive_count: 24
+      positive_rate_resolved: 0.7058823529411765
+      resolved_denominator: 34
+      session_balanced_mean_resolved: 0.003762003501232853
+    SOXX:
+      event_median_resolved: 0.00870828728842754
+      full_cohort_session_balanced_mean: null
+      positive_count: 20
+      positive_rate_resolved: 0.5882352941176471
+      resolved_denominator: 34
+      session_balanced_mean_resolved: 0.009555049069744508
+    bootstrap_interval: null
+    candidate_sessions: 29
+    complete: 34
+    complete_sessions: 28
+    estimate_scope: RESOLVED_SUBSET_ONLY_FULL_COHORT_UNKNOWN
+    events: 35
+    excess:
+      event_median_resolved: 0.0029354598543362975
+      full_cohort_session_balanced_mean: null
+      positive_count: 19
+      positive_rate_resolved: 0.5588235294117647
+      resolved_denominator: 34
+      session_balanced_mean_resolved: 0.005793045568511655
+    p_value: null
+    uncertainty_status: DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED
+    unresolved: 1
+    unresolved_reasons:
+      outside_admitted_discovery_scope: 1
+uncertainty_status: DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED
+discovery_outcome_access: AUTHORIZED_EXECUTED_SEALED70_ONLY
+actual_executions: 2
+access_counts:
+  confirmation_label_requests: 0
+  confirmation_price_reads: 0
+  discovery_anchor_close_reads: 416
+  discovery_endpoint_close_reads: 416
+  discovery_label_requests: 210
+  discovery_path_lookup_requests: 11920
+  discovery_present_path_bar_reads: 11920
+  outside_scope_labels: 2
+  profitability_calculations: 0
+  uncertainty_calculations: 0
+confirmation_outcome_access: 0
+confirmation_status: PENDING_ASYNCHRONOUS
+profitability: NOT_ESTIMATED
+signal_semantics_changed: false
+no_confirmation_PASS_REJECT_alpha_or_promotion: true
+H0001_H0002_and_prior_H0003_source_evidence_preserved: true
+next_P0: INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION
+next_hypothesis: H0004
+interpretation: Primary relative point mean positive, median negative; mean SOXX and
+  QQQ absolute price returns negative. No CI or inferential conclusion.64-slot subset
+  descriptive only.

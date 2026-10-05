@@ -1,3 +1,21 @@
+# Richping V2 - H0003 first paired discovery efficacy
+
+**IMPLEMENTED / EXECUTED_ON_REAL_DISCOVERY / EVIDENCE_PRODUCED. FROZEN SIGNAL AND PROTOCOL UNCHANGED.**
+
+H0003 primary16-slot paired price labels:35 complete/0 unresolved across29 sessions. Session-balanced SOXX minus QQQ +0.011824 percentage points; event median excess -0.005942 points; positive17/35 (48.571%). Mean SOXX absolute return -0.096169%, QQQ -0.107993%; SOXX positive16/35. Two positive-relative events have negative SOXX returns. This is descriptive relative persistence evidence, not LONG profitability.
+
+4-slot descriptive:35 complete/0 unresolved, mean excess +0.012245 points, median -0.029479 points, positive15/35.64-slot descriptive:34 complete/1 unresolved across28 complete sessions, resolved-subset mean excess +0.579305 points, median +0.293546 points, positive19/34; full-cohort64 mean null. Last August13 candidate needs August14 endpoint outside sealed70-session scope; no extra capture. All35 events retained.
+
+DISCOVERY_POSITIVE_RELATIVE_DIRECTION describes the primary point mean only. Uncertainty DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED; no CI/p-value/PASS/REJECT/alpha proof/promotion. Profitability NOT_ESTIMATED. Known cash distributions separately disclosed, never reinvested or normalized. Original64-slot RS/four-positive-observation/own>=0/one-episode/rearm signal and relative16-slot protocol are unchanged.
+
+Two real discovery executions identical,210 total discovery label requests/416 endpoint close reads; confirmation access0, uncertainty/profitability calculations0. Adapter/source/test seal preceded first label access. Targeted178/full1687 passed, failures/errors/skips0;586 prior tracked files preserved. H0001/H0002 frozen source/evidence/protocols/confirmation windows unchanged. Evidence: research/data_evidence/h0003-first-efficacy-20261005/; results docs/H0003_DISCOVERY_RESULTS.md; disposition research/decision_records/H0003-first-efficacy-v1.yaml.
+
+H0003 remains FROZEN / AWAITING_FUTURE_CONFIRMATION,252 sessions2026-10-19..2027-10-19, terminal strictly after2027-10-21 20:00ET. No interim performance. Future paired admission/action-unit segment/terminal adapter remains separate asynchronous work, not completed infrastructure.
+
+NEXT_ACTION **INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION / H0004 / USER_DECISION_REQUIRED**. Owner chooses next independent market mechanism. H0003 discovery sign does not change routing; confirmation waits do not block research. Workstream v2-h0003-first-efficacy; code not merged to main.
+
+Entries below are preserved historical reports.
+
 # Richping V2 - H0003 frozen signal and preregistered relative efficacy
 
 **SIGNAL FROZEN / EVALUATION PREREGISTERED / OUTCOMES NOT_RUN.**

@@ -1,0 +1,22 @@
+{
+  "access_counts": {
+    "confirmation_label_requests": 0,
+    "confirmation_price_reads": 0,
+    "discovery_anchor_close_reads": 208,
+    "discovery_endpoint_close_reads": 208,
+    "discovery_label_requests": 105,
+    "discovery_path_lookup_requests": 5960,
+    "discovery_present_path_bar_reads": 5960,
+    "outside_scope_labels": 1,
+    "profitability_calculations": 0,
+    "uncertainty_calculations": 0
+  },
+  "confirmation_outcome_access": 0,
+  "execution": 2,
+  "report_hash": "ff12bd9d80ee4f0744dea3c4e94cacc726d2b65b03d0970aab76680aa3c7003e",
+  "result_hashes": {
+    "discovery-report.json": "7c1134c8c9161769ea7de56246c0218030df8929ecfd9232dd3bd44c498c2472",
+    "event-results.json": "54c4d2ec89a9f3dc05c02295131f632463d9fb01e9ab25f971d7259efa776a11",
+    "outcome-access-audit.json": "f77f137e7452f8787d423889c56f6757dab580bdd9ea1caedd91ae891cd43a76"
+  }
+}

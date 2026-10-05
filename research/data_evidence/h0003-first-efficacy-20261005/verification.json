@@ -1,0 +1,72 @@
+{
+  "actual_access_counts": {
+    "confirmation_label_requests": 0,
+    "confirmation_price_reads": 0,
+    "discovery_anchor_close_reads": 416,
+    "discovery_endpoint_close_reads": 416,
+    "discovery_label_requests": 210,
+    "discovery_path_lookup_requests": 11920,
+    "discovery_present_path_bar_reads": 11920,
+    "outside_scope_labels": 2,
+    "profitability_calculations": 0,
+    "uncertainty_calculations": 0
+  },
+  "actual_executions": 2,
+  "confirmation_outcome_access": 0,
+  "disposition": "DISCOVERY_POSITIVE_RELATIVE_DIRECTION",
+  "event_stream_hash": "e08d529b7d6aa32eacc6091d131a789ecef37312418f7423c79da9f55742f0c5",
+  "frozen_H0003_contracts_and_35_candidates_unchanged": true,
+  "metadata_verification_forbidden_calls": {
+    "confirmation_outcomes": 0,
+    "database": 0,
+    "efficacy_calculation": 0,
+    "efficacy_statistics": 0,
+    "forward_or_benchmark_window": 0,
+    "forward_window": 0,
+    "market_load": 0,
+    "market_query": 0,
+    "market_revalidation": 0,
+    "network": 0,
+    "operational_store": 0,
+    "outcome_accessor": 0,
+    "profitability_calculation": 0,
+    "return_calculation": 0,
+    "signal_replay": 0,
+    "store_accessor": 0,
+    "uncertainty_calculation": 0
+  },
+  "next_P0": "INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION",
+  "next_hypothesis": "H0004",
+  "preserved_files": 586,
+  "prior_source_evidence_and_H0001_H0002_tracks_preserved": true,
+  "profitability": "NOT_ESTIMATED",
+  "protocol_hash": "b221efe766c4536717fde663fdc32e22fac136660fdb0278000e3d44c9d91f46",
+  "repeat_verification_equal": true,
+  "report_hash": "ff12bd9d80ee4f0744dea3c4e94cacc726d2b65b03d0970aab76680aa3c7003e",
+  "result_hashes": {
+    "discovery-report.json": "7c1134c8c9161769ea7de56246c0218030df8929ecfd9232dd3bd44c498c2472",
+    "event-results.json": "54c4d2ec89a9f3dc05c02295131f632463d9fb01e9ab25f971d7259efa776a11",
+    "outcome-access-audit.json": "f77f137e7452f8787d423889c56f6757dab580bdd9ea1caedd91ae891cd43a76"
+  },
+  "schema": "h0003_first_efficacy_verification_v1",
+  "signal_freeze_hash": "e08f98578ecbb3742ccd02bc2a09df205d9b2a45146082051a68955b5262e39e",
+  "tests": [
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "research/data_evidence/h0003-first-efficacy-20261005/tests-targeted-v1.xml",
+      "sha256": "1edb40189b3cf90e5d9e3e13bd1662dab4cf841be91d1fd8c12454bf8f9a73d0",
+      "skipped": 0,
+      "tests": 178
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "research/data_evidence/h0003-first-efficacy-20261005/tests-full-v1.xml",
+      "sha256": "96accdb98949c338e911576647934dc342598ebfe2240a55c790ae5ddd8d5de4",
+      "skipped": 0,
+      "tests": 1687
+    }
+  ],
+  "verification_price_queries": 0
+}
