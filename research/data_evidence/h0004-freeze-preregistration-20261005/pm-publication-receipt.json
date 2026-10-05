@@ -1,0 +1,29 @@
+{
+  "canonical_main_commit": "b8d64d60da58f486b19ca171f4cd7c41b663844c",
+  "canonical_main_pushed": true,
+  "next_P0": "H0004_FIRST_EFFICACY",
+  "outcome_access": 0,
+  "preserved_files": 646,
+  "primary_horizon_slots": 16,
+  "research_evidence_commit": "f967fd38da00294342119142b7c6c764a583b20c",
+  "research_implementation_commit": "9d036ae3ca58f06a002253ef7465d6a2ded6c970",
+  "schema": "h0004_pm_publication_receipt_v1",
+  "tests": [
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "tests-targeted.xml",
+      "sha256": "b99777f5d6fedd18bb1f35bad007186285ec587f1c1b4255ce829137f0da114d",
+      "skipped": 0,
+      "tests": 80
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "tests-full.xml",
+      "sha256": "031b42bfc308f40979a5a50abc9e7bdb2d320d3ce9ae84d2a326f945d71ad2e4",
+      "skipped": 0,
+      "tests": 1767
+    }
+  ]
+}

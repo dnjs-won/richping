@@ -1,0 +1,19 @@
+{
+  "active_P0": "H0004_FIRST_EFFICACY",
+  "canonical_main_before": "9682087a1da78d6130aeebcf9dd24e4490a9e662",
+  "files_before": {
+    "PROJECT_CONTROL.yaml": "01f37690c6e89f1d917427ab2f60b19571c18cafca70083665790a9fbef915fb",
+    "project/BACKLOG.yaml": "2ecfd719da27ec025ddaddb8e8ff14bca95d4e09030d36c9b4fb8806c475b4ac",
+    "project/DECISION_INDEX.yaml": "3e2f4fab5fbd402bebcdd37aeefb7b7c790ce7e24520ce72fc66a26f6f981aa7",
+    "project/USER_IDEAS.yaml": "393909cf7d9b076fc6f9347264c548c4be89f5683b978a9c40a6d8e1b20c4a4c"
+  },
+  "final_signal_frozen": true,
+  "outcome_access": 0,
+  "owner_semantics_complete": true,
+  "preregistration_complete": true,
+  "prior_H0001_H0002_H0003_tracks_preserved": true,
+  "prior_canonical_sources_and_frozen_decisions_preserved": true,
+  "research_commit": "f967fd38da00294342119142b7c6c764a583b20c",
+  "schema": "h0004_segment_pm_update_proof_v1",
+  "trial1_retained_in_track_history": true
+}
