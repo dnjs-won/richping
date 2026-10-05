@@ -48,11 +48,13 @@ items:
   efficacy_record: research/decision_records/H0002-first-efficacy-v1.yaml
   efficacy_branch: v2-h0002-first-efficacy
 - id: USER-H0003-LEADERSHIP-001
-  status: FROZEN_PREREGISTERED_OUTCOMES_NOT_RUN
+  status: FROZEN_EXPLORATORY_DISCOVERY_EVALUATED_CONFIRMATION_ASYNC_PENDING
   priority: CURRENT_H0003
   idea: SOXX leadership versus QQQ may continue over a later short horizon; LONG-only
     independent continuation research.
   family: RELATIVE_STRENGTH_LEADERSHIP_CONTINUATION
-  evidence_branch: v2-h0003-signal-freeze-preregistration
+  evidence_branch: v2-h0003-first-efficacy
   record: research/decision_records/H0003-signal-freeze-v1.json
   preregistration: research/decision_records/H0003-efficacy-preregistration-v1.yaml
+  efficacy_record: research/decision_records/H0003-first-efficacy-v1.yaml
+  disposition: DISCOVERY_POSITIVE_RELATIVE_DIRECTION

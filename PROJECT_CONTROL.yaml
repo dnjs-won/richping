@@ -15,7 +15,7 @@ source_of_truth:
     branch: main
     path: PROJECT_STATUS.md
   active_workstream_status:
-    branch: v2-h0003-signal-freeze-preregistration
+    branch: v2-h0003-first-efficacy
     path: PROJECT_STATUS.md
   decision_index:
     branch: main
@@ -30,21 +30,21 @@ control_plane:
   branch: main
   rule: PM state lives on main so new sessions can recover it from the default branch.
 active_workstream:
-  branch: v2-h0003-signal-freeze-preregistration
-  base_branch: v2-h0003-relative-strength-frequency
-  base_commit: 934f8f8036dcf7bc073e779d33827154428b08b4
-  implementation_commit: f1dffa02884096ff6abeaa05d2b94deec5957e97
+  branch: v2-h0003-first-efficacy
+  base_branch: v2-h0003-signal-freeze-preregistration
+  base_commit: f1dffa02884096ff6abeaa05d2b94deec5957e97
+  implementation_commit: 74b67518f544bfdcfd2b45c07198f605291992a5
   status: DIVERGED_FROM_MAIN
   observed_relation_to_main:
-    ahead_by: 50
-    behind_by: 25
-    main_commit: c211fd2f71460d7b25c5ecfcca384a3b1ab1f9a8
-  note: Owner-approved signal frozen unchanged; relative16-slot evaluation fully preregistered.
-    H0003 outcomes0; paired-label/bootstrap execution still belongs to next separate
-    action.
+    ahead_by: 52
+    behind_by: 26
+    main_commit: 0e35dcde4f6419a6db813078d8b9ec3dfc7e26fc
+  note: H0003 paired first discovery executed and valid exploratory disposition recorded;
+    frozen definitions unchanged. H0004 owner thesis intake is active P0; all confirmations
+    asynchronous.
 current_phase:
   id: INDEPENDENT_STRATEGY_RESEARCH_CYCLE
-  status: H0003_PREREGISTERED_AWAITING_FIRST_EXPLORATORY_EFFICACY
+  status: AWAITING_H0004_OWNER_THESIS_SELECTION
   objective: Repeat independent hypothesis generation, causal discovery, preregistration,
     confirmation and evidence disposition.
   exit_criteria:
@@ -56,21 +56,21 @@ current_phase:
   progress:
     intake_infrastructure: IMPLEMENTED_TESTED
     next_available_hypothesis: H0004
-    strategy_meaning: COMPLETE_OWNER_THESIS_SELECTION
+    active_hypothesis: H0004
+    strategy_meaning: USER_DECISION_REQUIRED
+    causal_frequency: NOT_STARTED_H0004
+    signal_freeze: NOT_STARTED_H0004
+    efficacy_preregistration: NOT_STARTED_H0004
+    outcome_evaluation: NOT_RUN_H0004
     H0001_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
-    active_hypothesis: H0003
-    causal_frequency: IMPLEMENTED_EXECUTED_REAL_DATA_EVIDENCE_PRODUCED
-    signal_freeze: FROZEN_OWNER_APPROVED
-    outcome_evaluation: NOT_RUN_H0003
-    satisfied_exit_criteria:
+    H0002_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
+    H0003_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
+    H0003_discovery_disposition: DISCOVERY_POSITIVE_RELATIVE_DIRECTION
+    satisfied_exit_criteria: []
+    remaining_exit_criteria:
     - 1
     - 2
-    remaining_exit_criteria:
     - 3
-    efficacy_preregistration: COMPLETE_FROZEN_BEFORE_OUTCOMES
-    H0002_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
-    H0002_discovery_disposition: DISCOVERY_INSUFFICIENT_RESOLVED_LABELS
-    H0003_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
 completed_actions:
 - id: V2_REAL_INTRADAY_DATA_FOUNDATION
   status: COMPLETE
@@ -655,31 +655,62 @@ completed_actions:
   outcome_access: 0
   efficacy_calculations: 0
   profitability: NOT_ESTIMATED
+- id: H0003_FIRST_EFFICACY
+  status: COMPLETE_VALID_EXPLORATORY_DISCOVERY
+  completed_at: '2026-10-05'
+  branch: v2-h0003-first-efficacy
+  commit: 74b67518f544bfdcfd2b45c07198f605291992a5
+  record: research/decision_records/H0003-first-efficacy-v1.yaml
+  evidence: research/data_evidence/h0003-first-efficacy-20261005/discovery-report.json
+  verification: research/data_evidence/h0003-first-efficacy-20261005/verification.json
+  report_hash: ff12bd9d80ee4f0744dea3c4e94cacc726d2b65b03d0970aab76680aa3c7003e
+  tests:
+  - path: research/data_evidence/h0003-first-efficacy-20261005/tests-targeted-v1.xml
+    sha256: 1edb40189b3cf90e5d9e3e13bd1662dab4cf841be91d1fd8c12454bf8f9a73d0
+    tests: 178
+    failures: 0
+    errors: 0
+    skipped: 0
+  - path: research/data_evidence/h0003-first-efficacy-20261005/tests-full-v1.xml
+    sha256: 96accdb98949c338e911576647934dc342598ebfe2240a55c790ae5ddd8d5de4
+    tests: 1687
+    failures: 0
+    errors: 0
+    skipped: 0
+  disposition: DISCOVERY_POSITIVE_RELATIVE_DIRECTION
+  candidate_events: 35
+  candidate_sessions: 29
+  confirmation_outcome_access: 0
+  frozen_contracts_changed: false
+  profitability: NOT_ESTIMATED
+  acceptance_criteria:
+    pre_access_binding_validated: true
+    adapter_sealed_and_tested_before_outcomes: true
+    all35_candidates_retained: true
+    paired_scheduled_paths: true
+    no_discovery_inference: true
+    deterministic_repeated_real_execution: true
+    prior_tracks_preserved: true
+    confirmation_access_zero: true
 next_action:
-  id: H0003_FIRST_EFFICACY
+  id: INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION
   priority: P0
-  status: READY
-  hypothesis_id: H0003
+  status: USER_DECISION_REQUIRED
+  hypothesis_id: H0004
   blocks_phase_exit_criteria:
-  - 3
-  evidence_branch: v2-h0003-signal-freeze-preregistration
-  basis_evidence: research/data_evidence/h0003-freeze-preregistration-20261005/verification.json
-  objective: Implement and validate the registered paired-label adapter, then first
-    disclose sealed70-session exploratory H0003 forward outcomes under the frozen
-    relative16-slot protocol.
-  why_now: Final signal approval, immutable binding, preregistration and regression
-    complete; outcome access has remained0.
+  - 1
+  evidence_branch: v2-h0003-first-efficacy
+  record: research/decision_records/H0003-first-efficacy-v1.yaml
+  objective: Select a new independent falsifiable market mechanism for H0004 before
+    feature/signal work or outcomes.
+  why_now: H0003 valid discovery disposition recorded regardless of sign; future confirmations
+    are asynchronous.
+  owner_decision: Choose H0004 thesis, universe and intended market mechanism; implementation
+    follows only after thesis selection.
   constraints:
-  - Discovery exploratory only; no confirmation PASS/REJECT, CI, power or profitability
-    claim.
-  - Bind and validate paired-label adapter source with synthetic tests before first
-    H0003 discovery outcome query.
-  - Retain all35 immutable candidates including mature unavailable endpoints; no extra
-    outcome-driven capture or complete-case deletion.
-  - No signal/horizon/benchmark/guard/session/episode tuning from outcomes.
-  - Confirmation stays asynchronous PENDING; no confirmation labels before fixed terminal
-    deadline.
-  - Preserve H0001/H0002 and prior H0003 frozen source/evidence.
+  - Do not reopen frozen H0001/H0002/H0003 or tune them from discovery outcomes.
+  - No dependence on confirmation wait; preserve each protocol/window/stopping identity.
+  - Any H0003 improvement is a separate authorized revision/trial, never a v1 rewrite.
 pm_policy:
   single_next_action: true
   discovered_non_blockers_go_to_backlog: true
@@ -1009,19 +1040,19 @@ hypothesis_tracks:
     status:
     - FROZEN
     - PREREGISTERED
-    - AWAITING_FIRST_EXPLORATORY_EFFICACY
+    - EXPLORATORY_DISCOVERY_EVALUATED
     - AWAITING_FUTURE_CONFIRMATION
     family: RELATIVE_STRENGTH_LEADERSHIP_CONTINUATION
     hypothesis: research/hypotheses/H0003-r01.yaml
-    branch: v2-h0003-signal-freeze-preregistration
-    commit: f1dffa02884096ff6abeaa05d2b94deec5957e97
+    branch: v2-h0003-first-efficacy
+    commit: 74b67518f544bfdcfd2b45c07198f605291992a5
     spec: research/strategy_specs/H0003-r01-frozen-v1.yaml
     record: research/decision_records/H0003-signal-freeze-v1.json
     frequency_evidence: research/data_evidence/h0003-frequency-20261004/frequency-audit.json
     benchmark: QQQ
     candidate_events: 35
     candidate_sessions: 29
-    outcome_access: 0
+    outcome_access: DISCOVERY_ONLY_AUTHORIZED_EXECUTED; CONFIRMATION0
     confirmation:
       status: PENDING
       start: '2026-10-19'
@@ -1049,9 +1080,114 @@ hypothesis_tracks:
     confirmation_is_project_blocker: false
     owner_signal_semantics: FINAL_APPROVED_2026_10_05
     confirmation_outcome_access: 0
-    efficacy_calculations: 0
-    evaluation_adapter: METADATA_CONTRACT_GATES_ONLY; PAIRED_LABEL_AND_BOOTSTRAP_ADAPTER_NOT_IMPLEMENTED_NOT_EXECUTED
-active_research_track: H0003
+    efficacy_calculations: DISCOVERY_DESCRIPTIVE_ONLY
+    evaluation_adapter: IMPLEMENTED_EXECUTED_DISCOVERY; NO_DISCOVERY_CI; FUTURE_PAIRED_ADMISSION_AND_TERMINAL_ADAPTER_SEPARATE
+    freeze_branch: v2-h0003-signal-freeze-preregistration
+    freeze_commit: f1dffa02884096ff6abeaa05d2b94deec5957e97
+    efficacy_record: research/decision_records/H0003-first-efficacy-v1.yaml
+    efficacy_evidence: research/data_evidence/h0003-first-efficacy-20261005/discovery-report.json
+    discovery_disposition: DISCOVERY_POSITIVE_RELATIVE_DIRECTION
+    discovery_metrics:
+      '16':
+        QQQ:
+          event_median_resolved: -0.0004848967266979365
+          full_cohort_session_balanced_mean: -0.0010799295897814714
+          positive_count: 15
+          positive_rate_resolved: 0.42857142857142855
+          resolved_denominator: 35
+          session_balanced_mean_resolved: -0.0010799295897814714
+        SOXX:
+          event_median_resolved: -0.0009000000000000119
+          full_cohort_session_balanced_mean: -0.0009616903235941244
+          positive_count: 16
+          positive_rate_resolved: 0.45714285714285713
+          resolved_denominator: 35
+          session_balanced_mean_resolved: -0.0009616903235941244
+        bootstrap_interval: null
+        candidate_sessions: 29
+        complete: 35
+        complete_sessions: 29
+        estimate_scope: FULL_COHORT
+        events: 35
+        excess:
+          event_median_resolved: -5.942028985506109e-05
+          full_cohort_session_balanced_mean: 0.00011823926618734694
+          positive_count: 17
+          positive_rate_resolved: 0.4857142857142857
+          resolved_denominator: 35
+          session_balanced_mean_resolved: 0.00011823926618734694
+        p_value: null
+        uncertainty_status: DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED
+        unresolved: 0
+        unresolved_reasons: {}
+      '4':
+        QQQ:
+          event_median_resolved: -0.0006427453610551304
+          full_cohort_session_balanced_mean: -0.00040104197092940435
+          positive_count: 17
+          positive_rate_resolved: 0.4857142857142857
+          resolved_denominator: 35
+          session_balanced_mean_resolved: -0.00040104197092940435
+        SOXX:
+          event_median_resolved: -0.0006443990978413083
+          full_cohort_session_balanced_mean: -0.000278596850230538
+          positive_count: 15
+          positive_rate_resolved: 0.42857142857142855
+          resolved_denominator: 35
+          session_balanced_mean_resolved: -0.000278596850230538
+        bootstrap_interval: null
+        candidate_sessions: 29
+        complete: 35
+        complete_sessions: 29
+        estimate_scope: FULL_COHORT
+        events: 35
+        excess:
+          event_median_resolved: -0.00029478829361595515
+          full_cohort_session_balanced_mean: 0.00012244512069886637
+          positive_count: 15
+          positive_rate_resolved: 0.42857142857142855
+          resolved_denominator: 35
+          session_balanced_mean_resolved: 0.00012244512069886637
+        p_value: null
+        uncertainty_status: DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED
+        unresolved: 0
+        unresolved_reasons: {}
+      '64':
+        QQQ:
+          event_median_resolved: 0.0052361739712080135
+          full_cohort_session_balanced_mean: null
+          positive_count: 24
+          positive_rate_resolved: 0.7058823529411765
+          resolved_denominator: 34
+          session_balanced_mean_resolved: 0.003762003501232853
+        SOXX:
+          event_median_resolved: 0.00870828728842754
+          full_cohort_session_balanced_mean: null
+          positive_count: 20
+          positive_rate_resolved: 0.5882352941176471
+          resolved_denominator: 34
+          session_balanced_mean_resolved: 0.009555049069744508
+        bootstrap_interval: null
+        candidate_sessions: 29
+        complete: 34
+        complete_sessions: 28
+        estimate_scope: RESOLVED_SUBSET_ONLY_FULL_COHORT_UNKNOWN
+        events: 35
+        excess:
+          event_median_resolved: 0.0029354598543362975
+          full_cohort_session_balanced_mean: null
+          positive_count: 19
+          positive_rate_resolved: 0.5588235294117647
+          resolved_denominator: 34
+          session_balanced_mean_resolved: 0.005793045568511655
+        p_value: null
+        uncertainty_status: DISCOVERY_UNCERTAINTY_NOT_PREREGISTERED
+        unresolved: 1
+        unresolved_reasons:
+          outside_admitted_discovery_scope: 1
+    profitability_calculations: 0
+    report_hash: ff12bd9d80ee4f0744dea3c4e94cacc726d2b65b03d0970aab76680aa3c7003e
+active_research_track: H0004
 research_cycle_history:
 - hypothesis: H0002
   status: COMPLETE_VALID_DISCOVERY_DISPOSITION_CONFIRMATION_ASYNC_PENDING
@@ -1064,3 +1200,51 @@ research_cycle_history:
   commit: 62992b202e37856a112ee45cc178a15dfd0c8899
   disposition: DISCOVERY_INSUFFICIENT_RESOLVED_LABELS
   confirmation_is_project_blocker: false
+- hypothesis: H0003
+  status: COMPLETE_VALID_DISCOVERY_DISPOSITION_CONFIRMATION_ASYNC_PENDING
+  satisfied_exit_criteria:
+  - 1
+  - 2
+  - 3
+  record: research/decision_records/H0003-first-efficacy-v1.yaml
+  branch: v2-h0003-first-efficacy
+  commit: 74b67518f544bfdcfd2b45c07198f605291992a5
+  disposition: DISCOVERY_POSITIVE_RELATIVE_DIRECTION
+  confirmation_is_project_blocker: false
+  phase:
+    id: INDEPENDENT_STRATEGY_RESEARCH_CYCLE
+    status: COMPLETE_VALID_H0003_DISCOVERY_DISPOSITION_CONFIRMATION_ASYNC_PENDING
+    objective: Repeat independent hypothesis generation, causal discovery, preregistration,
+      confirmation and evidence disposition.
+    exit_criteria:
+    - One independent falsifiable thesis selected with causal inputs and prior exposure
+      recorded.
+    - Bounded discovery and preregistered confirmation contract before outcomes.
+    - Evidence routing preserves failed/inconclusive trials and forbids unearned production
+      promotion.
+    progress:
+      intake_infrastructure: IMPLEMENTED_TESTED
+      next_available_hypothesis: H0004
+      strategy_meaning: COMPLETE_OWNER_THESIS_SELECTION
+      H0001_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
+      active_hypothesis: H0003
+      causal_frequency: IMPLEMENTED_EXECUTED_REAL_DATA_EVIDENCE_PRODUCED
+      signal_freeze: FROZEN_OWNER_APPROVED
+      outcome_evaluation: IMPLEMENTED_EXECUTED_DISCOVERY_EVIDENCE_PRODUCED
+      satisfied_exit_criteria:
+      - 1
+      - 2
+      - 3
+      remaining_exit_criteria: []
+      efficacy_preregistration: COMPLETE_FROZEN_BEFORE_OUTCOMES
+      H0002_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
+      H0002_discovery_disposition: DISCOVERY_INSUFFICIENT_RESOLVED_LABELS
+      H0003_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
+      H0003_discovery_disposition: DISCOVERY_POSITIVE_RELATIVE_DIRECTION
+next_independent_hypothesis:
+  id: H0004
+  meaning: NOT_SELECTED
+  routing: CURRENT_P0_OWNER_THESIS_SELECTION
+  H0001_future_confirmation_dependency: false
+  H0002_future_confirmation_dependency: false
+  H0003_future_confirmation_dependency: false

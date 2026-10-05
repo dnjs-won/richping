@@ -1,3 +1,11 @@
+# Richping PM - H0003 exploratory outcomes complete; H0004 intake
+
+Implementation `v2-h0003-first-efficacy` / `74b67518f544bfdcfd2b45c07198f605291992a5`; code not merged into main. Frozen H0003 contracts unchanged. 35/35 primary16-slot labels complete,29 sessions; session-balanced SOXX minus QQQ +0.011824%p, median -0.005942%p, positive17/35. SOXX mean -0.096169%, QQQ -0.107993%; relative outperformance does not validate LONG profit. 4-slot excess +0.012245%p (35 complete);64-slot resolved subset +0.579305%p (34 complete/1 outside-scope unresolved), full64 mean unknown. DISCOVERY_POSITIVE_RELATIVE_DIRECTION is a point description only; no CI, PASS/REJECT, alpha proof or promotion. H0003 confirmation252 sessions2026-10-19..2027-10-19 remains PENDING/asynchronous, outcome access0; profitability NOT_ESTIMATED. Two real executions identical; targeted178/full1687 pass, prior586 files preserved. H0001/H0002 frozen evidence/state unchanged.
+
+NEXT_ACTION **INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION / H0004 / USER_DECISION_REQUIRED**. Owner selects next independent market mechanism; confirmation waits do not block research. Future H0003 paired capture/admission/unit-segment/terminal inference adapters remain separate future work.
+
+Entries below are preserved historical reports.
+
 # Richping PM - H0003 signal frozen and efficacy preregistered
 
 Implementation `v2-h0003-signal-freeze-preregistration` / `f1dffa02884096ff6abeaa05d2b94deec5957e97`; not merged into main. Owner-approved signal unchanged: SOXX versus technology/growth QQQ,64 scheduled15m-slot return difference,4 consecutive positive observations, SOXX return>=0, one candidate per episode; only observed READY RS<=0 rearms. Discovery35 events/29 sessions preserved. Relative16-slot session-balanced primary mean, zero-excess null; absolute direction and4/64 horizons descriptive. Confirmation252 sessions2026-10-19..2027-10-19, fixed deadline2027-10-21 20:00ET, floors40 events/20 sessions/8 fixed10-session bins. 10-session circular calendar blocks,10000 draws, seed20261005,95% interval. H0003 outcomes/future queries/efficacy0; profitability NOT_ESTIMATED. Targeted134/full1643 tests passed;570 prior files preserved. H0001/H0002 frozen protocols/evidence/asynchronous tracks unchanged.

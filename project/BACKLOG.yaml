@@ -29,11 +29,11 @@ items:
 
     '
   guardrail: Do not merge blindly; preserve the newer main R1 paper changes.
-  active_branch: v2-h0003-signal-freeze-preregistration
+  active_branch: v2-h0003-first-efficacy
   observed_relation_to_main:
-    ahead_by: 50
-    behind_by: 25
-    main_commit: c211fd2f71460d7b25c5ecfcca384a3b1ab1f9a8
+    ahead_by: 52
+    behind_by: 26
+    main_commit: 0e35dcde4f6419a6db813078d8b9ec3dfc7e26fc
 - id: H0001_MINIMAL_15M_ENTRY_FREEZE
   priority: P1
   status: COMPLETE_FROZEN_AND_OFFLINE_MECHANICALLY_EXERCISED
@@ -409,20 +409,30 @@ items:
   evidence_branch: v2-h0003-relative-strength-frequency
   record: research/decision_records/H0003-hypothesis-frequency-v1.yaml
 - id: H0003_FIRST_EFFICACY
-  priority: P0
-  status: READY
-  blocks_phase_exit_criteria:
-  - 3
-  summary: First sealed35-event exploratory paired SOXX/QQQ outcomes after adapter
-    validation; no confirmation inference.
-  evidence_branch: v2-h0003-signal-freeze-preregistration
+  priority: COMPLETE
+  status: COMPLETE_VALID_EXPLORATORY_DISCOVERY
+  blocks_phase_exit_criteria: []
+  summary: 35/35 primary complete; registered relative point mean positive but absolute
+    SOXX/QQQ means negative. No inferential claims; next independent H0004.
+  evidence_branch: v2-h0003-first-efficacy
   preregistration: research/decision_records/H0003-efficacy-preregistration-v1.yaml
+  record: research/decision_records/H0003-first-efficacy-v1.yaml
 - id: H0003_FUTURE_CONFIRMATION
   priority: ASYNC
   status: PENDING_FUTURE_FIXED_COHORT
   blocks_phase_exit_criteria: []
   summary: 252 fixed sessions2026-10-19..2027-10-19; terminal after2027-10-21 20:00ET.
     New paired admission/prefix/unit-segment adapter required; no present label access.
-  evidence_branch: v2-h0003-signal-freeze-preregistration
+  evidence_branch: v2-h0003-first-efficacy
   preregistration: research/decision_records/H0003-efficacy-preregistration-v1.yaml
   project_blocker: false
+  confirmation_outcome_access: 0
+  infrastructure: METADATA_READINESS_GUARD_ONLY; FUTURE_PAIRED_ADMISSION_AND_TERMINAL_ADAPTER_NOT_IMPLEMENTED
+- id: H0004_INDEPENDENT_HYPOTHESIS_INTAKE
+  priority: P0
+  status: USER_DECISION_REQUIRED
+  blocks_phase_exit_criteria:
+  - 1
+  evidence_branch: v2-h0003-first-efficacy
+  summary: Select independent H0004 thesis without revising prior frozen trials or
+    waiting for confirmations.
