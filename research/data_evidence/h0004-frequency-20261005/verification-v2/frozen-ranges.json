@@ -1,0 +1,1581 @@
+{
+  "ranges": [
+    {
+      "feature": {
+        "compressed": true,
+        "high": 492.19,
+        "low": 485.69,
+        "normalized_range": 0.01334976381187102,
+        "percentile": 0.165625,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 492.19,
+      "id": "6589da6828ab2603b202724ff91d93f85d827573785c3d857bf2393c115dc465",
+      "last_valid_index": 676,
+      "low": 485.69,
+      "prefix_hash": "fc334467d9dcdee70ebb219d6a5a3d3fe19df16254cd9fe57b0db7825a46881b",
+      "published_at": "2026-05-19T13:15:00+00:00",
+      "published_index": 660,
+      "window_start": "2026-05-19T09:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 500.47,
+        "low": 494.69,
+        "normalized_range": 0.0115785256410257,
+        "percentile": 0.1078125,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 500.47,
+      "id": "a530dbaeba9ef3923b01165e67a8cc6cab389665e7fdf65c0e19db70f4406aa9",
+      "last_valid_index": 717,
+      "low": 494.69,
+      "prefix_hash": "2d293ce0c498969213b6571abaad6b3e4c20043580ab524289f25920f6a6493b",
+      "published_at": "2026-05-19T23:30:00+00:00",
+      "published_index": 701,
+      "window_start": "2026-05-19T19:45:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 509.43,
+        "low": 505.52,
+        "normalized_range": 0.007693064436792966,
+        "percentile": 0.009375,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 509.43,
+      "id": "3bd42e6208b73c0f19ccb34451991fd6eea66e695cb2160af4e2c560b46c7f86",
+      "last_valid_index": 736,
+      "low": 505.52,
+      "prefix_hash": "fae630a3231e88cf5aea1971056dc4b150812373b20101290ceb21a095c3630f",
+      "published_at": "2026-05-20T12:15:00+00:00",
+      "published_index": 720,
+      "window_start": "2026-05-20T08:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 519.38,
+        "low": 512.21,
+        "normalized_range": 0.013884047868014329,
+        "percentile": 0.2,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 519.38,
+      "id": "4e6d59f1d9725edddd0b9225cb6a667fd204d60132f52f4682bcb5c3d6a88ff3",
+      "last_valid_index": 761,
+      "low": 512.21,
+      "prefix_hash": "780f9e421c575ee275e37a7ae85d691a7864d9da23069b5e2615761f35eb21c7",
+      "published_at": "2026-05-20T18:30:00+00:00",
+      "published_index": 745,
+      "window_start": "2026-05-20T14:45:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 521.99,
+        "low": 515.0,
+        "normalized_range": 0.01344230769230771,
+        "percentile": 0.175,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 521.99,
+      "id": "59f8dfff93ee8efcf83bceefabf8a54a4b933a03d4534b096d8f0e6d2902570a",
+      "last_valid_index": 773,
+      "low": 515.0,
+      "prefix_hash": "0d0cc1e973a03765d8c567aa6d4f36b5635ae498aa2d24dd5759fd231e39f92b",
+      "published_at": "2026-05-20T21:30:00+00:00",
+      "published_index": 757,
+      "window_start": "2026-05-20T17:45:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 525.64,
+        "low": 519.42,
+        "normalized_range": 0.011871135201160446,
+        "percentile": 0.121875,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 525.64,
+      "id": "16597e052ae0d1b87ece6186dd667e56f1ba815e20f807987cefc0724e9b66e4",
+      "last_valid_index": 839,
+      "low": 519.42,
+      "prefix_hash": "082d578d7f5e1e6a8039c7f0364596ccd77e05bf0aa9dd3b6cc06b119d2f142b",
+      "published_at": "2026-05-21T22:00:00+00:00",
+      "published_index": 823,
+      "window_start": "2026-05-21T18:15:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 531.77,
+        "low": 524.36,
+        "normalized_range": 0.013998828707989283,
+        "percentile": 0.196875,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 531.77,
+      "id": "6d909c6a3c93265863cf0804596b887b8785b92f03975906c404ff60523d5087",
+      "last_valid_index": 866,
+      "low": 524.36,
+      "prefix_hash": "edd51e609cb1a75e562f253355a9be53c64c6823a33b5642cd903d69c5bb7898",
+      "published_at": "2026-05-22T12:45:00+00:00",
+      "published_index": 850,
+      "window_start": "2026-05-22T09:00:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 541.89,
+        "low": 535.2,
+        "normalized_range": 0.012385677787240236,
+        "percentile": 0.1453125,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 541.89,
+      "id": "0a6e81fc3efdb6585face84e1b506b158b9dbd51d1644101124fcfafef55743a",
+      "last_valid_index": 889,
+      "low": 535.2,
+      "prefix_hash": "8fd65f3356b321213e3dd15ad9e3aacfa12b80eff423cb88205b4c5c2db81916",
+      "published_at": "2026-05-22T18:30:00+00:00",
+      "published_index": 873,
+      "window_start": "2026-05-22T14:45:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 553.9951,
+        "low": 546.99,
+        "normalized_range": 0.012651435795557107,
+        "percentile": 0.1703125,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 553.9951,
+      "id": "b57b3793b5b8718e0eaf324b3fa41b2ca761d059030da65a333c335d4ef7570f",
+      "last_valid_index": 927,
+      "low": 546.99,
+      "prefix_hash": "d1c56e2407a7fa03e834140229aa0879c7a9118cfe7202c233bd8160093f8de9",
+      "published_at": "2026-05-26T12:00:00+00:00",
+      "published_index": 911,
+      "window_start": "2026-05-26T08:15:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 572.95,
+        "low": 565.42,
+        "normalized_range": 0.013169861480341553,
+        "percentile": 0.1703125,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 572.95,
+      "id": "a1460c12b1b9f1d4b79b4738d51573f33c362d675a2031f418665fe30327a635",
+      "last_valid_index": 965,
+      "low": 565.42,
+      "prefix_hash": "2d7379d7a9dec7a8791b69081fb039332aa0c397dfae902cb602697c983cd0ae",
+      "published_at": "2026-05-26T21:30:00+00:00",
+      "published_index": 949,
+      "window_start": "2026-05-26T17:45:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 568.5,
+        "low": 560.93,
+        "normalized_range": 0.013457777777777867,
+        "percentile": 0.1765625,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 568.5,
+      "id": "bb16631618b1b23a73e70532b6053455b42c9390cf49cb99d97723ce2a93fa14",
+      "last_valid_index": 1037,
+      "low": 560.93,
+      "prefix_hash": "7cdde8c018cb3b602e13852b366503a22ff50b2780d8275d03e7714c93bada87",
+      "published_at": "2026-05-27T23:30:00+00:00",
+      "published_index": 1021,
+      "window_start": "2026-05-27T19:45:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 560.43,
+        "low": 552.98,
+        "normalized_range": 0.013348383860101648,
+        "percentile": 0.16875,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 560.43,
+      "id": "16c96467fa9d085658816f5c0d54652f16252a9faf9a67951b56d06e4f7cbec2",
+      "last_valid_index": 1056,
+      "low": 552.98,
+      "prefix_hash": "f927ed364fb1cc45d783fef032144c312e3a7c9a566384789cb4dfd2813ae85d",
+      "published_at": "2026-05-28T12:15:00+00:00",
+      "published_index": 1040,
+      "window_start": "2026-05-28T08:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 575.8,
+        "low": 568.88,
+        "normalized_range": 0.012126416135843827,
+        "percentile": 0.1484375,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 575.8,
+      "id": "ca6e6dfb569cd24b6913f78b3d08f3d0ddd52473204aeb8eec4dba41dbd00b00",
+      "last_valid_index": 1084,
+      "low": 568.88,
+      "prefix_hash": "d2fed7c35ed335ad4f7bd6c1f9b58c880f145647eb5c985131c9e3690c28731e",
+      "published_at": "2026-05-28T19:15:00+00:00",
+      "published_index": 1068,
+      "window_start": "2026-05-28T15:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 576.22,
+        "low": 570.22,
+        "normalized_range": 0.010437323870159691,
+        "percentile": 0.0703125,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 576.22,
+      "id": "f889171e7ad9f852d8ee6909482b48cb16d2080226e214956c44080297980cf1",
+      "last_valid_index": 1110,
+      "low": 570.22,
+      "prefix_hash": "ab5643f7c93bfccd76eda1f1f50ba4c3e705663b0670da1e9b7d381de4a86cce",
+      "published_at": "2026-05-29T09:45:00+00:00",
+      "published_index": 1094,
+      "window_start": "2026-05-28T22:00:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 572.0,
+        "low": 564.6,
+        "normalized_range": 0.013018086872508383,
+        "percentile": 0.1609375,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 572.0,
+      "id": "b88d834f07c91a772a095e436400800f7a181da40268f834f455bf00ddf485f9",
+      "last_valid_index": 1146,
+      "low": 564.6,
+      "prefix_hash": "6abf3c7a350311779f3897b7cefc825b398e4b7e78be714a2a1475f97ee43fad",
+      "published_at": "2026-05-29T18:45:00+00:00",
+      "published_index": 1130,
+      "window_start": "2026-05-29T15:00:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 577.99,
+        "low": 570.16,
+        "normalized_range": 0.013661106846255917,
+        "percentile": 0.1953125,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 577.99,
+      "id": "53bb100a672351deccdd9971197099049d24abd47c97436fc65580b8a3f527da",
+      "last_valid_index": 1212,
+      "low": 570.16,
+      "prefix_hash": "e10283c62aa24c1761b407fe221fb9dc281ecdb442f4bb39a42e53903c4c9abe",
+      "published_at": "2026-06-01T19:15:00+00:00",
+      "published_index": 1196,
+      "window_start": "2026-06-01T15:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 575.5225,
+        "low": 569.0,
+        "normalized_range": 0.011397990388816141,
+        "percentile": 0.1296875,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 575.5225,
+      "id": "dcc208e583ea4ccc534f30a52861137c1246dcb574f8188f9605a822b1bfedef",
+      "last_valid_index": 1224,
+      "low": 569.0,
+      "prefix_hash": "da4359433e58626bf36abba0a7551c5843db3019441f14aae40a0c838ccdd203",
+      "published_at": "2026-06-01T22:15:00+00:00",
+      "published_index": 1208,
+      "window_start": "2026-06-01T18:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 588.75,
+        "low": 582.0,
+        "normalized_range": 0.011519361059439903,
+        "percentile": 0.1421875,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 588.75,
+      "id": "696bf7b75b281f4b5d5912761142c31ccd0888863ddfb64f56fa381ecead86ed",
+      "last_valid_index": 1249,
+      "low": 582.0,
+      "prefix_hash": "549ac02d3f82380ff59894316cf40b510823c29c459bb17d057930357aed5b84",
+      "published_at": "2026-06-02T12:30:00+00:00",
+      "published_index": 1233,
+      "window_start": "2026-06-02T08:45:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 601.19,
+        "low": 593.6642,
+        "normalized_range": 0.012593794973058006,
+        "percentile": 0.19375,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 601.19,
+      "id": "a43c56e08d2c80263281f589d1ac700953ed3335889829bf10eca37f6cc1477f",
+      "last_valid_index": 1274,
+      "low": 593.6642,
+      "prefix_hash": "bee6cb347796a42a4488c6e7f47c3095259142c8c39f8327b5886d56633fbfb7",
+      "published_at": "2026-06-02T18:45:00+00:00",
+      "published_index": 1258,
+      "window_start": "2026-06-02T15:00:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 589.46,
+        "low": 581.75,
+        "normalized_range": 0.013240370249523514,
+        "percentile": 0.1890625,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 589.46,
+      "id": "56c605d5e84ead5aec6e5c34c9007044bd8539a65edec3c3b2a9ffc2552f0f42",
+      "last_valid_index": 1440,
+      "low": 581.75,
+      "prefix_hash": "c46c9a2de82533b872c16d4006f36716b5487e09d4d800f65b6effc1bdddaf2b",
+      "published_at": "2026-06-05T12:15:00+00:00",
+      "published_index": 1424,
+      "window_start": "2026-06-05T08:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 575.86,
+        "low": 567.05,
+        "normalized_range": 0.015502320949072956,
+        "percentile": 0.2,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 575.86,
+      "id": "7f1b1ecb3d4cab3d1fc5c6cd583049eea42bc708d71cf44a7605687f4681e695",
+      "last_valid_index": 1546,
+      "low": 567.05,
+      "prefix_hash": "31443cec0a89d4dd3eeb9b7fed2742338cc3a276c9a3890380276cbfeaf2a4e9",
+      "published_at": "2026-06-08T22:45:00+00:00",
+      "published_index": 1530,
+      "window_start": "2026-06-08T19:00:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 586.7,
+        "low": 581.79,
+        "normalized_range": 0.008389720456564968,
+        "percentile": 0.028125,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 586.7,
+      "id": "e2a36994d9e993925844e20ef6b3b3cdeab51802b9baaa2a30cedab43cf4206e",
+      "last_valid_index": 1568,
+      "low": 581.79,
+      "prefix_hash": "253ade9037ded8ce0ff42f9d25d2637bf23c451bedfe1269037f81611c313a76",
+      "published_at": "2026-06-09T12:15:00+00:00",
+      "published_index": 1552,
+      "window_start": "2026-06-09T08:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 590.54,
+        "low": 580.83,
+        "normalized_range": 0.01648892813476417,
+        "percentile": 0.190625,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 590.54,
+      "id": "3d480f931ab48e4b59051eb057c923282ff37456cd98d5d4befb279dba65206c",
+      "last_valid_index": 1740,
+      "low": 580.83,
+      "prefix_hash": "555c9a08d11399f94273408bacd4d43cc860ee54f14e263a3ea708e9eb3a8df5",
+      "published_at": "2026-06-11T23:15:00+00:00",
+      "published_index": 1724,
+      "window_start": "2026-06-11T19:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 590.82,
+        "low": 582.91,
+        "normalized_range": 0.013478512762839658,
+        "percentile": 0.0953125,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 590.82,
+      "id": "28aa290416d9f1f46b7c6d59ce4c7f09576542adfda7b405a3041764a9276b85",
+      "last_valid_index": 1760,
+      "low": 582.91,
+      "prefix_hash": "30eb24ffc37b00b33bd527ecae0383c6468c3ee0f1bc7dd0fe3bc53bfd995b0b",
+      "published_at": "2026-06-12T12:15:00+00:00",
+      "published_index": 1744,
+      "window_start": "2026-06-12T08:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 602.69,
+        "low": 594.69,
+        "normalized_range": 0.01340033500837521,
+        "percentile": 0.075,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 602.69,
+      "id": "0b37683ebc6b187d0c6aaf740e8563360f6c6e24f0c78a3b5e4a6176a9c6383f",
+      "last_valid_index": 1792,
+      "low": 594.69,
+      "prefix_hash": "31894a79da9af1b1718b18d631373c2c5335fa9e0f385389945f050f83087988",
+      "published_at": "2026-06-12T20:15:00+00:00",
+      "published_index": 1776,
+      "window_start": "2026-06-12T16:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 624.0,
+        "low": 616.2,
+        "normalized_range": 0.01251745221703329,
+        "percentile": 0.053125,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 624.0,
+      "id": "df750fcf2f1518f5948737903e6093917b45bd321fb583ce5075cce6116b8f69",
+      "last_valid_index": 1823,
+      "low": 616.2,
+      "prefix_hash": "98ea631d46e4d05a3830d96b34d16b0d153275b0d56f92a821d8c00b2ab63a51",
+      "published_at": "2026-06-15T12:00:00+00:00",
+      "published_index": 1807,
+      "window_start": "2026-06-15T08:15:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 629.7199,
+        "low": 620.4,
+        "normalized_range": 0.01484249585934526,
+        "percentile": 0.1390625,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 629.7199,
+      "id": "4102b8892977def8b5ac9220ab9422b6df7fad53f6e769079301d1ce24f823f6",
+      "last_valid_index": 1851,
+      "low": 620.4,
+      "prefix_hash": "93b73b07196719eb615d54efd90591653dd79073c6e9cd70a547f931be00534c",
+      "published_at": "2026-06-15T19:00:00+00:00",
+      "published_index": 1835,
+      "window_start": "2026-06-15T15:15:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 599.69,
+        "low": 590.63,
+        "normalized_range": 0.015216661068189552,
+        "percentile": 0.175,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 599.69,
+      "id": "51b8d8a77053ea415ea261e31fd53d8d4ff749a88aadfa603bb501ff40710571",
+      "last_valid_index": 1934,
+      "low": 590.63,
+      "prefix_hash": "3f780e9fdf8e456978816d09ffa52bc402ec00ed29b568a83f0a15152d44a5db",
+      "published_at": "2026-06-16T23:45:00+00:00",
+      "published_index": 1918,
+      "window_start": "2026-06-16T20:00:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 608.6,
+        "low": 601.0,
+        "normalized_range": 0.012560115024211312,
+        "percentile": 0.0828125,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 608.6,
+      "id": "b0eaa7513874f31710cb4e185bbf140e7c141788c06004d7f53c6ca79c40ccd9",
+      "last_valid_index": 1952,
+      "low": 601.0,
+      "prefix_hash": "33772f21cd2a7d2e4694cf658434e970a8c4db585f0644d6a896849024bb2c41",
+      "published_at": "2026-06-17T12:15:00+00:00",
+      "published_index": 1936,
+      "window_start": "2026-06-17T08:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 626.22,
+        "low": 618.8,
+        "normalized_range": 0.011862509992006512,
+        "percentile": 0.0796875,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 626.22,
+      "id": "9b21e643fd18951edffd6a2a5a94cc9f6421a5da1aadff15174dcb6d804fd29f",
+      "last_valid_index": 2016,
+      "low": 618.8,
+      "prefix_hash": "cf2cdb2d99c1be35e22c7a7adc0ee2bb64d866b812cfb7118ded11cd93eba26a",
+      "published_at": "2026-06-18T12:15:00+00:00",
+      "published_index": 2000,
+      "window_start": "2026-06-18T08:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 641.18,
+        "low": 629.91,
+        "normalized_range": 0.017626174947997283,
+        "percentile": 0.2,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 641.18,
+      "id": "09d9d5d23b58de1aed2ee4805ccfe72973e3f2c3ea9e6423129bddad50701ca9",
+      "last_valid_index": 2039,
+      "low": 629.91,
+      "prefix_hash": "81eae8844f72b60ea21ea3b758870bf3338801391dbdd44bfcfa9f5398c0dae8",
+      "published_at": "2026-06-18T18:00:00+00:00",
+      "published_index": 2023,
+      "window_start": "2026-06-18T14:15:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 649.45,
+        "low": 641.1,
+        "normalized_range": 0.01286059728618298,
+        "percentile": 0.11875,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 649.45,
+      "id": "401ef01ed993d088b66fcc51ff738d6aa29addf72691593db4534a9b30561605",
+      "last_valid_index": 2080,
+      "low": 641.1,
+      "prefix_hash": "6ec72905021cf59e7949488789392883c46edd2065cacde8cc1ca840d8af8b44",
+      "published_at": "2026-06-22T12:15:00+00:00",
+      "published_index": 2064,
+      "window_start": "2026-06-22T08:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 652.83,
+        "low": 643.93,
+        "normalized_range": 0.013683360879425132,
+        "percentile": 0.1375,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 652.83,
+      "id": "2ebb0d3c815d48264e88b18f4fc7f5d2bb9e0efdca41d25b6f8a9311dbe078ad",
+      "last_valid_index": 2105,
+      "low": 643.93,
+      "prefix_hash": "e158155f60556e94e0fb343bdf1a0ebe7674e30a6ae8b6cf8e0575cc0d56a181",
+      "published_at": "2026-06-22T18:30:00+00:00",
+      "published_index": 2089,
+      "window_start": "2026-06-22T14:45:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 655.62,
+        "low": 645.93,
+        "normalized_range": 0.014795539839472294,
+        "percentile": 0.1859375,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 655.62,
+      "id": "b3d2a9b5b255c47de7c380e165b8e50779e73263a1b652646e9b2f31feda2410",
+      "last_valid_index": 2112,
+      "low": 645.93,
+      "prefix_hash": "3b7739c3ddf77d32aeafecf68c8864f52ee3ceaf573cb343406bebd960ae55e3",
+      "published_at": "2026-06-22T20:15:00+00:00",
+      "published_index": 2096,
+      "window_start": "2026-06-22T16:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 616.4166,
+        "low": 608.55,
+        "normalized_range": 0.012829185557258982,
+        "percentile": 0.1265625,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 616.4166,
+      "id": "e9724434833eb174f6f4b78cfdaa8137880e6dd932c09c164576ec9b8735ef49",
+      "last_valid_index": 2208,
+      "low": 608.55,
+      "prefix_hash": "35d96c5e5c360fd735c1538189bb9ddc3acac4ef56171a8f48ca35e89071342f",
+      "published_at": "2026-06-24T12:15:00+00:00",
+      "published_index": 2192,
+      "window_start": "2026-06-24T08:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 609.5,
+        "low": 601.5,
+        "normalized_range": 0.013225326500247976,
+        "percentile": 0.1390625,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 609.5,
+      "id": "6a2d08ec654e181eae400339c0de992bb3c621b753d737bcd8ce70bbceef4a52",
+      "last_valid_index": 2336,
+      "low": 601.5,
+      "prefix_hash": "9585117c044984aa2bbd7a4310734c63e4ab6e1f1684ea2e97c94baa408545ac",
+      "published_at": "2026-06-26T12:15:00+00:00",
+      "published_index": 2320,
+      "window_start": "2026-06-26T08:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 615.3499,
+        "low": 608.64,
+        "normalized_range": 0.010972494767137726,
+        "percentile": 0.0640625,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 615.3499,
+      "id": "9feff014e97476b67901ae33ca04b766d8b70974b0e667b06c56ed5a3355e4f9",
+      "last_valid_index": 2434,
+      "low": 608.64,
+      "prefix_hash": "c279a5c43ae3418072482bc399be09bef18438a0d232f4c214a626fbec828942",
+      "published_at": "2026-06-29T20:45:00+00:00",
+      "published_index": 2418,
+      "window_start": "2026-06-29T17:00:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 622.21,
+        "low": 613.2257,
+        "normalized_range": 0.014500395422779701,
+        "percentile": 0.1875,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 622.21,
+      "id": "55b2e864bdad9849f863aa9af37229e46e168ffc146aee1867be9a8957d64b8a",
+      "last_valid_index": 2461,
+      "low": 613.2257,
+      "prefix_hash": "6994b7ff93294d8b55f12243f4a8dba4361994fbccf151fee99f80cc8a581259",
+      "published_at": "2026-06-30T11:30:00+00:00",
+      "published_index": 2445,
+      "window_start": "2026-06-29T23:45:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 640.39,
+        "low": 632.0,
+        "normalized_range": 0.013129068602904337,
+        "percentile": 0.134375,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 640.39,
+      "id": "ef219547b90de1a54d14a039ebc2e1f51e533217387e021f4e143304bdb740d3",
+      "last_valid_index": 2488,
+      "low": 632.0,
+      "prefix_hash": "786da1f2df6c7d23387cf6385c19bbb24f1adafe954c26c9d10459d93907f128",
+      "published_at": "2026-06-30T18:15:00+00:00",
+      "published_index": 2472,
+      "window_start": "2026-06-30T14:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 643.73,
+        "low": 634.38,
+        "normalized_range": 0.014544379802756467,
+        "percentile": 0.165625,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 643.73,
+      "id": "f1ecef749bccc905ec4e9008a57bea9ea4b77a2b1c2bad56f21e08866c1bf313",
+      "last_valid_index": 2494,
+      "low": 634.38,
+      "prefix_hash": "9c8030a484b170abf6d6f45b7fdcf61adb014f3281568cca870b776fdc8091fe",
+      "published_at": "2026-06-30T19:45:00+00:00",
+      "published_index": 2478,
+      "window_start": "2026-06-30T16:00:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 637.82,
+        "low": 629.1,
+        "normalized_range": 0.013810579664238244,
+        "percentile": 0.1484375,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 637.82,
+      "id": "58a7748cfaeb9ba85b50d70eadc4b5a0d3bed334b26aaffdeb2732c87bafa3ef",
+      "last_valid_index": 2527,
+      "low": 629.1,
+      "prefix_hash": "6321b3189236b5ccafa0c277f82cd161911a3033e0fde4b630545720704266af",
+      "published_at": "2026-07-01T12:00:00+00:00",
+      "published_index": 2511,
+      "window_start": "2026-07-01T08:15:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 605.55,
+        "low": 597.25,
+        "normalized_range": 0.013786001395209706,
+        "percentile": 0.1453125,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 605.55,
+      "id": "249a176044909439b94e17640d18bf09b445459df4df414c114b2ef4de3dcc82",
+      "last_valid_index": 2574,
+      "low": 597.25,
+      "prefix_hash": "bd4f7f730c080112784721387f4358e5557bda5ac3b90a4dffd308a2a01b1fb0",
+      "published_at": "2026-07-01T23:45:00+00:00",
+      "published_index": 2558,
+      "window_start": "2026-07-01T20:00:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 571.77,
+        "low": 565.8,
+        "normalized_range": 0.01048416837890527,
+        "percentile": 0.0375,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 571.77,
+      "id": "11dcf359a5f977c2a43d25ed8a1487624c3e828c0517e392c4f332870e574976",
+      "last_valid_index": 2639,
+      "low": 565.8,
+      "prefix_hash": "1220a28ff4d68a7fef2e76f7483606459924c310d619e7d6868b0a0f4d4eccda",
+      "published_at": "2026-07-03T00:00:00+00:00",
+      "published_index": 2623,
+      "window_start": "2026-07-02T20:15:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 588.89,
+        "low": 580.64,
+        "normalized_range": 0.01405427505493944,
+        "percentile": 0.1421875,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 588.89,
+      "id": "bd4cda504854a4100af72ec4b39ff29a7724888432edd6538bde693c4f819501",
+      "last_valid_index": 2658,
+      "low": 580.64,
+      "prefix_hash": "f8df1f1532e89bd010c0b38b4b179dd2020ef3e30083d613ae700ef23d80676d",
+      "published_at": "2026-07-06T12:45:00+00:00",
+      "published_index": 2642,
+      "window_start": "2026-07-06T09:00:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 589.38,
+        "low": 580.75,
+        "normalized_range": 0.01484858912594631,
+        "percentile": 0.146875,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 589.38,
+      "id": "3010464e088b807bfcfd288354c6e380043ff09f9a9fffc9379f96613ff421e5",
+      "last_valid_index": 2690,
+      "low": 580.75,
+      "prefix_hash": "ee33666af67b7853e07ce4323f5e25316e1183cf1611e5f09d65ada57b53800d",
+      "published_at": "2026-07-06T20:45:00+00:00",
+      "published_index": 2674,
+      "window_start": "2026-07-06T17:00:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 586.33,
+        "low": 576.9829,
+        "normalized_range": 0.01617229267955096,
+        "percentile": 0.165625,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 586.33,
+      "id": "bff602b92b4c4864df7b412e64cff9ecdde8bb321205b1b940cd3d2c40708c56",
+      "last_valid_index": 2702,
+      "low": 576.9829,
+      "prefix_hash": "a8c6c92c64e9e43d2fc755037f5f45bc2e6b23f606f4aa7255660dd76610d867",
+      "published_at": "2026-07-06T23:45:00+00:00",
+      "published_index": 2686,
+      "window_start": "2026-07-06T20:00:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 564.52,
+        "low": 555.8,
+        "normalized_range": 0.015545750323127027,
+        "percentile": 0.15,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 564.52,
+      "id": "2ff49d0de8938cfa3d6fcdeefeb7f82d8e63406e00339a9e0db82e1bde49a126",
+      "last_valid_index": 2720,
+      "low": 555.8,
+      "prefix_hash": "7e276ccd1552b1055f1862ebfadaa88f8845b9a96a3be807a718b18ffd43b8e0",
+      "published_at": "2026-07-07T12:15:00+00:00",
+      "published_index": 2704,
+      "window_start": "2026-07-07T08:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 552.9,
+        "low": 544.2,
+        "normalized_range": 0.015832575068243735,
+        "percentile": 0.128125,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 552.9,
+      "id": "b03d63e8f6cd83578704492ac18dd0ce52f7718e45ae6f6b6156f06e71798c1a",
+      "last_valid_index": 2765,
+      "low": 544.2,
+      "prefix_hash": "49eb9c97d71ac738af77238251a96dc14a7eec43d179edea44c9c819dfbd6bb3",
+      "published_at": "2026-07-07T23:30:00+00:00",
+      "published_index": 2749,
+      "window_start": "2026-07-07T19:45:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 564.5,
+        "low": 555.44,
+        "normalized_range": 0.01614973262032076,
+        "percentile": 0.1359375,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 564.5,
+      "id": "c5e2192b46ee715e120c166a94ecce20fb3b57832c50301283bc66a72c5d0e4a",
+      "last_valid_index": 2817,
+      "low": 555.44,
+      "prefix_hash": "b6374dd274d71e2fb5f6fc52b1d67f1245c77a2338e1bad937c4c6befc79c2d4",
+      "published_at": "2026-07-08T20:30:00+00:00",
+      "published_index": 2801,
+      "window_start": "2026-07-08T16:45:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 592.96,
+        "low": 584.86,
+        "normalized_range": 0.013798507716943244,
+        "percentile": 0.1078125,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 592.96,
+      "id": "88b062994b3e3fa86ec843ecd5f63f69d95198bf7da3a39480d0e40c9634bc67",
+      "last_valid_index": 2873,
+      "low": 584.86,
+      "prefix_hash": "9ef5446651daa12ad6165d07139ba7b05e8dcb55aef444922a466512694e9bac",
+      "published_at": "2026-07-09T18:30:00+00:00",
+      "published_index": 2857,
+      "window_start": "2026-07-09T14:45:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 589.1,
+        "low": 579.14,
+        "normalized_range": 0.017084048027444315,
+        "percentile": 0.1671875,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 589.1,
+      "id": "12e4325f2ace7733cc6b023de70747eb8757ebec5163c168879b3ba881edb91a",
+      "last_valid_index": 2888,
+      "low": 579.14,
+      "prefix_hash": "27b552629df690835bd8707c1a3801a8c905d78867bfff18e0ea39cc5e080a4a",
+      "published_at": "2026-07-09T22:15:00+00:00",
+      "published_index": 2872,
+      "window_start": "2026-07-09T18:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 578.99,
+        "low": 570.5,
+        "normalized_range": 0.014748032727083242,
+        "percentile": 0.140625,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 578.99,
+      "id": "67d2121053529ecb9081682da8be3214468fda3cfbd5b54f26a50e62bcfae9a0",
+      "last_valid_index": 2912,
+      "low": 570.5,
+      "prefix_hash": "8bef4568f0b12c81cc58556f9b1288944d15181d5261b157599e83cc100a6a40",
+      "published_at": "2026-07-10T12:15:00+00:00",
+      "published_index": 2896,
+      "window_start": "2026-07-10T08:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 585.79,
+        "low": 578.61,
+        "normalized_range": 0.012350350901334715,
+        "percentile": 0.084375,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 585.79,
+      "id": "1122fbdae953b3c322d70db0e601bdaefab83237b91c083688aee1281bd09f67",
+      "last_valid_index": 2943,
+      "low": 578.61,
+      "prefix_hash": "2eda8836813383540cf70b48afdaa8466bf164c3edd4b20e68c8290a4b3e933c",
+      "published_at": "2026-07-10T20:00:00+00:00",
+      "published_index": 2927,
+      "window_start": "2026-07-10T16:15:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 569.67,
+        "low": 563.85,
+        "normalized_range": 0.010309278350515351,
+        "percentile": 0.0703125,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 569.67,
+      "id": "a2cf2132c61fe3dc8f89515706f675c7b32ba5c36ba9db48534f95913bca07ff",
+      "last_valid_index": 2976,
+      "low": 563.85,
+      "prefix_hash": "afe17625711bb5e58c9a0422d86a510117abf457c4eb8ae17d21afddecfcfa16",
+      "published_at": "2026-07-13T12:15:00+00:00",
+      "published_index": 2960,
+      "window_start": "2026-07-13T08:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 558.55,
+        "low": 550.26,
+        "normalized_range": 0.014991771705517411,
+        "percentile": 0.18125,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 558.55,
+      "id": "c3e3fc4168f9a675e0823617d6970150edfb7c3ed0f9c9054b8141ed633aaa7a",
+      "last_valid_index": 3008,
+      "low": 550.26,
+      "prefix_hash": "def8f4e4a35510997402c36d3b1d7a36c200035cdc2a9bd3921c71899dee6ecd",
+      "published_at": "2026-07-13T20:15:00+00:00",
+      "published_index": 2992,
+      "window_start": "2026-07-13T16:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 554.31,
+        "low": 548.28,
+        "normalized_range": 0.010929853181076622,
+        "percentile": 0.0890625,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 554.31,
+      "id": "a88861cd271dd0bd4292af899b470c7abc1a03fb4248e80dbf3e7155391ad7e9",
+      "last_valid_index": 3023,
+      "low": 548.28,
+      "prefix_hash": "29d2fbec4477a3ff205273a3e8d65776e352749b80378b0bcc5f755d11b7f100",
+      "published_at": "2026-07-14T00:00:00+00:00",
+      "published_index": 3007,
+      "window_start": "2026-07-13T20:15:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 575.0,
+        "low": 567.1,
+        "normalized_range": 0.013833256725107759,
+        "percentile": 0.16875,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 575.0,
+      "id": "c067cd65abd2a974e7d223e1d89446dcc72caaec383d47b0c908f75efc9384f5",
+      "last_valid_index": 3067,
+      "low": 567.1,
+      "prefix_hash": "fd79b726ea30220a23c50bae3591b2b836f56194d4a06e79941abb2bb669fed7",
+      "published_at": "2026-07-14T19:00:00+00:00",
+      "published_index": 3051,
+      "window_start": "2026-07-14T15:15:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 578.65,
+        "low": 572.91,
+        "normalized_range": 0.009999303184447094,
+        "percentile": 0.0515625,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 578.65,
+      "id": "1698051862fec415f24cc10823cfe560119bd15b902b96454c2f419033d6dfda",
+      "last_valid_index": 3104,
+      "low": 572.91,
+      "prefix_hash": "adc7efe3e9f75417c2488e195a66fa13314a8fc64ebecd0185e1b1ae5b33245b",
+      "published_at": "2026-07-15T12:15:00+00:00",
+      "published_index": 3088,
+      "window_start": "2026-07-15T08:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 556.66,
+        "low": 549.08,
+        "normalized_range": 0.013675645443556258,
+        "percentile": 0.1609375,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 556.66,
+      "id": "f013cc7a36d8a7b16c7532ba6db42a3a63f15d98b1ecc1f684afbe7e9259be75",
+      "last_valid_index": 3141,
+      "low": 549.08,
+      "prefix_hash": "e9d66bfd1a3f88bbc04c6fbad18d63b22ce958fb240a49bfe8f5a5edb8fce33c",
+      "published_at": "2026-07-15T21:30:00+00:00",
+      "published_index": 3125,
+      "window_start": "2026-07-15T17:45:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 533.785,
+        "low": 525.43,
+        "normalized_range": 0.015751668489121864,
+        "percentile": 0.2,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 533.785,
+      "id": "8e4f07243cdb3cd09fe9004074277f16cd865315e696507ed0e3adead898e4b5",
+      "last_valid_index": 3199,
+      "low": 525.43,
+      "prefix_hash": "7772c3dcfa49973305ffcedb5c52edc338b5c82fd251fac449f60c4ae3f94c7f",
+      "published_at": "2026-07-16T20:00:00+00:00",
+      "published_index": 3183,
+      "window_start": "2026-07-16T16:15:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 525.63,
+        "low": 518.39,
+        "normalized_range": 0.013943187289359671,
+        "percentile": 0.1875,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 525.63,
+      "id": "866552d856d84a1f4176afbe3a1fc459914c39d9e0d8dfe01aabd117e482d8c9",
+      "last_valid_index": 3272,
+      "low": 518.39,
+      "prefix_hash": "c5b001d9e802339214f3e42af61d127c50c3d5a5873dfc1cb3e021e459560ccd",
+      "published_at": "2026-07-17T22:15:00+00:00",
+      "published_index": 3256,
+      "window_start": "2026-07-17T18:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 529.84,
+        "low": 522.48,
+        "normalized_range": 0.014075349015108077,
+        "percentile": 0.190625,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 529.84,
+      "id": "c28b83920fde32d3ec99323d3df2f964e6976f4b32ad58bf47dcfcd3fc87fbb0",
+      "last_valid_index": 3337,
+      "low": 522.48,
+      "prefix_hash": "7a8c850eaa28e1639889a85bf9100d85745bce55aaf562452e9b81b5ac3b44b8",
+      "published_at": "2026-07-20T22:30:00+00:00",
+      "published_index": 3321,
+      "window_start": "2026-07-20T18:45:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 555.16,
+        "low": 549.0,
+        "normalized_range": 0.011170147273677072,
+        "percentile": 0.084375,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 555.16,
+      "id": "0d54d125bc238acb1aa413feaa8b6d6a03c4c916707720fa38f562fb76ea2173",
+      "last_valid_index": 3388,
+      "low": 549.0,
+      "prefix_hash": "555de6dad55d5354ff1f7ac468a2b2025a8de023b8171c42bd4908f57be4a97b",
+      "published_at": "2026-07-21T19:15:00+00:00",
+      "published_index": 3372,
+      "window_start": "2026-07-21T15:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 561.18,
+        "low": 554.62,
+        "normalized_range": 0.011744906363017771,
+        "percentile": 0.1203125,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 561.18,
+      "id": "740899354b26052d3a5696db8b51d8bdfc3cf48e6f868488b061dd0150736d4d",
+      "last_valid_index": 3451,
+      "low": 554.62,
+      "prefix_hash": "604910cf8d50a6eda52a4581da832da917657eed2a016ffb933151bc05747f78",
+      "published_at": "2026-07-22T19:00:00+00:00",
+      "published_index": 3435,
+      "window_start": "2026-07-22T15:15:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 552.0,
+        "low": 546.32,
+        "normalized_range": 0.010290041486258719,
+        "percentile": 0.0546875,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 552.0,
+      "id": "59992ff59a1cb1ec24cd9261286d0c1fe149d7370753542a3c843485575934b1",
+      "last_valid_index": 3552,
+      "low": 546.32,
+      "prefix_hash": "54dd79234c7586b58574d3b03f7239e28727088b7a37e8a44127384ca652d51f",
+      "published_at": "2026-07-24T12:15:00+00:00",
+      "published_index": 3536,
+      "window_start": "2026-07-24T08:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 529.52,
+        "low": 522.21,
+        "normalized_range": 0.013839454751987779,
+        "percentile": 0.178125,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 529.52,
+      "id": "e9c9ddb73159d3778a14b53c3c9860f53d64629f6f6c76206d4fce7e08565fb2",
+      "last_valid_index": 3593,
+      "low": 522.21,
+      "prefix_hash": "981d4cf53d22f7ea5c9f691721460525512db6d1d09789302ca061400f110d68",
+      "published_at": "2026-07-24T22:30:00+00:00",
+      "published_index": 3577,
+      "window_start": "2026-07-24T18:45:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 543.98,
+        "low": 537.25,
+        "normalized_range": 0.012483074583124698,
+        "percentile": 0.134375,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 543.98,
+      "id": "71da5f6cc7c1edbd07dd64962407eac1bf13073eb23afe78b4fcdde4cf0510ac",
+      "last_valid_index": 3615,
+      "low": 537.25,
+      "prefix_hash": "861e8dada542aab30fafad9f48ccf515eaa795e51930565f23e8ca256dc7acdc",
+      "published_at": "2026-07-27T12:00:00+00:00",
+      "published_index": 3599,
+      "window_start": "2026-07-27T08:15:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 518.8099,
+        "low": 511.8,
+        "normalized_range": 0.013680523028883606,
+        "percentile": 0.159375,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 518.8099,
+      "id": "afb3c2be4aaa1130669efe3fd0a04876e1a96072111ab8fdb28ec01c21e52dcb",
+      "last_valid_index": 3659,
+      "low": 511.8,
+      "prefix_hash": "8fd092f14bf538a22db1843f60f7499092d7ac45bf34af3558a99b018f792b9a",
+      "published_at": "2026-07-27T23:00:00+00:00",
+      "published_index": 3643,
+      "window_start": "2026-07-27T19:15:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 507.13,
+        "low": 499.26,
+        "normalized_range": 0.015670891369062443,
+        "percentile": 0.13125,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 507.13,
+      "id": "9cdbc1c6e6bc22d28d55c34b20406c1685a0aede01834812c5df7a1add6bd493",
+      "last_valid_index": 3834,
+      "low": 499.26,
+      "prefix_hash": "0e94429acad6dca6f771c25508a4fb37d4aee75daffdc879ae7ae2869be4966b",
+      "published_at": "2026-07-30T18:45:00+00:00",
+      "published_index": 3818,
+      "window_start": "2026-07-30T15:00:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 505.89,
+        "low": 500.7787,
+        "normalized_range": 0.010202195608782378,
+        "percentile": 0.0328125,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 505.89,
+      "id": "8e922ba1f2e5f376ef3c05e005fc1410fb7d55e248af859ee4e31f377cef10fa",
+      "last_valid_index": 3919,
+      "low": 500.7787,
+      "prefix_hash": "b5ce5852f1ae35c3b905b2de8c6d08120476885189e26e402b117968f0462ce2",
+      "published_at": "2026-08-01T00:00:00+00:00",
+      "published_index": 3903,
+      "window_start": "2026-07-31T20:15:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 510.95,
+        "low": 501.73,
+        "normalized_range": 0.018148534535362026,
+        "percentile": 0.146875,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 510.95,
+      "id": "235a4bf37322b281361f63ff60b88e111a182b9ff0e77a88370cd4fef90d1741",
+      "last_valid_index": 3966,
+      "low": 501.73,
+      "prefix_hash": "9d6b9c49c3f267e8547e0b42612b5f0141e66274a6127706d337931e1a872499",
+      "published_at": "2026-08-03T19:45:00+00:00",
+      "published_index": 3950,
+      "window_start": "2026-08-03T16:00:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 544.97,
+        "low": 533.96,
+        "normalized_range": 0.0202486482510023,
+        "percentile": 0.196875,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 544.97,
+      "id": "e1b8b6558efe5915c7b1d1acdce76ec01d0fe848236d0be748589f7d8c8cd616",
+      "last_valid_index": 4027,
+      "low": 533.96,
+      "prefix_hash": "0bad7ef6544045af2c1dfeef4e27067e1a570d0aab9a1a53fba09a9c30085c39",
+      "published_at": "2026-08-04T19:00:00+00:00",
+      "published_index": 4011,
+      "window_start": "2026-08-04T15:15:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 539.79,
+        "low": 530.88,
+        "normalized_range": 0.016708860759493613,
+        "percentile": 0.096875,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 539.79,
+      "id": "a0efd6427b57d3c6bf286a055ee68e0f4fd843fc4c73dbce6f81a60c30925f2d",
+      "last_valid_index": 4064,
+      "low": 530.88,
+      "prefix_hash": "b9647dca2a15d73237624175b3abc0d2b6dddac575e88a7cdbb51fd9de4ecb3a",
+      "published_at": "2026-08-05T12:15:00+00:00",
+      "published_index": 4048,
+      "window_start": "2026-08-05T08:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 539.4,
+        "low": 528.88,
+        "normalized_range": 0.01959761549925481,
+        "percentile": 0.1625,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 539.4,
+      "id": "d415f3fe157c4694d6b4561744069ce9377f87cd67e326ab564277a4c810a513",
+      "last_valid_index": 4089,
+      "low": 528.88,
+      "prefix_hash": "d4f3afad7b088d54e00af07214753cc76a8cc47fa15f1da23d3e48c5be51eaaf",
+      "published_at": "2026-08-05T18:30:00+00:00",
+      "published_index": 4073,
+      "window_start": "2026-08-05T14:45:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 538.81,
+        "low": 527.1,
+        "normalized_range": 0.021986894233838265,
+        "percentile": 0.1859375,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 538.81,
+      "id": "ac7d674bf53d365b150864e8cb9f705a0ee6d8fbdef54eed4a302f4d014298ac",
+      "last_valid_index": 4105,
+      "low": 527.1,
+      "prefix_hash": "8cc62b1f4513ee6b7a657c2dedaf75cfcfa0ffa1d4a9504b24487cda2ca8dc32",
+      "published_at": "2026-08-05T22:30:00+00:00",
+      "published_index": 4089,
+      "window_start": "2026-08-05T18:45:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 542.56,
+        "low": 531.28,
+        "normalized_range": 0.02101262993182067,
+        "percentile": 0.16875,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 542.56,
+      "id": "abd78be658b6e08a04d07bf3f8b43e432e45dbf87a2e0f3811e9e9049c547999",
+      "last_valid_index": 4151,
+      "low": 531.28,
+      "prefix_hash": "ab7857e943559f59f71b1fc105c509764ff8097ebb08fb14523189b554994e61",
+      "published_at": "2026-08-06T18:00:00+00:00",
+      "published_index": 4135,
+      "window_start": "2026-08-06T14:15:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 543.518,
+        "low": 533.42,
+        "normalized_range": 0.018717330861909305,
+        "percentile": 0.1640625,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 543.518,
+      "id": "a4fa2bca6f973e20d92f3993ffae3436bdc50e9d1b0d72a09b765a4f50a18fcf",
+      "last_valid_index": 4217,
+      "low": 533.42,
+      "prefix_hash": "4695a62bf94ef8868afa326aea7500409b9fe56e13d8d95698e3fb9e1788fca6",
+      "published_at": "2026-08-07T18:30:00+00:00",
+      "published_index": 4201,
+      "window_start": "2026-08-07T14:45:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 541.08,
+        "low": 533.75,
+        "normalized_range": 0.01370093457943933,
+        "percentile": 0.090625,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 541.08,
+      "id": "8f436f039094d641ddb1b9bd5e31686aafb6971e585f45f1118ed06d3b15766b",
+      "last_valid_index": 4281,
+      "low": 533.75,
+      "prefix_hash": "50e408df4a4a51928c0b6c58cbd42d0187812c60c4fdd515e17b0ffe64e7b5e6",
+      "published_at": "2026-08-10T18:30:00+00:00",
+      "published_index": 4265,
+      "window_start": "2026-08-10T14:45:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 537.69,
+        "low": 530.1,
+        "normalized_range": 0.01429890167856678,
+        "percentile": 0.146875,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 537.69,
+      "id": "fd87f6e4ec79deb0bf328ecd92bfff3b6f710636f2cf2e3a14a40391d59e4285",
+      "last_valid_index": 4346,
+      "low": 530.1,
+      "prefix_hash": "9a5685dd229b509662bb7b07e58fb73d42c3207f1c8f0c231b85e1338bb9a4a4",
+      "published_at": "2026-08-11T18:45:00+00:00",
+      "published_index": 4330,
+      "window_start": "2026-08-11T15:00:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 546.12,
+        "low": 541.9,
+        "normalized_range": 0.007742266906395677,
+        "percentile": 0.0125,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 546.12,
+      "id": "8e4a4ea415f80a8fbb13e2dfc1051286cab06511e1f0768e970acbd815618868",
+      "last_valid_index": 4384,
+      "low": 541.9,
+      "prefix_hash": "4c1aff3c50f58e8be4ad2146fdf51b669184cedf71c1466aae6f314e8283e4ac",
+      "published_at": "2026-08-12T12:15:00+00:00",
+      "published_index": 4368,
+      "window_start": "2026-08-12T08:30:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 554.11,
+        "low": 547.5,
+        "normalized_range": 0.01200944767441863,
+        "percentile": 0.1,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 554.11,
+      "id": "8939386bf326d108b9109fe49526fb6dba52b2c3a41dc892e470dea76bccb30c",
+      "last_valid_index": 4402,
+      "low": 547.5,
+      "prefix_hash": "1251a6ac98867cad8f4d9554fb97044dc7b0d54547d71e5e55089d5121e4bf61",
+      "published_at": "2026-08-12T16:45:00+00:00",
+      "published_index": 4386,
+      "window_start": "2026-08-12T13:00:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 562.25,
+        "low": 555.31,
+        "normalized_range": 0.01243727598566318,
+        "percentile": 0.1484375,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 562.25,
+      "id": "f076d7ee827a4b0ce428ed530cc01bf63d4a2ba1217c3da0451e051079828332",
+      "last_valid_index": 4473,
+      "low": 555.31,
+      "prefix_hash": "a9a5badb4f9aaf250018a5cd8b6baf6b6251fa0764a08861bfcd50a57b6eadd9",
+      "published_at": "2026-08-13T18:30:00+00:00",
+      "published_index": 4457,
+      "window_start": "2026-08-13T14:45:00+00:00"
+    },
+    {
+      "feature": {
+        "compressed": true,
+        "high": 553.42,
+        "low": 547.97,
+        "normalized_range": 0.009866932198786878,
+        "percentile": 0.0671875,
+        "reason": "own_history_rank",
+        "status": "READY"
+      },
+      "high": 553.42,
+      "id": "1116175b215e4ab063ff3ec90ed8821af95b1df852aca729f573decc46339b96",
+      "last_valid_index": 4493,
+      "low": 547.97,
+      "prefix_hash": "a0428fc4247642116138f59b10a1255865e4296e83480f5f32e6a6eb8b751f21",
+      "published_at": "2026-08-13T23:30:00+00:00",
+      "published_index": 4477,
+      "window_start": "2026-08-13T19:45:00+00:00"
+    }
+  ]
+}

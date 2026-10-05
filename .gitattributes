@@ -35,3 +35,11 @@ richping/research_v2/strategy/h0003_efficacy.py -text
 docs/H0003_FIRST_EFFICACY.md -text
 research/decision_records/H0003-first-efficacy-v1.yaml -text
 docs/H0003_DISCOVERY_RESULTS.md -text
+# H0004 pre-frequency source and evidence bind exact bytes.
+richping/research_v2/strategy/h0004_compression.py -text
+scripts/h0004_*.py -text
+research/hypotheses/H0004-r01.yaml -text
+research/strategy_specs/H0004-r01-candidate.yaml -text
+docs/H0004_COMPRESSION_RESEARCH.md -text
+tests/test_h0004_*.py -text
+research/data_evidence/h0004-*/**/*.xml binary

@@ -1,0 +1,439 @@
+{
+  "actual_replays": 2,
+  "admission_reuse": "PASS_CAUSAL_HISTORICAL_DISCOVERY_ONLY_NOT_LIVE_PIT",
+  "breakout_attempt_definition": "Each subsequent eligible completed-close comparison to an active range, not a high touch.",
+  "candidate_stream_hash": "a376f4d037988d01a031ee37364169170bc58800f31281756ccccf6893329bd9",
+  "comparators": 0,
+  "dataset_hash": "4b39f109e8cffce8a7e680e773b560b307e21dd5a92dcad6d06fcd47bb0aa8bd",
+  "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+  "denominators": {
+    "cancelled_episodes": 33,
+    "compression_feature_READY_bars": 3825,
+    "compression_state_bars": 875,
+    "compression_state_runs": 86,
+    "consumed_episodes": 39,
+    "distinct_candidate_sessions": 26,
+    "expired_episodes": 10,
+    "final_candidate_events": 39,
+    "frozen_ranges": 83,
+    "gap_resets": 0,
+    "pending_episodes_at_scope_end": 1,
+    "total_eligible_bars": 4480,
+    "unique_compression_episodes": 83,
+    "upside_breakout_attempts": 544
+  },
+  "efficacy": "NOT_RUN",
+  "final_freeze": "USER_DECISION_REQUIRED",
+  "forbidden_call_counts": {
+    "MFE_MAE": 0,
+    "confirmation_outcomes": 0,
+    "efficacy_statistics": 0,
+    "forward_module_imports": 0,
+    "forward_window_queries": 0,
+    "future_return_queries": 0,
+    "market_queries": 0,
+    "network_calls": 0,
+    "outcome_accessors": 0,
+    "profitability_calculations": 0,
+    "return_calculations": 0,
+    "store_access": 0
+  },
+  "frozen_range_stream_hash": "25b606b903572532faae8349f75ab29bf76c7ea43b9ec6c4df1f876e0615e29b",
+  "independence": "No prior strategy-state imports/references; common OHLC/session utilities only.",
+  "outcome_access": 0,
+  "parameter_trials": 1,
+  "prefix_equal": true,
+  "prefix_replays": 1,
+  "prior_evidence_unchanged": true,
+  "prior_files_preserved": 598,
+  "profitability": "NOT_RUN",
+  "repeat_equal": true,
+  "schema": "h0004_frequency_evidence_v1",
+  "segments": {
+    "AFTER_HOURS": {
+      "candidates": 8,
+      "compressed": 446,
+      "eligible_bars": 1120,
+      "feature_READY": 960,
+      "ranges": 29
+    },
+    "PREMARKET": {
+      "candidates": 18,
+      "compressed": 255,
+      "eligible_bars": 1540,
+      "feature_READY": 1305,
+      "ranges": 27
+    },
+    "RTH": {
+      "candidates": 13,
+      "compressed": 174,
+      "eligible_bars": 1820,
+      "feature_READY": 1560,
+      "ranges": 27
+    }
+  },
+  "sessions": {
+    "2026-05-05": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 0
+    },
+    "2026-05-06": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 0
+    },
+    "2026-05-07": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 0
+    },
+    "2026-05-08": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 0
+    },
+    "2026-05-11": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 0
+    },
+    "2026-05-12": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 0
+    },
+    "2026-05-13": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 0
+    },
+    "2026-05-14": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 0
+    },
+    "2026-05-15": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 0
+    },
+    "2026-05-18": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 0
+    },
+    "2026-05-19": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 2
+    },
+    "2026-05-20": {
+      "candidates": 3,
+      "eligible_bars": 64,
+      "ranges": 3
+    },
+    "2026-05-21": {
+      "candidates": 1,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-05-22": {
+      "candidates": 1,
+      "eligible_bars": 64,
+      "ranges": 2
+    },
+    "2026-05-26": {
+      "candidates": 2,
+      "eligible_bars": 64,
+      "ranges": 2
+    },
+    "2026-05-27": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-05-28": {
+      "candidates": 1,
+      "eligible_bars": 64,
+      "ranges": 2
+    },
+    "2026-05-29": {
+      "candidates": 1,
+      "eligible_bars": 64,
+      "ranges": 2
+    },
+    "2026-06-01": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 2
+    },
+    "2026-06-02": {
+      "candidates": 3,
+      "eligible_bars": 64,
+      "ranges": 2
+    },
+    "2026-06-03": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 0
+    },
+    "2026-06-04": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 0
+    },
+    "2026-06-05": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-06-08": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-06-09": {
+      "candidates": 1,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-06-10": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 0
+    },
+    "2026-06-11": {
+      "candidates": 1,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-06-12": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 2
+    },
+    "2026-06-15": {
+      "candidates": 2,
+      "eligible_bars": 64,
+      "ranges": 2
+    },
+    "2026-06-16": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-06-17": {
+      "candidates": 2,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-06-18": {
+      "candidates": 2,
+      "eligible_bars": 64,
+      "ranges": 2
+    },
+    "2026-06-22": {
+      "candidates": 2,
+      "eligible_bars": 64,
+      "ranges": 3
+    },
+    "2026-06-23": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 0
+    },
+    "2026-06-24": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-06-25": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 0
+    },
+    "2026-06-26": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-06-29": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-06-30": {
+      "candidates": 3,
+      "eligible_bars": 64,
+      "ranges": 3
+    },
+    "2026-07-01": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 2
+    },
+    "2026-07-02": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-07-06": {
+      "candidates": 2,
+      "eligible_bars": 64,
+      "ranges": 3
+    },
+    "2026-07-07": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 2
+    },
+    "2026-07-08": {
+      "candidates": 1,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-07-09": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 2
+    },
+    "2026-07-10": {
+      "candidates": 1,
+      "eligible_bars": 64,
+      "ranges": 2
+    },
+    "2026-07-13": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 3
+    },
+    "2026-07-14": {
+      "candidates": 1,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-07-15": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 2
+    },
+    "2026-07-16": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-07-17": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-07-20": {
+      "candidates": 1,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-07-21": {
+      "candidates": 1,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-07-22": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-07-23": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 0
+    },
+    "2026-07-24": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 2
+    },
+    "2026-07-27": {
+      "candidates": 1,
+      "eligible_bars": 64,
+      "ranges": 2
+    },
+    "2026-07-28": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 0
+    },
+    "2026-07-29": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 0
+    },
+    "2026-07-30": {
+      "candidates": 1,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-07-31": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-08-03": {
+      "candidates": 2,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-08-04": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-08-05": {
+      "candidates": 1,
+      "eligible_bars": 64,
+      "ranges": 3
+    },
+    "2026-08-06": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-08-07": {
+      "candidates": 1,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-08-10": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-08-11": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 1
+    },
+    "2026-08-12": {
+      "candidates": 1,
+      "eligible_bars": 64,
+      "ranges": 2
+    },
+    "2026-08-13": {
+      "candidates": 0,
+      "eligible_bars": 64,
+      "ranges": 2
+    }
+  },
+  "sessions_in_scope": 70,
+  "spec_hash": "c8497d0220220a1308407cdf6cbef800da47975aca20d5cf587d5005c853b1b7",
+  "status": "EXECUTED_REAL_FREQUENCY_ONLY",
+  "trace_hash": "8ad7bccbd814fe26ff6d9291b9b606ab6f63a208ac68f3ec3daa089941dc6cae",
+  "unavailable_and_retirement_reasons": {
+    "feature:UNAVAILABLE:history_warmup": 640,
+    "feature:UNAVAILABLE:window_warmup": 15,
+    "input:READY:completed_price": 4480,
+    "retirement:consumed": 39,
+    "retirement:downside_cancelled": 33,
+    "retirement:expired": 10
+  }
+}

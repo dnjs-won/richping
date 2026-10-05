@@ -1,0 +1,37 @@
+schema: h0004_hypothesis_frequency_decision_v1
+hypothesis: H0004-r01
+owner_thesis_status: SELECTED_2026_10_05
+family: VOLATILITY_COMPRESSION_BREAKOUT_CONTINUATION
+direction: LONG
+status: PROVISIONAL_MECHANICALLY_EXECUTABLE_OWNER_FREEZE_PENDING
+definition_selected_ex_ante:
+  measure: 16-bar enclosing OHLC range / completed close
+  history: Immediately previous 640 measures, excluding current measure
+  rank: Fraction historical measure <= current; ties fully counted; rank <= 0.20
+  persistence: Multi-bar window only
+  range: Frozen window highest high / lowest low at armed compression publication
+  breakout: Subsequent completed close > frozen high; equality and high-touch excluded
+  expiry: Next 16 scheduled slots inclusive; expire before slot 17
+  cancellation: Close < frozen low, gap, or invalid input
+  rearm: READY noncompression with no active range then READY compression; gap cannot rearm
+  session: 04:00-20:00 ET; official adjacency carries history/episode, closure consumes no slot
+  history_segments: Pooled premarket/RTH/after-hours
+alternatives_reviewed_not_executed: [True-range/ATR aggregate, absolute relative threshold, extra persistence, buffer/retest]
+parameter_trials: 1
+comparators: 0
+threshold_tuning: false
+outcome_access: 0
+evidence: research/data_evidence/h0004-frequency-20261005/verification-v2/frequency-audit.json
+candidate_events: 39
+candidate_sessions: 26
+compression_episodes: 83
+episode_dispositions: {consumed: 39, cancelled: 33, expired: 10, pending: 1}
+input_admission: REUSED_IMMUTABLE_SEALED70_SOXX_CAUSAL_HISTORICAL_DISCOVERY_ONLY
+discovery_prior_exposure: H0001/H0002/H0003; not untouched OOS
+independence: Pure SOXX OHLC/time; no prior strategy state, benchmark or contextual filters
+prior_evidence_preserved: true
+existing_tracks: H0001/H0002/H0003 remain frozen awaiting future confirmation; H0001 historically sparse
+owner_decision: Approve complete provisional semantics including 16/640/20%, pooled extended segments and 16-slot expiry before final freeze.
+efficacy_preregistration: NOT_STARTED; horizon/controls/costs/uncertainty/floor/confirmation/stopping unknown
+next_P0: H0004_SIGNAL_FREEZE_PREREGISTRATION
+next_action_status: USER_DECISION_REQUIRED

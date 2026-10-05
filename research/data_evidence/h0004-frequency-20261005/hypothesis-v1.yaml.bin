@@ -1,0 +1,46 @@
+schema_version: richping_research_hypothesis_v1
+hypothesis_id: H0004
+revision: 1
+status: DRAFT
+created_at: '2026-10-05T00:00:00Z'
+updated_at: '2026-10-05T00:00:00Z'
+supersedes: null
+title: SOXX own-volatility compression followed by upside range breakout continuation
+family: VOLATILITY_COMPRESSION_BREAKOUT_CONTINUATION
+thesis: A recent price range unusually narrow relative to SOXX's own causal history, followed by its first completed upside close breakout, may precede short-horizon upward continuation.
+source:
+  type: chat
+  discussion_date: '2026-10-05'
+  reference: Owner selected independent pure compression / breakout / continuation thesis and LONG direction.
+  issue: null
+observations: [Quiet price movement can form a bounded range; post-breakout persistence is untested.]
+rules:
+  regime: [No contextual trend or cross-asset filters.]
+  setup: [16-bar normalized enclosing range in own previous 640-observation bottom quintile.]
+  trigger: [One subsequent strict upside close breakout of an immutable range per episode.]
+  exit: [UNKNOWN_PENDING_PREREGISTRATION]
+  invalidation: [16-slot expiry, downside completed-close cancellation, missing-slot cancellation.]
+timeframes:
+  regime: []
+  signal: [15m]
+  confirmation: []
+  execution: []
+required_data: [Immutable admitted SOXX Alpaca SIP/raw USD/share extended 15m OHLC and time only.]
+unknowns: [Owner final signal freeze, efficacy horizon, controls, costs, uncertainty, evidence floor and untouched confirmation.]
+test:
+  null_hypothesis: UNKNOWN_PENDING_PREREGISTRATION
+  primary_metric: UNKNOWN_PENDING_PREREGISTRATION
+  decision_rule: UNKNOWN_PENDING_PREREGISTRATION
+  cost_assumption: UNKNOWN_PENDING_PREREGISTRATION
+  sample_unit: Compression episode; overlapping windows and sessions remain dependent.
+  discovery_period: '2026-05-05..2026-08-13; sealed 70 sessions, frequency only'
+  confirmatory_period: null
+  leakage_risks:
+    - Same discovery vintage already exposed in H0001/H0002/H0003 research; not untouched OOS.
+    - Historical bar-end availability assumed, not observed live PIT.
+    - No new outcome or candidate-conditioned future-price reads in H0004 action.
+    - Raw split-only identity; dividend feature normalization and future outcome accounting separate.
+  multiple_testing_family: One ex-ante provisional tuple, no comparator, no parameter grid.
+experiment_refs: []
+evidence_refs: [research/data_evidence/h0004-frequency-20261005/frequency-audit.json]
+notes: No MACD, prior strategy state, QQQ, volume, VWAP, manual levels, options, news, macro or Daily/H1 filters.

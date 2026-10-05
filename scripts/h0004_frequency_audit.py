@@ -1,0 +1,293 @@
+"""H0004 sealed frequency replay. No forward outcome module is imported."""
+from argparse import ArgumentParser
+from collections import Counter
+from contextlib import contextmanager, ExitStack
+from datetime import datetime, timedelta, timezone
+from hashlib import sha256
+import importlib.abc
+import io
+import json
+from pathlib import Path
+import subprocess
+import sys
+import tarfile
+from unittest.mock import patch
+import yaml
+
+from richping.core import digest
+from richping.research_v2.contracts import payload
+from richping.research_v2.market_data import MarketDataset
+from richping.research_v2.sessions import segment
+from richping.research_v2.strategy.h0004_compression import OHLCBar, CompressionStream, Specification
+
+ORIGINAL = Path('research/data_evidence/h0004-frequency-20261005')
+ROOT = ORIGINAL/'verification-v2'
+SOURCE = Path('research/data_evidence/h0001-alpaca-70-20261004')
+SPEC = Path('research/strategy_specs/H0004-r01-candidate.yaml')
+BASE = '74b67518f544bfdcfd2b45c07198f605291992a5'
+DATASET_ID = 'soxx-alpaca-sip-15m-discovery-20260505-20260813-v1'
+DATASET_HASH = '4b39f109e8cffce8a7e680e773b560b307e21dd5a92dcad6d06fcd47bb0aa8bd'
+EXECUTION = [SPEC, Path('research/hypotheses/H0004-r01.yaml'),
+             Path('docs/H0004_COMPRESSION_RESEARCH.md'),
+             Path('richping/research_v2/strategy/h0004_compression.py'),
+             Path('scripts/h0004_frequency_audit.py')]
+GUARDS = {
+    'richping.engine.observe': 'future_return_queries',
+    'richping.evaluation.evaluate_outcome_eligibility': 'future_return_queries',
+    'richping.data.Dataset.window': 'forward_window_queries',
+    'richping.store.Store.load_dataset': 'store_access',
+    'richping.research_v2.store.ResearchStore.load_dataset': 'store_access',
+    'richping.research_v2.market_data.MarketDataset.query': 'market_queries',
+    'richping.engine.features': 'return_calculations',
+    'richping.evaluation.cohort_returns': 'return_calculations',
+    'richping.evaluation.metrics': 'profitability_calculations',
+    'richping.evaluation.estimate': 'efficacy_statistics',
+    'richping.evaluation.block_ci': 'efficacy_statistics',
+    'socket.socket.connect': 'network_calls',
+    'socket.create_connection': 'network_calls',
+    'urllib.request.urlopen': 'network_calls',
+    'curl_cffi.requests.get': 'network_calls',
+}
+OUTCOME_MODULES = {
+    'richping.research_v2.strategy.h0002_efficacy':
+        ['scheduled_window', 'evaluate_membership', 'family_metrics', 'terminal_inference'],
+    'richping.research_v2.strategy.h0003_efficacy':
+        ['metrics', 'exploratory_disposition'],
+}
+
+
+def encode(value):
+    return (json.dumps(value, sort_keys=True, indent=2)+'\n').encode()
+
+
+def fingerprint(path):
+    return sha256(Path(path).read_bytes()).hexdigest()
+
+
+def preserved_raw(path, raw):
+    # Same six legacy Git-text exceptions as earlier frozen audit manifests.
+    legacy = {'mechanical-check.json', 'verification.json', 'tests.json',
+              'offline-proof-v1.json', 'offline-proof-v2.json', 'smoke.json'}
+    if not path.startswith('research/data_evidence/') or (
+            Path(path).name in legacy and path.startswith((
+                'research/data_evidence/h0001-15m-freeze-', 'research/data_evidence/h0001-daily-pit-',
+                'research/data_evidence/v2-real-'))):
+        raw = raw.replace(b'\r\n', b'\n')
+    return sha256(raw).hexdigest()
+
+
+def preserved_bytes(path):
+    return preserved_raw(path, Path(path).read_bytes())
+
+
+def write_new(path, raw):
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if path.exists():
+        if path.read_bytes() != raw:
+            raise ValueError('Immutable artifact collision: '+str(path))
+    else:
+        with path.open('xb') as handle:
+            handle.write(raw)
+
+
+def seal(root=ROOT):
+    spec = yaml.safe_load(SPEC.read_text(encoding='utf-8'))
+    if spec['status'] != 'PROVISIONAL_FREQUENCY_ONLY_NOT_SIGNAL_FREEZE' or spec['outcomes'] != 'FORBIDDEN':
+        raise ValueError('Provisional outcome-free definition required')
+    Specification(**spec['parameters'])
+    paths = subprocess.run(['git', 'ls-tree', '-r', '--name-only', BASE],
+                           capture_output=True, text=True, check=True).stdout.splitlines()
+    protected = [p for p in paths if p.startswith(('research/', 'richping/', 'scripts/', 'tests/', 'docs/'))
+                 or p == 'conftest.py']
+    expected = {}
+    archive = subprocess.run(['git','archive','--format=tar',BASE],check=True,capture_output=True).stdout
+    with tarfile.open(fileobj=io.BytesIO(archive)) as tree:
+        for p in protected:
+            expected[p] = preserved_raw(p,tree.extractfile(p).read())
+            if preserved_bytes(p) != expected[p]:
+                raise ValueError('Prior Git source changed before sealing: '+p)
+    manifest = dict(schema='h0004_pre_frequency_manifest_v1', base_commit=BASE,
+                    sealed_at=datetime.now(timezone.utc).isoformat(), parameter_trials=1, comparators=0,
+                    outcomes='FORBIDDEN', owner_final_freeze='USER_DECISION_REQUIRED',
+                    execution_files={p.as_posix(): fingerprint(p) for p in EXECUTION},
+                    input_files={str(SOURCE/n).replace('\\','/'): fingerprint(SOURCE/n)
+                                 for n in ('intraday-vintage.json', 'admission.json')},
+                    preserved_files=expected,
+                    predecessor=dict(manifest_sha256=fingerprint(ORIGINAL/'preexecution-manifest.json'),
+                                     report_sha256=fingerprint(ORIGINAL/'frequency-audit.json'),
+                                     source_archive='frequency-runner-v1.py.bin',
+                                     initial_replays=2, initial_prefix_replays=1, additional_parameter_trials=0,
+                                     reason='Initial preservation manifest mistakenly pinned overwritten historical tests/conftest.py; restored original, moved fixture to plugin and now compare every protected file to Git BASE. Signal/spec/input unchanged.'))
+    if (root/'preexecution-manifest.json').exists():
+        manifest['sealed_at'] = json.loads((root/'preexecution-manifest.json').read_bytes())['sealed_at']
+    write_new(root/'preexecution-manifest.json', encode(manifest))
+    return manifest
+
+
+def verify_manifest(root=ROOT):
+    manifest = json.loads((root/'preexecution-manifest.json').read_bytes())
+    if manifest['base_commit'] != BASE or manifest['parameter_trials'] != 1 or manifest['outcomes'] != 'FORBIDDEN':
+        raise ValueError('Manifest contract mismatch')
+    for group in ('execution_files', 'input_files', 'preserved_files'):
+        for path, expected in manifest[group].items():
+            actual = preserved_bytes(path) if group == 'preserved_files' else fingerprint(path)
+            if actual != expected:
+                raise ValueError('Sealed/prior file changed: '+path)
+    return manifest
+
+
+@contextmanager
+def no_outcomes():
+    counts = {key: 0 for key in set(GUARDS.values()) | {
+        'MFE_MAE', 'confirmation_outcomes', 'forward_module_imports', 'outcome_accessors'}}
+    def reject(category):
+        def stop(*args, **kwargs):
+            counts[category] += 1
+            raise AssertionError('H0004 forbids '+category)
+        return stop
+    class NoForwardModules(importlib.abc.MetaPathFinder):
+        def find_spec(self, fullname, path=None, target=None):
+            if ('efficacy' in fullname or fullname.startswith('richping.outcomes')):
+                reject('forward_module_imports')()
+    blocker = NoForwardModules()
+    sys.meta_path.insert(0, blocker)
+    try:
+        with ExitStack() as stack:
+            for name, category in GUARDS.items():
+                stack.enter_context(patch(name, side_effect=reject(category)))
+            # Full-suite collection may have already loaded historical evaluators.
+            # Patch only existing modules: never import them in this runner.
+            for module, names in OUTCOME_MODULES.items():
+                loaded = sys.modules.get(module)
+                if loaded:
+                    for name in names:
+                        if hasattr(loaded, name):
+                            stack.enter_context(patch.object(loaded, name, side_effect=reject('outcome_accessors')))
+            yield counts
+    finally:
+        sys.meta_path.remove(blocker)
+
+
+def load_admitted():
+    vintage = json.loads((SOURCE/'intraday-vintage.json').read_bytes())
+    admission = json.loads((SOURCE/'admission.json').read_bytes())
+    data = MarketDataset.from_records(vintage['dataset_id'], vintage['bars'], vintage['manifest'])
+    meta = data.manifest.unpack()
+    if (data.dataset_id, data.content_hash, vintage['content_hash']) != (DATASET_ID, DATASET_HASH, DATASET_HASH):
+        raise ValueError('Immutable vintage mismatch')
+    if meta['admission'] != admission or admission['status'] != 'PASS':
+        raise ValueError('Admission mismatch')
+    if data.gaps or len(data.bars) != 4480 or {b.symbol for b in data.bars} != {'SOXX'}:
+        raise ValueError('Exact admitted OHLC scope required')
+    if len({b.session for b in data.bars}) != 70 or admission['grid']['missing_count']:
+        raise ValueError('Sealed 70-session grid mismatch')
+    return data
+
+
+def replay(bars, spec):
+    stream = CompressionStream(spec)
+    counts = Counter({k: 0 for k in ('total_eligible_bars', 'compression_feature_READY_bars',
+        'compression_state_bars', 'compression_state_runs', 'unique_compression_episodes',
+        'frozen_ranges', 'upside_breakout_attempts', 'final_candidate_events',
+        'expired_episodes', 'cancelled_episodes', 'consumed_episodes', 'gap_resets')})
+    reasons, session_counts, segments = Counter(), {}, {}
+    events, ranges = [], []
+    chain = None
+    compressed_previous = False
+    for market in bars:
+        bar = market if isinstance(market, OHLCBar) else OHLCBar.from_market(market)
+        step = stream.accept(bar, bar.known_at)
+        day = session_counts.setdefault(bar.session, Counter(eligible_bars=0, candidates=0, ranges=0))
+        part = segment(bar.end_at-timedelta(minutes=15), bar.end_at)
+        seg = segments.setdefault(part, Counter(eligible_bars=0, feature_READY=0, compressed=0, ranges=0, candidates=0))
+        eligible = step.input_status == 'READY'
+        ready = step.feature.status == 'READY'
+        compressed = step.feature.compressed is True
+        counts['total_eligible_bars'] += eligible
+        counts['compression_feature_READY_bars'] += ready
+        counts['compression_state_bars'] += compressed
+        counts['compression_state_runs'] += compressed and not compressed_previous
+        counts['gap_resets'] += step.input_reason == 'gap_reset'
+        compressed_previous = compressed
+        counts['upside_breakout_attempts'] += step.breakout_evaluated
+        day['eligible_bars'] += eligible
+        seg['eligible_bars'] += eligible
+        seg['feature_READY'] += ready
+        seg['compressed'] += compressed
+        reasons['input:'+step.input_status+':'+step.input_reason] += 1
+        if not ready:
+            reasons['feature:'+step.feature.status+':'+step.feature.reason] += 1
+        if step.range_published:
+            ranges.append(payload(step.range_published))
+            counts['unique_compression_episodes'] += 1
+            counts['frozen_ranges'] += 1
+            day['ranges'] += 1
+            seg['ranges'] += 1
+        if step.retirement:
+            category = {'expired': 'expired_episodes', 'consumed': 'consumed_episodes'}.get(step.retirement, 'cancelled_episodes')
+            counts[category] += 1
+            reasons['retirement:'+step.retirement] += 1
+        for event in step.events:
+            events.append(payload(event))
+            counts['final_candidate_events'] += 1
+            day['candidates'] += 1
+            seg['candidates'] += 1
+        chain = digest([chain, payload(step)])
+    counts['distinct_candidate_sessions'] = sum(v['candidates'] > 0 for v in session_counts.values())
+    counts['pending_episodes_at_scope_end'] = int(stream.range is not None)
+    return dict(denominators=dict(counts), unavailable_and_retirement_reasons=dict(reasons),
+                sessions={k:dict(v) for k,v in session_counts.items()},
+                segments={k:dict(v) for k,v in segments.items()}, events=events, ranges=ranges,
+                candidate_stream_hash=digest(events), frozen_range_stream_hash=digest(ranges), trace_hash=chain)
+
+
+def audit(root=ROOT):
+    manifest = verify_manifest(root)
+    spec = Specification(**yaml.safe_load(SPEC.read_text(encoding='utf-8'))['parameters'])
+    with no_outcomes() as calls:
+        data = load_admitted()
+        first = replay(data.bars, spec)
+        second = replay(data.bars, spec)
+        cutoff = 2240
+        prefix = replay(data.bars[:cutoff], spec)
+    boundary = data.bars[cutoff-1].known_at.isoformat()
+    if first != second or prefix['events'] != [e for e in first['events'] if e['at'] <= boundary]:
+        raise ValueError('Repeat/prefix causal mismatch')
+    if prefix['ranges'] != [r for r in first['ranges'] if r['published_at'] <= boundary] or any(calls.values()):
+        raise ValueError('Range prefix/forbidden access mismatch')
+    if len({e['episode_id'] for e in first['events']}) != len(first['events']):
+        raise ValueError('Duplicate episode event')
+    verify_manifest(root)
+    report = dict(schema='h0004_frequency_evidence_v1', status='EXECUTED_REAL_FREQUENCY_ONLY',
+                  **{k:v for k,v in first.items() if k not in ('events','ranges')},
+                  dataset_id=data.dataset_id, dataset_hash=data.content_hash,
+                  sessions_in_scope=70, spec_hash=spec.content_hash, parameter_trials=1,
+                  comparators=0, actual_replays=2, prefix_replays=1,
+                  cumulative_real_replays=4, cumulative_prefix_replays=2,
+                  repeat_equal=True, prefix_equal=True, outcome_access=0,
+                  forbidden_call_counts=calls, efficacy='NOT_RUN', profitability='NOT_RUN',
+                  prior_files_preserved=len(manifest['preserved_files']), prior_evidence_unchanged=True,
+                  admission_reuse='PASS_CAUSAL_HISTORICAL_DISCOVERY_ONLY_NOT_LIVE_PIT',
+                  independence='No prior strategy-state imports/references; common OHLC/session utilities only.',
+                  breakout_attempt_definition='Each subsequent eligible completed-close comparison to an active range, not a high touch.',
+                  final_freeze='USER_DECISION_REQUIRED')
+    write_new(root/'frequency-audit.json', encode(report))
+    write_new(root/'candidate-events.json', encode(dict(events=first['events'])))
+    write_new(root/'frozen-ranges.json', encode(dict(ranges=first['ranges'])))
+    write_new(root/'independence-audit.json', encode(dict(
+        schema='h0004_independence_audit_v1', source_sha256=fingerprint(EXECUTION[3]),
+        forbidden_inputs=['MACD','H0001 state','H0002 defense','H0003 RS','QQQ','Daily/H1 trend',
+                          'volume','VWAP','options','news','macro','manual support/resistance'],
+        imported_strategy_states=[], signal_input='Detached SOXX OHLC/time only',
+        reused_utilities=['digest/time','immutable payload','completed-slot continuity','XNYS/extended session'],
+        prior_files_preserved=len(manifest['preserved_files']), prior_evidence_unchanged=True,
+        forbidden_call_counts=calls, outcome_access=0)))
+    return report
+
+
+if __name__ == '__main__':
+    parser = ArgumentParser(description=__doc__)
+    parser.add_argument('--seal', action='store_true')
+    args = parser.parse_args()
+    result = seal() if args.seal else audit()
+    print(json.dumps({k:v for k,v in result.items() if k in ('status','denominators','forbidden_call_counts','parameter_trials')}, indent=2))

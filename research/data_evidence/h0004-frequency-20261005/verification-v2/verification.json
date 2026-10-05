@@ -1,0 +1,47 @@
+{
+  "H0001_H0002_H0003_preserved": true,
+  "candidate_stream_hash": "a376f4d037988d01a031ee37364169170bc58800f31281756ccccf6893329bd9",
+  "comparators": 0,
+  "counts": {
+    "cancelled_episodes": 33,
+    "compression_feature_READY_bars": 3825,
+    "compression_state_bars": 875,
+    "compression_state_runs": 86,
+    "consumed_episodes": 39,
+    "distinct_candidate_sessions": 26,
+    "expired_episodes": 10,
+    "final_candidate_events": 39,
+    "frozen_ranges": 83,
+    "gap_resets": 0,
+    "pending_episodes_at_scope_end": 1,
+    "total_eligible_bars": 4480,
+    "unique_compression_episodes": 83,
+    "upside_breakout_attempts": 544
+  },
+  "next_P0": "H0004_SIGNAL_FREEZE_PREREGISTRATION",
+  "outcome_access": 0,
+  "parameter_trials": 1,
+  "prior_files_preserved": 598,
+  "report_hash": "7f9d0e0d033a754a4af3de14851a6715bf22325f80a386d122d0717f068791a0",
+  "schema": "h0004_frequency_verification_v1",
+  "spec_hash": "c8497d0220220a1308407cdf6cbef800da47975aca20d5cf587d5005c853b1b7",
+  "tests": [
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "tests-targeted.xml",
+      "sha256": "04a7589e08555bb99c278a3db2391ce82615138cdb4710c000cc726263aa55c6",
+      "skipped": 0,
+      "tests": 53
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "tests-full.xml",
+      "sha256": "61f83f6f0a4d34f7cc0edb7ba7b7536e259117e50b03425abffa35f29978d1f2",
+      "skipped": 0,
+      "tests": 1719
+    }
+  ],
+  "verification_price_queries": 0
+}

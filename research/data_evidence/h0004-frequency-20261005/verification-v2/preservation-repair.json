@@ -1,0 +1,17 @@
+{
+  "corrected_replays": 2,
+  "fixture_moved_to": "scripts/h0004_test_registry.py",
+  "hypothesis_change": "Evidence pointer only",
+  "initial_and_corrected_events_and_ranges_identical": true,
+  "initial_full": "Interrupted after preservation failures; not a completed regression; final complete rerun required",
+  "initial_manifest_sha256": "dd6dbe9ee01609b9cf20f46352a115c81c817abf5bf44b0acb0c588cea8fc18c",
+  "initial_preservation_claim": "SUPERSEDED_BY_VERIFICATION_V2",
+  "initial_replays": 2,
+  "initial_targeted": "1 failed,52 passed; preservation caught overwritten tests/conftest.py",
+  "outcome_access": 0,
+  "prior_files_Git_BASE_verified": 598,
+  "restored_file": "tests/conftest.py",
+  "schema": "h0004_preservation_repair_v1",
+  "signal_parameter_trials": 1,
+  "signal_semantics_changed": false
+}

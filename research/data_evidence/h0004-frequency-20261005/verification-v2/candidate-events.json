@@ -1,0 +1,1837 @@
+{
+  "events": [
+    {
+      "at": "2026-05-20T08:15:00+00:00",
+      "episode_id": "a530dbaeba9ef3923b01165e67a8cc6cab389665e7fdf65c0e19db70f4406aa9",
+      "id": "45e318864ca4800dd3786a09e8e7ce54d48a4b4782d03a24d4b8e23dffe4037a",
+      "session": "2026-05-20",
+      "snapshot": {
+        "bar": {
+          "close": 506.18,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-20T08:15:00+00:00",
+          "high": 506.2,
+          "known_at": "2026-05-20T08:15:00+00:00",
+          "low": 496.0,
+          "open": 500.8,
+          "session": "2026-05-20",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 506.2,
+          "low": 495.99,
+          "normalized_range": 0.02017069026828397,
+          "percentile": 0.4328125,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 500.47,
+            "low": 494.69,
+            "normalized_range": 0.0115785256410257,
+            "percentile": 0.1078125,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 500.47,
+          "id": "a530dbaeba9ef3923b01165e67a8cc6cab389665e7fdf65c0e19db70f4406aa9",
+          "last_valid_index": 717,
+          "low": 494.69,
+          "prefix_hash": "2d293ce0c498969213b6571abaad6b3e4c20043580ab524289f25920f6a6493b",
+          "published_at": "2026-05-19T23:30:00+00:00",
+          "published_index": 701,
+          "window_start": "2026-05-19T19:45:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-05-20T13:45:00+00:00",
+      "episode_id": "3bd42e6208b73c0f19ccb34451991fd6eea66e695cb2160af4e2c560b46c7f86",
+      "id": "196343c3d22a696a4b492d101e87a3bf53f8ee441433cffcaf4a56f58e46059f",
+      "session": "2026-05-20",
+      "snapshot": {
+        "bar": {
+          "close": 512.04,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-20T13:45:00+00:00",
+          "high": 512.38,
+          "known_at": "2026-05-20T13:45:00+00:00",
+          "low": 506.55,
+          "open": 506.95,
+          "session": "2026-05-20",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 512.38,
+          "low": 505.65,
+          "normalized_range": 0.013143504413717715,
+          "percentile": 0.1671875,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 509.43,
+            "low": 505.52,
+            "normalized_range": 0.007693064436792966,
+            "percentile": 0.009375,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 509.43,
+          "id": "3bd42e6208b73c0f19ccb34451991fd6eea66e695cb2160af4e2c560b46c7f86",
+          "last_valid_index": 736,
+          "low": 505.52,
+          "prefix_hash": "fae630a3231e88cf5aea1971056dc4b150812373b20101290ceb21a095c3630f",
+          "published_at": "2026-05-20T12:15:00+00:00",
+          "published_index": 720,
+          "window_start": "2026-05-20T08:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-05-20T20:00:00+00:00",
+      "episode_id": "4e6d59f1d9725edddd0b9225cb6a667fd204d60132f52f4682bcb5c3d6a88ff3",
+      "id": "03590850cded03329814e3c7d624d4249f486b6764447a75265be8ab34ed7fc2",
+      "session": "2026-05-20",
+      "snapshot": {
+        "bar": {
+          "close": 520.08,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-20T20:00:00+00:00",
+          "high": 520.54,
+          "known_at": "2026-05-20T20:00:00+00:00",
+          "low": 517.74,
+          "open": 518.08,
+          "session": "2026-05-20",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 520.54,
+          "low": 512.21,
+          "normalized_range": 0.016016766651284278,
+          "percentile": 0.3203125,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 519.38,
+            "low": 512.21,
+            "normalized_range": 0.013884047868014329,
+            "percentile": 0.2,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 519.38,
+          "id": "4e6d59f1d9725edddd0b9225cb6a667fd204d60132f52f4682bcb5c3d6a88ff3",
+          "last_valid_index": 761,
+          "low": 512.21,
+          "prefix_hash": "780f9e421c575ee275e37a7ae85d691a7864d9da23069b5e2615761f35eb21c7",
+          "published_at": "2026-05-20T18:30:00+00:00",
+          "published_index": 745,
+          "window_start": "2026-05-20T14:45:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-05-21T22:45:00+00:00",
+      "episode_id": "16597e052ae0d1b87ece6186dd667e56f1ba815e20f807987cefc0724e9b66e4",
+      "id": "903f3146e215f99bd7de23f3b46d79e79bf5e60888eb39fc716c42d2f9702552",
+      "session": "2026-05-21",
+      "snapshot": {
+        "bar": {
+          "close": 525.8,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-21T22:45:00+00:00",
+          "high": 525.8,
+          "known_at": "2026-05-21T22:45:00+00:00",
+          "low": 525.21,
+          "open": 525.4,
+          "session": "2026-05-21",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 525.8,
+          "low": 519.42,
+          "normalized_range": 0.012133891213389114,
+          "percentile": 0.1390625,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 525.64,
+            "low": 519.42,
+            "normalized_range": 0.011871135201160446,
+            "percentile": 0.121875,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 525.64,
+          "id": "16597e052ae0d1b87ece6186dd667e56f1ba815e20f807987cefc0724e9b66e4",
+          "last_valid_index": 839,
+          "low": 519.42,
+          "prefix_hash": "082d578d7f5e1e6a8039c7f0364596ccd77e05bf0aa9dd3b6cc06b119d2f142b",
+          "published_at": "2026-05-21T22:00:00+00:00",
+          "published_index": 823,
+          "window_start": "2026-05-21T18:15:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-05-22T13:45:00+00:00",
+      "episode_id": "6d909c6a3c93265863cf0804596b887b8785b92f03975906c404ff60523d5087",
+      "id": "f3ad523429ee0da45681d6e84b3da0768c8f81bd40c7703a6ad9c696ed389f1e",
+      "session": "2026-05-22",
+      "snapshot": {
+        "bar": {
+          "close": 534.18,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-22T13:45:00+00:00",
+          "high": 535.86,
+          "known_at": "2026-05-22T13:45:00+00:00",
+          "low": 530.17,
+          "open": 531.88,
+          "session": "2026-05-22",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 535.86,
+          "low": 524.36,
+          "normalized_range": 0.021528323785989744,
+          "percentile": 0.6140625,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 531.77,
+            "low": 524.36,
+            "normalized_range": 0.013998828707989283,
+            "percentile": 0.196875,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 531.77,
+          "id": "6d909c6a3c93265863cf0804596b887b8785b92f03975906c404ff60523d5087",
+          "last_valid_index": 866,
+          "low": 524.36,
+          "prefix_hash": "edd51e609cb1a75e562f253355a9be53c64c6823a33b5642cd903d69c5bb7898",
+          "published_at": "2026-05-22T12:45:00+00:00",
+          "published_index": 850,
+          "window_start": "2026-05-22T09:00:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-05-26T12:15:00+00:00",
+      "episode_id": "b57b3793b5b8718e0eaf324b3fa41b2ca761d059030da65a333c335d4ef7570f",
+      "id": "d5cf82bdbb4c55316f0189a4076c8262b37aae1f031f1207b4437024c9e4ad87",
+      "session": "2026-05-26",
+      "snapshot": {
+        "bar": {
+          "close": 554.25,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-26T12:15:00+00:00",
+          "high": 554.34,
+          "known_at": "2026-05-26T12:15:00+00:00",
+          "low": 553.27,
+          "open": 553.88,
+          "session": "2026-05-26",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 554.34,
+          "low": 548.1,
+          "normalized_range": 0.011258457374830869,
+          "percentile": 0.1265625,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 553.9951,
+            "low": 546.99,
+            "normalized_range": 0.012651435795557107,
+            "percentile": 0.1703125,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 553.9951,
+          "id": "b57b3793b5b8718e0eaf324b3fa41b2ca761d059030da65a333c335d4ef7570f",
+          "last_valid_index": 927,
+          "low": 546.99,
+          "prefix_hash": "d1c56e2407a7fa03e834140229aa0879c7a9118cfe7202c233bd8160093f8de9",
+          "published_at": "2026-05-26T12:00:00+00:00",
+          "published_index": 911,
+          "window_start": "2026-05-26T08:15:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-05-26T23:45:00+00:00",
+      "episode_id": "a1460c12b1b9f1d4b79b4738d51573f33c362d675a2031f418665fe30327a635",
+      "id": "a045de64e2c51e8199870bc46ee6da21c76a2e6c855207f12d3e7cc6b66685c7",
+      "session": "2026-05-26",
+      "snapshot": {
+        "bar": {
+          "close": 573.9,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-26T23:45:00+00:00",
+          "high": 573.9,
+          "known_at": "2026-05-26T23:45:00+00:00",
+          "low": 572.47,
+          "open": 572.91,
+          "session": "2026-05-26",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 573.9,
+          "low": 569.4,
+          "normalized_range": 0.007841087297438579,
+          "percentile": 0.0234375,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 572.95,
+            "low": 565.42,
+            "normalized_range": 0.013169861480341553,
+            "percentile": 0.1703125,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 572.95,
+          "id": "a1460c12b1b9f1d4b79b4738d51573f33c362d675a2031f418665fe30327a635",
+          "last_valid_index": 965,
+          "low": 565.42,
+          "prefix_hash": "2d7379d7a9dec7a8791b69081fb039332aa0c397dfae902cb602697c983cd0ae",
+          "published_at": "2026-05-26T21:30:00+00:00",
+          "published_index": 949,
+          "window_start": "2026-05-26T17:45:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-05-28T12:45:00+00:00",
+      "episode_id": "16c96467fa9d085658816f5c0d54652f16252a9faf9a67951b56d06e4f7cbec2",
+      "id": "9296f5dda089f0addfd50bdfa535a673c65684b426e14c5a9beb366ecb902cf3",
+      "session": "2026-05-28",
+      "snapshot": {
+        "bar": {
+          "close": 563.22,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-28T12:45:00+00:00",
+          "high": 563.28,
+          "known_at": "2026-05-28T12:45:00+00:00",
+          "low": 557.72,
+          "open": 558.12,
+          "session": "2026-05-28",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 563.28,
+          "low": 552.98,
+          "normalized_range": 0.018287702851461158,
+          "percentile": 0.4140625,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 560.43,
+            "low": 552.98,
+            "normalized_range": 0.013348383860101648,
+            "percentile": 0.16875,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 560.43,
+          "id": "16c96467fa9d085658816f5c0d54652f16252a9faf9a67951b56d06e4f7cbec2",
+          "last_valid_index": 1056,
+          "low": 552.98,
+          "prefix_hash": "f927ed364fb1cc45d783fef032144c312e3a7c9a566384789cb4dfd2813ae85d",
+          "published_at": "2026-05-28T12:15:00+00:00",
+          "published_index": 1040,
+          "window_start": "2026-05-28T08:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-05-29T13:45:00+00:00",
+      "episode_id": "f889171e7ad9f852d8ee6909482b48cb16d2080226e214956c44080297980cf1",
+      "id": "1f6c13f5d45b3de8b2065f6a72cbaf01da4e4f34fd62a41809ced290937012d6",
+      "session": "2026-05-29",
+      "snapshot": {
+        "bar": {
+          "close": 577.42,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-29T13:45:00+00:00",
+          "high": 578.41,
+          "known_at": "2026-05-29T13:45:00+00:00",
+          "low": 573.7,
+          "open": 576.41,
+          "session": "2026-05-29",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 578.41,
+          "low": 572.46,
+          "normalized_range": 0.010304457760382274,
+          "percentile": 0.0765625,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 576.22,
+            "low": 570.22,
+            "normalized_range": 0.010437323870159691,
+            "percentile": 0.0703125,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 576.22,
+          "id": "f889171e7ad9f852d8ee6909482b48cb16d2080226e214956c44080297980cf1",
+          "last_valid_index": 1110,
+          "low": 570.22,
+          "prefix_hash": "ab5643f7c93bfccd76eda1f1f50ba4c3e705663b0670da1e9b7d381de4a86cce",
+          "published_at": "2026-05-29T09:45:00+00:00",
+          "published_index": 1094,
+          "window_start": "2026-05-28T22:00:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-02T08:15:00+00:00",
+      "episode_id": "dcc208e583ea4ccc534f30a52861137c1246dcb574f8188f9605a822b1bfedef",
+      "id": "dcc2ab56adaaf263f7011006d3344ec009990a483e2318c809e7c6a42a8a8bda",
+      "session": "2026-06-02",
+      "snapshot": {
+        "bar": {
+          "close": 580.79,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-02T08:15:00+00:00",
+          "high": 581.64,
+          "known_at": "2026-06-02T08:15:00+00:00",
+          "low": 569.15,
+          "open": 575.43,
+          "session": "2026-06-02",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 581.64,
+          "low": 569.0,
+          "normalized_range": 0.021763460114671375,
+          "percentile": 0.5734375,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 575.5225,
+            "low": 569.0,
+            "normalized_range": 0.011397990388816141,
+            "percentile": 0.1296875,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 575.5225,
+          "id": "dcc208e583ea4ccc534f30a52861137c1246dcb574f8188f9605a822b1bfedef",
+          "last_valid_index": 1224,
+          "low": 569.0,
+          "prefix_hash": "da4359433e58626bf36abba0a7551c5843db3019441f14aae40a0c838ccdd203",
+          "published_at": "2026-06-01T22:15:00+00:00",
+          "published_index": 1208,
+          "window_start": "2026-06-01T18:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-02T13:45:00+00:00",
+      "episode_id": "696bf7b75b281f4b5d5912761142c31ccd0888863ddfb64f56fa381ecead86ed",
+      "id": "2ba22ded68535baf810793f6b470f54d860e5d86f8409c699004860028b91e53",
+      "session": "2026-06-02",
+      "snapshot": {
+        "bar": {
+          "close": 590.19,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-02T13:45:00+00:00",
+          "high": 590.7999,
+          "known_at": "2026-06-02T13:45:00+00:00",
+          "low": 581.925,
+          "open": 585.17,
+          "session": "2026-06-02",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 590.7999,
+          "low": 581.925,
+          "normalized_range": 0.015037360849895837,
+          "percentile": 0.265625,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 588.75,
+            "low": 582.0,
+            "normalized_range": 0.011519361059439903,
+            "percentile": 0.1421875,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 588.75,
+          "id": "696bf7b75b281f4b5d5912761142c31ccd0888863ddfb64f56fa381ecead86ed",
+          "last_valid_index": 1249,
+          "low": 582.0,
+          "prefix_hash": "549ac02d3f82380ff59894316cf40b510823c29c459bb17d057930357aed5b84",
+          "published_at": "2026-06-02T12:30:00+00:00",
+          "published_index": 1233,
+          "window_start": "2026-06-02T08:45:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-02T19:15:00+00:00",
+      "episode_id": "a43c56e08d2c80263281f589d1ac700953ed3335889829bf10eca37f6cc1477f",
+      "id": "ad2f109d68a2a2dcc69a3c1616df796013ccd58adbad7e32b4572fb4a2e1edaa",
+      "session": "2026-06-02",
+      "snapshot": {
+        "bar": {
+          "close": 601.43,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-02T19:15:00+00:00",
+          "high": 602.0,
+          "known_at": "2026-06-02T19:15:00+00:00",
+          "low": 599.645,
+          "open": 599.645,
+          "session": "2026-06-02",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 602.0,
+          "low": 594.48,
+          "normalized_range": 0.012503533245764233,
+          "percentile": 0.1953125,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 601.19,
+            "low": 593.6642,
+            "normalized_range": 0.012593794973058006,
+            "percentile": 0.19375,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 601.19,
+          "id": "a43c56e08d2c80263281f589d1ac700953ed3335889829bf10eca37f6cc1477f",
+          "last_valid_index": 1274,
+          "low": 593.6642,
+          "prefix_hash": "bee6cb347796a42a4488c6e7f47c3095259142c8c39f8327b5886d56633fbfb7",
+          "published_at": "2026-06-02T18:45:00+00:00",
+          "published_index": 1258,
+          "window_start": "2026-06-02T15:00:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-09T08:15:00+00:00",
+      "episode_id": "7f1b1ecb3d4cab3d1fc5c6cd583049eea42bc708d71cf44a7605687f4681e695",
+      "id": "045d17bac6acec2a680f43c534855b380140f066f103c09c1ed182922023e73a",
+      "session": "2026-06-09",
+      "snapshot": {
+        "bar": {
+          "close": 583.0,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-09T08:15:00+00:00",
+          "high": 583.16,
+          "known_at": "2026-06-09T08:15:00+00:00",
+          "low": 575.4,
+          "open": 578.78,
+          "session": "2026-06-09",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 583.16,
+          "low": 567.05,
+          "normalized_range": 0.02763293310463124,
+          "percentile": 0.540625,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 575.86,
+            "low": 567.05,
+            "normalized_range": 0.015502320949072956,
+            "percentile": 0.2,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 575.86,
+          "id": "7f1b1ecb3d4cab3d1fc5c6cd583049eea42bc708d71cf44a7605687f4681e695",
+          "last_valid_index": 1546,
+          "low": 567.05,
+          "prefix_hash": "31443cec0a89d4dd3eeb9b7fed2742338cc3a276c9a3890380276cbfeaf2a4e9",
+          "published_at": "2026-06-08T22:45:00+00:00",
+          "published_index": 1530,
+          "window_start": "2026-06-08T19:00:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-12T00:00:00+00:00",
+      "episode_id": "3d480f931ab48e4b59051eb057c923282ff37456cd98d5d4befb279dba65206c",
+      "id": "4e42ce98fa57ea8f129a43e451f842dff02ab206335e0db69ae4d9fe0567155a",
+      "session": "2026-06-11",
+      "snapshot": {
+        "bar": {
+          "close": 590.67,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-12T00:00:00+00:00",
+          "high": 590.7,
+          "known_at": "2026-06-12T00:00:00+00:00",
+          "low": 590.0,
+          "open": 590.0,
+          "session": "2026-06-11",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 590.7,
+          "low": 582.06,
+          "normalized_range": 0.014627456955660692,
+          "percentile": 0.13125,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 590.54,
+            "low": 580.83,
+            "normalized_range": 0.01648892813476417,
+            "percentile": 0.190625,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 590.54,
+          "id": "3d480f931ab48e4b59051eb057c923282ff37456cd98d5d4befb279dba65206c",
+          "last_valid_index": 1740,
+          "low": 580.83,
+          "prefix_hash": "555c9a08d11399f94273408bacd4d43cc860ee54f14e263a3ea708e9eb3a8df5",
+          "published_at": "2026-06-11T23:15:00+00:00",
+          "published_index": 1724,
+          "window_start": "2026-06-11T19:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-15T08:15:00+00:00",
+      "episode_id": "0b37683ebc6b187d0c6aaf740e8563360f6c6e24f0c78a3b5e4a6176a9c6383f",
+      "id": "b2248bd7b748fbb3c1c1bbcc5411d532fe6580b3ae57a48e78a1416a3776686e",
+      "session": "2026-06-15",
+      "snapshot": {
+        "bar": {
+          "close": 621.94,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-15T08:15:00+00:00",
+          "high": 621.94,
+          "known_at": "2026-06-15T08:15:00+00:00",
+          "low": 616.2,
+          "open": 620.0,
+          "session": "2026-06-15",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 621.94,
+          "low": 595.83,
+          "normalized_range": 0.041981541627809774,
+          "percentile": 0.7859375,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 602.69,
+            "low": 594.69,
+            "normalized_range": 0.01340033500837521,
+            "percentile": 0.075,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 602.69,
+          "id": "0b37683ebc6b187d0c6aaf740e8563360f6c6e24f0c78a3b5e4a6176a9c6383f",
+          "last_valid_index": 1792,
+          "low": 594.69,
+          "prefix_hash": "31894a79da9af1b1718b18d631373c2c5335fa9e0f385389945f050f83087988",
+          "published_at": "2026-06-12T20:15:00+00:00",
+          "published_index": 1776,
+          "window_start": "2026-06-12T16:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-15T15:30:00+00:00",
+      "episode_id": "df750fcf2f1518f5948737903e6093917b45bd321fb583ce5075cce6116b8f69",
+      "id": "3960c490d63f138e0b50c4ad060948c38ba0737d091263c755e3ea72f4ba07ef",
+      "session": "2026-06-15",
+      "snapshot": {
+        "bar": {
+          "close": 624.31,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-15T15:30:00+00:00",
+          "high": 624.68,
+          "known_at": "2026-06-15T15:30:00+00:00",
+          "low": 622.17,
+          "open": 623.6673,
+          "session": "2026-06-15",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 627.47,
+          "low": 618.45,
+          "normalized_range": 0.014447950537393254,
+          "percentile": 0.1140625,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 624.0,
+            "low": 616.2,
+            "normalized_range": 0.01251745221703329,
+            "percentile": 0.053125,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 624.0,
+          "id": "df750fcf2f1518f5948737903e6093917b45bd321fb583ce5075cce6116b8f69",
+          "last_valid_index": 1823,
+          "low": 616.2,
+          "prefix_hash": "98ea631d46e4d05a3830d96b34d16b0d153275b0d56f92a821d8c00b2ab63a51",
+          "published_at": "2026-06-15T12:00:00+00:00",
+          "published_index": 1807,
+          "window_start": "2026-06-15T08:15:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-17T08:15:00+00:00",
+      "episode_id": "51b8d8a77053ea415ea261e31fd53d8d4ff749a88aadfa603bb501ff40710571",
+      "id": "6c47ac4928c74867d3acbdfe32180c6d02c15c36d1af97d9e6a42a19a7b270d6",
+      "session": "2026-06-17",
+      "snapshot": {
+        "bar": {
+          "close": 608.4,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-17T08:15:00+00:00",
+          "high": 613.44,
+          "known_at": "2026-06-17T08:15:00+00:00",
+          "low": 599.1,
+          "open": 613.44,
+          "session": "2026-06-17",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 613.44,
+          "low": 592.0,
+          "normalized_range": 0.03523997370151225,
+          "percentile": 0.6484375,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 599.69,
+            "low": 590.63,
+            "normalized_range": 0.015216661068189552,
+            "percentile": 0.175,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 599.69,
+          "id": "51b8d8a77053ea415ea261e31fd53d8d4ff749a88aadfa603bb501ff40710571",
+          "last_valid_index": 1934,
+          "low": 590.63,
+          "prefix_hash": "3f780e9fdf8e456978816d09ffa52bc402ec00ed29b568a83f0a15152d44a5db",
+          "published_at": "2026-06-16T23:45:00+00:00",
+          "published_index": 1918,
+          "window_start": "2026-06-16T20:00:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-17T13:30:00+00:00",
+      "episode_id": "b0eaa7513874f31710cb4e185bbf140e7c141788c06004d7f53c6ca79c40ccd9",
+      "id": "c02a83f217f195542cd34ad1b7c1cfa5d84eddf08da24cd47e8201bbf9b4e316",
+      "session": "2026-06-17",
+      "snapshot": {
+        "bar": {
+          "close": 611.6,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-17T13:30:00+00:00",
+          "high": 611.7,
+          "known_at": "2026-06-17T13:30:00+00:00",
+          "low": 607.5,
+          "open": 607.95,
+          "session": "2026-06-17",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 611.7,
+          "low": 601.0,
+          "normalized_range": 0.017495094833224402,
+          "percentile": 0.2140625,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 608.6,
+            "low": 601.0,
+            "normalized_range": 0.012560115024211312,
+            "percentile": 0.0828125,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 608.6,
+          "id": "b0eaa7513874f31710cb4e185bbf140e7c141788c06004d7f53c6ca79c40ccd9",
+          "last_valid_index": 1952,
+          "low": 601.0,
+          "prefix_hash": "33772f21cd2a7d2e4694cf658434e970a8c4db585f0644d6a896849024bb2c41",
+          "published_at": "2026-06-17T12:15:00+00:00",
+          "published_index": 1936,
+          "window_start": "2026-06-17T08:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-18T12:45:00+00:00",
+      "episode_id": "9b21e643fd18951edffd6a2a5a94cc9f6421a5da1aadff15174dcb6d804fd29f",
+      "id": "2eb6988e5ee0638a2147b4c9d0c9aca2e6f2226999c2fec4f233dac9733adb4e",
+      "session": "2026-06-18",
+      "snapshot": {
+        "bar": {
+          "close": 626.5,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-18T12:45:00+00:00",
+          "high": 626.82,
+          "known_at": "2026-06-18T12:45:00+00:00",
+          "low": 625.3876,
+          "open": 626.1,
+          "session": "2026-06-18",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 626.82,
+          "low": 615.73,
+          "normalized_range": 0.01770151636073429,
+          "percentile": 0.2046875,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 626.22,
+            "low": 618.8,
+            "normalized_range": 0.011862509992006512,
+            "percentile": 0.0796875,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 626.22,
+          "id": "9b21e643fd18951edffd6a2a5a94cc9f6421a5da1aadff15174dcb6d804fd29f",
+          "last_valid_index": 2016,
+          "low": 618.8,
+          "prefix_hash": "cf2cdb2d99c1be35e22c7a7adc0ee2bb64d866b812cfb7118ded11cd93eba26a",
+          "published_at": "2026-06-18T12:15:00+00:00",
+          "published_index": 2000,
+          "window_start": "2026-06-18T08:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-18T19:45:00+00:00",
+      "episode_id": "09d9d5d23b58de1aed2ee4805ccfe72973e3f2c3ea9e6423129bddad50701ca9",
+      "id": "a21bbe6cd62962fa88bcd67a30a946e0aed9eb7844f6b1db3e60fe6789d21f07",
+      "session": "2026-06-18",
+      "snapshot": {
+        "bar": {
+          "close": 643.18,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-18T19:45:00+00:00",
+          "high": 643.18,
+          "known_at": "2026-06-18T19:45:00+00:00",
+          "low": 639.32,
+          "open": 640.28,
+          "session": "2026-06-18",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 643.18,
+          "low": 632.79,
+          "normalized_range": 0.01615410926956682,
+          "percentile": 0.1875,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 641.18,
+            "low": 629.91,
+            "normalized_range": 0.017626174947997283,
+            "percentile": 0.2,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 641.18,
+          "id": "09d9d5d23b58de1aed2ee4805ccfe72973e3f2c3ea9e6423129bddad50701ca9",
+          "last_valid_index": 2039,
+          "low": 629.91,
+          "prefix_hash": "81eae8844f72b60ea21ea3b758870bf3338801391dbdd44bfcfa9f5398c0dae8",
+          "published_at": "2026-06-18T18:00:00+00:00",
+          "published_index": 2023,
+          "window_start": "2026-06-18T14:15:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-22T12:30:00+00:00",
+      "episode_id": "401ef01ed993d088b66fcc51ff738d6aa29addf72691593db4534a9b30561605",
+      "id": "609ca846cd43d1d2425ede8ca51dfa5841c814c0bb80a9c397c003234b63404c",
+      "session": "2026-06-22",
+      "snapshot": {
+        "bar": {
+          "close": 651.36,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-22T12:30:00+00:00",
+          "high": 651.53,
+          "known_at": "2026-06-22T12:30:00+00:00",
+          "low": 644.97,
+          "open": 649.08,
+          "session": "2026-06-22",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 651.53,
+          "low": 641.25,
+          "normalized_range": 0.015782363055760213,
+          "percentile": 0.2046875,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 649.45,
+            "low": 641.1,
+            "normalized_range": 0.01286059728618298,
+            "percentile": 0.11875,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 649.45,
+          "id": "401ef01ed993d088b66fcc51ff738d6aa29addf72691593db4534a9b30561605",
+          "last_valid_index": 2080,
+          "low": 641.1,
+          "prefix_hash": "6ec72905021cf59e7949488789392883c46edd2065cacde8cc1ca840d8af8b44",
+          "published_at": "2026-06-22T12:15:00+00:00",
+          "published_index": 2064,
+          "window_start": "2026-06-22T08:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-22T20:00:00+00:00",
+      "episode_id": "2ebb0d3c815d48264e88b18f4fc7f5d2bb9e0efdca41d25b6f8a9311dbe078ad",
+      "id": "dad2da7f13e0440b88f328c4a3d158a4e6d3e51c8809fecd9e175443b931bfba",
+      "session": "2026-06-22",
+      "snapshot": {
+        "bar": {
+          "close": 655.091,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-22T20:00:00+00:00",
+          "high": 655.62,
+          "known_at": "2026-06-22T20:00:00+00:00",
+          "low": 649.57,
+          "open": 649.57,
+          "session": "2026-06-22",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 655.62,
+          "low": 643.93,
+          "normalized_range": 0.01784484903624085,
+          "percentile": 0.2671875,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 652.83,
+            "low": 643.93,
+            "normalized_range": 0.013683360879425132,
+            "percentile": 0.1375,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 652.83,
+          "id": "2ebb0d3c815d48264e88b18f4fc7f5d2bb9e0efdca41d25b6f8a9311dbe078ad",
+          "last_valid_index": 2105,
+          "low": 643.93,
+          "prefix_hash": "e158155f60556e94e0fb343bdf1a0ebe7674e30a6ae8b6cf8e0575cc0d56a181",
+          "published_at": "2026-06-22T18:30:00+00:00",
+          "published_index": 2089,
+          "window_start": "2026-06-22T14:45:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-30T08:15:00+00:00",
+      "episode_id": "9feff014e97476b67901ae33ca04b766d8b70974b0e667b06c56ed5a3355e4f9",
+      "id": "0c3ea4cb009fbb6c46a50d03cd3d544ce20359743764e6f4181d69a34cb8a48a",
+      "session": "2026-06-30",
+      "snapshot": {
+        "bar": {
+          "close": 617.7,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-30T08:15:00+00:00",
+          "high": 622.21,
+          "known_at": "2026-06-30T08:15:00+00:00",
+          "low": 615.84,
+          "open": 622.21,
+          "session": "2026-06-30",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 622.21,
+          "low": 610.7954,
+          "normalized_range": 0.01847919702120781,
+          "percentile": 0.321875,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 615.3499,
+            "low": 608.64,
+            "normalized_range": 0.010972494767137726,
+            "percentile": 0.0640625,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 615.3499,
+          "id": "9feff014e97476b67901ae33ca04b766d8b70974b0e667b06c56ed5a3355e4f9",
+          "last_valid_index": 2434,
+          "low": 608.64,
+          "prefix_hash": "c279a5c43ae3418072482bc399be09bef18438a0d232f4c214a626fbec828942",
+          "published_at": "2026-06-29T20:45:00+00:00",
+          "published_index": 2418,
+          "window_start": "2026-06-29T17:00:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-30T13:45:00+00:00",
+      "episode_id": "55b2e864bdad9849f863aa9af37229e46e168ffc146aee1867be9a8957d64b8a",
+      "id": "e8dbd5688dee2a7859be990e8510ca98b6393e3df66c2d70b8ce1491c693a84a",
+      "session": "2026-06-30",
+      "snapshot": {
+        "bar": {
+          "close": 625.92,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-30T13:45:00+00:00",
+          "high": 627.5899,
+          "known_at": "2026-06-30T13:45:00+00:00",
+          "low": 616.15,
+          "open": 617.6,
+          "session": "2026-06-30",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 627.5899,
+          "low": 613.68,
+          "normalized_range": 0.022223127556237208,
+          "percentile": 0.4890625,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 622.21,
+            "low": 613.2257,
+            "normalized_range": 0.014500395422779701,
+            "percentile": 0.1875,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 622.21,
+          "id": "55b2e864bdad9849f863aa9af37229e46e168ffc146aee1867be9a8957d64b8a",
+          "last_valid_index": 2461,
+          "low": 613.2257,
+          "prefix_hash": "6994b7ff93294d8b55f12243f4a8dba4361994fbccf151fee99f80cc8a581259",
+          "published_at": "2026-06-30T11:30:00+00:00",
+          "published_index": 2445,
+          "window_start": "2026-06-29T23:45:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-30T18:45:00+00:00",
+      "episode_id": "ef219547b90de1a54d14a039ebc2e1f51e533217387e021f4e143304bdb740d3",
+      "id": "6a43020c66ce3b6598c059640caf886c60e627f4ac85c96cdc9c0151783f0006",
+      "session": "2026-06-30",
+      "snapshot": {
+        "bar": {
+          "close": 642.32,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-30T18:45:00+00:00",
+          "high": 642.36,
+          "known_at": "2026-06-30T18:45:00+00:00",
+          "low": 639.72,
+          "open": 639.8,
+          "session": "2026-06-30",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 642.36,
+          "low": 632.0,
+          "normalized_range": 0.016129032258064536,
+          "percentile": 0.209375,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 640.39,
+            "low": 632.0,
+            "normalized_range": 0.013129068602904337,
+            "percentile": 0.134375,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 640.39,
+          "id": "ef219547b90de1a54d14a039ebc2e1f51e533217387e021f4e143304bdb740d3",
+          "last_valid_index": 2488,
+          "low": 632.0,
+          "prefix_hash": "786da1f2df6c7d23387cf6385c19bbb24f1adafe954c26c9d10459d93907f128",
+          "published_at": "2026-06-30T18:15:00+00:00",
+          "published_index": 2472,
+          "window_start": "2026-06-30T14:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-06T08:15:00+00:00",
+      "episode_id": "11dcf359a5f977c2a43d25ed8a1487624c3e828c0517e392c4f332870e574976",
+      "id": "24437aa772b8500bf30808eac04c14abea894dcd0f55be1a7eef009b6de0e1ee",
+      "session": "2026-07-06",
+      "snapshot": {
+        "bar": {
+          "close": 577.95,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-06T08:15:00+00:00",
+          "high": 583.8,
+          "known_at": "2026-07-06T08:15:00+00:00",
+          "low": 574.39,
+          "open": 581.5,
+          "session": "2026-07-06",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 583.8,
+          "low": 567.5,
+          "normalized_range": 0.028203131758802583,
+          "percentile": 0.6046875,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 571.77,
+            "low": 565.8,
+            "normalized_range": 0.01048416837890527,
+            "percentile": 0.0375,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 571.77,
+          "id": "11dcf359a5f977c2a43d25ed8a1487624c3e828c0517e392c4f332870e574976",
+          "last_valid_index": 2639,
+          "low": 565.8,
+          "prefix_hash": "1220a28ff4d68a7fef2e76f7483606459924c310d619e7d6868b0a0f4d4eccda",
+          "published_at": "2026-07-03T00:00:00+00:00",
+          "published_index": 2623,
+          "window_start": "2026-07-02T20:15:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-06T13:00:00+00:00",
+      "episode_id": "bd4cda504854a4100af72ec4b39ff29a7724888432edd6538bde693c4f819501",
+      "id": "45df9f07483c924076c73eb82eaad1529bc8efc1514650dc21b83346613b5f33",
+      "session": "2026-07-06",
+      "snapshot": {
+        "bar": {
+          "close": 588.99,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-06T13:00:00+00:00",
+          "high": 589.4,
+          "known_at": "2026-07-06T13:00:00+00:00",
+          "low": 587.272,
+          "open": 587.6,
+          "session": "2026-07-06",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 589.4,
+          "low": 580.64,
+          "normalized_range": 0.014872918046146778,
+          "percentile": 0.1578125,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 588.89,
+            "low": 580.64,
+            "normalized_range": 0.01405427505493944,
+            "percentile": 0.1421875,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 588.89,
+          "id": "bd4cda504854a4100af72ec4b39ff29a7724888432edd6538bde693c4f819501",
+          "last_valid_index": 2658,
+          "low": 580.64,
+          "prefix_hash": "f8df1f1532e89bd010c0b38b4b179dd2020ef3e30083d613ae700ef23d80676d",
+          "published_at": "2026-07-06T12:45:00+00:00",
+          "published_index": 2642,
+          "window_start": "2026-07-06T09:00:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-08T23:45:00+00:00",
+      "episode_id": "c5e2192b46ee715e120c166a94ecce20fb3b57832c50301283bc66a72c5d0e4a",
+      "id": "482aa9a537e98e51d53e3e74e0817ad6b0d928b678c85be270f136074767f864",
+      "session": "2026-07-08",
+      "snapshot": {
+        "bar": {
+          "close": 564.999,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-08T23:45:00+00:00",
+          "high": 564.999,
+          "known_at": "2026-07-08T23:45:00+00:00",
+          "low": 561.7,
+          "open": 562.0,
+          "session": "2026-07-08",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 564.999,
+          "low": 559.24,
+          "normalized_range": 0.010192938394581255,
+          "percentile": 0.05,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 564.5,
+            "low": 555.44,
+            "normalized_range": 0.01614973262032076,
+            "percentile": 0.1359375,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 564.5,
+          "id": "c5e2192b46ee715e120c166a94ecce20fb3b57832c50301283bc66a72c5d0e4a",
+          "last_valid_index": 2817,
+          "low": 555.44,
+          "prefix_hash": "b6374dd274d71e2fb5f6fc52b1d67f1245c77a2338e1bad937c4c6befc79c2d4",
+          "published_at": "2026-07-08T20:30:00+00:00",
+          "published_index": 2801,
+          "window_start": "2026-07-08T16:45:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-10T15:30:00+00:00",
+      "episode_id": "67d2121053529ecb9081682da8be3214468fda3cfbd5b54f26a50e62bcfae9a0",
+      "id": "97f3742de8ae92ad71dbbd8c9a1b76d15865e46090431102be5aa5e065810fae",
+      "session": "2026-07-10",
+      "snapshot": {
+        "bar": {
+          "close": 580.188,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-10T15:30:00+00:00",
+          "high": 580.84,
+          "known_at": "2026-07-10T15:30:00+00:00",
+          "low": 575.63,
+          "open": 575.63,
+          "session": "2026-07-10",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 580.84,
+          "low": 566.67,
+          "normalized_range": 0.024423118023813098,
+          "percentile": 0.43125,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 578.99,
+            "low": 570.5,
+            "normalized_range": 0.014748032727083242,
+            "percentile": 0.140625,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 578.99,
+          "id": "67d2121053529ecb9081682da8be3214468fda3cfbd5b54f26a50e62bcfae9a0",
+          "last_valid_index": 2912,
+          "low": 570.5,
+          "prefix_hash": "8bef4568f0b12c81cc58556f9b1288944d15181d5261b157599e83cc100a6a40",
+          "published_at": "2026-07-10T12:15:00+00:00",
+          "published_index": 2896,
+          "window_start": "2026-07-10T08:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-14T08:15:00+00:00",
+      "episode_id": "a88861cd271dd0bd4292af899b470c7abc1a03fb4248e80dbf3e7155391ad7e9",
+      "id": "4c9dd4ad8521d328e363df9be7523a4b0e0851dfc63b16801ccc9d08663f0490",
+      "session": "2026-07-14",
+      "snapshot": {
+        "bar": {
+          "close": 564.1,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-14T08:15:00+00:00",
+          "high": 565.19,
+          "known_at": "2026-07-14T08:15:00+00:00",
+          "low": 552.01,
+          "open": 561.0,
+          "session": "2026-07-14",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 565.19,
+          "low": 548.28,
+          "normalized_range": 0.02997695444070215,
+          "percentile": 0.646875,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 554.31,
+            "low": 548.28,
+            "normalized_range": 0.010929853181076622,
+            "percentile": 0.0890625,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 554.31,
+          "id": "a88861cd271dd0bd4292af899b470c7abc1a03fb4248e80dbf3e7155391ad7e9",
+          "last_valid_index": 3023,
+          "low": 548.28,
+          "prefix_hash": "29d2fbec4477a3ff205273a3e8d65776e352749b80378b0bcc5f755d11b7f100",
+          "published_at": "2026-07-14T00:00:00+00:00",
+          "published_index": 3007,
+          "window_start": "2026-07-13T20:15:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-20T08:15:00+00:00",
+      "episode_id": "866552d856d84a1f4176afbe3a1fc459914c39d9e0d8dfe01aabd117e482d8c9",
+      "id": "0fdb4a1e1d0c9e4080ab99ba46abb634d5a986d287025f031b2e64463bdc91c6",
+      "session": "2026-07-20",
+      "snapshot": {
+        "bar": {
+          "close": 527.14,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-20T08:15:00+00:00",
+          "high": 527.66,
+          "known_at": "2026-07-20T08:15:00+00:00",
+          "low": 520.91,
+          "open": 521.77,
+          "session": "2026-07-20",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 527.66,
+          "low": 519.0,
+          "normalized_range": 0.016428273323974597,
+          "percentile": 0.2453125,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 525.63,
+            "low": 518.39,
+            "normalized_range": 0.013943187289359671,
+            "percentile": 0.1875,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 525.63,
+          "id": "866552d856d84a1f4176afbe3a1fc459914c39d9e0d8dfe01aabd117e482d8c9",
+          "last_valid_index": 3272,
+          "low": 518.39,
+          "prefix_hash": "c5b001d9e802339214f3e42af61d127c50c3d5a5873dfc1cb3e021e459560ccd",
+          "published_at": "2026-07-17T22:15:00+00:00",
+          "published_index": 3256,
+          "window_start": "2026-07-17T18:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-21T21:45:00+00:00",
+      "episode_id": "0d54d125bc238acb1aa413feaa8b6d6a03c4c916707720fa38f562fb76ea2173",
+      "id": "6acdfae4e03408031fb4253ebaece608cf2284c6f5b84b79a7ac1a1d2bbb0a97",
+      "session": "2026-07-21",
+      "snapshot": {
+        "bar": {
+          "close": 555.56,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-21T21:45:00+00:00",
+          "high": 556.0,
+          "known_at": "2026-07-21T21:45:00+00:00",
+          "low": 554.5,
+          "open": 554.8,
+          "session": "2026-07-21",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 556.0,
+          "low": 549.63,
+          "normalized_range": 0.011465908272733827,
+          "percentile": 0.1,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 555.16,
+            "low": 549.0,
+            "normalized_range": 0.011170147273677072,
+            "percentile": 0.084375,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 555.16,
+          "id": "0d54d125bc238acb1aa413feaa8b6d6a03c4c916707720fa38f562fb76ea2173",
+          "last_valid_index": 3388,
+          "low": 549.0,
+          "prefix_hash": "555de6dad55d5354ff1f7ac468a2b2025a8de023b8171c42bd4908f57be4a97b",
+          "published_at": "2026-07-21T19:15:00+00:00",
+          "published_index": 3372,
+          "window_start": "2026-07-21T15:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-27T08:15:00+00:00",
+      "episode_id": "e9c9ddb73159d3778a14b53c3c9860f53d64629f6f6c76206d4fce7e08565fb2",
+      "id": "afbf845ab2ad51c67a301a479ff99a00fbc2f2d66abf226a1e958ce3cd5fb354",
+      "session": "2026-07-27",
+      "snapshot": {
+        "bar": {
+          "close": 541.0,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-27T08:15:00+00:00",
+          "high": 543.64,
+          "known_at": "2026-07-27T08:15:00+00:00",
+          "low": 537.25,
+          "open": 541.09,
+          "session": "2026-07-27",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 543.64,
+          "low": 526.12,
+          "normalized_range": 0.03238447319778185,
+          "percentile": 0.6734375,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 529.52,
+            "low": 522.21,
+            "normalized_range": 0.013839454751987779,
+            "percentile": 0.178125,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 529.52,
+          "id": "e9c9ddb73159d3778a14b53c3c9860f53d64629f6f6c76206d4fce7e08565fb2",
+          "last_valid_index": 3593,
+          "low": 522.21,
+          "prefix_hash": "981d4cf53d22f7ea5c9f691721460525512db6d1d09789302ca061400f110d68",
+          "published_at": "2026-07-24T22:30:00+00:00",
+          "published_index": 3577,
+          "window_start": "2026-07-24T18:45:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-30T20:15:00+00:00",
+      "episode_id": "9cdbc1c6e6bc22d28d55c34b20406c1685a0aede01834812c5df7a1add6bd493",
+      "id": "2bed583c180d8117ed56c8035ddf1407e0bad8b8a8e2b02e89361946f2a1fa68",
+      "session": "2026-07-30",
+      "snapshot": {
+        "bar": {
+          "close": 508.0,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-30T20:15:00+00:00",
+          "high": 508.99,
+          "known_at": "2026-07-30T20:15:00+00:00",
+          "low": 503.1,
+          "open": 504.53,
+          "session": "2026-07-30",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 508.99,
+          "low": 500.67,
+          "normalized_range": 0.0163779527559055,
+          "percentile": 0.15,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 507.13,
+            "low": 499.26,
+            "normalized_range": 0.015670891369062443,
+            "percentile": 0.13125,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 507.13,
+          "id": "9cdbc1c6e6bc22d28d55c34b20406c1685a0aede01834812c5df7a1add6bd493",
+          "last_valid_index": 3834,
+          "low": 499.26,
+          "prefix_hash": "0e94429acad6dca6f771c25508a4fb37d4aee75daffdc879ae7ae2869be4966b",
+          "published_at": "2026-07-30T18:45:00+00:00",
+          "published_index": 3818,
+          "window_start": "2026-07-30T15:00:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-08-03T08:15:00+00:00",
+      "episode_id": "8e922ba1f2e5f376ef3c05e005fc1410fb7d55e248af859ee4e31f377cef10fa",
+      "id": "388d58c30d86fdb3a2ee7183478e922484dbc4ea1c257492c83c15408ca15dc1",
+      "session": "2026-08-03",
+      "snapshot": {
+        "bar": {
+          "close": 508.42,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-08-03T08:15:00+00:00",
+          "high": 514.0,
+          "known_at": "2026-08-03T08:15:00+00:00",
+          "low": 505.32,
+          "open": 509.49,
+          "session": "2026-08-03",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 514.0,
+          "low": 500.7787,
+          "normalized_range": 0.026004681169112122,
+          "percentile": 0.3984375,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 505.89,
+            "low": 500.7787,
+            "normalized_range": 0.010202195608782378,
+            "percentile": 0.0328125,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 505.89,
+          "id": "8e922ba1f2e5f376ef3c05e005fc1410fb7d55e248af859ee4e31f377cef10fa",
+          "last_valid_index": 3919,
+          "low": 500.7787,
+          "prefix_hash": "b5ce5852f1ae35c3b905b2de8c6d08120476885189e26e402b117968f0462ce2",
+          "published_at": "2026-08-01T00:00:00+00:00",
+          "published_index": 3903,
+          "window_start": "2026-07-31T20:15:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-08-03T22:30:00+00:00",
+      "episode_id": "235a4bf37322b281361f63ff60b88e111a182b9ff0e77a88370cd4fef90d1741",
+      "id": "baa6a426313c6f64a0c1b7e433a141eb76e18d603175dd9f8e18823222b3ce17",
+      "session": "2026-08-03",
+      "snapshot": {
+        "bar": {
+          "close": 511.3,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-08-03T22:30:00+00:00",
+          "high": 511.8,
+          "known_at": "2026-08-03T22:30:00+00:00",
+          "low": 510.9,
+          "open": 510.9,
+          "session": "2026-08-03",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 511.8,
+          "low": 505.86,
+          "normalized_range": 0.011617445726579302,
+          "percentile": 0.0625,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 510.95,
+            "low": 501.73,
+            "normalized_range": 0.018148534535362026,
+            "percentile": 0.146875,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 510.95,
+          "id": "235a4bf37322b281361f63ff60b88e111a182b9ff0e77a88370cd4fef90d1741",
+          "last_valid_index": 3966,
+          "low": 501.73,
+          "prefix_hash": "9d6b9c49c3f267e8547e0b42612b5f0141e66274a6127706d337931e1a872499",
+          "published_at": "2026-08-03T19:45:00+00:00",
+          "published_index": 3950,
+          "window_start": "2026-08-03T16:00:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-08-05T13:45:00+00:00",
+      "episode_id": "a0efd6427b57d3c6bf286a055ee68e0f4fd843fc4c73dbce6f81a60c30925f2d",
+      "id": "8127aea3bf84fd069c24525d4e663a34113ca740ea62fdcbf29bff826a12224a",
+      "session": "2026-08-05",
+      "snapshot": {
+        "bar": {
+          "close": 542.5,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-08-05T13:45:00+00:00",
+          "high": 542.82,
+          "known_at": "2026-08-05T13:45:00+00:00",
+          "low": 534.8,
+          "open": 536.4,
+          "session": "2026-08-05",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 542.82,
+          "low": 530.88,
+          "normalized_range": 0.022009216589861852,
+          "percentile": 0.203125,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 539.79,
+            "low": 530.88,
+            "normalized_range": 0.016708860759493613,
+            "percentile": 0.096875,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 539.79,
+          "id": "a0efd6427b57d3c6bf286a055ee68e0f4fd843fc4c73dbce6f81a60c30925f2d",
+          "last_valid_index": 4064,
+          "low": 530.88,
+          "prefix_hash": "b9647dca2a15d73237624175b3abc0d2b6dddac575e88a7cdbb51fd9de4ecb3a",
+          "published_at": "2026-08-05T12:15:00+00:00",
+          "published_index": 4048,
+          "window_start": "2026-08-05T08:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-08-07T21:00:00+00:00",
+      "episode_id": "a4fa2bca6f973e20d92f3993ffae3436bdc50e9d1b0d72a09b765a4f50a18fcf",
+      "id": "b388d009ec664261e511dea13c77f3cac4adfe2ece97e1495ec36bf88f23224f",
+      "session": "2026-08-07",
+      "snapshot": {
+        "bar": {
+          "close": 543.54,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-08-07T21:00:00+00:00",
+          "high": 543.54,
+          "known_at": "2026-08-07T21:00:00+00:00",
+          "low": 543.02,
+          "open": 543.37,
+          "session": "2026-08-07",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 543.9,
+          "low": 539.19,
+          "normalized_range": 0.0086654156087867,
+          "percentile": 0.003125,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 543.518,
+            "low": 533.42,
+            "normalized_range": 0.018717330861909305,
+            "percentile": 0.1640625,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 543.518,
+          "id": "a4fa2bca6f973e20d92f3993ffae3436bdc50e9d1b0d72a09b765a4f50a18fcf",
+          "last_valid_index": 4217,
+          "low": 533.42,
+          "prefix_hash": "4695a62bf94ef8868afa326aea7500409b9fe56e13d8d95698e3fb9e1788fca6",
+          "published_at": "2026-08-07T18:30:00+00:00",
+          "published_index": 4201,
+          "window_start": "2026-08-07T14:45:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-08-12T12:30:00+00:00",
+      "episode_id": "8e4a4ea415f80a8fbb13e2dfc1051286cab06511e1f0768e970acbd815618868",
+      "id": "faeba1a0df8cd6653f3c7d58a0aeebff7af0b5c68276dd907abe1f403b2605bd",
+      "session": "2026-08-12",
+      "snapshot": {
+        "bar": {
+          "close": 547.8,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-08-12T12:30:00+00:00",
+          "high": 548.35,
+          "known_at": "2026-08-12T12:30:00+00:00",
+          "low": 545.011,
+          "open": 545.4,
+          "session": "2026-08-12",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 548.35,
+          "low": 542.11,
+          "normalized_range": 0.0113910186199343,
+          "percentile": 0.0875,
+          "reason": "own_history_rank",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 546.12,
+            "low": 541.9,
+            "normalized_range": 0.007742266906395677,
+            "percentile": 0.0125,
+            "reason": "own_history_rank",
+            "status": "READY"
+          },
+          "high": 546.12,
+          "id": "8e4a4ea415f80a8fbb13e2dfc1051286cab06511e1f0768e970acbd815618868",
+          "last_valid_index": 4384,
+          "low": 541.9,
+          "prefix_hash": "4c1aff3c50f58e8be4ad2146fdf51b669184cedf71c1466aae6f314e8283e4ac",
+          "published_at": "2026-08-12T12:15:00+00:00",
+          "published_index": 4368,
+          "window_start": "2026-08-12T08:30:00+00:00"
+        }
+      }
+    }
+  ]
+}

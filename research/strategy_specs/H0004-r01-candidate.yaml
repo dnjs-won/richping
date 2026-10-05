@@ -1,0 +1,29 @@
+schema_version: h0004_candidate_v1
+hypothesis_id: H0004
+revision: 1
+status: PROVISIONAL_FREQUENCY_ONLY_NOT_SIGNAL_FREEZE
+family: VOLATILITY_COMPRESSION_BREAKOUT_CONTINUATION
+direction: LONG
+instrument: SOXX
+timeframe: 15m
+session: 04:00-20:00 America/New_York
+parameters:
+  window_bars: 16
+  history_observations: 640
+  low_percentile: 0.20
+  expiration_bars: 16
+measure: (max(window.high)-min(window.low))/current_completed_close
+classification: fraction of immediately previous 640 measures <= current measure <= 0.20
+persistence: 16-bar window itself; no extra consecutive-state gate
+range: Freeze highest high / lowest low of current 16 bars at first armed compression publication.
+breakout: Only subsequent completed close strictly above frozen high; no buffer/touch/retest.
+expiration: Subsequent slots 1..16 inclusive eligible; slot 17 expires before evaluation.
+cancellation: Completed close strictly below frozen low or continuity gap; invalid input poisons stream.
+rearm: Only READY noncompression with no active range, then READY compression; gap never rearms.
+session_boundary: Scheduled next-session adjacency preserves numeric history and episode; calendar closure consumes no slot.
+outcomes: FORBIDDEN
+comparators: 0
+alternatives_not_executed:
+  - ATR/true-range aggregate measures bar movement rather than the actual enclosing range.
+  - Absolute relative threshold lacks own-normal variation context.
+  - Additional persistence, buffer, retest, RTH filter or larger grids change initial thesis.

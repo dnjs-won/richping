@@ -1,0 +1,9 @@
+{
+  "base_commit": "74b67518f544bfdcfd2b45c07198f605291992a5",
+  "byte_exact_Git_matches": {
+    "conftest.py": "67a85a984014555d854f4cd4f8abd25eea573a1f05eeab9d00d764c4399065f6",
+    "pyproject.toml": "cbccbaf1433bd6a937df6471a5467abbbead57a02ce8f71adb0dcdfe7cd10e28",
+    "tests/conftest.py": "32aefe914ad092599f57d6912995f5ea4d2a6cb29540058d419c0cb7b525c158"
+  },
+  "schema": "h0004_restored_source_proof_v1"
+}

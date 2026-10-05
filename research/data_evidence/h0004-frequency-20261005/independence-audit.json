@@ -1,0 +1,43 @@
+{
+  "forbidden_call_counts": {
+    "MFE_MAE": 0,
+    "confirmation_outcomes": 0,
+    "efficacy_statistics": 0,
+    "forward_module_imports": 0,
+    "forward_window_queries": 0,
+    "future_return_queries": 0,
+    "market_queries": 0,
+    "network_calls": 0,
+    "outcome_accessors": 0,
+    "profitability_calculations": 0,
+    "return_calculations": 0,
+    "store_access": 0
+  },
+  "forbidden_inputs": [
+    "MACD",
+    "H0001 state",
+    "H0002 defense",
+    "H0003 RS",
+    "QQQ",
+    "Daily/H1 trend",
+    "volume",
+    "VWAP",
+    "options",
+    "news",
+    "macro",
+    "manual support/resistance"
+  ],
+  "imported_strategy_states": [],
+  "outcome_access": 0,
+  "prior_evidence_unchanged": true,
+  "prior_files_preserved": 598,
+  "reused_utilities": [
+    "digest/time",
+    "immutable payload",
+    "completed-slot continuity",
+    "XNYS/extended session"
+  ],
+  "schema": "h0004_independence_audit_v1",
+  "signal_input": "Detached SOXX OHLC/time only",
+  "source_sha256": "d87ba55741e7d0fd54f6e3097aefa5975b154820955238e7c6db7ea2f57f572f"
+}

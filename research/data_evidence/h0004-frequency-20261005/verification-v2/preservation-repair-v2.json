@@ -1,0 +1,13 @@
+{
+  "additional_full_frequency_replays": 0,
+  "additional_signal_trials": 0,
+  "final_full_receipt": "tests-full.xml",
+  "intermediate_full": "Interrupted after pyproject.toml preservation failures; not a complete regression",
+  "new_configuration": "pytest.ini",
+  "outcome_access": 0,
+  "plugin": "scripts.h0004_test_registry.py",
+  "restored_file": "pyproject.toml",
+  "schema": "h0004_test_configuration_repair_v1",
+  "sealed_H0002_H0003_metadata_cases_revalidated": "2 passed",
+  "signal_semantics_changed": false
+}
