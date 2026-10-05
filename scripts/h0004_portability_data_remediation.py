@@ -217,8 +217,9 @@ def build():
         raise ValueError('Capture access/policy audit mismatch')
     prior=ROOT/'admission-manifest.json'
     code_commit=p.read(prior)['code_commit'] if prior.exists() else p.git('rev-parse','HEAD').decode().strip()
-    sources={name:p.fingerprint(name) for name in (__file__.replace('\\','/').split('/richping/')[-1],
-        'tests/test_h0004_portability_data_remediation.py',POLICY.as_posix())}
+    sources={name:p.fingerprint(name) for name in ('scripts/h0004_portability_data_remediation.py',
+        'tests/test_h0004_portability_data_remediation.py','scripts/h0004_portability_preaccess.py',
+        p.read(p.FREEZE)['implementation'],POLICY.as_posix())}
     for name,h in sources.items():
         if sha256(p.git('show',code_commit+':'+name)).hexdigest()!=h: raise ValueError('Uncommitted source')
     rows=[];files={POLICY.as_posix():p.fingerprint(POLICY),
@@ -228,6 +229,8 @@ def build():
         for r in old['symbols']:
             symbol=r['symbol'];folder=ROOT/'streams'/symbol
             oldaudit=p.read(PREDECESSOR/'streams'/symbol/'input-manifest.json')
+            bind(PREDECESSOR/'streams'/symbol/'input-manifest.json')
+            bind(PREDECESSOR/'streams'/symbol/'seal.json')
             selected=PREDECESSOR;comparison=None;after=None
             if symbol in policy['retry_symbols']:
                 after=exact_audit(symbol,ROOT)
@@ -262,6 +265,8 @@ def build():
                 data_content_sha256=audit['content_hash'],data_capture_path=(selected/'inputs'/symbol/'capture.json').as_posix(),
                 data_capture_sha256=audit['input_sha256'],candidate_stream_path=stream_path.as_posix(),
                 candidate_stream_sha256=p.fingerprint(stream_path),predecessor_stream_reused=unchanged,
+                predecessor_input_manifest_sha256=r['input_manifest_sha256'],
+                predecessor_candidate_seal_sha256=r['seal_sha256'],
                 coverage=audit['coverage'],retry_comparison=comparison,
                 **{k:stream[k] for k in ('candidate_count','candidate_sessions','eligible_decision_opportunities',
                     'eligible_sessions','signal_frequency_A','signal_frequency_B','signal_state')}))
