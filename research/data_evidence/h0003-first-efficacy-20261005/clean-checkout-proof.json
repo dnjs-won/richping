@@ -1,0 +1,17 @@
+{
+  "archive_commit": "d3a2457166f2735889f6d08508c1ff6d76af68fb",
+  "clean_archive_metadata_and_published_result_verification_equal": true,
+  "confirmation_outcome_access": 0,
+  "event_stream_hash": "e08d529b7d6aa32eacc6091d131a789ecef37312418f7423c79da9f55742f0c5",
+  "new_price_queries": 0,
+  "preserved_files_verified": 586,
+  "protocol_hash": "b221efe766c4536717fde663fdc32e22fac136660fdb0278000e3d44c9d91f46",
+  "report_hash": "ff12bd9d80ee4f0744dea3c4e94cacc726d2b65b03d0970aab76680aa3c7003e",
+  "result_hashes": {
+    "discovery-report.json": "7c1134c8c9161769ea7de56246c0218030df8929ecfd9232dd3bd44c498c2472",
+    "event-results.json": "54c4d2ec89a9f3dc05c02295131f632463d9fb01e9ab25f971d7259efa776a11",
+    "outcome-access-audit.json": "f77f137e7452f8787d423889c56f6757dab580bdd9ea1caedd91ae891cd43a76"
+  },
+  "signal_freeze_hash": "e08f98578ecbb3742ccd02bc2a09df205d9b2a45146082051a68955b5262e39e",
+  "verification_sha256": "400bc9cdb07e4fdef6b3a63a191bb0bab5a20f5bb8eb3d427f32d4756e3939c8"
+}
