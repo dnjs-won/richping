@@ -1,0 +1,39 @@
+{
+  "H0001_H0002_and_H0003_discovery_unchanged": true,
+  "H0003_efficacy_calculations": 0,
+  "H0003_future_price_queries": 0,
+  "H0003_outcome_access": 0,
+  "design_tests": {
+    "errors": 0,
+    "failures": 0,
+    "path": "research/data_evidence/h0003-freeze-preregistration-20261005/tests-design-v1.xml",
+    "sha256": "bc7d941a51b800f55a3fc0086a8fd3798cec2bc18b666293b0365f3b063f29fb",
+    "skipped": 0,
+    "tests": 47
+  },
+  "frozen_source_and_evidence_preserved": 570,
+  "manifest_sha256": "ff6cdfc724c2dfce33c6a93ffb8dd7a30fadf62ead8fb14fc5805964f4e306fd",
+  "metadata_verification_sha256": "7ee694ab84a4ffa334df0f6c29a74c1753e9b16100c3d1c4e8e5cafcc05a086c",
+  "next_P0": "H0003_FIRST_EFFICACY",
+  "profitability": "NOT_ESTIMATED",
+  "schema": "h0003_freeze_test_verification_v1",
+  "scope": "Market labels/statistics are not implemented or executed here. Historical H0002 regression fixtures are a separate scope.",
+  "tests": [
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "research/data_evidence/h0003-freeze-preregistration-20261005/tests-targeted-v1.xml",
+      "sha256": "4938723c6f0e4f443adf3e395ca0efe58eb56e90a0582bf0252a1f74c573e5e7",
+      "skipped": 0,
+      "tests": 134
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "research/data_evidence/h0003-freeze-preregistration-20261005/tests-full-v1.xml",
+      "sha256": "7e333ff97195ef4c501004964ae1a845dfbf67b46a5ae07a1f8fb89b43f2e94a",
+      "skipped": 0,
+      "tests": 1643
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+schema: h0003_relative_leadership_preregistration_v1
+version: H0003_RELATIVE_LEADERSHIP_EFFICACY_V1
+status: FROZEN_BEFORE_ANY_H0003_OUTCOME_ACCESS
+registered_on: '2026-10-05'
+hypothesis: H0003-r01
+signal_freeze: research/decision_records/H0003-signal-freeze-v1.json
+signal_spec: research/strategy_specs/H0003-r01-frozen-v1.yaml
+primary_family: RELATIVE_STRENGTH_LEADERSHIP_CONTINUATION
+comparators: []
+scope: GROSS_RELATIVE_PRICE_OPPORTUNITY_NOT_ACCOUNT_OR_EXECUTION_PROFITABILITY
+sample:
+  unit: Immutable leadership episode candidate id; at most one per episode.
+  duplicate: Any duplicate id/episode, identity collision, altered snapshot or inconsistent clock fails closed.
+  overlap: Keep all distinct candidates and overlapping forward windows; no thinning after outcomes.
+  weighting: Equal event weights within each session, then equal occupied session weights.
+  clocks: Historical bar-end assumed availability; not reconstructed live delivery or attainable fill.
+horizons:
+  primary_slots: 16
+  secondary_slots: [4, 64]
+  unit: Scheduled completed 15m slots on XNYS nominal 04:00-20:00 America/New_York grid.
+  rationale: >-
+    Four observed trading hours test continuation over the next part of a session
+    after a one-session leadership context and one-hour persistence check. One hour
+    is more immediate; one full session is longer exposure. Choose16 theoretically,
+    not from labels or by copying the64-slot signal window. Closures consume no slot;
+    missing/unsupported scheduled slots are never compressed.
+  secondary_role: Descriptive only; neither changes primary nor creates a PASS/REJECT test.
+label:
+  name: DIRECT_PAIRED_FORWARD_CLOSE_PRICE_EXCESS
+  own: SOXX_close_at_exact_t_plus_h / SOXX_close_at_candidate_t - 1
+  benchmark: QQQ_close_at_exact_t_plus_h / QQQ_close_at_candidate_t - 1
+  relative: own_minus_benchmark_on_identical_anchor_endpoint_and_scheduled_path
+  reference: Completed candidate-slot closes from sealed paired vintage; gross opportunity marks, not fills.
+  path: Both admitted series required at anchor and every scheduled slot t+1..t+h, same feed/unit/clock; no fill or stale/future benchmark substitution.
+  missing: Immature before terminal deadline PENDING; mature missing supported slots after deadline UNRESOLVED. Never omit unresolved events or replace them with0.
+  action_unit: Split/share-unit change or ambiguity anywhere anchor..endpoint makes that label UNRESOLVED; no new transformation or adjusted backfill.
+  dividends: Raw price return excludes cash dividend reinvestment and total-return accounting; known cash distributions disclosed separately, never normalized into this price estimand.
+  mfe_mae: NOT_PART_OF_V1
+baseline:
+  name: DIRECT_CONTEMPORANEOUS_QQQ_EXCESS_ZERO_NULL
+  estimand: Session-balanced mean of event-level SOXX forward price return minus paired QQQ forward price return at16 slots.
+  'null': Primary session-balanced expected post-signal SOXX price excess over QQQ <= 0.
+  alternative: Primary session-balanced expected post-signal SOXX price excess over QQQ > 0.
+  matched_controls: NONE; QQQ is the direct comparison, no non-event search/fallback engine.
+  interpretation: Observational leadership persistence relative to QQQ; no timing-alpha or causal effect identification versus matched non-events.
+absolute_relevance:
+  role: SECONDARY_DESCRIPTIVE_SOXX_PRICE_RETURN
+  rationale: Relative continuation is the approved thesis. A joint absolute-return gate would broaden the confirmatory condition; do not add it silently.
+  interpretation: Relative PASS with negative SOXX direction is not LONG profit validation; always disclose absolute direction and prohibit promotion/account-return claims.
+costs:
+  costs_bps: null
+  net_return: null
+  profitability: NOT_ESTIMATED
+  fill_spread_slippage_commissions: NOT_MODELED
+discovery:
+  interval: ['2026-05-05', '2026-08-13']
+  sessions: 70
+  paired_bars: 4480
+  events: 35
+  event_sessions: 29
+  role: Definition/frequency-exposed exploratory only, not confirmation or statistical power proof.
+  outcomes_this_action: FORBIDDEN
+  next_action: H0003_FIRST_EFFICACY
+  endpoint_scope: Exact endpoints and entire paired path must remain within admitted70-session scope; later missing labels retained UNRESOLVED, no opportunistic extra capture.
+  uncertainty: NOT_CONFIRMATORY; first exploratory report uses descriptive session-balanced primary excess only, no CI/PASS/REJECT or outcome-selected protocol changes.
+confirmation:
+  selection_basis: First252 official XNYS sessions after10 fixed official-session embargo starting registration day2026-10-05; one annual chronological cohort chosen for calendar breadth, not discovery35 count.
+  embargo_start: '2026-10-05'
+  embargo_end: '2026-10-16'
+  anchor_start: '2026-10-19'
+  anchor_end: '2027-10-19'
+  official_sessions: 252
+  followup_end: '2027-10-20'
+  terminal_receipt_deadline: '2027-10-21T20:00:00-04:00'
+  terminal_rule: Infer only strictly after fixed receipt deadline and identity/admission/completeness gates; before then readiness/frequency/PENDING only.
+  stopping: One terminal inference; no peeking, event-count extension, outcome-selected early termination, horizon change or calendar compression.
+  prefix_origin: '2026-05-05'
+  prefix: Price/feature-only chronological replay from declared origin through embargo; prefix events outside anchor period consume episode rights but are not confirmation samples. Do not reset episode at confirmation/session boundary. New immutable paired vintage identity/lineage and admission required; no old evidence rewrite.
+  session: Full04:00-20:00 ET, no RTH/segment selection.
+  unsupported: Official early/nonstandard sessions remain in252-session calendar and block denominator; explicit UNAVAILABLE input, numeric warmup reset, consumed-episode lock retained until READY RS<=0. Never create shorter/RTH synthetic slots.
+  unit_boundaries: >-
+    Future split/action/share-unit boundaries require separate compatible raw-unit
+    segment admission and explicit UNAVAILABLE boundary input, then frozen numeric
+    warmup. Retain consumed episode lock; no new rearm cause or registered split
+    transformation. A future adapter that cannot certify this contract is blocked,
+    not silently upgraded. All crossing candidate labels remain UNRESOLVED.
+  admission: Interval-specific immutable Alpaca SIP paired coverage/unit/action/clock certificate; discovery certificate never certifies future inputs. Expected supported-session capture failure prevents complete terminal inference; deterministic unsupported sessions disclosed separately.
+  identity: H0003-only protocol/stream/seed/stopping/evidence; overlapping H0001/H0002 calendar dates do not merge samples or confer independent market returns.
+  asynchronous: true
+  project_blocker: false
+evidence_floor:
+  complete_events: 40
+  distinct_candidate_sessions: 20
+  occupied_fixed_10_session_blocks: 8
+  completeness: All emitted primary events require resolved16-slot paired labels; no complete-case omission. Secondary unresolved labels block only their descriptive horizon.
+  breadth: Fixed nonoverlapping10-session bins from anchor_start including final2-session bin; at least8 occupied bins. Floors are breadth guards, not powered sample-size claims.
+uncertainty:
+  method: Circular moving calendar-session block percentile bootstrap of session-balanced primary relative mean.
+  grid: All252 fixed chronological anchor sessions, including zero-event and known unsupported sessions; never compress occupied dates.
+  block_sessions: 10
+  rationale: Two-week blocks exceed one-session RS memory and up-to-one-session labels; conservatively retain nearby leadership dependence. Finite regime dependence may exceed this assumption; no guaranteed coverage or power claim.
+  replicates: 10000
+  seed: 20261005
+  generator: random.Random under bound Python runtime.
+  resampling: Draw ceil(252/10)=26 randrange(252) starts with replacement; append10 circular session indices from each; truncate to252. Average occupied per-session relative means over sampled occurrences. Same indices may describe absolute means; those remain secondary.
+  interval: Two-sided95 percent percentile interval, linear interpolation at0.025 and0.975 using sorted valid replicate values and position(n-1)*q.
+  empty: No retries or seed changes. Empty replicate has no occupied event sessions. More than100 empty replicates (>1 percent) makes inference UNRESOLVED; otherwise disclose count and use valid replicates.
+  invalid: Nonfinite values, malformed calendar, unresolved primary labels or invalid resampling fail closed/UNRESOLVED; do not silently discard invalid numeric replicates or switch to IID/event bootstrap.
+multiple_testing:
+  primary_families: 1
+  alpha: 0.05
+  primary_rule: Only the registered16-slot relative estimand can PASS/REJECT.
+  secondary: Absolute SOXX, QQQ and4/64-slot descriptions cannot rescue or replace primary; no comparator or additional confirmatory test.
+  project: H0003-local inference is not family-wide strategy selection validation across all hypotheses; later promotion must account for repeated research trials separately.
+disposition:
+  precedence: [INVALID_FAIL_CLOSED, PENDING, UNRESOLVED, ZERO_SIGNAL, INSUFFICIENT_EVIDENCE, PASS, REJECT, INCONCLUSIVE]
+  INVALID_FAIL_CLOSED: Identity/semantics/duplicate/hash/session/provenance/admission/causality defect; no inference.
+  PENDING: Fixed receipt deadline not reached; no confirmation outcome access or inference.
+  UNRESOLVED: Mature primary labels/capture/units ambiguous or incomplete, or invalid/too-empty uncertainty; keep full emitted denominator.
+  ZERO_SIGNAL: Complete valid terminal cohort with0 candidates; economic estimates null.
+  INSUFFICIENT_EVIDENCE: Complete valid terminal cohort below any40-events/20-sessions/8-block floor; no PASS/REJECT inference.
+  PASS: All gates/floors satisfied and primary relative95-percent interval lower bound strictly >0.
+  REJECT: All gates/floors satisfied and primary relative95-percent interval upper bound strictly <0; evidence against positive relative continuation, not absence-of-effect proof.
+  INCONCLUSIVE: Valid floor-satisfying inference with neither strict positive lower nor strict negative upper bound; not significant does not prove no effect.
+  equality: Any bound equal0 is not PASS or REJECT.
+  promotion: Further independent research only; no automatic production, order, execution profitability or account-performance admission.
+outcome_access_this_action: FORBIDDEN
+next_P0: H0003_FIRST_EFFICACY

@@ -1,0 +1,79 @@
+{
+  "H0001_H0002_modified": false,
+  "base_commit": "934f8f8036dcf7bc073e779d33827154428b08b4",
+  "benchmark_meaning": "QQQ technology/growth benchmark; not entire market",
+  "datasets": {
+    "QQQ": {
+      "admission_hash": "04704a732d3a4c89c376dfa1bf34dd91cdbb42feaf116a147efb2bd8b6b898d8",
+      "capture_hash": "f062f8d13424c36e84a65993d75748874a0b41962850cf370324b918a56fedd9",
+      "hash": "f1491386dc854500e99664a0dfe64bbb4509e00be7ee1c61bf7ef1996607ddd8",
+      "hash_domain": "digest(canonical detached paired QQQ CloseBar sequence)",
+      "id": "qqq-alpaca-sip-15m-discovery-20260505-20260813-f062f8d13424c36e",
+      "vintage_path": "research/data_evidence/h0003-frequency-20261004/benchmark-vintage.json",
+      "vintage_sha256": "9a6dcdd6fc8d20fae1eb823b340dec8dbe1b3ff218c3213767a5f04e46c5ce91"
+    },
+    "SOXX": {
+      "hash": "4b39f109e8cffce8a7e680e773b560b307e21dd5a92dcad6d06fcd47bb0aa8bd",
+      "id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1"
+    }
+  },
+  "discovery_denominators": {
+    "absolute_guard_pass_bars": 2360,
+    "both_series_READY_bars": 4480,
+    "candidate_event_count": 35,
+    "candidate_sessions": 29,
+    "data_session_mismatch_count": 0,
+    "distinct_sessions": 70,
+    "leadership_episode_count": 37,
+    "leadership_state_count": 2188,
+    "positive_RS_guard_fail_bars": 144,
+    "positive_relative_return_bars": 2345,
+    "relative_strength_READY_bars": 4416,
+    "scheduled_pair_slots": 4480
+  },
+  "discovery_event_stream_hash": "e08d529b7d6aa32eacc6091d131a789ecef37312418f7423c79da9f55742f0c5",
+  "discovery_events_path": "research/data_evidence/h0003-frequency-20261004/candidate-events.json",
+  "discovery_events_sha256": "001366871d47ddd028b1c14608b9b1a67e27a7e67dbf5042c5e124ce6340b375",
+  "discovery_frequency_sha256": "abd47116022fb24fc1896d8ce3528088fe33021024f91f2649c5b733752d8820",
+  "discovery_trace_chain": "33021be775493f0ee365169200f0395eba461a8184b4d6723b5eb71d81ce3f73",
+  "efficacy_calculations": 0,
+  "episode": "Four consecutive READY RS>0 observations activate; first READY own-return>=0 emits once. RS<=0 ends and rearms. Guard failure alone never rearms.",
+  "episode_publication": "First persistent positive READY observation; id anchors first positive run observation.",
+  "guard": "SOXX_R64>=0",
+  "historical_hypothesis": "Original DRAFT retained; this decision resolves v1 signal semantics only.",
+  "hypothesis": "H0003-r01",
+  "hypothesis_sha256": "41bc5320acec4ba071e24ac94bce207831aef1a47b16f55ec263ff28ce2813f0",
+  "identity": "episode_id=digest(spec_hash,ordered_vintage_ids,first_positive_at); candidate_id=digest(snapshot_without_id)",
+  "implementation": "richping/research_v2/strategy/h0003_leadership.py",
+  "implementation_sha256": "3536deb1c6dc77ece850e2bb31643a410c6e7fbff4c63ac83b686b59dc8f0660",
+  "leadership": "RS64>0",
+  "missing": "UNAVAILABLE resets numeric history/persistence; retains episode/consumed lock until observed READY RS<=0.",
+  "outcome_access": 0,
+  "paired_contract": [
+    "alpaca_sip",
+    "sip",
+    "raw",
+    "USD",
+    "ALPACA_SIP_RAW_USD_PER_AS_TRADED_SHARE",
+    "INTERVAL_CERTIFIED_SPLIT_IDENTITY_DIVIDENDS_NOT_REINVESTED",
+    "historical_snapshot_bar_end_assumed_v1",
+    "15m",
+    "04:00-20:00 America/New_York"
+  ],
+  "parameters": {
+    "persistence_slots": 4,
+    "window_slots": 64
+  },
+  "persistence_slots": 4,
+  "profitability": "NOT_ESTIMATED",
+  "provisional_sha256": "4fd92cbaa29dd85ac70f39bdc25d0b0fa981e7b00a62ba84f437ab3bdfbdee77",
+  "rearm": "Observed READY RS64<=0 only",
+  "registered_on": "2026-10-05",
+  "schema": "h0003_signal_freeze_v1",
+  "signal_spec_hash": "c3f9ab6aab5065e054fe069fc8141ba130838cc6b953ec8839179bf6d315afc5",
+  "spec_canonical_hash": "ec0da5e862ccf83e222d03057ce6552b2625855044172067341cd8ee8e94ba03",
+  "spec_path": "research/strategy_specs/H0003-r01-frozen-v1.yaml",
+  "spec_sha256": "7bd85f5fe16f23714ff851433f8a9e90c7b4a9df32151e19b81bcdccdecb1a71",
+  "status": "IMMUTABLE_OWNER_APPROVED",
+  "window_slots": 64
+}

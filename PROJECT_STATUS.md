@@ -1,3 +1,21 @@
+# Richping V2 - H0003 frozen signal and preregistered relative efficacy
+
+**SIGNAL FROZEN / EVALUATION PREREGISTERED / OUTCOMES NOT_RUN.**
+
+Owner-approved H0003 v1 asks whether semiconductor leadership over technology/growth QQQ continues: SOXX_R64 minus QQQ_R64, 64 scheduled completed paired15m slots, four consecutive READY RS>0 observations, current SOXX_R64>=0. One guard-eligible candidate per episode; only observed READY RS<=0 rearms. Gaps, session boundaries and guard toggles do not rearm. Immutable paired Alpaca SIP/raw extended04:00-20:00 ET scope and original implementation unchanged.
+
+Discovery35 events/29 sessions,37 episodes and all original frequency evidence preserved. New immutable freeze binds hypothesis, both dataset identities/hashes, paired provenance/unit/session, source implementation and candidate stream. See research/decision_records/H0003-signal-freeze-v1.json and research/strategy_specs/H0003-r01-frozen-v1.yaml.
+
+Primary16 scheduled slots (four observed trading hours), session-balanced mean of future SOXX close price return minus paired QQQ close price return; null expected excess<=0. Absolute SOXX direction and4/64 horizons are descriptive only. One primary family; no alternate signal, benchmark or control search. Profitability NOT_ESTIMATED.
+
+Fixed confirmation252 sessions2026-10-19..2027-10-19, followup2027-10-20, receipt deadline2027-10-21 20:00ET; no inference at/before deadline or count-driven extension. Floors40 complete primary events/20 candidate sessions/8 occupied fixed10-session blocks. Circular calendar-session block bootstrap10 sessions/10000 draws/seed20261005/95-percent linear percentile interval; unresolved primary labels retained, no complete-case deletion. Full protocol: research/decision_records/H0003-efficacy-preregistration-v1.yaml.
+
+Metadata-only verification twice equal,570 prior source/evidence files preserved; real H0003 outcome access/future-price queries/efficacy calculations0. Targeted134/full1643 passed with failures/errors/skips0. New49 tests plus47 preseal design checks. H0001/H0002 frozen contracts/evidence/asynchronous tracks unchanged. Evidence: research/data_evidence/h0003-freeze-preregistration-20261005/verification.json and test-verification.json.
+
+NEXT_ACTION **H0003_FIRST_EFFICACY / READY**. Implement, bind and validate registered paired-label adapter before separate first exploratory discovery outcomes. Label/bootstrap execution is not implemented or run in this action. Confirmation is PENDING/asynchronous, not a project blocker; discovery cannot PASS confirmation. H0004 remains the next unused registry id.
+
+Entries below are preserved historical reports.
+
 # Richping V2 - H0003 relative leadership causal frequency
 
 **IMPLEMENTED / EXECUTED_ON_REAL_DATA / EVIDENCE_PRODUCED. Signal provisional; outcomes NOT_RUN.**
