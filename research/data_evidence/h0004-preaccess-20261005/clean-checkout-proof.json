@@ -1,0 +1,69 @@
+{
+  "clean_archive": true,
+  "exit_code": 0,
+  "real_candidate_endpoint_probe": 0,
+  "real_outcome_access": 0,
+  "research_commit": "0d7eb05b243acefb4a8f5654ffb4de35f7c43fae",
+  "result": {
+    "actual_candidate_endpoint_scope": "NOT_PROBED",
+    "confirmation": "PENDING_ASYNCHRONOUS_FUTURE_TERMINAL_ADAPTER_REQUIRED",
+    "confirmation_outcome_access": 0,
+    "deterministic": true,
+    "manifest_sha256": "c2fc3c168be2a9aae24b05e4186a894de11735f2b4c23556a43fb92bbbb1682b",
+    "next_P0": "H0004_DISCOVERY_EFFICACY_EXECUTION",
+    "prior_tracks_and_trial1_trial2_freeze_protocol_preserved": true,
+    "protected_files": 678,
+    "real_candidate_count": 48,
+    "real_candidate_sessions": 29,
+    "real_efficacy_calculations": 0,
+    "real_future_price_queries": 0,
+    "real_outcome_access": 0,
+    "real_profitability_calculations": 0,
+    "schema": "h0004_independent_preaccess_verification_v1",
+    "signal_trials": 2,
+    "source_hashes": {
+      "docs/H0004_PREACCESS_EVALUATOR.md": "c520bcf206d1ea133e9f16fedadb5a073677ce1014cd0e2a79f2bee13af216ad",
+      "richping/research_v2/strategy/h0004_directional_evaluator.py": "68243b54dfa7f8c98bea5161e48ef30eb1dcdd73c108193c882ceab8631d3943",
+      "scripts/h0004_discovery_access.py": "7a5888d6a28097af54452be4137c5d3bf082c96cd3edda56d44d15b86b7ebb9d",
+      "scripts/h0004_preaccess.py": "dc0a204d781483cade6b43fb59071ab8bc93df00a73b46dee83cab772a10648c",
+      "scripts/h0004_preaccess_fixtures.py": "03e91bc199a8f75cf0811479cc99d24e3e8b16bf22c8bdc118e682168a71ffaa",
+      "scripts/h0004_preaccess_verify.py": "70caedee7de094f738437b32b06cc04000cf8150e7447b9611cd2388ea4d6783",
+      "tests/test_h0004_directional_evaluator.py": "a8433ec2c118cc999431991192ee79f3cbef611d396ff576dc5431ae8271cb15"
+    },
+    "status": "PASS_PREACCESS_NO_REAL_OUTCOMES",
+    "synthetic_verification": {
+      "confirmation_pending_without_reads": true,
+      "full_denominator": true,
+      "synthetic_counters": {
+        "confirmation_label_reads": 0,
+        "discovery_label_reads": 8,
+        "efficacy_aggregations": 2,
+        "forward_price_queries": 4,
+        "profitability_calculations": 0,
+        "return_calculations": 4
+      },
+      "synthetic_formula": true,
+      "synthetic_output_hash": "25d0413aa12ed69cdd80eeac6651f72caa30cff9691e86920ccdb834541b87d6",
+      "synthetic_weighting": true
+    },
+    "tests": [
+      {
+        "errors": 0,
+        "failures": 0,
+        "path": "tests-targeted.xml",
+        "sha256": "d5a86c812a9f6568a20cd3b354621ffb8df3623ba34a63fecae565e30b5b3145",
+        "skipped": 0,
+        "tests": 73
+      },
+      {
+        "errors": 0,
+        "failures": 0,
+        "path": "tests-full.xml",
+        "sha256": "397ab7cbd4c294632c60ffc4bf46469cfafcdf2ab2b156a7af6f2ef1724573ae",
+        "skipped": 0,
+        "tests": 1816
+      }
+    ]
+  },
+  "schema": "h0004_preaccess_clean_git_archive_verification_v1"
+}
