@@ -1,0 +1,79 @@
+{
+  "clean_archive": true,
+  "confirmation_outcome_access": 0,
+  "exit_code": 0,
+  "legacy_git_text_transport_restoration": [
+    {
+      "adjustment": "ISOLATED_ARCHIVE_LEGACY_GIT_TEXT_LINE_ENDINGS_ONLY",
+      "git_archive_sha256": "628c9b7b3e398100d60a68f4745fc402b3b51f24b9b0c698b271fd28efa5b056",
+      "path": "research/decision_records/H0004-preaccess-evaluator-v1.yaml",
+      "sealed_sha256": "9d0a760344cb85fae63bade94dca9b5f215f8f27fc0ec54e9613bea834d08aa2"
+    },
+    {
+      "adjustment": "ISOLATED_ARCHIVE_LEGACY_GIT_TEXT_LINE_ENDINGS_ONLY",
+      "git_archive_sha256": "64fa234c2fb539e7002f3ddce2e292dba4afebc0f10e9d32676ae98a5375a08c",
+      "path": "research/decision_records/H0004-segment-remediation-v2.yaml",
+      "sealed_sha256": "2847959413af6143f6c446ba1afd8d6bd2e7393c6a5bf8af7f5a8fa619459292"
+    }
+  ],
+  "new_discovery_price_reads": 0,
+  "original_repository_artifacts_unchanged": true,
+  "research_commit": "b8b0db78f87dd2ca08eb55c0b515c96ab117b584",
+  "result": {
+    "aggregate": {
+      "candidate_sessions": 29,
+      "complete": 48,
+      "disposition": "DESCRIPTIVE_ONLY_NO_PASS_REJECT",
+      "full_cohort_session_balanced_mean": 0.001966116792698712,
+      "invalid": 0,
+      "pending": 0,
+      "profitability": "NOT_ESTIMATED",
+      "status": "COMPLETE",
+      "total_emitted": 48,
+      "uncertainty": null,
+      "unresolved": 0
+    },
+    "confirmation_outcome_access": 0,
+    "deterministic_independent_processes": 2,
+    "discovery_forward_price_queries_total": 96,
+    "discovery_label_reads_total": 192,
+    "disposition": "DISCOVERY_POSITIVE_DIRECTION",
+    "label_stream_sha256": "1599dd9d65fb4d012ece13b74a9d4a97c9356af5a9731c94ba6af0d71d20e9d0",
+    "metrics": {
+      "candidate_count": 48,
+      "candidate_sessions": 29,
+      "event_median_R16": 0.002252423999897668,
+      "max_R16": 0.032444305211159596,
+      "min_R16": -0.03076196845128054,
+      "negative_count": 19,
+      "negative_rate": 0.3958333333333333,
+      "positive_count": 29,
+      "positive_rate": 0.6041666666666666,
+      "session_balanced_mean_R16": 0.001966116792698712,
+      "zero_count": 0
+    },
+    "next_P0": "INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION",
+    "next_hypothesis": "H0005",
+    "path_stream_sha256": "b756516edded33b1574fe215bb466275f66e177b3d70ce11c34e792f73dbb2be",
+    "prior_evidence_preserved": true,
+    "profitability": "NOT_ESTIMATED",
+    "protected_prior_files": 696,
+    "replay_hashes": {
+      "run1": {
+        "labels.json": "1599dd9d65fb4d012ece13b74a9d4a97c9356af5a9731c94ba6af0d71d20e9d0",
+        "paths.json": "b756516edded33b1574fe215bb466275f66e177b3d70ce11c34e792f73dbb2be",
+        "report.json": "58fbedd6881cebfa7200ae92530a07ceaf0ec2f96a2224eab0220c6e14a2d5f6"
+      },
+      "run2": {
+        "labels.json": "1599dd9d65fb4d012ece13b74a9d4a97c9356af5a9731c94ba6af0d71d20e9d0",
+        "paths.json": "b756516edded33b1574fe215bb466275f66e177b3d70ce11c34e792f73dbb2be",
+        "report.json": "58fbedd6881cebfa7200ae92530a07ceaf0ec2f96a2224eab0220c6e14a2d5f6"
+      }
+    },
+    "report_sha256": "58fbedd6881cebfa7200ae92530a07ceaf0ec2f96a2224eab0220c6e14a2d5f6",
+    "schema": "h0004_discovery_execution_verification_v1",
+    "status": "VALID_EXPLORATORY_EXECUTION",
+    "uncertainty": "NOT_CONFIRMATORY"
+  },
+  "schema": "h0004_discovery_clean_git_archive_verification_v1"
+}

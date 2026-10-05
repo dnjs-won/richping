@@ -96,3 +96,13 @@ Research code remains on `v2-h0004-discovery-efficacy`; canonical PM updates liv
 on main. Main code integration remains the existing separate backlog lane.
 
 Validation: 72 pre-access preflight, 152 targeted and 1,839 full regression tests passed; failures/errors/skips0. CLI help, source compile and Git whitespace checks passed. Original sealed evaluator tests and all prior tests retained.
+
+Committed clean Git archive verification also succeeded without new price reads.
+The initial archive attempt failed closed on CRLF/LF transport of two legacy Git
+text YAML records; that failure is preserved. In the isolated archive only,
+line endings were reconstructed solely by each pre-outcome raw SHA256, then all
+gate/evidence/preservation checks passed. No original frozen artifact, evaluator,
+execution source, candidate, label, return or report was changed. Separate
+transport checks verify exact restoration, unchanged original bytes and rejection
+of a content mismatch. Evidence: `clean-checkout-attempt1.json`,
+`archive-portability-checks.json`, `clean-checkout-proof.json`.
