@@ -1,3 +1,11 @@
+# Richping PM - H0004 compression frequency; owner freeze pending
+
+Workstream `v2-h0004-compression-frequency` / `7488fa0941b9ec68c96a163a7694b31d5ab718d3`, not code-merged into main. OHLC/time-only SOXX16-bar normalized range, previous640 bottom20%, frozen range, strict upside close, next16 slots inclusive. Admitted sealed70 reused:4480 eligible,3825 READY,875 compressed,83 ranges,39 candidates/26 sessions. 39 consumed+33 downside-cancelled+10 expired+1 pending. Trials1/comparators0/outcomes0. Targeted/full regression passed; initial preservation fixture overwrite restored and corrected Git-BASE seal supersedes initial audit claim; all prior598 files preserved. H0001~3 frozen and asynchronous confirmations unchanged.
+
+NEXT_ACTION **H0004_SIGNAL_FREEZE_PREREGISTRATION / USER_DECISION_REQUIRED**. Approve full provisional semantics then preregister efficacy before any outcome.
+
+Entries below are historical reports.
+
 # Richping PM - H0003 exploratory outcomes complete; H0004 intake
 
 Implementation `v2-h0003-first-efficacy` / `74b67518f544bfdcfd2b45c07198f605291992a5`; code not merged into main. Frozen H0003 contracts unchanged. 35/35 primary16-slot labels complete,29 sessions; session-balanced SOXX minus QQQ +0.011824%p, median -0.005942%p, positive17/35. SOXX mean -0.096169%, QQQ -0.107993%; relative outperformance does not validate LONG profit. 4-slot excess +0.012245%p (35 complete);64-slot resolved subset +0.579305%p (34 complete/1 outside-scope unresolved), full64 mean unknown. DISCOVERY_POSITIVE_RELATIVE_DIRECTION is a point description only; no CI, PASS/REJECT, alpha proof or promotion. H0003 confirmation252 sessions2026-10-19..2027-10-19 remains PENDING/asynchronous, outcome access0; profitability NOT_ESTIMATED. Two real executions identical; targeted178/full1687 pass, prior586 files preserved. H0001/H0002 frozen evidence/state unchanged.

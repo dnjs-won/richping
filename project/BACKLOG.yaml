@@ -29,11 +29,11 @@ items:
 
     '
   guardrail: Do not merge blindly; preserve the newer main R1 paper changes.
-  active_branch: v2-h0003-first-efficacy
+  active_branch: v2-h0004-compression-frequency
   observed_relation_to_main:
-    ahead_by: 52
-    behind_by: 26
-    main_commit: 0e35dcde4f6419a6db813078d8b9ec3dfc7e26fc
+    ahead_by: 54
+    behind_by: 27
+    main_commit: f56d941e5215e480d72ce9ca005346898050db30
 - id: H0001_MINIMAL_15M_ENTRY_FREEZE
   priority: P1
   status: COMPLETE_FROZEN_AND_OFFLINE_MECHANICALLY_EXERCISED
@@ -429,10 +429,23 @@ items:
   confirmation_outcome_access: 0
   infrastructure: METADATA_READINESS_GUARD_ONLY; FUTURE_PAIRED_ADMISSION_AND_TERMINAL_ADAPTER_NOT_IMPLEMENTED
 - id: H0004_INDEPENDENT_HYPOTHESIS_INTAKE
+  priority: COMPLETE
+  status: COMPLETE_OWNER_THESIS_AND_CAUSAL_FREQUENCY
+  blocks_phase_exit_criteria: []
+  evidence_branch: v2-h0004-compression-frequency
+  summary: Pure compression/breakout,39 candidates/26 sessions, outcomes0.
+  record: research/decision_records/H0004-hypothesis-frequency-v1.yaml
+- id: H0004_SIGNAL_FREEZE_PREREGISTRATION
   priority: P0
   status: USER_DECISION_REQUIRED
   blocks_phase_exit_criteria:
-  - 1
-  evidence_branch: v2-h0003-first-efficacy
-  summary: Select independent H0004 thesis without revising prior frozen trials or
-    waiting for confirmations.
+  - 2
+  evidence_branch: v2-h0004-compression-frequency
+  record: research/decision_records/H0004-hypothesis-frequency-v1.yaml
+  summary: Approve complete provisional tuple and episode/session semantics; then
+    preregister without outcomes.
+- id: H0004_OPTIONAL_VARIANTS
+  priority: DEFERRED
+  status: NOT_AUTHORIZED_NOT_RUN
+  summary: ATR, segment conditioning, buffer/retest, RTH, extra persistence or thresholds
+    require separate semantic revision; no grid.

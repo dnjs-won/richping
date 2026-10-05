@@ -5,7 +5,7 @@ purpose: 'Lightweight routing index for AI PM sessions. This file does not repla
   is already frozen, what remains open, and where to read the authoritative evidence.
 
   '
-default_research_branch: v2-h0003-first-efficacy
+default_research_branch: v2-h0004-compression-frequency
 data_foundation:
   branch: v2-real-intraday-data-foundation
   contract: docs/V2_REAL_INTRADAY_DATA_FOUNDATION.md
@@ -24,8 +24,8 @@ canonical_sources:
     specification_version: h0001_r03_spec_v13
     sha256: bf8134733bacee17542240e53a8ec30223c1550b5bedbaa6d3994ba1444acc19
   current_status:
-    branch: v2-h0003-first-efficacy
-    path: PROJECT_STATUS.md
+    branch: v2-h0004-compression-frequency
+    path: docs/H0004_FREQUENCY_RESULTS.md
   entry_efficacy_protocol:
     branch: v2-h0001-entry-efficacy-preregistration
     commit: 13f719b56980a43fbace2a003b8c78331fa0c210
@@ -91,9 +91,9 @@ canonical_sources:
     discovery_disposition: DISCOVERY_INSUFFICIENT_RESOLVED_LABELS
   active_hypothesis:
     id: H0004
-    status: NOT_SELECTED_USER_DECISION_REQUIRED
-    branch: v2-h0003-first-efficacy
-    path: null
+    status: PROVISIONAL_OWNER_FREEZE_PENDING
+    branch: v2-h0004-compression-frequency
+    path: research/hypotheses/H0004-r01.yaml
   last_frozen_candidate_spec:
     branch: v2-h0003-signal-freeze-preregistration
     path: research/strategy_specs/H0003-r01-frozen-v1.yaml
@@ -250,6 +250,32 @@ canonical_sources:
           outside_admitted_discovery_scope: 1
     profitability_calculations: 0
     report_hash: ff12bd9d80ee4f0744dea3c4e94cacc726d2b65b03d0970aab76680aa3c7003e
+  H0004:
+    status:
+    - THESIS_SELECTED
+    - PROVISIONAL_SIGNAL
+    - FREQUENCY_EXECUTED
+    - OWNER_FREEZE_PENDING
+    family: VOLATILITY_COMPRESSION_BREAKOUT_CONTINUATION
+    direction: LONG
+    branch: v2-h0004-compression-frequency
+    commit: 7488fa0941b9ec68c96a163a7694b31d5ab718d3
+    hypothesis: research/hypotheses/H0004-r01.yaml
+    spec: research/strategy_specs/H0004-r01-candidate.yaml
+    record: research/decision_records/H0004-hypothesis-frequency-v1.yaml
+    frequency_evidence: research/data_evidence/h0004-frequency-20261005/verification-v2/frequency-audit.json
+    verification: research/data_evidence/h0004-frequency-20261005/verification-v2/verification.json
+    candidate_events: 39
+    candidate_sessions: 26
+    parameter_trials: 1
+    comparators: 0
+    outcome_access: 0
+    spec_hash: c8497d0220220a1308407cdf6cbef800da47975aca20d5cf587d5005c853b1b7
+    candidate_stream_hash: a376f4d037988d01a031ee37364169170bc58800f31281756ccccf6893329bd9
+    signal_freeze: USER_DECISION_REQUIRED
+    efficacy_preregistration: NOT_STARTED
+    outcome_evaluation: NOT_RUN
+    confirmation_is_project_blocker: false
 frozen_major_decisions:
   daily_input:
     status: FROZEN
@@ -415,13 +441,24 @@ current_open_decision_groups:
     SOXX/QQQ means. Descriptive only; confirmation PENDING/access0.
   evidence: research/data_evidence/h0003-first-efficacy-20261005/discovery-report.json
 - id: H0004_INDEPENDENT_HYPOTHESIS_SELECTION
+  priority: COMPLETE
+  status: RESOLVED_OWNER_THESIS_AND_FREQUENCY
+  blocks_phase_exit_criteria: []
+  evidence_branch: v2-h0004-compression-frequency
+  note: Owner chooses independent next market mechanism; all prior frozen hypotheses
+    retain asynchronous confirmation.
+  record: research/decision_records/H0004-hypothesis-frequency-v1.yaml
+  evidence: research/data_evidence/h0004-frequency-20261005/verification-v2/frequency-audit.json
+- id: H0004_SIGNAL_FREEZE_PREREGISTRATION
   priority: P0
   status: USER_DECISION_REQUIRED
   blocks_phase_exit_criteria:
-  - 1
-  evidence_branch: v2-h0003-first-efficacy
-  note: Owner chooses independent next market mechanism; all prior frozen hypotheses
-    retain asynchronous confirmation.
+  - 2
+  evidence_branch: v2-h0004-compression-frequency
+  record: research/decision_records/H0004-hypothesis-frequency-v1.yaml
+  evidence: research/data_evidence/h0004-frequency-20261005/verification-v2/frequency-audit.json
+  note: Executable39/26 frequency only; owner final semantics/freeze before outcome
+    preregistration.
 reopen_policy:
   frozen_decision_may_reopen_only_if:
   - A causal/data-integrity defect invalidates it.
@@ -473,9 +510,9 @@ frozen_semantic_interpretation_audit:
   negative_receipt_explicitly_frozen: false
   strategy_decisions_changed: false
   completeness_capture_is_causal_feature: false
-schema_revision: H0003 first paired exploratory efficacy valid; definitions/35-event
-  stream unchanged, confirmation0. Active P0 independent H0004 owner thesis selection;
-  H0001/H0002/H0003 confirmations asynchronous.
+schema_revision: H0004 owner thesis selected; single provisional pure compression
+  tuple executable39/26 with outcomes0. Prior H0001~3 unchanged; one P0 H0004 final
+  signal freeze/preregistration.
 long_history_access_routing:
   status: SELECTED70_DISCOVERY_PASS_ZERO_SIGNAL_H0001_ASYNC
   evidence_branch: v2-h0001-alpaca-70-session-discovery
@@ -506,11 +543,10 @@ long_history_access_routing:
     alternative not selected/admitted.
   selected_independent_hypothesis: H0002
 next_independent_hypothesis:
-  id: H0004
+  id: H0005
   meaning: NOT_SELECTED
-  infrastructure: IMPLEMENTED_TESTED
+  routing: FUTURE_UNUSED_REGISTRY_ID_NOT_CURRENT_P0
   H0001_future_confirmation_dependency: false
-  routing: CURRENT_P0_OWNER_THESIS_SELECTION
   H0002_future_confirmation_dependency: false
   H0003_future_confirmation_dependency: false
 active_research_track: H0004
