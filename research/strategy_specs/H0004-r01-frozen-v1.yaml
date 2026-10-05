@@ -1,0 +1,53 @@
+schema_version: h0004_frozen_signal_v1
+hypothesis_id: H0004
+hypothesis_revision: 1
+signal_revision: 2
+status: FROZEN_OWNER_APPROVED_BEFORE_OUTCOMES
+trial: TRIAL_2_SEGMENT_CONDITIONED_REFERENCE
+family: VOLATILITY_COMPRESSION_BREAKOUT_CONTINUATION
+direction: LONG
+instrument: SOXX
+timeframe: 15m
+session: 04:00-20:00 America/New_York
+parameters:
+  window_bars: 16
+  history_sessions: 10
+  low_percentile: 0.2
+  expiration_bars: 16
+measure: (max(window.high)-min(window.low))/current_completed_close
+classification: count(reference_measure <= current_measure)/len(reference) <= 0.20;
+  ties fully counted
+reference: All eligible measurements assigned to current completed bar segment from
+  exactly previous 10 completed official sessions; entire current session excluded.
+segments:
+- PREMARKET
+- RTH
+- AFTER_HOURS
+readiness: All 10 official input sessions must have complete admitted slot coverage;
+  eligible measurements require contiguous16 window, not percentile readiness. Initial
+  window warmup excluded and counted. Missing sessions never replaced with older available
+  days.
+persistence: 16-bar window only; no extra consecutive-state gate
+range: Frozen max high/min low of current16 completed scheduled bars on armed compression
+  publication.
+breakout: Only subsequent completed close strictly above frozen high; no buffer, retest
+  or high-touch.
+expiration: Subsequent slots1..16 inclusive valid; slot17 expires before evaluation.
+cancellation: Completed close strictly below frozen low or continuity gap; invalid
+  input poisons stream.
+rearm: READY noncompression with no active range then READY compression; gap never
+  rearms.
+session_boundary: Consecutive admitted scheduled trading slots, not continuous wall-clock
+  hours. Range window/episode may span or survive a market closure; closure consumes
+  no slot.
+outcomes: ONLY_UNDER_SEPARATELY_REGISTERED_EFFICACY
+comparators: 0
+owner_authority: Explicit user semantic correction and conditional final freeze; conditions
+  verified without outcomes.
+stop_rule: Last pre-outcome semantic trial; no third variant or threshold/window tuning
+  absent genuine blocker.
+version: H0004_COMPRESSION_BREAKOUT_SIGNAL_V1
+owner_approved_on: '2026-10-05'
+selected_trial: TRIAL_2_SEGMENT_CONDITIONED_REFERENCE
+signal_spec_hash: 0a4ebc7f1b793380cea11df0604e7faeee06679b2c56d3024b886aab56ef82e2
+implementation: richping/research_v2/strategy/h0004_segment_compression.py

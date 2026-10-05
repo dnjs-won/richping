@@ -1,0 +1,80 @@
+{
+  "candidate_events": "research/data_evidence/h0004-segment-frequency-20261005/candidate-events.json",
+  "candidate_events_sha256": "c5c236e995b7adf5f646057b64e2f7895b01635b54252de834ba6a534c1d8ead",
+  "counts": {
+    "breakout_evaluations": 625,
+    "candidate_sessions": 29,
+    "candidates": 48,
+    "compressed": 925,
+    "compression_READY": 3840,
+    "compression_runs": 108,
+    "consumed": 48,
+    "downside_cancelled": 38,
+    "eligible_bars": 4480,
+    "expired": 14,
+    "frozen_ranges": 101,
+    "gap_cancelled": 0,
+    "gap_resets": 0,
+    "invalid_cancelled": 0,
+    "pending": 1,
+    "unique_compression_episodes": 101
+  },
+  "efficacy_calculations": 0,
+  "event_stream_hash": "8e64aecd6fa26261bf5735126f3615427427bbe5ae34b0d242b8d14dd513d14d",
+  "frequency_report": "research/data_evidence/h0004-segment-frequency-20261005/frequency-audit.json",
+  "frequency_report_sha256": "dcc6abcc7f9f904f758131818b170242992060a15207c3d905412dbfa943130a",
+  "historical_hypothesis": "Original hypothesis DRAFT retained; this decision resolves final v1 signal reference.",
+  "hypothesis": "H0004-r01",
+  "hypothesis_sha256": "0929acc06fb4edd93e7e8292e78806585ccdfb5511e6567a7a29e07a545562fe",
+  "implementation": "richping/research_v2/strategy/h0004_segment_compression.py",
+  "implementation_sha256": "e8bb43d155b12f2baba0ddfecce881d6ea5ad70e0dbe1f5f37a57bddcd64f0c2",
+  "market_closure": "H0004 v1 studies compression and breakout across consecutive admitted trading slots, not continuous wall-clock hours. A range may therefore span or survive a market closure.",
+  "outcome_access": 0,
+  "owner_conditional_requirements_satisfied": true,
+  "parameters": {
+    "expiration_bars": 16,
+    "history_sessions": 10,
+    "low_percentile": 0.2,
+    "window_bars": 16
+  },
+  "profitability": "NOT_ESTIMATED",
+  "range_stream_hash": "d499a5da6009f81f49731a771350bcff439e5b9357c0947080aa8d016b4aecc9",
+  "registered_on": "2026-10-05",
+  "schema": "h0004_signal_freeze_v1",
+  "segments": {
+    "AFTER_HOURS": {
+      "candidates": 9,
+      "compressed": 219,
+      "compression_READY": 960,
+      "compression_rate": 0.228125,
+      "eligible_bars": 1120,
+      "ranges": 24,
+      "reference_READY": 960
+    },
+    "PREMARKET": {
+      "candidates": 19,
+      "compressed": 325,
+      "compression_READY": 1320,
+      "compression_rate": 0.24621212121212122,
+      "eligible_bars": 1540,
+      "ranges": 36,
+      "reference_READY": 1320
+    },
+    "RTH": {
+      "candidates": 20,
+      "compressed": 381,
+      "compression_READY": 1560,
+      "compression_rate": 0.24423076923076922,
+      "eligible_bars": 1820,
+      "ranges": 41,
+      "reference_READY": 1560
+    }
+  },
+  "selected_trial": "TRIAL_2_SEGMENT_CONDITIONED_REFERENCE",
+  "signal_trials": 2,
+  "spec_hash": "0a4ebc7f1b793380cea11df0604e7faeee06679b2c56d3024b886aab56ef82e2",
+  "spec_path": "research/strategy_specs/H0004-r01-frozen-v1.yaml",
+  "spec_sha256": "97cd08b88c2ef82224d3b353ada2b364d36981b47917f7f7ca8b81e0d4ec44b8",
+  "status": "IMMUTABLE_OWNER_APPROVED",
+  "trial1_preserved": true
+}

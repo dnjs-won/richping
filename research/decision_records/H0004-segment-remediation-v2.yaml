@@ -1,0 +1,31 @@
+schema: h0004_pre_outcome_semantic_remediation_v2
+hypothesis: H0004-r01
+status: COMPLETE_FINAL_SIGNAL_FROZEN_PREREGISTERED_OUTCOMES_NOT_RUN
+owner_decision: Replace pooled-segment reference with previous10 completed official sessions of current completed-bar segment; whole current session excluded.
+reason: Time-of-day semantic defect from frequency only; not efficacy tuning.
+trial1: TRIAL_1_POOLED_SEGMENT_REFERENCE
+trial1_evidence: research/data_evidence/h0004-frequency-20261005/verification-v2/frequency-audit.json
+trial1_candidates: 39
+trial1_sessions: 26
+trial2: TRIAL_2_SEGMENT_CONDITIONED_REFERENCE
+trial2_evidence: research/data_evidence/h0004-segment-frequency-20261005/frequency-audit.json
+trial2_candidates: 48
+trial2_sessions: 29
+parameter_trials: 2
+third_variant: NOT_CREATED_FORBIDDEN_ABSENT_GENUINE_BLOCKER
+unchanged: [SOXX, 15m, full04-20ET, normalized16-bar range, lower20percent, no extra persistence, frozen range, strict completed-close breakout, no buffer/retest, one candidate/episode, inclusive16-slot validity, downside-close cancellation, proper rearm, gap fail-closed]
+history: Exact prior10 completed official sessions; current session excluded; eligible same-segment measures only; no older-available replacement.
+closure: Scheduled admitted trading slots, not wall-clock hours; range/window can span or survive market closure; closure consumes no slot.
+final_freeze: research/decision_records/H0004-signal-freeze-v1.json
+preregistration: research/decision_records/H0004-efficacy-preregistration-v1.yaml
+primary_horizon_slots: 16
+primary_estimand: Session-balanced SOXX gross forward price direction; not timing Alpha or fill/account profitability.
+owner_semantic_decision: COMPLETE_EXPLICIT_CONDITIONAL_APPROVAL_SATISFIED
+outcome_access: 0
+forward_returns: 0
+MFE_MAE: 0
+efficacy: 0
+profitability: NOT_ESTIMATED
+confirmation_outcome_access: 0
+H0001_H0002_H0003_and_trial1_preserved: true
+next_P0: H0004_FIRST_EFFICACY

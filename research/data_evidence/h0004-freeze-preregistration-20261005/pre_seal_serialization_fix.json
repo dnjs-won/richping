@@ -1,0 +1,7 @@
+{
+  "draft_archive": "protocol-draft-before-yaml-key-fix.yaml.bin",
+  "extra_signal_trials": 0,
+  "outcome_access": 0,
+  "reason": "Quote null hypothesis key to avoid YAML None-key serialization; protocol meaning unchanged",
+  "schema": "h0004_protocol_yaml_key_serialization_fix_v1"
+}

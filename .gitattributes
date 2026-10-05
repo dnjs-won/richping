@@ -43,3 +43,10 @@ research/strategy_specs/H0004-r01-candidate.yaml -text
 docs/H0004_COMPRESSION_RESEARCH.md -text
 tests/test_h0004_*.py -text
 research/data_evidence/h0004-*/**/*.xml binary
+richping/research_v2/strategy/h0004_segment_compression.py -text
+richping/research_v2/strategy/h0004_experiment.py -text
+research/strategy_specs/H0004-r01-candidate-segment-v2.yaml -text
+docs/H0004_SEGMENT_REFERENCE_REMEDIATION.md -text
+research/strategy_specs/H0004-r01-frozen-v1.yaml -text
+research/decision_records/H0004-signal-freeze-v1.json -text
+research/decision_records/H0004-efficacy-preregistration-v1.yaml -text

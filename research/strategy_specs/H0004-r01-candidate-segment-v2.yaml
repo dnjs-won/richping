@@ -1,0 +1,28 @@
+schema_version: h0004_segment_candidate_v2
+hypothesis_id: H0004
+hypothesis_revision: 1
+signal_revision: 2
+status: PROVISIONAL_FREQUENCY_ONLY_PENDING_CONDITIONAL_OWNER_FREEZE
+trial: TRIAL_2_SEGMENT_CONDITIONED_REFERENCE
+family: VOLATILITY_COMPRESSION_BREAKOUT_CONTINUATION
+direction: LONG
+instrument: SOXX
+timeframe: 15m
+session: 04:00-20:00 America/New_York
+parameters: {window_bars: 16, history_sessions: 10, low_percentile: 0.20, expiration_bars: 16}
+measure: (max(window.high)-min(window.low))/current_completed_close
+classification: count(reference_measure <= current_measure)/len(reference) <= 0.20; ties fully counted
+reference: All eligible measurements assigned to current completed bar segment from exactly previous 10 completed official sessions; entire current session excluded.
+segments: [PREMARKET, RTH, AFTER_HOURS]
+readiness: All 10 official input sessions must have complete admitted slot coverage; eligible measurements require contiguous16 window, not percentile readiness. Initial window warmup excluded and counted. Missing sessions never replaced with older available days.
+persistence: 16-bar window only; no extra consecutive-state gate
+range: Frozen max high/min low of current16 completed scheduled bars on armed compression publication.
+breakout: Only subsequent completed close strictly above frozen high; no buffer, retest or high-touch.
+expiration: Subsequent slots1..16 inclusive valid; slot17 expires before evaluation.
+cancellation: Completed close strictly below frozen low or continuity gap; invalid input poisons stream.
+rearm: READY noncompression with no active range then READY compression; gap never rearms.
+session_boundary: Consecutive admitted scheduled trading slots, not continuous wall-clock hours. Range window/episode may span or survive a market closure; closure consumes no slot.
+outcomes: FORBIDDEN
+comparators: 0
+owner_authority: User pre-authorizes final freeze if trial2 causal, deterministic, nonzero and mechanically valid.
+stop_rule: Last pre-outcome semantic trial; no third variant or threshold/window tuning absent genuine blocker.

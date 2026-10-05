@@ -1,0 +1,51 @@
+{
+  "freeze_preregistration_forbidden_calls": {
+    "metadata": {
+      "database": 0,
+      "price_load": 0,
+      "signal_replay": 0
+    },
+    "outcomes": {
+      "MFE_MAE": 0,
+      "confirmation_outcomes": 0,
+      "efficacy_statistics": 0,
+      "forward_module_imports": 0,
+      "forward_window_queries": 0,
+      "future_return_queries": 0,
+      "market_queries": 0,
+      "network_calls": 0,
+      "outcome_accessors": 0,
+      "profitability_calculations": 0,
+      "return_calculations": 0,
+      "store_access": 0
+    }
+  },
+  "prior_H0001_H0002_H0003_strategy_state_imports": [],
+  "prior_evidence_unchanged": true,
+  "schema": "h0004_trial2_and_freeze_independence_audit_v1",
+  "signal_inputs": "SOXX OHLC/time only; existing H0004 immutable containers and common calendar/session utilities",
+  "signal_trials": 2,
+  "third_variant_created": false,
+  "trials": [
+    {
+      "MFE_MAE": 0,
+      "confirmation_outcome_access": 0,
+      "efficacy": 0,
+      "forward_return_queries": 0,
+      "outcome_access": 0,
+      "profitability": "NOT_ESTIMATED",
+      "report_sha256": "695be21d27bbbfcea34faa114be8b8cc6c39e770ef7a1a263cef7ca552e596c6",
+      "trial": "TRIAL_1_POOLED_SEGMENT_REFERENCE"
+    },
+    {
+      "MFE_MAE": 0,
+      "confirmation_outcome_access": 0,
+      "efficacy": 0,
+      "forward_return_queries": 0,
+      "outcome_access": 0,
+      "profitability": "NOT_ESTIMATED",
+      "report_sha256": "dcc6abcc7f9f904f758131818b170242992060a15207c3d905412dbfa943130a",
+      "trial": "TRIAL_2_SEGMENT_CONDITIONED_REFERENCE"
+    }
+  ]
+}

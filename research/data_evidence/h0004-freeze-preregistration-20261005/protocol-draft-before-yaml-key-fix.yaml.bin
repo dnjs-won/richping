@@ -1,0 +1,111 @@
+schema: h0004_directional_compression_preregistration_v1
+version: H0004_COMPRESSION_BREAKOUT_DIRECTIONAL_EFFICACY_V1
+status: FROZEN_BEFORE_ANY_H0004_OUTCOME_ACCESS
+registered_on: '2026-10-05'
+hypothesis: H0004-r01
+signal_freeze: research/decision_records/H0004-signal-freeze-v1.json
+signal_spec: research/strategy_specs/H0004-r01-frozen-v1.yaml
+primary_family: VOLATILITY_COMPRESSION_BREAKOUT_CONTINUATION
+comparators: []
+scope: GROSS_DIRECTIONAL_PRICE_OPPORTUNITY_NOT_TIMING_ALPHA_ACCOUNT_OR_FILL_PROFITABILITY
+sample:
+  unit: Immutable first-breakout candidate and compression episode id; one event per episode.
+  duplicate: Any duplicate id/episode, altered snapshot, inconsistent clock/hash/vintage fails closed.
+  overlap: Retain all distinct episodes and overlapping windows; never thin based on outcomes.
+  weighting: Equal event weights within each anchor session, then equal occupied-session weights.
+  clocks: Historical bar-end assumed availability; completed close is an opportunity mark, not an attainable fill.
+horizons:
+  primary_slots: 16
+  secondary_slots: []
+  unit: Subsequent scheduled completed15m slots on nominal04-20ET official XNYS grid.
+  rationale: Four observed trading hours test short continuation after breakout of a four-trading-hour range. Selected from the directional question before any outcomes; no horizon grid or best-return selection.
+  closure: Market closure consumes no slot; missing/unsupported nominal slots never compressed.
+label:
+  name: SOXX_GROSS_FORWARD_CLOSE_PRICE_DIRECTION
+  formula: SOXX_close_at_exact_t_plus_16 / SOXX_close_at_candidate_t - 1
+  path: Admitted anchor and every scheduled slot t+1..t+16 must be present, same compatible raw USD/share unit/feed/clock contract; never fill or skip a missing slot.
+  missing: Immature before receipt deadline PENDING; mature missing/unsupported/action-ambiguous paths UNRESOLVED; retain every candidate in full denominator, never replace with0 or complete-case inference.
+  action_unit: Share-unit change or ambiguity anywhere anchor..endpoint makes label UNRESOLVED; no new split transform or backfill.
+  dividends: Price-only direction excludes reinvestment and total-return accounting. Disclose cash distributions separately; feature normalization does not resolve outcome dividend accounting.
+  mfe_mae: NOT_PART_OF_V1
+baseline:
+  name: ZERO_DIRECTION_NULL
+  estimand: Session-balanced mean16-slot SOXX post-breakout gross price return.
+  null: Expected session-balanced directional price return <= 0.
+  alternative: Expected session-balanced directional price return > 0.
+  matched_controls: NONE
+  relative_benchmark: NONE
+  interpretation: Observed absolute LONG directional continuation only. Positive market drift may explain positive direction; no incremental compression timing Alpha, causal effect or relative superiority claim.
+costs:
+  costs_bps: null
+  net_return: null
+  profitability: NOT_ESTIMATED
+  fill_spread_slippage_commissions: NOT_MODELED
+discovery:
+  interval: ['2026-05-05', '2026-08-13']
+  sessions: 70
+  eligible_bars: 4480
+  signal_trials: 2
+  role: Trial1 pooled and trial2 same-segment definition/frequency exposed; previously exposed in H0001~3. Exploratory only, not untouched OOS or power evidence.
+  outcome_access_this_action: FORBIDDEN
+  endpoint_scope: Entire anchor/path must remain in sealed70; outside-scope labels retained UNRESOLVED, no extra opportunistic capture.
+  uncertainty: Future first discovery report descriptive session-balanced direction only; no CI/PASS/REJECT, no signal/protocol tuning from outcomes.
+confirmation:
+  selection_basis: First252 official XNYS sessions after fixed10-session embargo from registration2026-10-05; annual calendar breadth, independent of trial2 candidate count.
+  embargo_start: '2026-10-05'
+  embargo_end: '2026-10-16'
+  anchor_start: '2026-10-19'
+  anchor_end: '2027-10-19'
+  official_sessions: 252
+  followup_end: '2027-10-20'
+  terminal_receipt_deadline: '2027-10-21T20:00:00-04:00'
+  prefix_origin: '2026-05-05'
+  prefix: Chronological causal price/feature replay from declared origin through embargo; outside-window episodes consume rights but are not samples. No confirmation-boundary/session reset. New immutable input lineage and interval-specific admission required, no old vintage rewrite.
+  session: Full04-20ET, all three segments; same-segment prior10 completed official-session reference, entire current session excluded; window/episode can survive closure.
+  gaps_unsupported: Explicit UNAVAILABLE reset/cancellation clears numeric window and session references, disarms episode; only later READY noncompression rearms. Ten completed official reference sessions must rebuild. Never substitute RTH/older available days or fabricate slots. Unsupported dates remain calendar/block denominator.
+  unit_boundaries: Explicit admitted raw-unit segment boundary/reset; all crossing labels unresolved. No silently registered split transform or event rearm. Compatible new unit/coverage/action admission required.
+  admission: New immutable Alpaca SIP SOXX interval coverage/unit/action/clock certificate. Discovery certificate cannot certify future inputs. Missing expected supported-session capture blocks complete terminal inference; deterministic unsupported dates disclosed separately.
+  stopping: One terminal inference strictly after fixed receipt deadline and label maturation; no outcome peeking, count-driven extension, early success/failure stop or horizon/session change.
+  identity: H0004-only signal/protocol/stream/seed/stopping; shared dates with other hypotheses do not certify independent market returns.
+  asynchronous: true
+  project_blocker: false
+evidence_floor:
+  complete_events: 40
+  distinct_candidate_sessions: 20
+  occupied_fixed_10_session_blocks: 8
+  completeness: Every emitted primary candidate must have a resolved16-slot label; no complete-case omission.
+  rationale: Ex-ante breadth guards, not powered sample-size certification. Fixed nonoverlapping10-session calendar bins from anchor_start including final partial bin.
+uncertainty:
+  method: Circular moving calendar-session block percentile bootstrap of session-balanced directional mean using existing evaluation architecture.
+  grid: Entire fixed252-session anchor calendar, including zero-event and known unsupported dates; never compress occupied dates.
+  block_sessions: 20
+  rationale: Four-week blocks exceed ten-session reference memory plus short price/label windows; retain nearby episode dependence. Longer regime dependence may remain; no guaranteed coverage or power.
+  replicates: 10000
+  seed: 202610054
+  generator: random.Random under bound Python runtime.
+  resampling: Draw ceil(252/20)=13 randrange(252) starts with replacement; append20 circular indices each, truncate252; average occupied per-session means over sampled occurrences.
+  interval: Two-sided95-percent percentile interval; sorted valid replicates, linear interpolation at positions(n-1)*.025 and(n-1)*.975.
+  empty: No retry or seed change. More than100 empty replicates (>1%) makes inference UNRESOLVED; otherwise disclose and use valid replicates.
+  invalid: Nonfinite data, unresolved labels or invalid resampling fail closed; never IID/event bootstrap fallback.
+multiple_testing:
+  primary_families: 1
+  alpha: 0.05
+  primary_rule: Only registered16-slot absolute direction may PASS/REJECT.
+  signal_trials: 2
+  selection: Owner semantic choice before outcomes, not best outcome between trials; trial1 never later efficacy-ranked to rescue trial2.
+  project: H0004-local directional inference is not family-wide Alpha validation; later research selection/promotion must account for all trials.
+disposition:
+  precedence: [INVALID_FAIL_CLOSED, PENDING, UNRESOLVED, ZERO_SIGNAL, INSUFFICIENT_EVIDENCE, PASS, REJECT, INCONCLUSIVE]
+  INVALID_FAIL_CLOSED: Identity/hash/semantics/duplicate/session/admission/causality defect; no inference.
+  PENDING: Receipt deadline not reached; no confirmation outcome access or inference.
+  UNRESOLVED: Mature primary labels/capture/units ambiguous or incomplete, or invalid/too-empty bootstrap; preserve full denominator.
+  ZERO_SIGNAL: Complete valid terminal cohort with0 candidates; numeric estimates null.
+  INSUFFICIENT_EVIDENCE: Complete valid terminal cohort below any40-events/20-sessions/8-bin guard; no PASS/REJECT.
+  PASS: All gates/floors satisfied and directional95-percent interval lower bound strictly >0.
+  REJECT: All gates/floors satisfied and interval upper bound strictly <0; evidence against positive direction, not absence-of-effect proof.
+  INCONCLUSIVE: Valid floor-satisfying inference with neither strict positive lower nor strict negative upper bound.
+  equality: Interval bound equal0 is not PASS/REJECT.
+  promotion: Further independent/execution research only; no production/order/profitability/account/Alpha admission.
+outcome_access_this_action: FORBIDDEN
+next_P0: H0004_FIRST_EFFICACY
+next_action_scope: Implement, test and seal nonempty directional outcome adapter before later bounded exploratory discovery. No outcomes in remediation/freeze/preregistration action; confirmation remains asynchronous PENDING.

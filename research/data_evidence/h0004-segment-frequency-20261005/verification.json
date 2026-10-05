@@ -1,0 +1,78 @@
+{
+  "counts": {
+    "breakout_evaluations": 625,
+    "candidate_sessions": 29,
+    "candidates": 48,
+    "compressed": 925,
+    "compression_READY": 3840,
+    "compression_runs": 108,
+    "consumed": 48,
+    "downside_cancelled": 38,
+    "eligible_bars": 4480,
+    "expired": 14,
+    "frozen_ranges": 101,
+    "gap_cancelled": 0,
+    "gap_resets": 0,
+    "invalid_cancelled": 0,
+    "pending": 1,
+    "unique_compression_episodes": 101
+  },
+  "event_stream_hash": "8e64aecd6fa26261bf5735126f3615427427bbe5ae34b0d242b8d14dd513d14d",
+  "mechanically_executable": true,
+  "outcome_access": 0,
+  "parameter_trials": 2,
+  "preserved_files": 646,
+  "range_stream_hash": "d499a5da6009f81f49731a771350bcff439e5b9357c0947080aa8d016b4aecc9",
+  "report_hash": "96e24d60ad41b203834f709136814c0e371916fab9521aa8d298e19e92cbc17a",
+  "schema": "h0004_trial2_verification_v1",
+  "segments": {
+    "AFTER_HOURS": {
+      "candidates": 9,
+      "compressed": 219,
+      "compression_READY": 960,
+      "compression_rate": 0.228125,
+      "eligible_bars": 1120,
+      "ranges": 24,
+      "reference_READY": 960
+    },
+    "PREMARKET": {
+      "candidates": 19,
+      "compressed": 325,
+      "compression_READY": 1320,
+      "compression_rate": 0.24621212121212122,
+      "eligible_bars": 1540,
+      "ranges": 36,
+      "reference_READY": 1320
+    },
+    "RTH": {
+      "candidates": 20,
+      "compressed": 381,
+      "compression_READY": 1560,
+      "compression_rate": 0.24423076923076922,
+      "eligible_bars": 1820,
+      "ranges": 41,
+      "reference_READY": 1560
+    }
+  },
+  "spec_hash": "0a4ebc7f1b793380cea11df0604e7faeee06679b2c56d3024b886aab56ef82e2",
+  "tests": [
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "tests-targeted.xml",
+      "sha256": "b99777f5d6fedd18bb1f35bad007186285ec587f1c1b4255ce829137f0da114d",
+      "skipped": 0,
+      "tests": 80
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "tests-full.xml",
+      "sha256": "031b42bfc308f40979a5a50abc9e7bdb2d320d3ce9ae84d2a326f945d71ad2e4",
+      "skipped": 0,
+      "tests": 1767
+    }
+  ],
+  "trial1_and_H0001_H0002_H0003_preserved": true,
+  "verification_price_queries": 0
+}

@@ -1,0 +1,3796 @@
+{
+  "events": [
+    {
+      "at": "2026-05-20T08:15:00+00:00",
+      "episode_id": "1d08ad1bf93191d3b277f95c26e5953eb3bb7c4c84cd40a8c5e967b6f21114c6",
+      "id": "9dbc6eba38a826a39169c5fcd92e77feef3437fb0751064055bcfdc4021862a8",
+      "session": "2026-05-20",
+      "snapshot": {
+        "bar": {
+          "close": 506.18,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-20T08:15:00+00:00",
+          "high": 506.2,
+          "known_at": "2026-05-20T08:15:00+00:00",
+          "low": 496.0,
+          "open": 500.8,
+          "session": "2026-05-20",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 506.2,
+          "low": 495.99,
+          "normalized_range": 0.02017069026828397,
+          "percentile": 0.5045454545454545,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 220,
+          "reference_hash": "cd7d753d2a60ea87ae92adece0b0b37ab5288c548d06a9ef7c3a408e1c026c39",
+          "reference_sessions": [
+            "2026-05-06",
+            "2026-05-07",
+            "2026-05-08",
+            "2026-05-11",
+            "2026-05-12",
+            "2026-05-13",
+            "2026-05-14",
+            "2026-05-15",
+            "2026-05-18",
+            "2026-05-19"
+          ],
+          "reference_status": "READY",
+          "segment": "PREMARKET",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 500.66,
+            "low": 495.99,
+            "normalized_range": 0.009358904988075945,
+            "percentile": 0.15,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 160,
+            "reference_hash": "42bc1e8a9eba6c467fe571f0c5edb247ed0859078aff10d42fec855dffffd052",
+            "reference_sessions": [
+              "2026-05-05",
+              "2026-05-06",
+              "2026-05-07",
+              "2026-05-08",
+              "2026-05-11",
+              "2026-05-12",
+              "2026-05-13",
+              "2026-05-14",
+              "2026-05-15",
+              "2026-05-18"
+            ],
+            "reference_status": "READY",
+            "segment": "AFTER_HOURS",
+            "status": "READY"
+          },
+          "high": 500.66,
+          "id": "1d08ad1bf93191d3b277f95c26e5953eb3bb7c4c84cd40a8c5e967b6f21114c6",
+          "last_valid_index": 719,
+          "low": 495.99,
+          "prefix_hash": "45f2730549991d2752e8b4e8937e9dfff03ccdcfdb1e9adae7b3879fd41d78a7",
+          "published_at": "2026-05-20T00:00:00+00:00",
+          "published_index": 703,
+          "window_start": "2026-05-19T20:15:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-05-20T13:45:00+00:00",
+      "episode_id": "ddf835a9d9e82eac95d9aef65855a436a1b6407b371225b89490409110fc8039",
+      "id": "25a31eb61cefc3fbcec16f7e21f93e2fc7da67abbf24685a240280ee6fac0ccd",
+      "session": "2026-05-20",
+      "snapshot": {
+        "bar": {
+          "close": 512.04,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-20T13:45:00+00:00",
+          "high": 512.38,
+          "known_at": "2026-05-20T13:45:00+00:00",
+          "low": 506.55,
+          "open": 506.95,
+          "session": "2026-05-20",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 512.38,
+          "low": 505.65,
+          "normalized_range": 0.013143504413717715,
+          "percentile": 0.03076923076923077,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 260,
+          "reference_hash": "2a6cd161de7f699acb80edab7d10b076ba386003c20ac08ff2b669cb2d337d5c",
+          "reference_sessions": [
+            "2026-05-06",
+            "2026-05-07",
+            "2026-05-08",
+            "2026-05-11",
+            "2026-05-12",
+            "2026-05-13",
+            "2026-05-14",
+            "2026-05-15",
+            "2026-05-18",
+            "2026-05-19"
+          ],
+          "reference_status": "READY",
+          "segment": "RTH",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 509.43,
+            "low": 505.52,
+            "normalized_range": 0.007693064436792966,
+            "percentile": 0.00909090909090909,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 220,
+            "reference_hash": "cd7d753d2a60ea87ae92adece0b0b37ab5288c548d06a9ef7c3a408e1c026c39",
+            "reference_sessions": [
+              "2026-05-06",
+              "2026-05-07",
+              "2026-05-08",
+              "2026-05-11",
+              "2026-05-12",
+              "2026-05-13",
+              "2026-05-14",
+              "2026-05-15",
+              "2026-05-18",
+              "2026-05-19"
+            ],
+            "reference_status": "READY",
+            "segment": "PREMARKET",
+            "status": "READY"
+          },
+          "high": 509.43,
+          "id": "ddf835a9d9e82eac95d9aef65855a436a1b6407b371225b89490409110fc8039",
+          "last_valid_index": 736,
+          "low": 505.52,
+          "prefix_hash": "fae630a3231e88cf5aea1971056dc4b150812373b20101290ceb21a095c3630f",
+          "published_at": "2026-05-20T12:15:00+00:00",
+          "published_index": 720,
+          "window_start": "2026-05-20T08:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-05-20T20:00:00+00:00",
+      "episode_id": "8320d7c3e4fdfe27b3fc66020d607a3aad5647fc3ce0d82b22d3de04339ce251",
+      "id": "cf27777e62c4a1796afe7a36db88a014de5f6e8549e45d91b76aca2b6a3050ae",
+      "session": "2026-05-20",
+      "snapshot": {
+        "bar": {
+          "close": 520.08,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-20T20:00:00+00:00",
+          "high": 520.54,
+          "known_at": "2026-05-20T20:00:00+00:00",
+          "low": 517.74,
+          "open": 518.08,
+          "session": "2026-05-20",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 520.54,
+          "low": 512.21,
+          "normalized_range": 0.016016766651284278,
+          "percentile": 0.09230769230769231,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 260,
+          "reference_hash": "2a6cd161de7f699acb80edab7d10b076ba386003c20ac08ff2b669cb2d337d5c",
+          "reference_sessions": [
+            "2026-05-06",
+            "2026-05-07",
+            "2026-05-08",
+            "2026-05-11",
+            "2026-05-12",
+            "2026-05-13",
+            "2026-05-14",
+            "2026-05-15",
+            "2026-05-18",
+            "2026-05-19"
+          ],
+          "reference_status": "READY",
+          "segment": "RTH",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 519.38,
+            "low": 509.44,
+            "normalized_range": 0.01923560716013546,
+            "percentile": 0.16923076923076924,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 260,
+            "reference_hash": "2a6cd161de7f699acb80edab7d10b076ba386003c20ac08ff2b669cb2d337d5c",
+            "reference_sessions": [
+              "2026-05-06",
+              "2026-05-07",
+              "2026-05-08",
+              "2026-05-11",
+              "2026-05-12",
+              "2026-05-13",
+              "2026-05-14",
+              "2026-05-15",
+              "2026-05-18",
+              "2026-05-19"
+            ],
+            "reference_status": "READY",
+            "segment": "RTH",
+            "status": "READY"
+          },
+          "high": 519.38,
+          "id": "8320d7c3e4fdfe27b3fc66020d607a3aad5647fc3ce0d82b22d3de04339ce251",
+          "last_valid_index": 759,
+          "low": 509.44,
+          "prefix_hash": "ced004ffb7e97b766077261d38771c9f0e2277449ff3d54471ab60311ea5f400",
+          "published_at": "2026-05-20T18:00:00+00:00",
+          "published_index": 743,
+          "window_start": "2026-05-20T14:15:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-05-21T14:00:00+00:00",
+      "episode_id": "6537a9be01c76425b7432d1f263ed4f6aa653fcdf9a0e11841aa388b9b8c7cf9",
+      "id": "7edbedb5b008c4d1958c189f37b10c7ac27240013723873d88541c60852b6732",
+      "session": "2026-05-21",
+      "snapshot": {
+        "bar": {
+          "close": 523.52,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-21T14:00:00+00:00",
+          "high": 523.95,
+          "known_at": "2026-05-21T14:00:00+00:00",
+          "low": 519.73,
+          "open": 520.92,
+          "session": "2026-05-21",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 523.95,
+          "low": 514.41,
+          "normalized_range": 0.018222799511002592,
+          "percentile": 0.18076923076923077,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 260,
+          "reference_hash": "6f55fcfafc24fa204b01321613f6f128ef1e6d2b3f7d94605563b4b4c360540d",
+          "reference_sessions": [
+            "2026-05-07",
+            "2026-05-08",
+            "2026-05-11",
+            "2026-05-12",
+            "2026-05-13",
+            "2026-05-14",
+            "2026-05-15",
+            "2026-05-18",
+            "2026-05-19",
+            "2026-05-20"
+          ],
+          "reference_status": "READY",
+          "segment": "RTH",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 521.79,
+            "low": 514.41,
+            "normalized_range": 0.014166426720414618,
+            "percentile": 0.057692307692307696,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 260,
+            "reference_hash": "6f55fcfafc24fa204b01321613f6f128ef1e6d2b3f7d94605563b4b4c360540d",
+            "reference_sessions": [
+              "2026-05-07",
+              "2026-05-08",
+              "2026-05-11",
+              "2026-05-12",
+              "2026-05-13",
+              "2026-05-14",
+              "2026-05-15",
+              "2026-05-18",
+              "2026-05-19",
+              "2026-05-20"
+            ],
+            "reference_status": "READY",
+            "segment": "RTH",
+            "status": "READY"
+          },
+          "high": 521.79,
+          "id": "6537a9be01c76425b7432d1f263ed4f6aa653fcdf9a0e11841aa388b9b8c7cf9",
+          "last_valid_index": 806,
+          "low": 514.41,
+          "prefix_hash": "c657cd53fa0d5096dac32c994bc1df7123c80d7094cad8f69bce3186036c608a",
+          "published_at": "2026-05-21T13:45:00+00:00",
+          "published_index": 790,
+          "window_start": "2026-05-21T10:00:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-05-22T00:00:00+00:00",
+      "episode_id": "eeb24c10bdfce271beb9ab5dc31806fb4de2682df9903ffe49b1885d994f2b32",
+      "id": "4aad23ef730c7116a0ecba309eec362831e811942252c73feaaf2def9a16b216",
+      "session": "2026-05-21",
+      "snapshot": {
+        "bar": {
+          "close": 526.696,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-22T00:00:00+00:00",
+          "high": 526.7507,
+          "known_at": "2026-05-22T00:00:00+00:00",
+          "low": 525.717,
+          "open": 525.717,
+          "session": "2026-05-21",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 526.7507,
+          "low": 523.52,
+          "normalized_range": 0.006133898871455393,
+          "percentile": 0.00625,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 160,
+          "reference_hash": "859c8e6a94af0997a738f8cc62a5c89e6cff86a662585f43db9f838d4d69a693",
+          "reference_sessions": [
+            "2026-05-07",
+            "2026-05-08",
+            "2026-05-11",
+            "2026-05-12",
+            "2026-05-13",
+            "2026-05-14",
+            "2026-05-15",
+            "2026-05-18",
+            "2026-05-19",
+            "2026-05-20"
+          ],
+          "reference_status": "READY",
+          "segment": "AFTER_HOURS",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 526.5,
+            "low": 521.9,
+            "normalized_range": 0.008742808802183921,
+            "percentile": 0.04375,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 160,
+            "reference_hash": "859c8e6a94af0997a738f8cc62a5c89e6cff86a662585f43db9f838d4d69a693",
+            "reference_sessions": [
+              "2026-05-07",
+              "2026-05-08",
+              "2026-05-11",
+              "2026-05-12",
+              "2026-05-13",
+              "2026-05-14",
+              "2026-05-15",
+              "2026-05-18",
+              "2026-05-19",
+              "2026-05-20"
+            ],
+            "reference_status": "READY",
+            "segment": "AFTER_HOURS",
+            "status": "READY"
+          },
+          "high": 526.5,
+          "id": "eeb24c10bdfce271beb9ab5dc31806fb4de2682df9903ffe49b1885d994f2b32",
+          "last_valid_index": 844,
+          "low": 521.9,
+          "prefix_hash": "17734bce39560488de008b9b65f9978f2ba15a27d836ee0f5ea998ea9d3abd31",
+          "published_at": "2026-05-21T23:15:00+00:00",
+          "published_index": 828,
+          "window_start": "2026-05-21T19:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-05-22T13:45:00+00:00",
+      "episode_id": "85b4e7fab2080d0f0a840db8484155191e6d5452104f4476f7f88c4f5ccf1baf",
+      "id": "e5b78976a70aceecfaa4975786b7c27d64354601cfda4dd141fd4e9ac36798f8",
+      "session": "2026-05-22",
+      "snapshot": {
+        "bar": {
+          "close": 534.18,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-22T13:45:00+00:00",
+          "high": 535.86,
+          "known_at": "2026-05-22T13:45:00+00:00",
+          "low": 530.17,
+          "open": 531.88,
+          "session": "2026-05-22",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 535.86,
+          "low": 524.36,
+          "normalized_range": 0.021528323785989744,
+          "percentile": 0.4461538461538462,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 260,
+          "reference_hash": "47062db48ad5860703eade88be7a8764df5d79d1609a8a668bee5fd67f305821",
+          "reference_sessions": [
+            "2026-05-08",
+            "2026-05-11",
+            "2026-05-12",
+            "2026-05-13",
+            "2026-05-14",
+            "2026-05-15",
+            "2026-05-18",
+            "2026-05-19",
+            "2026-05-20",
+            "2026-05-21"
+          ],
+          "reference_status": "READY",
+          "segment": "RTH",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 531.77,
+            "low": 524.36,
+            "normalized_range": 0.013998828707989283,
+            "percentile": 0.16818181818181818,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 220,
+            "reference_hash": "2ecb70e1185abc3e3752d3eed0649deec4a49d5abb8c6ff5c795ed5a90ecacdf",
+            "reference_sessions": [
+              "2026-05-08",
+              "2026-05-11",
+              "2026-05-12",
+              "2026-05-13",
+              "2026-05-14",
+              "2026-05-15",
+              "2026-05-18",
+              "2026-05-19",
+              "2026-05-20",
+              "2026-05-21"
+            ],
+            "reference_status": "READY",
+            "segment": "PREMARKET",
+            "status": "READY"
+          },
+          "high": 531.77,
+          "id": "85b4e7fab2080d0f0a840db8484155191e6d5452104f4476f7f88c4f5ccf1baf",
+          "last_valid_index": 866,
+          "low": 524.36,
+          "prefix_hash": "edd51e609cb1a75e562f253355a9be53c64c6823a33b5642cd903d69c5bb7898",
+          "published_at": "2026-05-22T12:45:00+00:00",
+          "published_index": 850,
+          "window_start": "2026-05-22T09:00:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-05-26T12:15:00+00:00",
+      "episode_id": "f4b55c2058cd10397137ba99aed658444e3f34718957943be4c95327506cb977",
+      "id": "ef0a98f47ca1f4195771a20cb1bb4d05f197acd95efbd97b356b2d6f03824182",
+      "session": "2026-05-26",
+      "snapshot": {
+        "bar": {
+          "close": 554.25,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-26T12:15:00+00:00",
+          "high": 554.34,
+          "known_at": "2026-05-26T12:15:00+00:00",
+          "low": 553.27,
+          "open": 553.88,
+          "session": "2026-05-26",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 554.34,
+          "low": 548.1,
+          "normalized_range": 0.011258457374830869,
+          "percentile": 0.05,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 220,
+          "reference_hash": "36052f28f1007e75f9d1788e6c58b34aa1ea7ec44711339568d98c40bb2f12a8",
+          "reference_sessions": [
+            "2026-05-11",
+            "2026-05-12",
+            "2026-05-13",
+            "2026-05-14",
+            "2026-05-15",
+            "2026-05-18",
+            "2026-05-19",
+            "2026-05-20",
+            "2026-05-21",
+            "2026-05-22"
+          ],
+          "reference_status": "READY",
+          "segment": "PREMARKET",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 553.9951,
+            "low": 546.99,
+            "normalized_range": 0.012651435795557107,
+            "percentile": 0.10454545454545454,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 220,
+            "reference_hash": "36052f28f1007e75f9d1788e6c58b34aa1ea7ec44711339568d98c40bb2f12a8",
+            "reference_sessions": [
+              "2026-05-11",
+              "2026-05-12",
+              "2026-05-13",
+              "2026-05-14",
+              "2026-05-15",
+              "2026-05-18",
+              "2026-05-19",
+              "2026-05-20",
+              "2026-05-21",
+              "2026-05-22"
+            ],
+            "reference_status": "READY",
+            "segment": "PREMARKET",
+            "status": "READY"
+          },
+          "high": 553.9951,
+          "id": "f4b55c2058cd10397137ba99aed658444e3f34718957943be4c95327506cb977",
+          "last_valid_index": 927,
+          "low": 546.99,
+          "prefix_hash": "d1c56e2407a7fa03e834140229aa0879c7a9118cfe7202c233bd8160093f8de9",
+          "published_at": "2026-05-26T12:00:00+00:00",
+          "published_index": 911,
+          "window_start": "2026-05-26T08:15:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-05-26T23:45:00+00:00",
+      "episode_id": "0a5b461662759a6b3d065e07bac5eae0248f04046fa3b8c4cf6a96436030d61b",
+      "id": "1712b5281af07860e363f320efeebe1b4b292fd8785b3ea1b71315b0e8e75443",
+      "session": "2026-05-26",
+      "snapshot": {
+        "bar": {
+          "close": 573.9,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-26T23:45:00+00:00",
+          "high": 573.9,
+          "known_at": "2026-05-26T23:45:00+00:00",
+          "low": 572.47,
+          "open": 572.91,
+          "session": "2026-05-26",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 573.9,
+          "low": 569.4,
+          "normalized_range": 0.007841087297438579,
+          "percentile": 0.05625,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 160,
+          "reference_hash": "433327ba76fcc84e016f4de39c3029ff4ffa65807dd451bfa40107b6ff581f1a",
+          "reference_sessions": [
+            "2026-05-11",
+            "2026-05-12",
+            "2026-05-13",
+            "2026-05-14",
+            "2026-05-15",
+            "2026-05-18",
+            "2026-05-19",
+            "2026-05-20",
+            "2026-05-21",
+            "2026-05-22"
+          ],
+          "reference_status": "READY",
+          "segment": "AFTER_HOURS",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 572.95,
+            "low": 567.7245,
+            "normalized_range": 0.009132934843400466,
+            "percentile": 0.175,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 160,
+            "reference_hash": "433327ba76fcc84e016f4de39c3029ff4ffa65807dd451bfa40107b6ff581f1a",
+            "reference_sessions": [
+              "2026-05-11",
+              "2026-05-12",
+              "2026-05-13",
+              "2026-05-14",
+              "2026-05-15",
+              "2026-05-18",
+              "2026-05-19",
+              "2026-05-20",
+              "2026-05-21",
+              "2026-05-22"
+            ],
+            "reference_status": "READY",
+            "segment": "AFTER_HOURS",
+            "status": "READY"
+          },
+          "high": 572.95,
+          "id": "0a5b461662759a6b3d065e07bac5eae0248f04046fa3b8c4cf6a96436030d61b",
+          "last_valid_index": 971,
+          "low": 567.7245,
+          "prefix_hash": "c8e08a5fa6ffc81b6fc12bf2913423a99b8a9f88d9c12d4927a523f7f9772bb5",
+          "published_at": "2026-05-26T23:00:00+00:00",
+          "published_index": 955,
+          "window_start": "2026-05-26T19:15:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-05-27T19:45:00+00:00",
+      "episode_id": "265096cb384e421347146bf97daf4896c267e575217bfb979f36627a323092a2",
+      "id": "c3ba769002fe2a27e3b325a16215a7a3bf3941bf31c61cdd49f8e5ccb1af7750",
+      "session": "2026-05-27",
+      "snapshot": {
+        "bar": {
+          "close": 563.73,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-27T19:45:00+00:00",
+          "high": 563.82,
+          "known_at": "2026-05-27T19:45:00+00:00",
+          "low": 560.93,
+          "open": 560.98,
+          "session": "2026-05-27",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 563.82,
+          "low": 553.595,
+          "normalized_range": 0.01813811576463914,
+          "percentile": 0.19230769230769232,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 260,
+          "reference_hash": "34b8d9c94a4ff0787e86e5f6c50d100dbbd3cb25b72bbfb250037c565e6ee20a",
+          "reference_sessions": [
+            "2026-05-12",
+            "2026-05-13",
+            "2026-05-14",
+            "2026-05-15",
+            "2026-05-18",
+            "2026-05-19",
+            "2026-05-20",
+            "2026-05-21",
+            "2026-05-22",
+            "2026-05-26"
+          ],
+          "reference_status": "READY",
+          "segment": "RTH",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 563.0,
+            "low": 552.63,
+            "normalized_range": 0.018443588763105718,
+            "percentile": 0.19615384615384615,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 260,
+            "reference_hash": "34b8d9c94a4ff0787e86e5f6c50d100dbbd3cb25b72bbfb250037c565e6ee20a",
+            "reference_sessions": [
+              "2026-05-12",
+              "2026-05-13",
+              "2026-05-14",
+              "2026-05-15",
+              "2026-05-18",
+              "2026-05-19",
+              "2026-05-20",
+              "2026-05-21",
+              "2026-05-22",
+              "2026-05-26"
+            ],
+            "reference_status": "READY",
+            "segment": "RTH",
+            "status": "READY"
+          },
+          "high": 563.0,
+          "id": "265096cb384e421347146bf97daf4896c267e575217bfb979f36627a323092a2",
+          "last_valid_index": 1017,
+          "low": 552.63,
+          "prefix_hash": "4d91264885f9e63506e8efc5a6ee1f2bc988827c2b592f3a2e250023ba729b8b",
+          "published_at": "2026-05-27T18:30:00+00:00",
+          "published_index": 1001,
+          "window_start": "2026-05-27T14:45:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-05-28T12:45:00+00:00",
+      "episode_id": "8a252bb482b436ff3ba9809d3eb161c845c69be73943991e3489de74412ca2e0",
+      "id": "ff564bd0b56f5bd319f70275df70c34cdc7bc0dc40a2e3205bbe314adc4d3110",
+      "session": "2026-05-28",
+      "snapshot": {
+        "bar": {
+          "close": 563.22,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-28T12:45:00+00:00",
+          "high": 563.28,
+          "known_at": "2026-05-28T12:45:00+00:00",
+          "low": 557.72,
+          "open": 558.12,
+          "session": "2026-05-28",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 563.28,
+          "low": 552.98,
+          "normalized_range": 0.018287702851461158,
+          "percentile": 0.41363636363636364,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 220,
+          "reference_hash": "d0cc5dafe7b8e8667d7b38b2b1263914879bd90c0eaa99b236cb32fcfaa523c5",
+          "reference_sessions": [
+            "2026-05-13",
+            "2026-05-14",
+            "2026-05-15",
+            "2026-05-18",
+            "2026-05-19",
+            "2026-05-20",
+            "2026-05-21",
+            "2026-05-22",
+            "2026-05-26",
+            "2026-05-27"
+          ],
+          "reference_status": "READY",
+          "segment": "PREMARKET",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 560.43,
+            "low": 552.98,
+            "normalized_range": 0.013348383860101648,
+            "percentile": 0.13636363636363635,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 220,
+            "reference_hash": "d0cc5dafe7b8e8667d7b38b2b1263914879bd90c0eaa99b236cb32fcfaa523c5",
+            "reference_sessions": [
+              "2026-05-13",
+              "2026-05-14",
+              "2026-05-15",
+              "2026-05-18",
+              "2026-05-19",
+              "2026-05-20",
+              "2026-05-21",
+              "2026-05-22",
+              "2026-05-26",
+              "2026-05-27"
+            ],
+            "reference_status": "READY",
+            "segment": "PREMARKET",
+            "status": "READY"
+          },
+          "high": 560.43,
+          "id": "8a252bb482b436ff3ba9809d3eb161c845c69be73943991e3489de74412ca2e0",
+          "last_valid_index": 1056,
+          "low": 552.98,
+          "prefix_hash": "f927ed364fb1cc45d783fef032144c312e3a7c9a566384789cb4dfd2813ae85d",
+          "published_at": "2026-05-28T12:15:00+00:00",
+          "published_index": 1040,
+          "window_start": "2026-05-28T08:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-05-29T13:45:00+00:00",
+      "episode_id": "5b86c52d0b60ed857f38b75b76ed0d04f6e4f500f999aa2fc948745d75dec877",
+      "id": "d2036d948bdb3863a83f999491e5b22f1cb149e907812dcc14d37473b4883ba2",
+      "session": "2026-05-29",
+      "snapshot": {
+        "bar": {
+          "close": 577.42,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-05-29T13:45:00+00:00",
+          "high": 578.41,
+          "known_at": "2026-05-29T13:45:00+00:00",
+          "low": 573.7,
+          "open": 576.41,
+          "session": "2026-05-29",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 578.41,
+          "low": 572.46,
+          "normalized_range": 0.010304457760382274,
+          "percentile": 0.011538461538461539,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 260,
+          "reference_hash": "2eb3d3fc8b59a19ed0821fa4c375f7f54007781d4eecdeae52de5e0dd3efaec3",
+          "reference_sessions": [
+            "2026-05-14",
+            "2026-05-15",
+            "2026-05-18",
+            "2026-05-19",
+            "2026-05-20",
+            "2026-05-21",
+            "2026-05-22",
+            "2026-05-26",
+            "2026-05-27",
+            "2026-05-28"
+          ],
+          "reference_status": "READY",
+          "segment": "RTH",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 576.22,
+            "low": 570.22,
+            "normalized_range": 0.010437323870159691,
+            "percentile": 0.03636363636363636,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 220,
+            "reference_hash": "20908082e2be2f647dbf6e374acd8277e49e13aa40619253f6302be8069d50b8",
+            "reference_sessions": [
+              "2026-05-14",
+              "2026-05-15",
+              "2026-05-18",
+              "2026-05-19",
+              "2026-05-20",
+              "2026-05-21",
+              "2026-05-22",
+              "2026-05-26",
+              "2026-05-27",
+              "2026-05-28"
+            ],
+            "reference_status": "READY",
+            "segment": "PREMARKET",
+            "status": "READY"
+          },
+          "high": 576.22,
+          "id": "5b86c52d0b60ed857f38b75b76ed0d04f6e4f500f999aa2fc948745d75dec877",
+          "last_valid_index": 1110,
+          "low": 570.22,
+          "prefix_hash": "ab5643f7c93bfccd76eda1f1f50ba4c3e705663b0670da1e9b7d381de4a86cce",
+          "published_at": "2026-05-29T09:45:00+00:00",
+          "published_index": 1094,
+          "window_start": "2026-05-28T22:00:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-02T13:45:00+00:00",
+      "episode_id": "c34d0f0ba314a24f7ecde3823db2ff4f1fb75166e2b465f29e12c278eec96307",
+      "id": "93bb2a7dcfbd5250b13666a809f8127e97444fe182f590c13668650576ee4032",
+      "session": "2026-06-02",
+      "snapshot": {
+        "bar": {
+          "close": 590.19,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-02T13:45:00+00:00",
+          "high": 590.7999,
+          "known_at": "2026-06-02T13:45:00+00:00",
+          "low": 581.925,
+          "open": 585.17,
+          "session": "2026-06-02",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 590.7999,
+          "low": 581.925,
+          "normalized_range": 0.015037360849895837,
+          "percentile": 0.12307692307692308,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 260,
+          "reference_hash": "4466cae1d499bff1920b38808376d0d0744464db7bc0ff4c61be16eda247a2d1",
+          "reference_sessions": [
+            "2026-05-18",
+            "2026-05-19",
+            "2026-05-20",
+            "2026-05-21",
+            "2026-05-22",
+            "2026-05-26",
+            "2026-05-27",
+            "2026-05-28",
+            "2026-05-29",
+            "2026-06-01"
+          ],
+          "reference_status": "READY",
+          "segment": "RTH",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 588.75,
+            "low": 580.37,
+            "normalized_range": 0.014321848509707403,
+            "percentile": 0.18181818181818182,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 220,
+            "reference_hash": "158add773d88de6b0a896f2f50bdd7a81b3e135c13f081b481456cf5f89c497f",
+            "reference_sessions": [
+              "2026-05-18",
+              "2026-05-19",
+              "2026-05-20",
+              "2026-05-21",
+              "2026-05-22",
+              "2026-05-26",
+              "2026-05-27",
+              "2026-05-28",
+              "2026-05-29",
+              "2026-06-01"
+            ],
+            "reference_status": "READY",
+            "segment": "PREMARKET",
+            "status": "READY"
+          },
+          "high": 588.75,
+          "id": "c34d0f0ba314a24f7ecde3823db2ff4f1fb75166e2b465f29e12c278eec96307",
+          "last_valid_index": 1248,
+          "low": 580.37,
+          "prefix_hash": "ef157d641d95b1e96d07cc8cb9f3dfbfadf960dcebc9292a40ad7c0b8e9636c1",
+          "published_at": "2026-06-02T12:15:00+00:00",
+          "published_index": 1232,
+          "window_start": "2026-06-02T08:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-02T19:15:00+00:00",
+      "episode_id": "83b50d7a23a8b45fa70b3ea7f32676b196b8752ceda1108fc70ffdedba174fbb",
+      "id": "6828aebc9123d1f7ecba58ec2f2417502c1452e934a5428c596950f3d19ba627",
+      "session": "2026-06-02",
+      "snapshot": {
+        "bar": {
+          "close": 601.43,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-02T19:15:00+00:00",
+          "high": 602.0,
+          "known_at": "2026-06-02T19:15:00+00:00",
+          "low": 599.645,
+          "open": 599.645,
+          "session": "2026-06-02",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 602.0,
+          "low": 594.48,
+          "normalized_range": 0.012503533245764233,
+          "percentile": 0.06538461538461539,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 260,
+          "reference_hash": "4466cae1d499bff1920b38808376d0d0744464db7bc0ff4c61be16eda247a2d1",
+          "reference_sessions": [
+            "2026-05-18",
+            "2026-05-19",
+            "2026-05-20",
+            "2026-05-21",
+            "2026-05-22",
+            "2026-05-26",
+            "2026-05-27",
+            "2026-05-28",
+            "2026-05-29",
+            "2026-06-01"
+          ],
+          "reference_status": "READY",
+          "segment": "RTH",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 601.19,
+            "low": 589.87,
+            "normalized_range": 0.018891540528362425,
+            "percentile": 0.2,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 260,
+            "reference_hash": "4466cae1d499bff1920b38808376d0d0744464db7bc0ff4c61be16eda247a2d1",
+            "reference_sessions": [
+              "2026-05-18",
+              "2026-05-19",
+              "2026-05-20",
+              "2026-05-21",
+              "2026-05-22",
+              "2026-05-26",
+              "2026-05-27",
+              "2026-05-28",
+              "2026-05-29",
+              "2026-06-01"
+            ],
+            "reference_status": "READY",
+            "segment": "RTH",
+            "status": "READY"
+          },
+          "high": 601.19,
+          "id": "83b50d7a23a8b45fa70b3ea7f32676b196b8752ceda1108fc70ffdedba174fbb",
+          "last_valid_index": 1273,
+          "low": 589.87,
+          "prefix_hash": "09dbf059608d8448c8faeabbabd08e52ea6ce8329d658220838fb47d5516a152",
+          "published_at": "2026-06-02T18:30:00+00:00",
+          "published_index": 1257,
+          "window_start": "2026-06-02T14:45:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-03T18:30:00+00:00",
+      "episode_id": "632f1eb08a8f002285015c0985e52e85412586bb8bae9800d1a06b5fd5cfea55",
+      "id": "11b88e247b178c23effceda3cec02fb27dd42f82cc2efeb653d57f47b4b9b82d",
+      "session": "2026-06-03",
+      "snapshot": {
+        "bar": {
+          "close": 618.29,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-03T18:30:00+00:00",
+          "high": 618.5,
+          "known_at": "2026-06-03T18:30:00+00:00",
+          "low": 614.5,
+          "open": 615.57,
+          "session": "2026-06-03",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 618.5,
+          "low": 609.361,
+          "normalized_range": 0.014781089779876773,
+          "percentile": 0.13846153846153847,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 260,
+          "reference_hash": "a71661f2d5c765b1f9feb968037c0f5000e37c38d662ef04ef0928437fb2f136",
+          "reference_sessions": [
+            "2026-05-19",
+            "2026-05-20",
+            "2026-05-21",
+            "2026-05-22",
+            "2026-05-26",
+            "2026-05-27",
+            "2026-05-28",
+            "2026-05-29",
+            "2026-06-01",
+            "2026-06-02"
+          ],
+          "reference_status": "READY",
+          "segment": "RTH",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 617.52,
+            "low": 609.361,
+            "normalized_range": 0.013255030258802057,
+            "percentile": 0.09230769230769231,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 260,
+            "reference_hash": "a71661f2d5c765b1f9feb968037c0f5000e37c38d662ef04ef0928437fb2f136",
+            "reference_sessions": [
+              "2026-05-19",
+              "2026-05-20",
+              "2026-05-21",
+              "2026-05-22",
+              "2026-05-26",
+              "2026-05-27",
+              "2026-05-28",
+              "2026-05-29",
+              "2026-06-01",
+              "2026-06-02"
+            ],
+            "reference_status": "READY",
+            "segment": "RTH",
+            "status": "READY"
+          },
+          "high": 617.52,
+          "id": "632f1eb08a8f002285015c0985e52e85412586bb8bae9800d1a06b5fd5cfea55",
+          "last_valid_index": 1336,
+          "low": 609.361,
+          "prefix_hash": "94112fcea8e9aefb9e286eaf83b042c6b06a568246ca72c70d1ff815bd7f1052",
+          "published_at": "2026-06-03T18:15:00+00:00",
+          "published_index": 1320,
+          "window_start": "2026-06-03T14:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-15T15:30:00+00:00",
+      "episode_id": "6df30564a038f18aef817a0ec92891cc1c2e38fda772eaeed3ede6b445a31535",
+      "id": "187abb088512ec9fee8b63ee3b3decab46cba659657beba79d407711bacebe1c",
+      "session": "2026-06-15",
+      "snapshot": {
+        "bar": {
+          "close": 624.31,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-15T15:30:00+00:00",
+          "high": 624.68,
+          "known_at": "2026-06-15T15:30:00+00:00",
+          "low": 622.17,
+          "open": 623.6673,
+          "session": "2026-06-15",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 627.47,
+          "low": 618.45,
+          "normalized_range": 0.014447950537393254,
+          "percentile": 0.04230769230769231,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 260,
+          "reference_hash": "fc1d058bf0cff8b81a9f8a904ea62210694433e344fbdbe3713071315acc2e98",
+          "reference_sessions": [
+            "2026-06-01",
+            "2026-06-02",
+            "2026-06-03",
+            "2026-06-04",
+            "2026-06-05",
+            "2026-06-08",
+            "2026-06-09",
+            "2026-06-10",
+            "2026-06-11",
+            "2026-06-12"
+          ],
+          "reference_status": "READY",
+          "segment": "RTH",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 624.0,
+            "low": 616.2,
+            "normalized_range": 0.01251745221703329,
+            "percentile": 0.05,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 220,
+            "reference_hash": "30be0e8133138fcd963424191d461d47516cd624f57c0392ac5df087a1a05978",
+            "reference_sessions": [
+              "2026-06-01",
+              "2026-06-02",
+              "2026-06-03",
+              "2026-06-04",
+              "2026-06-05",
+              "2026-06-08",
+              "2026-06-09",
+              "2026-06-10",
+              "2026-06-11",
+              "2026-06-12"
+            ],
+            "reference_status": "READY",
+            "segment": "PREMARKET",
+            "status": "READY"
+          },
+          "high": 624.0,
+          "id": "6df30564a038f18aef817a0ec92891cc1c2e38fda772eaeed3ede6b445a31535",
+          "last_valid_index": 1823,
+          "low": 616.2,
+          "prefix_hash": "98ea631d46e4d05a3830d96b34d16b0d153275b0d56f92a821d8c00b2ab63a51",
+          "published_at": "2026-06-15T12:00:00+00:00",
+          "published_index": 1807,
+          "window_start": "2026-06-15T08:15:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-17T08:15:00+00:00",
+      "episode_id": "2914408488e7fb1b01f2834f4318400234f20d9d6ca9b7044c58dc85f3c3ffae",
+      "id": "78ca6dac2cb22594818089686f65514e617e778a3753e20f86b0f6a7eb8cd850",
+      "session": "2026-06-17",
+      "snapshot": {
+        "bar": {
+          "close": 608.4,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-17T08:15:00+00:00",
+          "high": 613.44,
+          "known_at": "2026-06-17T08:15:00+00:00",
+          "low": 599.1,
+          "open": 613.44,
+          "session": "2026-06-17",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 613.44,
+          "low": 592.0,
+          "normalized_range": 0.03523997370151225,
+          "percentile": 0.7636363636363637,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 220,
+          "reference_hash": "bfef4a2de62091976e27b18a1ee1970f7f648bca6d7cf18353cc56acd51fab7f",
+          "reference_sessions": [
+            "2026-06-03",
+            "2026-06-04",
+            "2026-06-05",
+            "2026-06-08",
+            "2026-06-09",
+            "2026-06-10",
+            "2026-06-11",
+            "2026-06-12",
+            "2026-06-15",
+            "2026-06-16"
+          ],
+          "reference_status": "READY",
+          "segment": "PREMARKET",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 597.2,
+            "low": 591.18,
+            "normalized_range": 0.010136453160746628,
+            "percentile": 0.15,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 160,
+            "reference_hash": "b7864a6a5b25dcf6f9596117bd983c7144cdc4fb73a757591327b532517b240f",
+            "reference_sessions": [
+              "2026-06-02",
+              "2026-06-03",
+              "2026-06-04",
+              "2026-06-05",
+              "2026-06-08",
+              "2026-06-09",
+              "2026-06-10",
+              "2026-06-11",
+              "2026-06-12",
+              "2026-06-15"
+            ],
+            "reference_status": "READY",
+            "segment": "AFTER_HOURS",
+            "status": "READY"
+          },
+          "high": 597.2,
+          "id": "2914408488e7fb1b01f2834f4318400234f20d9d6ca9b7044c58dc85f3c3ffae",
+          "last_valid_index": 1935,
+          "low": 591.18,
+          "prefix_hash": "2b7eff20bf7dad8286b89161d6760893f2ddf5f1da750dc16d581a9b582f81ae",
+          "published_at": "2026-06-17T00:00:00+00:00",
+          "published_index": 1919,
+          "window_start": "2026-06-16T20:15:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-17T13:30:00+00:00",
+      "episode_id": "b8bc31bce3c7dfc4494ad245f39b5f8f64a10d73df7f85e419d597da9bcff8b6",
+      "id": "136bec59bbf403b345d230675ba1b31d8a8e1e736f614749b3f520f7384af228",
+      "session": "2026-06-17",
+      "snapshot": {
+        "bar": {
+          "close": 611.6,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-17T13:30:00+00:00",
+          "high": 611.7,
+          "known_at": "2026-06-17T13:30:00+00:00",
+          "low": 607.5,
+          "open": 607.95,
+          "session": "2026-06-17",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 611.7,
+          "low": 601.0,
+          "normalized_range": 0.017495094833224402,
+          "percentile": 0.25,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 220,
+          "reference_hash": "bfef4a2de62091976e27b18a1ee1970f7f648bca6d7cf18353cc56acd51fab7f",
+          "reference_sessions": [
+            "2026-06-03",
+            "2026-06-04",
+            "2026-06-05",
+            "2026-06-08",
+            "2026-06-09",
+            "2026-06-10",
+            "2026-06-11",
+            "2026-06-12",
+            "2026-06-15",
+            "2026-06-16"
+          ],
+          "reference_status": "READY",
+          "segment": "PREMARKET",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 608.6,
+            "low": 601.0,
+            "normalized_range": 0.012560115024211312,
+            "percentile": 0.08181818181818182,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 220,
+            "reference_hash": "bfef4a2de62091976e27b18a1ee1970f7f648bca6d7cf18353cc56acd51fab7f",
+            "reference_sessions": [
+              "2026-06-03",
+              "2026-06-04",
+              "2026-06-05",
+              "2026-06-08",
+              "2026-06-09",
+              "2026-06-10",
+              "2026-06-11",
+              "2026-06-12",
+              "2026-06-15",
+              "2026-06-16"
+            ],
+            "reference_status": "READY",
+            "segment": "PREMARKET",
+            "status": "READY"
+          },
+          "high": 608.6,
+          "id": "b8bc31bce3c7dfc4494ad245f39b5f8f64a10d73df7f85e419d597da9bcff8b6",
+          "last_valid_index": 1952,
+          "low": 601.0,
+          "prefix_hash": "33772f21cd2a7d2e4694cf658434e970a8c4db585f0644d6a896849024bb2c41",
+          "published_at": "2026-06-17T12:15:00+00:00",
+          "published_index": 1936,
+          "window_start": "2026-06-17T08:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-18T12:45:00+00:00",
+      "episode_id": "41f745e291cb96c1e5a66a95ed81588939cd0e839840ce98e8363648d4b7d8a7",
+      "id": "350650dd727a5ef008aee81e60fc8ce79722779a8f88e533f89b1d1a813cb8e7",
+      "session": "2026-06-18",
+      "snapshot": {
+        "bar": {
+          "close": 626.5,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-18T12:45:00+00:00",
+          "high": 626.82,
+          "known_at": "2026-06-18T12:45:00+00:00",
+          "low": 625.3876,
+          "open": 626.1,
+          "session": "2026-06-18",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 626.82,
+          "low": 615.73,
+          "normalized_range": 0.01770151636073429,
+          "percentile": 0.24545454545454545,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 220,
+          "reference_hash": "9e2552ffd9fe41330f189d7fb5d6f82931be2b8f736a67332bd67e13e0149b31",
+          "reference_sessions": [
+            "2026-06-04",
+            "2026-06-05",
+            "2026-06-08",
+            "2026-06-09",
+            "2026-06-10",
+            "2026-06-11",
+            "2026-06-12",
+            "2026-06-15",
+            "2026-06-16",
+            "2026-06-17"
+          ],
+          "reference_status": "READY",
+          "segment": "PREMARKET",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 626.22,
+            "low": 618.8,
+            "normalized_range": 0.011862509992006512,
+            "percentile": 0.07727272727272727,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 220,
+            "reference_hash": "9e2552ffd9fe41330f189d7fb5d6f82931be2b8f736a67332bd67e13e0149b31",
+            "reference_sessions": [
+              "2026-06-04",
+              "2026-06-05",
+              "2026-06-08",
+              "2026-06-09",
+              "2026-06-10",
+              "2026-06-11",
+              "2026-06-12",
+              "2026-06-15",
+              "2026-06-16",
+              "2026-06-17"
+            ],
+            "reference_status": "READY",
+            "segment": "PREMARKET",
+            "status": "READY"
+          },
+          "high": 626.22,
+          "id": "41f745e291cb96c1e5a66a95ed81588939cd0e839840ce98e8363648d4b7d8a7",
+          "last_valid_index": 2016,
+          "low": 618.8,
+          "prefix_hash": "cf2cdb2d99c1be35e22c7a7adc0ee2bb64d866b812cfb7118ded11cd93eba26a",
+          "published_at": "2026-06-18T12:15:00+00:00",
+          "published_index": 2000,
+          "window_start": "2026-06-18T08:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-18T19:45:00+00:00",
+      "episode_id": "dc5e270324bec5855d80c8c0946cf0c1f674e078cdcb430ad74dd6d14d93d297",
+      "id": "f26403e34480f6cd7dabee06ae6a6bab4f9ec3d9c65a83c096ac26e7919ca7a5",
+      "session": "2026-06-18",
+      "snapshot": {
+        "bar": {
+          "close": 643.18,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-18T19:45:00+00:00",
+          "high": 643.18,
+          "known_at": "2026-06-18T19:45:00+00:00",
+          "low": 639.32,
+          "open": 640.28,
+          "session": "2026-06-18",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 643.18,
+          "low": 632.79,
+          "normalized_range": 0.01615410926956682,
+          "percentile": 0.09615384615384616,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 260,
+          "reference_hash": "7516324ea85bf375f02a12063ae88f3aa5d1c473c1edceabcf8dff18bd0fa1e5",
+          "reference_sessions": [
+            "2026-06-04",
+            "2026-06-05",
+            "2026-06-08",
+            "2026-06-09",
+            "2026-06-10",
+            "2026-06-11",
+            "2026-06-12",
+            "2026-06-15",
+            "2026-06-16",
+            "2026-06-17"
+          ],
+          "reference_status": "READY",
+          "segment": "RTH",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 641.18,
+            "low": 629.91,
+            "normalized_range": 0.017626174947997283,
+            "percentile": 0.11538461538461539,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 260,
+            "reference_hash": "7516324ea85bf375f02a12063ae88f3aa5d1c473c1edceabcf8dff18bd0fa1e5",
+            "reference_sessions": [
+              "2026-06-04",
+              "2026-06-05",
+              "2026-06-08",
+              "2026-06-09",
+              "2026-06-10",
+              "2026-06-11",
+              "2026-06-12",
+              "2026-06-15",
+              "2026-06-16",
+              "2026-06-17"
+            ],
+            "reference_status": "READY",
+            "segment": "RTH",
+            "status": "READY"
+          },
+          "high": 641.18,
+          "id": "dc5e270324bec5855d80c8c0946cf0c1f674e078cdcb430ad74dd6d14d93d297",
+          "last_valid_index": 2039,
+          "low": 629.91,
+          "prefix_hash": "81eae8844f72b60ea21ea3b758870bf3338801391dbdd44bfcfa9f5398c0dae8",
+          "published_at": "2026-06-18T18:00:00+00:00",
+          "published_index": 2023,
+          "window_start": "2026-06-18T14:15:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-22T12:30:00+00:00",
+      "episode_id": "96436b1de5cb2fe16e55f64359186c88bef8c0104ce87ec81a9c9bf2dd514778",
+      "id": "03e804c87e161cd3084dd1f6a92272cfd15bffa2ae66379d33269831b6b50c59",
+      "session": "2026-06-22",
+      "snapshot": {
+        "bar": {
+          "close": 651.36,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-22T12:30:00+00:00",
+          "high": 651.53,
+          "known_at": "2026-06-22T12:30:00+00:00",
+          "low": 644.97,
+          "open": 649.08,
+          "session": "2026-06-22",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 651.53,
+          "low": 641.25,
+          "normalized_range": 0.015782363055760213,
+          "percentile": 0.20454545454545456,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 220,
+          "reference_hash": "486cd868a0fa555b506c72924a164bb3ed0b5b93333a051ffc1c62d14570a259",
+          "reference_sessions": [
+            "2026-06-05",
+            "2026-06-08",
+            "2026-06-09",
+            "2026-06-10",
+            "2026-06-11",
+            "2026-06-12",
+            "2026-06-15",
+            "2026-06-16",
+            "2026-06-17",
+            "2026-06-18"
+          ],
+          "reference_status": "READY",
+          "segment": "PREMARKET",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 649.45,
+            "low": 641.1,
+            "normalized_range": 0.01286059728618298,
+            "percentile": 0.10909090909090909,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 220,
+            "reference_hash": "486cd868a0fa555b506c72924a164bb3ed0b5b93333a051ffc1c62d14570a259",
+            "reference_sessions": [
+              "2026-06-05",
+              "2026-06-08",
+              "2026-06-09",
+              "2026-06-10",
+              "2026-06-11",
+              "2026-06-12",
+              "2026-06-15",
+              "2026-06-16",
+              "2026-06-17",
+              "2026-06-18"
+            ],
+            "reference_status": "READY",
+            "segment": "PREMARKET",
+            "status": "READY"
+          },
+          "high": 649.45,
+          "id": "96436b1de5cb2fe16e55f64359186c88bef8c0104ce87ec81a9c9bf2dd514778",
+          "last_valid_index": 2080,
+          "low": 641.1,
+          "prefix_hash": "6ec72905021cf59e7949488789392883c46edd2065cacde8cc1ca840d8af8b44",
+          "published_at": "2026-06-22T12:15:00+00:00",
+          "published_index": 2064,
+          "window_start": "2026-06-22T08:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-22T14:15:00+00:00",
+      "episode_id": "e495f0fa1d7eb482e068dde751bdc8ecaece336837f4cdf51e5ddc44f3117f09",
+      "id": "858d4c14849acbd7756bf21c3817b6c75d9490db4dc8808cd76a3ab92cc0ceb9",
+      "session": "2026-06-22",
+      "snapshot": {
+        "bar": {
+          "close": 655.62,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-22T14:15:00+00:00",
+          "high": 655.77,
+          "known_at": "2026-06-22T14:15:00+00:00",
+          "low": 651.23,
+          "open": 652.66,
+          "session": "2026-06-22",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 655.77,
+          "low": 644.15,
+          "normalized_range": 0.01772368140081145,
+          "percentile": 0.15,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 260,
+          "reference_hash": "0ded24b2c6cc712e23177f385911cab188b15be46fb5bc8055f519fa5fc5f3d1",
+          "reference_sessions": [
+            "2026-06-05",
+            "2026-06-08",
+            "2026-06-09",
+            "2026-06-10",
+            "2026-06-11",
+            "2026-06-12",
+            "2026-06-15",
+            "2026-06-16",
+            "2026-06-17",
+            "2026-06-18"
+          ],
+          "reference_status": "READY",
+          "segment": "RTH",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 655.1916,
+            "low": 642.43,
+            "normalized_range": 0.01970173521810227,
+            "percentile": 0.16923076923076924,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 260,
+            "reference_hash": "0ded24b2c6cc712e23177f385911cab188b15be46fb5bc8055f519fa5fc5f3d1",
+            "reference_sessions": [
+              "2026-06-05",
+              "2026-06-08",
+              "2026-06-09",
+              "2026-06-10",
+              "2026-06-11",
+              "2026-06-12",
+              "2026-06-15",
+              "2026-06-16",
+              "2026-06-17",
+              "2026-06-18"
+            ],
+            "reference_status": "READY",
+            "segment": "RTH",
+            "status": "READY"
+          },
+          "high": 655.1916,
+          "id": "e495f0fa1d7eb482e068dde751bdc8ecaece336837f4cdf51e5ddc44f3117f09",
+          "last_valid_index": 2086,
+          "low": 642.43,
+          "prefix_hash": "29fde487e7cf945db033e2919abef4507214d3cf3a20e61af2b400b390b61835",
+          "published_at": "2026-06-22T13:45:00+00:00",
+          "published_index": 2070,
+          "window_start": "2026-06-22T10:00:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-25T12:45:00+00:00",
+      "episode_id": "c1cc59b4f221915f1da47871c099c42d44b7c909bf1b409cd71cf336c313e031",
+      "id": "4029451e54272172be06d0d5934b5d87503aad224b86a7d7b2d43c297442b83c",
+      "session": "2026-06-25",
+      "snapshot": {
+        "bar": {
+          "close": 635.3771,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-25T12:45:00+00:00",
+          "high": 637.61,
+          "known_at": "2026-06-25T12:45:00+00:00",
+          "low": 632.06,
+          "open": 632.06,
+          "session": "2026-06-25",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 637.61,
+          "low": 624.0,
+          "normalized_range": 0.021420350214069742,
+          "percentile": 0.3090909090909091,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 220,
+          "reference_hash": "097d9532fa811f00c73c8f3048a952f7351e91fe8cff653f2fd82a3b7e910ae3",
+          "reference_sessions": [
+            "2026-06-10",
+            "2026-06-11",
+            "2026-06-12",
+            "2026-06-15",
+            "2026-06-16",
+            "2026-06-17",
+            "2026-06-18",
+            "2026-06-22",
+            "2026-06-23",
+            "2026-06-24"
+          ],
+          "reference_status": "READY",
+          "segment": "PREMARKET",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 634.5,
+            "low": 624.0,
+            "normalized_range": 0.016586105582409253,
+            "percentile": 0.2,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 220,
+            "reference_hash": "097d9532fa811f00c73c8f3048a952f7351e91fe8cff653f2fd82a3b7e910ae3",
+            "reference_sessions": [
+              "2026-06-10",
+              "2026-06-11",
+              "2026-06-12",
+              "2026-06-15",
+              "2026-06-16",
+              "2026-06-17",
+              "2026-06-18",
+              "2026-06-22",
+              "2026-06-23",
+              "2026-06-24"
+            ],
+            "reference_status": "READY",
+            "segment": "PREMARKET",
+            "status": "READY"
+          },
+          "high": 634.5,
+          "id": "c1cc59b4f221915f1da47871c099c42d44b7c909bf1b409cd71cf336c313e031",
+          "last_valid_index": 2273,
+          "low": 624.0,
+          "prefix_hash": "a13df2f6cb7c0dc4adec2d8293c4086ce7fe093d758a2baae7e55d29a6b8d2e5",
+          "published_at": "2026-06-25T12:30:00+00:00",
+          "published_index": 2257,
+          "window_start": "2026-06-25T08:45:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-30T08:15:00+00:00",
+      "episode_id": "32289ca558fa21353e6edbc042a0acc3ce980a065f7fb1fd2dd9d61d770d8445",
+      "id": "535efa12d4a594a13cd65fb7b534bbecfe1564980cb7d00defd22cc72e90659b",
+      "session": "2026-06-30",
+      "snapshot": {
+        "bar": {
+          "close": 617.7,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-30T08:15:00+00:00",
+          "high": 622.21,
+          "known_at": "2026-06-30T08:15:00+00:00",
+          "low": 615.84,
+          "open": 622.21,
+          "session": "2026-06-30",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 622.21,
+          "low": 610.7954,
+          "normalized_range": 0.01847919702120781,
+          "percentile": 0.36363636363636365,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 220,
+          "reference_hash": "4b6a7d44ffad6ab489efb71f12bf12bcd2ec332288968cdaa32128e30e838025",
+          "reference_sessions": [
+            "2026-06-15",
+            "2026-06-16",
+            "2026-06-17",
+            "2026-06-18",
+            "2026-06-22",
+            "2026-06-23",
+            "2026-06-24",
+            "2026-06-25",
+            "2026-06-26",
+            "2026-06-29"
+          ],
+          "reference_status": "READY",
+          "segment": "PREMARKET",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 615.3499,
+            "low": 608.64,
+            "normalized_range": 0.010972494767137726,
+            "percentile": 0.18125,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 160,
+            "reference_hash": "50de494a017142acc02f676e8c6e408c2d8754f418811c37c69fdf63ddd537e7",
+            "reference_sessions": [
+              "2026-06-12",
+              "2026-06-15",
+              "2026-06-16",
+              "2026-06-17",
+              "2026-06-18",
+              "2026-06-22",
+              "2026-06-23",
+              "2026-06-24",
+              "2026-06-25",
+              "2026-06-26"
+            ],
+            "reference_status": "READY",
+            "segment": "AFTER_HOURS",
+            "status": "READY"
+          },
+          "high": 615.3499,
+          "id": "32289ca558fa21353e6edbc042a0acc3ce980a065f7fb1fd2dd9d61d770d8445",
+          "last_valid_index": 2434,
+          "low": 608.64,
+          "prefix_hash": "c279a5c43ae3418072482bc399be09bef18438a0d232f4c214a626fbec828942",
+          "published_at": "2026-06-29T20:45:00+00:00",
+          "published_index": 2418,
+          "window_start": "2026-06-29T17:00:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-30T13:45:00+00:00",
+      "episode_id": "7423d2dc97c1f763cd2c38acf295cc2040e9cf4fd4b23d1d12e0d4093271e3cd",
+      "id": "9ff31733fc4bf8cddad42bb22ae37ff04b34aea534bf64056546895fba5655f3",
+      "session": "2026-06-30",
+      "snapshot": {
+        "bar": {
+          "close": 625.92,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-30T13:45:00+00:00",
+          "high": 627.5899,
+          "known_at": "2026-06-30T13:45:00+00:00",
+          "low": 616.15,
+          "open": 617.6,
+          "session": "2026-06-30",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 627.5899,
+          "low": 613.68,
+          "normalized_range": 0.022223127556237208,
+          "percentile": 0.3730769230769231,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 260,
+          "reference_hash": "57524811b02f758dac71f6c3b7707f72389c6f1f6292b798fa72c36e47b6041f",
+          "reference_sessions": [
+            "2026-06-15",
+            "2026-06-16",
+            "2026-06-17",
+            "2026-06-18",
+            "2026-06-22",
+            "2026-06-23",
+            "2026-06-24",
+            "2026-06-25",
+            "2026-06-26",
+            "2026-06-29"
+          ],
+          "reference_status": "READY",
+          "segment": "RTH",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 622.21,
+            "low": 612.299,
+            "normalized_range": 0.016072847574720755,
+            "percentile": 0.2,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 220,
+            "reference_hash": "4b6a7d44ffad6ab489efb71f12bf12bcd2ec332288968cdaa32128e30e838025",
+            "reference_sessions": [
+              "2026-06-15",
+              "2026-06-16",
+              "2026-06-17",
+              "2026-06-18",
+              "2026-06-22",
+              "2026-06-23",
+              "2026-06-24",
+              "2026-06-25",
+              "2026-06-26",
+              "2026-06-29"
+            ],
+            "reference_status": "READY",
+            "segment": "PREMARKET",
+            "status": "READY"
+          },
+          "high": 622.21,
+          "id": "7423d2dc97c1f763cd2c38acf295cc2040e9cf4fd4b23d1d12e0d4093271e3cd",
+          "last_valid_index": 2458,
+          "low": 612.299,
+          "prefix_hash": "a915d5ebd47b5800a4549678dfb5adb32ddf97dab3660982e11902f2117beba1",
+          "published_at": "2026-06-30T10:45:00+00:00",
+          "published_index": 2442,
+          "window_start": "2026-06-29T23:00:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-06-30T18:45:00+00:00",
+      "episode_id": "5c1fdd915d9361dd2bfab3e23bcf00dddc4139e8b4b9dccb835de3bdce6433cc",
+      "id": "255b37c68f09ea20c40e9593baf5fd0825af136dd4c9a90cdd3a0dc071152b5c",
+      "session": "2026-06-30",
+      "snapshot": {
+        "bar": {
+          "close": 642.32,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-06-30T18:45:00+00:00",
+          "high": 642.36,
+          "known_at": "2026-06-30T18:45:00+00:00",
+          "low": 639.72,
+          "open": 639.8,
+          "session": "2026-06-30",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 642.36,
+          "low": 632.0,
+          "normalized_range": 0.016129032258064536,
+          "percentile": 0.1423076923076923,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 260,
+          "reference_hash": "57524811b02f758dac71f6c3b7707f72389c6f1f6292b798fa72c36e47b6041f",
+          "reference_sessions": [
+            "2026-06-15",
+            "2026-06-16",
+            "2026-06-17",
+            "2026-06-18",
+            "2026-06-22",
+            "2026-06-23",
+            "2026-06-24",
+            "2026-06-25",
+            "2026-06-26",
+            "2026-06-29"
+          ],
+          "reference_status": "READY",
+          "segment": "RTH",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 640.39,
+            "low": 628.73,
+            "normalized_range": 0.018241837325364864,
+            "percentile": 0.19615384615384615,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 260,
+            "reference_hash": "57524811b02f758dac71f6c3b7707f72389c6f1f6292b798fa72c36e47b6041f",
+            "reference_sessions": [
+              "2026-06-15",
+              "2026-06-16",
+              "2026-06-17",
+              "2026-06-18",
+              "2026-06-22",
+              "2026-06-23",
+              "2026-06-24",
+              "2026-06-25",
+              "2026-06-26",
+              "2026-06-29"
+            ],
+            "reference_status": "READY",
+            "segment": "RTH",
+            "status": "READY"
+          },
+          "high": 640.39,
+          "id": "5c1fdd915d9361dd2bfab3e23bcf00dddc4139e8b4b9dccb835de3bdce6433cc",
+          "last_valid_index": 2487,
+          "low": 628.73,
+          "prefix_hash": "3abd6e7969c650e14139befe3917027dd57ca3b5223e62a1203d61bc7b86b423",
+          "published_at": "2026-06-30T18:00:00+00:00",
+          "published_index": 2471,
+          "window_start": "2026-06-30T14:15:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-06T08:15:00+00:00",
+      "episode_id": "2c884b69eb8081ac513fd0f4d29f587880834a3af28fa0dc5ffa90d62c852b19",
+      "id": "c85c838c3a9544a297effcfbcfef1623b7262386c2265ba572e34ec478687ce0",
+      "session": "2026-07-06",
+      "snapshot": {
+        "bar": {
+          "close": 577.95,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-06T08:15:00+00:00",
+          "high": 583.8,
+          "known_at": "2026-07-06T08:15:00+00:00",
+          "low": 574.39,
+          "open": 581.5,
+          "session": "2026-07-06",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 583.8,
+          "low": 567.5,
+          "normalized_range": 0.028203131758802583,
+          "percentile": 0.6454545454545455,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 220,
+          "reference_hash": "a845ceead1ac5835ca48b7ae72580302e8ae953136ed1fa128ae42e5279e1498",
+          "reference_sessions": [
+            "2026-06-18",
+            "2026-06-22",
+            "2026-06-23",
+            "2026-06-24",
+            "2026-06-25",
+            "2026-06-26",
+            "2026-06-29",
+            "2026-06-30",
+            "2026-07-01",
+            "2026-07-02"
+          ],
+          "reference_status": "READY",
+          "segment": "PREMARKET",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 571.77,
+            "low": 565.8,
+            "normalized_range": 0.01048416837890527,
+            "percentile": 0.15,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 160,
+            "reference_hash": "4dcb818d7a977e3ac7f7a1edf372d211c906625177d1fadb353e4e382748d0d7",
+            "reference_sessions": [
+              "2026-06-17",
+              "2026-06-18",
+              "2026-06-22",
+              "2026-06-23",
+              "2026-06-24",
+              "2026-06-25",
+              "2026-06-26",
+              "2026-06-29",
+              "2026-06-30",
+              "2026-07-01"
+            ],
+            "reference_status": "READY",
+            "segment": "AFTER_HOURS",
+            "status": "READY"
+          },
+          "high": 571.77,
+          "id": "2c884b69eb8081ac513fd0f4d29f587880834a3af28fa0dc5ffa90d62c852b19",
+          "last_valid_index": 2639,
+          "low": 565.8,
+          "prefix_hash": "1220a28ff4d68a7fef2e76f7483606459924c310d619e7d6868b0a0f4d4eccda",
+          "published_at": "2026-07-03T00:00:00+00:00",
+          "published_index": 2623,
+          "window_start": "2026-07-02T20:15:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-06T13:00:00+00:00",
+      "episode_id": "5073f8663286391a0de9e2eca5becade8974d80af4076f5f7f207d6131e7498c",
+      "id": "86d8a4aa808fca81e557d8132f03b0772df2e61142e7624b3bcb2111aeaee16e",
+      "session": "2026-07-06",
+      "snapshot": {
+        "bar": {
+          "close": 588.99,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-06T13:00:00+00:00",
+          "high": 589.4,
+          "known_at": "2026-07-06T13:00:00+00:00",
+          "low": 587.272,
+          "open": 587.6,
+          "session": "2026-07-06",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 589.4,
+          "low": 580.64,
+          "normalized_range": 0.014872918046146778,
+          "percentile": 0.10454545454545454,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 220,
+          "reference_hash": "a845ceead1ac5835ca48b7ae72580302e8ae953136ed1fa128ae42e5279e1498",
+          "reference_sessions": [
+            "2026-06-18",
+            "2026-06-22",
+            "2026-06-23",
+            "2026-06-24",
+            "2026-06-25",
+            "2026-06-26",
+            "2026-06-29",
+            "2026-06-30",
+            "2026-07-01",
+            "2026-07-02"
+          ],
+          "reference_status": "READY",
+          "segment": "PREMARKET",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 588.89,
+            "low": 579.06,
+            "normalized_range": 0.016734193592319025,
+            "percentile": 0.17272727272727273,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 220,
+            "reference_hash": "a845ceead1ac5835ca48b7ae72580302e8ae953136ed1fa128ae42e5279e1498",
+            "reference_sessions": [
+              "2026-06-18",
+              "2026-06-22",
+              "2026-06-23",
+              "2026-06-24",
+              "2026-06-25",
+              "2026-06-26",
+              "2026-06-29",
+              "2026-06-30",
+              "2026-07-01",
+              "2026-07-02"
+            ],
+            "reference_status": "READY",
+            "segment": "PREMARKET",
+            "status": "READY"
+          },
+          "high": 588.89,
+          "id": "5073f8663286391a0de9e2eca5becade8974d80af4076f5f7f207d6131e7498c",
+          "last_valid_index": 2657,
+          "low": 579.06,
+          "prefix_hash": "167297d62a512edafce26e20a7bc0be52bb47cf8aa8c73f3414eae6a142e151b",
+          "published_at": "2026-07-06T12:30:00+00:00",
+          "published_index": 2641,
+          "window_start": "2026-07-06T08:45:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-08T23:45:00+00:00",
+      "episode_id": "bf9d844381344192c4062471c0ead8e092128ad039fa78ee023549b50d91fbed",
+      "id": "ae3dbd6685413dc7444b678e2e3066347f64c1a9787db4f4d2a0152f1c71abf4",
+      "session": "2026-07-08",
+      "snapshot": {
+        "bar": {
+          "close": 564.999,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-08T23:45:00+00:00",
+          "high": 564.999,
+          "known_at": "2026-07-08T23:45:00+00:00",
+          "low": 561.7,
+          "open": 562.0,
+          "session": "2026-07-08",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 564.999,
+          "low": 559.24,
+          "normalized_range": 0.010192938394581255,
+          "percentile": 0.13125,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 160,
+          "reference_hash": "016349f69489b1fcc01344ea31ac3255b8df7c2ad49f302704fb7d33cf89a7f3",
+          "reference_sessions": [
+            "2026-06-23",
+            "2026-06-24",
+            "2026-06-25",
+            "2026-06-26",
+            "2026-06-29",
+            "2026-06-30",
+            "2026-07-01",
+            "2026-07-02",
+            "2026-07-06",
+            "2026-07-07"
+          ],
+          "reference_status": "READY",
+          "segment": "AFTER_HOURS",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 564.5,
+            "low": 557.42,
+            "normalized_range": 0.012645115199142777,
+            "percentile": 0.175,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 160,
+            "reference_hash": "016349f69489b1fcc01344ea31ac3255b8df7c2ad49f302704fb7d33cf89a7f3",
+            "reference_sessions": [
+              "2026-06-23",
+              "2026-06-24",
+              "2026-06-25",
+              "2026-06-26",
+              "2026-06-29",
+              "2026-06-30",
+              "2026-07-01",
+              "2026-07-02",
+              "2026-07-06",
+              "2026-07-07"
+            ],
+            "reference_status": "READY",
+            "segment": "AFTER_HOURS",
+            "status": "READY"
+          },
+          "high": 564.5,
+          "id": "bf9d844381344192c4062471c0ead8e092128ad039fa78ee023549b50d91fbed",
+          "last_valid_index": 2818,
+          "low": 557.42,
+          "prefix_hash": "2d606e2dfab41f387df843a16fe141b3827cbdbc3ad7bff85c79800292a9ef0a",
+          "published_at": "2026-07-08T20:45:00+00:00",
+          "published_index": 2802,
+          "window_start": "2026-07-08T17:00:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-10T15:30:00+00:00",
+      "episode_id": "1725a5a8dc007e5a559cdde37055f3a5ec6d6b42b687fd2ddcd0d8f946694687",
+      "id": "4cf73aef8113ff753e9bcee8acbf854a79088380ed193c6c2dcbacee36cdd468",
+      "session": "2026-07-10",
+      "snapshot": {
+        "bar": {
+          "close": 580.188,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-10T15:30:00+00:00",
+          "high": 580.84,
+          "known_at": "2026-07-10T15:30:00+00:00",
+          "low": 575.63,
+          "open": 575.63,
+          "session": "2026-07-10",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 580.84,
+          "low": 566.67,
+          "normalized_range": 0.024423118023813098,
+          "percentile": 0.2,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 260,
+          "reference_hash": "2aa46321a0b724f774ebcd41ed52fbc7e65487254a965cb8b8941ad835c71c13",
+          "reference_sessions": [
+            "2026-06-25",
+            "2026-06-26",
+            "2026-06-29",
+            "2026-06-30",
+            "2026-07-01",
+            "2026-07-02",
+            "2026-07-06",
+            "2026-07-07",
+            "2026-07-08",
+            "2026-07-09"
+          ],
+          "reference_status": "READY",
+          "segment": "RTH",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 578.99,
+            "low": 570.5,
+            "normalized_range": 0.014748032727083242,
+            "percentile": 0.09545454545454546,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 220,
+            "reference_hash": "bbd0935dbd110b3226b2e4439fc762fe539ba34e264b660a62ff98ac3e1a17de",
+            "reference_sessions": [
+              "2026-06-25",
+              "2026-06-26",
+              "2026-06-29",
+              "2026-06-30",
+              "2026-07-01",
+              "2026-07-02",
+              "2026-07-06",
+              "2026-07-07",
+              "2026-07-08",
+              "2026-07-09"
+            ],
+            "reference_status": "READY",
+            "segment": "PREMARKET",
+            "status": "READY"
+          },
+          "high": 578.99,
+          "id": "1725a5a8dc007e5a559cdde37055f3a5ec6d6b42b687fd2ddcd0d8f946694687",
+          "last_valid_index": 2912,
+          "low": 570.5,
+          "prefix_hash": "8bef4568f0b12c81cc58556f9b1288944d15181d5261b157599e83cc100a6a40",
+          "published_at": "2026-07-10T12:15:00+00:00",
+          "published_index": 2896,
+          "window_start": "2026-07-10T08:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-10T16:30:00+00:00",
+      "episode_id": "8e13c1abdd05fdb0313693154417908d53dee5abe075be8aac6aa2bc843d7353",
+      "id": "dfc6c542643a8f9d3d7d7ac73a4a6d2cd27a040b73a0ef0d1c6c6c68e2cfc336",
+      "session": "2026-07-10",
+      "snapshot": {
+        "bar": {
+          "close": 581.9374,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-10T16:30:00+00:00",
+          "high": 582.63,
+          "known_at": "2026-07-10T16:30:00+00:00",
+          "low": 579.645,
+          "open": 579.645,
+          "session": "2026-07-10",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 582.63,
+          "low": 566.67,
+          "normalized_range": 0.02742563031693793,
+          "percentile": 0.3076923076923077,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 260,
+          "reference_hash": "2aa46321a0b724f774ebcd41ed52fbc7e65487254a965cb8b8941ad835c71c13",
+          "reference_sessions": [
+            "2026-06-25",
+            "2026-06-26",
+            "2026-06-29",
+            "2026-06-30",
+            "2026-07-01",
+            "2026-07-02",
+            "2026-07-06",
+            "2026-07-07",
+            "2026-07-08",
+            "2026-07-09"
+          ],
+          "reference_status": "READY",
+          "segment": "RTH",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 580.84,
+            "low": 566.67,
+            "normalized_range": 0.024490995195133036,
+            "percentile": 0.2,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 260,
+            "reference_hash": "2aa46321a0b724f774ebcd41ed52fbc7e65487254a965cb8b8941ad835c71c13",
+            "reference_sessions": [
+              "2026-06-25",
+              "2026-06-26",
+              "2026-06-29",
+              "2026-06-30",
+              "2026-07-01",
+              "2026-07-02",
+              "2026-07-06",
+              "2026-07-07",
+              "2026-07-08",
+              "2026-07-09"
+            ],
+            "reference_status": "READY",
+            "segment": "RTH",
+            "status": "READY"
+          },
+          "high": 580.84,
+          "id": "8e13c1abdd05fdb0313693154417908d53dee5abe075be8aac6aa2bc843d7353",
+          "last_valid_index": 2927,
+          "low": 566.67,
+          "prefix_hash": "224869b2af3c3766e69ae5e45f8c1b566c21bf62f4f648229d9ad07693914b78",
+          "published_at": "2026-07-10T16:00:00+00:00",
+          "published_index": 2911,
+          "window_start": "2026-07-10T12:15:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-14T12:30:00+00:00",
+      "episode_id": "5f83653dbce6ddb331f70ff5ca14f3c0c67930bfaacebd720f33f6846bb43a94",
+      "id": "529b3f9a192b1040ccb42521ea6d572cff610cec398b984d40e72508016630ea",
+      "session": "2026-07-14",
+      "snapshot": {
+        "bar": {
+          "close": 573.3,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-14T12:30:00+00:00",
+          "high": 574.11,
+          "known_at": "2026-07-14T12:30:00+00:00",
+          "low": 570.07,
+          "open": 570.11,
+          "session": "2026-07-14",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 574.11,
+          "low": 564.0,
+          "normalized_range": 0.017634746206174803,
+          "percentile": 0.17727272727272728,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 220,
+          "reference_hash": "756ef21e45d48c8aae34a11bf22260b9c2bff6835d762cdcbb1afc7542d96411",
+          "reference_sessions": [
+            "2026-06-29",
+            "2026-06-30",
+            "2026-07-01",
+            "2026-07-02",
+            "2026-07-06",
+            "2026-07-07",
+            "2026-07-08",
+            "2026-07-09",
+            "2026-07-10",
+            "2026-07-13"
+          ],
+          "reference_status": "READY",
+          "segment": "PREMARKET",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 573.22,
+            "low": 564.0,
+            "normalized_range": 0.01616126205083265,
+            "percentile": 0.16363636363636364,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 220,
+            "reference_hash": "756ef21e45d48c8aae34a11bf22260b9c2bff6835d762cdcbb1afc7542d96411",
+            "reference_sessions": [
+              "2026-06-29",
+              "2026-06-30",
+              "2026-07-01",
+              "2026-07-02",
+              "2026-07-06",
+              "2026-07-07",
+              "2026-07-08",
+              "2026-07-09",
+              "2026-07-10",
+              "2026-07-13"
+            ],
+            "reference_status": "READY",
+            "segment": "PREMARKET",
+            "status": "READY"
+          },
+          "high": 573.22,
+          "id": "5f83653dbce6ddb331f70ff5ca14f3c0c67930bfaacebd720f33f6846bb43a94",
+          "last_valid_index": 3040,
+          "low": 564.0,
+          "prefix_hash": "c58f7e5465719bd923dbafdb592861060a934c006e98a53656d0976fc280cc00",
+          "published_at": "2026-07-14T12:15:00+00:00",
+          "published_index": 3024,
+          "window_start": "2026-07-14T08:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-14T23:45:00+00:00",
+      "episode_id": "1af47bf6554ef1b5d4a40abb98eab7a1229915156f94247912ada0a7008ce7b1",
+      "id": "21e28da5e32968d6cc86a92a23e3057693599d8c333c364df01f2e8d127336d9",
+      "session": "2026-07-14",
+      "snapshot": {
+        "bar": {
+          "close": 572.0,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-14T23:45:00+00:00",
+          "high": 572.0,
+          "known_at": "2026-07-14T23:45:00+00:00",
+          "low": 571.0,
+          "open": 571.29,
+          "session": "2026-07-14",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 572.0,
+          "low": 567.0,
+          "normalized_range": 0.008741258741258742,
+          "percentile": 0.1,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 160,
+          "reference_hash": "35619b398f8e5a2f39753bff318123a048286df2a7ecf9824e51f649f43b49c5",
+          "reference_sessions": [
+            "2026-06-29",
+            "2026-06-30",
+            "2026-07-01",
+            "2026-07-02",
+            "2026-07-06",
+            "2026-07-07",
+            "2026-07-08",
+            "2026-07-09",
+            "2026-07-10",
+            "2026-07-13"
+          ],
+          "reference_status": "READY",
+          "segment": "AFTER_HOURS",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 571.22,
+            "low": 566.13,
+            "normalized_range": 0.008950237383506298,
+            "percentile": 0.1,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 160,
+            "reference_hash": "35619b398f8e5a2f39753bff318123a048286df2a7ecf9824e51f649f43b49c5",
+            "reference_sessions": [
+              "2026-06-29",
+              "2026-06-30",
+              "2026-07-01",
+              "2026-07-02",
+              "2026-07-06",
+              "2026-07-07",
+              "2026-07-08",
+              "2026-07-09",
+              "2026-07-10",
+              "2026-07-13"
+            ],
+            "reference_status": "READY",
+            "segment": "AFTER_HOURS",
+            "status": "READY"
+          },
+          "high": 571.22,
+          "id": "1af47bf6554ef1b5d4a40abb98eab7a1229915156f94247912ada0a7008ce7b1",
+          "last_valid_index": 3083,
+          "low": 566.13,
+          "prefix_hash": "895849167a8c4952a10ba6d862d5404de6f25830e97fcf93bbfa616a4d5dd39b",
+          "published_at": "2026-07-14T23:00:00+00:00",
+          "published_index": 3067,
+          "window_start": "2026-07-14T19:15:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-20T08:15:00+00:00",
+      "episode_id": "36a5ab4ce66f8c03a9b479de56722f382943d93a00729af8a883fca4a5e21d48",
+      "id": "99e93cb251c0eebc7780f6bd1ae6dd1b0378c9eb54073e337f0cbf3f68c4394e",
+      "session": "2026-07-20",
+      "snapshot": {
+        "bar": {
+          "close": 527.14,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-20T08:15:00+00:00",
+          "high": 527.66,
+          "known_at": "2026-07-20T08:15:00+00:00",
+          "low": 520.91,
+          "open": 521.77,
+          "session": "2026-07-20",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 527.66,
+          "low": 519.0,
+          "normalized_range": 0.016428273323974597,
+          "percentile": 0.12727272727272726,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 220,
+          "reference_hash": "359498b8bf0c8a0555b07c5212fcd4220b59b4b6cf306f992b57263dc8100e40",
+          "reference_sessions": [
+            "2026-07-06",
+            "2026-07-07",
+            "2026-07-08",
+            "2026-07-09",
+            "2026-07-10",
+            "2026-07-13",
+            "2026-07-14",
+            "2026-07-15",
+            "2026-07-16",
+            "2026-07-17"
+          ],
+          "reference_status": "READY",
+          "segment": "PREMARKET",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 522.28,
+            "low": 518.49,
+            "normalized_range": 0.007279222525256336,
+            "percentile": 0.06875,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 160,
+            "reference_hash": "9e0eff8158673581ca35cae38c7b8fa951f2614471191481351e8c5e3b81060b",
+            "reference_sessions": [
+              "2026-07-02",
+              "2026-07-06",
+              "2026-07-07",
+              "2026-07-08",
+              "2026-07-09",
+              "2026-07-10",
+              "2026-07-13",
+              "2026-07-14",
+              "2026-07-15",
+              "2026-07-16"
+            ],
+            "reference_status": "READY",
+            "segment": "AFTER_HOURS",
+            "status": "READY"
+          },
+          "high": 522.28,
+          "id": "36a5ab4ce66f8c03a9b479de56722f382943d93a00729af8a883fca4a5e21d48",
+          "last_valid_index": 3279,
+          "low": 518.49,
+          "prefix_hash": "d49704b8a4ae9b6e49d58a11acc635795867663d26409eec331e06431a432c12",
+          "published_at": "2026-07-18T00:00:00+00:00",
+          "published_index": 3263,
+          "window_start": "2026-07-17T20:15:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-21T08:15:00+00:00",
+      "episode_id": "516a0149b093911beba22078ff31429c914105b7723fe153018b3ef4dd139a3c",
+      "id": "cebe24e9cd98af24dd42bc7eadef5ba2b18d46517073a07477c514447d5aa0da",
+      "session": "2026-07-21",
+      "snapshot": {
+        "bar": {
+          "close": 543.87,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-21T08:15:00+00:00",
+          "high": 544.26,
+          "known_at": "2026-07-21T08:15:00+00:00",
+          "low": 535.22,
+          "open": 540.74,
+          "session": "2026-07-21",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 544.26,
+          "low": 521.64,
+          "normalized_range": 0.041590821335981035,
+          "percentile": 0.759090909090909,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 220,
+          "reference_hash": "5d26d2634ea3603d820ea35091096c64a48f052196df56afa83e1413c030f2ac",
+          "reference_sessions": [
+            "2026-07-07",
+            "2026-07-08",
+            "2026-07-09",
+            "2026-07-10",
+            "2026-07-13",
+            "2026-07-14",
+            "2026-07-15",
+            "2026-07-16",
+            "2026-07-17",
+            "2026-07-20"
+          ],
+          "reference_status": "READY",
+          "segment": "PREMARKET",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 526.9566,
+            "low": 521.64,
+            "normalized_range": 0.010146183206106859,
+            "percentile": 0.2,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 160,
+            "reference_hash": "de8f448fd0461a9cebb9220e3e18f5f2704aac238b7aaa6849d83686fd12aa96",
+            "reference_sessions": [
+              "2026-07-06",
+              "2026-07-07",
+              "2026-07-08",
+              "2026-07-09",
+              "2026-07-10",
+              "2026-07-13",
+              "2026-07-14",
+              "2026-07-15",
+              "2026-07-16",
+              "2026-07-17"
+            ],
+            "reference_status": "READY",
+            "segment": "AFTER_HOURS",
+            "status": "READY"
+          },
+          "high": 526.9566,
+          "id": "516a0149b093911beba22078ff31429c914105b7723fe153018b3ef4dd139a3c",
+          "last_valid_index": 3340,
+          "low": 521.64,
+          "prefix_hash": "9b1136c710a8f48010d3882d417b0ccbb391125dd8de4a7f8202de8b7ab12cd5",
+          "published_at": "2026-07-20T23:15:00+00:00",
+          "published_index": 3324,
+          "window_start": "2026-07-20T19:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-21T12:15:00+00:00",
+      "episode_id": "be09b55d4e9202f35eec53ab2735f434ee58e6ea85a9ebc9c79650cdabb21e1f",
+      "id": "6815ce796caa77d87bcb6ea3f52fe55d2187db41f5c8a0ac84dad904b9d64f2a",
+      "session": "2026-07-21",
+      "snapshot": {
+        "bar": {
+          "close": 547.53,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-21T12:15:00+00:00",
+          "high": 548.31,
+          "known_at": "2026-07-21T12:15:00+00:00",
+          "low": 536.3,
+          "open": 546.5,
+          "session": "2026-07-21",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 548.31,
+          "low": 536.3,
+          "normalized_range": 0.021934871148612846,
+          "percentile": 0.17727272727272728,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 220,
+          "reference_hash": "5d26d2634ea3603d820ea35091096c64a48f052196df56afa83e1413c030f2ac",
+          "reference_sessions": [
+            "2026-07-07",
+            "2026-07-08",
+            "2026-07-09",
+            "2026-07-10",
+            "2026-07-13",
+            "2026-07-14",
+            "2026-07-15",
+            "2026-07-16",
+            "2026-07-17",
+            "2026-07-20"
+          ],
+          "reference_status": "READY",
+          "segment": "PREMARKET",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 547.38,
+            "low": 535.22,
+            "normalized_range": 0.022250686184812386,
+            "percentile": 0.18636363636363637,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 220,
+            "reference_hash": "5d26d2634ea3603d820ea35091096c64a48f052196df56afa83e1413c030f2ac",
+            "reference_sessions": [
+              "2026-07-07",
+              "2026-07-08",
+              "2026-07-09",
+              "2026-07-10",
+              "2026-07-13",
+              "2026-07-14",
+              "2026-07-15",
+              "2026-07-16",
+              "2026-07-17",
+              "2026-07-20"
+            ],
+            "reference_status": "READY",
+            "segment": "PREMARKET",
+            "status": "READY"
+          },
+          "high": 547.38,
+          "id": "be09b55d4e9202f35eec53ab2735f434ee58e6ea85a9ebc9c79650cdabb21e1f",
+          "last_valid_index": 3359,
+          "low": 535.22,
+          "prefix_hash": "a8740b0d9e3fb640aac012d5c4ade20603d9cce0d5a8254c30009d01833f0f59",
+          "published_at": "2026-07-21T12:00:00+00:00",
+          "published_index": 3343,
+          "window_start": "2026-07-21T08:15:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-21T17:00:00+00:00",
+      "episode_id": "3e1f9d02efe258e048817318a052b74a0ef3d5f8e4a8728332df81f94f157aeb",
+      "id": "aba4c1bda5a948fde87536cae27a8b05385388067161714780877460d2761fa0",
+      "session": "2026-07-21",
+      "snapshot": {
+        "bar": {
+          "close": 553.48,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-21T17:00:00+00:00",
+          "high": 554.46,
+          "known_at": "2026-07-21T17:00:00+00:00",
+          "low": 552.69,
+          "open": 552.89,
+          "session": "2026-07-21",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 554.46,
+          "low": 540.15,
+          "normalized_range": 0.025854592758546034,
+          "percentile": 0.3,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 260,
+          "reference_hash": "6e17d412c2a1bbcb5d135522d265b81d70dd4eb2a6cb88553d22e2ae3f127a94",
+          "reference_sessions": [
+            "2026-07-07",
+            "2026-07-08",
+            "2026-07-09",
+            "2026-07-10",
+            "2026-07-13",
+            "2026-07-14",
+            "2026-07-15",
+            "2026-07-16",
+            "2026-07-17",
+            "2026-07-20"
+          ],
+          "reference_status": "READY",
+          "segment": "RTH",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 553.11,
+            "low": 540.15,
+            "normalized_range": 0.0235114878835108,
+            "percentile": 0.16538461538461538,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 260,
+            "reference_hash": "6e17d412c2a1bbcb5d135522d265b81d70dd4eb2a6cb88553d22e2ae3f127a94",
+            "reference_sessions": [
+              "2026-07-07",
+              "2026-07-08",
+              "2026-07-09",
+              "2026-07-10",
+              "2026-07-13",
+              "2026-07-14",
+              "2026-07-15",
+              "2026-07-16",
+              "2026-07-17",
+              "2026-07-20"
+            ],
+            "reference_status": "READY",
+            "segment": "RTH",
+            "status": "READY"
+          },
+          "high": 553.11,
+          "id": "3e1f9d02efe258e048817318a052b74a0ef3d5f8e4a8728332df81f94f157aeb",
+          "last_valid_index": 3376,
+          "low": 540.15,
+          "prefix_hash": "13d2b134e10e4a97f7b0e9eb584d57ee8f39f76313168e609abf6bb0895fe6ab",
+          "published_at": "2026-07-21T16:15:00+00:00",
+          "published_index": 3360,
+          "window_start": "2026-07-21T12:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-21T21:45:00+00:00",
+      "episode_id": "c62a283092042cc8041fa44149ed877886b30c2f75efaf5c55056f96fa35ee3e",
+      "id": "0efb866c307905484df5887383e039ea44782d111b112d7317ed37ed98241c3e",
+      "session": "2026-07-21",
+      "snapshot": {
+        "bar": {
+          "close": 555.56,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-21T21:45:00+00:00",
+          "high": 556.0,
+          "known_at": "2026-07-21T21:45:00+00:00",
+          "low": 554.5,
+          "open": 554.8,
+          "session": "2026-07-21",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 556.0,
+          "low": 549.63,
+          "normalized_range": 0.011465908272733827,
+          "percentile": 0.29375,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 160,
+          "reference_hash": "04e74b7bebe78f87937807fec623329e35253892eaae01712276436e1455f5a2",
+          "reference_sessions": [
+            "2026-07-07",
+            "2026-07-08",
+            "2026-07-09",
+            "2026-07-10",
+            "2026-07-13",
+            "2026-07-14",
+            "2026-07-15",
+            "2026-07-16",
+            "2026-07-17",
+            "2026-07-20"
+          ],
+          "reference_status": "READY",
+          "segment": "AFTER_HOURS",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 555.16,
+            "low": 545.4,
+            "normalized_range": 0.017656849265504,
+            "percentile": 0.04230769230769231,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 260,
+            "reference_hash": "6e17d412c2a1bbcb5d135522d265b81d70dd4eb2a6cb88553d22e2ae3f127a94",
+            "reference_sessions": [
+              "2026-07-07",
+              "2026-07-08",
+              "2026-07-09",
+              "2026-07-10",
+              "2026-07-13",
+              "2026-07-14",
+              "2026-07-15",
+              "2026-07-16",
+              "2026-07-17",
+              "2026-07-20"
+            ],
+            "reference_status": "READY",
+            "segment": "RTH",
+            "status": "READY"
+          },
+          "high": 555.16,
+          "id": "c62a283092042cc8041fa44149ed877886b30c2f75efaf5c55056f96fa35ee3e",
+          "last_valid_index": 3385,
+          "low": 545.4,
+          "prefix_hash": "f260e722441de4ca7a7799fa332720151017e5c7c3edab264efcde6a3dd3774e",
+          "published_at": "2026-07-21T18:30:00+00:00",
+          "published_index": 3369,
+          "window_start": "2026-07-21T14:45:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-23T20:15:00+00:00",
+      "episode_id": "6d4c631969a5fb2316d9ce6283d1389f9b87f4a683fe668f305030a9c5e880c4",
+      "id": "3374c06d90d4a1f4e24024680a326aa6dd4552f5c65583792418588d28c331a5",
+      "session": "2026-07-23",
+      "snapshot": {
+        "bar": {
+          "close": 558.47,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-23T20:15:00+00:00",
+          "high": 560.0,
+          "known_at": "2026-07-23T20:15:00+00:00",
+          "low": 550.89,
+          "open": 550.89,
+          "session": "2026-07-23",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 560.0,
+          "low": 544.61,
+          "normalized_range": 0.02755743370279511,
+          "percentile": 0.95,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 160,
+          "reference_hash": "cd9f6502c6bdf14d00dce8061bb01bdc2c92fb38062880f9f548342442839031",
+          "reference_sessions": [
+            "2026-07-09",
+            "2026-07-10",
+            "2026-07-13",
+            "2026-07-14",
+            "2026-07-15",
+            "2026-07-16",
+            "2026-07-17",
+            "2026-07-20",
+            "2026-07-21",
+            "2026-07-22"
+          ],
+          "reference_status": "READY",
+          "segment": "AFTER_HOURS",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 555.82,
+            "low": 543.79,
+            "normalized_range": 0.022001536266871662,
+            "percentile": 0.16923076923076924,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 260,
+            "reference_hash": "e1239aeba8b885e2a1ce0b94d5131027e32d1a8af18400787ed3ec9fb00d015c",
+            "reference_sessions": [
+              "2026-07-09",
+              "2026-07-10",
+              "2026-07-13",
+              "2026-07-14",
+              "2026-07-15",
+              "2026-07-16",
+              "2026-07-17",
+              "2026-07-20",
+              "2026-07-21",
+              "2026-07-22"
+            ],
+            "reference_status": "READY",
+            "segment": "RTH",
+            "status": "READY"
+          },
+          "high": 555.82,
+          "id": "6d4c631969a5fb2316d9ce6283d1389f9b87f4a683fe668f305030a9c5e880c4",
+          "last_valid_index": 3514,
+          "low": 543.79,
+          "prefix_hash": "ae3f6d7ee15799410a2c6e78b9347b0fbe8c22305ceb16daa6f16958b5dad7b3",
+          "published_at": "2026-07-23T18:45:00+00:00",
+          "published_index": 3498,
+          "window_start": "2026-07-23T15:00:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-27T08:15:00+00:00",
+      "episode_id": "77578b8aa999dbb0f9ce8293863ae0c7aeaa16cbfab34d71d7efa6ff5d201d21",
+      "id": "bffdf31fcfd9be5b13305f277c7085d41b56ce91d9e017d4e4028c8013440ec9",
+      "session": "2026-07-27",
+      "snapshot": {
+        "bar": {
+          "close": 541.0,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-27T08:15:00+00:00",
+          "high": 543.64,
+          "known_at": "2026-07-27T08:15:00+00:00",
+          "low": 537.25,
+          "open": 541.09,
+          "session": "2026-07-27",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 543.64,
+          "low": 526.12,
+          "normalized_range": 0.03238447319778185,
+          "percentile": 0.6,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 220,
+          "reference_hash": "8e15bf1f7a6dccb5a19b2c62f730a3cbe7dd4de5ffac47a7b695e69329d3e8a7",
+          "reference_sessions": [
+            "2026-07-13",
+            "2026-07-14",
+            "2026-07-15",
+            "2026-07-16",
+            "2026-07-17",
+            "2026-07-20",
+            "2026-07-21",
+            "2026-07-22",
+            "2026-07-23",
+            "2026-07-24"
+          ],
+          "reference_status": "READY",
+          "segment": "PREMARKET",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 529.88,
+            "low": 525.53,
+            "normalized_range": 0.008267918575257108,
+            "percentile": 0.09375,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 160,
+            "reference_hash": "196f3022b7d9ac0f447cc9f0275f95421ea5b5864c5cffa36765631ba957363b",
+            "reference_sessions": [
+              "2026-07-10",
+              "2026-07-13",
+              "2026-07-14",
+              "2026-07-15",
+              "2026-07-16",
+              "2026-07-17",
+              "2026-07-20",
+              "2026-07-21",
+              "2026-07-22",
+              "2026-07-23"
+            ],
+            "reference_status": "READY",
+            "segment": "AFTER_HOURS",
+            "status": "READY"
+          },
+          "high": 529.88,
+          "id": "77578b8aa999dbb0f9ce8293863ae0c7aeaa16cbfab34d71d7efa6ff5d201d21",
+          "last_valid_index": 3599,
+          "low": 525.53,
+          "prefix_hash": "e3e166c2408be6b3d9dc999c0127ada1465224a67e8829615c7ac5826cf3d597",
+          "published_at": "2026-07-25T00:00:00+00:00",
+          "published_index": 3583,
+          "window_start": "2026-07-24T20:15:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-27T19:15:00+00:00",
+      "episode_id": "0fb88c0dae7ac5606acfe61520b89774aa19088bc9794dd3365f21a84f0eef37",
+      "id": "71b5a54038e7865116fc702e65ac2fce8b08425b56311493f853a6d1a33d6e99",
+      "session": "2026-07-27",
+      "snapshot": {
+        "bar": {
+          "close": 514.77,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-27T19:15:00+00:00",
+          "high": 516.29,
+          "known_at": "2026-07-27T19:15:00+00:00",
+          "low": 511.98,
+          "open": 512.35,
+          "session": "2026-07-27",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 516.29,
+          "low": 500.66,
+          "normalized_range": 0.030363074771256948,
+          "percentile": 0.5,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 260,
+          "reference_hash": "85dd44e95a2d2a468b2bd67c77d3247f84153ced6d60143d70acc23dcf642dc3",
+          "reference_sessions": [
+            "2026-07-13",
+            "2026-07-14",
+            "2026-07-15",
+            "2026-07-16",
+            "2026-07-17",
+            "2026-07-20",
+            "2026-07-21",
+            "2026-07-22",
+            "2026-07-23",
+            "2026-07-24"
+          ],
+          "reference_status": "READY",
+          "segment": "RTH",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 512.71,
+            "low": 500.66,
+            "normalized_range": 0.023703208293172316,
+            "percentile": 0.18461538461538463,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 260,
+            "reference_hash": "85dd44e95a2d2a468b2bd67c77d3247f84153ced6d60143d70acc23dcf642dc3",
+            "reference_sessions": [
+              "2026-07-13",
+              "2026-07-14",
+              "2026-07-15",
+              "2026-07-16",
+              "2026-07-17",
+              "2026-07-20",
+              "2026-07-21",
+              "2026-07-22",
+              "2026-07-23",
+              "2026-07-24"
+            ],
+            "reference_status": "READY",
+            "segment": "RTH",
+            "status": "READY"
+          },
+          "high": 512.71,
+          "id": "0fb88c0dae7ac5606acfe61520b89774aa19088bc9794dd3365f21a84f0eef37",
+          "last_valid_index": 3642,
+          "low": 500.66,
+          "prefix_hash": "e5bf06d7c2dbe5dfb050d9633c1b8cac33319645c7eabe1b298f5412c4523f77",
+          "published_at": "2026-07-27T18:45:00+00:00",
+          "published_index": 3626,
+          "window_start": "2026-07-27T15:00:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-07-30T20:30:00+00:00",
+      "episode_id": "58fe01c69065c72d2af295b29c63d9fb8d1477ca32f92f36e8788cd95b93e7ba",
+      "id": "5c37d9c59d470aee52b1431fe386fb258405fe29d99dcacdd49df169002ed092",
+      "session": "2026-07-30",
+      "snapshot": {
+        "bar": {
+          "close": 511.0,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-07-30T20:30:00+00:00",
+          "high": 511.0,
+          "known_at": "2026-07-30T20:30:00+00:00",
+          "low": 508.14,
+          "open": 508.23,
+          "session": "2026-07-30",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 511.0,
+          "low": 500.67,
+          "normalized_range": 0.020215264187866896,
+          "percentile": 0.53125,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 160,
+          "reference_hash": "7fdae62a34b40d1416cce7d4bc58740e06b8b018c556fc1c522a8385c3dd28c7",
+          "reference_sessions": [
+            "2026-07-16",
+            "2026-07-17",
+            "2026-07-20",
+            "2026-07-21",
+            "2026-07-22",
+            "2026-07-23",
+            "2026-07-24",
+            "2026-07-27",
+            "2026-07-28",
+            "2026-07-29"
+          ],
+          "reference_status": "READY",
+          "segment": "AFTER_HOURS",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 509.98,
+            "low": 497.93,
+            "normalized_range": 0.023905884220132546,
+            "percentile": 0.1576923076923077,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 260,
+            "reference_hash": "93a1b05ee2212494d9a42951c2a08ae93cdc2239852fd606b903eedd6b3b2071",
+            "reference_sessions": [
+              "2026-07-16",
+              "2026-07-17",
+              "2026-07-20",
+              "2026-07-21",
+              "2026-07-22",
+              "2026-07-23",
+              "2026-07-24",
+              "2026-07-27",
+              "2026-07-28",
+              "2026-07-29"
+            ],
+            "reference_status": "READY",
+            "segment": "RTH",
+            "status": "READY"
+          },
+          "high": 509.98,
+          "id": "58fe01c69065c72d2af295b29c63d9fb8d1477ca32f92f36e8788cd95b93e7ba",
+          "last_valid_index": 3831,
+          "low": 497.93,
+          "prefix_hash": "3644ec92f45e8cab6947f01ff425e42ebd006e7a0b3c7267c44e75cc75ba5ea2",
+          "published_at": "2026-07-30T18:00:00+00:00",
+          "published_index": 3815,
+          "window_start": "2026-07-30T14:15:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-08-03T08:15:00+00:00",
+      "episode_id": "f3713d5a2877b1891384f8b26c2effe3b90e900c6756f2cdb2f68bb07d370c11",
+      "id": "fe11fd666101d2cc802a850212b4f811153b8102c05bf9d6a2f5762f36db36b9",
+      "session": "2026-08-03",
+      "snapshot": {
+        "bar": {
+          "close": 508.42,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-08-03T08:15:00+00:00",
+          "high": 514.0,
+          "known_at": "2026-08-03T08:15:00+00:00",
+          "low": 505.32,
+          "open": 509.49,
+          "session": "2026-08-03",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": false,
+          "high": 514.0,
+          "low": 500.7787,
+          "normalized_range": 0.026004681169112122,
+          "percentile": 0.4409090909090909,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 220,
+          "reference_hash": "7f69af0c1bca04dfa59bf3582bd4227ac053142ca3e7dae82103832d755ccb60",
+          "reference_sessions": [
+            "2026-07-20",
+            "2026-07-21",
+            "2026-07-22",
+            "2026-07-23",
+            "2026-07-24",
+            "2026-07-27",
+            "2026-07-28",
+            "2026-07-29",
+            "2026-07-30",
+            "2026-07-31"
+          ],
+          "reference_status": "READY",
+          "segment": "PREMARKET",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 505.89,
+            "low": 500.7787,
+            "normalized_range": 0.010202195608782378,
+            "percentile": 0.0875,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 160,
+            "reference_hash": "1e22cc6b04920e5c6487932559d5132c339fac573191fdbecc1e0e1e0928371b",
+            "reference_sessions": [
+              "2026-07-17",
+              "2026-07-20",
+              "2026-07-21",
+              "2026-07-22",
+              "2026-07-23",
+              "2026-07-24",
+              "2026-07-27",
+              "2026-07-28",
+              "2026-07-29",
+              "2026-07-30"
+            ],
+            "reference_status": "READY",
+            "segment": "AFTER_HOURS",
+            "status": "READY"
+          },
+          "high": 505.89,
+          "id": "f3713d5a2877b1891384f8b26c2effe3b90e900c6756f2cdb2f68bb07d370c11",
+          "last_valid_index": 3919,
+          "low": 500.7787,
+          "prefix_hash": "b5ce5852f1ae35c3b905b2de8c6d08120476885189e26e402b117968f0462ce2",
+          "published_at": "2026-08-01T00:00:00+00:00",
+          "published_index": 3903,
+          "window_start": "2026-07-31T20:15:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-08-03T22:30:00+00:00",
+      "episode_id": "74a66d122a73fdb53949c48bea986aecf28bcbb2c0157ef33f26a6a36c8aeb3d",
+      "id": "2431dcad037ca83a2332f7da9aef76fa3b0423383d5418ccbb7f502efb2fefaa",
+      "session": "2026-08-03",
+      "snapshot": {
+        "bar": {
+          "close": 511.3,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-08-03T22:30:00+00:00",
+          "high": 511.8,
+          "known_at": "2026-08-03T22:30:00+00:00",
+          "low": 510.9,
+          "open": 510.9,
+          "session": "2026-08-03",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 511.8,
+          "low": 505.86,
+          "normalized_range": 0.011617445726579302,
+          "percentile": 0.15,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 160,
+          "reference_hash": "d59137f1ade76019ff155296b9bc90a6f1ecaecd2028e82b50b3e6ec9a5826ad",
+          "reference_sessions": [
+            "2026-07-20",
+            "2026-07-21",
+            "2026-07-22",
+            "2026-07-23",
+            "2026-07-24",
+            "2026-07-27",
+            "2026-07-28",
+            "2026-07-29",
+            "2026-07-30",
+            "2026-07-31"
+          ],
+          "reference_status": "READY",
+          "segment": "AFTER_HOURS",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 510.95,
+            "low": 498.98,
+            "normalized_range": 0.02358063118080448,
+            "percentile": 0.19230769230769232,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 260,
+            "reference_hash": "f652d015c99a37decd5afd858798d9c25512b65c289f96e5105d5500cff90f40",
+            "reference_sessions": [
+              "2026-07-20",
+              "2026-07-21",
+              "2026-07-22",
+              "2026-07-23",
+              "2026-07-24",
+              "2026-07-27",
+              "2026-07-28",
+              "2026-07-29",
+              "2026-07-30",
+              "2026-07-31"
+            ],
+            "reference_status": "READY",
+            "segment": "RTH",
+            "status": "READY"
+          },
+          "high": 510.95,
+          "id": "74a66d122a73fdb53949c48bea986aecf28bcbb2c0157ef33f26a6a36c8aeb3d",
+          "last_valid_index": 3965,
+          "low": 498.98,
+          "prefix_hash": "d4586d086dea944b3385872b3bf386a0e7f11c248f38e3377a8a5a2a407ac6db",
+          "published_at": "2026-08-03T19:30:00+00:00",
+          "published_index": 3949,
+          "window_start": "2026-08-03T15:45:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-08-04T15:15:00+00:00",
+      "episode_id": "7d2ff0f1a8b680b2cf2f091eb681d9f83e6191c2d08b9aded08da4f78642f3e3",
+      "id": "e74e4742a209c864227b5ff7ce79883d4897049430aec079c2acba18472c5aac",
+      "session": "2026-08-04",
+      "snapshot": {
+        "bar": {
+          "close": 538.175,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-08-04T15:15:00+00:00",
+          "high": 538.38,
+          "known_at": "2026-08-04T15:15:00+00:00",
+          "low": 533.96,
+          "open": 534.335,
+          "session": "2026-08-04",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 538.38,
+          "low": 526.26,
+          "normalized_range": 0.02252055558136295,
+          "percentile": 0.16153846153846155,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 260,
+          "reference_hash": "2c871339621782b437488aeedd427ea2e5098791418673e47d093727725c223a",
+          "reference_sessions": [
+            "2026-07-21",
+            "2026-07-22",
+            "2026-07-23",
+            "2026-07-24",
+            "2026-07-27",
+            "2026-07-28",
+            "2026-07-29",
+            "2026-07-30",
+            "2026-07-31",
+            "2026-08-03"
+          ],
+          "reference_status": "READY",
+          "segment": "RTH",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 536.22,
+            "low": 524.13,
+            "normalized_range": 0.022628584262933356,
+            "percentile": 0.16538461538461538,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 260,
+            "reference_hash": "2c871339621782b437488aeedd427ea2e5098791418673e47d093727725c223a",
+            "reference_sessions": [
+              "2026-07-21",
+              "2026-07-22",
+              "2026-07-23",
+              "2026-07-24",
+              "2026-07-27",
+              "2026-07-28",
+              "2026-07-29",
+              "2026-07-30",
+              "2026-07-31",
+              "2026-08-03"
+            ],
+            "reference_status": "READY",
+            "segment": "RTH",
+            "status": "READY"
+          },
+          "high": 536.22,
+          "id": "7d2ff0f1a8b680b2cf2f091eb681d9f83e6191c2d08b9aded08da4f78642f3e3",
+          "last_valid_index": 4010,
+          "low": 524.13,
+          "prefix_hash": "12e35a5d040c38d40b4522d104a7944b37130c20b505fea596b3f91e40bd6015",
+          "published_at": "2026-08-04T14:45:00+00:00",
+          "published_index": 3994,
+          "window_start": "2026-08-04T11:00:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-08-05T13:45:00+00:00",
+      "episode_id": "2878658d3f0c729faf219f5dce74a39e9b9dbefed4566fac56abe4813c76a1ac",
+      "id": "451d29f6d31e5dd35946277f36491580647052bb03344f40fdbd18c97d025267",
+      "session": "2026-08-05",
+      "snapshot": {
+        "bar": {
+          "close": 542.5,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-08-05T13:45:00+00:00",
+          "high": 542.82,
+          "known_at": "2026-08-05T13:45:00+00:00",
+          "low": 534.8,
+          "open": 536.4,
+          "session": "2026-08-05",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 542.82,
+          "low": 530.88,
+          "normalized_range": 0.022009216589861852,
+          "percentile": 0.13076923076923078,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 260,
+          "reference_hash": "0a19fd6e119e3bc26fb5a641015a0a10755448c5f20b0a5823768dd748521aa8",
+          "reference_sessions": [
+            "2026-07-22",
+            "2026-07-23",
+            "2026-07-24",
+            "2026-07-27",
+            "2026-07-28",
+            "2026-07-29",
+            "2026-07-30",
+            "2026-07-31",
+            "2026-08-03",
+            "2026-08-04"
+          ],
+          "reference_status": "READY",
+          "segment": "RTH",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 539.79,
+            "low": 530.88,
+            "normalized_range": 0.016708860759493613,
+            "percentile": 0.06363636363636363,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 220,
+            "reference_hash": "3afd10a4f7d9a52c5a3413db267f0c90cd568628284d2fbfd3c1bd65459a5bf7",
+            "reference_sessions": [
+              "2026-07-22",
+              "2026-07-23",
+              "2026-07-24",
+              "2026-07-27",
+              "2026-07-28",
+              "2026-07-29",
+              "2026-07-30",
+              "2026-07-31",
+              "2026-08-03",
+              "2026-08-04"
+            ],
+            "reference_status": "READY",
+            "segment": "PREMARKET",
+            "status": "READY"
+          },
+          "high": 539.79,
+          "id": "2878658d3f0c729faf219f5dce74a39e9b9dbefed4566fac56abe4813c76a1ac",
+          "last_valid_index": 4064,
+          "low": 530.88,
+          "prefix_hash": "b9647dca2a15d73237624175b3abc0d2b6dddac575e88a7cdbb51fd9de4ecb3a",
+          "published_at": "2026-08-05T12:15:00+00:00",
+          "published_index": 4048,
+          "window_start": "2026-08-05T08:30:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-08-07T08:15:00+00:00",
+      "episode_id": "c4c8641cbb0c54c9efe13ae6f8df9ffc256e6c40366f02262b8d60c32c008892",
+      "id": "aebdd369211ea6a43b2a7f2e86d8312c89c56a87758998e43aefb4a5579d534f",
+      "session": "2026-08-07",
+      "snapshot": {
+        "bar": {
+          "close": 539.91,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-08-07T08:15:00+00:00",
+          "high": 540.0,
+          "known_at": "2026-08-07T08:15:00+00:00",
+          "low": 532.57,
+          "open": 538.0,
+          "session": "2026-08-07",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 540.0,
+          "low": 532.158,
+          "normalized_range": 0.01452464299605487,
+          "percentile": 0.09090909090909091,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 220,
+          "reference_hash": "1301287ba0d33e14a07c2887cf0b787223380636259a47752954c5e6fd685e91",
+          "reference_sessions": [
+            "2026-07-24",
+            "2026-07-27",
+            "2026-07-28",
+            "2026-07-29",
+            "2026-07-30",
+            "2026-07-31",
+            "2026-08-03",
+            "2026-08-04",
+            "2026-08-05",
+            "2026-08-06"
+          ],
+          "reference_status": "READY",
+          "segment": "PREMARKET",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 539.04,
+            "low": 531.66,
+            "normalized_range": 0.013767629281396902,
+            "percentile": 0.13125,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 160,
+            "reference_hash": "0895306e2989ec80966828742e8bccc5ccb7e8a65fbe1b9df8ff56318442f0be",
+            "reference_sessions": [
+              "2026-07-23",
+              "2026-07-24",
+              "2026-07-27",
+              "2026-07-28",
+              "2026-07-29",
+              "2026-07-30",
+              "2026-07-31",
+              "2026-08-03",
+              "2026-08-04",
+              "2026-08-05"
+            ],
+            "reference_status": "READY",
+            "segment": "AFTER_HOURS",
+            "status": "READY"
+          },
+          "high": 539.04,
+          "id": "c4c8641cbb0c54c9efe13ae6f8df9ffc256e6c40366f02262b8d60c32c008892",
+          "last_valid_index": 4169,
+          "low": 531.66,
+          "prefix_hash": "52bf3379c7e152fa2f1496f436dae16983e2bcb5460bb313b51bd59c5f805aef",
+          "published_at": "2026-08-06T22:30:00+00:00",
+          "published_index": 4153,
+          "window_start": "2026-08-06T18:45:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-08-07T21:00:00+00:00",
+      "episode_id": "1a0faeedc564a3d89bd1757f8a96a71dd56f0c3c9ca3d825253f1dfdfddbb8cb",
+      "id": "aab6533edaca9121f66d5fb571db0491a743372ff0697f54d50a1e9975cb0723",
+      "session": "2026-08-07",
+      "snapshot": {
+        "bar": {
+          "close": 543.54,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-08-07T21:00:00+00:00",
+          "high": 543.54,
+          "known_at": "2026-08-07T21:00:00+00:00",
+          "low": 543.02,
+          "open": 543.37,
+          "session": "2026-08-07",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 543.9,
+          "low": 539.19,
+          "normalized_range": 0.0086654156087867,
+          "percentile": 0.00625,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 160,
+          "reference_hash": "56b4d763c2a392093d7cc4be81f06db792701569e24ea6d53f39e69d854b592f",
+          "reference_sessions": [
+            "2026-07-24",
+            "2026-07-27",
+            "2026-07-28",
+            "2026-07-29",
+            "2026-07-30",
+            "2026-07-31",
+            "2026-08-03",
+            "2026-08-04",
+            "2026-08-05",
+            "2026-08-06"
+          ],
+          "reference_status": "READY",
+          "segment": "AFTER_HOURS",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 543.518,
+            "low": 531.27,
+            "normalized_range": 0.022625964069644015,
+            "percentile": 0.17692307692307693,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 260,
+            "reference_hash": "534b720adc89e7c5f3b9d68cd8bdbac846111fae211a84f033a3de2d0a00321e",
+            "reference_sessions": [
+              "2026-07-24",
+              "2026-07-27",
+              "2026-07-28",
+              "2026-07-29",
+              "2026-07-30",
+              "2026-07-31",
+              "2026-08-03",
+              "2026-08-04",
+              "2026-08-05",
+              "2026-08-06"
+            ],
+            "reference_status": "READY",
+            "segment": "RTH",
+            "status": "READY"
+          },
+          "high": 543.518,
+          "id": "1a0faeedc564a3d89bd1757f8a96a71dd56f0c3c9ca3d825253f1dfdfddbb8cb",
+          "last_valid_index": 4215,
+          "low": 531.27,
+          "prefix_hash": "f917d5887e5d15cbb40d32591be2771d07da69172e5230bb77d68ede410d53b1",
+          "published_at": "2026-08-07T18:00:00+00:00",
+          "published_index": 4199,
+          "window_start": "2026-08-07T14:15:00+00:00"
+        }
+      }
+    },
+    {
+      "at": "2026-08-12T12:30:00+00:00",
+      "episode_id": "74607c1f06ef85c8437659fffb1d1e0edfa50e42b2fc57590a3a1f1f86942ac1",
+      "id": "9c0fbd0a4f485638ac34cbcce459335447e964127530072c59b6bcc0964e96a3",
+      "session": "2026-08-12",
+      "snapshot": {
+        "bar": {
+          "close": 547.8,
+          "dataset_id": "soxx-alpaca-sip-15m-discovery-20260505-20260813-v1",
+          "end_at": "2026-08-12T12:30:00+00:00",
+          "high": 548.35,
+          "known_at": "2026-08-12T12:30:00+00:00",
+          "low": 545.011,
+          "open": 545.4,
+          "session": "2026-08-12",
+          "symbol": "SOXX"
+        },
+        "feature": {
+          "compressed": true,
+          "high": 548.35,
+          "low": 542.11,
+          "normalized_range": 0.0113910186199343,
+          "percentile": 0.013636363636363636,
+          "reason": "same_segment_prior_sessions_rank",
+          "reference_count": 220,
+          "reference_hash": "e22fb1a0379d62354bc2b8f18c7c55ac2243d91a5d6c7d8f27092774a91ddea4",
+          "reference_sessions": [
+            "2026-07-29",
+            "2026-07-30",
+            "2026-07-31",
+            "2026-08-03",
+            "2026-08-04",
+            "2026-08-05",
+            "2026-08-06",
+            "2026-08-07",
+            "2026-08-10",
+            "2026-08-11"
+          ],
+          "reference_status": "READY",
+          "segment": "PREMARKET",
+          "status": "READY"
+        },
+        "range": {
+          "feature": {
+            "compressed": true,
+            "high": 545.6,
+            "low": 537.3,
+            "normalized_range": 0.015213725346433149,
+            "percentile": 0.17727272727272728,
+            "reason": "same_segment_prior_sessions_rank",
+            "reference_count": 220,
+            "reference_hash": "e22fb1a0379d62354bc2b8f18c7c55ac2243d91a5d6c7d8f27092774a91ddea4",
+            "reference_sessions": [
+              "2026-07-29",
+              "2026-07-30",
+              "2026-07-31",
+              "2026-08-03",
+              "2026-08-04",
+              "2026-08-05",
+              "2026-08-06",
+              "2026-08-07",
+              "2026-08-10",
+              "2026-08-11"
+            ],
+            "reference_status": "READY",
+            "segment": "PREMARKET",
+            "status": "READY"
+          },
+          "high": 545.6,
+          "id": "74607c1f06ef85c8437659fffb1d1e0edfa50e42b2fc57590a3a1f1f86942ac1",
+          "last_valid_index": 4383,
+          "low": 537.3,
+          "prefix_hash": "1558915dc79b7f0485e892a51028b3983ed3a281ba098836ee053ce94fab1bf4",
+          "published_at": "2026-08-12T12:00:00+00:00",
+          "published_index": 4367,
+          "window_start": "2026-08-12T08:15:00+00:00"
+        }
+      }
+    }
+  ]
+}

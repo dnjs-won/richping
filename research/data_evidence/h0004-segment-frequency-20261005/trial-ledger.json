@@ -1,0 +1,26 @@
+{
+  "parameter_trials": 2,
+  "reason": "Owner time-of-day semantic correction before outcomes; not performance selection",
+  "schema": "h0004_two_trial_ledger_v1",
+  "third_variant": "FORBIDDEN_ABSENT_IMPLEMENTATION_OR_SEMANTIC_BLOCKER",
+  "trials": [
+    {
+      "candidate_events": 39,
+      "candidate_sessions": 26,
+      "identity": "TRIAL_1_POOLED_SEGMENT_REFERENCE",
+      "outcome_access": 0,
+      "report_path": "research/data_evidence/h0004-frequency-20261005/verification-v2/frequency-audit.json",
+      "report_sha256": "695be21d27bbbfcea34faa114be8b8cc6c39e770ef7a1a263cef7ca552e596c6"
+    },
+    {
+      "efficacy": 0,
+      "forward_returns": 0,
+      "identity": "TRIAL_2_SEGMENT_CONDITIONED_REFERENCE",
+      "outcome_access": 0,
+      "profitability": "NOT_ESTIMATED",
+      "report_path": "research/data_evidence/h0004-segment-frequency-20261005/frequency-audit.json",
+      "report_sha256": "dcc6abcc7f9f904f758131818b170242992060a15207c3d905412dbfa943130a",
+      "spec_hash": "0a4ebc7f1b793380cea11df0604e7faeee06679b2c56d3024b886aab56ef82e2"
+    }
+  ]
+}

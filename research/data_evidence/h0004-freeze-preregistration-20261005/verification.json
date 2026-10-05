@@ -1,0 +1,59 @@
+{
+  "confirmation_sessions": 252,
+  "confirmation_status": "PENDING_ASYNCHRONOUS",
+  "counts": {
+    "breakout_evaluations": 625,
+    "candidate_sessions": 29,
+    "candidates": 48,
+    "compressed": 925,
+    "compression_READY": 3840,
+    "compression_runs": 108,
+    "consumed": 48,
+    "downside_cancelled": 38,
+    "eligible_bars": 4480,
+    "expired": 14,
+    "frozen_ranges": 101,
+    "gap_cancelled": 0,
+    "gap_resets": 0,
+    "invalid_cancelled": 0,
+    "pending": 1,
+    "unique_compression_episodes": 101
+  },
+  "efficacy_calculations": 0,
+  "evaluation_adapter": "METADATA_GATES_ONLY; NONEMPTY_LABEL_AND_TERMINAL_STATISTICS_ADAPTER_NOT_IMPLEMENTED_NOT_EXECUTED",
+  "event_stream_hash": "8e64aecd6fa26261bf5735126f3615427427bbe5ae34b0d242b8d14dd513d14d",
+  "forbidden_call_counts": {
+    "metadata": {
+      "database": 0,
+      "price_load": 0,
+      "signal_replay": 0
+    },
+    "outcomes": {
+      "MFE_MAE": 0,
+      "confirmation_outcomes": 0,
+      "efficacy_statistics": 0,
+      "forward_module_imports": 0,
+      "forward_window_queries": 0,
+      "future_return_queries": 0,
+      "market_queries": 0,
+      "network_calls": 0,
+      "outcome_accessors": 0,
+      "profitability_calculations": 0,
+      "return_calculations": 0,
+      "store_access": 0
+    }
+  },
+  "future_price_queries": 0,
+  "next_P0": "H0004_FIRST_EFFICACY",
+  "outcome_access": 0,
+  "parameter_trials": 2,
+  "preserved_files": 646,
+  "primary_horizon_slots": 16,
+  "profitability": "NOT_ESTIMATED",
+  "protocol_hash": "09e8202e4edd3a06c3b7907d7aafa70c93c05155d5f1d902c5d07798540d8d1f",
+  "repeat_equal": true,
+  "schema": "h0004_signal_preregistration_verification_v1",
+  "signal_freeze_sha256": "f4226caf0d6a0bd825347a06ee4be26307e7eda551ed560e9538cc38dd932de8",
+  "signal_spec_sha256": "97cd08b88c2ef82224d3b353ada2b364d36981b47917f7f7ca8b81e0d4ec44b8",
+  "status": "FROZEN_PREREGISTERED_OUTCOMES_NOT_RUN"
+}
