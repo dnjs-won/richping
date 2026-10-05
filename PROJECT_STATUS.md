@@ -1,3 +1,13 @@
+# Richping PM - H0004 portability P0 frozen / STOP
+
+Workstream `v2-h0004-portability-v1-preaccess` / `f3090a23123279cf0f9a506a526224cce7909e61`. Separate `H0004_PORTABILITY_V1` / INTRA_SECTOR_CROSS_SYMBOL_PORTABILITY. Official2026-03-31 historical SOXX top10 frozen before replay. Full10 retained;READY3/informative3,UNAVAILABLE6/UNRESOLVED1. NVDA47/34sessions, MU52/33, INTC32/25. All symbol stream statuses and aggregate sealed; two independent processes byte identical. Universe SHA256 f81c673dd26c4aced735f9fbddd018a0a8c954a154e475cd5088742d3bab1474; aggregate SHA256 c84353e456627a07bf7f3139272a0e1dad119172f2fc230f3a2bd5518269f1e8. Outcome/access/endpoint probes0; profitability NOT_ESTIMATED. No independent-asset or general-market confirmation claim.
+
+Existing H0004 SOXX48/29 discovery, frozen source/protocol and future2026-10-19..2027-10-19 PENDING/ASYNCHRONOUS confirmation unchanged. 704 original research/code/doc/test files preserved. Targeted119/full1861 passed, no failures/errors/skips. No research implementation merge.
+
+NEXT_ACTION **H0004_PORTABILITY_OUTCOME_PHASE_REQUIRES_SEPARATE_EXPLICIT_OWNER_ACTION / STOP_AWAIT_SEPARATE_OWNER_ACTION**. P0 grants no runtime outcome authorization. Prior H0005 selection routing preserved below/in routing history, no H0005 implementation.
+
+Entries below are preserved historical reports.
+
 # Richping PM - H0004 first discovery execution complete
 
 Workstream `v2-h0004-discovery-efficacy` / `9ad3546d6d0d273fa916d63da43d00a6a33131ad`, code not merged into main. Frozen48 candidates/29 sessions, trials2. Complete48/unresolved0. Disposition DISCOVERY_POSITIVE_DIRECTION; exploratory descriptive only, uncertainty NOT_CONFIRMATORY; profitability NOT_ESTIMATED. Two independent processes produce identical labels/paths/reports. All prior frozen sources/evidence and H0001~3 tracks preserved; H0004 signal/protocol unchanged. Confirmation outcome access0; fixed252 sessions2026-10-19..2027-10-19, terminal after2027-10-21 20:00ET remains PENDING/ASYNCHRONOUS.

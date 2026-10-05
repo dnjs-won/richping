@@ -5,7 +5,7 @@ purpose: 'Lightweight routing index for AI PM sessions. This file does not repla
   is already frozen, what remains open, and where to read the authoritative evidence.
 
   '
-default_research_branch: v2-h0004-discovery-efficacy
+default_research_branch: v2-h0004-portability-v1-preaccess
 data_foundation:
   branch: v2-real-intraday-data-foundation
   contract: docs/V2_REAL_INTRADAY_DATA_FOUNDATION.md
@@ -575,8 +575,8 @@ current_open_decision_groups:
     or tuning.
 - id: INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION
   hypothesis_id: H0005
-  priority: P0
-  status: USER_DECISION_REQUIRED
+  priority: DEFERRED_DURING_PORTABILITY_OWNER_ACTION
+  status: PRESERVED_PENDING_OWNER_THESIS
   blocks_phase_exit_criteria:
   - 1
   evidence_branch: v2-h0004-discovery-efficacy
@@ -633,9 +633,8 @@ frozen_semantic_interpretation_audit:
   negative_receipt_explicitly_frozen: false
   strategy_decisions_changed: false
   completeness_capture_is_causal_feature: false
-schema_revision: H0004 discovery exploratory executed with immutable48/29 denominator,
-  trials2 and zero confirmation access. H0005 independent owner thesis is the sole
-  active P0.
+schema_revision: Separate H0004_PORTABILITY_V1 P0 frozen; only future owner-authorized
+  outcome action remains. Original frozen hypotheses and H0005 pending thesis preserved.
 long_history_access_routing:
   status: SELECTED70_DISCOVERY_PASS_ZERO_SIGNAL_H0001_ASYNC
   evidence_branch: v2-h0001-alpaca-70-session-discovery
@@ -672,4 +671,55 @@ next_independent_hypothesis:
   H0001_future_confirmation_dependency: false
   H0002_future_confirmation_dependency: false
   H0003_future_confirmation_dependency: false
-active_research_track: H0004
+active_research_track: H0004_PORTABILITY_V1
+research_workstreams:
+  H0004_PORTABILITY_V1:
+    branch: v2-h0004-portability-v1-preaccess
+    base_commit: 9ad3546d6d0d273fa916d63da43d00a6a33131ad
+    implementation_commit: f3090a23123279cf0f9a506a526224cce7909e61
+    code_commit: 6511c2c0ef0592a3998bdf013b758987f0044263
+    status: READY_FOR_PORTABILITY_OUTCOME_ACCESS
+    research_id: H0004_PORTABILITY_V1
+    scope: INTRA_SECTOR_CROSS_SYMBOL_PORTABILITY
+    evidence: research/decision_records/H0004-portability-v1-preaccess-result.json
+    candidate_manifest_sha256: c84353e456627a07bf7f3139272a0e1dad119172f2fc230f3a2bd5518269f1e8
+    outcomes: NOT_ACCESSED
+    profitability: NOT_ESTIMATED
+    integration: NOT_MAIN_INTEGRATED
+routing_history:
+- main_commit: 1789f7be7e3bbea298fb8984d2a9d5a072e14000
+  previous_default_research_branch: v2-h0004-discovery-efficacy
+  previous_active_hypothesis:
+    id: H0005
+    status: OWNER_THESIS_SELECTION_REQUIRED_NOT_IMPLEMENTED
+    branch: v2-h0004-discovery-efficacy
+    note: No H0005 hypothesis artifact or signal exists yet; registry intake is the
+      next action.
+  previous_schema_revision: H0004 discovery exploratory executed with immutable48/29
+    denominator, trials2 and zero confirmation access. H0005 independent owner thesis
+    is the sole active P0.
+  previous_H0005_open_decision:
+    id: INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION
+    hypothesis_id: H0005
+    priority: P0
+    status: USER_DECISION_REQUIRED
+    blocks_phase_exit_criteria:
+    - 1
+    evidence_branch: v2-h0004-discovery-efficacy
+    note: Independent next mechanism selection. Frozen future confirmation waits do
+      not block research.
+portability_next_action:
+  id: H0004_PORTABILITY_OUTCOME_PHASE_REQUIRES_SEPARATE_EXPLICIT_OWNER_ACTION
+  priority: P0
+  status: STOP_AWAIT_SEPARATE_OWNER_ACTION
+  research_id: H0004_PORTABILITY_V1
+  objective: Separately authorize scoped portability outcomes only after frozen gate;
+    no access in completed P0.
+  constraints:
+  - All10 symbols retained; no replacement/tuning
+  - Existing H0004 discovery/confirmation immutable and separate
+  - Shared semiconductor factor; not independent-asset confirmation
+  - No production integration, profitability or automatic execution
+canonical_source_routing_note: Original canonical_sources (including last H0005 owner-thesis
+  routing) preserved as historical source bindings; current separate research unit
+  is research_workstreams.H0004_PORTABILITY_V1 and PROJECT_CONTROL.next_action.

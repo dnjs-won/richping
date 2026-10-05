@@ -475,7 +475,7 @@ items:
     no CI/tuning/confirmation/profitability.
 - id: H0005_INDEPENDENT_HYPOTHESIS_SELECTION
   action_id: INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION
-  priority: P0
+  priority: DEFERRED_DURING_PORTABILITY_OWNER_ACTION
   status: USER_DECISION_REQUIRED
   blocks_phase_exit_criteria:
   - 1
@@ -491,3 +491,35 @@ items:
     no outcome-driven external parameters. QQQ already exposed in H0003 is not certified
     untouched by naming it.
   implementation: NOT_IMPLEMENTED_NOT_EXECUTED
+- id: H0004_PORTABILITY_CONTROL_REMEDIATION
+  priority: P2
+  status: OPEN_FUTURE_ACTION
+  blocks_phase_exit_criteria: []
+  summary: Minimal P0 gate retained legacy permit package; control-layer ownership
+    remediation separate P2.
+  evidence_branch: v2-h0004-portability-v1-preaccess
+- id: H0004_CROSS_SECTOR_GENERALIZATION_PROTOCOL
+  priority: P2
+  status: OPEN_FUTURE_ACTION
+  blocks_phase_exit_criteria: []
+  summary: Separate future preregistration for independent/cross-sector assets; semiconductor
+    constituents do not establish general-market portability.
+  evidence_branch: v2-h0004-portability-v1-preaccess
+- id: H0004_PORTABILITY_V1_PREACCESS
+  priority: COMPLETE
+  status: COMPLETE_FROZEN_STOP
+  summary: Full10 retained;READY3/informative3,UNAVAILABLE6/UNRESOLVED1; causal candidates
+    only; outcomes0.
+  evidence_branch: v2-h0004-portability-v1-preaccess
+  evidence: research/decision_records/H0004-portability-v1-preaccess-result.json
+  commit: f3090a23123279cf0f9a506a526224cce7909e61
+routing_history:
+- previous:
+    id: H0005_INDEPENDENT_HYPOTHESIS_SELECTION
+    action_id: INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION
+    priority: P0
+    status: USER_DECISION_REQUIRED
+    blocks_phase_exit_criteria:
+    - 1
+    summary: Choose independent H0005 thesis; no signal or implementation yet.
+  reason: Owner requested separate portability P0; no H0005 implementation

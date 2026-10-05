@@ -15,8 +15,8 @@ source_of_truth:
     branch: main
     path: PROJECT_STATUS.md
   active_workstream_status:
-    branch: v2-h0004-discovery-efficacy
-    path: docs/H0004_DISCOVERY_RESULTS.md
+    branch: v2-h0004-portability-v1-preaccess
+    path: research/decision_records/H0004-portability-v1-preaccess-result.json
   decision_index:
     branch: main
     path: project/DECISION_INDEX.yaml
@@ -30,71 +30,36 @@ control_plane:
   branch: main
   rule: PM state lives on main so new sessions can recover it from the default branch.
 active_workstream:
-  branch: v2-h0004-discovery-efficacy
-  base_branch: v2-h0004-preaccess-evaluator
-  base_commit: d1e6f2463c3b34336b6a9711a7dfa33714d1b552
-  implementation_commit: 9ad3546d6d0d273fa916d63da43d00a6a33131ad
-  status: DIVERGED_FROM_MAIN
-  observed_relation_to_main:
-    ahead_by: 64
-    behind_by: 30
-    main_commit: e13977a26a636af1c31e63c142c00c59ae65d719
-  note: First sealed70 discovery execution complete twice;48 full denominator retained.
-    Exploratory only; frozen signal/protocol unchanged. Code not main-integrated.
-    Next H0005 independent thesis selection.
+  branch: v2-h0004-portability-v1-preaccess
+  base_commit: 9ad3546d6d0d273fa916d63da43d00a6a33131ad
+  implementation_commit: f3090a23123279cf0f9a506a526224cce7909e61
+  code_commit: 6511c2c0ef0592a3998bdf013b758987f0044263
+  status: READY_FOR_PORTABILITY_OUTCOME_ACCESS
+  research_id: H0004_PORTABILITY_V1
+  scope: INTRA_SECTOR_CROSS_SYMBOL_PORTABILITY
+  evidence: research/decision_records/H0004-portability-v1-preaccess-result.json
+  candidate_manifest_sha256: c84353e456627a07bf7f3139272a0e1dad119172f2fc230f3a2bd5518269f1e8
+  outcomes: NOT_ACCESSED
+  profitability: NOT_ESTIMATED
+  integration: NOT_MAIN_INTEGRATED
 current_phase:
-  id: INDEPENDENT_STRATEGY_RESEARCH_CYCLE
-  status: H0004_EXPLORATORY_COMPLETE_H0005_OWNER_THESIS_PENDING
-  objective: Repeat independent hypothesis generation, causal discovery, preregistration,
-    confirmation and evidence disposition.
+  id: H0004_PORTABILITY_V1_PREACCESS
+  status: COMPLETE_FROZEN_STOP
+  objective: Freeze intra-sector cross-symbol protocol/universe/causal candidate streams
+    with no outcomes.
   exit_criteria:
-  - One independent falsifiable thesis selected with causal inputs and prior exposure
-    recorded.
-  - Bounded discovery and preregistered confirmation contract before outcomes.
-  - Evidence routing preserves failed/inconclusive trials and forbids unearned production
-    promotion.
+  - Frozen historical universe and protocol
+  - Identical frozen signal config/source
+  - All symbol candidate streams and aggregate sealed
+  - Zero real outcomes and preserved SOXX48/29
   progress:
-    intake_infrastructure: IMPLEMENTED_TESTED
-    next_available_hypothesis: H0005
-    active_hypothesis: H0005
-    strategy_meaning: H0005_OWNER_THESIS_SELECTION_REQUIRED
-    causal_frequency: H0005_NOT_RUN
-    signal_freeze: H0005_NOT_STARTED
-    efficacy_preregistration: H0005_NOT_STARTED
-    outcome_evaluation: H0004_EXECUTED_DISCOVERY_EXPLORATORY_ONLY
-    H0001_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
-    H0002_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
-    H0003_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
-    H0003_discovery_disposition: DISCOVERY_POSITIVE_RELATIVE_DIRECTION
-    satisfied_exit_criteria:
-    - 1
-    - 2
-    - 3
-    remaining_exit_criteria: []
-    evaluation_adapter: H0005_NOT_IMPLEMENTED
-    H0004_discovery_disposition: DISCOVERY_POSITIVE_DIRECTION
-    H0004_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
-    next_cycle_exit_criteria_status: H0005_NOT_STARTED; owner thesis required before
-      implementation
-    previous_H0004_preaccess_progress:
-      intake_infrastructure: IMPLEMENTED_TESTED
-      next_available_hypothesis: H0005
-      active_hypothesis: H0004
-      strategy_meaning: COMPLETE_OWNER_THESIS_SELECTION
-      causal_frequency: TRIAL2_IMPLEMENTED_EXECUTED_REAL_EVIDENCE
-      signal_freeze: FROZEN_OWNER_APPROVED_SEGMENT_CONDITIONED
-      efficacy_preregistration: FROZEN_BEFORE_OUTCOMES
-      outcome_evaluation: NOT_RUN_H0004
-      H0001_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
-      H0002_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
-      H0003_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
-      H0003_discovery_disposition: DISCOVERY_POSITIVE_RELATIVE_DIRECTION
-      satisfied_exit_criteria:
-      - 1
-      - 2
-      remaining_exit_criteria:
-      - 3
-      evaluation_adapter: IMPLEMENTED_SYNTHETIC_TESTED_SEALED_INDEPENDENT_PASS
+    preaccess: FROZEN
+    outcomes: NOT_ACCESSED
+    full_universe: 10
+    ready_universe: 3
+    informative_universe: 3
+    unavailable: 6
+    unresolved: 1
 completed_actions:
 - id: V2_REAL_INTRADAY_DATA_FOUNDATION
   status: COMPLETE
@@ -852,23 +817,38 @@ completed_actions:
     failures: 0
     errors: 0
     skipped: 0
+- branch: v2-h0004-portability-v1-preaccess
+  base_commit: 9ad3546d6d0d273fa916d63da43d00a6a33131ad
+  implementation_commit: f3090a23123279cf0f9a506a526224cce7909e61
+  code_commit: 6511c2c0ef0592a3998bdf013b758987f0044263
+  status: COMPLETE_FROZEN_STOP
+  research_id: H0004_PORTABILITY_V1
+  scope: INTRA_SECTOR_CROSS_SYMBOL_PORTABILITY
+  evidence: research/decision_records/H0004-portability-v1-preaccess-result.json
+  candidate_manifest_sha256: c84353e456627a07bf7f3139272a0e1dad119172f2fc230f3a2bd5518269f1e8
+  outcomes: NOT_ACCESSED
+  profitability: NOT_ESTIMATED
+  integration: NOT_MAIN_INTEGRATED
+  id: H0004_PORTABILITY_V1_PREACCESS
+  implementation_state: REAL_CAUSAL_CANDIDATES_SEALED_NO_OUTCOMES
+  tests:
+    targeted: 119
+    full: 1861
+    errors: 0
+    failures: 0
+    skipped: 0
 next_action:
-  id: INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION
+  id: H0004_PORTABILITY_OUTCOME_PHASE_REQUIRES_SEPARATE_EXPLICIT_OWNER_ACTION
   priority: P0
-  status: USER_DECISION_REQUIRED
-  hypothesis_id: H0005
-  blocks_phase_exit_criteria:
-  - 1
-  objective: Select one independent H0005 falsifiable market mechanism and causal
-    inputs; record prior exposure before implementation.
+  status: STOP_AWAIT_SEPARATE_OWNER_ACTION
+  research_id: H0004_PORTABILITY_V1
+  objective: Separately authorize scoped portability outcomes only after frozen gate;
+    no access in completed P0.
   constraints:
-  - Preserve H0001~H0004 frozen hypotheses and asynchronous confirmation; no interim
-    outcomes.
-  - No H0004 parameter/session/horizon or segment tuning; discovery direction does
-    not control routing.
-  - H0005 selection is not completed by this routing action.
-  - Cross-instrument validation policy remains a separate future project action; no
-    external capture here.
+  - All10 symbols retained; no replacement/tuning
+  - Existing H0004 discovery/confirmation immutable and separate
+  - Shared semiconductor factor; not independent-asset confirmation
+  - No production integration, profitability or automatic execution
 pm_policy:
   single_next_action: true
   discovered_non_blockers_go_to_backlog: true
@@ -1458,7 +1438,20 @@ hypothesis_tracks:
     discovery_forward_price_queries_total: 96
     discovery_independent_executions: 2
     discovery_outcome_access_namespace: SEALED70_DISCOVERY_ONLY
-active_research_track: H0004
+  H0004_PORTABILITY_V1:
+    branch: v2-h0004-portability-v1-preaccess
+    base_commit: 9ad3546d6d0d273fa916d63da43d00a6a33131ad
+    implementation_commit: f3090a23123279cf0f9a506a526224cce7909e61
+    code_commit: 6511c2c0ef0592a3998bdf013b758987f0044263
+    status: READY_FOR_PORTABILITY_OUTCOME_ACCESS
+    research_id: H0004_PORTABILITY_V1
+    scope: INTRA_SECTOR_CROSS_SYMBOL_PORTABILITY
+    evidence: research/decision_records/H0004-portability-v1-preaccess-result.json
+    candidate_manifest_sha256: c84353e456627a07bf7f3139272a0e1dad119172f2fc230f3a2bd5518269f1e8
+    outcomes: NOT_ACCESSED
+    profitability: NOT_ESTIMATED
+    integration: NOT_MAIN_INTEGRATED
+active_research_track: H0004_PORTABILITY_V1
 research_cycle_history:
 - hypothesis: H0002
   status: COMPLETE_VALID_DISCOVERY_DISPOSITION_CONFIRMATION_ASYNC_PENDING
@@ -1519,3 +1512,88 @@ next_independent_hypothesis:
   H0001_future_confirmation_dependency: false
   H0002_future_confirmation_dependency: false
   H0003_future_confirmation_dependency: false
+workstream_routing_history:
+- main_commit: 1789f7be7e3bbea298fb8984d2a9d5a072e14000
+  active_workstream:
+    branch: v2-h0004-discovery-efficacy
+    base_branch: v2-h0004-preaccess-evaluator
+    base_commit: d1e6f2463c3b34336b6a9711a7dfa33714d1b552
+    implementation_commit: 9ad3546d6d0d273fa916d63da43d00a6a33131ad
+    status: DIVERGED_FROM_MAIN
+    observed_relation_to_main:
+      ahead_by: 64
+      behind_by: 30
+      main_commit: e13977a26a636af1c31e63c142c00c59ae65d719
+    note: First sealed70 discovery execution complete twice;48 full denominator retained.
+      Exploratory only; frozen signal/protocol unchanged. Code not main-integrated.
+      Next H0005 independent thesis selection.
+  current_phase:
+    id: INDEPENDENT_STRATEGY_RESEARCH_CYCLE
+    status: H0004_EXPLORATORY_COMPLETE_H0005_OWNER_THESIS_PENDING
+    objective: Repeat independent hypothesis generation, causal discovery, preregistration,
+      confirmation and evidence disposition.
+    exit_criteria:
+    - One independent falsifiable thesis selected with causal inputs and prior exposure
+      recorded.
+    - Bounded discovery and preregistered confirmation contract before outcomes.
+    - Evidence routing preserves failed/inconclusive trials and forbids unearned production
+      promotion.
+    progress:
+      intake_infrastructure: IMPLEMENTED_TESTED
+      next_available_hypothesis: H0005
+      active_hypothesis: H0005
+      strategy_meaning: H0005_OWNER_THESIS_SELECTION_REQUIRED
+      causal_frequency: H0005_NOT_RUN
+      signal_freeze: H0005_NOT_STARTED
+      efficacy_preregistration: H0005_NOT_STARTED
+      outcome_evaluation: H0004_EXECUTED_DISCOVERY_EXPLORATORY_ONLY
+      H0001_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
+      H0002_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
+      H0003_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
+      H0003_discovery_disposition: DISCOVERY_POSITIVE_RELATIVE_DIRECTION
+      satisfied_exit_criteria:
+      - 1
+      - 2
+      - 3
+      remaining_exit_criteria: []
+      evaluation_adapter: H0005_NOT_IMPLEMENTED
+      H0004_discovery_disposition: DISCOVERY_POSITIVE_DIRECTION
+      H0004_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
+      next_cycle_exit_criteria_status: H0005_NOT_STARTED; owner thesis required before
+        implementation
+      previous_H0004_preaccess_progress:
+        intake_infrastructure: IMPLEMENTED_TESTED
+        next_available_hypothesis: H0005
+        active_hypothesis: H0004
+        strategy_meaning: COMPLETE_OWNER_THESIS_SELECTION
+        causal_frequency: TRIAL2_IMPLEMENTED_EXECUTED_REAL_EVIDENCE
+        signal_freeze: FROZEN_OWNER_APPROVED_SEGMENT_CONDITIONED
+        efficacy_preregistration: FROZEN_BEFORE_OUTCOMES
+        outcome_evaluation: NOT_RUN_H0004
+        H0001_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
+        H0002_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
+        H0003_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
+        H0003_discovery_disposition: DISCOVERY_POSITIVE_RELATIVE_DIRECTION
+        satisfied_exit_criteria:
+        - 1
+        - 2
+        remaining_exit_criteria:
+        - 3
+        evaluation_adapter: IMPLEMENTED_SYNTHETIC_TESTED_SEALED_INDEPENDENT_PASS
+  next_action:
+    id: INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION
+    priority: P0
+    status: USER_DECISION_REQUIRED
+    hypothesis_id: H0005
+    blocks_phase_exit_criteria:
+    - 1
+    objective: Select one independent H0005 falsifiable market mechanism and causal
+      inputs; record prior exposure before implementation.
+    constraints:
+    - Preserve H0001~H0004 frozen hypotheses and asynchronous confirmation; no interim
+      outcomes.
+    - No H0004 parameter/session/horizon or segment tuning; discovery direction does
+      not control routing.
+    - H0005 selection is not completed by this routing action.
+    - Cross-instrument validation policy remains a separate future project action;
+      no external capture here.
