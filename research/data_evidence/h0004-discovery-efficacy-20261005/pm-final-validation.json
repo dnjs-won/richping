@@ -1,0 +1,12 @@
+{
+  "H0004_confirmation_preserved": true,
+  "H0005_implemented": false,
+  "active_hypothesis": "H0005",
+  "canonical_yaml_roundtrip": true,
+  "confirmation_outcome_access": 0,
+  "discovery_COMPLETE": 48,
+  "prior_H0001_H0002_H0003_tracks_preserved": true,
+  "schema": "h0004_pm_final_validation_v1",
+  "single_active_P0": "INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION",
+  "source_sha256": "54f957277e43c98348e5ba5d5dfc7e6a8c43d0aa9d8b2b98c805893290855ee3"
+}

@@ -43,7 +43,7 @@ def update():
         status='DIVERGED_FROM_MAIN',observed_relation_to_main=relation,
         note='First sealed70 discovery execution complete twice;48 full denominator retained. Exploratory only; frozen signal/protocol unchanged. Code not main-integrated. Next H0005 independent thesis selection.')
     control['current_phase']['status']='H0004_EXPLORATORY_COMPLETE_H0005_OWNER_THESIS_PENDING'
-    control['current_phase']['progress']['completed_H0004_cycle']=deepcopy(control['current_phase']['progress'])
+    control['current_phase']['progress']['previous_H0004_preaccess_progress']=deepcopy(control['current_phase']['progress'])
     control['current_phase']['progress'].update(active_hypothesis='H0005',next_available_hypothesis='H0005',
         strategy_meaning='H0005_OWNER_THESIS_SELECTION_REQUIRED',
         causal_frequency='H0005_NOT_RUN',signal_freeze='H0005_NOT_STARTED',

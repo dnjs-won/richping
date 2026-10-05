@@ -1,0 +1,19 @@
+{
+  "H0004_frozen_fields_preserved": true,
+  "active_P0": "INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION",
+  "active_hypothesis": "H0005",
+  "canonical_main_before": "e13977a26a636af1c31e63c142c00c59ae65d719",
+  "completed_P0": "H0004_DISCOVERY_EFFICACY_EXECUTION",
+  "confirmation_outcome_access": 0,
+  "files_before": {
+    "PROJECT_CONTROL.yaml": "f895df4097478732d4404f7ba9deb97a14c612f5231c07725a30d4f417a83ee2",
+    "project/BACKLOG.yaml": "8502f18b1f683718a8ff9dcfa6727913039170e5382498dcb54dfa036be30f7d",
+    "project/DECISION_INDEX.yaml": "809478ba9ccf2911d088ea9d7f8cbe77893e10e8517f8659ba05002e2d033a60",
+    "project/USER_IDEAS.yaml": "0e5b0b4c0103bef0274d882ce2f9bf82a8f856680099ced1c15174d53c194a16"
+  },
+  "prior_H0001_H0002_H0003_tracks_preserved": true,
+  "prior_canonical_sources_and_frozen_major_decisions_preserved": true,
+  "profitability": "NOT_ESTIMATED",
+  "research_commit": "9ad3546d6d0d273fa916d63da43d00a6a33131ad",
+  "schema": "h0004_discovery_pm_update_proof_v1"
+}
