@@ -1,0 +1,40 @@
+{
+  "counters": {
+    "real_H0004": {
+      "confirmation_label_reads": 0,
+      "discovery_label_reads": 0,
+      "efficacy_aggregations": 0,
+      "forward_price_queries": 0,
+      "profitability_calculations": 0,
+      "real_dataset_loads": 0,
+      "real_endpoint_readiness_probes": 0,
+      "return_calculations": 0
+    },
+    "shared_forbidden": {
+      "metadata": {
+        "database": 0,
+        "price_load": 0,
+        "signal_replay": 0
+      },
+      "outcomes": {
+        "MFE_MAE": 0,
+        "confirmation_outcomes": 0,
+        "efficacy_statistics": 0,
+        "forward_module_imports": 0,
+        "forward_window_queries": 0,
+        "future_return_queries": 0,
+        "market_queries": 0,
+        "network_calls": 0,
+        "outcome_accessors": 0,
+        "profitability_calculations": 0,
+        "return_calculations": 0,
+        "store_access": 0
+      }
+    }
+  },
+  "real_candidate_count": 48,
+  "real_candidate_endpoint_readiness": "NOT_PROBED",
+  "real_outcome_access": 0,
+  "schema": "h0004_preaccess_zero_access_v1",
+  "synthetic_arithmetic": "Separate SYNTHETIC: namespaces only"
+}
