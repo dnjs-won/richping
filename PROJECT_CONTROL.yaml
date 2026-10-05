@@ -15,7 +15,7 @@ source_of_truth:
     branch: main
     path: PROJECT_STATUS.md
   active_workstream_status:
-    branch: v2-h0003-relative-strength-frequency
+    branch: v2-h0003-signal-freeze-preregistration
     path: PROJECT_STATUS.md
   decision_index:
     branch: main
@@ -30,22 +30,21 @@ control_plane:
   branch: main
   rule: PM state lives on main so new sessions can recover it from the default branch.
 active_workstream:
-  branch: v2-h0003-relative-strength-frequency
-  base_branch: v2-h0002-first-efficacy
-  base_commit: 62992b202e37856a112ee45cc178a15dfd0c8899
-  implementation_commit: 57d839707e2cf8f9c46f68c670859ed1b403f9ea
+  branch: v2-h0003-signal-freeze-preregistration
+  base_branch: v2-h0003-relative-strength-frequency
+  base_commit: 934f8f8036dcf7bc073e779d33827154428b08b4
+  implementation_commit: f1dffa02884096ff6abeaa05d2b94deec5957e97
   status: DIVERGED_FROM_MAIN
   observed_relation_to_main:
-    ahead_by: 48
-    behind_by: 24
-    main_commit: fc28ebe2d6fbf92a4ac86455f55e84b0cc628468
-  note: 'H0003 independent relative leadership causal frequency complete: 35 candidates/29
-    sessions; outcomes0. Signal provisional, final owner freeze pending; H0001/H0002
-    frozen async tracks unchanged.'
-  verification_commit: 934f8f8036dcf7bc073e779d33827154428b08b4
+    ahead_by: 50
+    behind_by: 25
+    main_commit: c211fd2f71460d7b25c5ecfcca384a3b1ab1f9a8
+  note: Owner-approved signal frozen unchanged; relative16-slot evaluation fully preregistered.
+    H0003 outcomes0; paired-label/bootstrap execution still belongs to next separate
+    action.
 current_phase:
   id: INDEPENDENT_STRATEGY_RESEARCH_CYCLE
-  status: AWAITING_H0003_SIGNAL_FREEZE
+  status: H0003_PREREGISTERED_AWAITING_FIRST_EXPLORATORY_EFFICACY
   objective: Repeat independent hypothesis generation, causal discovery, preregistration,
     confirmation and evidence disposition.
   exit_criteria:
@@ -61,16 +60,17 @@ current_phase:
     H0001_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
     active_hypothesis: H0003
     causal_frequency: IMPLEMENTED_EXECUTED_REAL_DATA_EVIDENCE_PRODUCED
-    signal_freeze: USER_DECISION_REQUIRED
+    signal_freeze: FROZEN_OWNER_APPROVED
     outcome_evaluation: NOT_RUN_H0003
     satisfied_exit_criteria:
     - 1
-    remaining_exit_criteria:
     - 2
+    remaining_exit_criteria:
     - 3
-    efficacy_preregistration: NOT_STARTED_H0003
+    efficacy_preregistration: COMPLETE_FROZEN_BEFORE_OUTCOMES
     H0002_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
     H0002_discovery_disposition: DISCOVERY_INSUFFICIENT_RESOLVED_LABELS
+    H0003_confirmation_wait: ASYNCHRONOUS_NOT_BLOCKING
 completed_actions:
 - id: V2_REAL_INTRADAY_DATA_FOUNDATION
   status: COMPLETE
@@ -621,25 +621,65 @@ completed_actions:
     tests: 1594
   verification_commit: 934f8f8036dcf7bc073e779d33827154428b08b4
   clean_checkout_proof: research/data_evidence/h0003-frequency-20261004/clean-checkout-proof.json
+- id: H0003_SIGNAL_FREEZE_PREREGISTRATION
+  hypothesis: H0003-r01
+  status: COMPLETE_SIGNAL_FROZEN_PROTOCOL_PREREGISTERED_OUTCOMES_NOT_RUN
+  completed_at: '2026-10-05'
+  branch: v2-h0003-signal-freeze-preregistration
+  commit: f1dffa02884096ff6abeaa05d2b94deec5957e97
+  record: research/decision_records/H0003-signal-freeze-v1.json
+  preregistration: research/decision_records/H0003-efficacy-preregistration-v1.yaml
+  evidence: research/data_evidence/h0003-freeze-preregistration-20261005/verification.json
+  test_verification: research/data_evidence/h0003-freeze-preregistration-20261005/test-verification.json
+  tests:
+  - path: research/data_evidence/h0003-freeze-preregistration-20261005/tests-targeted-v1.xml
+    sha256: 4938723c6f0e4f443adf3e395ca0efe58eb56e90a0582bf0252a1f74c573e5e7
+    tests: 134
+    failures: 0
+    errors: 0
+    skipped: 0
+  - path: research/data_evidence/h0003-freeze-preregistration-20261005/tests-full-v1.xml
+    sha256: 7e333ff97195ef4c501004964ae1a845dfbf67b46a5ae07a1f8fb89b43f2e94a
+    tests: 1643
+    failures: 0
+    errors: 0
+    skipped: 0
+  acceptance_criteria:
+    owner_semantics_unchanged: true
+    immutable_signal_binding: true
+    full_relative_evaluation_protocol: true
+    future_chronological_confirmation_frozen: true
+    discovery_35_events_29_sessions_preserved: true
+    H0003_outcomes_zero: true
+    prior_tracks_preserved: true
+  outcome_access: 0
+  efficacy_calculations: 0
+  profitability: NOT_ESTIMATED
 next_action:
-  id: H0003_SIGNAL_FREEZE_PREREGISTRATION
+  id: H0003_FIRST_EFFICACY
   priority: P0
-  status: USER_DECISION_REQUIRED
-  blocks_phase_exit_criteria:
-  - 2
+  status: READY
   hypothesis_id: H0003
-  objective: Approve final recent-session positive-persistent leadership/own-nonnegative
-    guard/extended episode semantics, then preregister efficacy before outcomes.
-  why_now: QQQ admission and causal paired mechanics pass; 35 events/29 sessions without
-    outcomes or tuning.
-  evidence_branch: v2-h0003-relative-strength-frequency
-  basis_evidence: research/data_evidence/h0003-frequency-20261004/frequency-audit.json
-  owner_decision: Approve the concrete provisional definition; owner changes create
-    a new sealed revision.
+  blocks_phase_exit_criteria:
+  - 3
+  evidence_branch: v2-h0003-signal-freeze-preregistration
+  basis_evidence: research/data_evidence/h0003-freeze-preregistration-20261005/verification.json
+  objective: Implement and validate the registered paired-label adapter, then first
+    disclose sealed70-session exploratory H0003 forward outcomes under the frozen
+    relative16-slot protocol.
+  why_now: Final signal approval, immutable binding, preregistration and regression
+    complete; outcome access has remained0.
   constraints:
-  - No H0003 outcomes before freeze and efficacy preregistration.
-  - Preserve H0001/H0002 frozen evidence and asynchronous confirmation windows.
-  - No automatic numeric threshold/window/benchmark/session relaxation.
+  - Discovery exploratory only; no confirmation PASS/REJECT, CI, power or profitability
+    claim.
+  - Bind and validate paired-label adapter source with synthetic tests before first
+    H0003 discovery outcome query.
+  - Retain all35 immutable candidates including mature unavailable endpoints; no extra
+    outcome-driven capture or complete-case deletion.
+  - No signal/horizon/benchmark/guard/session/episode tuning from outcomes.
+  - Confirmation stays asynchronous PENDING; no confirmation labels before fixed terminal
+    deadline.
+  - Preserve H0001/H0002 and prior H0003 frozen source/evidence.
 pm_policy:
   single_next_action: true
   discovered_non_blockers_go_to_backlog: true
@@ -967,23 +1007,50 @@ hypothesis_tracks:
     profitability_calculations: 0
   H0003:
     status:
-    - THESIS_SELECTED
-    - CAUSAL_FREQUENCY_COMPLETE
-    - SIGNAL_PROVISIONAL
+    - FROZEN
+    - PREREGISTERED
+    - AWAITING_FIRST_EXPLORATORY_EFFICACY
+    - AWAITING_FUTURE_CONFIRMATION
     family: RELATIVE_STRENGTH_LEADERSHIP_CONTINUATION
     hypothesis: research/hypotheses/H0003-r01.yaml
-    branch: v2-h0003-relative-strength-frequency
-    commit: 57d839707e2cf8f9c46f68c670859ed1b403f9ea
-    spec: research/strategy_specs/H0003-r01-candidate.yaml
-    record: research/decision_records/H0003-hypothesis-frequency-v1.yaml
+    branch: v2-h0003-signal-freeze-preregistration
+    commit: f1dffa02884096ff6abeaa05d2b94deec5957e97
+    spec: research/strategy_specs/H0003-r01-frozen-v1.yaml
+    record: research/decision_records/H0003-signal-freeze-v1.json
     frequency_evidence: research/data_evidence/h0003-frequency-20261004/frequency-audit.json
     benchmark: QQQ
     candidate_events: 35
     candidate_sessions: 29
     outcome_access: 0
-    confirmation: NOT_PREREGISTERED
-    signal_freeze: USER_DECISION_REQUIRED
-    verification_commit: 934f8f8036dcf7bc073e779d33827154428b08b4
+    confirmation:
+      status: PENDING
+      start: '2026-10-19'
+      end: '2027-10-19'
+      sessions: 252
+      followup_end: '2027-10-20'
+      receipt_deadline: '2027-10-21T20:00:00-04:00'
+    signal_freeze: FROZEN_OWNER_APPROVED
+    frequency_record: research/decision_records/H0003-hypothesis-frequency-v1.yaml
+    frequency_verification_commit: 934f8f8036dcf7bc073e779d33827154428b08b4
+    preregistration: research/decision_records/H0003-efficacy-preregistration-v1.yaml
+    protocol_hash: b221efe766c4536717fde663fdc32e22fac136660fdb0278000e3d44c9d91f46
+    signal_freeze_sha256: e08f98578ecbb3742ccd02bc2a09df205d9b2a45146082051a68955b5262e39e
+    spec_sha256: 7bd85f5fe16f23714ff851433f8a9e90c7b4a9df32151e19b81bcdccdecb1a71
+    freeze_evidence: research/data_evidence/h0003-freeze-preregistration-20261005/verification.json
+    event_stream_hash: e08d529b7d6aa32eacc6091d131a789ecef37312418f7423c79da9f55742f0c5
+    evidence_floor:
+      events: 40
+      sessions: 20
+      occupied_fixed_10_session_blocks: 8
+    primary_horizon_slots: 16
+    primary_estimand: Session-balanced future SOXX price return minus paired QQQ price
+      return
+    absolute_SOXX_outcome: SECONDARY_DESCRIPTIVE
+    confirmation_is_project_blocker: false
+    owner_signal_semantics: FINAL_APPROVED_2026_10_05
+    confirmation_outcome_access: 0
+    efficacy_calculations: 0
+    evaluation_adapter: METADATA_CONTRACT_GATES_ONLY; PAIRED_LABEL_AND_BOOTSTRAP_ADAPTER_NOT_IMPLEMENTED_NOT_EXECUTED
 active_research_track: H0003
 research_cycle_history:
 - hypothesis: H0002

@@ -1,3 +1,11 @@
+# Richping PM - H0003 signal frozen and efficacy preregistered
+
+Implementation `v2-h0003-signal-freeze-preregistration` / `f1dffa02884096ff6abeaa05d2b94deec5957e97`; not merged into main. Owner-approved signal unchanged: SOXX versus technology/growth QQQ,64 scheduled15m-slot return difference,4 consecutive positive observations, SOXX return>=0, one candidate per episode; only observed READY RS<=0 rearms. Discovery35 events/29 sessions preserved. Relative16-slot session-balanced primary mean, zero-excess null; absolute direction and4/64 horizons descriptive. Confirmation252 sessions2026-10-19..2027-10-19, fixed deadline2027-10-21 20:00ET, floors40 events/20 sessions/8 fixed10-session bins. 10-session circular calendar blocks,10000 draws, seed20261005,95% interval. H0003 outcomes/future queries/efficacy0; profitability NOT_ESTIMATED. Targeted134/full1643 tests passed;570 prior files preserved. H0001/H0002 frozen protocols/evidence/asynchronous tracks unchanged.
+
+NEXT_ACTION **H0003_FIRST_EFFICACY / READY**. Separately implement/validate registered paired labels then publish discovery exploratory outcomes; future confirmation remains PENDING, not a project blocker. Evaluation contract is frozen; real label/bootstrap adapter is not yet implemented or executed.
+
+Entries below are preserved historical reports.
+
 # Richping PM - H0003 causal relative leadership frequency
 
 Implementation `v2-h0003-relative-strength-frequency` / `57d839707e2cf8f9c46f68c670859ed1b403f9ea`; code not merged to main. SOXX versus QQQ, 64-slot trailing price-return difference, four positive observations, own nonnegative direction, one candidate per episode. QQQ SIP admission PASS 4480 exact slots/70 sessions; RS READY4416, leadership37, candidates35/29 sessions, mismatches0. Outcome access0; no efficacy, profitability or promotion. Final targeted/full regression passed; see branch verification evidence. H0001 frozen/sparse126-session and H0002 frozen252-session confirmations remain asynchronous and unchanged.

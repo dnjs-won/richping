@@ -48,10 +48,11 @@ items:
   efficacy_record: research/decision_records/H0002-first-efficacy-v1.yaml
   efficacy_branch: v2-h0002-first-efficacy
 - id: USER-H0003-LEADERSHIP-001
-  status: THESIS_SELECTED_CAUSAL_FREQUENCY_COMPLETE
+  status: FROZEN_PREREGISTERED_OUTCOMES_NOT_RUN
   priority: CURRENT_H0003
   idea: SOXX leadership versus QQQ may continue over a later short horizon; LONG-only
     independent continuation research.
   family: RELATIVE_STRENGTH_LEADERSHIP_CONTINUATION
-  evidence_branch: v2-h0003-relative-strength-frequency
-  record: research/decision_records/H0003-hypothesis-frequency-v1.yaml
+  evidence_branch: v2-h0003-signal-freeze-preregistration
+  record: research/decision_records/H0003-signal-freeze-v1.json
+  preregistration: research/decision_records/H0003-efficacy-preregistration-v1.yaml

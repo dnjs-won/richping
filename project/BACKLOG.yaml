@@ -29,11 +29,11 @@ items:
 
     '
   guardrail: Do not merge blindly; preserve the newer main R1 paper changes.
-  active_branch: v2-h0003-relative-strength-frequency
+  active_branch: v2-h0003-signal-freeze-preregistration
   observed_relation_to_main:
-    ahead_by: 47
-    behind_by: 24
-    main_commit: fc28ebe2d6fbf92a4ac86455f55e84b0cc628468
+    ahead_by: 50
+    behind_by: 25
+    main_commit: c211fd2f71460d7b25c5ecfcca384a3b1ab1f9a8
 - id: H0001_MINIMAL_15M_ENTRY_FREEZE
   priority: P1
   status: COMPLETE_FROZEN_AND_OFFLINE_MECHANICALLY_EXERCISED
@@ -384,23 +384,23 @@ items:
 - id: H0003_INDEPENDENT_HYPOTHESIS_INTAKE
   priority: COMPLETE
   status: COMPLETE_OWNER_THESIS_AND_CAUSAL_FREQUENCY
-  summary: SOXX/QQQ independent leadership thesis selected; causal frequency35/29
-    sessions, outcomes0.
-  strategy_meaning: OWNER_THESIS_SELECTED_SIGNAL_FREEZE_PENDING
+  summary: Independent SOXX/QQQ thesis and causal frequency complete; separate final
+    freeze/preregistration also completed with outcomes0.
+  strategy_meaning: OWNER_THESIS_AND_FINAL_SIGNAL_APPROVED
   future_confirmation_dependency: false
   blocks_phase_exit_criteria: []
-  routing: COMPLETE_NEXT_H0003_SIGNAL_FREEZE_PREREGISTRATION
+  routing: COMPLETE_H0003_FREEZE_PREREGISTRATION_NOW_FIRST_EFFICACY
   evidence_branch: v2-h0003-relative-strength-frequency
   record: research/decision_records/H0003-hypothesis-frequency-v1.yaml
 - id: H0003_SIGNAL_FREEZE_PREREGISTRATION
-  priority: P0
-  status: USER_DECISION_REQUIRED
-  blocks_phase_exit_criteria:
-  - 2
-  summary: Approve provisional signal semantics/final freeze, then preregister before
-    any outcomes.
-  evidence_branch: v2-h0003-relative-strength-frequency
-  record: research/decision_records/H0003-hypothesis-frequency-v1.yaml
+  priority: COMPLETE
+  status: COMPLETE_FROZEN_PREREGISTERED
+  blocks_phase_exit_criteria: []
+  summary: Final64-slot/four-observation/own>=0 signal unchanged; relative16-slot
+    protocol frozen, H0003 outcomes0.
+  evidence_branch: v2-h0003-signal-freeze-preregistration
+  record: research/decision_records/H0003-signal-freeze-v1.json
+  preregistration: research/decision_records/H0003-efficacy-preregistration-v1.yaml
 - id: H0003_OPTIONAL_COMPARATORS
   priority: DEFERRED
   status: NOT_AUTHORIZED_NOT_RUN
@@ -408,3 +408,21 @@ items:
     immediate grid or performance ranking.
   evidence_branch: v2-h0003-relative-strength-frequency
   record: research/decision_records/H0003-hypothesis-frequency-v1.yaml
+- id: H0003_FIRST_EFFICACY
+  priority: P0
+  status: READY
+  blocks_phase_exit_criteria:
+  - 3
+  summary: First sealed35-event exploratory paired SOXX/QQQ outcomes after adapter
+    validation; no confirmation inference.
+  evidence_branch: v2-h0003-signal-freeze-preregistration
+  preregistration: research/decision_records/H0003-efficacy-preregistration-v1.yaml
+- id: H0003_FUTURE_CONFIRMATION
+  priority: ASYNC
+  status: PENDING_FUTURE_FIXED_COHORT
+  blocks_phase_exit_criteria: []
+  summary: 252 fixed sessions2026-10-19..2027-10-19; terminal after2027-10-21 20:00ET.
+    New paired admission/prefix/unit-segment adapter required; no present label access.
+  evidence_branch: v2-h0003-signal-freeze-preregistration
+  preregistration: research/decision_records/H0003-efficacy-preregistration-v1.yaml
+  project_blocker: false
