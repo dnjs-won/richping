@@ -1,0 +1,13 @@
+{
+  "cli_help_exit_code": 0,
+  "confirmation_outcome_access": 0,
+  "execution_sources": {
+    "h0004_discovery_clean_verify.py": "310eb8f912640acf80bdd13b2b8d6b0e3b748e9ba63d6200efcfe8965e619a01",
+    "h0004_discovery_pm_update.py": "56578a1a123f6a9b2033a10d4481e9bfb3b19aac7d3e9723c1e53ab8305fb7f3"
+  },
+  "git_diff_check_exit_code": 0,
+  "new_source_tests": "Synthetic only; execution real outcomes separate",
+  "pm_and_clean_verifier_compile_exit_code": 0,
+  "prior_files_preserved": 696,
+  "schema": "h0004_discovery_engineering_checks_v1"
+}

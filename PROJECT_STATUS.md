@@ -1,3 +1,13 @@
+# Richping V2 - H0004 first exploratory discovery execution
+
+IMPLEMENTED / EXECUTED_ON_REAL_DISCOVERY / EVIDENCE_PRODUCED. Frozen signal/protocol/pre-access sources unchanged. Sealed70 SOXX discovery only;48/48 COMPLETE, unresolved/pending/invalid0 across29 sessions. Primary session-balanced R16 mean+0.196612%, median+0.225242%, positive29/48 (60.416667%), negative19, zero0, min/max-3.076197%/+3.244431%. DISCOVERY_POSITIVE_DIRECTION / NOT_CONFIRMATORY; no CI, inference, alpha or profitability. Profitability NOT_ESTIMATED.
+
+Two independent processes have identical labels/paths/report hashes.192 discovery label close reads/96 forward endpoint queries total; confirmation outcome access0, extra capture/network/signal regeneration/statistics/profitability0 in execution. All696 prior protected tracked files preserved. Targeted152/full1839 passed, failures/errors/skips0; preflight72 also passed. Evidence research/data_evidence/h0004-discovery-efficacy-20261005/, results docs/H0004_DISCOVERY_RESULTS.md.
+
+H0004 FROZEN / AWAITING_FUTURE_CONFIRMATION, fixed252 sessions2026-10-19..2027-10-19, terminal strictly after2027-10-21 20:00ET; PENDING/ASYNCHRONOUS. H0001~3 and H0004 trial1/trial2/freeze/protocol/pre-access seal unchanged. NEXT_ACTION INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION / H0005 / USER_DECISION_REQUIRED; H0005 thesis not yet selected/implemented. Cross-instrument policy P2 backlog only, no external instrument evaluated. Code on v2-h0004-discovery-efficacy, not merged to main.
+
+Entries below are preserved historical reports.
+
 # Richping V2 - H0003 first paired discovery efficacy
 
 **IMPLEMENTED / EXECUTED_ON_REAL_DISCOVERY / EVIDENCE_PRODUCED. FROZEN SIGNAL AND PROTOCOL UNCHANGED.**

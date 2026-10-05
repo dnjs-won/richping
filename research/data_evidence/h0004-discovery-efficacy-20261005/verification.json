@@ -1,0 +1,74 @@
+{
+  "aggregate": {
+    "candidate_sessions": 29,
+    "complete": 48,
+    "disposition": "DESCRIPTIVE_ONLY_NO_PASS_REJECT",
+    "full_cohort_session_balanced_mean": 0.001966116792698712,
+    "invalid": 0,
+    "pending": 0,
+    "profitability": "NOT_ESTIMATED",
+    "status": "COMPLETE",
+    "total_emitted": 48,
+    "uncertainty": null,
+    "unresolved": 0
+  },
+  "confirmation_outcome_access": 0,
+  "deterministic_independent_processes": 2,
+  "discovery_forward_price_queries_total": 96,
+  "discovery_label_reads_total": 192,
+  "disposition": "DISCOVERY_POSITIVE_DIRECTION",
+  "label_stream_sha256": "1599dd9d65fb4d012ece13b74a9d4a97c9356af5a9731c94ba6af0d71d20e9d0",
+  "metrics": {
+    "candidate_count": 48,
+    "candidate_sessions": 29,
+    "event_median_R16": 0.002252423999897668,
+    "max_R16": 0.032444305211159596,
+    "min_R16": -0.03076196845128054,
+    "negative_count": 19,
+    "negative_rate": 0.3958333333333333,
+    "positive_count": 29,
+    "positive_rate": 0.6041666666666666,
+    "session_balanced_mean_R16": 0.001966116792698712,
+    "zero_count": 0
+  },
+  "next_P0": "INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION",
+  "next_hypothesis": "H0005",
+  "path_stream_sha256": "b756516edded33b1574fe215bb466275f66e177b3d70ce11c34e792f73dbb2be",
+  "prior_evidence_preserved": true,
+  "profitability": "NOT_ESTIMATED",
+  "protected_prior_files": 696,
+  "replay_hashes": {
+    "run1": {
+      "labels.json": "1599dd9d65fb4d012ece13b74a9d4a97c9356af5a9731c94ba6af0d71d20e9d0",
+      "paths.json": "b756516edded33b1574fe215bb466275f66e177b3d70ce11c34e792f73dbb2be",
+      "report.json": "58fbedd6881cebfa7200ae92530a07ceaf0ec2f96a2224eab0220c6e14a2d5f6"
+    },
+    "run2": {
+      "labels.json": "1599dd9d65fb4d012ece13b74a9d4a97c9356af5a9731c94ba6af0d71d20e9d0",
+      "paths.json": "b756516edded33b1574fe215bb466275f66e177b3d70ce11c34e792f73dbb2be",
+      "report.json": "58fbedd6881cebfa7200ae92530a07ceaf0ec2f96a2224eab0220c6e14a2d5f6"
+    }
+  },
+  "report_sha256": "58fbedd6881cebfa7200ae92530a07ceaf0ec2f96a2224eab0220c6e14a2d5f6",
+  "schema": "h0004_discovery_execution_verification_v1",
+  "status": "VALID_EXPLORATORY_EXECUTION",
+  "tests": [
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "tests-targeted.xml",
+      "sha256": "ba0cdb2e804ae49a3e2c6c44e63a1170053b3b932ea87633f4b37fad9cb1e429",
+      "skipped": 0,
+      "tests": 152
+    },
+    {
+      "errors": 0,
+      "failures": 0,
+      "path": "tests-full.xml",
+      "sha256": "bd2edd27cb319100d23b60593dcdcee93d4bcbbbc2932d01bb6a9ec46a07de3c",
+      "skipped": 0,
+      "tests": 1839
+    }
+  ],
+  "uncertainty": "NOT_CONFIRMATORY"
+}

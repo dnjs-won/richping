@@ -52,3 +52,7 @@ research/decision_records/H0004-signal-freeze-v1.json -text
 research/decision_records/H0004-efficacy-preregistration-v1.yaml -text
 richping/research_v2/strategy/h0004_directional_evaluator.py -text
 docs/H0004_PREACCESS_EVALUATOR.md -text
+
+# H0004 discovery result records remain byte exact across checkouts.
+research/decision_records/H0004-discovery-efficacy-v1.yaml -text
+docs/H0004_DISCOVERY_RESULTS.md -text

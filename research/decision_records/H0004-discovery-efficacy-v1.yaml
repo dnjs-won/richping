@@ -1,0 +1,478 @@
+schema: h0004_first_discovery_directional_execution_v1
+hypothesis: H0004-r01
+status: VALID_EXPLORATORY_EXECUTION
+scope: DISCOVERY_EXPLORATORY
+branch: v2-h0004-discovery-efficacy
+frozen_gate:
+  action: H0004_DISCOVERY_EFFICACY_EXECUTION
+  binding:
+    admission_hash: 96fcdc081a36dd18812538dd19646e9a522a66ff2223e92f58a65ef7fdab1946
+    anchor_metadata_hash: 883afba25d9e9405512eaaaa5dbae9a453c2ddd83d2d36137dc151d70c49c2e9
+    calendar_hash: c1777c8b0287c6d749b222ff3e74d1fac804aff238d4f01b3e463b5c55e9851a
+    candidate_stream_hash: 8e64aecd6fa26261bf5735126f3615427427bbe5ae34b0d242b8d14dd513d14d
+    dataset_hash: 4b39f109e8cffce8a7e680e773b560b307e21dd5a92dcad6d06fcd47bb0aa8bd
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    protocol_hash: 09e8202e4edd3a06c3b7907d7aafa70c93c05155d5f1d902c5d07798540d8d1f
+    scope: DISCOVERY_EXPLORATORY
+    semantics_hash: 6da89efb4a2764f23323880eaf7209bc37dd9f83fc8e7a50f68b2a17fc401d44
+    signal_freeze_hash: f4226caf0d6a0bd825347a06ee4be26307e7eda551ed560e9538cc38dd932de8
+    synthetic: false
+  candidate_count: 48
+  candidate_sessions: 29
+  canonical_main_commit: e13977a26a636af1c31e63c142c00c59ae65d719
+  clean_verification_sha256: b7e174121d1dff2bcfd64d78cdcf71b8e6cd64616bfc8d4b56499b9f397e960c
+  dataset_files:
+    research/data_evidence/h0001-alpaca-70-20261004/admission.json: 96fcdc081a36dd18812538dd19646e9a522a66ff2223e92f58a65ef7fdab1946
+    research/data_evidence/h0001-alpaca-70-20261004/intraday-vintage.json: 34e9e2a646ffe28405f0fffc1e0ceee06c6ce5c7c1cbf081abced3d92231cd03
+  exact_candidates:
+  - at: '2026-05-20T08:15:00+00:00'
+    close_identity: f3c0bf190a08daf0195258054c15e5b279e087a3a30a076475b29382537f17a7
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 1d08ad1bf93191d3b277f95c26e5953eb3bb7c4c84cd40a8c5e967b6f21114c6
+    event_id: 9dbc6eba38a826a39169c5fcd92e77feef3437fb0751064055bcfdc4021862a8
+    session: '2026-05-20'
+    snapshot_hash: a73be66eb7dc742a12867ea9f6d57f9fec100c77b787eeac0ca88506dffdb85a
+  - at: '2026-05-20T13:45:00+00:00'
+    close_identity: acf482fa9667f7b90a33fcf780c667dd079374e2a6ad4b6690a0b3cad8b2ff1d
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: ddf835a9d9e82eac95d9aef65855a436a1b6407b371225b89490409110fc8039
+    event_id: 25a31eb61cefc3fbcec16f7e21f93e2fc7da67abbf24685a240280ee6fac0ccd
+    session: '2026-05-20'
+    snapshot_hash: 28784de5fc04406fcce4e87ae8a4b8af8991cec055756e0225b223a90d4e50e9
+  - at: '2026-05-20T20:00:00+00:00'
+    close_identity: 4dd30cd127d34595c0e22feaa8bfc094603a8503f1cdbdd6b5411af33629d395
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 8320d7c3e4fdfe27b3fc66020d607a3aad5647fc3ce0d82b22d3de04339ce251
+    event_id: cf27777e62c4a1796afe7a36db88a014de5f6e8549e45d91b76aca2b6a3050ae
+    session: '2026-05-20'
+    snapshot_hash: ed4aa0c870d7574113502f21d8b33190cde7a77ae42c0159373d4bac94e1dc64
+  - at: '2026-05-21T14:00:00+00:00'
+    close_identity: 63db3772ca9361a92814f420f3ae7a8df3a2cf5407f282117f04cae606610717
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 6537a9be01c76425b7432d1f263ed4f6aa653fcdf9a0e11841aa388b9b8c7cf9
+    event_id: 7edbedb5b008c4d1958c189f37b10c7ac27240013723873d88541c60852b6732
+    session: '2026-05-21'
+    snapshot_hash: cc32688af2d463650f641e787aa83f977ff4e47195d743522c4957bc80a8821f
+  - at: '2026-05-22T00:00:00+00:00'
+    close_identity: 048a92f8c1a7ca499a74ddd4bd1ab89299fd27e42143a3477a4ed0b1663af6a3
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: eeb24c10bdfce271beb9ab5dc31806fb4de2682df9903ffe49b1885d994f2b32
+    event_id: 4aad23ef730c7116a0ecba309eec362831e811942252c73feaaf2def9a16b216
+    session: '2026-05-21'
+    snapshot_hash: 7ca03bad4ee4d6fc5bb091e8b9310f9f8ead86847a76e27a07fbf085179d8d87
+  - at: '2026-05-22T13:45:00+00:00'
+    close_identity: 84d4ff00bd96bb1421e76ab662668678a63e902d82006df7bd4fa96ae4e7fd36
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 85b4e7fab2080d0f0a840db8484155191e6d5452104f4476f7f88c4f5ccf1baf
+    event_id: e5b78976a70aceecfaa4975786b7c27d64354601cfda4dd141fd4e9ac36798f8
+    session: '2026-05-22'
+    snapshot_hash: 8a68434cd2bb434d43c5ba258bdff91d7b2a361a85cbe51b542171ee301108c1
+  - at: '2026-05-26T12:15:00+00:00'
+    close_identity: 94229f8c19cdf39f9a9b26944304fc4497df9fa35d50b23e84f2b58707d67836
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: f4b55c2058cd10397137ba99aed658444e3f34718957943be4c95327506cb977
+    event_id: ef0a98f47ca1f4195771a20cb1bb4d05f197acd95efbd97b356b2d6f03824182
+    session: '2026-05-26'
+    snapshot_hash: f3324b4c293b7c7972798edea87876a966e0d67338566bb754e2736c7db77853
+  - at: '2026-05-26T23:45:00+00:00'
+    close_identity: fd7d23fd9869072c9a8e458c81ad0f44fe4583023ae261544eea26f97d4bb25f
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 0a5b461662759a6b3d065e07bac5eae0248f04046fa3b8c4cf6a96436030d61b
+    event_id: 1712b5281af07860e363f320efeebe1b4b292fd8785b3ea1b71315b0e8e75443
+    session: '2026-05-26'
+    snapshot_hash: c0c3041408464116f7586e3ff16e9805aad95b1dedc52170cb0ae02504891558
+  - at: '2026-05-27T19:45:00+00:00'
+    close_identity: 4924da951a7159ca9e48a1d0f70fe801bda37d93b2c4e3779def568b2e1e71be
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 265096cb384e421347146bf97daf4896c267e575217bfb979f36627a323092a2
+    event_id: c3ba769002fe2a27e3b325a16215a7a3bf3941bf31c61cdd49f8e5ccb1af7750
+    session: '2026-05-27'
+    snapshot_hash: ff8922ec1b30cc134f91d355553b4f75b8ad9100099db0f515e58e645f8a392c
+  - at: '2026-05-28T12:45:00+00:00'
+    close_identity: 5fbc3cc5bf6abd819bc5fce5f192d94373cfcc4ce840ccc6be641f2cad87a782
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 8a252bb482b436ff3ba9809d3eb161c845c69be73943991e3489de74412ca2e0
+    event_id: ff564bd0b56f5bd319f70275df70c34cdc7bc0dc40a2e3205bbe314adc4d3110
+    session: '2026-05-28'
+    snapshot_hash: c04011e92a80e8f003f1ad7751c496d77080411f4421726531bb680df16c4fdc
+  - at: '2026-05-29T13:45:00+00:00'
+    close_identity: 038451a7c573b2eca7b61bd76e3f46a009a614e060b871f24736b0dbf38e872c
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 5b86c52d0b60ed857f38b75b76ed0d04f6e4f500f999aa2fc948745d75dec877
+    event_id: d2036d948bdb3863a83f999491e5b22f1cb149e907812dcc14d37473b4883ba2
+    session: '2026-05-29'
+    snapshot_hash: 12501b40fd45cee94261c9400a48c8d0ac997a5ed54f01154daaa590fd38f4ba
+  - at: '2026-06-02T13:45:00+00:00'
+    close_identity: 97de7139b4c5abf20868b137ccb339c692382357b7c26913b048d8e39793745a
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: c34d0f0ba314a24f7ecde3823db2ff4f1fb75166e2b465f29e12c278eec96307
+    event_id: 93bb2a7dcfbd5250b13666a809f8127e97444fe182f590c13668650576ee4032
+    session: '2026-06-02'
+    snapshot_hash: 792b81ccacc1bc301f40bb8223942da24d15eb7f74ffc2ca90042c2af53595e2
+  - at: '2026-06-02T19:15:00+00:00'
+    close_identity: ebe5c5132665efee437948ada7b39be4972cd75c0366bed3e3693e1d2a9aa576
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 83b50d7a23a8b45fa70b3ea7f32676b196b8752ceda1108fc70ffdedba174fbb
+    event_id: 6828aebc9123d1f7ecba58ec2f2417502c1452e934a5428c596950f3d19ba627
+    session: '2026-06-02'
+    snapshot_hash: d8ded7951496a6211508760178d8f248dfdaa77d13b63287005bd078d0cea1bd
+  - at: '2026-06-03T18:30:00+00:00'
+    close_identity: 2259f41a1097955f4e5c4c815860756497c2f93bf84b2903fbc3a83584728fc0
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 632f1eb08a8f002285015c0985e52e85412586bb8bae9800d1a06b5fd5cfea55
+    event_id: 11b88e247b178c23effceda3cec02fb27dd42f82cc2efeb653d57f47b4b9b82d
+    session: '2026-06-03'
+    snapshot_hash: ab2b27ec345c6a40c9d13beaa92015f7ab8860129d2fb64d2b54fdf55418b83d
+  - at: '2026-06-15T15:30:00+00:00'
+    close_identity: 56df6f7d228a94b3cdc79a46d36bb5b5da380f6fa0811cbf1d07bc324562f7a4
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 6df30564a038f18aef817a0ec92891cc1c2e38fda772eaeed3ede6b445a31535
+    event_id: 187abb088512ec9fee8b63ee3b3decab46cba659657beba79d407711bacebe1c
+    session: '2026-06-15'
+    snapshot_hash: d7f094dff6203c754cc7cf24fb1e7d6bb043e139506d9ae649bebba33c292911
+  - at: '2026-06-17T08:15:00+00:00'
+    close_identity: 849e9b329bb79a6997d5f2af141292afe46eb6160cca902081778682fa014dac
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 2914408488e7fb1b01f2834f4318400234f20d9d6ca9b7044c58dc85f3c3ffae
+    event_id: 78ca6dac2cb22594818089686f65514e617e778a3753e20f86b0f6a7eb8cd850
+    session: '2026-06-17'
+    snapshot_hash: 184425aaf45ae8b47eb5a5858b09a72e97a08ab570d5902e994b87677a81b79f
+  - at: '2026-06-17T13:30:00+00:00'
+    close_identity: 3311fe03ad37e1985a2e88d145cb843deb5e024238d371b544230194f89d9a78
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: b8bc31bce3c7dfc4494ad245f39b5f8f64a10d73df7f85e419d597da9bcff8b6
+    event_id: 136bec59bbf403b345d230675ba1b31d8a8e1e736f614749b3f520f7384af228
+    session: '2026-06-17'
+    snapshot_hash: e9373f6e8b7eeb7c9a1eb4148ee84a469147572f1dc34f68eff5f266b027c5a8
+  - at: '2026-06-18T12:45:00+00:00'
+    close_identity: f78f6476bf47cb3d3de995f4c052d9b7da94977b978d741eff90627ba1ce55be
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 41f745e291cb96c1e5a66a95ed81588939cd0e839840ce98e8363648d4b7d8a7
+    event_id: 350650dd727a5ef008aee81e60fc8ce79722779a8f88e533f89b1d1a813cb8e7
+    session: '2026-06-18'
+    snapshot_hash: 44722fdaf15a1390ce9c74954f58b876a4ca556807b55f88560b460de3a87490
+  - at: '2026-06-18T19:45:00+00:00'
+    close_identity: 38715c9a74856a2a0d865824746e4b9aa50aec828a9b36b4316d579566e44f97
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: dc5e270324bec5855d80c8c0946cf0c1f674e078cdcb430ad74dd6d14d93d297
+    event_id: f26403e34480f6cd7dabee06ae6a6bab4f9ec3d9c65a83c096ac26e7919ca7a5
+    session: '2026-06-18'
+    snapshot_hash: e4b3aaf7d9c97f3baad5fb9d71cc7e607dab8497db781bb4727a795d8480cba1
+  - at: '2026-06-22T12:30:00+00:00'
+    close_identity: 628efe07ed323c3e56e33f4850950f49212046526fe96a8db10ec90e27211c2b
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 96436b1de5cb2fe16e55f64359186c88bef8c0104ce87ec81a9c9bf2dd514778
+    event_id: 03e804c87e161cd3084dd1f6a92272cfd15bffa2ae66379d33269831b6b50c59
+    session: '2026-06-22'
+    snapshot_hash: 14fd7ec15f6ee54859368daae2b6866a8fa04f9cf7d12f71e72feb0a5a3f2fea
+  - at: '2026-06-22T14:15:00+00:00'
+    close_identity: afaa8b017d5a150d74092e9c7657e039e5513c3bb659887e772bed9191702e07
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: e495f0fa1d7eb482e068dde751bdc8ecaece336837f4cdf51e5ddc44f3117f09
+    event_id: 858d4c14849acbd7756bf21c3817b6c75d9490db4dc8808cd76a3ab92cc0ceb9
+    session: '2026-06-22'
+    snapshot_hash: 9b4f7e4db586b4921e28f6f2d5ef20a64cfc9e8cc0781543f85c176f66f580a4
+  - at: '2026-06-25T12:45:00+00:00'
+    close_identity: e471703d38439954f2fe7456c9bb367da6a8b175887458b0dc3f1dd45c3e688d
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: c1cc59b4f221915f1da47871c099c42d44b7c909bf1b409cd71cf336c313e031
+    event_id: 4029451e54272172be06d0d5934b5d87503aad224b86a7d7b2d43c297442b83c
+    session: '2026-06-25'
+    snapshot_hash: 97e262046f2dedaf89a72119c51b9b6218b415d68a98f3e7a6d2a40550eec8d2
+  - at: '2026-06-30T08:15:00+00:00'
+    close_identity: 87b27e01b8954cd23fdbfa9f420540da9426c25562fdbe5a815765f44e8cdf64
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 32289ca558fa21353e6edbc042a0acc3ce980a065f7fb1fd2dd9d61d770d8445
+    event_id: 535efa12d4a594a13cd65fb7b534bbecfe1564980cb7d00defd22cc72e90659b
+    session: '2026-06-30'
+    snapshot_hash: e9a8488a9ad9fc48d11c2fcfc31c4533abfd7d2a0589fd4a4b384e490d3fe7db
+  - at: '2026-06-30T13:45:00+00:00'
+    close_identity: 3d75dfb0ee7f3ebde3280bb5ed0e6c4aafb1d11087f963b2629968f06f867dc1
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 7423d2dc97c1f763cd2c38acf295cc2040e9cf4fd4b23d1d12e0d4093271e3cd
+    event_id: 9ff31733fc4bf8cddad42bb22ae37ff04b34aea534bf64056546895fba5655f3
+    session: '2026-06-30'
+    snapshot_hash: bbd63ec7ebe5174bcba88117befb4cc2af698af28a766cc3a65d08869b800b15
+  - at: '2026-06-30T18:45:00+00:00'
+    close_identity: cbb80f4f6306d14146313cc67ae007de30adcf46a2683148d969e2bf2e70f8a1
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 5c1fdd915d9361dd2bfab3e23bcf00dddc4139e8b4b9dccb835de3bdce6433cc
+    event_id: 255b37c68f09ea20c40e9593baf5fd0825af136dd4c9a90cdd3a0dc071152b5c
+    session: '2026-06-30'
+    snapshot_hash: ddb1ec6ee808d6e60f1b410774f49087ce7b1e1a270d7478bf1a1aace0c93910
+  - at: '2026-07-06T08:15:00+00:00'
+    close_identity: c2475afc232cd427d3a75f5fa7e727ad5b6ad3236f0657b42d76df47b873610f
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 2c884b69eb8081ac513fd0f4d29f587880834a3af28fa0dc5ffa90d62c852b19
+    event_id: c85c838c3a9544a297effcfbcfef1623b7262386c2265ba572e34ec478687ce0
+    session: '2026-07-06'
+    snapshot_hash: db79c546b36c3735c34fb0ad346bee1847381b607d637bf4cb603488ba84eada
+  - at: '2026-07-06T13:00:00+00:00'
+    close_identity: c9142e671cdb61478c953dd1bf66638a6bf3858c4baf59df9a68230933e571d0
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 5073f8663286391a0de9e2eca5becade8974d80af4076f5f7f207d6131e7498c
+    event_id: 86d8a4aa808fca81e557d8132f03b0772df2e61142e7624b3bcb2111aeaee16e
+    session: '2026-07-06'
+    snapshot_hash: 309c656ff43d5cac2cdfec57f9aad25f60bc640e09f1a90e6f3984b8feb3c89a
+  - at: '2026-07-08T23:45:00+00:00'
+    close_identity: 4a635b43331db7362a5aa56efa18ed68d03bb52b199c411eca94e029caa16e62
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: bf9d844381344192c4062471c0ead8e092128ad039fa78ee023549b50d91fbed
+    event_id: ae3dbd6685413dc7444b678e2e3066347f64c1a9787db4f4d2a0152f1c71abf4
+    session: '2026-07-08'
+    snapshot_hash: fdcd8c867c256093e761ac0c33d899e0cdd561d579b4d8be9cbdaa1a2380a4d2
+  - at: '2026-07-10T15:30:00+00:00'
+    close_identity: f4c1454dcd4f0cad7f87a58c3deaac7b02683e58daa96a04231b2f530a6d6c41
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 1725a5a8dc007e5a559cdde37055f3a5ec6d6b42b687fd2ddcd0d8f946694687
+    event_id: 4cf73aef8113ff753e9bcee8acbf854a79088380ed193c6c2dcbacee36cdd468
+    session: '2026-07-10'
+    snapshot_hash: 836416f52f8078945392166ee3d9d0834d058dade6b1bb0d58e79483b65ba6a6
+  - at: '2026-07-10T16:30:00+00:00'
+    close_identity: 9bbf0423fe665444dc1b99c876d21e8b094f0803cbcb877ee655431f8e77f271
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 8e13c1abdd05fdb0313693154417908d53dee5abe075be8aac6aa2bc843d7353
+    event_id: dfc6c542643a8f9d3d7d7ac73a4a6d2cd27a040b73a0ef0d1c6c6c68e2cfc336
+    session: '2026-07-10'
+    snapshot_hash: f6aa5c89e4c1386e39218d9524265b9e13dfd5fcf0ff369463225077dbcc28da
+  - at: '2026-07-14T12:30:00+00:00'
+    close_identity: 3ce3e21a440e0ee9c52d6db67f97b7ad69092fac4f1193b91172d936985d52d7
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 5f83653dbce6ddb331f70ff5ca14f3c0c67930bfaacebd720f33f6846bb43a94
+    event_id: 529b3f9a192b1040ccb42521ea6d572cff610cec398b984d40e72508016630ea
+    session: '2026-07-14'
+    snapshot_hash: d53988fe4aa379654426d9a40a4242ffe25ce0f6499780505636dc49d802c66d
+  - at: '2026-07-14T23:45:00+00:00'
+    close_identity: 61218c8ffff1e4c01b86900a9d6d7dd082ec13dbaf6b73c8b2be17381da7c060
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 1af47bf6554ef1b5d4a40abb98eab7a1229915156f94247912ada0a7008ce7b1
+    event_id: 21e28da5e32968d6cc86a92a23e3057693599d8c333c364df01f2e8d127336d9
+    session: '2026-07-14'
+    snapshot_hash: 3b54a63fc0c7f00eebee43f4cd3eb78be0558a9727a891700b110e20540bf278
+  - at: '2026-07-20T08:15:00+00:00'
+    close_identity: d185a4232bb344011ca2b205286ac68ff709365d4e064a10e49096b8be0f312c
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 36a5ab4ce66f8c03a9b479de56722f382943d93a00729af8a883fca4a5e21d48
+    event_id: 99e93cb251c0eebc7780f6bd1ae6dd1b0378c9eb54073e337f0cbf3f68c4394e
+    session: '2026-07-20'
+    snapshot_hash: 6b48af05a6dfe49773646984ae7563ea1bfb4468b501b4b5646b40293534719c
+  - at: '2026-07-21T08:15:00+00:00'
+    close_identity: 4b633a8636ba219c4dcdac2e9e64b9d72be07306d87a40cc274790fb40769bde
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 516a0149b093911beba22078ff31429c914105b7723fe153018b3ef4dd139a3c
+    event_id: cebe24e9cd98af24dd42bc7eadef5ba2b18d46517073a07477c514447d5aa0da
+    session: '2026-07-21'
+    snapshot_hash: 72ff740067382117d308a6807aab88c92c0af2ec66aeb8acf82b83dad7a99d39
+  - at: '2026-07-21T12:15:00+00:00'
+    close_identity: 81e94ea9a86704c27a55383aa4268d00c77afd44f37a22f63599885d31d871f2
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: be09b55d4e9202f35eec53ab2735f434ee58e6ea85a9ebc9c79650cdabb21e1f
+    event_id: 6815ce796caa77d87bcb6ea3f52fe55d2187db41f5c8a0ac84dad904b9d64f2a
+    session: '2026-07-21'
+    snapshot_hash: ca648f935f3de8023b01349f52993cfad3c4de848ec2cce4e64b523b2083b234
+  - at: '2026-07-21T17:00:00+00:00'
+    close_identity: 9c5c2098aa29ce3a61a5d3d24e9f8e2cc729f90a9149e83d54068ca1529f29d1
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 3e1f9d02efe258e048817318a052b74a0ef3d5f8e4a8728332df81f94f157aeb
+    event_id: aba4c1bda5a948fde87536cae27a8b05385388067161714780877460d2761fa0
+    session: '2026-07-21'
+    snapshot_hash: 69fd0c3a7a8241eb26969d871522d171a28df2dc1c47616ac30cf99d1246ead1
+  - at: '2026-07-21T21:45:00+00:00'
+    close_identity: 94fa6828fa3b63aab5a61b0176b1ebd83646eb4d1c2e7a034122c4ffbc0539c3
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: c62a283092042cc8041fa44149ed877886b30c2f75efaf5c55056f96fa35ee3e
+    event_id: 0efb866c307905484df5887383e039ea44782d111b112d7317ed37ed98241c3e
+    session: '2026-07-21'
+    snapshot_hash: a0ddc475539516f169f337748cfa9813c166af870e75bb2079973ac712fc0638
+  - at: '2026-07-23T20:15:00+00:00'
+    close_identity: 7877fafb7c995ad7dfbdb40fbd87585ed71c9751698a617c9a3f3fef4f733cb4
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 6d4c631969a5fb2316d9ce6283d1389f9b87f4a683fe668f305030a9c5e880c4
+    event_id: 3374c06d90d4a1f4e24024680a326aa6dd4552f5c65583792418588d28c331a5
+    session: '2026-07-23'
+    snapshot_hash: 4d2f638d597212f803a9cea02502b942326c88eb81d1b8129d0d75a311818f6f
+  - at: '2026-07-27T08:15:00+00:00'
+    close_identity: 4c7ca4ff230f4dcc2848a842aff893938fd597c9d4386680f2d9f99d29f99ed8
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 77578b8aa999dbb0f9ce8293863ae0c7aeaa16cbfab34d71d7efa6ff5d201d21
+    event_id: bffdf31fcfd9be5b13305f277c7085d41b56ce91d9e017d4e4028c8013440ec9
+    session: '2026-07-27'
+    snapshot_hash: 0a8951a14b9b3f069298da8a551e8e0be48bf2c0c974d7ba6325861273572039
+  - at: '2026-07-27T19:15:00+00:00'
+    close_identity: c8ff60ce6c9f1cf1ab044eb56044f6bc60db40841ad70cca5e997ecb1f9f8784
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 0fb88c0dae7ac5606acfe61520b89774aa19088bc9794dd3365f21a84f0eef37
+    event_id: 71b5a54038e7865116fc702e65ac2fce8b08425b56311493f853a6d1a33d6e99
+    session: '2026-07-27'
+    snapshot_hash: b912fd4fc460fba55badc1e8029a183b80414acb94003fffb716a569b970d0d7
+  - at: '2026-07-30T20:30:00+00:00'
+    close_identity: ee98cc24fb6e4b5d1c2e947de56d1bcad329ae9ac34095d4cada26b9b6e7ba28
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 58fe01c69065c72d2af295b29c63d9fb8d1477ca32f92f36e8788cd95b93e7ba
+    event_id: 5c37d9c59d470aee52b1431fe386fb258405fe29d99dcacdd49df169002ed092
+    session: '2026-07-30'
+    snapshot_hash: c183b25a9bf6911e06ed5cbd7438809728a02a00b6f9341ca33facd2cd87393f
+  - at: '2026-08-03T08:15:00+00:00'
+    close_identity: 502e7590f0a330d2d4f9ae63296609f09d4e8e8dfb028f773196269a63763d15
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: f3713d5a2877b1891384f8b26c2effe3b90e900c6756f2cdb2f68bb07d370c11
+    event_id: fe11fd666101d2cc802a850212b4f811153b8102c05bf9d6a2f5762f36db36b9
+    session: '2026-08-03'
+    snapshot_hash: 3c5435252203c0d39c623c6a65336dde8d17a7ba9b9d83d4d9128e81a102caf1
+  - at: '2026-08-03T22:30:00+00:00'
+    close_identity: a0d12c8c8bd31db3b9dc594bde5642e73f6c13f21ae2f8c37d3d351b91a592ec
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 74a66d122a73fdb53949c48bea986aecf28bcbb2c0157ef33f26a6a36c8aeb3d
+    event_id: 2431dcad037ca83a2332f7da9aef76fa3b0423383d5418ccbb7f502efb2fefaa
+    session: '2026-08-03'
+    snapshot_hash: e8efbbf53e5dfdce53d665961dc85206491e692787d0b5216e105fb35c4c1ba9
+  - at: '2026-08-04T15:15:00+00:00'
+    close_identity: f88f2f00b6701c4cc202b47bada69b386eb71f623435859a41c2e02260dc03a3
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 7d2ff0f1a8b680b2cf2f091eb681d9f83e6191c2d08b9aded08da4f78642f3e3
+    event_id: e74e4742a209c864227b5ff7ce79883d4897049430aec079c2acba18472c5aac
+    session: '2026-08-04'
+    snapshot_hash: 40e41870cb94a22f193ef9894bf84da72f267995785b64881723f0c79d455c46
+  - at: '2026-08-05T13:45:00+00:00'
+    close_identity: 42772bc4672ec43cbd9970ed4f59a580c62d4bf3a570a4e277f9f5c62dc5fd98
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 2878658d3f0c729faf219f5dce74a39e9b9dbefed4566fac56abe4813c76a1ac
+    event_id: 451d29f6d31e5dd35946277f36491580647052bb03344f40fdbd18c97d025267
+    session: '2026-08-05'
+    snapshot_hash: 95b806e3d2d06f413fc06364c4f635afcbb08c49051a71f5387ad25cd91c6a99
+  - at: '2026-08-07T08:15:00+00:00'
+    close_identity: b4dd7ab6785670c17e3bbffdb02c4a9e386073ac15828e25401011c0967256cf
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: c4c8641cbb0c54c9efe13ae6f8df9ffc256e6c40366f02262b8d60c32c008892
+    event_id: aebdd369211ea6a43b2a7f2e86d8312c89c56a87758998e43aefb4a5579d534f
+    session: '2026-08-07'
+    snapshot_hash: e115627cecd5b031aa810a51eb7f44dd86743ed8e9cfd11870e33863418201f3
+  - at: '2026-08-07T21:00:00+00:00'
+    close_identity: 2d02f9a817e3f2c8e18815a0b38f39eb8573ce24d7e260499cd96a50ba1abbc0
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 1a0faeedc564a3d89bd1757f8a96a71dd56f0c3c9ca3d825253f1dfdfddbb8cb
+    event_id: aab6533edaca9121f66d5fb571db0491a743372ff0697f54d50a1e9975cb0723
+    session: '2026-08-07'
+    snapshot_hash: e0aa9d86eb9bcd2e65d54d3a129f7b11e2cd2518df74cf9d073f80b4c9e9ae5f
+  - at: '2026-08-12T12:30:00+00:00'
+    close_identity: 4a9a6eb57668eb8efc027f804523ba8d8c7b72b392dffe60012b2d2b86e5a9fd
+    dataset_id: soxx-alpaca-sip-15m-discovery-20260505-20260813-v1
+    episode_id: 74607c1f06ef85c8437659fffb1d1e0edfa50e42b2fc57590a3a1f1f86942ac1
+    event_id: 9c0fbd0a4f485638ac34cbcce459335447e964127530072c59b6bcc0964e96a3
+    session: '2026-08-12'
+    snapshot_hash: caab2de13fd1d19fde09fb79b65b56067a12ca01f069cf4960eb1389b5f2e496
+  frozen_records:
+    research/decision_records/H0004-efficacy-preregistration-v1.yaml: 4e74c1484b2ec50af6c10ab90d41401c9ed9a0b4a330156d67913ff120c348f8
+    research/decision_records/H0004-preaccess-evaluator-v1.yaml: 9d0a760344cb85fae63bade94dca9b5f215f8f27fc0ec54e9613bea834d08aa2
+    research/decision_records/H0004-segment-remediation-v2.yaml: 2847959413af6143f6c446ba1afd8d6bd2e7393c6a5bf8af7f5a8fa619459292
+    research/decision_records/H0004-signal-freeze-v1.json: f4226caf0d6a0bd825347a06ee4be26307e7eda551ed560e9538cc38dd932de8
+  frozen_sources:
+    docs/H0004_PREACCESS_EVALUATOR.md: c520bcf206d1ea133e9f16fedadb5a073677ce1014cd0e2a79f2bee13af216ad
+    richping/research_v2/strategy/h0004_directional_evaluator.py: 68243b54dfa7f8c98bea5161e48ef30eb1dcdd73c108193c882ceab8631d3943
+    scripts/h0004_discovery_access.py: 7a5888d6a28097af54452be4137c5d3bf082c96cd3edda56d44d15b86b7ebb9d
+    scripts/h0004_preaccess.py: dc0a204d781483cade6b43fb59071ab8bc93df00a73b46dee83cab772a10648c
+    scripts/h0004_preaccess_fixtures.py: 03e91bc199a8f75cf0811479cc99d24e3e8b16bf22c8bdc118e682168a71ffaa
+    scripts/h0004_preaccess_verify.py: 70caedee7de094f738437b32b06cc04000cf8150e7447b9611cd2388ea4d6783
+    tests/test_h0004_directional_evaluator.py: a8433ec2c118cc999431991192ee79f3cbef611d396ff576dc5431ae8271cb15
+  independent_verification_sha256: 763a4abfb9178fd728d4cb18021d1a29d3360e54a6ac1cb3f1e252e45c8181da
+  preaccess_manifest_sha256: c2fc3c168be2a9aae24b05e4186a894de11735f2b4c23556a43fb92bbbb1682b
+  preaccess_outcome_counters:
+    real_H0004:
+      confirmation_label_reads: 0
+      discovery_label_reads: 0
+      efficacy_aggregations: 0
+      forward_price_queries: 0
+      profitability_calculations: 0
+      real_dataset_loads: 0
+      real_endpoint_readiness_probes: 0
+      return_calculations: 0
+    shared_forbidden:
+      metadata:
+        database: 0
+        price_load: 0
+        signal_replay: 0
+      outcomes:
+        MFE_MAE: 0
+        confirmation_outcomes: 0
+        efficacy_statistics: 0
+        forward_module_imports: 0
+        forward_window_queries: 0
+        future_return_queries: 0
+        market_queries: 0
+        network_calls: 0
+        outcome_accessors: 0
+        profitability_calculations: 0
+        return_calculations: 0
+        store_access: 0
+  signal_trials: 2
+  status: VERIFIED_BEFORE_PRICE_ACCESS
+execution_manifest: research/data_evidence/h0004-discovery-efficacy-20261005/manifest.json
+execution_manifest_sha256: 12d9d0db883a23b41c61ad078a2bee8f3c4e80dbb8f2ffc5f0efb47cabe4ada9
+verification: research/data_evidence/h0004-discovery-efficacy-20261005/verification.json
+verification_sha256: 0c750046dab575781c60fc548ef8961c10e4cd49ed2e32240173764bba093830
+aggregate:
+  candidate_sessions: 29
+  complete: 48
+  disposition: DESCRIPTIVE_ONLY_NO_PASS_REJECT
+  full_cohort_session_balanced_mean: 0.001966116792698712
+  invalid: 0
+  pending: 0
+  profitability: NOT_ESTIMATED
+  status: COMPLETE
+  total_emitted: 48
+  uncertainty: null
+  unresolved: 0
+metrics:
+  candidate_count: 48
+  candidate_sessions: 29
+  event_median_R16: 0.002252423999897668
+  max_R16: 0.032444305211159596
+  min_R16: -0.03076196845128054
+  negative_count: 19
+  negative_rate: 0.3958333333333333
+  positive_count: 29
+  positive_rate: 0.6041666666666666
+  session_balanced_mean_R16: 0.001966116792698712
+  zero_count: 0
+descriptive_disposition: DISCOVERY_POSITIVE_DIRECTION
+uncertainty: NOT_CONFIRMATORY
+profitability: NOT_ESTIMATED
+confirmation_outcome_access: 0
+confirmation_status: PENDING_ASYNCHRONOUS
+confirmation_sessions: 252
+confirmation_interval:
+- '2026-10-19'
+- '2027-10-19'
+confirmation_terminal_receipt_deadline: '2027-10-21T20:00:00-04:00'
+signal_trials: 2
+signal_protocol_and_prior_evidence: IMMUTABLE_UNCHANGED
+report_sha256: 58fbedd6881cebfa7200ae92530a07ceaf0ec2f96a2224eab0220c6e14a2d5f6
+label_stream_sha256: 1599dd9d65fb4d012ece13b74a9d4a97c9356af5a9731c94ba6af0d71d20e9d0
+path_stream_sha256: b756516edded33b1574fe215bb466275f66e177b3d70ce11c34e792f73dbb2be
+replay_hashes:
+  run1:
+    labels.json: 1599dd9d65fb4d012ece13b74a9d4a97c9356af5a9731c94ba6af0d71d20e9d0
+    paths.json: b756516edded33b1574fe215bb466275f66e177b3d70ce11c34e792f73dbb2be
+    report.json: 58fbedd6881cebfa7200ae92530a07ceaf0ec2f96a2224eab0220c6e14a2d5f6
+  run2:
+    labels.json: 1599dd9d65fb4d012ece13b74a9d4a97c9356af5a9731c94ba6af0d71d20e9d0
+    paths.json: b756516edded33b1574fe215bb466275f66e177b3d70ce11c34e792f73dbb2be
+    report.json: 58fbedd6881cebfa7200ae92530a07ceaf0ec2f96a2224eab0220c6e14a2d5f6
+discovery_label_close_reads_total: 192
+discovery_forward_price_queries_total: 96
+tests:
+- errors: 0
+  failures: 0
+  path: tests-targeted.xml
+  sha256: ba0cdb2e804ae49a3e2c6c44e63a1170053b3b932ea87633f4b37fad9cb1e429
+  skipped: 0
+  tests: 152
+- errors: 0
+  failures: 0
+  path: tests-full.xml
+  sha256: bd2edd27cb319100d23b60593dcdcee93d4bcbbbc2932d01bb6a9ec46a07de3c
+  skipped: 0
+  tests: 1839
+next_P0: INDEPENDENT_HYPOTHESIS_GENERATION_SELECTION
+next_hypothesis: H0005
+no_post_outcome_tuning: true
