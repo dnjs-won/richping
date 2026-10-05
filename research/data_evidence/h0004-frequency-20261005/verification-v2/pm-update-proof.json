@@ -1,0 +1,17 @@
+{
+  "active_P0": "H0004_SIGNAL_FREEZE_PREREGISTRATION",
+  "canonical_main_before": "f56d941e5215e480d72ce9ca005346898050db30",
+  "files_before": {
+    "PROJECT_CONTROL.yaml": "12032cb9ee513c37e60b682963392285140a54f7d4bae094d2440eaca8129b81",
+    "project/BACKLOG.yaml": "a5a6a214f6e6a41bcadccf1edff439a1ef2eef2effd54754b51b033d761f0b16",
+    "project/DECISION_INDEX.yaml": "6758bd4237a864845da352b1ad4155580bb9332b7392ea7dcfc818f8e27212e6",
+    "project/USER_IDEAS.yaml": "7c2eb03cbac036a105677df876416385a8d2bc32c3cb38f944c9fb043544b536"
+  },
+  "outcome_access": 0,
+  "owner_freeze_pending": true,
+  "prior_canonical_evidence_preserved": true,
+  "prior_major_decisions_preserved": true,
+  "prior_tracks_preserved": true,
+  "research_commit": "7488fa0941b9ec68c96a163a7694b31d5ab718d3",
+  "schema": "h0004_pm_update_proof_v1"
+}
