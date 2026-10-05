@@ -1,0 +1,12 @@
+{
+  "archive_commit": "9549f77c3d6153f884cf2d9af5b4907005eafab4",
+  "clean_archive_metadata_verification_equal": true,
+  "efficacy_calculations": 0,
+  "event_stream_hash": "e08d529b7d6aa32eacc6091d131a789ecef37312418f7423c79da9f55742f0c5",
+  "frozen_signal_and_protocol_bindings_verified": true,
+  "future_price_queries": 0,
+  "original_570_source_and_evidence_hashes_verified": true,
+  "outcome_access": 0,
+  "protocol_hash": "b221efe766c4536717fde663fdc32e22fac136660fdb0278000e3d44c9d91f46",
+  "verification_sha256": "7ee694ab84a4ffa334df0f6c29a74c1753e9b16100c3d1c4e8e5cafcc05a086c"
+}
