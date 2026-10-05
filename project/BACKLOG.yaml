@@ -513,6 +513,16 @@ items:
   evidence_branch: v2-h0004-portability-v1-preaccess
   evidence: research/decision_records/H0004-portability-v1-preaccess-result.json
   commit: f3090a23123279cf0f9a506a526224cce7909e61
+- id: H0004_PORTABILITY_V1_DATA_ADMISSION_REMEDIATION
+  priority: P0
+  status: PORTABILITY_DATA_ADMISSION_FINALIZED
+  evidence_branch: v2-h0004-portability-v1-data-remediation
+  commit: d8b3ea5f00b3de06f4f6415d53469b39b80478fe
+  evidence: research/decision_records/H0004-portability-v1-data-admission-result.json
+  summary: Same-provider retry reproduced all1804 missing extended-session slots;
+    no recovery or ingestion bug. READY3/UNAVAILABLE6/UNRESOLVED1; KLAC split incompatible;
+    outcomes0.
+  next_action: H0004_PORTABILITY_V1_OUTCOME_EVALUATION
 routing_history:
 - previous:
     id: H0005_INDEPENDENT_HYPOTHESIS_SELECTION

@@ -15,8 +15,8 @@ source_of_truth:
     branch: main
     path: PROJECT_STATUS.md
   active_workstream_status:
-    branch: v2-h0004-portability-v1-preaccess
-    path: research/decision_records/H0004-portability-v1-preaccess-result.json
+    branch: v2-h0004-portability-v1-data-remediation
+    path: research/decision_records/H0004-portability-v1-data-admission-result.json
   decision_index:
     branch: main
     path: project/DECISION_INDEX.yaml
@@ -30,36 +30,39 @@ control_plane:
   branch: main
   rule: PM state lives on main so new sessions can recover it from the default branch.
 active_workstream:
-  branch: v2-h0004-portability-v1-preaccess
-  base_commit: 9ad3546d6d0d273fa916d63da43d00a6a33131ad
-  implementation_commit: f3090a23123279cf0f9a506a526224cce7909e61
-  code_commit: 6511c2c0ef0592a3998bdf013b758987f0044263
-  status: READY_FOR_PORTABILITY_OUTCOME_ACCESS
+  branch: v2-h0004-portability-v1-data-remediation
+  base_commit: f3090a23123279cf0f9a506a526224cce7909e61
+  implementation_commit: d8b3ea5f00b3de06f4f6415d53469b39b80478fe
+  code_commit: fad6a02b56eb32404d72fe518c9172bd207cd56a
+  status: PORTABILITY_DATA_ADMISSION_FINALIZED
   research_id: H0004_PORTABILITY_V1
   scope: INTRA_SECTOR_CROSS_SYMBOL_PORTABILITY
-  evidence: research/decision_records/H0004-portability-v1-preaccess-result.json
-  candidate_manifest_sha256: c84353e456627a07bf7f3139272a0e1dad119172f2fc230f3a2bd5518269f1e8
+  evidence: research/decision_records/H0004-portability-v1-data-admission-result.json
+  aggregate_manifest_sha256: 917b1eb75e379a44d9f8d293d9cae1c9c554f12780d7aec991c003ed6521892c
+  predecessor_manifest_sha256: c84353e456627a07bf7f3139272a0e1dad119172f2fc230f3a2bd5518269f1e8
+  remediation_policy_sha256: c6c667493587bd0a2a63351a0064e455c1b6f8f430ad12650f757c9f0e30b541
   outcomes: NOT_ACCESSED
   profitability: NOT_ESTIMATED
   integration: NOT_MAIN_INTEGRATED
 current_phase:
-  id: H0004_PORTABILITY_V1_PREACCESS
+  id: H0004_PORTABILITY_V1_DATA_ADMISSION_REMEDIATION
   status: COMPLETE_FROZEN_STOP
-  objective: Freeze intra-sector cross-symbol protocol/universe/causal candidate streams
-    with no outcomes.
+  objective: Outcome-blind exact missing-data audit and same-provider final input
+    admission; strategy and universe unchanged.
   exit_criteria:
-  - Frozen historical universe and protocol
-  - Identical frozen signal config/source
-  - All symbol candidate streams and aggregate sealed
-  - Zero real outcomes and preserved SOXX48/29
+  - Policy frozen before retry
+  - All missing observations audited
+  - Same frozen provider/unit/grid only
+  - Final10 symbol statuses and streams sealed
+  - No real outcomes or returns; predecessor and SOXX48/29 preserved
   progress:
-    preaccess: FROZEN
+    admission: PORTABILITY_DATA_ADMISSION_FINALIZED
     outcomes: NOT_ACCESSED
     full_universe: 10
     ready_universe: 3
-    informative_universe: 3
     unavailable: 6
     unresolved: 1
+    recovered_symbols: 0
 completed_actions:
 - id: V2_REAL_INTRADAY_DATA_FOUNDATION
   status: COMPLETE
@@ -837,18 +840,52 @@ completed_actions:
     errors: 0
     failures: 0
     skipped: 0
+- branch: v2-h0004-portability-v1-data-remediation
+  base_commit: f3090a23123279cf0f9a506a526224cce7909e61
+  implementation_commit: d8b3ea5f00b3de06f4f6415d53469b39b80478fe
+  code_commit: fad6a02b56eb32404d72fe518c9172bd207cd56a
+  status: PORTABILITY_DATA_ADMISSION_FINALIZED
+  research_id: H0004_PORTABILITY_V1
+  scope: INTRA_SECTOR_CROSS_SYMBOL_PORTABILITY
+  evidence: research/decision_records/H0004-portability-v1-data-admission-result.json
+  aggregate_manifest_sha256: 917b1eb75e379a44d9f8d293d9cae1c9c554f12780d7aec991c003ed6521892c
+  predecessor_manifest_sha256: c84353e456627a07bf7f3139272a0e1dad119172f2fc230f3a2bd5518269f1e8
+  remediation_policy_sha256: c6c667493587bd0a2a63351a0064e455c1b6f8f430ad12650f757c9f0e30b541
+  outcomes: NOT_ACCESSED
+  profitability: NOT_ESTIMATED
+  integration: NOT_MAIN_INTEGRATED
+  id: H0004_PORTABILITY_V1_DATA_ADMISSION_REMEDIATION
+  implementation_state: REAL_CAUSAL_INPUT_RETRY_AUDITED_ADMISSION_FROZEN_NO_OUTCOMES
+  tests:
+    full:
+      counts:
+        errors: 0
+        failures: 0
+        skipped: 0
+        tests: 1880
+      sha256: 61f88e409e25fbb1d347364397c69bedc2c9c690cb1fed509de65a2f79e2560f
+    independent_process_repeat: PASS; each final suite runs2 separate offline digest
+      processes; equal canonical admission hash
+    network_disabled: true
+    real_H0004_outcome_guard: true
+    targeted:
+      counts:
+        errors: 0
+        failures: 0
+        skipped: 0
+        tests: 41
+      sha256: 42bc228e3fe812d0f012c68e5c6248509bb0ac9efc65efe4aa7b08425dc14520
 next_action:
-  id: H0004_PORTABILITY_OUTCOME_PHASE_REQUIRES_SEPARATE_EXPLICIT_OWNER_ACTION
+  id: H0004_PORTABILITY_V1_OUTCOME_EVALUATION
   priority: P0
   status: STOP_AWAIT_SEPARATE_OWNER_ACTION
   research_id: H0004_PORTABILITY_V1
-  objective: Separately authorize scoped portability outcomes only after frozen gate;
-    no access in completed P0.
+  objective: Separate outcome phase after final admission gate; none accessed by remediation.
   constraints:
-  - All10 symbols retained; no replacement/tuning
-  - Existing H0004 discovery/confirmation immutable and separate
-  - Shared semiconductor factor; not independent-asset confirmation
-  - No production integration, profitability or automatic execution
+  - Full10 symbols retained, no replacement or tuning
+  - Existing H0004 discovery and confirmation immutable
+  - Shared semiconductor factor; no independent-asset/general-market claims
+  - Runtime outcome permission not issued by admission action
 pm_policy:
   single_next_action: true
   discovered_non_blockers_go_to_backlog: true
@@ -1597,3 +1634,63 @@ workstream_routing_history:
     - H0005 selection is not completed by this routing action.
     - Cross-instrument validation policy remains a separate future project action;
       no external capture here.
+- main_commit: ae45cde234d0fe007c4e447b4ba6eabef2793a22
+  active_workstream:
+    branch: v2-h0004-portability-v1-preaccess
+    base_commit: 9ad3546d6d0d273fa916d63da43d00a6a33131ad
+    implementation_commit: f3090a23123279cf0f9a506a526224cce7909e61
+    code_commit: 6511c2c0ef0592a3998bdf013b758987f0044263
+    status: READY_FOR_PORTABILITY_OUTCOME_ACCESS
+    research_id: H0004_PORTABILITY_V1
+    scope: INTRA_SECTOR_CROSS_SYMBOL_PORTABILITY
+    evidence: research/decision_records/H0004-portability-v1-preaccess-result.json
+    candidate_manifest_sha256: c84353e456627a07bf7f3139272a0e1dad119172f2fc230f3a2bd5518269f1e8
+    outcomes: NOT_ACCESSED
+    profitability: NOT_ESTIMATED
+    integration: NOT_MAIN_INTEGRATED
+  current_phase:
+    id: H0004_PORTABILITY_V1_PREACCESS
+    status: COMPLETE_FROZEN_STOP
+    objective: Freeze intra-sector cross-symbol protocol/universe/causal candidate
+      streams with no outcomes.
+    exit_criteria:
+    - Frozen historical universe and protocol
+    - Identical frozen signal config/source
+    - All symbol candidate streams and aggregate sealed
+    - Zero real outcomes and preserved SOXX48/29
+    progress:
+      preaccess: FROZEN
+      outcomes: NOT_ACCESSED
+      full_universe: 10
+      ready_universe: 3
+      informative_universe: 3
+      unavailable: 6
+      unresolved: 1
+  next_action:
+    id: H0004_PORTABILITY_OUTCOME_PHASE_REQUIRES_SEPARATE_EXPLICIT_OWNER_ACTION
+    priority: P0
+    status: STOP_AWAIT_SEPARATE_OWNER_ACTION
+    research_id: H0004_PORTABILITY_V1
+    objective: Separately authorize scoped portability outcomes only after frozen
+      gate; no access in completed P0.
+    constraints:
+    - All10 symbols retained; no replacement/tuning
+    - Existing H0004 discovery/confirmation immutable and separate
+    - Shared semiconductor factor; not independent-asset confirmation
+    - No production integration, profitability or automatic execution
+admission_revisions:
+  H0004_PORTABILITY_V1_REVISION2:
+    branch: v2-h0004-portability-v1-data-remediation
+    base_commit: f3090a23123279cf0f9a506a526224cce7909e61
+    implementation_commit: d8b3ea5f00b3de06f4f6415d53469b39b80478fe
+    code_commit: fad6a02b56eb32404d72fe518c9172bd207cd56a
+    status: PORTABILITY_DATA_ADMISSION_FINALIZED
+    research_id: H0004_PORTABILITY_V1
+    scope: INTRA_SECTOR_CROSS_SYMBOL_PORTABILITY
+    evidence: research/decision_records/H0004-portability-v1-data-admission-result.json
+    aggregate_manifest_sha256: 917b1eb75e379a44d9f8d293d9cae1c9c554f12780d7aec991c003ed6521892c
+    predecessor_manifest_sha256: c84353e456627a07bf7f3139272a0e1dad119172f2fc230f3a2bd5518269f1e8
+    remediation_policy_sha256: c6c667493587bd0a2a63351a0064e455c1b6f8f430ad12650f757c9f0e30b541
+    outcomes: NOT_ACCESSED
+    profitability: NOT_ESTIMATED
+    integration: NOT_MAIN_INTEGRATED

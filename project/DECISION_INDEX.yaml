@@ -5,7 +5,7 @@ purpose: 'Lightweight routing index for AI PM sessions. This file does not repla
   is already frozen, what remains open, and where to read the authoritative evidence.
 
   '
-default_research_branch: v2-h0004-portability-v1-preaccess
+default_research_branch: v2-h0004-portability-v1-data-remediation
 data_foundation:
   branch: v2-real-intraday-data-foundation
   contract: docs/V2_REAL_INTRADAY_DATA_FOUNDATION.md
@@ -708,6 +708,8 @@ routing_history:
     evidence_branch: v2-h0004-discovery-efficacy
     note: Independent next mechanism selection. Frozen future confirmation waits do
       not block research.
+- main_commit: ae45cde234d0fe007c4e447b4ba6eabef2793a22
+  previous_default_research_branch: v2-h0004-portability-v1-preaccess
 portability_next_action:
   id: H0004_PORTABILITY_OUTCOME_PHASE_REQUIRES_SEPARATE_EXPLICIT_OWNER_ACTION
   priority: P0
@@ -723,3 +725,19 @@ portability_next_action:
 canonical_source_routing_note: Original canonical_sources (including last H0005 owner-thesis
   routing) preserved as historical source bindings; current separate research unit
   is research_workstreams.H0004_PORTABILITY_V1 and PROJECT_CONTROL.next_action.
+admission_revisions:
+  H0004_PORTABILITY_V1_REVISION2:
+    branch: v2-h0004-portability-v1-data-remediation
+    base_commit: f3090a23123279cf0f9a506a526224cce7909e61
+    implementation_commit: d8b3ea5f00b3de06f4f6415d53469b39b80478fe
+    code_commit: fad6a02b56eb32404d72fe518c9172bd207cd56a
+    status: PORTABILITY_DATA_ADMISSION_FINALIZED
+    research_id: H0004_PORTABILITY_V1
+    scope: INTRA_SECTOR_CROSS_SYMBOL_PORTABILITY
+    evidence: research/decision_records/H0004-portability-v1-data-admission-result.json
+    aggregate_manifest_sha256: 917b1eb75e379a44d9f8d293d9cae1c9c554f12780d7aec991c003ed6521892c
+    predecessor_manifest_sha256: c84353e456627a07bf7f3139272a0e1dad119172f2fc230f3a2bd5518269f1e8
+    remediation_policy_sha256: c6c667493587bd0a2a63351a0064e455c1b6f8f430ad12650f757c9f0e30b541
+    outcomes: NOT_ACCESSED
+    profitability: NOT_ESTIMATED
+    integration: NOT_MAIN_INTEGRATED

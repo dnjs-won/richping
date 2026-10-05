@@ -1,3 +1,13 @@
+# Richping PM - portability data admission finalized / STOP
+
+Workstream `v2-h0004-portability-v1-data-remediation` / `d8b3ea5f00b3de06f4f6415d53469b39b80478fe`. H0004_PORTABILITY_V1 admission revision2: PORTABILITY_DATA_ADMISSION_FINALIZED. Same frozen Alpaca SIP retry, no recovered bars or ingestion bug. All1804 missing extended-session observations persist. Full10 retained: READY3 / UNAVAILABLE6 / UNRESOLVED1. KLAC10:1 split incompatible with frozen share-unit identity. All10 predecessor candidate hashes unchanged; NVDA47/34sessions, MU52/33, INTC32/25. Aggregate SHA256 917b1eb75e379a44d9f8d293d9cae1c9c554f12780d7aec991c003ed6521892c. Outcomes0/return calculations0; profitability NOT_ESTIMATED.
+
+Predecessor preaccess, H0004 source/config/protocol, SOXX48/29 discovery and asynchronous confirmation unchanged. Targeted41/full1880 passed, independent processes equal. No research code merged into main.
+
+NEXT_ACTION **H0004_PORTABILITY_V1_OUTCOME_EVALUATION / STOP_AWAIT_SEPARATE_OWNER_ACTION**. No runtime outcome authorization issued by this action.
+
+Entries below are preserved historical reports.
+
 # Richping PM - H0004 portability P0 frozen / STOP
 
 Workstream `v2-h0004-portability-v1-preaccess` / `f3090a23123279cf0f9a506a526224cce7909e61`. Separate `H0004_PORTABILITY_V1` / INTRA_SECTOR_CROSS_SYMBOL_PORTABILITY. Official2026-03-31 historical SOXX top10 frozen before replay. Full10 retained;READY3/informative3,UNAVAILABLE6/UNRESOLVED1. NVDA47/34sessions, MU52/33, INTC32/25. All symbol stream statuses and aggregate sealed; two independent processes byte identical. Universe SHA256 f81c673dd26c4aced735f9fbddd018a0a8c954a154e475cd5088742d3bab1474; aggregate SHA256 c84353e456627a07bf7f3139272a0e1dad119172f2fc230f3a2bd5518269f1e8. Outcome/access/endpoint probes0; profitability NOT_ESTIMATED. No independent-asset or general-market confirmation claim.
